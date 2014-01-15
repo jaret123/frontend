@@ -1,0 +1,111 @@
+<div class="consumption-details-container">
+    <div class="legend">
+        <span class="swatch current"></span>
+        <span class="label">Current Consumption</span>
+        <span class="swatch xeros"></span>
+        <span class="label">Potential Consumption with Xeros</span>
+    </div>
+    <div class="report__select select">
+        <span>
+            <span>Report</span>
+            <select id="report-select" autofocus class="flagvisibility">
+                <option value="1">Cold Water</option>
+                <option value="2">Hot Water</option>
+                <option value="3">Total Water</option>
+                <option value="4">Cycle Time</option>
+                <option value="5" selected>Chemical</option>
+            </select>
+        </span>
+    </div>
+
+    <div class="time__select select">
+        <span>
+            <span>Timeframe</span>
+            <select id="consumption-details-select" autofocus class="flagvisibility">
+                <option value="1">Last 30 days</option>
+                <option value="2">Previous Month</option>
+                <option value="3" selected>Last 6 Months</option>
+                <option value="4">Year to Date</option>
+                <option value="5">Last Year</option>
+                <option value="6">Custom...</option>
+            </select>
+        </span>
+    </div>
+
+    <div class="line"></div>
+
+    {{#consumption.0}}
+
+        <!--<div class="legend">-->
+        <!--<div class="icon-Washer"></div>-->
+        <!--<div class="text">Potential Consumption<br/>with Xeros</div>-->
+        <!--</div>-->
+
+        <div class="container">
+        <div class="machine">
+            <div class="icon-Washer"></div>
+            {{machine}}<br/>
+            {{capacity}}
+            <div > <span class="caret-left"></span><span class="caret-right"></span> </div>
+        </div>
+
+        {{#metric}}
+            <div id="section-{{name}}" class="section-wrapper {{cssClass}}" >
+                <div>
+                    <!--{{name}}-->
+
+                    {{#details}}
+                    <div class="row row-title {{cssClass}}">
+                        <div class="title">
+                            {{type}}
+                        </div>
+                    </div>
+                    <div class="row row-data {{cssClass}}">
+                        {{#measures}}
+                        <div class="box col-{{0}}">
+                            <div class="top">
+                                <div class="label">{{1}}</div>
+                                <div class="value">{{2}}</div>
+                            </div>
+                            <div class="bottom">
+                                <div class="label">&nbsp;</div>
+                                <div class="value">{{3}}</div>
+                            </div>
+                        </div>
+                        {{/measures}}
+
+                        <div class="box col-5">
+                            <div class="blue top">
+                                <div class="label"></div>
+                                <div class="value"></div>
+                            </div>
+                            <div class="blue bottom">
+                                <div class="label"></div>
+                                <div class="left-arrow"><span class="caret-left"></span></div>
+                            </div>
+                        </div>
+                        <div class="box col-6">
+                            <div class="blue top">
+                                <div class="label">{{summaryMeasures.0.0}}</div>
+                                <div class="value">{{summaryMeasures.0.1}}%</div>
+                            </div>
+                            <div class="blue bottom">
+                                <div class="label">{{summaryMeasures.1.0}}</div>
+                                <div class="value">{{summaryMeasures.1.1}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/details}}
+
+
+
+                </div>
+
+            </div>
+        {{/metric}}
+    </div>
+
+    {{/consumption.0}}
+
+
+</div>

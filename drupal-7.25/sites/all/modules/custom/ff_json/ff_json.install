@@ -1,0 +1,47 @@
+<?php
+
+/**
+ *
+ * @file
+ * Defines schema for the FF_json Fields
+ *
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function ff_jason_field_schema($field) {
+  return array(
+    'columns' => array(
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'state' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'data' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'source' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function viz_api_uninstall() {
+  variable_del('ff_json_*');
+}

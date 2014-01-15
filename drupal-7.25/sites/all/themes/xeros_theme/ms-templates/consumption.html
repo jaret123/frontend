@@ -1,0 +1,99 @@
+
+<div class="consumption-container">
+    <div class="legend">
+        <span class="swatch current"></span>
+        <span class="label">Current Consumption</span>
+        <span class="swatch xeros"></span>
+        <span class="label">Potential Consumption with Xeros</span>
+    </div>
+    <div class="kpis__select">
+        <span>
+            <span>Timeframe</span>
+            <select id="consumption-select" autofocus class="flagvisibility">
+                <option value="1">Last 30 days</option>
+                <option value="2">Previous Month</option>
+                <option value="3" selected>Last 6 Months</option>
+                <option value="4">Year to Date</option>
+                <option value="5">Last Year</option>
+                <option value="6">Custom...</option>
+            </select>
+        </span>
+    </div>
+    <div class="consumption__grid-container">
+    <div class="row first">
+        <div class="col col-1">
+            <div class="label">Machine</div>
+        </div>
+        <div class="col col-2">
+            <div class="label">Cold Water</div>
+            <div class="sub-label">(Gallons)</div>
+        </div>
+        <div class="col col-3">
+            <div class="label">Hot Water</div>
+            <div class="sub-label">(Energy/Pound)</div>
+        </div>
+        <div class="col col-4">
+            <div class="label">Total Water</div>
+            <div class="sub-label">(Energy/Pound)</div>
+        </div>
+        <div class="col col-5">
+            <div class="label">Cycle Time</div>
+            <div class="sub-label">(Minutes)</div>
+        </div>
+        <div class="col col-6">
+            <div class="label">Chemical</div>
+            <div class="sub-label">(Ounces/Pound)</div>
+        </div>
+    </div>
+    {{#consumption}}
+    <div class="row {{cssClass}}">
+        <div class="col col-1" report="total">
+            <a href="#" class="consumption__machine {{machine}}">
+                <div class="icon-Washer"></div>
+                <div class="machine-label">{{machine}} <br/> ({{capacity}}) </div>
+            </a>
+        </div>
+        <div class="col col-2 link" report="cold">
+            <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
+            <div class="labels">
+                <div class="actual">{{metric.0.data.0}}</div>
+                <div class="potential">{{metric.0.data.1}}</div>
+            </div>
+            <div>{{metric.0.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+        </div>
+        <div class="col col-3 link" report="hot">
+            <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
+            <div class="labels">
+                <div class="actual">{{metric.1.data.0}}</div>
+                <div class="potential">{{metric.1.data.1}}</div>
+            </div>
+            <div>{{metric.1.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+        </div>
+        <div class="col col-4 link" report="total">
+            <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
+            <div class="labels">
+                <div class="actual">{{metric.2.data.0}}</div>
+                <div class="potential">{{metric.2.data.1}}</div>
+            </div>
+            <div>{{metric.2.data.2}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+        </div>
+        <div class="col col-5 link" report="cycle">
+            <img src="/sites/all/themes/xeros_theme/images/piechart_placeholder.png"/>
+            <div class="labels">
+                <div class="actual">{{metric.3.data.0}}</div>
+                <div class="potential">{{metric.3.data.1}}</div>
+            </div>
+            <div>{{metric.3.data.2}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+        </div>
+        <div class="col col-6 link" report="chem">
+            <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
+            <div class="labels">
+                <div class="actual">{{metric.4.data.0}}</div>
+                <div class="potential">{{metric.4.data.1}}</div>
+            </div>
+            <div>{{metric.4.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+        </div>
+    </div>
+    {{/consumption}}
+    </div>
+</div>

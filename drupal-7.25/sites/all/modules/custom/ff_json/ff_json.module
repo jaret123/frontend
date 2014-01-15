@@ -1,0 +1,266 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+
+function ff_json_help($path, $arg) {
+    $output = '';
+    switch ($path) {
+        case 'admin/help#ff_json':
+            $output = t('Add fields for storing remote data on a content type');
+    }
+    return $output;
+}
+
+/**
+ * Implements hook_init().
+ */
+function ff_json_init() {
+
+}
+
+/**
+ * Implements hook_field_info().
+ *
+ * Provides the description of the field.
+ */
+function ff_json_field_info() {
+    return array(
+        'ff_json' => array(
+            'label' => t('JSON field'),
+            'description' => t('This field stores and renders remote data.'),
+            'instance_settings' => array(
+                'cardinality' => 1,
+            ),
+            'default_widget' => 'ff_json_widget',
+            'default_formatter' => 'ff_json_standard',
+        ),
+    );
+}
+
+/**
+ * Implements hook_field_validate().
+ *
+ * This hook gives us a chance to validate content that's in our field.
+ * We're really only interested in $items parameter, since it holds
+ * arrays representing content in the field we've defined.
+ *
+ */
+function ff_json_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+    // Do nothing yet.
+}
+
+/**
+ * Implements hook_field_is_empty().
+ *
+ * hook_field_is_empty() is where Drupal asks us if this field is empty.
+ * Return TRUE if it does not contain data, FALSE if it does. This lets
+ * the form API flag an error when required fields are empty.
+ */
+function ff_json_field_is_empty($item, $field) {
+    return empty($item['state']);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ *
+ * We need to tell Drupal what formatters we have available for the view.
+ *
+ * @see ff_json_field_formatter_view().
+ */
+function ff_json_field_formatter_info() {
+    $formats = array(
+        // This formatter just shows plain text
+        'ff_json_standard' => array(   // WAS simple_text
+            'label' => t('Standard'),
+            'field types' => array('ff_json'),
+        ),
+    );
+    return $formats;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ *
+ * @see ff_json_field_formatter_info().
+ */
+function ff_json_field_formatter_view($object_type, $object, $field, $instance, $langcode, $items, $display) {
+
+    $element = array();
+
+    // Include the right widget based on the type of display
+
+    var_dump($items);
+    switch ($display['type']) {
+        // This formatter just outputs text
+        case 'ff_json_standard' :
+            foreach ($items as $delta => $item) {
+                $element[$delta] = ff_json_format_field($item, $delta, $display);
+            };
+            break;
+    }
+    return $element;
+}
+
+/**
+ * This function formats the visualization field for display,
+ * called by data_viz_field_formatter_view().
+ */
+function ff_json_format_field($item, $delta, $display) {
+    //$chart_id = uniqid();
+
+    // Filter the data down to just the items in state:dataSeriesDisplay
+
+//    $state = json_decode($item['state']);
+//    $data = json_decode($item['data']);
+//    $lines = array();
+
+    // Replace the set of data series with the new filtered set
+//    $data->lines = $lines;
+//    $item['data'] = json_encode($data);
+
+    // Get the map details and place in an array to pass to Drupal.settings.
+//    $settings = array(
+//        'viz_api_' . $chart_id => array(
+//            'state' => $item['state'],
+//            'data' => $item['data'],
+//            'nid' => $chart_id,
+//            'path' => 'http://' . $_SERVER['HTTP_HOST'] . '/' . drupal_get_path('module', 'viz_api') . '/',
+//            'chartType' => $item['type'],
+//        ),
+//    );
+
+    $element = array(
+        '#type' => 'container',
+        '#attributes' => array('class' => array('field-item')),
+    );
+
+    //var_dump($item);
+    //var_dump($display);
+    //var_dump($delta);
+
+    $element['data'] = array(
+        'item' => array(
+            '#type' => 'container',
+            '#attributes' => array('class' => array('field-item')),
+            'text' => array(
+                '#markup' => theme('field', array(
+                    'name' => check_plain($item['data']),
+                    //'nid' => $chart_id,
+                )),
+            ),
+        ),
+    );
+    // Use this if you want to pass data to the JS
+//    $drupal_path = drupal_get_path('module', 'viz_api');
+//    drupal_add_js($settings, 'setting');
+
+
+    return $element;
+}
+
+/****************
+ * Widget fields for Node Edit
+ */
+
+/**
+ * Implements hook_field_widget_info().
+ *
+
+ */
+function ff_json_field_widget_info() {
+    return array(
+        'ff_json_widget' => array(
+            'label' => t('Standard'),
+            'field types' => array('ff_json'),
+        ),
+    );
+}
+
+/**
+ * Implements hook_field_widget_error().
+ */
+function ff_json_field_widget_error($element, $error, $form, &$form_state) {
+    if (empty($item['json'])) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/**
+ * Implements hook_field_widget_form().
+ *
+ * hook_widget_form() is where Drupal tells us to create form elements for
+ * our field's widget.
+ *
+ * We provide one of two different forms, depending on the widget type of
+ * the Form API item provided.
+ *
+ * The 'ff_json_text' just displays a raw text field.  The 'ff_json_line_chart' adds
+ * the D3 js helper to let us manipulate and build charts.
+ */
+function ff_json_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+    // Append a unique ID to each field in case we allow more than one instance on a content type.
+    $field_id = uniqid();
+
+    $fieldName = str_replace('_', '-', $element['#field_name']);
+
+    // Get the state and data details and place in an array to pass to Drupal.settings.
+//    $settings = array(
+//        'ff_json_' . $field_id => array(
+//            'path' => 'http://' . $_SERVER['HTTP_HOST'] . '/' . drupal_get_path('module', 'ff_json') . '/',
+//            'fieldName' => $fieldName,
+//        )
+//    );
+//    drupal_add_js($settings, 'setting');
+
+    $value = isset($items[$delta]['state']) ? $items[$delta]['state'] : '';
+
+    $element['#title'] = t('Remote Data Settings');
+    $element['#description'] = '<p>' . t('JSON Data for report') . '</p>';
+
+    $element += array(
+        '#type' => 'fieldset',
+        '#tree' => TRUE,
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+    );
+
+    $element['title'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Title'),
+        '#default_value' => isset($items[$delta]['title']) ? $items[$delta]['title'] : '',
+        '#prefix' => '<div><div class="clearfix"><div class="ff_json_field"></div></div>'
+    );
+    $element['state'] = array(
+        '#type' => 'textarea',
+        '#title' => t('State'),
+        '#default_value' => isset($items[$delta]['state']) ? $items[$delta]['state'] : '',
+    );
+    $element['data'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Data'),
+        '#default_value' => isset($items[$delta]['data']) ? $items[$delta]['data'] : '',
+    );
+    return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ff_json_theme($existing, $type, $theme, $path) {
+    if ($type == 'module') {
+        return array(
+            'ff_json' => array(
+                'variables' => array(
+                    'name' => "hello",
+                    'chart_id' => "0", //$node->nid,
+                ),
+                'template' => 'field',
+                'path' => drupal_get_path('module', 'ff_json') . '/theme',
+            ),
+        );
+    }
+    return array();
+}
