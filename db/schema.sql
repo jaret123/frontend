@@ -64,8 +64,8 @@ create table xeros_operations_schedule (
   operations_schedule_id int unsigned not null auto_increment,
   day varchar(255),
   shift varchar(255),
-  shift_start_time time,
-  shift_end_time time comment 'Should we make this a length for dealing with shifts that might wrap around midnight',
+  shift_start_time TIME,
+  shift_end_time TIME comment 'Should we make this a length for dealing with shifts that might wrap around midnight',
   location_id int unsigned not null,
   index location_id_index (location_id),
   foreign key (location_id) references xeros_location(location_id) on delete cascade,
@@ -199,7 +199,7 @@ create table xeros_active_dai (
 
 create table xeros_dai_meter_actual (
   dai_meter_actual_id int unsigned not null auto_increment,
-  reading_timestamp datetime,
+  reading_timestamp DATETIME,
   active_dai_id int unsigned,
   index active_dai_id_index (active_dai_id),
   foreign key (active_dai_id) references xeros_active_dai(active_dai_id),

@@ -1,0 +1,6 @@
+name = JSON Field
+description = Defines a JSON field type with state, data, and remote end point fields.
+core = 7.x
+package = FF
+
+dependencies[] = field

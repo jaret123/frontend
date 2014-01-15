@@ -1,0 +1,95 @@
+$color: #444;
+$color-hover: #000;
+
+$background-color: white;
+$background-color-hover: #bbb;
+
+$border-color: $font-color;
+$border-color-hover: $font-color;
+
+.dropdown {
+
+  margin:0 0 10px 0;
+  display: inline-block;
+  // Override standard mixin
+  a:hover {
+    color: $color-hover;
+    border-bottom: none;
+  }
+
+
+  dd, dt, ul {
+    margin: 0px;
+    padding: 0px;
+  }
+  dd {
+    position: absolute;
+    z-index: 9999;
+  }
+  a, a:visited {
+    color: $color;
+    text-decoration: none;
+    outline: none;
+  }
+  a:hover {
+    color: $color-hover;
+  }
+  dt a:hover {
+    color: $color-hover;
+    border: 1px solid $border-color-hover;
+  }
+  dt a {
+    background-color: $background-color;
+    display: block;
+    padding-right: 20px;
+    border: 1px solid $border-color;
+    width: 160px;
+    padding: 5px;
+    span {
+      cursor: pointer;
+      display: block;
+      &.caret-down {
+        display: inline-block;
+        float: right;
+        margin-top: 9px;
+      }
+    }
+  }
+  dd ul {
+    background: $background-color none repeat scroll 0 0;
+    border: 1px solid $border-color;
+    color: $color;
+    display: none;
+    left: 0px;
+    padding: 5px 0px;
+    position: absolute;
+    top: 2px;
+    width: auto;
+    min-width: 170px;
+    list-style: none;
+  }
+  span.value {
+    display: none;
+  }
+  dd ul li a {
+    padding: 5px;
+    display: block;
+  }
+  dd ul li a:hover {
+    background-color: $background-color-hover;
+  }
+}
+
+img.flag {
+  border: none;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.flagvisibility {
+  display: none;
+}
+
+dl {
+
+}
