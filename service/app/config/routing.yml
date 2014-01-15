@@ -1,0 +1,5 @@
+ff_xeros:
+    resource: "@FFXerosBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
