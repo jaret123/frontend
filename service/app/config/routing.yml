@@ -3,3 +3,6 @@ ff_xeros:
     type:     annotation
     prefix:   /
 
+report:
+    type:   rest
+    resource:   FF\XerosBundle\Controller\ReportController
