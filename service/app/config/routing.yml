@@ -1,0 +1,8 @@
+ff_xeros:
+    resource: "@FFXerosBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+report:
+    type:   rest
+    resource:   FF\XerosBundle\Controller\ReportController
