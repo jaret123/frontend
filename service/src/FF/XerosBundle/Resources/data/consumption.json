@@ -1,0 +1,442 @@
+[
+    {
+        "machine": "Unimac 1",
+        "capacity": "60lb",
+        "metric": [
+            {
+                "name": "cold",
+                "cssClass": "show",
+                "data": ["53,678", "35,231", 69],
+                "details": [
+                    {
+                        "type": "Total",
+                        "measures": [
+                            [1, "Gallons", 50, 60 ],
+                            [2, "Load Size", 50, 60],
+                            [3, "Gallons per Pound", 34, 42],
+                            [4, "Cost per Pound", ".034", ".067"]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 8],
+                            ["Cost Reduction", "$11"]
+                        ]
+                    },
+                    {
+                        "type": "White Bath Towels",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Sheets",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "Colored Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "hot",
+                "data": [22, 45, 69],
+                "details": [
+                    {
+                        "type": "Total",
+                        "measures": [
+                            [1, "Gallons", 2, 2 ],
+                            [2, "Load Size", 2, 3],
+                            [3, "Cost per Therm", 4, 5],
+                            [4, "Cost per Pound", 6, 7]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 8],
+                            ["Cost Reduction", "$11"]
+                        ]
+                    },
+                    {
+                        "type": "White Bath Towels",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Cost per Therm", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Sheets",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Cost per Therm", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Cost per Therm", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "Colored Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Cost per Therm", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "total",
+                "data": [24, 14, 69],
+                "details": [
+                    {
+                        "type": "Total",
+                        "measures": [
+                            [1, "Gallons", 1, 2 ],
+                            [2, "Load Size", 2, 3],
+                            [3, "Gallons per Pound", 4, 5],
+                            [4, "Cost per Pound", 6, 7]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 8],
+                            ["Cost Reduction", "$11"]
+                        ]
+                    },
+                    {
+                        "type": "White Bath Towels",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.8"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Sheets",
+                        "measures": [
+                            [1, "Gallons", 87, 34.9 ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", 1.45, 0.58 ],
+                            [4, "Cost per Pound", 0.0412, 0.0166 ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 59.89],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "Colored Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "cycle",
+                "data": [58, 45, 69],
+                "details": [
+                    {
+                        "type": "Total",
+                        "measures": [
+                            [1, "Gallons", 1, 2 ],
+                            [2, "Load Size", 2, 3],
+                            [3, "Gallons per Pound", 4, 5],
+                            [4, "Cost per Pound", 6, 7]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 8],
+                            ["Cost Reduction", "$11"]
+                        ]
+                    },
+                    {
+                        "type": "White Bath Towels",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.8"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Sheets",
+                        "measures": [
+                            [1, "Gallons", 87, 34.9 ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", 1.45, 0.58 ],
+                            [4, "Cost per Pound", 0.0412, 0.0166 ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 59.89],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "Colored Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "chem",
+                "data": [43, 45, 69],
+                "details": [
+                    {
+                        "type": "Total",
+                        "measures": [
+                            [1, "Gallons", 1, 2 ],
+                            [2, "Load Size", 2, 3],
+                            [3, "Gallons per Pound", 4, 5],
+                            [4, "Cost per Pound", 6, 7]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 8],
+                            ["Cost Reduction", "$11"]
+                        ]
+                    },
+                    {
+                        "type": "White Bath Towels",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.8"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Sheets",
+                        "measures": [
+                            [1, "Gallons", 87, 34.9 ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", 1.45, 0.58 ],
+                            [4, "Cost per Pound", 0.0412, 0.0166 ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", 59.89],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "White Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    },
+                    {
+                        "type": "Colored Table Linens",
+                        "measures": [
+                            [1, "Gallons", 87, "34.9" ],
+                            [2, "Load Size", 50, 60 ],
+                            [3, "Gallons per Pound", "1.45", "0.58" ],
+                            [4, "Cost per Pound", "0.0412", "0.0166" ]
+
+                        ],
+                        "summaryMeasures": [
+                            ["Water Reduction", "59.89"],
+                            ["Cost Reduction", "$0.02480"]
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "machine": "Unimac 2",
+        "capacity": "60lb",
+        "metric": [
+            {
+                "name": "cold",
+                "data": ["53,678", "35,231", 58]
+            },
+            {
+                "name": "hot",
+                "data": [32, 14, 51]
+            },
+            {
+                "name": "total",
+                "data": [34, 15, 52]
+            },
+            {
+                "name": "cycle",
+                "data": [64, 35, 46]
+            },
+            {
+                "name": "chem",
+                "data": [56, 34, 48]
+            }
+        ]
+    },
+    {
+        "machine": "Unimac 3",
+        "capacity": "60lb",
+        "metric": [
+            {
+                "name": "cold",
+                "data": ["53,678", "35,231", 58]
+            },
+            {
+                "name": "hot",
+                "data": [32, 14, 51]
+            },
+            {
+                "name": "total",
+                "data": [34, 15, 52]
+            },
+            {
+                "name": "cycle",
+                "data": [64, 35, 46]
+            },
+            {
+                "name": "chem",
+                "data": [56, 34, 48]
+            }
+        ],
+        "cssClass": "last"
+    }
+]
