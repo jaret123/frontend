@@ -23,7 +23,11 @@
         }
     ];
 
-    
+    function kpiCallback(data) {
+        createDropDown("#kpi-select");
+        var chart = new kpiChart(data);
+    }
+
 </script>
 
 <div id="page-1" class="main page">

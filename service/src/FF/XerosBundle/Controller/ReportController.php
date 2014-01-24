@@ -24,11 +24,10 @@ class ReportController extends Controller {
      */
     public function reportAction($uid, $id, $fromDate, $toDate)
     {
-        //var_dump("input params", $id, $start, $end);
+        // Resources directory
+        $dir = __DIR__ . '/../Resources/data/';
 
-        // Temp location for loading data
-        // TODO: Don't hard code this URL
-        $dir = "/Users/jason/dev/ELYXOR/xeros/service/src/FF/XerosBundle/Resources/data/";
+        //$dir = "../Resources/data/";
 
         // {id} = Report ID
         switch ($id) {
