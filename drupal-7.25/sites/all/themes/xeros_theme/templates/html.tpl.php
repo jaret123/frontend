@@ -30,13 +30,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,600,700' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="css/chart.css" media="all"> -->
 
-<!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/mustache.js"></script>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/createDropdown.js"></script>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/data.js"></script>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/d3.min.js"></script>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/chart.js"></script>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/scripts.js"></script>
+
 
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>
@@ -62,5 +56,14 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+
+  <!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/mustache.js"></script>
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/createDropdown.js"></script>
+
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/news.js"></script>
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/d3.min.js"></script>
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/chart.js"></script>
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/scripts.js"></script>
 </body>
 </html>

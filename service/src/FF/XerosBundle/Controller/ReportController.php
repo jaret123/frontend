@@ -26,22 +26,34 @@ class ReportController extends Controller {
     {
         //var_dump("input params", $id, $start, $end);
 
-        // {id} = Report ID
+        // Temp location for loading data
+        // TODO: Don't hard code this URL
+        $dir = "/Users/jason/dev/ELYXOR/xeros/service/src/FF/XerosBundle/Resources/data/";
 
+        // {id} = Report ID
         switch ($id) {
-            case 1:
+            case "users":
                 $sql = sprintf("SELECT * FROM users WHERE uid = '%s'", $uid);
                 $conn = $this->get('database_connection');
                 $users = $conn->fetchAll($sql);
 
                 return array ("report" => $users);
                 break;
-            case 2:
-                return array("report" => "Report 2");
+            case "kpis":
+                $json = file_get_contents($dir . "kpis.json");
                 break;
-            case 3:
-                return array("report" => "Report 3");
+            case "consumption":
+                $json = file_get_contents($dir . "consumption.json");
+                break;
+            case "consumptionDetails":
+                $json = file_get_contents($dir . "consumption.json");
+                break;
+            case "news":
+                $json = file_get_contents($dir . "news.json");
                 break;
         }
+
+        $ar = json_decode($json, true);
+        return array ("data" => $ar);
     }
 } 

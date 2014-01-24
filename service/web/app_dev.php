@@ -18,6 +18,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
 }
 
 //$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+
 if( !isset($_COOKIE['XDEBUG_SESSION']) )
     $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 else
