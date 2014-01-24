@@ -7,6 +7,25 @@
  * @see https://drupal.org/node/1728164
  */
 ?>
+<script>
+    var reports = [
+        {
+            rid : 1,
+            apiUrl : 'http://xeros.local/api/report/7/kpis/123/321.json',
+            template : "kpis",
+            callback : "kpiCallback"
+        },
+        {
+            rid : 2,
+            apiUrl : 'http://xeros.local/api/report/7/news/123/321.json',
+            template : "news",
+            callback : "newsCallback"
+        }
+    ];
+
+    
+</script>
+
 <div id="page-1" class="main page">
     <div class="page-container">
         <div class="container">

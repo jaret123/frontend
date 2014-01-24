@@ -3,46 +3,36 @@
 jQuery( document ).ready(function() {
     console.log( "ready!" );
 
-    loadTemplate("kpis", function() {
-        //showPage(jQuery('#page-1'));
-        createDropDown("#kpi-select");
-        chart();
-    } );
-    loadTemplate("news");
-    loadTemplate("consumption", bindLinks);
-    loadTemplate("consumption-details", function() {
-        createDropDown("#consumption-details-select");
-        createDropDown("#report-select", function(){
-            showSection();
-            //console.log("Do Nothing");
-        });
-
-        jQuery( "#report-select" ).on( "change", function(event) {
-            event.preventDefault();
-            alert( jQuery( this ).text() );
-        });
-
-    });
-
-//    jQuery('#menu-dashboard').click(function(event) {
-//            event.preventDefault();
-//            jQuery(".header__main-menu li").removeClass("active");
-//            jQuery(this).addClass("active");
-//            //showPage(jQuery('#page-1'));
-//        }
-//    );
-//
-//    jQuery('#menu-consumption').click(function(event) {
-//            event.preventDefault();
-//            jQuery(".header__main-menu li").removeClass("active");
-//            jQuery(this).addClass("active");
-//            //showPage(jQuery('#page-2'));
-//        }
-//    )
-
+    // Load the templates for each report on the page
+    for (var i= 0; i<reports.length; i++ ) {
+        var r = reports[i];
+        loadTemplate(r.template, r.apiUrl, window[r.callback])
+    }
+//    loadTemplate("kpis", kpiCallback );
+//    loadTemplate("news");
+//    loadTemplate("consumption", bindLinks);
+//    loadTemplate("consumption-details", consumptionDetailsCallback);
 });
 
 var ql = 400;
+
+function kpiCallback () {
+    createDropDown("#kpi-select");
+    chart();
+};
+
+function consumptionDetailsCallback () {
+    createDropDown("#consumption-details-select");
+    createDropDown("#report-select", function(){
+        showSection();
+        //console.log("Do Nothing");
+    });
+
+    jQuery( "#report-select" ).on( "change", function(event) {
+        event.preventDefault();
+        alert( jQuery( this ).text() );
+    });
+};
 
 function showPage(box) {
     // Hide active
@@ -75,36 +65,37 @@ function fadeBoxIn(box) {
     });
 }
 
-function bindLinks () {
-    jQuery('.consumption__machine, .link').click(function(event) {
-        event.preventDefault();
-        //showPage(jQuery('#page-3'));
-        document.location.href='consumption-details';
-    });
 
 
-    createDropDown("#consumption-select");
-};
+function loadTemplate(templateName, apiUrl, callback) {
 
-function loadTemplate(templateName, callback) {
-
-    if (arguments.length == 2) { // if only two arguments were supplied
+    // Make sure callback is a function
+    if (arguments.length == 3) { // if only two arguments were supplied
         if (Object.prototype.toString.call(callback) == "[object Function]") {
             var c = callback;
         }
     }
 
+    // Load the template file from the directory
     var filename = "/sites/all/themes/xeros_theme/ms-templates/" + templateName + ".html";
 
-    jQuery.get( filename,
-        function(template) {
-            var html = Mustache.to_html(template, data);
-            jQuery('#' + templateName).html(html);
-            if (typeof c != "undefined") {
-                c();
-            }
-        },
-        'text');
+    // Get the data, merge the template, then callback
+    jQuery.ajax({
+        url: apiUrl,
+        dataType: 'json',
+        success: function(data) {
+            jQuery.get( filename,
+                function(template) {
+                    var html = Mustache.to_html(template, data);
+                    jQuery('#' + templateName).html(html);
+                    if (typeof c != "undefined") {
+                        c();
+                    }
+                },
+                'text');
+        }
+    })
+
 }
 
 

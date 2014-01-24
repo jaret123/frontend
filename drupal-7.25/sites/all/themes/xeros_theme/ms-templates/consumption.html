@@ -1,4 +1,3 @@
-
 <div class="consumption-container">
     <div class="legend">
         <span class="swatch current"></span>
@@ -45,7 +44,7 @@
             <div class="sub-label">(Ounces/Pound)</div>
         </div>
     </div>
-    {{#consumption}}
+    {{#data}}
     <div class="row {{cssClass}}">
         <div class="col col-1" report="total">
             <a href="#" class="consumption__machine {{machine}}">
@@ -94,6 +93,6 @@
             <div>{{metric.4.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
     </div>
-    {{/consumption}}
+    {{/data}}
     </div>
 </div>
