@@ -6,7 +6,8 @@ jQuery( document ).ready(function() {
     loadTemplate("kpis", function() {
         //showPage(jQuery('#page-1'));
         createDropDown("#kpi-select");
-        chart();
+        // TODO
+        var chart = new kpiChart();
     } );
     loadTemplate("news");
     loadTemplate("consumption", bindLinks);

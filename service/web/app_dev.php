@@ -17,13 +17,21 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+//$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+if( !isset($_COOKIE['XDEBUG_SESSION']) )
+    $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+else
+    $loader = require_once __DIR__.'/../app/autoload.php';
+
 Debug::enable();
+
 
 require_once __DIR__.'/../app/AppKernel.php';
 
 $kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
+//$kernel->loadClassCache();
+if( !isset($_COOKIE['XDEBUG_SESSION']) )
+    $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();

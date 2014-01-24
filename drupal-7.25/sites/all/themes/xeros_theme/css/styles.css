@@ -1524,7 +1524,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1376896851');
+  background-image: url('../images/progress.gif?1389821308');
 }
 
 /* line 5, ../sass/components/_header.scss */
@@ -1579,7 +1579,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -1590,15 +1590,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -1628,7 +1628,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -1639,15 +1639,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -1851,18 +1851,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 61, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-2 .chart {
-  height: 150px;
-  text-align: center;
-}
-/* line 65, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-2 .chart svg {
-  margin: 10px;
-  width: 292px;
-  height: 130px;
-}
-/* line 72, ../sass/components/_page-1.scss */
+/* line 62, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 {
   float: left;
   width: 25%;
@@ -1879,25 +1868,25 @@ h1 {
   height: 150px;
   position: relative;
 }
-/* line 77, ../sass/components/_page-1.scss */
+/* line 67, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .unit {
   text-transform: uppercase;
   font-weight: 300;
   font-size: .7em;
 }
-/* line 82, ../sass/components/_page-1.scss */
+/* line 72, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .dollars {
   margin-top: 6px;
   font-size: 1.6em;
   letter-spacing: 1px;
   font-weight: 300;
 }
-/* line 87, ../sass/components/_page-1.scss */
+/* line 77, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .dollars .dollar-sign {
   font-size: .6em;
   vertical-align: top;
 }
-/* line 99, ../sass/components/_page-1.scss */
+/* line 89, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .saved {
   font-weight: 300;
   font-size: .8em;
@@ -1905,13 +1894,13 @@ h1 {
   line-height: 130%;
   margin-top: 0px;
 }
-/* line 106, ../sass/components/_page-1.scss */
+/* line 96, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .percent {
   font-weight: 300;
   font-size: 1.1em;
   margin-top: 8px;
 }
-/* line 111, ../sass/components/_page-1.scss */
+/* line 101, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .border {
   height: 1px;
   border-top: 1px dashed gray;
@@ -1920,77 +1909,77 @@ h1 {
   margin-top: 2px;
   margin-bottom: -2px;
 }
-/* line 119, ../sass/components/_page-1.scss */
+/* line 109, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .info {
   position: absolute;
   right: 5px;
   bottom: 5px;
 }
-/* line 123, ../sass/components/_page-1.scss */
+/* line 113, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis .row .col-3 .info:hover {
   color: #0087be;
 }
-/* line 133, ../sass/components/_page-1.scss */
+/* line 123, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-overall .icon {
   color: #79bdb5;
 }
-/* line 134, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-overall .chart {
+/* line 124, ../sass/components/_page-1.scss */
+#page-1 .container #kpis .kpis-overall .kpi-chart {
   background-color: #79bdb5;
 }
-/* line 135, ../sass/components/_page-1.scss */
+/* line 125, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-overall .col-3 {
   border: 1px solid #79bdb5;
 }
-/* line 138, ../sass/components/_page-1.scss */
+/* line 128, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-gallons .icon {
   color: #77b8d5;
 }
-/* line 139, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-gallons .chart {
+/* line 129, ../sass/components/_page-1.scss */
+#page-1 .container #kpis .kpis-gallons .kpi-chart {
   background-color: #77b8d5;
 }
-/* line 140, ../sass/components/_page-1.scss */
+/* line 130, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-gallons .col-3 {
   border: 1px solid #77b8d5;
 }
-/* line 143, ../sass/components/_page-1.scss */
+/* line 133, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-efficiency .icon {
   color: #f47f48;
 }
-/* line 144, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-efficiency .chart {
+/* line 134, ../sass/components/_page-1.scss */
+#page-1 .container #kpis .kpis-efficiency .kpi-chart {
   background-color: #f47f48;
 }
-/* line 145, ../sass/components/_page-1.scss */
+/* line 135, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-efficiency .col-3 {
   border: 1px solid #f47f48;
 }
-/* line 148, ../sass/components/_page-1.scss */
+/* line 138, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-labor .icon {
   color: #8cc63f;
 }
-/* line 149, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-labor .chart {
+/* line 139, ../sass/components/_page-1.scss */
+#page-1 .container #kpis .kpis-labor .kpi-chart {
   background-color: #8cc63f;
 }
-/* line 150, ../sass/components/_page-1.scss */
+/* line 140, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-labor .col-3 {
   border: 1px solid #8cc63f;
 }
-/* line 153, ../sass/components/_page-1.scss */
+/* line 143, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-chemicals .icon {
   color: #fbb03b;
 }
-/* line 154, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-chemicals .chart {
+/* line 144, ../sass/components/_page-1.scss */
+#page-1 .container #kpis .kpis-chemicals .kpi-chart {
   background-color: #fbb03b;
 }
-/* line 155, ../sass/components/_page-1.scss */
+/* line 145, ../sass/components/_page-1.scss */
 #page-1 .container #kpis .kpis-chemicals .col-3 {
   border: 1px solid #fbb03b;
 }
-/* line 159, ../sass/components/_page-1.scss */
+/* line 149, ../sass/components/_page-1.scss */
 #page-1 .container #news {
   float: left;
   width: 33.33333%;
@@ -2005,13 +1994,13 @@ h1 {
   word-wrap: break-word;
   margin-top: 22px;
 }
-/* line 162, ../sass/components/_page-1.scss */
+/* line 152, ../sass/components/_page-1.scss */
 #page-1 .container #news h1 {
   margin-top: 10px;
   padding-left: 22px;
   margin-bottom: 10px;
 }
-/* line 167, ../sass/components/_page-1.scss */
+/* line 157, ../sass/components/_page-1.scss */
 #page-1 .container #news h3 {
   color: #0087be;
   font-size: 14px;
@@ -2019,23 +2008,23 @@ h1 {
   margin: 0px;
   font-weight: 400;
 }
-/* line 174, ../sass/components/_page-1.scss */
+/* line 164, ../sass/components/_page-1.scss */
 #page-1 .container #news .news__news-item {
   padding-left: 22px;
 }
-/* line 177, ../sass/components/_page-1.scss */
+/* line 167, ../sass/components/_page-1.scss */
 #page-1 .container #news p {
   font-size: .75em;
   line-height: 1.25em;
   margin: 0px;
   margin-bottom: 4px;
 }
-/* line 183, ../sass/components/_page-1.scss */
+/* line 173, ../sass/components/_page-1.scss */
 #page-1 .container #news .read-more {
   font-color: #0087be;
   font-weight: bold;
 }
-/* line 187, ../sass/components/_page-1.scss */
+/* line 177, ../sass/components/_page-1.scss */
 #page-1 .container #news .tags {
   margin-bottom: 1.7em;
   font-style: italic;
@@ -2630,37 +2619,49 @@ img.flag {
 }
 
 /* line 1, ../sass/components/_chart.scss */
-.chart {
+.kpi-chart {
+  height: 150px;
+  text-align: center;
   font-size: 10px;
   color: #FFF;
 }
-/* line 6, ../sass/components/_chart.scss */
-.chart .axis path,
-.chart .axis line {
+/* line 5, ../sass/components/_chart.scss */
+.kpi-chart svg {
+  margin: 15px 0px 10px 0px;
+  width: 316px;
+  height: 130px;
+}
+/* line 14, ../sass/components/_chart.scss */
+.kpi-chart .axis path,
+.kpi-chart .axis line {
   fill: none;
   stroke: #FFF;
   shape-rendering: crispEdges;
 }
-/* line 12, ../sass/components/_chart.scss */
-.chart text {
+/* line 20, ../sass/components/_chart.scss */
+.kpi-chart text {
   fill: #FFF;
 }
-/* line 15, ../sass/components/_chart.scss */
-.chart .x.axis path, .chart .x.axis line, .chart .y.axis path {
+/* line 23, ../sass/components/_chart.scss */
+.kpi-chart .x.axis path, .kpi-chart .x.axis line, .kpi-chart .y.axis path {
   display: none;
 }
-/* line 19, ../sass/components/_chart.scss */
-.chart .xeros-line, .chart .competitor-line {
-  fill: none;
-  stroke-width: 5.0px;
-  stroke-linecap: round;
+/* line 26, ../sass/components/_chart.scss */
+.kpi-chart .y.axis path {
+  display: none;
 }
-/* line 25, ../sass/components/_chart.scss */
-.chart .xeros-line {
+/* line 30, ../sass/components/_chart.scss */
+.kpi-chart .line-a, .kpi-chart .line-b {
+  fill: none;
+  stroke-width: 2px;
+}
+/* line 36, ../sass/components/_chart.scss */
+.kpi-chart .line-a {
+  fill: none;
   stroke: #0086bd;
 }
-/* line 29, ../sass/components/_chart.scss */
-.chart .competitor-line {
+/* line 41, ../sass/components/_chart.scss */
+.kpi-chart .line-b {
   stroke: white;
 }
 

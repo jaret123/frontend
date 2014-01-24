@@ -58,16 +58,6 @@
         }
         .col-2 {
           @include zen-grid-item(6,4);
-          .chart {
-            //background-color: lightgrey;
-            height: 150px;
-            text-align: center;
-            svg {
-              margin: 10px;
-              width: 292px;
-              height: 130px;
-            }
-          }
         }
         .col-3 {
           @include zen-grid-item(3,10);
@@ -131,27 +121,27 @@
 
       .kpis-overall {
         .icon { color: $chart-color-1;}
-        .chart {background-color: $chart-color-1;}
+        .kpi-chart {background-color: $chart-color-1;}
         .col-3 {border: 1px solid $chart-color-1;}
       }
       .kpis-gallons {
         .icon { color: $chart-color-2;}
-        .chart {background-color: $chart-color-2;}
+        .kpi-chart {background-color: $chart-color-2;}
         .col-3 {border: 1px solid $chart-color-2;}
       }
       .kpis-efficiency {
         .icon { color: $chart-color-3;}
-        .chart {background-color: $chart-color-3;}
+        .kpi-chart {background-color: $chart-color-3;}
         .col-3 {border: 1px solid $chart-color-3;}
       }
       .kpis-labor {
         .icon { color: $chart-color-4;}
-        .chart {background-color: $chart-color-4;}
+        .kpi-chart {background-color: $chart-color-4;}
         .col-3 {border: 1px solid $chart-color-4;}
       }
       .kpis-chemicals {
         .icon { color: $chart-color-5;}
-        .chart {background-color: $chart-color-5;}
+        .kpi-chart {background-color: $chart-color-5;}
         .col-3 {border: 1px solid $chart-color-5;}
       }
     }
