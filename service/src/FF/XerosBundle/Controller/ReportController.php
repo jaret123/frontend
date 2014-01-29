@@ -27,7 +27,7 @@ class ReportController extends Controller {
         // Resources directory
         $dir = __DIR__ . '/../Resources/data/';
 
-        //$dir = "../Resources/data/";
+        $userRole = $this->userRole();
 
         // {id} = Report ID
         switch ($id) {
@@ -55,4 +55,23 @@ class ReportController extends Controller {
         $ar = json_decode($json, true);
         return array ("data" => $ar);
     }
+
+    private function userRole()
+    {
+        foreach ($_COOKIE as $key => $value)
+        {
+            if ( substr($key, 0, 4) == 'SESS' ) {
+                $sid = $value;
+            }
+        }
+
+        $sql = sprintf("SELECT * FROM sessions WHERE sid = '%s'", $sid);
+        $conn = $this->get('database_connection');
+        $user = $conn->fetchAll($sql);
+
+        return array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+    }
+
+    private function
+
 } 
