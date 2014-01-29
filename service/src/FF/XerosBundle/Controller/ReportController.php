@@ -29,30 +29,34 @@ class ReportController extends Controller {
 
         $userRole = $this->userRole();
 
-        $filters = array(
-            'fromDate' => $fromDate,
-            'toDate' => $toDate
-        );
+        if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
+            return array ("message" => "Access denied");
+        } else {
+            $filters = array(
+                'fromDate' => $fromDate,
+                'toDate' => $toDate
+            );
 
-        switch ($reportName) {
-            case "kpis":
+            switch ($reportName) {
+                case "kpis":
 
-                $ar = $this->reportKPIs($filters);
-                break;
-            case "consumption":
+                    $ar = $this->reportKPIs($filters);
+                    break;
+                case "consumption":
 
-                $ar = $this->reportConsumption($filters);
-                break;
-            case "consumptionDetails":
-                $ar = $this->reportConsumptionDetails($filters);
-                break;
-            case "news":
-                $json = file_get_contents($dir . "news.json");
-                break;
+                    $ar = $this->reportConsumption($filters);
+                    break;
+                case "consumptionDetails":
+                    $ar = $this->reportConsumptionDetails($filters);
+                    break;
+                case "news":
+                    $json = file_get_contents($dir . "news.json");
+                    break;
+            }
+
+             //$ar = json_decode($json, true);
+            return array ("data" => $ar);
         }
-
-         //$ar = json_decode($json, true);
-        return array ("data" => $ar);
     }
 
     private function replaceFilters($string, $filters) {
@@ -64,6 +68,8 @@ class ReportController extends Controller {
 
     private function userRole()
     {
+        $sid = NULL;
+
         foreach ($_COOKIE as $key => $value)
         {
             if ( substr($key, 0, 4) == 'SESS' ) {
@@ -71,11 +77,16 @@ class ReportController extends Controller {
             }
         }
 
-        $sql = sprintf("SELECT * FROM sessions WHERE sid = '%s'", $sid);
-        $conn = $this->get('database_connection');
-        $user = $conn->fetchAll($sql);
+        if ( $sid === NULL or $sid == 0 ) {
+            return array ("uid" => NULL);
+        } else {
+            $sql = sprintf("SELECT * FROM sessions WHERE sid = '%s'", $sid);
+            $conn = $this->get('database_connection');
+            $user = $conn->fetchAll($sql);
 
-        return array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+            return array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+        }
+
     }
 
     private function reportKPIs($filters) {
