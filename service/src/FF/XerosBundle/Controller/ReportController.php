@@ -20,34 +20,31 @@ class ReportController extends Controller {
     /**
      * @return array
      * @View()
-     * @Route("/report/{uid}/{id}/{fromDate}/{toDate}.{_format}")
+     * @Route("/report/{reportName}/{fromDate}/{toDate}.{_format}")
      */
-    public function reportAction($uid, $id, $fromDate, $toDate)
+    public function reportAction($reportName, $fromDate, $toDate)
     {
         // Resources directory
         $dir = __DIR__ . '/../Resources/data/';
 
         $userRole = $this->userRole();
 
-        // {id} = Report ID
-        switch ($id) {
-            case "users":
-                $sql = sprintf("SELECT * FROM users WHERE uid = '%s'", $uid);
-                $conn = $this->get('database_connection');
-                $users = $conn->fetchAll($sql);
+        $filters = array(
+            'fromDate' => $fromDate,
+            'toDate' => $toDate
+        );
 
-                return array ("report" => $users);
-                break;
+        switch ($reportName) {
             case "kpis":
 
-                $ar = $this->reportKPIs($dir);
+                $ar = $this->reportKPIs($filters);
                 break;
             case "consumption":
 
-                $ar = $this->reportConsumption();
+                $ar = $this->reportConsumption($filters);
                 break;
             case "consumptionDetails":
-                $ar = $this->reportConsumptionDetails();
+                $ar = $this->reportConsumptionDetails($filters);
                 break;
             case "news":
                 $json = file_get_contents($dir . "news.json");
@@ -56,6 +53,13 @@ class ReportController extends Controller {
 
          //$ar = json_decode($json, true);
         return array ("data" => $ar);
+    }
+
+    private function replaceFilters($string, $filters) {
+        foreach ($filters as $k => $v) {
+            $string = str_replace(':' . $k, $v, $string);
+        }
+        return $string;
     }
 
     private function userRole()
@@ -74,7 +78,7 @@ class ReportController extends Controller {
         return array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
     }
 
-    private function reportKPIs() {
+    private function reportKPIs($filters) {
 
         $sql = <<<SQL
 select
@@ -109,7 +113,7 @@ from
 	      on xd.date = xc.reading_date
 	where
 	    1 = 1
-	    and xd.date > '2013-11-28' and xd.date < '2013-12-12'
+	    and xd.date > ':fromDate' and xd.date < ':toDate'
 	group by
 		xd.date,
 		xc.reading_date
@@ -120,6 +124,7 @@ order by
 	b.date
 SQL;
 
+        $sql = $this->replaceFilters($sql, $filters);
         $conn = $this->get('database_connection');
         $ar = $conn->fetchAll($sql);
 
@@ -127,7 +132,7 @@ SQL;
 
     }
 
-    private function reportConsumption() {
+    private function reportConsumption($filters) {
         //$json = file_get_contents($dir . "consumption.json");
 
         $sql = <<<SQL
@@ -155,8 +160,7 @@ from
    		xeros_cycle
 	where
 	    1 = 1
-   		-- machine_id = 1
-   		-- put in date ranges
+   	    and reading_date > ':fromDate' and reading_date < ':toDate'
 	group by
    		machine_id
 	) as b
@@ -167,13 +171,14 @@ where
 
 
 SQL;
+        $sql = $this->replaceFilters($sql, $filters);
         $conn = $this->get('database_connection');
         $ar = $conn->fetchAll($sql);
 
         return $ar;
     }
 
-    private function reportConsumptionDetails() {
+    private function reportConsumptionDetails($filters) {
 
         $sql = <<<SQL
 select
@@ -254,7 +259,7 @@ from
 	where
 	    1 = 1
    		AND xc.machine_id = 1
-   		-- put in date ranges
+        and reading_date > ':fromDate' and reading_date < ':toDate'
 	group by
    		xc.machine_id,
    		xc.classification_id
@@ -267,6 +272,7 @@ where
 
 SQL;
 
+        $sql = $this->replaceFilters($sql, $filters);
         $conn = $this->get('database_connection');
         $ar = $conn->fetchAll($sql);
 
