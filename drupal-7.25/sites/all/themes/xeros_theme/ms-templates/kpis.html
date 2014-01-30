@@ -22,13 +22,13 @@
     <div class="kpis-{{meta.cssClass}} row">
         <div class="col col-1">
             <div class="icon icon-{{meta.icon}}"></div>
-            <div class="col title">{{name}}</div>
+            <div class="col title">{{meta.title}}</div>
         </div>
         <div class="col col-2">
-            <div class="col kpi-chart"></div>
+            <div class="col kpi-chart {{name}}"></div>
         </div>
         <div class="col col-3">
-            <div class="col unit">{{meta.name}}&nbsp;</div>
+            <div class="col unit">{{meta.title}}&nbsp;</div>
             <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{summaryData.cost}}</div>
             <div class="col saved">Actual Cost</div>
             <div class="col border"></div>
