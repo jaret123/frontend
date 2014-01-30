@@ -149,8 +149,8 @@ SQL;
 
 
         array_push($metrics, array(
-            "name" => "Cold Water",
-            "meta" => array( "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
+            "name" => "cold-water",
+            "meta" => array( "title" => "Cold Water", "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
             "query" => <<<METRIC
    		truncate(sum(xc.cycle_cold_water_volume), 0) as value,
    		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as value_xeros,
@@ -165,8 +165,8 @@ SQL;
 METRIC
         ));
         array_push($metrics, array(
-            "name" => "hot water",
-            "meta" => array( "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
+            "name" => "hot-water",
+            "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
    		truncate(sum(xc.cycle_hot_water_volume), 0) as value,
    		truncate(sum(xc.cycle_hot_water_volume), 0) as value_xeros,
@@ -181,8 +181,8 @@ METRIC
 METRIC
         ));
         array_push($metrics, array(
-            "name" => "cycle time",
-            "meta" => array( "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
+            "name" => "cycle-time",
+            "meta" => array( "title" => "Cycle Time", "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
             "query" => <<<METRIC
    		truncate(sum(xc.cycle_time_total_time), 0) as value,
    		truncate(sum(xc.cycle_time_xeros_total_time), 0) as value_xeros,
@@ -197,8 +197,8 @@ METRIC
 METRIC
         ));
         array_push($metrics, array(
-            "name" => "chemical strength",
-            "meta" => array( "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
+            "name" => "chemical",
+            "meta" => array( "title" => "Chemical Strength", "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
             "query" => <<<METRIC
    		truncate(sum(xc.cycle_chemical_strength), 0) as value,
    		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as value_xeros,

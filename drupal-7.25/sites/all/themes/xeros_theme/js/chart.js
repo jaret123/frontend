@@ -63,7 +63,10 @@
 
 var kpiChart = function(data) {
 
-//    var data = getData(kpiType);
+    var name = data["name"];
+
+
+
     var data = data["chartData"];
 
 //    sets up the page
@@ -113,22 +116,23 @@ var kpiChart = function(data) {
 // create the individual points for the line
     var lineA = d3.svg.line()
         .x(function (d) {
-            return x(d[0]);// date
+            x(d["date"]);
+            return x(d["date"]);// date
         })
         .y(function (d) {
-            return y(d[1]); // value 1
+            return y(d["value"]); // value 1
         });
 
     var lineB = d3.svg.line()
         .x(function (d) {
-            return x(d[0]);// date
+            return x(d["date"]);// date
         })
         .y(function (d) {
-            return y(d[2]); // value 1
+            return y(d["value_xeros"]); // value 1
         });
 
 // adds SVG element to DOM, positioning properly
-    var svg = d3.selectAll(".kpis .kpi-chart").append("svg")
+    var svg = d3.selectAll(".kpis .kpi-chart ." + name).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
