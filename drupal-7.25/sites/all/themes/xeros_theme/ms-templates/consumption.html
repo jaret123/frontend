@@ -45,52 +45,52 @@
         </div>
     </div>
     {{#data}}
-    <div class="row {{cssClass}}">
+    <div class="row {{meta.cssClass}}">
         <div class="col col-1" report="total">
-            <a href="#" class="consumption__machine {{machine}}">
+            <a href="#" class="consumption__machine {{machine_name}}">
                 <div class="icon-Washer"></div>
-                <div class="machine-label">{{machine}} <br/> ({{capacity}}) </div>
+                <div class="machine-label">{{machine_name}} <br/> ({{size}}) </div>
             </a>
         </div>
         <div class="col col-2 link" report="cold">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
-                <div class="actual">{{metric.0.data.0}}</div>
-                <div class="potential">{{metric.0.data.1}}</div>
+                <div class="actual">{{cold_water_value}}</div>
+                <div class="potential">{{cold_water_xeros_value}}</div>
             </div>
-            <div>{{metric.0.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+            <div>{{cold_water_delta_value}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
         <div class="col col-3 link" report="hot">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
-                <div class="actual">{{metric.1.data.0}}</div>
-                <div class="potential">{{metric.1.data.1}}</div>
+                <div class="actual">{{hot_water_value}}</div>
+                <div class="potential">{{hot_water_xeros_value}}</div>
             </div>
-            <div>{{metric.1.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+            <div>{{hot_water_delta_value}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
         <div class="col col-4 link" report="total">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
-                <div class="actual">{{metric.2.data.0}}</div>
-                <div class="potential">{{metric.2.data.1}}</div>
+                <div class="actual">{{total_water_value}}</div>
+                <div class="potential">{{total_water_xeros_value}}</div>
             </div>
-            <div>{{metric.2.data.2}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+            <div>{{total_water_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
         <div class="col col-5 link" report="cycle">
             <img src="/sites/all/themes/xeros_theme/images/piechart_placeholder.png"/>
             <div class="labels">
-                <div class="actual">{{metric.3.data.0}}</div>
-                <div class="potential">{{metric.3.data.1}}</div>
+                <div class="actual">{{time_value}}</div>
+                <div class="potential">{{time_xeros_value}}</div>
             </div>
-            <div>{{metric.3.data.2}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+            <div>{{time_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
         <div class="col col-6 link" report="chem">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
-                <div class="actual">{{metric.4.data.0}}</div>
-                <div class="potential">{{metric.4.data.1}}</div>
+                <div class="actual">{{chemical_value}}</div>
+                <div class="potential">{{chemical_xeros_value}}</div>
             </div>
-            <div>{{metric.4.data.2}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+            <div>{{chemical_delta_value}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
     </div>
     {{/data}}
