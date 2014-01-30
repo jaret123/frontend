@@ -14,13 +14,14 @@
             apiUrl : 'http://xeros.local/api/report/kpis/2013-12-01/2013-12-30.json',
             template : "kpis",
             callback : "kpiCallback"
-        },
-        {
-            rid : 2,
-            apiUrl : 'http://xeros.local/api/report/7/news/123/321.json',
-            template : "news",
-            callback : "newsCallback"
         }
+
+//        {
+//            rid : 2,
+//            apiUrl : 'http://xeros.local/api/report/7/news/123/321.json',
+//            template : "news",
+//            callback : "newsCallback"
+//        }
     ];
 
     function kpiCallback(data) {

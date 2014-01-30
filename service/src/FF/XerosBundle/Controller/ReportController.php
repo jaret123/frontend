@@ -97,7 +97,8 @@ class ReportController extends Controller {
         $kpis = array();
         $metrics = array();
 
-        $sql = <<<SQL
+        // Date points for the charts
+        $dataPointSql = <<<SQL
 select
 	b.*
 from
@@ -123,54 +124,115 @@ order by
 	b.date
 SQL;
 
+        $summarySql = <<<SQL
+select
+	b.*
+from
+	(
+	select
+	    xd.date,
+	    xc.reading_date,
+        :metric
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	where
+	    1 = 1
+	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
+	) as b
+where
+   1 = 1
+order by
+	b.date
+SQL;
+
+
         array_push($metrics, array(
-            "name" => "cold water",
+            "name" => "Cold Water",
+            "meta" => array( "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
             "query" => <<<METRIC
-   		sum(xc.cycle_cold_water_volume) as value,
-   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
-   		sum(xc.cycle_cold_water_cost) as cost,
-   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
+   		truncate(sum(xc.cycle_cold_water_volume), 0) as value,
+   		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as value_xeros,
+   		truncate(sum(xc.cycle_cold_water_cost), 0) as cost,
+   		truncate(sum(xc.cycle_cold_water_xeros_cost), 0) as cost_xeros,
+   		truncate(
+   		    100 * (
+   		           ( sum(xc.cycle_cold_water_cost) - sum(xc.cycle_cold_water_xeros_cost) )
+   		             / sum(xc.cycle_cold_water_cost)
+   		           )
+   		           , 0) as savings
 METRIC
         ));
         array_push($metrics, array(
             "name" => "hot water",
+            "meta" => array( "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
-   		sum(xc.cycle_hot_water_volume) as value,
-   		sum(xc.cycle_hot_water_volume) as value_xeros,
-   		sum(xc.cycle_hot_water_cost) as cost,
-   		sum(xc.cycle_hot_water_xeros_cost) as cost_xeros
+   		truncate(sum(xc.cycle_hot_water_volume), 0) as value,
+   		truncate(sum(xc.cycle_hot_water_volume), 0) as value_xeros,
+   		truncate(sum(xc.cycle_hot_water_cost), 0) as cost,
+   		truncate(sum(xc.cycle_hot_water_xeros_cost), 0) as cost_xeros,
+   		truncate(
+   		   		100 * (
+   		   		    ( sum(xc.cycle_hot_water_cost) - sum(xc.cycle_hot_water_xeros_cost) )
+   		   		    / sum(xc.cycle_hot_water_cost)
+   		   		    )
+   		   		    , 0) as savings
 METRIC
         ));
         array_push($metrics, array(
             "name" => "cycle time",
+            "meta" => array( "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
             "query" => <<<METRIC
-   		sum(xc.cycle_time_total_time) as value,
-   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
-   		sum(xc.cycle_time_labor_cost) as cost,
-   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
+   		truncate(sum(xc.cycle_time_total_time), 0) as value,
+   		truncate(sum(xc.cycle_time_xeros_total_time), 0) as value_xeros,
+   		truncate(sum(xc.cycle_time_labor_cost), 0) as cost,
+   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as cost_xeros,
+   		truncate(
+   		        100 * (
+   		            (  sum(xc.cycle_time_labor_cost) - sum(xc.cycle_time_xeros_labor_cost) )
+   		            / sum(xc.cycle_time_labor_cost)
+   		            )
+   		            , 0) as savings
 METRIC
         ));
         array_push($metrics, array(
             "name" => "chemical strength",
+            "meta" => array( "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
             "query" => <<<METRIC
-   		sum(xc.cycle_chemical_strength) as value,
-   		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
-   		sum(xc.cycle_chemical_cost) as cost,
-   		sum(xc.cycle_chemical_xeros_cost) as cost_xeros
+   		truncate(sum(xc.cycle_chemical_strength), 0) as value,
+   		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as value_xeros,
+   		truncate(sum(xc.cycle_chemical_cost), 0) as cost,
+   		truncate(sum(xc.cycle_chemical_xeros_cost), 0) as cost_xeros,
+   	    truncate(
+   	            100 * (
+   	            (  sum(xc.cycle_chemical_cost) - sum(xc.cycle_chemical_xeros_cost) )
+   	             / sum(xc.cycle_chemical_cost)
+   	             )
+   	             , 0) as savings
 METRIC
         ));
 
 
         foreach ( $metrics as $k => $v) {
             $ar = array (
-                'metric' => $v["name"],
-                'data' => array()
+                'name' => $v["name"],
+                'meta' => $v["meta"],
+                'summaryData' => array(),
+                'chartData' => array()
             );
 
             $filters['metric'] = $v["query"];
-            $parsedSql = $this->replaceFilters($sql, $filters);
             $conn = $this->get('database_connection');
-            $ar["data"] = $conn->fetchAll($parsedSql);
+
+            $summarySqlParsed = $this->replaceFilters($summarySql, $filters);
+
+            $a = $conn->fetchAll($summarySqlParsed);
+            $ar["summaryData"] = $a[0];
+
+            $dataPointSqlParsed = $this->replaceFilters($dataPointSql, $filters);
+
+            $ar["chartData"] = $conn->fetchAll($dataPointSqlParsed);
 
             array_push($kpis, $ar);
         }
