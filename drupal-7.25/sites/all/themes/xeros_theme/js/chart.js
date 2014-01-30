@@ -140,68 +140,100 @@ var kpiChart = function (data) {
 
 
 var barChart = function (data) {
+    // TODO Transform the incoming data
 
-//    var data = [1, 0.5];
-    var colors = ["black", "blue"];
+    var data = [1000,12];
+    var pct = "15%";
+    var colors = ["#999", "#0086bd"];
 
-    var margin = {top: 0, right: 0, bottom: 0, left: 0},
-        width = 50 - margin.left - margin.right,
-        height = 50 - margin.top - margin.bottom;
+    var margin = {top: 10, right: 20, bottom: 0, left: 20},
+        width = 120 - (margin.left + margin.right),
+        height = 200 - (margin.top + margin.bottom),
+        barHeight = 20;
 
 
-    var x = d3.scale.ordinal()
-        .domain([0, 1])
-        .range([0, width / data.length]);
-
-    var y = d3.scale.linear()
+    var x = d3.scale.linear()
         .domain([0, d3.max(data)])
-        .range([height, 0]);
-
+        .range([0, width]);
 
 //Create SVG element
-    // TODO
-    var svg = d3.select("body .bar-chart").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", barHeight * 5);
 
-    svg.selectAll(".bar")
+    var bar = svg.selectAll("g")
         .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function (d, i) {
-            return x(i);
+        .enter().append("g")
+        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+    bar.append("rect")
+        .attr("width", x)
+        .attr("height", barHeight - 1)
+        .attr("fill", function(d, i) { return colors[i]; });
+
+    bar.append("text")
+        .attr("x", function(d, i) {
+            console.log(x(d));
+            if (x(d) > width / 2) {
+                return x(d) - 5;
+            }
+            else {
+                return x(d) + 5;
+            }
+
         })
-        .attr("width", width / data.length)
-        .attr("y", function (d) {
-            return y(d);
+        .attr("text-anchor", function(d, i) {
+            console.log(x(d));
+            if (x(d) > width / 2) {
+                return "end";
+            }
+            else {
+                return "start";
+            }
+
         })
-        .attr("height", function (d) {
-            return height - y(d);
+        .style("fill", function(d, i) {
+            console.log(x(d));
+            if (x(d) > width / 2) {
+                return "#FFF";
+            }
+            else {
+                return colors[1];
+            }
+
         })
-        .attr("fill", function (d, i) {
-            return colors[i];
-        });
+        .attr("y", barHeight / 2)
+        .attr("dy", ".35em")
+        .text(function(d) { return d; });
+
+    svg.append("g").append("text")
+        .attr("width", width)
+        .attr("y", barHeight * 3)
+        .attr("x", width / 2)
+        .attr("dy", ".35em")
+        .attr("text-anchor", "middle")
+        .style("fill", "#999")
+        .text(pct);
+
 
 }
 
 var donutChart = function (data) {
     // data range 0 - 60 minutes
 
-    var total = 60; //diameter
-    var outer = 10;
-    var inner = 15;
+    var total = 60, // total of full circle
+        outer = 50, // outer value
+        inner = 15; // inner value
+
     var donutWidth = 5;
 
-    var dataOuter = [outer, total - outer];
-    var dataInner = [inner, total - inner];
+    var dataOuter = [outer, total - outer],
+        dataInner = [inner, total - inner];
 
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = 50 - margin.left - margin.right,
         height = 50 - margin.top - margin.bottom,
         radius = Math.min(width, height) / 2;
-
 
     var colorOuter = d3.scale.ordinal()
         .range(["#0000FF", "#FFFFFF"]);
