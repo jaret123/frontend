@@ -59,13 +59,6 @@ class ReportController extends Controller {
         }
     }
 
-    private function replaceFilters($string, $filters) {
-        foreach ($filters as $k => $v) {
-            $string = str_replace(':' . $k, $v, $string);
-        }
-        return $string;
-    }
-
     private function userRole()
     {
         $sid = NULL;
@@ -91,40 +84,25 @@ class ReportController extends Controller {
 
     private function reportKPIs($filters) {
 
+        $kpis = array();
+        $metrics = array();
+
         $sql = <<<SQL
 select
 	b.*
 from
-	( -- metrics
+	(
 	select
 	    xd.date,
 	    xc.reading_date,
-   		sum(xc.cycle_cold_water_volume) as cold_water_volume,
-   		sum(xc.cycle_cold_water_xeros_volume) as cold_water_xeros_volume,
-   		sum(xc.cycle_cold_water_cost) as cold_water_cost,
-   		sum(xc.cycle_cold_water_xeros_cost) as cold_water_xeros_cost,
-
-   		sum(xc.cycle_hot_water_volume) as hot_water_volume,
-   		sum(xc.cycle_hot_water_volume) as hot_water_xeros_volume,
-   		sum(xc.cycle_hot_water_cost) as hot_water_cost,
-   		sum(xc.cycle_hot_water_xeros_cost) as hot_water_xeros_cost,
-
-   		sum(xc.cycle_time_total_time) as time_total_time,
-   		sum(xc.cycle_time_xeros_total_time) as time_xeros_total_time,
-   		sum(xc.cycle_time_labor_cost) as time_labor_cost,
-   		sum(xc.cycle_time_xeros_labor_cost) as time_xeros_labor_cost,
-
-   		sum(xc.cycle_chemical_strength) as chemical_strength,
-   		sum(xc.cycle_chemical_xeros_strength) as chemical_strength_xeros,
-   		sum(xc.cycle_chemical_cost) as chemical_cost,
-   		sum(xc.cycle_chemical_xeros_cost) as chemical_xeros_cost
+        :metric
 	from
 	    xeros_dates as xd
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
 	where
 	    1 = 1
-	    and xd.date > ':fromDate' and xd.date < ':toDate'
+	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
 	group by
 		xd.date,
 		xc.reading_date
@@ -135,12 +113,67 @@ order by
 	b.date
 SQL;
 
-        $sql = $this->replaceFilters($sql, $filters);
-        $conn = $this->get('database_connection');
-        $ar = $conn->fetchAll($sql);
+        array_push($metrics, array(
+            "name" => "cold water",
+            "query" => <<<METRIC
+   		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
+METRIC
+        ));
+        array_push($metrics, array(
+            "name" => "hot water",
+            "query" => <<<METRIC
+   		sum(xc.cycle_hot_water_volume) as value,
+   		sum(xc.cycle_hot_water_volume) as value_xeros,
+   		sum(xc.cycle_hot_water_cost) as cost,
+   		sum(xc.cycle_hot_water_xeros_cost) as cost_xeros
+METRIC
+        ));
+        array_push($metrics, array(
+            "name" => "cycle time",
+            "query" => <<<METRIC
+   		sum(xc.cycle_time_total_time) as value,
+   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
+   		sum(xc.cycle_time_labor_cost) as cost,
+   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
+METRIC
+        ));
+        array_push($metrics, array(
+            "name" => "chemical strength",
+            "query" => <<<METRIC
+   		sum(xc.cycle_chemical_strength) as value,
+   		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
+   		sum(xc.cycle_chemical_cost) as cost,
+   		sum(xc.cycle_chemical_xeros_cost) as cost_xeros
+METRIC
+        ));
 
-        return $ar;
 
+        foreach ( $metrics as $k => $v) {
+            $ar = array (
+                'metric' => $v["name"],
+                'data' => array()
+            );
+
+            $filters['metric'] = $v["query"];
+            $parsedSql = $this->replaceFilters($sql, $filters);
+            $conn = $this->get('database_connection');
+            $ar["data"] = $conn->fetchAll($parsedSql);
+
+            array_push($kpis, $ar);
+        }
+
+        return $kpis;
+
+    }
+
+    private function replaceFilters($string, $filters) {
+        foreach ($filters as $k => $v) {
+            $string = str_replace(':' . $k, $v, $string);
+        }
+        return $string;
     }
 
     private function reportConsumption($filters) {
@@ -171,7 +204,7 @@ from
    		xeros_cycle
 	where
 	    1 = 1
-   	    and reading_date > ':fromDate' and reading_date < ':toDate'
+   	    and reading_date >= ':fromDate' and reading_date <= ':toDate'
 	group by
    		machine_id
 	) as b
@@ -270,7 +303,7 @@ from
 	where
 	    1 = 1
    		AND xc.machine_id = 1
-        and reading_date > ':fromDate' and reading_date < ':toDate'
+        and reading_date >= ':fromDate' and reading_date =< ':toDate'
 	group by
    		xc.machine_id,
    		xc.classification_id
