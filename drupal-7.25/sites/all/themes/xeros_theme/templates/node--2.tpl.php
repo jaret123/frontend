@@ -11,7 +11,7 @@
     var reports = [
         {
             rid : 1,
-            apiUrl : 'http://xeros.local/api/report/7/kpis/123/321.json',
+            apiUrl : 'http://xeros.local/api/report/kpis/2013-12-01/2013-12-30.json',
             template : "kpis",
             callback : "kpiCallback"
         },

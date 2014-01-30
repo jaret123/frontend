@@ -1,9 +1,9 @@
-//// Constants
-var KPI_COST = "KPI_COST",
-    KPI_COLD = "KPI_COLD",
-    KPI_HOT = "KPI_HOT",
-    KPI_TIME = "KPI_TIME",
-    KPI_CHEMICAL = "KPI_CHEMICAL";
+////// Constants
+//var KPI_COST = "KPI_COST",
+//    KPI_COLD = "KPI_COLD",
+//    KPI_HOT = "KPI_HOT",
+//    KPI_TIME = "KPI_TIME",
+//    KPI_CHEMICAL = "KPI_CHEMICAL";
 
 
 //// Defined Chart types
@@ -11,9 +11,59 @@ var KPI_COST = "KPI_COST",
 //    CHART_BAR_H = "CHART_BAR_H",
 //    CHART_DONUT = "CHART_DONUT";
 
-var kpiChart = function(kpiType) {
 
-    var data = getData(kpiType);
+// --------------- Helper Functions ----------- //
+function getData(kpiType) {
+
+    var data = dummyData();
+    switch (kpiType) {
+        case KPI_COST:
+            data = data.slice(0,30);
+            break;
+        case KPI_COLD:
+            data = data.slice(30,60);
+            break;
+        case KPI_HOT:
+            data = data.slice(0,180);
+            break;
+        case KPI_TIME:
+            data = data.slice(180);
+            break;
+        case KPI_CHEMICAL:
+            data = data;
+            break;
+
+    }
+
+
+
+
+}
+
+function dummyData() {
+
+//    converts date string to date object
+    var parseDate = d3.time.format("%x").parse;
+    var data = [];
+
+    var len = Math.min(dataA.length, dataB.length);
+    for (var i = 0; i < len; i++) {
+        var row = [];
+        row[0] = parseDate(dataA[i]["date"]);
+        row[1] = dataA[i]["value"];
+        row[2] = dataB[i]["value"];
+
+        data.push(row);
+        console.log(row);
+    }
+    return data;
+}
+
+// ------------ charts ---------------- //
+
+var kpiChart = function(data) {
+
+//    var data = getData(kpiType);
 
 //    sets up the page
     var margin = {top: 1, right: 10, bottom: 16, left: 26},
@@ -131,49 +181,97 @@ var kpiChart = function(kpiType) {
 };
 
 
-function getData(kpiType) {
+var barChart = function(data) {
 
-    var data = dummyData();
-    switch (kpiType) {
-        case KPI_COST:
-            data = data.slice(0,30);
-            break;
-        case KPI_COLD:
-            data = data.slice(30,60);
-            break;
-        case KPI_HOT:
-            data = data.slice(0,180);
-            break;
-        case KPI_TIME:
-            data = data.slice(180);
-            break;
-        case KPI_CHEMICAL:
-            data = data;
-            break;
+//    var data = [1, 0.5];
+    var colors = ["black", "blue"];
 
-    }
+    var margin = {top: 0, right: 0, bottom: 0, left: 0},
+        width = 50 - margin.left - margin.right,
+        height = 50 - margin.top - margin.bottom;
 
 
+    var x = d3.scale.ordinal()
+        .domain([0, 1])
+        .range([0, width / data.length]);
 
+    var y = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([height, 0]);
+
+
+//Create SVG element
+    // TODO
+    var svg = d3.select("body .bar-chart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d, i) { return x(i); })
+        .attr("width", width / data.length)
+        .attr("y", function(d) { return y(d); })
+        .attr("height", function(d) { return height - y(d); })
+        .attr("fill", function(d, i) { return colors[i]; });
 
 }
 
-function dummyData() {
+var donutChart = function(data) {
+    // data range 0 - 60 minutes
 
-//    converts date string to date object
-    var parseDate = d3.time.format("%x").parse;
-    var data = [];
+    var total = 60; //diameter
+    var outer = 10;
+    var inner = 15;
+    var donutWidth = 5;
 
-    var len = Math.min(dataA.length, dataB.length);
-    for (var i = 0; i < len; i++) {
-        var row = [];
-        row[0] = parseDate(dataA[i]["date"]);
-        row[1] = dataA[i]["value"];
-        row[2] = dataB[i]["value"];
+    var dataOuter = [outer, total - outer];
+    var dataInner = [inner, total - inner];
 
-        data.push(row);
-        console.log(row);
-    }
-    return data;
+    var margin = {top: 0, right: 0, bottom: 0, left: 0},
+        width = 50 - margin.left - margin.right,
+        height = 50 - margin.top - margin.bottom,
+        radius = Math.min(width, height) / 2;
+
+
+    var colorOuter = d3.scale.ordinal()
+        .range(["#0000FF", "#FFFFFF"]);
+
+    var colorInner = d3.scale.ordinal()
+        .range(["#666", "#AAA"]);
+
+    var outerArc = d3.svg.arc()
+        .outerRadius(radius)
+        .innerRadius(radius - donutWidth);
+
+    var innerArc = d3.svg.arc()
+        .outerRadius(radius - donutWidth)
+        .innerRadius(radius - 2 * donutWidth);
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d,i) { return d; });
+
+    var svg = d3.select("body .donut-chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+
+    var g = svg.selectAll(".arc")
+        .data(pie(dataOuter))
+        .enter().append("g")
+        .attr("class", "arc");
+
+    g.append("path")
+        .attr("d", outerArc)
+        .style("fill", function(d,i) { return colorOuter(i); });
+
+    g.data(pie(dataInner))
+        .append("path")
+        .attr("d", innerArc)
+        .style("fill", funct
 }
-
