@@ -586,96 +586,188 @@ table {
   margin-bottom: 1.5em;
 }
 
-@font-face {
-  font-family: 'icomoon';
-  src: url("/sites/all/themes/xeros_theme/fonts/icomoon.eot");
-  src: url("/sites/all/themes/xeros_theme/fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("/sites/all/themes/xeros_theme/fonts/icomoon.ttf") format("truetype"), url("/sites/all/themes/xeros_theme/fonts/icomoon.woff") format("woff"), url("/sites/all/themes/xeros_theme/fonts/icomoon.svg#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal;
+/* line 1, ../sass/components/_admin.scss */
+.admin-menu-icon {
+  height: 16px;
+  width: 16px;
 }
 
-/* line 12, ../sass/components/_icons.scss */
-[class^="icon-"], [class*=" icon-"] {
-  font-family: 'icomoon';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* line 1, ../sass/components/_caret.scss */
+.caret-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
 }
 
-/* line 26, ../sass/components/_icons.scss */
-.icon-Globe:before {
-  content: "\e600";
+/* line 12, ../sass/components/_caret.scss */
+.caret-left {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-right: 4px solid;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
 }
 
-/* line 29, ../sass/components/_icons.scss */
-.icon-Drop:before {
-  content: "\e601";
+/* line 23, ../sass/components/_caret.scss */
+.caret-right {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-left: 4px solid;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
 }
 
-/* line 32, ../sass/components/_icons.scss */
-.icon-Thermometer:before {
-  content: "\e602";
+/* line 1, ../sass/components/_chartKpi.scss */
+.kpi-chart {
+  height: 150px;
+  text-align: center;
+  font-size: 10px;
+  color: #FFF;
+}
+/* line 5, ../sass/components/_chartKpi.scss */
+.kpi-chart svg {
+  margin: 15px 0px 10px 0px;
+  width: 316px;
+  height: 130px;
+}
+/* line 14, ../sass/components/_chartKpi.scss */
+.kpi-chart .axis path,
+.kpi-chart .axis line {
+  fill: none;
+  stroke: #FFF;
+  shape-rendering: crispEdges;
+}
+/* line 20, ../sass/components/_chartKpi.scss */
+.kpi-chart text {
+  fill: #FFF;
+}
+/* line 23, ../sass/components/_chartKpi.scss */
+.kpi-chart .x.axis path, .kpi-chart .x.axis line, .kpi-chart .y.axis path {
+  display: none;
+}
+/* line 26, ../sass/components/_chartKpi.scss */
+.kpi-chart .y.axis path {
+  display: none;
+}
+/* line 30, ../sass/components/_chartKpi.scss */
+.kpi-chart .line-a, .kpi-chart .line-b {
+  fill: none;
+  stroke-width: 2px;
+}
+/* line 36, ../sass/components/_chartKpi.scss */
+.kpi-chart .line-a {
+  fill: none;
+  stroke: #0086bd;
+}
+/* line 41, ../sass/components/_chartKpi.scss */
+.kpi-chart .line-b {
+  stroke: white;
 }
 
-/* line 35, ../sass/components/_icons.scss */
-.icon-Clock:before {
-  content: "\e603";
+/* line 10, ../sass/components/_dropdown.scss */
+.dropdown {
+  margin: 0 0 10px 0;
+  display: inline-block;
+}
+/* line 15, ../sass/components/_dropdown.scss */
+.dropdown a:hover {
+  color: black;
+  border-bottom: none;
+}
+/* line 21, ../sass/components/_dropdown.scss */
+.dropdown dd, .dropdown dt, .dropdown ul {
+  margin: 0px;
+  padding: 0px;
+}
+/* line 25, ../sass/components/_dropdown.scss */
+.dropdown dd {
+  position: absolute;
+  z-index: 9999;
+}
+/* line 29, ../sass/components/_dropdown.scss */
+.dropdown a, .dropdown a:visited {
+  color: #444444;
+  text-decoration: none;
+  outline: none;
+}
+/* line 34, ../sass/components/_dropdown.scss */
+.dropdown a:hover {
+  color: black;
+}
+/* line 37, ../sass/components/_dropdown.scss */
+.dropdown dt a:hover {
+  color: black;
+  border: 1px solid gray;
+}
+/* line 41, ../sass/components/_dropdown.scss */
+.dropdown dt a {
+  background-color: white;
+  display: block;
+  padding-right: 20px;
+  border: 1px solid gray;
+  width: 160px;
+  padding: 5px;
+}
+/* line 48, ../sass/components/_dropdown.scss */
+.dropdown dt a span {
+  cursor: pointer;
+  display: block;
+}
+/* line 51, ../sass/components/_dropdown.scss */
+.dropdown dt a span.caret-down {
+  display: inline-block;
+  float: right;
+  margin-top: 9px;
+}
+/* line 58, ../sass/components/_dropdown.scss */
+.dropdown dd ul {
+  background: white none repeat scroll 0 0;
+  border: 1px solid gray;
+  color: #444444;
+  display: none;
+  left: 0px;
+  padding: 5px 0px;
+  position: absolute;
+  top: 2px;
+  width: auto;
+  min-width: 170px;
+  list-style: none;
+}
+/* line 71, ../sass/components/_dropdown.scss */
+.dropdown span.value {
+  display: none;
+}
+/* line 74, ../sass/components/_dropdown.scss */
+.dropdown dd ul li a {
+  padding: 5px;
+  display: block;
+}
+/* line 78, ../sass/components/_dropdown.scss */
+.dropdown dd ul li a:hover {
+  background-color: #bbbbbb;
 }
 
-/* line 38, ../sass/components/_icons.scss */
-.icon-Atom:before {
-  content: "\e604";
-}
-
-/* line 41, ../sass/components/_icons.scss */
-.icon-Washer:before {
-  content: "\e605";
-}
-
-/* line 44, ../sass/components/_icons.scss */
-.icon-Info:before {
-  content: "\e606";
-}
-
-/* line 47, ../sass/components/_icons.scss */
-.icon-Phone:before {
-  content: "\e607";
-}
-
-/* line 50, ../sass/components/_icons.scss */
-.icon-Email:before {
-  content: "\e608";
-}
-
-/* line 53, ../sass/components/_icons.scss */
-.icon-Twitter:before {
-  content: "\e609";
-}
-
-/* line 56, ../sass/components/_icons.scss */
-.icon-Facebook:before {
-  content: "\e60a";
-}
-
-/* line 59, ../sass/components/_icons.scss */
-.icon-LinkedIn:before {
-  content: "\e60b";
-}
-
-/* line 3, ../sass/components/_misc.scss */
-.select {
-  font-weight: 300;
-  overflow: hidden;
-}
-/* line 6, ../sass/components/_misc.scss */
-.select select, .select option {
+/* line 83, ../sass/components/_dropdown.scss */
+img.flag {
+  border: none;
+  vertical-align: middle;
   margin-left: 10px;
+}
+
+/* line 89, ../sass/components/_dropdown.scss */
+.flagvisibility {
+  display: none;
 }
 
 /**
@@ -1527,6 +1619,61 @@ tr.selected td {
   background-image: url('../images/progress.gif?1389821308');
 }
 
+/* line 2, ../sass/components/_footer.scss */
+.footer {
+  margin-top: 60px;
+  background-color: #333;
+  color: white;
+  height: 100px;
+}
+/* line 7, ../sass/components/_footer.scss */
+.footer .footer-wrapper {
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  padding-top: 10px;
+  font-size: 80%;
+  letter-spacing: 0.08em;
+}
+/* line 16, ../sass/components/_footer.scss */
+.footer .footer-wrapper > div {
+  display: inline-block;
+}
+/* line 19, ../sass/components/_footer.scss */
+.footer .footer-wrapper a:hover {
+  border: 0;
+}
+/* line 22, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__logo {
+  position: absolute;
+  top: -40px;
+}
+/* line 26, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__left {
+  margin-left: 70px;
+  height: 100px;
+  vertical-align: top;
+}
+/* line 30, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__left a {
+  color: white;
+}
+/* line 34, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__middle {
+  margin-left: 40px;
+  color: white;
+}
+/* line 38, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right {
+  float: right;
+  color: white;
+}
+/* line 42, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right [class^="icon-"] {
+  font-size: 30px;
+}
+
 /* line 5, ../sass/components/_header.scss */
 .top-border {
   height: 2em;
@@ -1691,59 +1838,128 @@ h1 {
   margin-top: -40px;
 }
 
-/* line 2, ../sass/components/_footer.scss */
-.footer {
-  margin-top: 60px;
-  background-color: #333;
-  color: white;
-  height: 100px;
+@font-face {
+  font-family: 'icomoon';
+  src: url("/sites/all/themes/xeros_theme/fonts/icomoon.eot");
+  src: url("/sites/all/themes/xeros_theme/fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("/sites/all/themes/xeros_theme/fonts/icomoon.ttf") format("truetype"), url("/sites/all/themes/xeros_theme/fonts/icomoon.woff") format("woff"), url("/sites/all/themes/xeros_theme/fonts/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
-/* line 7, ../sass/components/_footer.scss */
-.footer .footer-wrapper {
-  width: 980px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  padding-top: 10px;
-  font-size: 80%;
-  letter-spacing: 0.08em;
+
+/* line 12, ../sass/components/_icons.scss */
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-/* line 16, ../sass/components/_footer.scss */
-.footer .footer-wrapper > div {
-  display: inline-block;
+
+/* line 26, ../sass/components/_icons.scss */
+.icon-Globe:before {
+  content: "\e600";
 }
-/* line 19, ../sass/components/_footer.scss */
-.footer .footer-wrapper a:hover {
-  border: 0;
+
+/* line 29, ../sass/components/_icons.scss */
+.icon-Drop:before {
+  content: "\e601";
 }
-/* line 22, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__logo {
+
+/* line 32, ../sass/components/_icons.scss */
+.icon-Thermometer:before {
+  content: "\e602";
+}
+
+/* line 35, ../sass/components/_icons.scss */
+.icon-Clock:before {
+  content: "\e603";
+}
+
+/* line 38, ../sass/components/_icons.scss */
+.icon-Atom:before {
+  content: "\e604";
+}
+
+/* line 41, ../sass/components/_icons.scss */
+.icon-Washer:before {
+  content: "\e605";
+}
+
+/* line 44, ../sass/components/_icons.scss */
+.icon-Info:before {
+  content: "\e606";
+}
+
+/* line 47, ../sass/components/_icons.scss */
+.icon-Phone:before {
+  content: "\e607";
+}
+
+/* line 50, ../sass/components/_icons.scss */
+.icon-Email:before {
+  content: "\e608";
+}
+
+/* line 53, ../sass/components/_icons.scss */
+.icon-Twitter:before {
+  content: "\e609";
+}
+
+/* line 56, ../sass/components/_icons.scss */
+.icon-Facebook:before {
+  content: "\e60a";
+}
+
+/* line 59, ../sass/components/_icons.scss */
+.icon-LinkedIn:before {
+  content: "\e60b";
+}
+
+/* line 1, ../sass/components/_legend.scss */
+.legend {
+  font-weight: 300;
+  font-size: 12px;
+  left: 0px;
+  top: 10px;
   position: absolute;
-  top: -40px;
+  line-height: 20px;
 }
-/* line 26, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__left {
-  margin-left: 70px;
-  height: 100px;
-  vertical-align: top;
+/* line 8, ../sass/components/_legend.scss */
+.legend .label {
+  margin-left: 5px;
 }
-/* line 30, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__left a {
-  color: white;
+/* line 11, ../sass/components/_legend.scss */
+.legend .swatch {
+  width: 20px;
+  height: 12px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: -1px;
 }
-/* line 34, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__middle {
-  margin-left: 40px;
-  color: white;
+/* line 17, ../sass/components/_legend.scss */
+.legend .swatch.current {
+  background-color: gray;
+  border: 1px solid gray;
 }
-/* line 38, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right {
-  float: right;
-  color: white;
+/* line 21, ../sass/components/_legend.scss */
+.legend .swatch.xeros {
+  background-color: #0087be;
+  border: 1px solid #0087be;
 }
-/* line 42, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right [class^="icon-"] {
-  font-size: 30px;
+
+/* line 3, ../sass/components/_misc.scss */
+.select {
+  font-weight: 300;
+  overflow: hidden;
+}
+/* line 6, ../sass/components/_misc.scss */
+.select select, .select option {
+  margin-left: 10px;
 }
 
 /* line 2, ../sass/components/_page-1.scss */
@@ -2453,222 +2669,6 @@ h1 {
 #page-3 .legend .swatch.current {
   background-color: white;
   border: 1px solid gray;
-}
-
-/* line 1, ../sass/components/_legend.scss */
-.legend {
-  font-weight: 300;
-  font-size: 12px;
-  left: 0px;
-  top: 10px;
-  position: absolute;
-  line-height: 20px;
-}
-/* line 8, ../sass/components/_legend.scss */
-.legend .label {
-  margin-left: 5px;
-}
-/* line 11, ../sass/components/_legend.scss */
-.legend .swatch {
-  width: 20px;
-  height: 12px;
-  display: inline-block;
-  margin-left: 10px;
-  margin-bottom: -1px;
-}
-/* line 17, ../sass/components/_legend.scss */
-.legend .swatch.current {
-  background-color: gray;
-  border: 1px solid gray;
-}
-/* line 21, ../sass/components/_legend.scss */
-.legend .swatch.xeros {
-  background-color: #0087be;
-  border: 1px solid #0087be;
-}
-
-/* line 10, ../sass/components/_dropdown.scss */
-.dropdown {
-  margin: 0 0 10px 0;
-  display: inline-block;
-}
-/* line 15, ../sass/components/_dropdown.scss */
-.dropdown a:hover {
-  color: black;
-  border-bottom: none;
-}
-/* line 21, ../sass/components/_dropdown.scss */
-.dropdown dd, .dropdown dt, .dropdown ul {
-  margin: 0px;
-  padding: 0px;
-}
-/* line 25, ../sass/components/_dropdown.scss */
-.dropdown dd {
-  position: absolute;
-  z-index: 9999;
-}
-/* line 29, ../sass/components/_dropdown.scss */
-.dropdown a, .dropdown a:visited {
-  color: #444444;
-  text-decoration: none;
-  outline: none;
-}
-/* line 34, ../sass/components/_dropdown.scss */
-.dropdown a:hover {
-  color: black;
-}
-/* line 37, ../sass/components/_dropdown.scss */
-.dropdown dt a:hover {
-  color: black;
-  border: 1px solid gray;
-}
-/* line 41, ../sass/components/_dropdown.scss */
-.dropdown dt a {
-  background-color: white;
-  display: block;
-  padding-right: 20px;
-  border: 1px solid gray;
-  width: 160px;
-  padding: 5px;
-}
-/* line 48, ../sass/components/_dropdown.scss */
-.dropdown dt a span {
-  cursor: pointer;
-  display: block;
-}
-/* line 51, ../sass/components/_dropdown.scss */
-.dropdown dt a span.caret-down {
-  display: inline-block;
-  float: right;
-  margin-top: 9px;
-}
-/* line 58, ../sass/components/_dropdown.scss */
-.dropdown dd ul {
-  background: white none repeat scroll 0 0;
-  border: 1px solid gray;
-  color: #444444;
-  display: none;
-  left: 0px;
-  padding: 5px 0px;
-  position: absolute;
-  top: 2px;
-  width: auto;
-  min-width: 170px;
-  list-style: none;
-}
-/* line 71, ../sass/components/_dropdown.scss */
-.dropdown span.value {
-  display: none;
-}
-/* line 74, ../sass/components/_dropdown.scss */
-.dropdown dd ul li a {
-  padding: 5px;
-  display: block;
-}
-/* line 78, ../sass/components/_dropdown.scss */
-.dropdown dd ul li a:hover {
-  background-color: #bbbbbb;
-}
-
-/* line 83, ../sass/components/_dropdown.scss */
-img.flag {
-  border: none;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-
-/* line 89, ../sass/components/_dropdown.scss */
-.flagvisibility {
-  display: none;
-}
-
-/* line 1, ../sass/components/_caret.scss */
-.caret-down {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-top: 4px solid;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
-}
-
-/* line 12, ../sass/components/_caret.scss */
-.caret-left {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-right: 4px solid;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-}
-
-/* line 23, ../sass/components/_caret.scss */
-.caret-right {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 2px;
-  vertical-align: middle;
-  border-left: 4px solid;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-}
-
-/* line 1, ../sass/components/_chart.scss */
-.kpi-chart {
-  height: 150px;
-  text-align: center;
-  font-size: 10px;
-  color: #FFF;
-}
-/* line 5, ../sass/components/_chart.scss */
-.kpi-chart svg {
-  margin: 15px 0px 10px 0px;
-  width: 316px;
-  height: 130px;
-}
-/* line 14, ../sass/components/_chart.scss */
-.kpi-chart .axis path,
-.kpi-chart .axis line {
-  fill: none;
-  stroke: #FFF;
-  shape-rendering: crispEdges;
-}
-/* line 20, ../sass/components/_chart.scss */
-.kpi-chart text {
-  fill: #FFF;
-}
-/* line 23, ../sass/components/_chart.scss */
-.kpi-chart .x.axis path, .kpi-chart .x.axis line, .kpi-chart .y.axis path {
-  display: none;
-}
-/* line 26, ../sass/components/_chart.scss */
-.kpi-chart .y.axis path {
-  display: none;
-}
-/* line 30, ../sass/components/_chart.scss */
-.kpi-chart .line-a, .kpi-chart .line-b {
-  fill: none;
-  stroke-width: 2px;
-}
-/* line 36, ../sass/components/_chart.scss */
-.kpi-chart .line-a {
-  fill: none;
-  stroke: #0086bd;
-}
-/* line 41, ../sass/components/_chart.scss */
-.kpi-chart .line-b {
-  stroke: white;
-}
-
-/* line 1, ../sass/components/_admin.scss */
-.admin-menu-icon {
-  height: 16px;
-  width: 16px;
 }
 
 /* Layout rules */

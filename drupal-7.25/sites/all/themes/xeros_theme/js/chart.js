@@ -12,66 +12,67 @@
 //    CHART_DONUT = "CHART_DONUT";
 
 
-// --------------- Helper Functions ----------- //
-function getData(kpiType) {
-
-    var data = dummyData();
-    switch (kpiType) {
-        case KPI_COST:
-            data = data.slice(0,30);
-            break;
-        case KPI_COLD:
-            data = data.slice(30,60);
-            break;
-        case KPI_HOT:
-            data = data.slice(0,180);
-            break;
-        case KPI_TIME:
-            data = data.slice(180);
-            break;
-        case KPI_CHEMICAL:
-            data = data;
-            break;
-
-    }
-
-
+//// --------------- Helper Functions ----------- //
+//function getData(kpiType) {
+//
+//    var data = dummyData();
+//    switch (kpiType) {
+//        case KPI_COST:
+//            data = data.slice(0,30);
+//            break;
+//        case KPI_COLD:
+//            data = data.slice(30,60);
+//            break;
+//        case KPI_HOT:
+//            data = data.slice(0,180);
+//            break;
+//        case KPI_TIME:
+//            data = data.slice(180);
+//            break;
+//        case KPI_CHEMICAL:
+//            data = data;
+//            break;
+//
+//    }
 
 
-}
 
-function dummyData() {
 
-//    converts date string to date object
-    var parseDate = d3.time.format("%x").parse;
-    var data = [];
+//}
 
-    var len = Math.min(dataA.length, dataB.length);
-    for (var i = 0; i < len; i++) {
-        var row = [];
-        row[0] = parseDate(dataA[i]["date"]);
-        row[1] = dataA[i]["value"];
-        row[2] = dataB[i]["value"];
-
-        data.push(row);
-        console.log(row);
-    }
-    return data;
-}
+//function dummyData() {
+//
+////    converts date string to date object
+//    var parseDate = d3.time.format("%x").parse;
+//    var data = [];
+//
+//    var len = Math.min(dataA.length, dataB.length);
+//    for (var i = 0; i < len; i++) {
+//        var row = [];
+//        row[0] = parseDate(dataA[i]["date"]);
+//        row[1] = dataA[i]["value"];
+//        row[2] = dataB[i]["value"];
+//
+//        data.push(row);
+//        console.log(row);
+//    }
+//    return data;
+//}
 
 // ------------ charts ---------------- //
 
 var kpiChart = function(data) {
 
 //    var data = getData(kpiType);
+    var data = data["chartData"];
 
 //    sets up the page
     var margin = {top: 1, right: 10, bottom: 16, left: 26},
         width = 316 - margin.left - margin.right,
         height = 130 - margin.top - margin.bottom;
 
-    var chartMargins = [4, 50, 18, 16];
-    var axisMargins = [4, 20, 0, 0];
+//    var chartMargins = [4, 50, 18, 16];
+//    var axisMargins = [4, 20, 0, 0];
 
 //    // sets up the page
 //    var width = 292,
@@ -148,7 +149,7 @@ var kpiChart = function(data) {
     var extentB = d3.extent(data, function (d) {
         return d[2]; // value 2
     });
-    y.domain([d3.min([extentA[0], extentB[0]]), d3.max([extentA[1], extentB[1]])])
+    y.domain([d3.min([extentA[0], extentB[0]]), d3.max([extentA[1], extentB[1]])]);
 
 // append the notation for x-axis to the DOM and position
     svg.append("g")
@@ -273,5 +274,5 @@ var donutChart = function(data) {
     g.data(pie(dataInner))
         .append("path")
         .attr("d", innerArc)
-        .style("fill", funct
-}
+        .style("fill", function(d,i) { return colorInner(i); });
+};

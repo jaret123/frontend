@@ -26,7 +26,10 @@
 
     function kpiCallback(data) {
         createDropDown("#kpi-select");
-        var chart = new kpiChart(data);
+        for ( row in data.data ) {
+            console.log(data.data[row]);
+            var chart = new kpiChart( data.data[row] );
+        }
     }
 
 </script>
