@@ -1524,7 +1524,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1389821308');
+  background-image: url('../images/progress.gif?1376896851');
 }
 
 /* line 5, ../sass/components/_header.scss */
@@ -1579,7 +1579,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -1590,15 +1590,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -1628,7 +1628,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -1639,15 +1639,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -2329,10 +2329,6 @@ h1 {
 /* line 32, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container {
   margin-top: 25px;
-}
-/* line 33, ../sass/components/_page-3.scss */
-#page-3 .consumption-details-container .container .section-wrapper {
-  display: none;
 }
 /* line 35, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .section-wrapper.show {

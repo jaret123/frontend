@@ -1,18 +1,7 @@
 jQuery(document).ready(function () {
     console.log("ready!");
 
-    function consumptionDetailsCallback(data) {
-        createDropDown("#consumption-details-select");
-        createDropDown("#report-select", function () {
-            showSection();
-            //console.log("Do Nothing");
-        });
 
-        jQuery("#report-select").on("change", function (event) {
-            event.preventDefault();
-            alert(jQuery(this).text());
-        });
-    }
 
     // Load the templates for each report on the page
     for (var i = 0; i < reports.length; i++) {
@@ -54,6 +43,53 @@ jQuery(document).ready(function () {
         });
     }
 
+    // HELPER: #key_value
+//
+// Usage: {{#key_value obj}} Key: {{key}} // Value: {{value}} {{/key_value}}
+//
+// Iterate over an object, setting 'key' and 'value' for each property in
+// the object.
+    Handlebars.registerHelper("key_value", function(obj, fn) {
+        var buffer = "",
+            key;
+
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                buffer += fn({key: key, value: obj[key]});
+            }
+        }
+
+        return buffer;
+    });
+
+// HELPER: #each_with_key
+//
+// Usage: {{#each_with_key container key="myKey"}}...{{/each_with_key}}
+//
+// Iterate over an object containing other objects. Each
+// inner object will be used in turn, with an added key ("myKey")
+// set to the value of the inner object's key in the container.
+    Handlebars.registerHelper("each_with_key", function(obj, fn) {
+        var context,
+            buffer = "",
+            key,
+            keyName = fn.hash.key;
+
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                context = obj[key];
+
+                if (keyName) {
+                    context[keyName] = key;
+                }
+
+                buffer += fn(context);
+            }
+        }
+
+        return buffer;
+    });
+
     function loadTemplate(templateName, apiUrl, callback) {
 
         // Make sure callback is a function
@@ -73,7 +109,10 @@ jQuery(document).ready(function () {
             success: function (data) {
                 jQuery.get(filename,
                     function (template) {
-                        var html = Mustache.to_html(template, data);
+
+                        var tpl = Handlebars.compile(template);
+                        var html = tpl(data);
+                        //var html = Mustache.to_html(template, data);
                         jQuery('#' + templateName).html(html);
                         if (typeof c != "undefined") {
                             c(data);

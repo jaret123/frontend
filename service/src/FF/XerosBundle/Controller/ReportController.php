@@ -336,6 +336,24 @@ SQL;
 
     private function reportConsumptionDetails($filters) {
 
+        $data = array();
+        $metrics = array();
+
+        $machinesSql = "select machine_id, manufacturer as name from xeros_machine"; // TODO: Refactor to filter to users machines
+
+        $classificiationSql = <<<classificationSQL
+select
+    xmc.classification_id,
+    xc.name
+from
+    xeros_machine_classification as xmc
+     left join xeros_classification as xc
+       on xmc.classification_id = xc.classification_id
+where
+    xmc.machine_id = :machine_id
+classificationSQL;
+
+
         $sql = <<<SQL
 select
 	xm.machine_id as id,
@@ -357,53 +375,7 @@ from
 
 	    xcl.name,
 
-   		sum(xc.cycle_cold_water_volume) as cold_water_volume,
-   		sum(xc.cycle_cold_water_xeros_volume) as cold_water_xeros_volume,
-   		sum(xc.cycle_cold_water_volume_per_pound) as cold_water_volume_per_pound,
-   		sum(xc.cycle_cold_water_xeros_volume_per_pound) as cold_water_xeros_volume_per_pound,
-   		sum(xc.cycle_cold_water_cost_per_pound) as cold_water_cost_per_pound,
-   		sum(xc.cycle_cold_water_xeros_cost_per_pound) as cold_water_xeros_cost_per_pound,
-   		sum(xc.cycle_cold_water_volume_per_pound) -
-   		    sum(xc.cycle_cold_water_xeros_volume_per_pound)  as cold_water_volume_per_pound_delta,
-   		sum(xc.cycle_cold_water_cost_per_pound) /
-   		    sum(xc.cycle_cold_water_xeros_cost_per_pound) as cold_water_cost_per_pound_delta,
-
-   		sum(xc.cycle_hot_water_volume) as hot_water_volume,
-   		sum(xc.cycle_hot_water_volume) as hot_water_xeros_volume,
-   		sum(xc.cycle_hot_water_volume_per_pound) as hot_water_volume_per_pound,
-   		sum(xc.cycle_hot_water_xeros_volume_per_pound) as hot_water_xeros_volume_per_pound,
-   		sum(xc.cycle_hot_water_cost_per_pound) as hot_water_cost_per_pound,
-   		sum(xc.cycle_hot_water_xeros_cost_per_pound) as hot_water_xeros_cost_per_pound,
-   		   		sum(xc.cycle_hot_water_volume_per_pound) -
-   		    sum(xc.cycle_hot_water_xeros_volume_per_pound)  as hot_water_delta_volume_per_pound,
-   		sum(xc.cycle_hot_water_cost_per_pound) /
-   		    sum(xc.cycle_hot_water_xeros_cost_per_pound) as hot_water_delta_cost_per_pound,
-
-   		sum(xc.cycle_time_run_time) as time_run_time,
-   		sum(xc.cycle_time_xeros_run_time) as time_xeros_run_time,
-   		sum(xc.cycle_time_total_time) as time_total_time,
-   		sum(xc.cycle_time_xeros_total_time) as time_xeros_total_time,
-   		sum(xc.cycle_time_labor_cost) as time_labor_cost,
-   		sum(xc.cycle_time_xeros_labor_cost) as time_xeros_labor_cost,
-   		sum(xc.cycle_time_labor_cost_per_pound) as time_labor_cost_per_pound,
-   		sum(xc.cycle_time_xeros_labor_cost_per_pound) as time_xeros_labor_cost_per_pound,
-   		sum(xc.cycle_time_total_time) /
-   		sum(xc.cycle_time_xeros_total_time) as time_delta_total_time,
-   		sum(xc.cycle_time_labor_cost_per_pound) /
-   		   		sum(xc.cycle_time_xeros_labor_cost_per_pound) as time_delta_labor_cost_per_pound,
-
-
-
-   		sum(xc.cycle_chemical_strength) as chemical_strength,
-   		sum(xc.cycle_chemical_xeros_strength) as chemical_strength_xeros,
-   		sum(xc.cycle_chemical_strength_per_pound) as chemical_strength_per_pound,
-   		sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_xeros_strength_per_pound,
-   		sum(xc.cycle_chemical_cost_per_pound) as chemical_cost_per_pound,
-   		sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_xeros_cost_per_pound,
-   		sum(xc.cycle_chemical_strength_per_pound) /
-   		sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_delta_strength_per_pound,
-   		sum(xc.cycle_chemical_cost_per_pound) /
-   		sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_delta_cost_per_pound
+        :metric
 
 	from
    		xeros_cycle as xc
@@ -415,7 +387,7 @@ from
 	where
 	    1 = 1
    		AND xc.machine_id = 1
-        and reading_date >= ':fromDate' and reading_date =< ':toDate'
+        and reading_date >= ':fromDate' and reading_date <= ':toDate'
 	group by
    		xc.machine_id,
    		xc.classification_id
@@ -423,15 +395,140 @@ from
 	    on xm.machine_id = b.machine_id
 where
    1 = 1
-   and xm.machine_id = 1
+   and xm.machine_id = :machine_id
+   and b.classification_id = :classification_id
    # put in location filter;
 
 SQL;
 
-        $sql = $this->replaceFilters($sql, $filters);
-        $conn = $this->get('database_connection');
-        $ar = $conn->fetchAll($sql);
+        // TODO: Make all these field names the same
+        array_push($metrics, array(
+            "name" => "Cold Water",
+            "id" => "cold_water",
+            "query" => <<<METRIC
+        sum(xc.cycle_cold_water_volume) as value_one,
+   		sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
+   		sum(xc.cycle_cold_water_volume_per_pound) as value_two,
+   		sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_two,
+   		sum(xc.cycle_cold_water_cost_per_pound) as value_three,
+   		sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_three,
+   		sum(xc.cycle_cold_water_volume_per_pound) -
+        sum(xc.cycle_cold_water_xeros_volume_per_pound)  as delta_one,
+   		sum(xc.cycle_cold_water_cost_per_pound) /
+        sum(xc.cycle_cold_water_xeros_cost_per_pound) as delta_two
 
-        return $ar;
+METRIC
+        ));
+
+        array_push($metrics, array(
+            "name" => "Hot Water",
+            "id" => "hot_water",
+            "query" => <<<METRIC
+   		sum(xc.cycle_hot_water_volume) as value_one,
+   		sum(xc.cycle_hot_water_volume) as xeros_value_one,
+   		sum(xc.cycle_hot_water_volume_per_pound) as value_two,
+   		sum(xc.cycle_hot_water_xeros_volume_per_pound) as xeros_value_two,
+   		sum(xc.cycle_hot_water_cost_per_pound) as value_three,
+   		sum(xc.cycle_hot_water_xeros_cost_per_pound) as xeros_value_three,
+   		sum(xc.cycle_hot_water_volume_per_pound) -
+        sum(xc.cycle_hot_water_xeros_volume_per_pound)  as delta_one,
+   		sum(xc.cycle_hot_water_cost_per_pound) /
+        sum(xc.cycle_hot_water_xeros_cost_per_pound) as delta_two
+
+METRIC
+        ));
+
+//        array_push($metrics, array(
+//            "query" => <<<METRIC
+//
+//METRIC
+//        ));
+
+        array_push($metrics, array(
+            "name" => "Cycle Time",
+            "id" => "cycle_time",
+            "query" => <<<METRIC
+   		sum(xc.cycle_time_run_time) as value_one,
+   		sum(xc.cycle_time_xeros_run_time) as xeros_value_one,
+   		sum(xc.cycle_time_labor_cost) as value_two,
+   		sum(xc.cycle_time_xeros_labor_cost) as xeros_value_two,
+   		sum(xc.cycle_time_labor_cost_per_pound) as value_three,
+   		sum(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_three,
+   		sum(xc.cycle_time_total_time) /
+        sum(xc.cycle_time_xeros_total_time) as delta_one,
+   		sum(xc.cycle_time_labor_cost_per_pound) /
+        sum(xc.cycle_time_xeros_labor_cost_per_pound) as delta_two
+
+METRIC
+        ));
+
+        array_push($metrics, array(
+            "name" => "Chemical",
+            "id" => "chemical",
+            "query" => <<<METRIC
+   		sum(xc.cycle_chemical_strength) as chemical_strength,
+   		sum(xc.cycle_chemical_xeros_strength) as chemical_strength_xeros,
+   		sum(xc.cycle_chemical_strength_per_pound) as chemical_strength_per_pound,
+   		sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_xeros_strength_per_pound,
+   		sum(xc.cycle_chemical_cost_per_pound) as chemical_cost_per_pound,
+   		sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_xeros_cost_per_pound,
+   		sum(xc.cycle_chemical_strength_per_pound) /
+        sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_delta_strength_per_pound,
+   	  	sum(xc.cycle_chemical_cost_per_pound) /
+        sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_delta_cost_per_pound
+METRIC
+        ));
+
+        $conn = $this->get('database_connection');
+
+        $machines = $conn->fetchAll($machinesSql);
+
+        // Machines
+        foreach ($machines as $k => $machine ) {
+
+            $machine_id = $machine["machine_id"];
+            // Add the machine meta data
+            $data[$machine_id] = $machine;
+            $data[$machine_id]["metrics"] = array();
+
+            // Add the machine_id filter to the sql filters
+            $filters['machine_id'] = $machine["machine_id"];
+
+            // Get all the classifications for this machine
+            $classificiationSqlParsed = $this->replaceFilters($classificiationSql, $filters);
+            $classifications = $conn->fetchAll($classificiationSqlParsed);
+
+            // Metrics
+            foreach ($metrics as $k2 => $metric) {
+
+                $metric_id = $metric["id"];
+                // Add the metric meta data
+                $data[$machine_id]["metrics"][$metric_id] = $metric;
+                $data[$machine_id]["metrics"][$metric_id]["classifications"] = array();
+
+                // Add the metrics to the sql filter
+                $filters['metric'] = $metric["query"];
+
+                // Classifications
+                foreach ($classifications as $k1 => $class) {
+
+                    $class_id = $class["classification_id"];
+
+                    $data[$machine_id]["metrics"][$metric_id]["classifications"][$class_id] = $class;
+
+                    $filters['classification_id'] = $class["classification_id"];
+
+                    $sqlParsed = $this->replaceFilters($sql, $filters);
+
+                    $results = $conn->fetchAll($sqlParsed);
+
+                    $data[$machine_id]["metrics"][$metric_id]["classifications"][$class_id]["data"] = $results;
+
+                }
+
+            }
+        }
+
+        return $data;
     }
 } 

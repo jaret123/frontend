@@ -59,6 +59,8 @@
 
   <!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/mustache.js"></script>
+  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/handlebars-v1.3.0.js"></script>
+
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/createDropdown.js"></script>
 
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/news.js"></script>
