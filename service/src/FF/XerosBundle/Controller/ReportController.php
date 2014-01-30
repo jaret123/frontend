@@ -70,6 +70,9 @@ class ReportController extends Controller {
     {
         $sid = NULL;
 
+        $userRole['uid'] = NULL;
+
+        // Is there something that looks like a Drupal Session ID
         foreach ($_COOKIE as $key => $value)
         {
             if ( substr($key, 0, 4) == 'SESS' ) {
@@ -77,16 +80,23 @@ class ReportController extends Controller {
             }
         }
 
-        if ( $sid === NULL or $sid == 0 ) {
+        if ( $sid === NULL ) {
             return array ("uid" => NULL);
         } else {
+            // Does this session ID exist in the sessions table
             $sql = sprintf("SELECT * FROM sessions WHERE sid = '%s'", $sid);
             $conn = $this->get('database_connection');
             $user = $conn->fetchAll($sql);
 
-            return array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+            // If it does, then return user array
+            if ( $user[0]['uid'] >= 0 ) {
+                $userRole = array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+            } else {
+                // Access denied
+                // Do nothing
+            }
         }
-
+        return $userRole;
     }
 
     private function reportKPIs($filters) {
