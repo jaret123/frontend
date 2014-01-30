@@ -1,88 +1,22 @@
-////// Constants
-//var KPI_COST = "KPI_COST",
-//    KPI_COLD = "KPI_COLD",
-//    KPI_HOT = "KPI_HOT",
-//    KPI_TIME = "KPI_TIME",
-//    KPI_CHEMICAL = "KPI_CHEMICAL";
-
-
-//// Defined Chart types
-//var CHART_KPI = "CHART_KPI",
-//    CHART_BAR_H = "CHART_BAR_H",
-//    CHART_DONUT = "CHART_DONUT";
-
-
-//// --------------- Helper Functions ----------- //
-//function getData(kpiType) {
-//
-//    var data = dummyData();
-//    switch (kpiType) {
-//        case KPI_COST:
-//            data = data.slice(0,30);
-//            break;
-//        case KPI_COLD:
-//            data = data.slice(30,60);
-//            break;
-//        case KPI_HOT:
-//            data = data.slice(0,180);
-//            break;
-//        case KPI_TIME:
-//            data = data.slice(180);
-//            break;
-//        case KPI_CHEMICAL:
-//            data = data;
-//            break;
-//
-//    }
-
-
-
-
-//}
-
-//function dummyData() {
-//
-////    converts date string to date object
-//    var parseDate = d3.time.format("%x").parse;
-//    var data = [];
-//
-//    var len = Math.min(dataA.length, dataB.length);
-//    for (var i = 0; i < len; i++) {
-//        var row = [];
-//        row[0] = parseDate(dataA[i]["date"]);
-//        row[1] = dataA[i]["value"];
-//        row[2] = dataB[i]["value"];
-//
-//        data.push(row);
-//        console.log(row);
-//    }
-//    return data;
-//}
-
 // ------------ charts ---------------- //
 
-var kpiChart = function(data) {
+var kpiChart = function (data) {
 
+    var parseDate = d3.time.format("%Y-%m-%d").parse;
     var name = data["name"];
-
-
-
     var data = data["chartData"];
+    function replaceNull(value) {
+        if (value !== "") {
+            return parseInt(value, 10); // value 1
+        }
+        return 0;
+    }
 
 //    sets up the page
-    var margin = {top: 1, right: 10, bottom: 16, left: 26},
-        width = 316 - margin.left - margin.right,
-        height = 130 - margin.top - margin.bottom;
-
-//    var chartMargins = [4, 50, 18, 16];
-//    var axisMargins = [4, 20, 0, 0];
-
-//    // sets up the page
-//    var width = 292,
-//        height = 130;
-
-////    converts date string to date object
-//    var parseDate = d3.time.format("%x").parse;
+//    var margin = {top: 1, right: 10, bottom: 16, left: 26},
+    var margin = {top: 15, right: 25, bottom: 25, left: 40},
+        width = 327 - (margin.left + margin.right),
+        height = 150 - (margin.top + margin.bottom);
 
 //    translate the actual x data into the pixel space of the DOM
     var x = d3.time.scale()
@@ -103,7 +37,7 @@ var kpiChart = function(data) {
 
 //    .ticks(d3.time.days, 1)
 
-        // use this based on chart date range
+    // use this based on chart date range
 //    .tickFormat(d3.time.format('%a %d'))
 
 // setup the y-axis notation
@@ -116,23 +50,34 @@ var kpiChart = function(data) {
 // create the individual points for the line
     var lineA = d3.svg.line()
         .x(function (d) {
-            x(d["date"]);
-            return x(d["date"]);// date
+            return x(parseDate(d["date"]));// date
         })
         .y(function (d) {
-            return y(d["value"]); // value 1
+            var value = d["value"];
+            if (value !== "") {
+                return parseInt(y(value), 10); // value 1
+            }
+            return 0;
+//            return replaceNull(d["value"]);
         });
 
     var lineB = d3.svg.line()
         .x(function (d) {
-            return x(d["date"]);// date
+            return x(parseDate(d["date"]));// date
         })
         .y(function (d) {
-            return y(d["value_xeros"]); // value 1
+            var value = d["value_xeros"];
+            if (value !== "") {
+                return parseInt(y(value), 10); // value 1
+            }
+            return 0;
+//            return replaceNull(d["value_xeros"]);
         });
 
 // adds SVG element to DOM, positioning properly
-    var svg = d3.selectAll(".kpis .kpi-chart ." + name).append("svg")
+    var selector = ".kpi-chart." + name;
+    console.log(selector);
+    var svg = d3.selectAll(selector).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -141,19 +86,27 @@ var kpiChart = function(data) {
 
 // find the extent (min / max) of the values
     x.domain(d3.extent(data, function (d) {
-        return d[0]; // date
+        return parseDate(d["date"]); // date
     }));
-//    y.domain(d3.extent(data, function (d) {
-//        return d[1]; // value 1
-//    }));
-//    y.domain([0,800]);
     var extentA = d3.extent(data, function (d) {
-        return d[1]; // value 1
+        var value = d["value"];
+        if (value !== "") {
+            return parseInt(value, 10); // value 1
+        }
+        return 0;
+        return replaceNull(d["value"]);
     });
     var extentB = d3.extent(data, function (d) {
-        return d[2]; // value 2
+        var value = d["value_xeros"];
+        if (value !== "") {
+            return parseInt(value, 10); // value 1
+        }
+        return 0;
+//        return replaceNull(d["value_value"]);
     });
-    y.domain([d3.min([extentA[0], extentB[0]]), d3.max([extentA[1], extentB[1]])]);
+    var min = d3.min([extentA[0], extentB[0]]);
+    var max = d3.max([extentA[1], extentB[1]]);
+    y.domain([min, max]);
 
 // append the notation for x-axis to the DOM and position
     svg.append("g")
@@ -186,7 +139,7 @@ var kpiChart = function(data) {
 };
 
 
-var barChart = function(data) {
+var barChart = function (data) {
 
 //    var data = [1, 0.5];
     var colors = ["black", "blue"];
@@ -217,15 +170,23 @@ var barChart = function(data) {
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d, i) { return x(i); })
+        .attr("x", function (d, i) {
+            return x(i);
+        })
         .attr("width", width / data.length)
-        .attr("y", function(d) { return y(d); })
-        .attr("height", function(d) { return height - y(d); })
-        .attr("fill", function(d, i) { return colors[i]; });
+        .attr("y", function (d) {
+            return y(d);
+        })
+        .attr("height", function (d) {
+            return height - y(d);
+        })
+        .attr("fill", function (d, i) {
+            return colors[i];
+        });
 
 }
 
-var donutChart = function(data) {
+var donutChart = function (data) {
     // data range 0 - 60 minutes
 
     var total = 60; //diameter
@@ -258,13 +219,15 @@ var donutChart = function(data) {
 
     var pie = d3.layout.pie()
         .sort(null)
-        .value(function(d,i) { return d; });
+        .value(function (d, i) {
+            return d;
+        });
 
     var svg = d3.select("body .donut-chart").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
-        .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var g = svg.selectAll(".arc")
         .data(pie(dataOuter))
@@ -273,10 +236,14 @@ var donutChart = function(data) {
 
     g.append("path")
         .attr("d", outerArc)
-        .style("fill", function(d,i) { return colorOuter(i); });
+        .style("fill", function (d, i) {
+            return colorOuter(i);
+        });
 
     g.data(pie(dataInner))
         .append("path")
         .attr("d", innerArc)
-        .style("fill", function(d,i) { return colorInner(i); });
+        .style("fill", function (d, i) {
+            return colorInner(i);
+        });
 };

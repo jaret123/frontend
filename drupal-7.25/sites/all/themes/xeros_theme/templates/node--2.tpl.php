@@ -11,7 +11,7 @@
     var reports = [
         {
             rid : 1,
-            apiUrl : 'http://xeros.local/api/report/kpis/2013-12-01/2013-12-30.json',
+            apiUrl : 'http://xeros.local/api/report/kpis/2013-12-01/2013-12-07.json',
             template : "kpis",
             callback : "kpiCallback"
         }
@@ -27,7 +27,6 @@
     function kpiCallback(data) {
         createDropDown("#kpi-select");
         for ( row in data.data ) {
-            console.log(data.data[row]);
             var chart = new kpiChart( data.data[row] );
         }
     }

@@ -637,9 +637,9 @@ table {
 }
 /* line 5, ../sass/components/_chartKpi.scss */
 .kpi-chart svg {
-  margin: 15px 0px 10px 0px;
-  width: 316px;
-  height: 130px;
+  margin: 0px 0px 0px 0px;
+  width: 327px;
+  height: 150px;
 }
 /* line 14, ../sass/components/_chartKpi.scss */
 .kpi-chart .axis path,
@@ -652,25 +652,16 @@ table {
 .kpi-chart text {
   fill: #FFF;
 }
-/* line 23, ../sass/components/_chartKpi.scss */
-.kpi-chart .x.axis path, .kpi-chart .x.axis line, .kpi-chart .y.axis path {
-  display: none;
-}
-/* line 26, ../sass/components/_chartKpi.scss */
-.kpi-chart .y.axis path {
-  display: none;
-}
-/* line 30, ../sass/components/_chartKpi.scss */
+/* line 40, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 3px;
 }
-/* line 36, ../sass/components/_chartKpi.scss */
+/* line 45, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {
-  fill: none;
   stroke: #0086bd;
 }
-/* line 41, ../sass/components/_chartKpi.scss */
+/* line 49, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-b {
   stroke: white;
 }
