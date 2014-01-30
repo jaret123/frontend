@@ -100,7 +100,13 @@ class ReportController extends Controller {
         // Date points for the charts
         $dataPointSql = <<<SQL
 select
-	b.*
+    b.date,
+	b.reading_date,
+	coalesce(b.value, "") as value,
+	coalesce(b.value_xeros, "") as value_xeros,
+	coalesce(b.cost, "") as cost,
+	coalesce(b.cost_xeros, "") as cost_xeros,
+	coalesce(b.savings, "") as savings
 from
 	(
 	select
@@ -126,7 +132,7 @@ SQL;
 
         $summarySql = <<<SQL
 select
-	b.*
+  b.*
 from
 	(
 	select
