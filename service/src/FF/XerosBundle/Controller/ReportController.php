@@ -92,6 +92,13 @@ class ReportController extends Controller {
         return $userRole;
     }
 
+    private function replaceFilters($string, $filters) {
+        foreach ($filters as $k => $v) {
+            $string = str_replace(':' . $k, $v, $string);
+        }
+        return $string;
+    }
+
     private function reportKPIs($filters) {
 
         $kpis = array();
@@ -247,49 +254,76 @@ METRIC
 
     }
 
-    private function replaceFilters($string, $filters) {
-        foreach ($filters as $k => $v) {
-            $string = str_replace(':' . $k, $v, $string);
-        }
-        return $string;
-    }
-
     private function reportConsumption($filters) {
         //$json = file_get_contents($dir . "consumption.json");
 
         $sql = <<<SQL
+SELECT
+  xm.machine_id   AS id,
+  xm.manufacturer AS machine_name,
+  xm.size,
+  truncate(b.cold_water_volume, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_volume, 0) as cold_water_xeros_value,
+  truncate(b.cold_water_delta_volume, 0) as cold_water_delta_value,
 
-select
-	xm.machine_id as id,
-	xm.manufacturer as machine_name,
-	xm.size,
-	b.*
-from
-	xeros_machine as xm
-	left join
-	( -- metrics
-	select
-	    machine_id,
-   		sum(cycle_cold_water_volume) as cold_water_volume,
-   		sum(cycle_cold_water_xeros_volume) as cold_water_xeros_volume,
-   		sum(cycle_hot_water_volume) as hot_water_volume,
-   		sum(cycle_hot_water_volume) as hot_water_xeros_volume,
-   		sum(cycle_time_run_time) as time_run_time,
-   		sum(cycle_time_xeros_run_time) as time_xeros_run_time,
-   		sum(cycle_chemical_strength) as chemical_strength,
-   		sum(cycle_chemical_xeros_strength) as chemical_strength_xeros
-	from
-   		xeros_cycle
-	where
-	    1 = 1
-   	    and reading_date >= ':fromDate' and reading_date <= ':toDate'
-	group by
-   		machine_id
-	) as b
-	    on xm.machine_id = b.machine_id
-where
-   1 = 1
-   # put in location filter;
+    truncate(b.hot_water_volume, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_volume, 0) as hot_water_xeros_value,
+  truncate(b.hot_water_delta_volume, 0) as hot_water_delta_value,
+  
+    truncate(b.total_water_volume, 0) as total_water_value,
+  truncate(b.total_water_xeros_volume, 0) as total_water_xeros_value,
+  truncate(b.total_water_delta_volume, 0) as total_water_delta_value,
+  
+    truncate(b.time_run_time, 0) as time_value,
+  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  truncate(b.time_delta_run_time, 0) as time_delta_value,
+  
+    truncate(b.chemical_strength, 0) as chemical_value,
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value,
+  truncate(b.chemical_delta_strength, 0) as chemical_delta_value
+FROM
+    xeros_machine AS xm
+    LEFT JOIN
+    (-- metrics
+     SELECT
+       machine_id,
+       sum(cycle_cold_water_volume)       AS cold_water_volume,
+       sum(cycle_cold_water_xeros_volume) AS cold_water_xeros_volume,
+       (sum(cycle_cold_water_volume) - sum(cycle_cold_water_xeros_volume)) /
+       sum(cycle_cold_water_volume)       AS cold_water_delta_volume,
+
+       sum(cycle_hot_water_volume)        AS hot_water_volume,
+       sum(cycle_hot_water_volume)        AS hot_water_xeros_volume,
+       (sum(cycle_hot_water_volume) - sum(cycle_hot_water_xeros_volume)) /
+       sum(cycle_hot_water_volume)       AS hot_water_delta_volume,
+
+       sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume) as total_water_volume,
+       sum(cycle_cold_water_xeros_volume) + sum(cycle_cold_water_xeros_volume) as total_water_xeros_volume,
+
+       (( sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume) ) -  ( sum(cycle_cold_water_xeros_volume) + sum(cycle_cold_water_xeros_volume) ))
+           / ( sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume) )  as total_water_delta_volume,
+
+         sum(cycle_time_run_time)           AS time_run_time,
+       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
+       (sum(cycle_time_run_time) - sum(cycle_time_xeros_run_time)) /
+       sum(cycle_time_run_time)       AS time_delta_run_time,
+
+       sum(cycle_chemical_strength)       AS chemical_strength,
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength,
+       (sum(cycle_chemical_strength) - sum(cycle_chemical_xeros_strength)) /
+       sum(cycle_chemical_strength)       AS chemical_delta_strength
+     FROM
+       xeros_cycle
+     WHERE
+       1 = 1
+       AND reading_date >= ':fromDate' AND reading_date <= ':toDate'
+     GROUP BY
+       machine_id
+    ) AS b
+      ON xm.machine_id = b.machine_id
+WHERE
+  1 = 1
+# put in location filter;
 
 
 SQL;
