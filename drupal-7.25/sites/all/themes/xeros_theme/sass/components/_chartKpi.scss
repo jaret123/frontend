@@ -1,0 +1,54 @@
+.kpi-chart {
+  height: 150px;
+  text-align: center;
+
+  svg {
+    margin: 15px 0px 10px 0px;
+    width: 316px;
+    height: 130px;
+  }
+  font-size: 10px;
+  color: #FFF;
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #FFF;
+    shape-rendering: crispEdges;
+  }
+
+  text {
+  	fill: #FFF;
+  }
+  .x.axis path, .x.axis line, .y.axis path {
+    display: none;
+  }
+  .y.axis path {
+    display: none;
+  }
+
+  .line-a, .line-b {
+    fill: none;
+    stroke-width: 2px;
+//    stroke-linecap: round;
+  }
+
+  .line-a {
+    fill:none;
+    stroke: #0086bd;
+  }
+
+  .line-b {
+    stroke: white;
+  }
+}
+
+
+
+
+
+
+
+
+
+
