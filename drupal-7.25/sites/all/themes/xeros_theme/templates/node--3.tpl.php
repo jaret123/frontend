@@ -12,7 +12,7 @@
     var reports = [
             {
                 rid : 1,
-                apiUrl : 'http://xeros.local/api/report/consumption/2013-11-10/2013-12-20.json',
+                apiUrl : '/api/report/consumption/2013-11-10/2013-12-20.json',
                 template : "consumption",
                 callback : "consumptionCallback"
             }
