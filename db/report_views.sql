@@ -148,7 +148,7 @@ CREATE VIEW xeros_cycle AS
       LEFT JOIN xeros_machine AS xm
         ON xdma.machine_id = xm.machine_id
       LEFT JOIN xeros_xeros_local_static_value AS xxlsv
-        ON xmc.machine_classification_id = xxlsv.machine_classification_id
+        ON xmc.classification_id = xxlsv.classification_id
 -- Cold Water
       LEFT JOIN xeros_utility_actual AS xua
         ON xua.utility_type = 'water'

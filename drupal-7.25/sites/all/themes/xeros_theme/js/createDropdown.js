@@ -7,7 +7,6 @@ function createDropDown(selector, callback){
     var options = jQuery("option", source);
     var targetId = jQuery(selector).attr('id') + "__dl";
 
-
     jQuery(source).after('<dl id=' + targetId + ' class="dropdown" select-list="' + selector + '"></dl>');
 
     var source_dl = jQuery("#" + targetId);
@@ -18,7 +17,8 @@ function createDropDown(selector, callback){
     source_dl.append('<dd><ul></ul></dd>')
 
     options.each(function(){
-        source_dl.find(" dd ul").append('<li><a href="#">' +
+        // TODO: Need to figure out how to update the link to the machine
+        source_dl.find(" dd ul").append('<li><a href="#' + machine + "+" +jQuery(this).val() + '">' +
             jQuery(this).text() + '<span class="value">' +
             jQuery(this).val() + '</span></a></li>');
     });
@@ -35,13 +35,19 @@ function createDropDown(selector, callback){
     });
 
     source_dl.find("ul li a").click(function(event) {
+        event.preventDefault();
         var text = jQuery(this).html();
         source_dl.find("dt a").html(text);
         source_dl.find("dd ul").hide();
         jQuery(source_dl.attr("select-list")).val(jQuery(this).find("span.value").html());
 
-        if (Object.prototype.toString.call(callback) == "[object Function]") {
-            callback();
-        }
+        window.metric = jQuery(this).find("span.value").html();
+
+        window.location.hash = window.machine + "+" + window.metric;
+
+
+//        if (Object.prototype.toString.call(callback) == "[object Function]") {
+//            callback();
+//        }
     });
 }

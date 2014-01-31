@@ -33,9 +33,6 @@
     </div>
 
     <div class="line"></div>
-
-    {{#each data}}
-
         <div class="container">
         <div class="machine">
             <div class="icon-Washer"></div>
@@ -43,10 +40,7 @@
             {{this.machine_id}}
             <div > <span class="caret-left"></span><span class="caret-right"></span> </div>
         </div>
-
-            {{#each this.metrics}}
-
-            {{#each this.classifications}}
+            {{#each classifications}}
             <div id="section-{{id}}" class="section-wrapper {{id}}" >
                 <div>
 
@@ -127,10 +121,5 @@
 
             </div>
             {{/each}}
-            {{/each}}
         </div>
-
-    {{/each}}
-
-
 </div>

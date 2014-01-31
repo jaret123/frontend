@@ -5,7 +5,7 @@ truncate xeros_xeros_local_static_value;
 
 insert into xeros_xeros_local_static_value (
     xeros_local_static_value_id,
-    machine_classification_id,
+    classification_id,
     hot_water_gallons,
     cold_water_gallons,
     run_time

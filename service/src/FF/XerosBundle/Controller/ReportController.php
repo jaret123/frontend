@@ -386,7 +386,6 @@ from
          		on xmc.classification_id = xcl.classification_id
 	where
 	    1 = 1
-   		AND xc.machine_id = 1
         and reading_date >= ':fromDate' and reading_date <= ':toDate'
 	group by
    		xc.machine_id,

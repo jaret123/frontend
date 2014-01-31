@@ -26,6 +26,8 @@
 
   <?php print $styles; ?>
   <?php print $scripts; ?>
+    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/handlebars-v1.3.0.js"></script>
+    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/createDropdown.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,600,700' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="css/chart.css" media="all"> -->
@@ -58,14 +60,13 @@
   <?php print $page_bottom; ?>
 
   <!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
-  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/mustache.js"></script>
-  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/handlebars-v1.3.0.js"></script>
 
-  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/createDropdown.js"></script>
+
+
 
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/news.js"></script>
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/d3.min.js"></script>
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/chart.js"></script>
-  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/scripts.js"></script>
+<!--  <script src="--><?php //print $base_path . $path_to_xeros_theme; ?><!--/js/scripts.js"></script>-->
 </body>
 </html>

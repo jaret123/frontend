@@ -2511,148 +2511,152 @@ h1 {
   margin-right: auto;
 }
 /* line 13, ../sass/components/_page-3.scss */
+#page-3 #spinner {
+  height: 300px;
+}
+/* line 17, ../sass/components/_page-3.scss */
 #page-3.active {
   z-index: 10;
 }
-/* line 16, ../sass/components/_page-3.scss */
+/* line 20, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container {
   position: relative;
   overflow: hidden;
 }
-/* line 19, ../sass/components/_page-3.scss */
+/* line 23, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .select {
   display: inline-block;
 }
-/* line 24, ../sass/components/_page-3.scss */
+/* line 28, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .report__select {
   margin-left: 500px;
 }
-/* line 27, ../sass/components/_page-3.scss */
+/* line 31, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .line {
   margin-top: 10px;
   margin-bottom: 0px;
   border-top: 1px dashed gray;
 }
-/* line 32, ../sass/components/_page-3.scss */
+/* line 36, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container {
   margin-top: 25px;
 }
-/* line 35, ../sass/components/_page-3.scss */
+/* line 39, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .section-wrapper.show {
   display: block;
 }
-/* line 42, ../sass/components/_page-3.scss */
+/* line 46, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine {
   position: absolute;
   text-align: center;
 }
-/* line 45, ../sass/components/_page-3.scss */
+/* line 49, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine .icon-Washer {
   font-size: 80px;
 }
-/* line 51, ../sass/components/_page-3.scss */
+/* line 55, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row {
   overflow: hidden;
   margin-top: 10px;
   margin-left: 150px;
 }
-/* line 55, ../sass/components/_page-3.scss */
+/* line 59, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-title.first {
   margin-top: 0px;
 }
-/* line 58, ../sass/components/_page-3.scss */
+/* line 62, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-data.first {
   border-bottom: 1px dashed gray;
   margin-bottom: 35px;
 }
-/* line 62, ../sass/components/_page-3.scss */
+/* line 66, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .title {
   font-size: 20px;
   color: #444;
   font-weight: 400;
 }
-/* line 68, ../sass/components/_page-3.scss */
+/* line 72, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top, #page-3 .consumption-details-container .container .row .bottom {
   height: 72px;
   text-align: center;
   vertical-align: middle;
 }
-/* line 73, ../sass/components/_page-3.scss */
+/* line 77, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top {
   border: 1px solid gray;
   border-bottom: none;
 }
-/* line 77, ../sass/components/_page-3.scss */
+/* line 81, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .bottom {
   border-color: #0087be;
   background-color: #0087be;
   color: white;
 }
-/* line 83, ../sass/components/_page-3.scss */
+/* line 87, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .label {
   font-size: .7em;
   font-weight: 300;
 }
-/* line 87, ../sass/components/_page-3.scss */
+/* line 91, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .value {
   font-size: 1.8em;
   font-weight: 300;
 }
-/* line 91, ../sass/components/_page-3.scss */
+/* line 95, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top .value {
   padding-top: 5px;
 }
-/* line 96, ../sass/components/_page-3.scss */
+/* line 100, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .box {
   display: inline-block;
   margin-left: 27.9px;
 }
-/* line 100, ../sass/components/_page-3.scss */
+/* line 104, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-1 {
   width: 90px;
   margin-left: 0px;
 }
-/* line 104, ../sass/components/_page-3.scss */
+/* line 108, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-2 {
   width: 90px;
 }
-/* line 107, ../sass/components/_page-3.scss */
+/* line 111, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-3 {
   width: 135px;
 }
-/* line 110, ../sass/components/_page-3.scss */
+/* line 114, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-4 {
   width: 180px;
 }
-/* line 114, ../sass/components/_page-3.scss */
+/* line 118, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 {
   width: 15px;
   margin-left: 20.4px;
 }
-/* line 117, ../sass/components/_page-3.scss */
+/* line 121, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .top, #page-3 .consumption-details-container .container .row .col-5 .bottom {
   background-color: white;
   border-color: white;
 }
-/* line 122, ../sass/components/_page-3.scss */
+/* line 126, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .bottom {
   color: #0087be;
 }
-/* line 127, ../sass/components/_page-3.scss */
+/* line 131, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 {
   width: 180px;
   margin-left: 20.4px;
 }
-/* line 130, ../sass/components/_page-3.scss */
+/* line 134, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top {
   background-color: #0087be;
   color: white;
 }
-/* line 134, ../sass/components/_page-3.scss */
+/* line 138, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top, #page-3 .consumption-details-container .container .row .col-6 .bottom {
   border-color: #0087be;
 }
-/* line 145, ../sass/components/_page-3.scss */
+/* line 149, ../sass/components/_page-3.scss */
 #page-3 .legend .swatch.current {
   background-color: white;
   border: 1px solid gray;

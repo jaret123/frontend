@@ -10,6 +10,10 @@
   $col-gutter: (.31 * $col-width);
   $row-height: .8 * $col-width;
 
+  #spinner {
+    height: 300px;
+
+  }
   &.active {
     z-index: 10;
   }
