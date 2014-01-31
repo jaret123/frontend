@@ -36,12 +36,6 @@
 
     {{#each data}}
 
-        key: {{@key}} value: {{this}}
-        <!--<div class="legend">-->
-        <!--<div class="icon-Washer"></div>-->
-        <!--<div class="text">Potential Consumption<br/>with Xeros</div>-->
-        <!--</div>-->
-
         <div class="container">
         <div class="machine">
             <div class="icon-Washer"></div>
@@ -52,12 +46,9 @@
 
             {{#each this.metrics}}
 
-            {{this.name}}
-
             {{#each this.classifications}}
             <div id="section-{{id}}" class="section-wrapper {{id}}" >
                 <div>
-                    <!--{{name}}-->
 
                     <div class="row row-title {{id}}">
                         <div class="title">

@@ -406,58 +406,126 @@ SQL;
             "name" => "Cold Water",
             "id" => "cold_water",
             "query" => <<<METRIC
-        sum(xc.cycle_cold_water_volume) as value_one,
-   		sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
-   		sum(xc.cycle_cold_water_volume_per_pound) as value_two,
-   		sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_two,
-   		sum(xc.cycle_cold_water_cost_per_pound) as value_three,
-   		sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_three,
-   		sum(xc.cycle_cold_water_volume_per_pound) -
-        sum(xc.cycle_cold_water_xeros_volume_per_pound)  as delta_one,
-   		sum(xc.cycle_cold_water_cost_per_pound) /
-        sum(xc.cycle_cold_water_xeros_cost_per_pound) as delta_two
+            'Gallons' as value_one_label,
+        truncate(sum(xc.cycle_cold_water_volume), 0) as value_one,
+   		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
+
+        'Load Size' as value_two_label,
+        '50' as value_two,
+        '50' as xeros_value_two,
+
+        'Gallons Per Pound' as value_three_label,
+   		truncate(sum(xc.cycle_cold_water_volume_per_pound), 0) as value_three,
+   		truncate(sum(xc.cycle_cold_water_xeros_volume_per_pound), 0) as xeros_value_three,
+
+   		'Cost Per Pound' as value_four_label,
+   		truncate(sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
+   		truncate(sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four,
+
+   		'Water Reduction' as delta_one_label,
+   		truncate(sum(xc.cycle_cold_water_volume_per_pound) -
+           sum(xc.cycle_cold_water_xeros_volume_per_pound), 1) as delta_one,
+
+        'Cost Reduction' as delta_two_label,
+   		truncate(sum(xc.cycle_cold_water_cost_per_pound) /
+         sum(xc.cycle_cold_water_xeros_cost_per_pound), 0) as delta_two
 
 METRIC
         ));
+        // TODO: Cost Reduction need to be total, not per pound
 
         array_push($metrics, array(
             "name" => "Hot Water",
             "id" => "hot_water",
             "query" => <<<METRIC
-   		sum(xc.cycle_hot_water_volume) as value_one,
-   		sum(xc.cycle_hot_water_volume) as xeros_value_one,
-   		sum(xc.cycle_hot_water_volume_per_pound) as value_two,
-   		sum(xc.cycle_hot_water_xeros_volume_per_pound) as xeros_value_two,
-   		sum(xc.cycle_hot_water_cost_per_pound) as value_three,
-   		sum(xc.cycle_hot_water_xeros_cost_per_pound) as xeros_value_three,
-   		sum(xc.cycle_hot_water_volume_per_pound) -
-        sum(xc.cycle_hot_water_xeros_volume_per_pound)  as delta_one,
-   		sum(xc.cycle_hot_water_cost_per_pound) /
-        sum(xc.cycle_hot_water_xeros_cost_per_pound) as delta_two
+
+        'Gallons' as value_one_label,
+   		truncate(sum(xc.cycle_hot_water_volume), 0) as value_one,
+   		truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as xeros_value_one,
+
+        'Load Size' as value_two_label,
+        '50' as value_two,
+        '50' as xeros_value_two,
+
+        'Gallons Per Pound' as value_three_label,
+   		truncate(sum(xc.cycle_hot_water_volume_per_pound), 0) as value_three,
+   		truncate(sum(xc.cycle_hot_water_xeros_volume_per_pound), 0) as xeros_value_three,
+
+   		'Cost Per Pound' as value_four_label,
+   		truncate(sum(xc.cycle_hot_water_cost_per_pound), 2) as value_four,
+   		truncate(sum(xc.cycle_hot_water_xeros_cost_per_pound), 2) as xeros_value_four,
+
+   		'Water Reduction' as delta_one_label,
+   		truncate(sum(xc.cycle_hot_water_volume_per_pound) -
+            sum(xc.cycle_hot_water_xeros_volume_per_pound), 2) as delta_one,
+
+        'Cost Reduction' as delta_two_label,
+   		truncate(sum(xc.cycle_hot_water_cost_per_pound) /
+            sum(xc.cycle_hot_water_xeros_cost_per_pound), 2) as delta_two
 
 METRIC
         ));
 
-//        array_push($metrics, array(
-//            "query" => <<<METRIC
-//
-//METRIC
-//        ));
+        array_push($metrics, array(
+            "name" => "Total Water",
+            "id" => "total_water",
+            "query" => <<<METRIC
+
+        'Gallons' as value_one_label,
+   		truncate( sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) , 0) as value_one,
+   		truncate( sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
+
+        'Load Size' as value_two_label,
+        '50' as value_two,
+        '50' as xeros_value_two,
+
+        'Gallons Per Pound' as value_three_label,
+   		truncate( sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) , 0) as value_three,
+   		truncate( sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound)  , 0) as xeros_value_three,
+
+   		'Cost Per Pound' as value_four_label,
+   		truncate( sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
+   		truncate( sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four,
+
+   		'Water Reduction' as delta_one_label,
+   		truncate( ( sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) ) -
+            ( sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound) ) , 2) as delta_one,
+
+        'Cost Reduction' as delta_two_label,
+   		truncate( ( sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound) ) /
+            ( sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound) ), 2) as delta_two
+
+METRIC
+        ));
 
         array_push($metrics, array(
             "name" => "Cycle Time",
             "id" => "cycle_time",
             "query" => <<<METRIC
-   		sum(xc.cycle_time_run_time) as value_one,
-   		sum(xc.cycle_time_xeros_run_time) as xeros_value_one,
-   		sum(xc.cycle_time_labor_cost) as value_two,
-   		sum(xc.cycle_time_xeros_labor_cost) as xeros_value_two,
-   		sum(xc.cycle_time_labor_cost_per_pound) as value_three,
-   		sum(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_three,
-   		sum(xc.cycle_time_total_time) /
-        sum(xc.cycle_time_xeros_total_time) as delta_one,
-   		sum(xc.cycle_time_labor_cost_per_pound) /
-        sum(xc.cycle_time_xeros_labor_cost_per_pound) as delta_two
+
+        'Total Cycle Time' as value_one_label,
+   		truncate(sum(xc.cycle_time_run_time), 0) as value_one,
+   		truncate(sum(xc.cycle_time_xeros_run_time), 0) as xeros_value_one,
+
+        'Load Size' as value_two_label,
+        '50' as value_two,
+        '50' as xeros_value_two,
+
+        'Labor Cost' as value_three_label,
+   		truncate(sum(xc.cycle_time_labor_cost), 0) as value_three,
+   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as xeros_value_three,
+
+   		'Cost Per Pound' as value_four_label,
+   		truncate(sum(xc.cycle_time_labor_cost_per_pound), 2) as value_four,
+   		truncate(sum(xc.cycle_time_xeros_labor_cost_per_pound), 2) as xeros_value_four,
+
+        'Water Reduction' as delta_one_label,
+   		truncate(sum(xc.cycle_time_total_time) /
+            sum(xc.cycle_time_xeros_total_time), 2) as delta_one,
+
+        'Cost Reduction' as delta_two_label,
+   		truncate(sum(xc.cycle_time_labor_cost_per_pound) /
+            sum(xc.cycle_time_xeros_labor_cost_per_pound), 2) as delta_two
 
 METRIC
         ));
@@ -466,16 +534,30 @@ METRIC
             "name" => "Chemical",
             "id" => "chemical",
             "query" => <<<METRIC
-   		sum(xc.cycle_chemical_strength) as chemical_strength,
-   		sum(xc.cycle_chemical_xeros_strength) as chemical_strength_xeros,
-   		sum(xc.cycle_chemical_strength_per_pound) as chemical_strength_per_pound,
-   		sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_xeros_strength_per_pound,
-   		sum(xc.cycle_chemical_cost_per_pound) as chemical_cost_per_pound,
-   		sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_xeros_cost_per_pound,
-   		sum(xc.cycle_chemical_strength_per_pound) /
-        sum(xc.cycle_chemical_xeros_strength_per_pound) as chemical_delta_strength_per_pound,
-   	  	sum(xc.cycle_chemical_cost_per_pound) /
-        sum(xc.cycle_chemical_xeros_cost_per_pound) as chemical_delta_cost_per_pound
+
+        'Total Ounces' as value_one_label,
+   		truncate(sum(xc.cycle_chemical_strength), 0) as value_one,
+   		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as xeros_value_one,
+
+        'Load Size' as value_two_label,
+        '50' as value_two,
+        '50' as xeros_value_two,
+
+        'Ounces Per Pound' as value_three_label,
+   		truncate(sum(xc.cycle_chemical_strength_per_pound), 0) as value_three,
+   		truncate(sum(xc.cycle_chemical_xeros_strength_per_pound), 0) as xeros_value_three,
+
+        'Cost Per Pound' as value_four_label,
+   		truncate(sum(xc.cycle_chemical_cost_per_pound), 2) as value_four,
+   		truncate(sum(xc.cycle_chemical_xeros_cost_per_pound), 2) as xeros_value_four,
+
+        'Chemical Reduction' as delta_one_label,
+   		coalesce( truncate(sum(xc.cycle_chemical_strength_per_pound) /
+            sum(xc.cycle_chemical_xeros_strength_per_pound), 2), 'NA') as delta_one,
+
+        'Cost Reduction' as delta_two_label,
+   	  	coalesce( truncate(sum(xc.cycle_chemical_cost_per_pound) /
+            sum(xc.cycle_chemical_xeros_cost_per_pound), 2), 'NA') as delta_two
 METRIC
         ));
 
