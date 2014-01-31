@@ -51,6 +51,7 @@ class ReportController extends Controller {
                     break;
                 case "news":
                     $json = file_get_contents($dir . "news.json");
+                    $ar = json_decode($json, true);
                     break;
             }
 

@@ -1,15 +1,13 @@
 
     <div class="news">
         <h1>News</h1>
-        {{#data}}
+        {{#each data}}
         <div class="news__news-item">
             <h3>{{title}}</h3>
             <p>{{teaser}}</p>
             <p class="read-more"><a href="#">Read More</a></p>
             <p class="tags">Tags: <span class="link">{{tags}}</span></p>
         </div>
-        {{/data}}
-        {{^data}}
-        No news found
-        {{/data}}
+        {{/each}}
+
     </div>

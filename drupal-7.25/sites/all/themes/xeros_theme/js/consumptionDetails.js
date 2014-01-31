@@ -21,8 +21,7 @@ var app = {
         //var data = [];
         // If no hash - set data to defaults
         if (!hash) {
-            //alert('defaults');
-            console.log(hash.substr(1).split("+"));
+
         } else {
             //alert('hash' );
             hash_array = hash.substr(1).split("+");
@@ -30,9 +29,9 @@ var app = {
             self.metric = hash_array[1];
             window.machine = self.machine;
             window.metric = self.metric;
-            self.showReport();
-            console.log(hash.substr(1).split("+"));
         }
+        self.showReport();
+        console.log(hash.substr(1).split("+"));
     },
 
     showReport: function() {
@@ -55,21 +54,20 @@ var app = {
 
     },
 
-    showHome: function() {
-        alert('Hello');
-    },
-
     getData: function() {
         var self = this;
 
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
+        console.log("template loaded");
         // Get the data, merge the template, then callback
         jQuery.ajax({
             url: this.apiUrl,
             dataType: 'json',
             success: function (data) {
+                console.log("data retrieved");
                 self.data = data;
-                self.showReport();
+                //self.showReport();
+                self.route();
                 self.registerEvents();
             }
         })

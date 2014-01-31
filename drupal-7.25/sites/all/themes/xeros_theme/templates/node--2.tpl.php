@@ -25,27 +25,23 @@
             apiUrl : '/api/report/kpis/2013-12-01/2013-12-07.json',
             template : "kpis",
             callback : "kpiCallback"
+        },
+        {
+            rid : 2,
+            apiUrl : '/api/report/news/123/321.json',
+            template : "news",
+            callback : "newsCallback"
         }
-
-//        {
-//            rid : 2,
-//            apiUrl : 'http://xeros.local/api/report/7/news/123/321.json',
-//            template : "news",
-//            callback : "newsCallback"
-//        }
     ];
 
     function kpiCallback(data) {
-        createDropDown("#kpi-select");
         for ( row in data.data ) {
             var chart = new kpiChart( data.data[row] );
         }
+        createDropDown("#kpi-select");
+        console.log(data.data);
+
     }
-
-
-
-
-
     jQuery(document).ready(function () {
         console.log("ready!");
 
@@ -54,7 +50,6 @@
             var r = reports[i];
             loadTemplate(r.template, r.apiUrl, window[r.callback])
         }
-
 
     });
 </script>

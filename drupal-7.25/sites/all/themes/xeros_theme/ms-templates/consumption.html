@@ -55,7 +55,7 @@
                 <div class="machine-label">{{machine_name}} <br/> ({{size}}) </div>
             </a>
         </div>
-        <div class="col col-2 link" report="cold">
+        <div class="col col-2 link" classification="cold_water" machine="{{id}}">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
                 <div class="actual">{{cold_water_value}}</div>
@@ -63,7 +63,7 @@
             </div>
             <div>{{cold_water_delta_value}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
-        <div class="col col-3 link" report="hot">
+        <div class="col col-3 link" classification="hot_water" machine="{{id}}">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
                 <div class="actual">{{hot_water_value}}</div>
@@ -71,7 +71,7 @@
             </div>
             <div>{{hot_water_delta_value}}%<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
-        <div class="col col-4 link" report="total">
+        <div class="col col-4 link" classification="total_water" machine="{{id}}">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
                 <div class="actual">{{total_water_value}}</div>
@@ -79,7 +79,7 @@
             </div>
             <div>{{total_water_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
-        <div class="col col-5 link" report="cycle">
+        <div class="col col-5 link" classification="cycle_time" machine="{{id}}">
             <img src="/sites/all/themes/xeros_theme/images/piechart_placeholder.png"/>
             <div class="labels">
                 <div class="actual">{{time_value}}</div>
@@ -87,7 +87,7 @@
             </div>
             <div>{{time_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
         </div>
-        <div class="col col-6 link" report="chem">
+        <div class="col col-6 link" classification="chemical" machine="{{id}}">
             <img class="bar-chart" src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
             <div class="labels">
                 <div class="actual">{{chemical_value}}</div>
