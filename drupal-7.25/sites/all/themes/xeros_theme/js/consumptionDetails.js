@@ -101,7 +101,7 @@ var app = {
         var self = this;
         // Self data
         self.reportData = self.data.data[self.machine].metrics[self.metric];
-        var html = self.tpl(reportData);
+        var html = self.tpl(self.reportData);
         jQuery('#page-container').html(html);
         self.bindNavigation();
     },

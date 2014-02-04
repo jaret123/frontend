@@ -26,10 +26,10 @@ $aliases['xeros.dev'] = array (
     ),
   ),
 );
-$aliases['xeros.stage'] = array (
-    'root' => '/var/www/ELYXOR/stage/www/drupal-7.25',
-    'uri' => 'http://xeros-stage.d.ffinno.com',
-    'remote-host' => 'ffinno',
+$aliases['xeros.qa'] = array (
+    'root' => '/var/www/xeros/www/drual',
+    'uri' => 'http://sbeadycare-qa.xeroscleaning.com',,
+    'remote-host' => 'xeros',
     'path-aliases' =>
         array (
             '%drush' => '/usr/bin',
@@ -41,9 +41,9 @@ $aliases['xeros.stage'] = array (
                 array (
                     'default' =>
                         array (
-                            'database' => 'xeros_stage',
-                            'username' => 'root',
-                            'password' => 'root',
+                            'database' => 'xeros-qa',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
                             'host' => 'localhost',
                             'port' => '',
                             'driver' => 'mysql',
