@@ -5,6 +5,7 @@ var kpiChart = function (data) {
     var parseDate = d3.time.format("%Y-%m-%d").parse;
     var name = data["name"];
     var data = data["chartData"];
+
     function replaceNull(value) {
         if (value !== "") {
             return parseInt(value, 10); // value 1
@@ -134,15 +135,18 @@ var kpiChart = function (data) {
     svg.append("path")
         .datum(data)
         .attr("class", "line-b")
-        .attr("d", lineB);
-
+        .attr("d", lineA)
+        .transition()
+            .delay(500)
+            .duration(1500)
+            .attr("d", lineB)
 };
 
 
 var barChart = function (data) {
     // TODO Transform the incoming data
 
-    var data = [1000,12];
+    var data = [1000, 12];
     var pct = "15%";
     var colors = ["#999", "#0086bd"];
 
@@ -164,15 +168,19 @@ var barChart = function (data) {
     var bar = svg.selectAll("g")
         .data(data)
         .enter().append("g")
-        .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+        .attr("transform", function (d, i) {
+            return "translate(0," + i * barHeight + ")";
+        });
 
     bar.append("rect")
         .attr("width", x)
         .attr("height", barHeight - 1)
-        .attr("fill", function(d, i) { return colors[i]; });
+        .attr("fill", function (d, i) {
+            return colors[i];
+        });
 
     bar.append("text")
-        .attr("x", function(d, i) {
+        .attr("x", function (d, i) {
             console.log(x(d));
             if (x(d) > width / 2) {
                 return x(d) - 5;
@@ -182,7 +190,7 @@ var barChart = function (data) {
             }
 
         })
-        .attr("text-anchor", function(d, i) {
+        .attr("text-anchor", function (d, i) {
             console.log(x(d));
             if (x(d) > width / 2) {
                 return "end";
@@ -192,7 +200,7 @@ var barChart = function (data) {
             }
 
         })
-        .style("fill", function(d, i) {
+        .style("fill", function (d, i) {
             console.log(x(d));
             if (x(d) > width / 2) {
                 return "#FFF";
@@ -204,7 +212,9 @@ var barChart = function (data) {
         })
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
-        .text(function(d) { return d; });
+        .text(function (d) {
+            return d;
+        });
 
     svg.append("g").append("text")
         .attr("width", width)
