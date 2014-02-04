@@ -18,7 +18,7 @@ function createDropDown(selector, callback){
 
     options.each(function(){
         // TODO: Need to figure out how to update the link to the machine
-        source_dl.find(" dd ul").append('<li><a href="#' + machine + "+" +jQuery(this).val() + '">' +
+        source_dl.find(" dd ul").append('<li><a href="#">' +
             jQuery(this).text() + '<span class="value">' +
             jQuery(this).val() + '</span></a></li>');
     });
@@ -36,18 +36,16 @@ function createDropDown(selector, callback){
 
     source_dl.find("ul li a").click(function(event) {
         event.preventDefault();
+        // Update display
+
         var text = jQuery(this).html();
         source_dl.find("dt a").html(text);
         source_dl.find("dd ul").hide();
         jQuery(source_dl.attr("select-list")).val(jQuery(this).find("span.value").html());
 
-        window.metric = jQuery(this).find("span.value").html();
-
-        window.location.hash = window.machine + "+" + window.metric;
-
-
-//        if (Object.prototype.toString.call(callback) == "[object Function]") {
-//            callback();
-//        }
+        // Go do something
+        if (Object.prototype.toString.call(callback) == "[object Function]") {
+            callback(event);
+        }
     });
 }

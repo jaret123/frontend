@@ -611,9 +611,9 @@ table {
   height: 0;
   margin-left: 2px;
   vertical-align: middle;
-  border-right: 4px solid;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
+  border-right: 10px solid;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 
 /* line 23, ../sass/components/_caret.scss */
@@ -623,9 +623,9 @@ table {
   height: 0;
   margin-left: 2px;
   vertical-align: middle;
-  border-left: 4px solid;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
+  border-left: 10px solid;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 
 /* line 1, ../sass/components/_chartKpi.scss */

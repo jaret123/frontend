@@ -21,7 +21,6 @@ function data_entity_entity_property_info() {
         'getter callback' => 'entity_property_verbatim_get',
         'setter callback' => 'entity_property_verbatim_set',
         'schema field' => $field_name,
-        'field' => TRUE,
       );
     }
   }

@@ -1,0 +1,28 @@
+.kpi-chart {
+  height: 150px;
+  text-align: center;
+  font-size: 10px;
+  color: #FFF; }
+  .kpi-chart svg {
+    margin: 15px 0px 10px 0px;
+    width: 316px;
+    height: 130px; }
+  .kpi-chart .axis path,
+  .kpi-chart .axis line {
+    fill: none;
+    stroke: #FFF;
+    shape-rendering: crispEdges; }
+  .kpi-chart text {
+    fill: #FFF; }
+  .kpi-chart .x.axis path, .kpi-chart .x.axis line, .kpi-chart .y.axis path {
+    display: none; }
+  .kpi-chart .y.axis path {
+    display: none; }
+  .kpi-chart .line-a, .kpi-chart .line-b {
+    fill: none;
+    stroke-width: 2px; }
+  .kpi-chart .line-a {
+    fill: none;
+    stroke: #0086bd; }
+  .kpi-chart .line-b {
+    stroke: white; }
