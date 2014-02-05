@@ -14,8 +14,8 @@
     </div>
 </div>
 
-<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
 <script>
+    // Refactor to the view
     var reports = [
         {
             rid : 1,
@@ -48,3 +48,7 @@
 
     });
 </script>
+
+<script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
+<script src = "/sites/all/themes/xeros_theme/js/consumption.js" ></script>

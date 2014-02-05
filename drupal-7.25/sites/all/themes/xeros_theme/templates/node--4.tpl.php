@@ -152,7 +152,8 @@
 </div>
 
 
-    <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
-    <script src = "/sites/all/themes/xeros_theme/js/consumptionDetails.js" ></script>
+<script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
+<script src = "/sites/all/themes/xeros_theme/js/app.js" ></script>
+<script src = "/sites/all/themes/xeros_theme/js/controls.js" ></script>
 
