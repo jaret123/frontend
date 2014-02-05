@@ -3,7 +3,7 @@
 var app = {
 
     // TODO: Need to store the report filters in the session to handle page to page transitions
-    apiUrl: "/api/report/consumptionDetails/2013-11-10/2013-12-20.json",
+    apiUrl: "",
     machine: 1, // Initial machine when there is no hash
     metric: "cold_water", // Initial metric when there is no hash
     dateRange: "last_30_day", // Initial date range
@@ -37,37 +37,17 @@ var app = {
             self.machine = hash_array[0];
             self.metric = hash_array[1];
         }
-        self.showReport();
+        // This is a little funky, but we are going to let the view inherit our showReport method - sort of
+        view.parseData(self.showReport);
         console.log(hash.substr(1).split("+"));
     },
 
+    // This is going to be passed as a function to the view
     showReport: function () {
-        var self = this;
-        // Self data
-        self.reportData = self.data.data[self.machine].metrics[self.metric];
-        var html = self.tpl(self.reportData);
-        jQuery('#page-container').html(html);
+        var html = app.tpl(app.reportData);
+        jQuery('.template-container').html(html);
         controls.createMachineNav();
     },
-
-//    // Navigation that needs to be bound after a report is rendered because the elements are in the client template
-//    bindNavigation: function () {
-//        var self=this;
-//        // Machine navigation
-//        jQuery("#machine").find(".caret-left-wrapper").click(function () {
-//            if (self.machine > 1) {
-//                self.machine = self.machine - 1;
-//            }
-//            window.location.hash = self.machine + "+" + self.metric + "+" + self.dateRange;
-//        })
-//
-//        jQuery("#machine").find(".caret-right-wrapper").click(function () {
-//            if (self.machine < self.machineMax) {
-//                self.machine = parseInt(self.machine) + parseInt(1);
-//            }
-//            window.location.hash = self.machine + "+" + self.metric + "+" + self.dateRange;
-//        })
-//    },
 
     getData: function () {
         var self = this;
@@ -85,8 +65,11 @@ var app = {
         })
     },
 
-    initialize: function () {
+    initialize: function (apiUrl) {
         var self = this;
+
+        self.apiUrl = apiUrl;
+
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
         console.log("template loaded");
         self.registerEvents();
@@ -94,4 +77,4 @@ var app = {
     }
 }
 
-app.initialize();
+app.initialize(window.apiUrl);

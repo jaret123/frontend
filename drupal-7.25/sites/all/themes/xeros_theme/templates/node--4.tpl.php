@@ -44,8 +44,10 @@
                     </span>
                 </div>
 
-                <div id="page-container">
+                <div id="page-container" class="template-container">
                     <div id="spinner"></div>
+
+                </div>
                     <script id="page-tpl" type="text/x-handlebars-template">
 
                         <div class="line"></div>
@@ -145,15 +147,16 @@
                         </div>
 
                     </script>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<script>
+    var apiUrl = "/api/report/consumptionDetails/2013-11-10/2013-12-20.json";
+</script>
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
 <script src = "/sites/all/themes/xeros_theme/js/app.js" ></script>
 <script src = "/sites/all/themes/xeros_theme/js/controls.js" ></script>
-
+<script src = "/sites/all/themes/xeros_theme/js/ConsumptionDetailsView.js" ></script>
