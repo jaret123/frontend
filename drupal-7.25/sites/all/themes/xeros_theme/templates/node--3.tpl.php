@@ -63,69 +63,46 @@
                         <div id="spinner"></div>
                         <script id="page-tpl" type="text/x-handlebars-template">
                         {{#data}}
-                        <div class="row {{meta.cssClass}}">
-                            <div class="col col-1" report="total">
-                                <div class="bar-chart cold"></div>
-                                <div class="bar-chart total"></div>
-
+                        <div class="row {{meta.cssClass}}" machineId={{id}}>
+                            <div class="col col-1">
                                 <a href="#" class="consumption__machine {{machine_name}}">
                                     <div class="icon-Washer"></div>
                                     <div class="machine-label">{{machine_name}} <br/> ({{size}})</div>
+                                    <div class="metric__message"></div>
                                 </a>
                             </div>
-                            <div class="col col-2 link" classification="cold_water" machine="{{id}}">
-                                <img class="bar-chart"
-                                     src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
+                            <div class="col col-2 link metric" classification="cold_water" machine="{{id}}" chart="cold_water-{{id}}">
 
-                                <div class="labels">
-                                    <div class="actual">{{cold_water_value}}</div>
-                                    <div class="potential">{{cold_water_xeros_value}}</div>
-                                </div>
-                                <div>{{cold_water_delta_value}}%<img
+                                <div class="chart"></div>
+                                <div class="delta" data="{{cold_water_delta_value}}">{{cold_water_delta_value}}%<img
                                         src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="metric__message"></div>
                             </div>
-                            <div class="col col-3 link" classification="hot_water" machine="{{id}}">
-                                <img class="bar-chart"
-                                     src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
 
-                                <div class="labels">
-                                    <div class="actual">{{hot_water_value}}</div>
-                                    <div class="potential">{{hot_water_xeros_value}}</div>
-                                </div>
-                                <div>{{hot_water_delta_value}}%<img
+                            <div class="col col-3 link metric" classification="hot_water" machine="{{id}}" chart="hot_water-{{id}}">
+                                <div class="chart"></div>
+                                <div class="delta" data="{{hot_water_delta_value}}">{{hot_water_delta_value}}%<img
                                         src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="metric__message"></div>
                             </div>
-                            <div class="col col-4 link" classification="total_water" machine="{{id}}">
-                                <img class="bar-chart"
-                                     src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
-
-                                <div class="labels">
-                                    <div class="actual">{{total_water_value}}</div>
-                                    <div class="potential">{{total_water_xeros_value}}</div>
-                                </div>
-                                <div>{{total_water_delta_value}}<img
+                            <div class="col col-4 link metric" classification="total_water" machine="{{id}}" chart="total_water-{{id}}">
+                                <div class="chart"></div>
+                                <div class="delta" data="{{total_water_delta_value}}">{{total_water_delta_value}}<img
                                         src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="metric__message"></div>
                             </div>
-                            <div class="col col-5 link" classification="cycle_time" machine="{{id}}">
-                                <img src="/sites/all/themes/xeros_theme/images/piechart_placeholder.png"/>
-
-                                <div class="labels">
-                                    <div class="actual">{{time_value}}</div>
-                                    <div class="potential">{{time_xeros_value}}</div>
+                            <div class="col col-5 link metric" classification="cycle_time" machine="{{id}}" chart="cycle_time-{{id}}">
+                                <div class="chart"></div>
+                                <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/>
                                 </div>
-                                <div>{{time_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/>
-                                </div>
+                                <div class="metric__message"></div>
                             </div>
-                            <div class="col col-6 link" classification="chemical" machine="{{id}}">
-                                <img class="bar-chart"
-                                     src="/sites/all/themes/xeros_theme/images/barchart_placeholder.png"/>
 
-                                <div class="labels">
-                                    <div class="actual">{{chemical_value}}</div>
-                                    <div class="potential">{{chemical_xeros_value}}</div>
-                                </div>
-                                <div>{{chemical_delta_value}}%<img
+                            <div class="col col-6 link metric" classification="chemical" machine="{{id}}" chart="chemical-{{id}}">
+                                <div class="chart"></div>
+                                <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%<img
                                         src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="metric__message"></div>
                             </div>
                         </div>
                         {{/data}}
@@ -168,4 +145,6 @@
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/app.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>
 <script src="/sites/all/themes/xeros_theme/js/ConsumptionView.js" ></script>

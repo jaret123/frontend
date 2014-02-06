@@ -36,7 +36,8 @@
 
     function kpiCallback(data) {
         for ( row in data.data ) {
-            var chart = new kpiChart( data.data[row] );
+            chart.data = data.data[row];
+            chart.drawKPI();
         }
         createDropDown("#kpi-select");
         console.log(data.data);
@@ -53,3 +54,5 @@
 
     });
 </script>
+
+<script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>
