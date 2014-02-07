@@ -55,4 +55,7 @@
     });
 </script>
 
+
+<script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>

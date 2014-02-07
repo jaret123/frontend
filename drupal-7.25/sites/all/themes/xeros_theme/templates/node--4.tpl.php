@@ -33,14 +33,14 @@
                 <div class="time__select select">
                 <span>
                     <span>Timeframe</span>
-                        <select id="time-select" autofocus class="flagvisibility">
-                            <option value="last-30-days">Last 30 days</option>
-                            <option value="last-month">Previous Month</option>
-                            <option value="last-6-months" selected>Last 6 Months</option>
-                            <option value="year-to-date">Year to Date</option>
-                            <option value="last-year">Last Year</option>
-                            <option value="range">Custom...</option>
-                        </select>
+            <select id="time-select" autofocus class="flagvisibility">
+                <option value="last30days" selected>Last 30 days</option>
+                <option value="previousMonth">Previous Month</option>
+                <option value="last6months">Last 6 Months</option>
+                <option value="yearToDate">Year to Date</option>
+                <option value="lastYearToDate">Last Year</option>
+                <option value="custom">Custom...</option>
+            </select>
                     </span>
                 </div>
 
@@ -153,10 +153,11 @@
 </div>
 
 <script>
-    var apiUrl = "/api/report/consumptionDetails/2013-11-10/2013-12-20.json";
+    var apiUrlBase = '/api/report/consumptionDetails/{{fromDate}}/{{toDate}}.json';
+    var dateRange = 'last6months';
 </script>
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
-<script src = "/sites/all/themes/xeros_theme/js/app.js" ></script>
 <script src = "/sites/all/themes/xeros_theme/js/controls.js" ></script>
+<script src = "/sites/all/themes/xeros_theme/js/app.js" ></script>
 <script src = "/sites/all/themes/xeros_theme/js/ConsumptionDetailsView.js" ></script>

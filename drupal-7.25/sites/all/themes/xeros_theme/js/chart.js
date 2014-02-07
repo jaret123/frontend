@@ -83,7 +83,6 @@ var chart = {
 
         // adds SVG element to DOM, positioning properly
         var selector = ".kpi-chart." + name;
-        console.log(selector);
         var svg = d3.selectAll(selector).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -145,16 +144,15 @@ var chart = {
         self = this;
         var data = [],
             colors = [],
-            selector = "";
+            selector = "",
+            domainMax;
 
         data = self.data;
         colors = self.colors;
         selector = self.selector;
         classes = self.classes;
 
-//        var data = [1000, 12];
-//        var pct = "15%";
-//        //var colors = ["#999", "#0086bd"];
+        domainMax = data[2];
 
         var margin = {top: 10, right: 20, bottom: 0, left: 20},
             width = 120 - (margin.left + margin.right),
@@ -162,7 +160,7 @@ var chart = {
             barHeight = 20;
 
         var x = d3.scale.linear()
-            .domain([0, d3.max(data)])
+            .domain([0, domainMax])
             .range([0, width]);
 
         //Create SVG element
@@ -186,7 +184,6 @@ var chart = {
 
         bar.append("text")
             .attr("x", function (d, i) {
-                console.log(x(d));
                 if (x(d) > width / 2) {
                     return x(d) - 5;
                 }
@@ -199,7 +196,6 @@ var chart = {
                 return classes[i];
             })
             .attr("text-anchor", function (d, i) {
-                console.log(x(d));
                 if (x(d) > width / 2) {
                     return "end";
                 }
@@ -209,7 +205,6 @@ var chart = {
 
             })
             .style("fill", function (d, i) {
-                console.log(x(d));
                 if (x(d) > width / 2) {
                     return "#FFF";
                 }
@@ -245,10 +240,10 @@ var chart = {
         var dataOuter = [outer, total - outer],
             dataInner = [inner, total - inner];
 
-        var margin = {top: 0, right: 0, bottom: 0, left: 0},
-            width = 50 - margin.left - margin.right,
-            height = 50 - margin.top - margin.bottom,
-            radius = Math.min(width, height) / 2;
+        var margin = {top: 25, right: 25, bottom: 25, left: 15},
+            width = 100 ,
+            height = 100,
+            radius = Math.min(width - margin.left - margin.right, height - margin.top - margin.bottom) / 2;
 
         var colorOuter = d3.scale.ordinal()
             .range([colors[1], "#FFFFFF"]);
@@ -274,7 +269,7 @@ var chart = {
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + width / 2 + "," + (height - 20) + ")");
 
         // Draw the donut in the SVG
         var donut = svg.selectAll(".arc")
@@ -294,6 +289,24 @@ var chart = {
             .style("fill", function (d, i) {
                 return colorInner(i);
             });
+
+        svg.append("g").append("text")
+            .attr("width", width)
+            .attr("y", 0)
+            .attr("x", 0)
+            .attr("dy", ".35em")
+            .attr("text-anchor", "middle")
+            .style("fill", colorInner)
+            .text(inner)
+
+        svg.append("g").append("text")
+            .attr("width", width)
+            .attr("y", -30)
+            .attr("x", 30)
+            .attr("dy", ".35em")
+            .attr("text-anchor", "middle")
+            .style("fill", colorOuter)
+            .text(outer)
 
 //        // Add text labels
 //        svg.append("text")

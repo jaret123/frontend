@@ -633,6 +633,26 @@ table {
   font-size: 12px;
 }
 
+/* line 8, ../sass/components/_chart.scss */
+.metric .arrow {
+  display: inline-block;
+  width: inherit;
+  height: 15px;
+  background: no-repeat left bottom;
+}
+/* line 14, ../sass/components/_chart.scss */
+.metric .arrow.up {
+  background: url("/sites/all/themes/xeros_theme/images/up-arrow.png") no-repeat left bottom;
+}
+/* line 17, ../sass/components/_chart.scss */
+.metric .arrow.down {
+  background: url("/sites/all/themes/xeros_theme/images/arrow.png") no-repeat left bottom;
+}
+/* line 20, ../sass/components/_chart.scss */
+.metric .delta {
+  display: inline-block;
+}
+
 /* line 1, ../sass/components/_chartKpi.scss */
 .kpi-chart {
   height: 150px;

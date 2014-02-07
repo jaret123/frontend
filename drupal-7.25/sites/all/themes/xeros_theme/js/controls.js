@@ -102,7 +102,7 @@ var controls = {
     initialize : function() {
         // We can call all of these because the jQuery selectors will just return an empty result if the element
         // is not on the page.
-        this.showSpinner();
+        //this.showSpinner();
         this.createReportSelect();
         this.createTimeSelect();
     }

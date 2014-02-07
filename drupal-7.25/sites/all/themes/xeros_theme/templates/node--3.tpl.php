@@ -21,13 +21,13 @@
                 <div class="kpis__select">
         <span>
             <span>Timeframe</span>
-            <select id="consumption-select" autofocus class="flagvisibility">
-                <option value="1">Last 30 days</option>
-                <option value="2">Previous Month</option>
-                <option value="3" selected>Last 6 Months</option>
-                <option value="4">Year to Date</option>
-                <option value="5">Last Year</option>
-                <option value="6">Custom...</option>
+            <select id="time-select" autofocus class="flagvisibility">
+                <option value="last30days" selected>Last 30 days</option>
+                <option value="previousMonth">Previous Month</option>
+                <option value="last6months">Last 6 Months</option>
+                <option value="yearToDate">Year to Date</option>
+                <option value="lastYearToDate">Last Year</option>
+                <option value="custom">Custom...</option>
             </select>
         </span>
                 </div>
@@ -74,34 +74,34 @@
                             <div class="col col-2 link metric" classification="cold_water" machine="{{id}}" chart="cold_water-{{id}}">
 
                                 <div class="chart"></div>
-                                <div class="delta" data="{{cold_water_delta_value}}">{{cold_water_delta_value}}%<img
-                                        src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="delta" data="{{cold_water_delta_value}}">{{cold_water_delta_value}}%</div>
+                                <div class="arrow {{cold-water-up-or-down}}"></div>
                                 <div class="metric__message"></div>
                             </div>
 
                             <div class="col col-3 link metric" classification="hot_water" machine="{{id}}" chart="hot_water-{{id}}">
                                 <div class="chart"></div>
-                                <div class="delta" data="{{hot_water_delta_value}}">{{hot_water_delta_value}}%<img
-                                        src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="delta" data="{{hot_water_delta_value}}">{{hot_water_delta_value}}%</div>
+                                <div class="arrow {{hot-water-up-or-down}}"></div>
                                 <div class="metric__message"></div>
                             </div>
                             <div class="col col-4 link metric" classification="total_water" machine="{{id}}" chart="total_water-{{id}}">
                                 <div class="chart"></div>
-                                <div class="delta" data="{{total_water_delta_value}}">{{total_water_delta_value}}<img
-                                        src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="delta" data="{{total_water_delta_value}}">{{total_water_delta_value}}%</div>
+                                <div class="arrow {{total-water-up-or-down}}"></div>
                                 <div class="metric__message"></div>
                             </div>
                             <div class="col col-5 link metric" classification="cycle_time" machine="{{id}}" chart="cycle_time-{{id}}">
                                 <div class="chart"></div>
-                                <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}<img src="/sites/all/themes/xeros_theme/images/arrow.png"/>
-                                </div>
+                                <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
+                                <div class="arrow {{cold-water-up-or-down}}"></div>
                                 <div class="metric__message"></div>
                             </div>
 
                             <div class="col col-6 link metric" classification="chemical" machine="{{id}}" chart="chemical-{{id}}">
                                 <div class="chart"></div>
-                                <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%<img
-                                        src="/sites/all/themes/xeros_theme/images/arrow.png"/></div>
+                                <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
+                                <div class="arrow {{cold-water-up-or-down}}"></div>
                                 <div class="metric__message"></div>
                             </div>
                         </div>
@@ -138,13 +138,14 @@
 <!--</script>-->
 
 <script>
-    var apiUrl = '/api/report/consumption/2013-11-10/2013-12-20.json';
+    var apiUrlBase = '/api/report/consumption/{{fromDate}}/{{toDate}}.json';
+    var dateRange = 'last6months';
 </script>
 
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
-<script src="/sites/all/themes/xeros_theme/js/app.js"></script>
-<script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+    <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+    <script src="/sites/all/themes/xeros_theme/js/app.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>
 <script src="/sites/all/themes/xeros_theme/js/ConsumptionView.js" ></script>

@@ -7,27 +7,80 @@ var view = {
     parseData : function(draw) {
         var self = this;
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
+
         app.reportData = app.data;
-        draw();
+
+        // TODO: Remove the delta value from the SQL report and calculate here
+        for ( i in app.reportData.data) {
+            app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
+            app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
+            app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
+            app.reportData.data[i].total_water_delta_value = self.delta(app.reportData.data[i].total_water_value, app.reportData.data[i].total_water_xeros_value);
+            app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
+        }
+        draw(); // This does the html template draw
+
         self.drawCharts();
         self.bindNav();
     },
-    drawCharts : function() {
+    delta : function(base, change) {
 
+        var delta = 0;
+
+        delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+        return delta;
+    },
+    isValid : function(arr) {
+        var isValid = true;
+
+        for ( i in arr ) {
+            if ( isNaN(arr[i]) ) {
+                isValid = false;
+                return isValid;
+                // Break out because the whole array is invalid if one value is
+            }
+        }
+        return isValid;
+    },
+    drawCharts : function() {
+        var self = this;
         var total = 0;
+
+        // Get the max value of each metric for each machine so that the charts on the screen
+        // are relative to each other
+
+        // TODO: Refactor candidate
+
+        var c = [],
+            h = [],
+            t = [],
+            tm = [],
+            ch = [],
+            domainMultiple = 1.1; // Use this value to keep the values from maxing out
 
         for ( i in app.data.data ) {
             var row = app.data.data[i];
-            if ( row.time_value > total ) {
-                total = row.time_value;
-            };
-            if ( row.time_xeros_value > total ) {
-                total = row.time_xeros_value;
-            }
+
+            c.push(parseInt(row.cold_water_value));
+            c.push(parseInt(row.cold_water_xeros_value));
+
+
+            h.push(parseInt(row.hot_water_value));
+            h.push(parseInt(row.hot_water_xeros_value));
+
+
+            t.push(parseInt(row.total_water_value));
+            t.push(parseInt(row.total_water_xeros_value));
+
+
+            tm.push(parseInt(row.time_value));
+            tm.push(parseInt(row.time_xeros_value));
+
+
+            ch.push(parseInt(row.chemical_value));
+            ch.push(parseInt(row.chemical_xeros_value));
         }
 
-        // Just so that the largest circle is only 2/3's full
-        total = total * 1.5;
 
         for ( i in app.data.data ) {
             var row = app.data.data[i];
@@ -38,48 +91,67 @@ var view = {
 
             // Cold Water
             chart.selector = "[chart=cold_water-" + row.id + "] .chart";
-            chart.data = [parseInt(row.cold_water_value), parseInt(row.cold_water_xeros_value)];
-            chart.drawBar();
+            chart.data = [parseInt(row.cold_water_value), parseInt(row.cold_water_xeros_value), d3.max(c) * domainMultiple];
+            if ( self.isValid(chart.data) ) {
+                chart.drawBar();
+            }
 
             // Hot Water
             chart.selector = "[chart=hot_water-" + row.id + "] .chart";
-            chart.data = [parseInt(row.hot_water_value), parseInt(row.hot_water_xeros_value)];
-            chart.drawBar();
+            chart.data = [parseInt(row.hot_water_value), parseInt(row.hot_water_xeros_value), d3.max(h) * domainMultiple];
+            if ( self.isValid(chart.data) ) {
+                chart.drawBar();
+            }
 
             // Total Water
             chart.selector = "[chart=total_water-" + row.id + "] .chart";
-            chart.data = [parseInt(row.total_water_value), parseInt(row.total_water_xeros_value)];
-            chart.drawBar();
+            chart.data = [parseInt(row.total_water_value), parseInt(row.total_water_xeros_value), d3.max(t) * domainMultiple];
+            if ( self.isValid(chart.data) ) {
+                chart.drawBar();
+            }
 
             // Cycle Time
             // TODO: Normalize per cycle?
             chart.selector = "[chart=cycle_time-" + row.id + "] .chart";
-            chart.data = [parseInt(row.time_value), parseInt(row.time_xeros_value), total];
-            chart.drawDonut();
+            chart.data = [parseInt(row.time_value), parseInt(row.time_xeros_value), d3.max(tm) * domainMultiple];
+            if ( self.isValid(chart.data) ) {
+                chart.drawDonut();
+            }
 
             // Chemical
             chart.selector = "[chart=chemical-" + row.id + "] .chart";
-            chart.data = [parseInt(row.chemical_value), parseInt(row.chemical_value)];
-            chart.drawBar();
+            chart.data = [parseInt(row.chemical_value), parseInt(row.chemical_xeros_value), d3.max(ch) * domainMultiple];
+            if ( self.isValid(chart.data) ) {
+                chart.drawBar();
+            }
 
         }
 
-        // Hide charts with errors
+
         jQuery(".metric").each(function() {
             var d =  jQuery(this).find(".delta").attr("data");
+            // Hide charts with errors
             if (typeof d == "undefined" || d == "" )
             {
                 jQuery(this).find(".chart, .delta").hide();
                 jQuery(this).find(".metric__message").html("No Readings<br/> Found");
                 jQuery(this).removeClass("link");
+            } else { // Perform some other decorations
+                var d = parseInt(jQuery(this).find(".delta").attr("data"));
+                if ( d < 0 ) {
+                    jQuery(this).find(".arrow").addClass("up");
+                } else {
+                    jQuery(this).find(".arrow").addClass("down")
+                }
             }
+
         });
         //        var data = [1000, 12];
 //        var pct = "15%";
 //        //var colors = ["#999", "#0086bd"];
     },
     initialize : function() {
-
+        //createDropDown();
     },
     bindNav : function() {
         jQuery('.consumption__machine, .link').click(function (event) {
