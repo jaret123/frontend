@@ -12,8 +12,56 @@
 <div id="page-1" class="main page">
     <div class="page-container">
         <div class="container">
-            <div id="kpis" class="kpis">...</div>
-            <div id="news" class="news">...</div>
+            <div class="kpis">
+                <div class="legend">
+                    <span class="swatch current"></span>
+                    <span class="label">Current Consumption</span>
+                    <span class="swatch xeros"></span>
+                    <span class="label">Potential Consumption with Xeros</span>
+                </div>
+                <div class="kpis__select select">
+                    <span>
+                        <span>Timeframe</span>
+                        <select id="time-select" autofocus class="flagvisibility">
+                            <option value="last30days">Last 30 days</option>
+                            <option value="previousMonth">Previous Month</option>
+                            <option value="last6months" selected>Last 6 Months</option>
+                            <option value="yearToDate">Year to Date</option>
+                            <option value="previousYear">Last Year</option>
+                            <option value="custom">Custom...</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="template-container">
+                    <div id="spinner"></div>
+                </div>
+                <script id="page-tpl" type="text/x-handlebars-template">
+                    {{#data}}
+                    <div class="kpis-{{meta.cssClass}} row">
+                        <div class="col col-1">
+                            <div class="icon icon-{{meta.icon}}"></div>
+                            <div class="col title">{{meta.title}}</div>
+                        </div>
+                        <div class="col col-2">
+                            <div class="col kpi-chart {{name}}"></div>
+                        </div>
+                        <div class="col col-3">
+                            <div class="col unit">{{meta.title}}&nbsp;</div>
+                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{summaryData.cost}}</div>
+                            <div class="col saved">Actual Cost</div>
+                            <div class="col border"></div>
+                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{summaryData.cost_xeros}}</div>
+                            <div class="col saved">Potential Cost</div>
+                            <div class="col percent">{{summaryData.savings}}%</div>
+                            <div class="col info icon-Info"></div>
+                        </div>
+                    </div>
+                    {{/data}}
+                </script>
+            </div> <!-- kpis -->
+
+            <div id="news" class="news">...</div> <!-- news -->
         </div>
     </div>
 </div>
@@ -53,9 +101,20 @@
         }
 
     });
+
+
+</script>
+
+<script>
+    var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';
+    var dateRange = 'last6months';
 </script>
 
 
+<script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+<script src="/sites/all/themes/xeros_theme/js/app.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>
+<script src="/sites/all/themes/xeros_theme/js/KpisView.js" ></script>

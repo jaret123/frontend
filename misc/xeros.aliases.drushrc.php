@@ -26,7 +26,7 @@ $aliases['xeros.dev'] = array (
     ),
   ),
 );
-$aliases['xeros.stage'] = array (
+$aliases['xeros.qa'] = array (
     'root' => '/var/www/xeros/www/drupal',
     'uri' => 'http://sbeadycare-qa.xeroscleaning.com',
     'remote-host' => 'xeros',

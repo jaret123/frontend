@@ -16,27 +16,30 @@
     z-index: 10;
   }
 
+  .legend .swatch.current {
+    background-color: white;
+    border: 1px solid gray;
+  }
+  // select
+  .kpis__select {
+    @include zen-clear(both);
+    overflow: hidden;
+    margin:0;
+    > span {
+      float: right;
+    }
+    dl {
+      margin:0 0 10px 0;
+    }
+  }
+
   .container {
     width: 980px;
     @include zen-grid-container();
-    #kpis {
+
       .kpis {
         position: relative;
-        .legend .swatch.current {
-          background-color: white;
-          border: 1px solid gray;
-        }
-      .kpis__select {
-        @include zen-clear(both);
-        overflow: hidden;
-		margin:0;
-        > span {
-          float: right;
-        }
-		dl {
-			margin:0 0 10px 0;
-		}
-      }
+
       @include zen-grid-item(8, 1);
       .row {
         @include zen-nested-container();
@@ -116,9 +119,7 @@
           }
         }
       }
-
       }
-
       .kpis-overall {
         .icon { color: $chart-color-1;}
         .kpi-chart {background-color: $chart-color-1;}
@@ -144,7 +145,8 @@
         .kpi-chart {background-color: $chart-color-5;}
         .col-3 {border: 1px solid $chart-color-5;}
       }
-    }
+  }
+
 
     #news {
       @include zen-grid-item(4,9);
@@ -179,9 +181,4 @@
 		font-style:italic;
       }
     }
-
-
   }
-
-}
-

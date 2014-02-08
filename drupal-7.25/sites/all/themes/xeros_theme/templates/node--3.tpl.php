@@ -19,17 +19,17 @@
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
                 <div class="kpis__select">
-        <span>
-            <span>Timeframe</span>
-            <select id="time-select" autofocus class="flagvisibility">
-                <option value="last30days" selected>Last 30 days</option>
-                <option value="previousMonth">Previous Month</option>
-                <option value="last6months">Last 6 Months</option>
-                <option value="yearToDate">Year to Date</option>
-                <option value="lastYearToDate">Last Year</option>
-                <option value="custom">Custom...</option>
-            </select>
-        </span>
+                    <span>
+                        <span>Timeframe</span>
+                        <select id="time-select" autofocus class="flagvisibility">
+                            <option value="last30days">Last 30 days</option>
+                            <option value="previousMonth">Previous Month</option>
+                            <option value="last6months" selected>Last 6 Months</option>
+                            <option value="yearToDate">Year to Date</option>
+                            <option value="previousYear">Last Year</option>
+                            <option value="custom">Custom...</option>
+                        </select>
+                    </span>
                 </div>
 
                 <div class="consumption__grid-container">

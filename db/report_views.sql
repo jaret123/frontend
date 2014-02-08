@@ -1,8 +1,9 @@
-USE xeros_local;
+USE `xeros-qa`;
 
 -- Chemical usage
 -- Broken down by each chemical in each cycle
 
+DROP TABLE IF EXISTS xeros_chemical_unit;
 DROP VIEW IF EXISTS xeros_chemical_unit;
 
 CREATE VIEW xeros_chemical_unit AS
@@ -37,6 +38,7 @@ CREATE VIEW xeros_chemical_unit AS
 
 -- Calculations by cycle
 -- Summing the component parts of the chemical formulas
+DROP TABLE IF EXISTS xeros_chemical_cycle;
 DROP VIEW IF EXISTS xeros_chemical_cycle;
 
 CREATE VIEW xeros_chemical_cycle AS
@@ -60,12 +62,13 @@ CREATE VIEW xeros_chemical_cycle AS
     machine_id,
     classification_id,
     reading_date
-
+;
 -- Top Level Reports (by day)
 
 
 -- Cold Water Usage
 -- Calculations by cycle
+DROP TABLE IF EXISTS xeros_cycle;
 DROP VIEW IF EXISTS xeros_cycle;
 
 CREATE VIEW xeros_cycle AS

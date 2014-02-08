@@ -21,11 +21,11 @@
                     <span>
                         <span>Report</span>
                         <select id="report-select" autofocus class="flagvisibility">
-                            <option value="cold_water">Cold Water</option>
+                            <option value="cold_water" selected>Cold Water</option>
                             <option value="hot_water">Hot Water</option>
                             <option value="total_water">Total Water</option>
                             <option value="cycle_time">Cycle Time</option>
-                            <option value="chemical" selected>Chemical</option>
+                            <option value="chemical">Chemical</option>
                         </select>
                     </span>
                 </div>
@@ -33,14 +33,14 @@
                 <div class="time__select select">
                 <span>
                     <span>Timeframe</span>
-            <select id="time-select" autofocus class="flagvisibility">
-                <option value="last30days" selected>Last 30 days</option>
-                <option value="previousMonth">Previous Month</option>
-                <option value="last6months">Last 6 Months</option>
-                <option value="yearToDate">Year to Date</option>
-                <option value="lastYearToDate">Last Year</option>
-                <option value="custom">Custom...</option>
-            </select>
+                        <select id="time-select" autofocus class="flagvisibility">
+                            <option value="last30days">Last 30 days</option>
+                            <option value="previousMonth">Previous Month</option>
+                            <option value="last6months" selected>Last 6 Months</option>
+                            <option value="yearToDate">Year to Date</option>
+                            <option value="previousYear">Last Year</option>
+                            <option value="custom">Custom...</option>
+                        </select>
                     </span>
                 </div>
 

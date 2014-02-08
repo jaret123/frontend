@@ -1991,6 +1991,25 @@ h1 {
   z-index: 10;
 }
 /* line 19, ../sass/components/_page-1.scss */
+#page-1 .legend .swatch.current {
+  background-color: white;
+  border: 1px solid gray;
+}
+/* line 24, ../sass/components/_page-1.scss */
+#page-1 .kpis__select {
+  clear: both;
+  overflow: hidden;
+  margin: 0;
+}
+/* line 28, ../sass/components/_page-1.scss */
+#page-1 .kpis__select > span {
+  float: right;
+}
+/* line 31, ../sass/components/_page-1.scss */
+#page-1 .kpis__select dl {
+  margin: 0 0 10px 0;
+}
+/* line 36, ../sass/components/_page-1.scss */
 #page-1 .container {
   width: 980px;
 }
@@ -2003,8 +2022,8 @@ h1 {
 #page-1 .container:after {
   clear: both;
 }
-/* line 23, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis {
+/* line 40, ../sass/components/_page-1.scss */
+#page-1 .container .kpis {
   position: relative;
   float: left;
   width: 66.66667%;
@@ -2018,27 +2037,8 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 25, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .legend .swatch.current {
-  background-color: white;
-  border: 1px solid gray;
-}
-/* line 29, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .kpis__select {
-  clear: both;
-  overflow: hidden;
-  margin: 0;
-}
-/* line 33, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .kpis__select > span {
-  float: right;
-}
-/* line 36, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .kpis__select dl {
-  margin: 0 0 10px 0;
-}
-/* line 41, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row {
+/* line 44, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row {
   padding-left: 0;
   padding-right: 0;
   clear: left;
@@ -2048,8 +2048,8 @@ h1 {
   padding-bottom: 10px;
   overflow: hidden;
 }
-/* line 49, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-1 {
+/* line 52, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-1 {
   float: left;
   width: 25%;
   margin-left: 0%;
@@ -2064,13 +2064,13 @@ h1 {
   text-align: center;
   font-weight: 300;
 }
-/* line 53, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-1 .icon {
+/* line 56, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-1 .icon {
   margin-top: 34px;
   font-size: 60px;
 }
-/* line 59, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-2 {
+/* line 62, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-2 {
   float: left;
   width: 50%;
   margin-left: 25%;
@@ -2083,8 +2083,8 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 62, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 {
+/* line 65, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 {
   float: left;
   width: 25%;
   margin-left: 75%;
@@ -2100,40 +2100,40 @@ h1 {
   height: 150px;
   position: relative;
 }
-/* line 67, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .unit {
+/* line 70, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .unit {
   text-transform: uppercase;
   font-weight: 300;
   font-size: .7em;
 }
-/* line 72, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .dollars {
+/* line 75, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .dollars {
   margin-top: 6px;
   font-size: 1.6em;
   letter-spacing: 1px;
   font-weight: 300;
 }
-/* line 77, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .dollars .dollar-sign {
+/* line 80, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .dollars .dollar-sign {
   font-size: .6em;
   vertical-align: top;
 }
-/* line 89, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .saved {
+/* line 92, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .saved {
   font-weight: 300;
   font-size: .8em;
   padding: 0 20px;
   line-height: 130%;
   margin-top: 0px;
 }
-/* line 96, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .percent {
+/* line 99, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .percent {
   font-weight: 300;
   font-size: 1.1em;
   margin-top: 8px;
 }
-/* line 101, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .border {
+/* line 104, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .border {
   height: 1px;
   border-top: 1px dashed gray;
   width: 60%;
@@ -2141,78 +2141,78 @@ h1 {
   margin-top: 2px;
   margin-bottom: -2px;
 }
-/* line 109, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .info {
+/* line 112, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .info {
   position: absolute;
   right: 5px;
   bottom: 5px;
 }
-/* line 113, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis .row .col-3 .info:hover {
+/* line 116, ../sass/components/_page-1.scss */
+#page-1 .container .kpis .row .col-3 .info:hover {
   color: #0087be;
 }
-/* line 123, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-overall .icon {
+/* line 124, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-overall .icon {
   color: #79bdb5;
 }
-/* line 124, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-overall .kpi-chart {
+/* line 125, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-overall .kpi-chart {
   background-color: #79bdb5;
 }
-/* line 125, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-overall .col-3 {
+/* line 126, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-overall .col-3 {
   border: 1px solid #79bdb5;
 }
-/* line 128, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-gallons .icon {
+/* line 129, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-gallons .icon {
   color: #77b8d5;
 }
-/* line 129, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-gallons .kpi-chart {
+/* line 130, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-gallons .kpi-chart {
   background-color: #77b8d5;
 }
-/* line 130, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-gallons .col-3 {
+/* line 131, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-gallons .col-3 {
   border: 1px solid #77b8d5;
 }
-/* line 133, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-efficiency .icon {
+/* line 134, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-efficiency .icon {
   color: #f47f48;
 }
-/* line 134, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-efficiency .kpi-chart {
+/* line 135, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-efficiency .kpi-chart {
   background-color: #f47f48;
 }
-/* line 135, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-efficiency .col-3 {
+/* line 136, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-efficiency .col-3 {
   border: 1px solid #f47f48;
 }
-/* line 138, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-labor .icon {
+/* line 139, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-labor .icon {
   color: #8cc63f;
 }
-/* line 139, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-labor .kpi-chart {
+/* line 140, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-labor .kpi-chart {
   background-color: #8cc63f;
 }
-/* line 140, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-labor .col-3 {
+/* line 141, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-labor .col-3 {
   border: 1px solid #8cc63f;
 }
-/* line 143, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-chemicals .icon {
+/* line 144, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-chemicals .icon {
   color: #fbb03b;
 }
-/* line 144, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-chemicals .kpi-chart {
+/* line 145, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-chemicals .kpi-chart {
   background-color: #fbb03b;
 }
-/* line 145, ../sass/components/_page-1.scss */
-#page-1 .container #kpis .kpis-chemicals .col-3 {
+/* line 146, ../sass/components/_page-1.scss */
+#page-1 .container .kpis-chemicals .col-3 {
   border: 1px solid #fbb03b;
 }
-/* line 149, ../sass/components/_page-1.scss */
-#page-1 .container #news {
+/* line 151, ../sass/components/_page-1.scss */
+#page-1 #news {
   float: left;
   width: 33.33333%;
   margin-left: 66.66667%;
@@ -2226,38 +2226,38 @@ h1 {
   word-wrap: break-word;
   margin-top: 22px;
 }
-/* line 152, ../sass/components/_page-1.scss */
-#page-1 .container #news h1 {
+/* line 154, ../sass/components/_page-1.scss */
+#page-1 #news h1 {
   margin-top: 10px;
   padding-left: 22px;
   margin-bottom: 10px;
 }
-/* line 157, ../sass/components/_page-1.scss */
-#page-1 .container #news h3 {
+/* line 159, ../sass/components/_page-1.scss */
+#page-1 #news h3 {
   color: #0087be;
   font-size: 14px;
   line-height: 18px;
   margin: 0px;
   font-weight: 400;
 }
-/* line 164, ../sass/components/_page-1.scss */
-#page-1 .container #news .news__news-item {
+/* line 166, ../sass/components/_page-1.scss */
+#page-1 #news .news__news-item {
   padding-left: 22px;
 }
-/* line 167, ../sass/components/_page-1.scss */
-#page-1 .container #news p {
+/* line 169, ../sass/components/_page-1.scss */
+#page-1 #news p {
   font-size: .75em;
   line-height: 1.25em;
   margin: 0px;
   margin-bottom: 4px;
 }
-/* line 173, ../sass/components/_page-1.scss */
-#page-1 .container #news .read-more {
+/* line 175, ../sass/components/_page-1.scss */
+#page-1 #news .read-more {
   font-color: #0087be;
   font-weight: bold;
 }
-/* line 177, ../sass/components/_page-1.scss */
-#page-1 .container #news .tags {
+/* line 179, ../sass/components/_page-1.scss */
+#page-1 #news .tags {
   margin-bottom: 1.7em;
   font-style: italic;
 }
