@@ -61,10 +61,11 @@ var chart = {
             })
             .y(function (d) {
                 var value = d["value"];
+                console.log(d);
                 if (value !== "") {
-                    return parseInt(y(value), 10); // value 1
+                    return y(parseInt(value, 10)); // value 1
                 }
-                return 0;
+                return y(parseInt(0, 10));
         //            return replaceNull(d["value"]);
             });
 
@@ -75,9 +76,9 @@ var chart = {
             .y(function (d) {
                 var value = d["value_xeros"];
                 if (value !== "") {
-                    return parseInt(y(value), 10); // value 1
+                    return y(parseInt(value, 10)); // value 1
                 }
-                return 0;
+                return y(0);
         //            return replaceNull(d["value_xeros"]);
             });
 
@@ -99,15 +100,15 @@ var chart = {
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
-            return 0;
-            return replaceNull(d["value"]);
+            return parseInt(0, 10);
+            //return replaceNull(d["value"]);
         });
         var extentB = d3.extent(data, function (d) {
             var value = d["value_xeros"];
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
-            return 0;
+            return parseInt(0, 10);
         //        return replaceNull(d["value_value"]);
         });
         var min = d3.min([extentA[0], extentB[0]]);
