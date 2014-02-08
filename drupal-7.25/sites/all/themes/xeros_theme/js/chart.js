@@ -36,12 +36,16 @@ var chart = {
         // setup the x-axis notation
         var xAxis = d3.svg.axis()
             .scale(x)
-            .ticks(d3.time.months, 2)
-            .tickFormat(d3.time.format("%b"))
+            .ticks(6)
+            //.ticks(d3.time.months, 2)
+            .tickFormat(d3.time.format("%b"), 2)
             .tickSize(0)
             .orient("bottom");
 
-
+        // If we are dealing with less than 3 months data, put days on the ticks
+        if ( data.length < 80 ) {
+            xAxis.tickFormat(d3.time.format("%b %d"), 2)
+        }
         //    .ticks(d3.time.days, 1)
 
         // use this based on chart date range
@@ -51,7 +55,7 @@ var chart = {
         var yAxis = d3.svg.axis()
             .scale(y)
             .tickSize(-width)
-            .ticks(8)
+            .ticks(6)
             .orient("left");
 
         // create the individual points for the line
@@ -61,7 +65,6 @@ var chart = {
             })
             .y(function (d) {
                 var value = d["value"];
-                console.log(d);
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
@@ -100,7 +103,7 @@ var chart = {
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
-            return parseInt(0, 10);
+            return 0;
             //return replaceNull(d["value"]);
         });
         var extentB = d3.extent(data, function (d) {
@@ -108,11 +111,15 @@ var chart = {
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
-            return parseInt(0, 10);
+            return 0;
         //        return replaceNull(d["value_value"]);
         });
         var min = d3.min([extentA[0], extentB[0]]);
-        var max = d3.max([extentA[1], extentB[1]]);
+        var max = d3.max([extentA[1], extentB[1], 500]); // Added 1000 to deal with no records found
+
+        var round = 1000;
+
+        max = round * (Math.ceil( max / round ) );
         y.domain([min, max]);
 
         // append the notation for x-axis to the DOM and position

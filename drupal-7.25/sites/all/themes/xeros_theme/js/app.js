@@ -6,7 +6,7 @@ var app = {
     apiUrl: "",
     machine: 1, // Initial machine when there is no hash
     metric: "cold_water", // Initial metric when there is no hash
-    dateRange: "last_30_day", // Initial date range
+    dateRange: "last30days", // Initial date range
     tpl: {}, // Our page template
     dataRefresh: 1,
     reportData: {},
