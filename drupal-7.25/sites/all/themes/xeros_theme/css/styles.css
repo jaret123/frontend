@@ -1711,30 +1711,31 @@ h1 {
   margin-right: auto;
   color: #0087be;
   margin-bottom: 20px;
+  min-height: 80px;
 }
-/* line 22, ../sass/components/_header.scss */
+/* line 23, ../sass/components/_header.scss */
 .header .block {
   margin-bottom: 0;
 }
-/* line 27, ../sass/components/_header.scss */
+/* line 28, ../sass/components/_header.scss */
 .header .header__logo {
   position: absolute;
   z-index: 10;
   top: 10px;
   margin-left: -12px;
 }
-/* line 32, ../sass/components/_header.scss */
+/* line 33, ../sass/components/_header.scss */
 .header .header__logo img {
   height: 76px;
   width: 184px;
 }
-/* line 37, ../sass/components/_header.scss */
+/* line 38, ../sass/components/_header.scss */
 .header .header__row-1 {
   position: relative;
   text-align: right;
   line-height: 2em;
 }
-/* line 42, ../sass/components/_header.scss */
+/* line 43, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu {
   display: inline-block;
   margin: 0;
@@ -1765,23 +1766,23 @@ h1 {
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
-/* line 45, ../sass/components/_header.scss */
+/* line 46, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu li {
   text-transform: uppercase;
   margin-left: 10px;
   font-size: 75%;
 }
-/* line 50, ../sass/components/_header.scss */
+/* line 51, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu a, .header .header__row-1 ul.menu a:hover, .header .header__row-1 ul.menu a:visited {
   color: #0087be;
   border: 0;
 }
-/* line 56, ../sass/components/_header.scss */
+/* line 57, ../sass/components/_header.scss */
 .header .header__row-2 {
   line-height: 2em;
   text-align: left;
 }
-/* line 59, ../sass/components/_header.scss */
+/* line 60, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu {
   display: inline-block;
   margin: 0;
@@ -1814,7 +1815,7 @@ h1 {
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
-/* line 64, ../sass/components/_header.scss */
+/* line 65, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li {
   text-transform: uppercase;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6bcaee), color-stop(100%, #0b7fb0));
@@ -1832,20 +1833,20 @@ h1 {
   color: #fff;
   font-size: 90%;
 }
-/* line 72, ../sass/components/_header.scss */
+/* line 73, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li.active {
   background: #0086bd;
 }
-/* line 76, ../sass/components/_header.scss */
+/* line 77, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li:hover {
   background: #0ea2e0;
 }
-/* line 79, ../sass/components/_header.scss */
+/* line 80, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li a {
   text-decoration: none;
   color: inherit;
 }
-/* line 86, ../sass/components/_header.scss */
+/* line 87, ../sass/components/_header.scss */
 .header .header__row-2 .header__welcome {
   color: gray;
   display: inline-block;

@@ -25,7 +25,14 @@
         <!--                      <li id="menu-dashboard" class="active">Dashboard</li>-->
         <!--                      <li id="menu-consumption">Consumption</li>-->
         <!--                  </ul>-->
-        <span class="header__welcome">Welcome Michael Hyatt</span>
+        <?php
+            if ( $user->uid > 0 ) {
+        ?>
+            <span class="header__welcome">Welcome <?php print $user->name ; ?></span>
+        <?php
+            }; // endif
+        ?>
+
     </div>
 </header>
 
