@@ -54,7 +54,8 @@
                         <div class="container">
                             <div id="machine" class="machine">
                                 <div class="icon-Washer"></div>
-                                {{this.name}}<br/>
+                                {{this.machine_name}}<br/>
+                                {{this.serial_number}}<br/>
                                 {{this.machine_id}}
                                 <div>
                                     <span class="caret-left-wrapper"> <span class="caret-left"></span> </span>

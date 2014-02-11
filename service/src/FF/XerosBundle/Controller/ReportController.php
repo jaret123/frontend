@@ -322,7 +322,7 @@ SQL;
         $data = array();
         $metrics = array();
 
-        $machinesSql = "select machine_id, manufacturer as name from xeros_machine"; // TODO: Refactor to filter to users machines
+        $machinesSql = "select machine_id, manufacturer as name, serial_number, size, fuel_type from xeros_machine"; // TODO: Refactor to filter to users machines
 
         $classificiationSql = <<<classificationSQL
 select
