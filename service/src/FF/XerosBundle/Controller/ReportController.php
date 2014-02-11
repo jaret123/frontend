@@ -39,11 +39,9 @@ class ReportController extends Controller {
 
             switch ($reportName) {
                 case "kpis":
-
                     $ar = $this->reportKPIs($filters);
                     break;
                 case "consumption":
-
                     $ar = $this->reportConsumption($filters);
                     break;
                 case "consumptionDetails":
@@ -113,8 +111,7 @@ select
 	coalesce(b.value, "") as value,
 	coalesce(b.value_xeros, "") as value_xeros,
 	coalesce(b.cost, "") as cost,
-	coalesce(b.cost_xeros, "") as cost_xeros,
-	coalesce(b.savings, "") as savings
+	coalesce(b.cost_xeros, "") as cost_xeros
 from
 	(
 	select
@@ -160,7 +157,16 @@ where
 order by
 	b.date
 SQL;
-
+        array_push($metrics, array(
+                                  "name" => "total",
+                                  "meta" => array( "title" => "Total Savings", "label" => "Overall Expense", "icon" => "Globe", "cssClass" => "overall"),
+                                  "query" => <<<METRIC
+   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as value,
+   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as value_xeros,
+   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as cost,
+   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as cost_xeros
+METRIC
+                             ));
 
         array_push($metrics, array(
             "name" => "cold-water",
@@ -169,13 +175,7 @@ SQL;
    		truncate(sum(xc.cycle_cold_water_volume), 0) as value,
    		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as value_xeros,
    		truncate(sum(xc.cycle_cold_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost), 0) as cost_xeros,
-   		truncate(
-   		    100 * (
-   		           ( sum(xc.cycle_cold_water_cost) - sum(xc.cycle_cold_water_xeros_cost) )
-   		             / sum(xc.cycle_cold_water_cost)
-   		           )
-   		           , 0) as savings
+   		truncate(sum(xc.cycle_cold_water_xeros_cost), 0) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
@@ -183,15 +183,9 @@ METRIC
             "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
    		truncate(sum(xc.cycle_hot_water_volume), 0) as value,
-   		truncate(sum(xc.cycle_hot_water_volume), 0) as value_xeros,
+   		truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as value_xeros,
    		truncate(sum(xc.cycle_hot_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_hot_water_xeros_cost), 0) as cost_xeros,
-   		truncate(
-   		   		100 * (
-   		   		    ( sum(xc.cycle_hot_water_cost) - sum(xc.cycle_hot_water_xeros_cost) )
-   		   		    / sum(xc.cycle_hot_water_cost)
-   		   		    )
-   		   		    , 0) as savings
+   		truncate(sum(xc.cycle_hot_water_xeros_cost), 0) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
@@ -201,13 +195,7 @@ METRIC
    		truncate(sum(xc.cycle_time_total_time), 0) as value,
    		truncate(sum(xc.cycle_time_xeros_total_time), 0) as value_xeros,
    		truncate(sum(xc.cycle_time_labor_cost), 0) as cost,
-   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as cost_xeros,
-   		truncate(
-   		        100 * (
-   		            (  sum(xc.cycle_time_labor_cost) - sum(xc.cycle_time_xeros_labor_cost) )
-   		            / sum(xc.cycle_time_labor_cost)
-   		            )
-   		            , 0) as savings
+   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
@@ -217,13 +205,7 @@ METRIC
    		truncate(sum(xc.cycle_chemical_strength), 0) as value,
    		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as value_xeros,
    		truncate(sum(xc.cycle_chemical_cost), 0) as cost,
-   		truncate(sum(xc.cycle_chemical_xeros_cost), 0) as cost_xeros,
-   	    truncate(
-   	            100 * (
-   	            (  sum(xc.cycle_chemical_cost) - sum(xc.cycle_chemical_xeros_cost) )
-   	             / sum(xc.cycle_chemical_cost)
-   	             )
-   	             , 0) as savings
+   		truncate(sum(xc.cycle_chemical_xeros_cost), 0) as cost_xeros
 METRIC
         ));
 
@@ -294,7 +276,7 @@ FROM
        sum(cycle_cold_water_volume)       AS cold_water_delta_volume,
 
        sum(cycle_hot_water_volume)        AS hot_water_volume,
-       sum(cycle_hot_water_volume)        AS hot_water_xeros_volume,
+       sum(cycle_hot_water_xeros_volume)        AS hot_water_xeros_volume,
        (sum(cycle_hot_water_volume) - sum(cycle_hot_water_xeros_volume)) /
        sum(cycle_hot_water_volume)       AS hot_water_delta_volume,
 

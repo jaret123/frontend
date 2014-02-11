@@ -9,8 +9,13 @@ var view = {
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
         app.reportData = app.data;
-        draw(); // This does the html template draw
 
+        for ( i in app.reportData.data ) {
+            s = app.reportData.data[i].summaryData;
+            app.reportData.data[i].summaryData.savings = Math.round( (100 * (parseInt(s.cost, 10) - parseInt(s.cost_xeros, 10)) / parseInt(s.cost, 10) ), 0);
+        }
+
+        draw(); // This does the html template draw
         self.drawCharts();
         self.bindNav();
     },
@@ -38,7 +43,6 @@ var view = {
             chart.data = app.data.data[i];
             chart.drawKPI();
         }
-
     },
     showNews: function() {
       var self = this;
