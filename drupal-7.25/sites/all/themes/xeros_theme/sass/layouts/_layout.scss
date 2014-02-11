@@ -6,6 +6,9 @@
  * right breakpoints to use for your site depend on your content.
  */
 
+html {
+  padding-bottom: 210px; // Space for footer
+}
 .centered, .device-layout {
   //@include zen-grid-background();
   padding: {
