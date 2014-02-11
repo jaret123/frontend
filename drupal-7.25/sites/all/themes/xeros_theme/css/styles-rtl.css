@@ -8,9 +8,10 @@ h1 {
   font-weight: 100;
 }
 
-/* line 121, ../sass/_init.scss */
+/* line 124, ../sass/_init.scss */
 html {
   color: gray;
+  font-weight: 300;
 }
 
 /* HTML element (SMACSS base) rules */

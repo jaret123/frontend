@@ -104,8 +104,11 @@ $indent-amount: 30px;
 $nav-height: 3em;
 
 // Tab styling.
-$tabs-container-bg: #fff;
-$tabs-border: #bbb;
+$tabs-container-bg: #6bcaee;
+$tabs-border: rgb(0,135,190);
+$tabs-color: white;
+$tabs-background-color: rgb(0,135,190);
+$tabs-background-color-active: #6bcaee;
 
 $header-background-color: rgb(211,239,252);
 
@@ -120,9 +123,11 @@ $chart-color-5: rgb(251,176,59);
 
 html {
   color: $font-color;
+  font-weight: 300;
 }
 
-
+$navbutton-highlight: #6bcaee;
+$navbutton-base: #0b7fb0;
 
 // =============================================================================
 // Partials to be shared with all .scss files.
