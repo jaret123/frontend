@@ -45,9 +45,9 @@
                 </div>
 
                 <div id="page-container" class="template-container">
-                    <div id="spinner"></div>
 
                 </div>
+                <div id="spinner"></div>
                     <script id="page-tpl" type="text/x-handlebars-template">
 
                         <div class="line"></div>

@@ -2376,8 +2376,10 @@ h1 {
 /* line 35, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .consumption__grid-container {
   margin-top: 20px;
+  position: relative;
+  min-height: 400px;
 }
-/* line 39, ../sass/components/_page-2.scss */
+/* line 41, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row {
   overflow: hidden;
   border-top: 1px dashed gray;
@@ -2388,44 +2390,44 @@ h1 {
   height: 75px;
   clear: left;
 }
-/* line 49, ../sass/components/_page-2.scss */
+/* line 51, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .link {
   cursor: pointer;
 }
-/* line 52, ../sass/components/_page-2.scss */
+/* line 54, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .link:hover {
   opacity: 0.8;
 }
-/* line 56, ../sass/components/_page-2.scss */
+/* line 58, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col {
   position: absolute;
   bottom: 20px;
 }
-/* line 60, ../sass/components/_page-2.scss */
+/* line 62, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first {
   padding-top: 10px;
   padding-bottom: 10px;
   height: 50px;
 }
-/* line 64, ../sass/components/_page-2.scss */
+/* line 66, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label, #page-2 .consumption-container .row.first .sub-label {
   text-align: center;
 }
-/* line 67, ../sass/components/_page-2.scss */
+/* line 69, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label {
   font-weight: 400;
 }
-/* line 70, ../sass/components/_page-2.scss */
+/* line 72, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .sub-label {
   font-weight: 100;
   font-size: .83em;
   line-height: 1em;
 }
-/* line 76, ../sass/components/_page-2.scss */
+/* line 78, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.last {
   border-bottom: 1px dashed gray;
 }
-/* line 79, ../sass/components/_page-2.scss */
+/* line 81, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 {
   float: left;
   width: 16.66667%;
@@ -2440,24 +2442,24 @@ h1 {
   word-wrap: break-word;
   font-weight: 400;
 }
-/* line 84, ../sass/components/_page-2.scss */
+/* line 86, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-Washer {
   color: gray;
   font-size: 80px;
   display: inline-block;
 }
-/* line 89, ../sass/components/_page-2.scss */
+/* line 91, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .machine-label {
   display: inline-block;
   font-size: 0.8em;
   line-height: 1.5em;
 }
-/* line 94, ../sass/components/_page-2.scss */
+/* line 96, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 a:hover, #page-2 .consumption-container .row .col-1 a:hover .icon-Washer {
   color: #0087be;
   border-bottom: 0px solid white;
 }
-/* line 99, ../sass/components/_page-2.scss */
+/* line 101, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 {
   float: left;
   width: 16.66667%;
@@ -2471,7 +2473,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 102, ../sass/components/_page-2.scss */
+/* line 104, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-3 {
   float: left;
   width: 16.66667%;
@@ -2485,7 +2487,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 105, ../sass/components/_page-2.scss */
+/* line 107, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 {
   float: left;
   width: 16.66667%;
@@ -2499,7 +2501,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 108, ../sass/components/_page-2.scss */
+/* line 110, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 {
   float: left;
   width: 16.66667%;
@@ -2513,7 +2515,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 111, ../sass/components/_page-2.scss */
+/* line 113, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 {
   float: left;
   width: 16.66667%;
@@ -2527,7 +2529,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 116, ../sass/components/_page-2.scss */
+/* line 118, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart, #page-2 .consumption-container .row .col-6 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -2538,7 +2540,7 @@ h1 {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 122, ../sass/components/_page-2.scss */
+/* line 124, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels, #page-2 .consumption-container .row .col-6 .labels {
   position: relative;
   display: inline-block;
@@ -2546,35 +2548,35 @@ h1 {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 131, ../sass/components/_page-2.scss */
+/* line 133, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential, #page-2 .consumption-container .row .col-6 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 139, ../sass/components/_page-2.scss */
+/* line 141, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 img {
   display: inline-block;
 }
-/* line 142, ../sass/components/_page-2.scss */
+/* line 144, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 145, ../sass/components/_page-2.scss */
+/* line 147, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 150, ../sass/components/_page-2.scss */
+/* line 152, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 159, ../sass/components/_page-2.scss */
+/* line 161, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -2582,13 +2584,13 @@ h1 {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 163, ../sass/components/_page-2.scss */
+/* line 165, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 168, ../sass/components/_page-2.scss */
+/* line 170, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 .labels .potential {
   color: #0087be;
   margin-left: -37px;
@@ -2604,152 +2606,149 @@ h1 {
   margin-right: auto;
 }
 /* line 13, ../sass/components/_page-3.scss */
-#page-3 #spinner {
-  height: 300px;
-}
-/* line 17, ../sass/components/_page-3.scss */
 #page-3.active {
   z-index: 10;
 }
-/* line 20, ../sass/components/_page-3.scss */
+/* line 16, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container {
   position: relative;
   overflow: hidden;
+  min-height: 400px;
 }
-/* line 23, ../sass/components/_page-3.scss */
+/* line 20, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .select {
   display: inline-block;
 }
-/* line 28, ../sass/components/_page-3.scss */
+/* line 25, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .report__select {
   margin-left: 500px;
 }
-/* line 31, ../sass/components/_page-3.scss */
+/* line 28, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .line {
   margin-top: 10px;
   margin-bottom: 0px;
   border-top: 1px dashed gray;
 }
-/* line 36, ../sass/components/_page-3.scss */
+/* line 33, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container {
   margin-top: 25px;
 }
-/* line 39, ../sass/components/_page-3.scss */
+/* line 36, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .section-wrapper.show {
   display: block;
 }
-/* line 46, ../sass/components/_page-3.scss */
+/* line 43, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine {
   position: absolute;
   text-align: center;
 }
-/* line 49, ../sass/components/_page-3.scss */
+/* line 46, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine .icon-Washer {
   font-size: 80px;
 }
-/* line 55, ../sass/components/_page-3.scss */
+/* line 52, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row {
   overflow: hidden;
   margin-top: 10px;
   margin-left: 150px;
 }
-/* line 59, ../sass/components/_page-3.scss */
+/* line 56, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-title.first {
   margin-top: 0px;
 }
-/* line 62, ../sass/components/_page-3.scss */
+/* line 59, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-data.first {
   border-bottom: 1px dashed gray;
   margin-bottom: 35px;
 }
-/* line 66, ../sass/components/_page-3.scss */
+/* line 63, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .title {
   font-size: 20px;
   color: #444;
   font-weight: 400;
 }
-/* line 72, ../sass/components/_page-3.scss */
+/* line 69, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top, #page-3 .consumption-details-container .container .row .bottom {
   height: 72px;
   text-align: center;
   vertical-align: middle;
 }
-/* line 77, ../sass/components/_page-3.scss */
+/* line 74, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top {
   border: 1px solid gray;
   border-bottom: none;
 }
-/* line 81, ../sass/components/_page-3.scss */
+/* line 78, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .bottom {
   border-color: #0087be;
   background-color: #0087be;
   color: white;
 }
-/* line 87, ../sass/components/_page-3.scss */
+/* line 84, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .label {
   font-size: .7em;
   font-weight: 300;
 }
-/* line 91, ../sass/components/_page-3.scss */
+/* line 88, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .value {
   font-size: 1.8em;
   font-weight: 300;
 }
-/* line 95, ../sass/components/_page-3.scss */
+/* line 92, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top .value {
   padding-top: 5px;
 }
-/* line 100, ../sass/components/_page-3.scss */
+/* line 97, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .box {
   display: inline-block;
   margin-left: 27.9px;
 }
-/* line 104, ../sass/components/_page-3.scss */
+/* line 101, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-1 {
   width: 90px;
   margin-left: 0px;
 }
-/* line 108, ../sass/components/_page-3.scss */
+/* line 105, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-2 {
   width: 90px;
 }
-/* line 111, ../sass/components/_page-3.scss */
+/* line 108, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-3 {
   width: 135px;
 }
-/* line 114, ../sass/components/_page-3.scss */
+/* line 111, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-4 {
   width: 180px;
 }
-/* line 118, ../sass/components/_page-3.scss */
+/* line 115, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 {
   width: 15px;
   margin-left: 20.4px;
 }
-/* line 121, ../sass/components/_page-3.scss */
+/* line 118, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .top, #page-3 .consumption-details-container .container .row .col-5 .bottom {
   background-color: white;
   border-color: white;
 }
-/* line 126, ../sass/components/_page-3.scss */
+/* line 123, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .bottom {
   color: #0087be;
 }
-/* line 131, ../sass/components/_page-3.scss */
+/* line 128, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 {
   width: 180px;
   margin-left: 20.4px;
 }
-/* line 134, ../sass/components/_page-3.scss */
+/* line 131, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top {
   background-color: #0087be;
   color: white;
 }
-/* line 138, ../sass/components/_page-3.scss */
+/* line 135, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top, #page-3 .consumption-details-container .container .row .col-6 .bottom {
   border-color: #0087be;
 }
-/* line 149, ../sass/components/_page-3.scss */
+/* line 146, ../sass/components/_page-3.scss */
 #page-3 .legend .swatch.current {
   background-color: white;
   border: 1px solid gray;

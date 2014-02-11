@@ -10,16 +10,13 @@
   $col-gutter: (.31 * $col-width);
   $row-height: .8 * $col-width;
 
-  #spinner {
-    height: 300px;
-
-  }
   &.active {
     z-index: 10;
   }
   .consumption-details-container {
     position: relative;
     overflow: hidden;
+    min-height: 400px;
     .select {
       display: inline-block;
       //margin-top: 45px;

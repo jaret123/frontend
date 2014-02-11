@@ -1,14 +1,14 @@
 var controls = {
     showSpinner: function () {
         var opts = {
-            lines: 15, // The number of lines to draw
-            length: 32, // The length of each line
-            width: 10, // The line thickness
-            radius: 30, // The radius of the inner circle
+            lines: 10, // The number of lines to draw
+            length: 20, // The length of each line
+            width: 4, // The line thickness
+            radius: 10, // The radius of the inner circle
             corners: 1, // Corner roundness (0..1)
             rotate: 30, // The rotation offset
             direction: 1, // 1: clockwise, -1: counterclockwise
-            color: '#000', // #rgb or #rrggbb or array of colors
+            color: ['#77B8D5', '#0B7FB0'], // #rgb or #rrggbb or array of colors
             speed: 0.7, // Rounds per second
             trail: 93, // Afterglow percentage
             shadow: false, // Whether to render a shadow
