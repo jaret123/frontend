@@ -16,8 +16,14 @@
     > div {
       display: inline-block;
     }
+    a {
+      @include single-transition(color, .3s, ease, 0);
+      text-decoration: none;
+      color: white;
+    }
 	a:hover {
 		border:0;
+      color: #00A5E2;
 	}
     .footer__logo {
       position: absolute;
@@ -27,9 +33,6 @@
       margin-left: 70px;
       height: 100px;
       vertical-align: top;
-      a {
-        color: white;
-      }
     }
     .footer__middle {
       margin-left: 40px;
@@ -38,14 +41,20 @@
     .footer__right {
       float: right;
       color: white;
+    }
+      [class^="icon-"] {
+        font-size: 30px;
+      }
+      .icon-Twitter{
+        text-decoration: none;
+        color: white; }
+        .icon-Facebook {
+          text-decoration: none;
+          color: white; }
+        .icon-LinkedIn {
+          text-decoration: none;
+          color: white; }
 
-    [class^="icon-"] {
-      font-size: 30px;
-    }
-    .icon-Twitter{  }
-      .icon-Facebook{  }
-      .icon-LinkedIn{  }
-    }
   }
 
 }

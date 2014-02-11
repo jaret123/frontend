@@ -34,6 +34,10 @@
   }
 
   .container {
+    .template-container {
+      @include single-transition(height, .3s, ease, 0);
+      min-height: 600px;
+    }
     width: 980px;
     @include zen-grid-container();
 
@@ -147,13 +151,39 @@
       }
   }
 
-
-    #news {
+    .news {
       @include zen-grid-item(4,9);
       margin-top: 22px;
+      padding-left: 30px;
+      .view-all {
+        position: absolute;
+        right: 0px;
+        top: 20px;
+
+          text-decoration: none;
+          color: inherit;
+        font-weight: 300;
+        &:hover {
+          color: #00A5E2;
+        }
+      }
+      position: relative;
+      article {
+        position: relative;
+        min-height: 180px;
+      }
+      p {
+        display: inline-block;
+        width: 60%;
+      }
+      img {
+        float: right;
+      }
+      h3 {
+        /* max-width: 100px; */
+      }
       h1 {
         margin-top: 10px;
-        padding-left: 22px;
         margin-bottom: 10px;
       }
       h3 {

@@ -40,6 +40,10 @@ var view = {
         }
 
     },
+    showNews: function() {
+      var self = this;
+
+    },
     initialize : function() {
         // Do any initialization unique to this view.
     },

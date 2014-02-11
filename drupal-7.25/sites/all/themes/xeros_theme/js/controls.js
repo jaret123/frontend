@@ -15,11 +15,15 @@ var controls = {
             hwaccel: true, // Whether to use hardware acceleration
             className: 'spinner', // The CSS class to assign to the spinner
             zIndex: 2e9, // The z-index (defaults to 2000000000)
-            top: 'auto', // Top position relative to parent in px
-            left: 'auto' // Left position relative to parent in px
+//            top: 'auto', // Top position relative to parent in px
+//            left: 'auto' // Left position relative to parent in px
         };
         var target = document.getElementById('spinner');
         var spinner = new Spinner(opts).spin(target);
+    },
+    hideSpinner: function () {
+        var target = document.getElementById('spinner');
+        jQuery(target).hide();
     },
     createDropDown: function (selector, callback) {
         var source = jQuery(selector);

@@ -204,6 +204,7 @@ var app = {
 
     // This is going to be passed as a function to the view
     showReport: function () {
+        controls.hideSpinner();
         var html = app.tpl(app.reportData);
         jQuery('.template-container').html(html);
         controls.createMachineNav();

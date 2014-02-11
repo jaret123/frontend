@@ -79,20 +79,20 @@
             <img src="/sites/all/themes/xeros_theme/images/xeros_logo.png"/>
         </div>
         <div class="footer__left">
-            <a href="#">BACK TO XEROS WEBSITE</a>
+            <a href="www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>
         </div>
 
         <div class="footer__middle">
-            CONTACT US<br/>
-            000.000.0000<br/>
-            someone@xeroscleaning.com<br/>
+            <a href="http://www.xeroscleaning.com/contact-us/">CONTACT US</a><br/>
+            <phone>1-855-XEROS NA (1-855-937-6762)</phone><br/>
+            <a href="mailto:Jonathan.benjamin@xeroscleaning.com">Jonathan.benjamin@xeroscleaning.com</a><br/>
         </div>
 
         <div class="footer__right">
             CONNECT<br/>
-            <span class="icon-Twitter"></span>
-            <span class="icon-Facebook"></span>
-            <span class="icon-LinkedIn"></span>
+            <a href="https://twitter.com/XerosLtd" title="" class="icon-Twitter"></a>
+            <a href="http://www.facebook.com/pages/Xeros-Ltd/278750025534402" title="" class="icon-Facebook"></a>
+            <a href="http://www.linkedin.com/company/2695466?trk=tyah" title="" class="icon-LinkedIn"></a>
         </div>
 
     </div>
