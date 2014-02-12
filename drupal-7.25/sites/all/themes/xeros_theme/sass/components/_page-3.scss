@@ -30,7 +30,16 @@
       margin-bottom: 0px;
       border-top: 1px dashed $font-color;
     }
+    .template-container {
+      @include single-transition(opacity, .3s, ease-in, 0);
+      &.fade {
+        opacity: .5;
+      }
+    }
     .container{
+
+
+
       .section-wrapper {
 //        display:none;
         &.show {

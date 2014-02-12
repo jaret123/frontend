@@ -36,7 +36,11 @@
   .container {
     .template-container {
       @include single-transition(height, .3s, ease, 0);
+      @include single-transition(opacity, .3s, ease-in, 0);
       min-height: 600px;
+      &.fade {
+        opacity: .5;
+      }
     }
     width: 980px;
     @include zen-grid-container();

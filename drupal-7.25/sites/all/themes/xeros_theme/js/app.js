@@ -212,11 +212,11 @@ var app = {
     showReport: function () {
         controls.hideSpinner();
         var html = app.tpl(app.reportData);
-        jQuery('.template-container').html(html).css("opacity", 1);
+        jQuery('.template-container').html(html).removeClass("fade");
         controls.createMachineNav();
     },
     fadeReport: function () {
-        jQuery('.template-container').css("opacity", .5);
+        jQuery('.template-container').addClass("fade");
         jQuery('#spinner').show();
     },
     getData: function () {
