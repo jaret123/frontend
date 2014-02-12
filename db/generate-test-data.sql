@@ -1,9 +1,13 @@
 -- Create syntax for 'generateData'
-
+/* 
+  call generateData;
+  select count(*) from `xeros_dai_meter_actual`
+*/
+DROP PROCEDURE IF EXISTS generateData ;
 DELIMITER ;;
-CREATE DEFINER=`xeros`@`%` PROCEDURE `generateData`()
+CREATE PROCEDURE `generateData`()
 BEGIN 
-	DECLARE rundate datetime;
+	DECLARE rundate, tday datetime;
 	DECLARE count, tempclass, m_id, intv int;
 	DECLARE savings double;
 
@@ -13,11 +17,12 @@ BEGIN
 	SET intv = 1;
 	SET tempclass = 1 + rand()*9;
 
-	SET rundate = '2013-01-01 06:00:00';
+	SET tday = curdate();
+	SET rundate = tday - interval 1 year;
 
-
-	WHILE rundate<'2013-01-08 00:00:00' DO		
-			INSERT INTO xeros_dai_meter_actual_test (reading_timestamp, 
+	TRUNCATE xeros_dai_meter_actual;
+	WHILE rundate < tday DO		
+			INSERT INTO xeros_dai_meter_actual (reading_timestamp, 
 				active_dai_id, classification_id, hot_water, cold_water, run_time, machine_id)
 			VALUES(
 				rundate,

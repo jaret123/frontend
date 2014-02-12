@@ -199,7 +199,8 @@ var app = {
         // if dataRefresh equals 1, then go to the web service again and get new data
         if ( app.dataRefresh == 1 ) {
             self.setApiUrl();
-            controls.showSpinner();
+            //controls.showSpinner();
+            app.fadeReport();
             app.getData();
         } else {
             view.parseData(self.showReport);
@@ -211,10 +212,13 @@ var app = {
     showReport: function () {
         controls.hideSpinner();
         var html = app.tpl(app.reportData);
-        jQuery('.template-container').html(html);
+        jQuery('.template-container').html(html).css("opacity", 1);
         controls.createMachineNav();
     },
-
+    fadeReport: function () {
+        jQuery('.template-container').css("opacity", .5);
+        jQuery('#spinner').show();
+    },
     getData: function () {
         var self = this;
         // Get the data then go to routing
@@ -237,6 +241,7 @@ var app = {
         var self = this;
 
         controls.showSpinner();
+        //self.hideReport();
         // Do the things that have no dependencies
         self.createDateRanges();
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
