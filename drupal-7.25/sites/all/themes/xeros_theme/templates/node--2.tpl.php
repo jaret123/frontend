@@ -114,7 +114,7 @@
 
 <script>
     var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';
-    var dateRange = 'last6months';
+    var dateRange = 'last30days';
 </script>
 
 
