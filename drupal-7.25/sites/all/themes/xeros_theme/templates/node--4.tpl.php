@@ -77,44 +77,44 @@
                                         <div class="box col-1">
                                             <div class="top">
                                                 <div class="label">{{data.0.value_one_label}}</div>
-                                                <div class="value">{{data.0.value_one}}</div>
+                                                <div class="value">{{isBlank data.0.value_one}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{data.0.xeros_value_one}}</div>
+                                                <div class="value">{{isBlank data.0.xeros_value_one}}</div>
                                             </div>
                                         </div>
 
                                         <div class="box col-2">
                                             <div class="top">
                                                 <div class="label">{{data.0.value_two_label}}</div>
-                                                <div class="value">{{data.0.value_two}}</div>
+                                                <div class="value">{{isBlank data.0.value_two}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{data.0.xeros_value_two}}</div>
+                                                <div class="value">{{isBlank data.0.xeros_value_two}}</div>
                                             </div>
                                         </div>
 
                                         <div class="box col-3">
                                             <div class="top">
                                                 <div class="label">{{data.0.value_three_label}}</div>
-                                                <div class="value">{{data.0.value_three}}</div>
+                                                <div class="value">{{isBlank data.0.value_three}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{data.0.xeros_value_three}}</div>
+                                                <div class="value">{{isBlank data.0.xeros_value_three}}</div>
                                             </div>
                                         </div>
 
                                         <div class="box col-4">
                                             <div class="top">
                                                 <div class="label">{{data.0.value_four_label}}</div>
-                                                <div class="value">{{data.0.value_four}}</div>
+                                                <div class="value">{{isBlank data.0.value_four}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{data.0.xeros_value_four}}</div>
+                                                <div class="value">{{isBlank data.0.xeros_value_four}}</div>
                                             </div>
                                         </div>
 
@@ -131,11 +131,11 @@
                                         <div class="box col-6">
                                             <div class="blue top">
                                                 <div class="label">{{data.0.delta_one_label}}</div>
-                                                <div class="value">{{data.0.delta_one}}%</div>
+                                                <div class="value">{{isBlank data.0.delta_one}}% </div>
                                             </div>
                                             <div class="blue bottom">
                                                 <div class="label">Cost Reduction</div>
-                                                <div class="value">{{data.0.delta_two}}</div>
+                                                <div class="value">{{isBlank data.0.delta_two}} &nbsp;</div>
                                             </div>
                                         </div>
                                     </div>

@@ -240,6 +240,15 @@ var app = {
     initialize: function () {
         var self = this;
 
+        // Sometimes the summary data comes back empty when we don't have readings yet.
+        Handlebars.registerHelper("isBlank", function(value) {
+            if ( typeof(value) === "undefined" )  {
+            return 0
+            } else {
+            return value;
+            };
+        });
+
         controls.showSpinner();
         //self.hideReport();
         // Do the things that have no dependencies

@@ -37,16 +37,6 @@
 
                 </div>
                 <div id="spinner"></div>
-                <script>
-                    // Sometimes the summary data comes back empty when we don't have readings yet.
-                    Handlebars.registerHelper("isBlank", function(value) {
-                        if ( typeof(value) === "undefined" )  {
-                            return 0
-                        } else {
-                            return value;
-                        };
-                    });
-                </script>
                 <script id="page-tpl" type="text/x-handlebars-template">
                     {{#data}}
                     <div class="kpis-{{meta.cssClass}} row">
