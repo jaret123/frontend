@@ -10,6 +10,19 @@ var view = {
 
         app.reportData = app.data;
 
+        app.reportData.data[0].summaryData.cost = 0;
+        app.reportData.data[0].summaryData.cost_xeros = 0;
+        app.reportData.data[0].summaryData.value = 0;
+        app.reportData.data[0].summaryData.value_xeros = 0;
+
+        for (var i = 1; i < 4; i++) {
+            app.reportData.data[0].summaryData.cost += parseInt(app.reportData.data[i].summaryData.cost, 10) ;
+            app.reportData.data[0].summaryData.cost_xeros += parseInt(app.reportData.data[i].summaryData.cost_xeros, 10);
+            app.reportData.data[0].summaryData.value += parseInt(app.reportData.data[i].summaryData.value, 10) ;
+            app.reportData.data[0].summaryData.value_xeros += parseInt(app.reportData.data[i].summaryData.value_xeros, 10) ;
+        }
+
+
         for ( i in app.reportData.data ) {
             s = app.reportData.data[i].summaryData;
             app.reportData.data[i].summaryData.savings = Math.round( (100 * (parseInt(s.cost, 10) - parseInt(s.cost_xeros, 10)) / parseInt(s.cost, 10) ), 0);
