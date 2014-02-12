@@ -64,7 +64,7 @@ var chart = {
                 return x(parseDate(d["date"]));// date
             })
             .y(function (d) {
-                var value = d["value"];
+                var value = d["cost"];
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
@@ -77,7 +77,7 @@ var chart = {
                 return x(parseDate(d["date"]));// date
             })
             .y(function (d) {
-                var value = d["value_xeros"];
+                var value = d["cost_xeros"];
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
@@ -99,7 +99,7 @@ var chart = {
             return parseDate(d["date"]); // date
         }));
         var extentA = d3.extent(data, function (d) {
-            var value = d["value"];
+            var value = d["cost"];
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
@@ -107,7 +107,7 @@ var chart = {
             //return replaceNull(d["value"]);
         });
         var extentB = d3.extent(data, function (d) {
-            var value = d["value_xeros"];
+            var value = d["cost_xeros"];
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
@@ -115,9 +115,9 @@ var chart = {
         //        return replaceNull(d["value_value"]);
         });
         var min = d3.min([extentA[0], extentB[0]]);
-        var max = d3.max([extentA[1], extentB[1], 500]); // Added 1000 to deal with no records found
+        var max = d3.max([extentA[1], extentB[1], 100]); // Added 1000 to deal with no records found
 
-        var round = 1000;
+        var round = 100;
 
         max = round * (Math.ceil( max / round ) );
         y.domain([min, max]);
