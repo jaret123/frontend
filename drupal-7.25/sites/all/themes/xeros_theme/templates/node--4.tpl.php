@@ -134,7 +134,7 @@
                                                 <div class="value">{{data.0.delta_one}}%</div>
                                             </div>
                                             <div class="blue bottom">
-                                                <div class="label">{{data.0.delta_two_label}}</div>
+                                                <div class="label">Cost Reduction</div>
                                                 <div class="value">{{data.0.delta_two}}</div>
                                             </div>
                                         </div>
