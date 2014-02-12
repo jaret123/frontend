@@ -82,7 +82,43 @@ class ReportController extends Controller {
 
             // If it does, then return user array
             if ( $user[0]['uid'] >= 0 ) {
+                // Get the user company_id and location_id
+
                 $userRole = array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+
+                $sql = <<<SQL
+                    select u.uid, u.name, u.mail, fc.field_company_target_id as company_id
+                    from
+                        users as u
+                        left join field_data_field_company as fc
+                             on u.uid = fc.entity_id
+                        left join node as n
+                             on fc.field_company_target_id = n.nid
+                    where u.uid = :uid
+SQL;
+                $sqlParsed = $this->replaceFilters($sql, array("uid" => $user[0]['uid']));
+                $userData = $conn->fetchAll($sqlParsed);
+                // TODO : Check to make sure user had a company id
+                $userRole["company_id"] = $userData[0]["company_id"];
+
+                // Get machines associated with the company
+
+                $sql = <<<SQL
+
+                select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                        xeros_machine as xm
+                        left join field_data_field_company as fc
+                          on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                        left join field_data_field_location as fl
+                          on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                where fc.field_company_target_id = :company_id
+SQL;
+                $sqlParsed = $this->replaceFilters($sql, array("company_id" => $userRole["company_id"]));
+                $machineData = $conn->fetchAll($sqlParsed);
+                // TODO : More error checking on this
+                foreach ( $machineData as $record ) {
+                    $userRole["machine_ids"][] = $record["machine_id"];
+                }
             } else {
                 // Access denied
                 // Do nothing

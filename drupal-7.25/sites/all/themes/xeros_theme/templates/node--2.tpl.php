@@ -28,7 +28,7 @@
                             <option value="last6months" selected>Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-                            <option value="custom">Custom...</option>
+<!--                            <option value="custom">Custom...</option>-->
                         </select>
                     </span>
                 </div>

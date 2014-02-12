@@ -27,7 +27,7 @@
                             <option value="last6months" selected>Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-                            <option value="custom">Custom...</option>
+<!--                            <option value="custom">Custom...</option>-->
                         </select>
                     </span>
                 </div>
@@ -120,33 +120,10 @@
         </div>
     </div>
 </div>
-    <!--<script>-->
-    <!--    // Refactor to the view-->
-    <!--    var reports = [-->
-    <!--        {-->
-    <!--            rid: 1,-->
-    <!--            apiUrl: '/api/report/consumption/2013-11-10/2013-12-20.json',-->
-    <!--            template: "consumption",-->
-    <!--            callback: "consumptionCallback"-->
-    <!--        }-->
-    <!--    ];-->
-    <!---->
-
-    <!--    jQuery(document).ready(function () {-->
-    <!--        console.log("ready!");-->
-    <!--//-->
-    <!--//        // Load the templates for each report on the page-->
-    <!--//        for (var i = 0; i < reports.length; i++) {-->
-    <!--//            var r = reports[i];-->
-    <!--//            loadTemplate(r.template, r.apiUrl, window[r.callback])-->
-    <!--//        }-->
-    <!---->
-    <!--    });-->
-    <!--</script>-->
 
     <script>
         var apiUrlBase = '/api/report/consumption/{{fromDate}}/{{toDate}}.json';
-        var dateRange = 'last6months';
+        var dateRange = 'last30days';
     </script>
 
     <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>

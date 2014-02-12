@@ -39,7 +39,7 @@
                             <option value="last6months" selected>Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-                            <option value="custom">Custom...</option>
+<!--                            <option value="custom">Custom...</option>-->
                         </select>
                     </span>
                 </div>
@@ -164,7 +164,7 @@
 
 <script>
     var apiUrlBase = '/api/report/consumptionDetails/{{fromDate}}/{{toDate}}.json';
-    var dateRange = 'last6months';
+    var dateRange = 'last30days';
 </script>
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>

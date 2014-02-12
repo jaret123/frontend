@@ -9,7 +9,7 @@ var app = {
     dataRefresh: 1,
     reportData: {},
     data: {}, // Any event that wants new data should flag dataRefresh to be 1
-    machineMax: 5,
+    machineMax: 2, //TODO: This needs to be made dynamic
 
     date : new Date(), // The current date
     sessionDateRange : [], // The apps current date range
