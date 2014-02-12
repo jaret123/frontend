@@ -64,7 +64,7 @@
                             <div class="col border"></div>
                             <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{isBlank summaryData.cost_xeros}}</div>
                             <div class="col saved">Potential Cost</div>
-                            <div class="col percent">{{isBlank SummaryData.savings}}%</div>
+                            <div class="col percent">{{isBlank summaryData.savings}}%</div>
                             <div class="col info icon-Info"></div>
                         </div>
                     </div>

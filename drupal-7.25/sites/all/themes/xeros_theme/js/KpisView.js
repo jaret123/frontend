@@ -25,7 +25,7 @@ var view = {
 
         for ( i in app.reportData.data ) {
             s = app.reportData.data[i].summaryData;
-            app.reportData.data[i].summaryData.savings = Math.round( (100 * (parseInt(s.cost, 10) - parseInt(s.cost_xeros, 10)) / parseInt(s.cost, 10) ), 0);
+            app.reportData.data[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
         }
 
         draw(); // This does the html template draw
