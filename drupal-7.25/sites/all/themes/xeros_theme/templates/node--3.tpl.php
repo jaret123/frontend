@@ -66,7 +66,7 @@
                                 <div class="col col-1">
                                     <a href="#" class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer"></div>
-                                        <div class="machine-label">{{machine_name}} <br/> ({{size}})</div>
+                                        <div class="machine-label">{{machine_name}} <br/> ({{size}}) <br/> <span class="small">{{serial_number}}</span> </div>
                                         <div class="metric__message"></div>
                                     </a>
                                 </div>

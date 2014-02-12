@@ -244,6 +244,7 @@ METRIC
 SELECT
   xm.machine_id   AS id,
   xm.manufacturer AS machine_name,
+  xm.serial_number,
   xm.size,
   truncate(b.cold_water_volume, 0) as cold_water_value,
   truncate(b.cold_water_xeros_volume, 0) as cold_water_xeros_value,

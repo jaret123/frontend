@@ -124,7 +124,6 @@ var view = {
             if ( self.isValid(chart.data) ) {
                 chart.drawBar();
             }
-
         }
 
 

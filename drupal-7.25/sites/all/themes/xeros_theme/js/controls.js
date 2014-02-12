@@ -85,7 +85,7 @@ var controls = {
     createTimeSelect : function() {
         var self = this;
         jQuery("#time-select").val(app.sessionTimeSelect);
-        self.createDropDown("#time-select", function () {
+        self.createDropDown("#time-select", function (event) {
             app.dateRange = jQuery(event.target).find("span.value").html();
             // Refresh data
             app.dataRefresh = 1;

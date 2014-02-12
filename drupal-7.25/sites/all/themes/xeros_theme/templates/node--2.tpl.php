@@ -37,6 +37,16 @@
 
                 </div>
                 <div id="spinner"></div>
+                <script>
+                    // Sometimes the summary data comes back empty when we don't have readings yet.
+                    Handlebars.registerHelper("isBlank", function(value) {
+                        if ( typeof(value) === "undefined" )  {
+                            return 0
+                        } else {
+                            return value;
+                        };
+                    });
+                </script>
                 <script id="page-tpl" type="text/x-handlebars-template">
                     {{#data}}
                     <div class="kpis-{{meta.cssClass}} row">
@@ -49,12 +59,12 @@
                         </div>
                         <div class="col col-3">
                             <div class="col unit">{{meta.title}}&nbsp;</div>
-                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{summaryData.cost}}</div>
+                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{isBlank summaryData.cost}}</div>
                             <div class="col saved">Actual Cost</div>
                             <div class="col border"></div>
-                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{summaryData.cost_xeros}}</div>
+                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{isBlank summaryData.cost_xeros}}</div>
                             <div class="col saved">Potential Cost</div>
-                            <div class="col percent">{{summaryData.savings}}%</div>
+                            <div class="col percent">{{isBlank SummaryData.savings}}%</div>
                             <div class="col info icon-Info"></div>
                         </div>
                     </div>

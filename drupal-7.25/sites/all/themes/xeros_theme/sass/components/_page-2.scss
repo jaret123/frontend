@@ -7,7 +7,7 @@
   margin-right: auto;
 
   $zen-column-count: 6;
-  $zen-gutter-width: 10px;
+  $zen-gutter-width: 5px;
 
   &.active {
     z-index: 10;
@@ -81,8 +81,8 @@
       .col-1 {
 
         @include zen-grid-item(1,1);
-        font-weight: 400;
-
+        font-weight: 300;
+        .small { font-size: 9px; }
         .icon-Washer {
           color: $font-color;
           font-size: 80px;
@@ -92,10 +92,17 @@
           display: inline-block;
 		  font-size: 0.8em;
 		  line-height: 1.5em;
+          vertical-align: top;
+          margin-top: 12px;
+        }
+        a, a .icon-Washer {
+          text-decoration: none;
+          color:inherit;
         }
         a:hover, a:hover .icon-Washer {
           color: $font-accent-color;
           border-bottom: 0px solid white;
+          text-decoration: none;
         }
       }
       .col-2 {
