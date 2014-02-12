@@ -4,6 +4,7 @@
 var view = {
 
     // Each report view has a slightly different data structure
+    // In this function we re-organize the data feed if need be and do some summary calcs
     parseData : function(draw) {
         self = this;
 
@@ -22,7 +23,6 @@ var view = {
 
         for ( i in app.reportData.classifications ) {
             var d = app.reportData.classifications[i];
-
             for ( j in d.data ) {
                 var d1 = d.data[j];
                 app.reportData.classifications[i].data[j].delta_one = self.percentDelta(d1.value_three, d1.xeros_value_three);
@@ -39,7 +39,8 @@ var view = {
         return ( parseFloat(a) - parseFloat(b) );
     },
     initialize : function() {
-
+        controls.createReportSelect();
+        controls.createTimeSelect();
     }
 }
 

@@ -143,6 +143,15 @@
                                 </div>
 
                             </div>
+                            {{else}}
+                            <div id="" class="section-wrapper">
+                                <div>
+
+                                    <div class="row row-title">
+                                        No Data for this machine
+                                    </div>
+                                </div>
+                            </div>
                             {{/each}}
                         </div>
                         </div>

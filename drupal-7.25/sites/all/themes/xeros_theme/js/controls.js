@@ -27,7 +27,7 @@ var controls = {
     },
     createDropDown: function (selector, callback) {
         var source = jQuery(selector);
-        var selected = source.find("option[selected]");
+        var selected = source.find("option[value=" + source.val() + "]"); //source.val(); //source.find("option[selected]");
         var options = jQuery("option", source);
         var targetId = jQuery(selector).attr('id') + "__dl";
 
@@ -74,13 +74,18 @@ var controls = {
         });
     },
     createReportSelect : function() {
-        createDropDown("#report-select", function (event) {
+        var self = this;
+        jQuery("#report-select").val(app.sessionMetric);
+        //jQuery("#report-select").val("hot_water");
+        self.createDropDown("#report-select", function (event) {
             app.metric = jQuery(event.target).find("span.value").html();
             window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
         });
     },
     createTimeSelect : function() {
-        createDropDown("#time-select", function () {
+        var self = this;
+        jQuery("#time-select").val(app.sessionTimeSelect);
+        self.createDropDown("#time-select", function () {
             app.dateRange = jQuery(event.target).find("span.value").html();
             // Refresh data
             app.dataRefresh = 1;
@@ -107,8 +112,8 @@ var controls = {
         // We can call all of these because the jQuery selectors will just return an empty result if the element
         // is not on the page.
         //this.showSpinner();
-        this.createReportSelect();
-        this.createTimeSelect();
+//        this.createReportSelect();
+//        this.createTimeSelect();
     }
 }
 

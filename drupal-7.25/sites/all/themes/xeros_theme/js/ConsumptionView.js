@@ -152,6 +152,7 @@ var view = {
     },
     initialize : function() {
         //createDropDown();
+        controls.createTimeSelect();
     },
     bindNav : function() {
         jQuery('.consumption__machine, .link').click(function (event) {
@@ -159,7 +160,9 @@ var view = {
             var machine_id = jQuery(this).attr("machine");
             event.preventDefault();
             console.log(jQuery(this).attr("classification"));
-            document.location.href = 'consumption-details#' + machine_id + "+" + classification;
+            app.sessionMetric = classification;
+            app.saveCookie();
+            document.location.href = 'consumption-details#' + machine_id + "+" + classification + "+" + app.sessionTimeSelect;
         });
     }
 }

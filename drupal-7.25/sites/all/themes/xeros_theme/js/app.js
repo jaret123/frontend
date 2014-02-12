@@ -1,12 +1,10 @@
 // The main router of the report app
 
 var app = {
-
     apiUrlBase: "",
     apiUrl: "",
     machine: 1, // Initial machine when there is no hash
     metric: "cold_water", // Initial metric when there is no hash
-    dateRange: "last30days", // Initial date range
     tpl: {}, // Our page template
     dataRefresh: 1,
     reportData: {},
@@ -15,6 +13,7 @@ var app = {
 
     date : new Date(), // The current date
     sessionDateRange : [], // The apps current date range
+    sessionTimeSelect : "",
     sessionMetric : "cold_water",
     dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
     dateRanges : {
@@ -142,17 +141,21 @@ var app = {
         self = this;
         document.cookie = "sessionDateRange=" + self.sessionDateRange;
         document.cookie = "sessionMetric=" + self.sessionMetric;
+        document.cookie = "sessionTimeSelect=" + self.sessionTimeSelect;
     },
     getCookie : function() {
         self = this;
         var c = document.cookie.split(";");
         for ( i in c ) {
-            var kv = c[i].split("=");
+            var kv = c[i].trim().split("=");
             if ( kv[0] == "sessionDateRange" ) {
                 self.sessionDateRange = kv[1].split(",");
             }
             if (kv[0] == "sessionMetric") {
                 self.sessionMetric = kv[1];
+            }
+            if (kv[0] == "sessionTimeSelect") {
+                self.sessionTimeSelect = kv[1];
             }
             console.log(kv);
         };
@@ -176,21 +179,23 @@ var app = {
         // If no hash - set data to defaults
         if (!hash) {
 
-
-     //   } else if (hash_array[2] != window.dataRange)  {
-     //       self.getData();
-
         } else {
             //alert('hash' );
             hashArray = hash.substr(1).split("+");
-            self.machine = hashArray[0];
-            self.metric = hashArray[1];
-            self.sessionDateRange = self.dateRanges[hashArray[2]];
+            if (hashArray.length > 1) {
+                self.machine = hashArray[0];
+                if ( hashArray[1].length > 1 ) {
+                    self.metric = hashArray[1];
+                    self.sessionMetric = hashArray[1];
+                }
+                if ( hashArray[2].length > 1 ) {
+                    self.sessionDateRange = self.dateRanges[hashArray[2]];
+                    self.sessionTimeSelect = hashArray[2];
+                }
+            }
         }
         // This is a little funky, but we are going to let the view inherit our showReport method - sort of
-
         self.saveCookie();
-
         // if dataRefresh equals 1, then go to the web service again and get new data
         if ( app.dataRefresh == 1 ) {
             self.setApiUrl();
