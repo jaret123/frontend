@@ -189,8 +189,18 @@ var app = {
                     self.sessionMetric = hashArray[1];
                 }
                 if ( hashArray[2].length > 1 ) {
-                    self.sessionDateRange = self.dateRanges[hashArray[2]];
-                    self.sessionTimeSelect = hashArray[2];
+                    // If this is a custom date range, then we take the date range out of the URL and store
+                    // sessionTimeSelect as custom
+                    if ( hashArray[2].substr(0,6) === "custom" ) {
+                        var dr = hashArray[2].split(",");
+                        self.sessionDateRange = [ dr[1], dr[2] ];
+                        self.sessionTimeSelect = dr[0];
+                        console.log(dr);
+                    } else {
+                        self.sessionDateRange = self.dateRanges[hashArray[2]];
+                        self.sessionTimeSelect = hashArray[2];
+                    }
+
                 }
             }
         }

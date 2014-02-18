@@ -93,3 +93,44 @@ img.flag {
 dl {
 
 }
+
+ #cal {
+   position: absolute;
+   right: 0;
+   top: 46px;
+   padding-right: 0;
+   margin-right:0;
+   background: white;
+   border: 1px solid #333;
+   border-radius: 0;
+   margin-top: -11px;
+   z-index: 1;
+   display:none;
+   padding-bottom: 15px;
+ }
+#cal.show {
+  display:block;
+}
+#time-select__dl {
+  /* border-bottom: 1px solid white; */
+  /*position: relative;*/
+  /*z-index: 10;*/
+}
+.dropdown dt a {
+  /*border-bottom: 1px solid white;*/
+}
+.cal__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  padding-right: 15px;
+}
+.cal__button-submit, .cal__button-cancel {
+  font-size: 10px;
+  display: inline-block;
+}
+.cal__button-submit:hover, .cal__button-cancel:hover {
+  color: red;
+  background-color: blue;
+}

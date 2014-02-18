@@ -29,7 +29,7 @@
     <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/handlebars-v1.3.0.js"></script>
 <!--    <script src="--><?php //print $base_path . $path_to_xeros_theme; ?><!--/js/createDropdown.js"></script>-->
 
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,600,700' rel='stylesheet' type='text/css'>
+<!--    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,600,700' rel='stylesheet' type='text/css'>-->
     <!-- <link rel="stylesheet" href="css/chart.css" media="all"> -->
 
 

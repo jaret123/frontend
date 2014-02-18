@@ -8,7 +8,7 @@
  */
 ?>
 
-<link rel="stylesheet" href="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.css" type="text/css" charset="utf-8">
+<!--<link rel="stylesheet" href="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.css" type="text/css" charset="utf-8">-->
 
 <div id="page-1" class="main page">
     <div class="page-container">
@@ -20,7 +20,7 @@
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
-                <div id="kpis__select" class="kpis__select select">
+                <div id="kpis__select" class="time__select kpis__select select">
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
@@ -29,12 +29,14 @@
                             <option value="last6months">Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-<!--                            <option value="custom">Custom...</option>-->
+                            <option value="custom">Custom...</option>
                         </select>
                     </span>
                     <div id="cal">
-
-                        <div class="closeButton"></div>
+                        <div class="cal__button">
+                            <div class="cal__button-submit">Get Data</div>
+                            <div class="cal__button-cancel">Cancel</div>
+                        </div>
                     </div>
 
                 </div>
@@ -126,13 +128,6 @@
     var dateRange = 'last30days';
 
 
-    var k = new Kalendae({
-        attachTo:document.getElementById("cal"),
-        months:3,
-        mode:'range',
-        direction: "today-past",
-        selected:[Kalendae.moment().subtract({M:2}), Kalendae.moment().subtract({D:1})]
-    });
 
 
 //    var closeButton = k.util.make('a', {'class': classes.closeButton}, self.containter);
@@ -141,42 +136,6 @@
 //    });
 
 </script>
-
-<style>
-
-    #cal {
-        right: 0;
-        position: relative;
-        float: right;
-        padding-right: 0;
-        margin-right:0;
-        background: white;
-        border: 1px solid #333;
-        border-radius: 0;
-        margin-top: -11px;
-        z-index: 0;
-        display:none;
-    }
-    #time-select__dl {
-        /* border-bottom: 1px solid white; */
-        /*position: relative;*/
-        /*z-index: 10;*/
-    }
-    .dropdown dt a {
-        /*border-bottom: 1px solid white;*/
-    }
-    .closeButton {
-        height: 20px;
-        width: 20px;
-        background-image: url("/sites/all/themes/xeros_theme/lib/kalendae/close.png");
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        z-index: 9999;
-    }
-
-</style>
-
 
 <!-- loading spinner -->
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>

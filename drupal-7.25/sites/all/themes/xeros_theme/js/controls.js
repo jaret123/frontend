@@ -55,6 +55,7 @@ var controls = {
         jQuery(document).bind('click', function (e) {
             var jQueryclicked = jQuery(e.target);
             if (!jQueryclicked.parents().hasClass("dropdown"))
+                //jQuery("#cal").removeClass("show");
                 jQuery(".dropdown dd ul").hide();
         });
 
@@ -65,9 +66,10 @@ var controls = {
             var text = jQuery(this).html();
             source_dl.find("dt a").html(text);
             source_dl.find("dd ul").hide();
-            jQuery(source_dl.attr("select-list")).val(jQuery(this).find("span.value").html());
 
-            // Go do something
+            var click_value = jQuery(this).find("span.value").html();
+            jQuery(source_dl.attr("select-list")).val(click_value);
+
             if (Object.prototype.toString.call(callback) == "[object Function]") {
                 callback(event);
             }
@@ -86,11 +88,50 @@ var controls = {
         var self = this;
         jQuery("#time-select").val(app.sessionTimeSelect);
         self.createDropDown("#time-select", function (event) {
-            app.dateRange = jQuery(event.target).find("span.value").html();
+
+            var click_value = jQuery(event.target).find("span.value").html();
+
+            // This is specific to the time select - TODO: Refactor if we add more controls
+            if ( click_value === "custom") {
+                // Show the custom date range picker
+                jQuery("#cal").addClass("show");
+            } else {
+                // Go do something
+                jQuery("#cal").removeClass("show");
+                app.dateRange = jQuery(event.target).find("span.value").html();
+                // Refresh data
+                app.dataRefresh = 1;
+                window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+            }
+        });
+
+        // Add the calendar picker
+        var k = new Kalendae({
+            attachTo:document.getElementById("cal"),
+            months:3,
+            mode:'range',
+            direction: "today-past",
+            selected:[Kalendae.moment().subtract({M:2}), Kalendae.moment().subtract({D:1})]
+        });
+
+        jQuery(".cal__button-submit").unbind().click(function (e) {
+            jQuery("#cal").removeClass("show");
+            console.log("submit");
+
+            // Set date range
+            app.dateRange = 'custom,' + k.getSelectedAsText();
             // Refresh data
             app.dataRefresh = 1;
+            // Set the dates to custom
+            // TODO: Figure out how this affects routing
             window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
         });
+
+        jQuery(".cal__button-cancel").unbind().click(function (e) {
+            console.log("cancel");
+            jQuery("#cal").removeClass("show");
+        });
+
     },
     createMachineNav : function() {
         // Machine navigation

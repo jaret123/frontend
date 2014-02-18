@@ -39,9 +39,15 @@
                             <option value="last6months" selected>Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-<!--                            <option value="custom">Custom...</option>-->
+                            <option value="custom">Custom...</option>
                         </select>
                     </span>
+                    <div id="cal">
+                        <div class="cal__button">
+                            <div class="cal__button-submit">Get Data</div>
+                            <div class="cal__button-cancel">Cancel</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="page-container" class="template-container">
@@ -166,8 +172,11 @@
     var apiUrlBase = '/api/report/consumptionDetails/{{fromDate}}/{{toDate}}.json';
     var dateRange = 'last30days';
 </script>
+<script src="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
 <script src = "/sites/all/themes/xeros_theme/js/controls.js" ></script>
+
 <script src = "/sites/all/themes/xeros_theme/js/app.js" ></script>
 <script src = "/sites/all/themes/xeros_theme/js/ConsumptionDetailsView.js" ></script>

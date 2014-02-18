@@ -18,7 +18,7 @@
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
-                <div class="kpis__select">
+                <div class="time__select">
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
@@ -27,9 +27,15 @@
                             <option value="last6months">Last 6 Months</option>
                             <option value="yearToDate">Year to Date</option>
                             <option value="previousYear">Last Year</option>
-<!--                            <option value="custom">Custom...</option>-->
+                            <option value="custom">Custom...</option>
                         </select>
                     </span>
+                    <div id="cal">
+                        <div class="cal__button">
+                            <div class="cal__button-submit">Get Data</div>
+                            <div class="cal__button-cancel">Cancel</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="consumption__grid-container">
@@ -129,6 +135,8 @@
     <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
     <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
     <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
+<script src="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="/sites/all/themes/xeros_theme/js/app.js"></script>
     <script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
     <script src="/sites/all/themes/xeros_theme/js/chart.js"></script>
