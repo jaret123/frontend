@@ -129,8 +129,12 @@ dl {
 .cal__button-submit, .cal__button-cancel {
   font-size: 10px;
   display: inline-block;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  line-height: 20px;
+  padding: 0 5px;
 }
 .cal__button-submit:hover, .cal__button-cancel:hover {
-  color: red;
-  background-color: blue;
+  border: 1px solid #333;
 }
