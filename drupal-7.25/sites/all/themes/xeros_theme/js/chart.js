@@ -91,8 +91,19 @@ var chart = {
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("fill", "none")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        svg.append("g")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width",  width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("transform", "translate(" + -(margin.left) + "," + -(margin.top) + ")")
+            //.attr("fill", "red")
 
         // find the extent (min / max) of the values
         x.domain(d3.extent(data, function (d) {
@@ -125,28 +136,36 @@ var chart = {
         // append the notation for x-axis to the DOM and position
         svg.append("g")
             .attr("class", "x axis")
+            .attr("fill", "none")
+            .attr("stroke", "white")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
         // append the notation for y-axis to the DOM and position
         svg.append("g")
             .attr("class", "y axis")
+            .attr("fill", "none")
+            .attr("stroke", "white")
             .call(yAxis);
 
         // append the line itself
         svg.append("path")
             .datum(data)
             .attr("class", "line-a")
-            .attr("d", lineA);
+            .attr("d", lineA)
+            .attr("stroke", "#fff")
+            .attr("fill", "none");
 
         svg.append("path")
             .datum(data)
             .attr("class", "line-b")
             .attr("d", lineA)
+            .attr("stroke", "blue")
             .transition()
             .delay(500)
             .duration(1500)
             .attr("d", lineB)
+            .attr("fill", "none");
     },
     drawBar: function () {
         self = this;

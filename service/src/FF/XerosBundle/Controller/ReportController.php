@@ -21,20 +21,25 @@ class ReportController extends Controller {
      * @return array
      * @View()
      * @Route("/report/{reportName}/{fromDate}/{toDate}.{_format}")
+     *
+     * reportAction handles the routing of request to the functions below
+     * reportName maps to a function call below and fromDate adn toDate are
+     * SQL formatted dates ('YYYY-MM-DD')
      */
     public function reportAction($reportName, $fromDate, $toDate)
     {
         // Resources directory
         $dir = __DIR__ . '/../Resources/data/';
 
-        $userRole = $this->userRole();
+        $userRole = $this->getUserRole();
 
         if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
             return array ("message" => "Access denied");
         } else {
             $filters = array(
                 'fromDate' => $fromDate,
-                'toDate' => $toDate
+                'toDate' => $toDate,
+                'machineIds' => $this->arrayToString($userRole["machine_ids"])
             );
 
             switch ($reportName) {
@@ -58,7 +63,13 @@ class ReportController extends Controller {
         }
     }
 
-    private function userRole()
+    /**
+     * @return array
+     *
+     * userRole tests for the session ID in the site cookies and checks to see if it matches
+     * an authenticated Drupal session.   If it does, then the user can access the web services
+     */
+    private function getUserRole()
     {
         $sid = NULL;
 
@@ -127,6 +138,14 @@ SQL;
         return $userRole;
     }
 
+    /**
+     * @param $string
+     * @param $filters
+     *
+     * @return mixed
+     *
+     * replaceFilters is a private function to help build the report SQL used below
+     */
     private function replaceFilters($string, $filters) {
         foreach ($filters as $k => $v) {
             $string = str_replace(':' . $k, $v, $string);
@@ -134,6 +153,28 @@ SQL;
         return $string;
     }
 
+    private function arrayToString($array) {
+        $string = "";
+        $length = count($array);
+        $i = 0;
+        foreach ( $array  as $k => $v ) {
+            $i = $i + 1;
+            $string = $string . $v;
+            if ( $i < $length ) {
+                $string = $string . ", ";
+            }
+        }
+        return $string;
+    }
+    /**
+     * @param $filters
+     *
+     * @return array
+     *
+     * reportKPIs is used for the dashboard report on sbeadycare.
+     * It returns a JSON formatted feed of summary data for each metric
+     * and arrays of point data for the charts
+     */
     private function reportKPIs($filters) {
 
         $kpis = array();
@@ -161,6 +202,7 @@ from
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
+	    and xc.machine_id in ( :machineIds )
 	group by
 		xd.date,
 		xc.reading_date
@@ -187,6 +229,7 @@ from
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
+	    and xc.machine_id in ( :machineIds )
 	) as b
 where
    1 = 1
@@ -273,6 +316,14 @@ METRIC
 
     }
 
+    /**
+     * @param $filters
+     *
+     * @return mixed
+     *
+     * reportConsumption returns the data for the consumption page
+     *
+     */
     private function reportConsumption($filters) {
         //$json = file_get_contents($dir . "consumption.json");
 
@@ -339,14 +390,14 @@ FROM
      WHERE
        1 = 1
        AND reading_date >= ':fromDate' AND reading_date <= ':toDate'
+       and machine_id in ( :machineIds )
      GROUP BY
        machine_id
     ) AS b
       ON xm.machine_id = b.machine_id
 WHERE
   1 = 1
-# put in location filter;
-
+  and xm.machine_id in ( :machineIds )
 
 SQL;
         $sql = $this->replaceFilters($sql, $filters);
@@ -356,70 +407,82 @@ SQL;
         return $ar;
     }
 
+    /**
+     * @param $filters
+     *
+     * @return array
+     *
+     * Returns a structured array (JSON object) for the Consumption Details page
+     */
     private function reportConsumptionDetails($filters) {
 
         $data = array();
         $metrics = array();
 
-        $machinesSql = "select machine_id, manufacturer as name, serial_number, size, fuel_type from xeros_machine"; // TODO: Refactor to filter to users machines
+        $machinesSql = <<<machineSQL
+            select
+                machine_id,
+                manufacturer as name,
+                serial_number,
+                size,
+                fuel_type
+            from
+                xeros_machine
+            where machine_id in ( :machineIds )
+machineSQL;
 
         $classificiationSql = <<<classificationSQL
-select
-    xmc.classification_id,
-    xc.name
-from
-    xeros_machine_classification as xmc
-     left join xeros_classification as xc
-       on xmc.classification_id = xc.classification_id
-where
-    xmc.machine_id = :machine_id
+            select
+                xmc.classification_id,
+                xc.name
+            from
+                xeros_machine_classification as xmc
+                 left join xeros_classification as xc
+                   on xmc.classification_id = xc.classification_id
+            where
+                xmc.machine_id = :machine_id
 classificationSQL;
 
-
         $sql = <<<SQL
-select
-	xm.machine_id as id,
-	xm.manufacturer as machine_name,
-	xm.size,
-	b.*
-from
-	xeros_machine as xm
+            select
+                xm.machine_id as id,
+                xm.manufacturer as machine_name,
+                xm.size,
+                b.*
+            from
+                xeros_machine as xm
+                left join
+                ( -- metrics
+                select
+                    xc.machine_id,
+                    xc.classification_id,
 
+                    xmc.load_size,
+                    xmc.xeros_load_size,
 
-	left join
-	( -- metrics
-	select
-	    xc.machine_id,
-	    xc.classification_id,
+                    xcl.name,
 
-	    xmc.load_size,
-	    xmc.xeros_load_size,
-
-	    xcl.name,
-
-        :metric
-
-	from
-   		xeros_cycle as xc
-   		    left join xeros_machine_classification as xmc
-        		on xc.machine_id = xmc.machine_id
-        		and xc.classification_id = xmc.classification_id
-         	left join xeros_classification as xcl
-         		on xmc.classification_id = xcl.classification_id
-	where
-	    1 = 1
-        and reading_date >= ':fromDate' and reading_date <= ':toDate'
-	group by
-   		xc.machine_id,
-   		xc.classification_id
-	) as b
-	    on xm.machine_id = b.machine_id
-where
-   1 = 1
-   and xm.machine_id = :machine_id
-   and b.classification_id = :classification_id
-   # put in location filter;
-
+                    :metric
+                from
+                    xeros_cycle as xc
+                        left join xeros_machine_classification as xmc
+                            on xc.machine_id = xmc.machine_id
+                            and xc.classification_id = xmc.classification_id
+                        left join xeros_classification as xcl
+                            on xmc.classification_id = xcl.classification_id
+                where
+                    1 = 1
+                    and reading_date >= ':fromDate' and reading_date <= ':toDate'
+                    and xc.machine_id in ( :machineIds )
+                group by
+                    xc.machine_id,
+                    xc.classification_id
+                ) as b
+                    on xm.machine_id = b.machine_id
+            where
+               1 = 1
+               and xm.machine_id = :machine_id
+               and b.classification_id = :classification_id
 SQL;
 
         // TODO: Make all these field names the same
@@ -427,22 +490,21 @@ SQL;
             "name" => "Cold Water",
             "id" => "cold_water",
             "query" => <<<METRIC
-            'Gallons' as value_one_label,
-        truncate(sum(xc.cycle_cold_water_volume), 0) as value_one,
-   		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
+                'Gallons' as value_one_label,
+                truncate(sum(xc.cycle_cold_water_volume), 0) as value_one,
+                truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
 
-        'Load Size' as value_two_label,
-        '50' as value_two,
-        '50' as xeros_value_two,
+                'Load Size' as value_two_label,
+                '50' as value_two,
+                '50' as xeros_value_two,
 
-        'Gallons Per Pound' as value_three_label,
-   		truncate(sum(xc.cycle_cold_water_volume_per_pound), 0) as value_three,
-   		truncate(sum(xc.cycle_cold_water_xeros_volume_per_pound), 0) as xeros_value_three,
+                'Gallons Per Pound' as value_three_label,
+                truncate(sum(xc.cycle_cold_water_volume_per_pound), 0) as value_three,
+                truncate(sum(xc.cycle_cold_water_xeros_volume_per_pound), 0) as xeros_value_three,
 
-   		'Cost Per Pound' as value_four_label,
-   		truncate(sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
-
+                'Cost Per Pound' as value_four_label,
+                truncate(sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
+                truncate(sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
 METRIC
         ));
         // TODO: Cost Reduction need to be total, not per pound
@@ -451,23 +513,21 @@ METRIC
             "name" => "Hot Water",
             "id" => "hot_water",
             "query" => <<<METRIC
+                'Gallons' as value_one_label,
+                truncate(sum(xc.cycle_hot_water_volume), 0) as value_one,
+                truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as xeros_value_one,
 
-        'Gallons' as value_one_label,
-   		truncate(sum(xc.cycle_hot_water_volume), 0) as value_one,
-   		truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as xeros_value_one,
+                'Load Size' as value_two_label,
+                '50' as value_two,
+                '50' as xeros_value_two,
 
-        'Load Size' as value_two_label,
-        '50' as value_two,
-        '50' as xeros_value_two,
+                'Gallons Per Pound' as value_three_label,
+                truncate(sum(xc.cycle_hot_water_volume_per_pound), 0) as value_three,
+                truncate(sum(xc.cycle_hot_water_xeros_volume_per_pound), 0) as xeros_value_three,
 
-        'Gallons Per Pound' as value_three_label,
-   		truncate(sum(xc.cycle_hot_water_volume_per_pound), 0) as value_three,
-   		truncate(sum(xc.cycle_hot_water_xeros_volume_per_pound), 0) as xeros_value_three,
-
-   		'Cost Per Pound' as value_four_label,
-   		truncate(sum(xc.cycle_hot_water_cost_per_pound), 2) as value_four,
-   		truncate(sum(xc.cycle_hot_water_xeros_cost_per_pound), 2) as xeros_value_four
-
+                'Cost Per Pound' as value_four_label,
+                truncate(sum(xc.cycle_hot_water_cost_per_pound), 2) as value_four,
+                truncate(sum(xc.cycle_hot_water_xeros_cost_per_pound), 2) as xeros_value_four
 METRIC
         ));
 
@@ -476,21 +536,21 @@ METRIC
             "id" => "total_water",
             "query" => <<<METRIC
 
-        'Gallons' as value_one_label,
-   		truncate( sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) , 0) as value_one,
-   		truncate( sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
+                'Gallons' as value_one_label,
+                truncate( sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) , 0) as value_one,
+                truncate( sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
 
-        'Load Size' as value_two_label,
-        '50' as value_two,
-        '50' as xeros_value_two,
+                'Load Size' as value_two_label,
+                '50' as value_two,
+                '50' as xeros_value_two,
 
-        'Gallons Per Pound' as value_three_label,
-   		truncate( sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) , 0) as value_three,
-   		truncate( sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound)  , 0) as xeros_value_three,
+                'Gallons Per Pound' as value_three_label,
+                truncate( sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) , 0) as value_three,
+                truncate( sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound)  , 0) as xeros_value_three,
 
-   		'Cost Per Pound' as value_four_label,
-   		truncate( sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
-   		truncate( sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
+                'Cost Per Pound' as value_four_label,
+                truncate( sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
+                truncate( sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
 
 METRIC
         ));
@@ -500,21 +560,21 @@ METRIC
             "id" => "cycle_time",
             "query" => <<<METRIC
 
-        'Total Cycle Time' as value_one_label,
-   		truncate(sum(xc.cycle_time_run_time), 0) as value_one,
-   		truncate(sum(xc.cycle_time_xeros_run_time), 0) as xeros_value_one,
+                'Total Cycle Time' as value_one_label,
+                truncate(sum(xc.cycle_time_run_time), 0) as value_one,
+                truncate(sum(xc.cycle_time_xeros_run_time), 0) as xeros_value_one,
 
-        'Load Size' as value_two_label,
-        '50' as value_two,
-        '50' as xeros_value_two,
+                'Load Size' as value_two_label,
+                '50' as value_two,
+                '50' as xeros_value_two,
 
-        'Labor Cost' as value_three_label,
-   		truncate(sum(xc.cycle_time_labor_cost), 0) as value_three,
-   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as xeros_value_three,
+                'Labor Cost' as value_three_label,
+                truncate(sum(xc.cycle_time_labor_cost), 0) as value_three,
+                truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as xeros_value_three,
 
-   		'Cost Per Pound' as value_four_label,
-   		truncate(sum(xc.cycle_time_labor_cost_per_pound), 2) as value_four,
-   		truncate(sum(xc.cycle_time_xeros_labor_cost_per_pound), 2) as xeros_value_four
+                'Cost Per Pound' as value_four_label,
+                truncate(sum(xc.cycle_time_labor_cost_per_pound), 2) as value_four,
+                truncate(sum(xc.cycle_time_xeros_labor_cost_per_pound), 2) as xeros_value_four
 METRIC
         ));
 
@@ -523,27 +583,27 @@ METRIC
             "id" => "chemical",
             "query" => <<<METRIC
 
-        'Total Ounces' as value_one_label,
-   		truncate(sum(xc.cycle_chemical_strength), 0) as value_one,
-   		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as xeros_value_one,
+                'Total Ounces' as value_one_label,
+                truncate(sum(xc.cycle_chemical_strength), 0) as value_one,
+                truncate(sum(xc.cycle_chemical_xeros_strength), 0) as xeros_value_one,
 
-        'Load Size' as value_two_label,
-        '50' as value_two,
-        '50' as xeros_value_two,
+                'Load Size' as value_two_label,
+                '50' as value_two,
+                '50' as xeros_value_two,
 
-        'Ounces Per Pound' as value_three_label,
-   		truncate(sum(xc.cycle_chemical_strength_per_pound), 0) as value_three,
-   		truncate(sum(xc.cycle_chemical_xeros_strength_per_pound), 0) as xeros_value_three,
+                'Ounces Per Pound' as value_three_label,
+                truncate(sum(xc.cycle_chemical_strength_per_pound), 0) as value_three,
+                truncate(sum(xc.cycle_chemical_xeros_strength_per_pound), 0) as xeros_value_three,
 
-        'Cost Per Pound' as value_four_label,
-   		truncate(sum(xc.cycle_chemical_cost_per_pound), 2) as value_four,
-   		truncate(sum(xc.cycle_chemical_xeros_cost_per_pound), 2) as xeros_value_four
+                'Cost Per Pound' as value_four_label,
+                truncate(sum(xc.cycle_chemical_cost_per_pound), 2) as value_four,
+                truncate(sum(xc.cycle_chemical_xeros_cost_per_pound), 2) as xeros_value_four
 METRIC
         ));
 
         $conn = $this->get('database_connection');
 
-        $machines = $conn->fetchAll($machinesSql);
+        $machines = $conn->fetchAll($this->replaceFilters($machinesSql, $filters));
 
         // Machines
         foreach ($machines as $k => $machine ) {

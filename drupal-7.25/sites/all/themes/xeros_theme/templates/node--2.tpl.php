@@ -8,6 +8,7 @@
  */
 ?>
 
+<link rel="stylesheet" href="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.css" type="text/css" charset="utf-8">
 
 <div id="page-1" class="main page">
     <div class="page-container">
@@ -19,7 +20,7 @@
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
-                <div class="kpis__select select">
+                <div id="kpis__select" class="kpis__select select">
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
@@ -31,8 +32,12 @@
 <!--                            <option value="custom">Custom...</option>-->
                         </select>
                     </span>
-                </div>
+                    <div id="cal">
 
+                        <div class="closeButton"></div>
+                    </div>
+
+                </div>
                 <div class="template-container">
 
                 </div>
@@ -99,6 +104,10 @@
                 </div><!-- news -->
         </div>
     </div>
+
+<!--    <a href="#" class="btn btn-primary download-pdf">Download PDF</a>-->
+<!---->
+<!--    <canvas id="drawingArea"></canvas>-->
 </div>
 <script>
     var reports = [
@@ -111,17 +120,118 @@
     ];
 
 </script>
-
+<script src="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';
     var dateRange = 'last30days';
+
+
+    var k = new Kalendae({
+        attachTo:document.getElementById("cal"),
+        months:3,
+        mode:'range',
+        direction: "today-past",
+        selected:[Kalendae.moment().subtract({M:2}), Kalendae.moment().subtract({D:1})]
+    });
+
+
+//    var closeButton = k.util.make('a', {'class': classes.closeButton}, self.containter);
+//    k.addEvent(closeButton, 'click', function () {
+//        this.addClass("hide");
+//    });
+
 </script>
 
+<style>
 
+    #cal {
+        right: 0;
+        position: relative;
+        float: right;
+        padding-right: 0;
+        margin-right:0;
+        background: white;
+        border: 1px solid #333;
+        border-radius: 0;
+        margin-top: -11px;
+        z-index: 0;
+        display:none;
+    }
+    #time-select__dl {
+        /* border-bottom: 1px solid white; */
+        /*position: relative;*/
+        /*z-index: 10;*/
+    }
+    .dropdown dt a {
+        /*border-bottom: 1px solid white;*/
+    }
+    .closeButton {
+        height: 20px;
+        width: 20px;
+        background-image: url("/sites/all/themes/xeros_theme/lib/kalendae/close.png");
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 9999;
+    }
+
+</style>
+
+
+<!-- loading spinner -->
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
-<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
+<!--<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>-->
+
+<!-- Page controls -->
+
 <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
-<script src="/sites/all/themes/xeros_theme/js/app.js"></script>
+
+<!-- jsPDF scripts in development mode -->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/libs/FileSaver.js/FileSaver.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/libs/Blob.js/Blob.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/libs/Blob.js/BlobBuilder.js"></script>-->
+<!---->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/libs/Deflate/deflate.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/libs/Deflate/adler32cs.js"></script>-->
+<!---->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.addimage.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.from_html.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.ie_below_9_shim.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.sillysvgrenderer.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.split_text_to_size.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>-->
+
+
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/libs/FileSaver.js/FileSaver.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/libs/Blob.js/Blob.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/libs/Blob.js/BlobBuilder.js"></script>-->
+<!---->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/libs/Deflate/deflate.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/libs/Deflate/adler32cs.js"></script>-->
+<!---->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.addimage.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.from_html.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.ie_below_9_shim.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.sillysvgrenderer.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.split_text_to_size.js"></script>-->
+<!--<script src="/sites/all/themes/xeros_theme/lib/jsPDF-png/jspdf.plugin.standard_fonts_metrics.js"></script>-->
+
+<!-- Canvg for converting SVG to Canvas to PNG -->
+
+<script src="/sites/all/themes/xeros_theme/lib/canvg-1.3/rgbcolor.js"></script>
+<script src="/sites/all/themes/xeros_theme/lib/canvg-1.3/StackBlur.js"></script>
+<script src="/sites/all/themes/xeros_theme/lib/canvg-1.3/canvg.js"></script>
+
+<script src="/sites/all/themes/xeros_theme/lib/innersvg/innersvg.js"></script>
+<!-- D3 -->
+
 <script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
+
+<script src="/sites/all/themes/xeros_theme/js/app.js"></script>
+
 <script src="/sites/all/themes/xeros_theme/js/chart.js" ></script>
+<!--<script src="/sites/all/themes/xeros_theme/js/exportPDF.js"></script>-->
+
 <script src="/sites/all/themes/xeros_theme/js/KpisView.js" ></script>

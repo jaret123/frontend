@@ -668,27 +668,27 @@ table {
   width: 327px;
   height: 150px;
 }
-/* line 14, ../sass/components/_chartKpi.scss */
+/* line 15, ../sass/components/_chartKpi.scss */
 .kpi-chart .axis path,
 .kpi-chart .axis line {
   fill: none;
   stroke: #FFF;
   shape-rendering: crispEdges;
 }
-/* line 20, ../sass/components/_chartKpi.scss */
+/* line 21, ../sass/components/_chartKpi.scss */
 .kpi-chart text {
   fill: #FFF;
 }
-/* line 40, ../sass/components/_chartKpi.scss */
+/* line 41, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
   stroke-width: 3px;
 }
-/* line 45, ../sass/components/_chartKpi.scss */
+/* line 46, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {
   stroke: white;
 }
-/* line 49, ../sass/components/_chartKpi.scss */
+/* line 50, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-b {
   stroke: #0086bd;
 }

@@ -31,6 +31,7 @@ var view = {
         draw(); // This does the html template draw
         self.drawCharts();
         self.bindNav();
+        exportPDF.init();
     },
     delta : function(base, change) { // TODO: Move to a utility library
         var delta = 0;
