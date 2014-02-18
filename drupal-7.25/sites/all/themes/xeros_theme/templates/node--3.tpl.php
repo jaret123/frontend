@@ -18,7 +18,7 @@
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
-                <div class="time__select">
+                <div class="kpis__select time__select">
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
