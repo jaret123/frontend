@@ -56,12 +56,12 @@
                         </div>
                         <div class="col col-3">
                             <div class="col unit">{{meta.title}}&nbsp;</div>
-                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{isBlank summaryData.cost}}</div>
+                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost}}</div>
                             <div class="col saved">Actual Cost</div>
                             <div class="col border"></div>
-                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{isBlank summaryData.cost_xeros}}</div>
+                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost_xeros}}</div>
                             <div class="col saved">Potential Cost</div>
-                            <div class="col percent">{{isBlank summaryData.savings}}%</div>
+                            <div class="col percent">{{toLocaleString summaryData.savings}}%</div>
                             <div class="col info icon-Info"></div>
                         </div>
                     </div>
@@ -137,6 +137,7 @@
 
 </script>
 
+<script src="/sites/all/themes/xeros_theme/js/formattter.js"></script>
 <!-- loading spinner -->
 <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
 <!--<script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>-->

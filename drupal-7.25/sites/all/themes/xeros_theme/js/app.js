@@ -251,13 +251,37 @@ var app = {
         var self = this;
 
         // Sometimes the summary data comes back empty when we don't have readings yet.
-        Handlebars.registerHelper("isBlank", function(value) {
+
+        Handlebars.registerHelper("formatMoney", function(value, decPlaces, thouSeparator, decSeparator) {
             if ( typeof(value) === "undefined" )  {
-            return 0
+                return 0
             } else {
-            return value;
+                var n = value,
+                decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 0 : decPlaces,
+                decSeparator = decSeparator == undefined ? "." : decSeparator,
+                thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+                sign = n < 0 ? "-" : "",
+                i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+                j = (j = i.length) > 3 ? j % 3 : 0;
+                return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
             };
         });
+
+        Handlebars.registerHelper("isBlank", function(value) {
+            if ( typeof(value) === "undefined" )  {
+                return 0
+            } else {
+                return value;
+            };
+        });
+
+        Handlebars.registerHelper("toLocaleString", function(value) {
+            if ( typeof(value) === "undefined" )  {
+                return 0
+            } else {
+                return parseInt(value, 10).toLocaleString();
+            };
+        })
 
         controls.showSpinner();
         //self.hideReport();

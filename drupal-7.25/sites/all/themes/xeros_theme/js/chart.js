@@ -217,7 +217,6 @@ var chart = {
                 else {
                     return x(d) + 5;
                 }
-
             })
             .attr("class", function (d, i) {
                 return classes[i];
@@ -243,7 +242,7 @@ var chart = {
             .attr("y", barHeight / 2)
             .attr("dy", ".35em")
             .text(function (d) {
-                return d;
+                return d.toLocaleString();
             });
     },
     drawDonut: function () {
@@ -324,7 +323,7 @@ var chart = {
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
             .style("fill", colorInner)
-            .text(inner)
+            .text(inner.toLocaleString())
 
         svg.append("g").append("text")
             .attr("width", width)
@@ -333,7 +332,7 @@ var chart = {
             .attr("dy", ".35em")
             .attr("text-anchor", "middle")
             .style("fill", colorOuter)
-            .text(outer)
+            .text(outer.toLocaleString())
 
 //        // Add text labels
 //        svg.append("text")
