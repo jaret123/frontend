@@ -1,0 +1,6 @@
+Data export for {{ fromDate }} to {{ toDate }}
+
+machine_id, classification_id
+{% for row in data %}
+    {{ row.machine_id }}, {{ row.classification_id }}
+{% endfor %}
