@@ -6,3 +6,6 @@ ff_xeros:
 report:
     type:   rest
     resource:   FF\XerosBundle\Controller\ReportController
+csv:
+    type:   annotation
+    resource:   FF\XerosBundle\Controller\CSVController

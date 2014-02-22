@@ -8,8 +8,9 @@
 
 namespace FF\XerosBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FF\XerosBundle\Utils\Utils;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -17,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ReportController extends Controller {
 
+    private $u = NULL;
     /**
      * @return array
      * @View()
@@ -28,10 +30,14 @@ class ReportController extends Controller {
      */
     public function reportAction($reportName, $fromDate, $toDate)
     {
+
         // Resources directory
         $dir = __DIR__ . '/../Resources/data/';
 
-        $userRole = $this->getUserRole();
+        $this->u = new Utils();
+        $conn = $this->get('database_connection');
+
+        $userRole = $this->u->getUserRole($conn);
 
         if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
             return array ("message" => "Access denied");
@@ -39,7 +45,7 @@ class ReportController extends Controller {
             $filters = array(
                 'fromDate' => $fromDate,
                 'toDate' => $toDate,
-                'machineIds' => $this->arrayToString($userRole["machine_ids"])
+                'machineIds' => $this->u->arrayToString($userRole["machine_ids"])
             );
 
             switch ($reportName) {
@@ -63,109 +69,6 @@ class ReportController extends Controller {
         }
     }
 
-    /**
-     * @return array
-     *
-     * userRole tests for the session ID in the site cookies and checks to see if it matches
-     * an authenticated Drupal session.   If it does, then the user can access the web services
-     */
-    private function getUserRole()
-    {
-        $sid = NULL;
-
-        $userRole['uid'] = NULL;
-
-        // Is there something that looks like a Drupal Session ID
-        foreach ($_COOKIE as $key => $value)
-        {
-            if ( substr($key, 0, 4) == 'SESS' ) {
-                $sid = $value;
-            }
-        }
-
-        if ( $sid === NULL ) {
-            return array ("uid" => NULL);
-        } else {
-            // Does this session ID exist in the sessions table
-            $sql = sprintf("SELECT * FROM sessions WHERE sid = '%s'", $sid);
-            $conn = $this->get('database_connection');
-            $user = $conn->fetchAll($sql);
-
-            // If it does, then return user array
-            if ( $user[0]['uid'] >= 0 ) {
-                // Get the user company_id and location_id
-
-                $userRole = array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
-
-                $sql = <<<SQL
-                    select u.uid, u.name, u.mail, fc.field_company_target_id as company_id
-                    from
-                        users as u
-                        left join field_data_field_company as fc
-                             on u.uid = fc.entity_id
-                        left join node as n
-                             on fc.field_company_target_id = n.nid
-                    where u.uid = :uid
-SQL;
-                $sqlParsed = $this->replaceFilters($sql, array("uid" => $user[0]['uid']));
-                $userData = $conn->fetchAll($sqlParsed);
-                // TODO : Check to make sure user had a company id
-                $userRole["company_id"] = $userData[0]["company_id"];
-
-                // Get machines associated with the company
-
-                $sql = <<<SQL
-
-                select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
-                        xeros_machine as xm
-                        left join field_data_field_company as fc
-                          on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
-                        left join field_data_field_location as fl
-                          on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
-                where fc.field_company_target_id = :company_id
-SQL;
-                $sqlParsed = $this->replaceFilters($sql, array("company_id" => $userRole["company_id"]));
-                $machineData = $conn->fetchAll($sqlParsed);
-                // TODO : More error checking on this
-                foreach ( $machineData as $record ) {
-                    $userRole["machine_ids"][] = $record["machine_id"];
-                }
-            } else {
-                // Access denied
-                // Do nothing
-            }
-        }
-        return $userRole;
-    }
-
-    /**
-     * @param $string
-     * @param $filters
-     *
-     * @return mixed
-     *
-     * replaceFilters is a private function to help build the report SQL used below
-     */
-    private function replaceFilters($string, $filters) {
-        foreach ($filters as $k => $v) {
-            $string = str_replace(':' . $k, $v, $string);
-        }
-        return $string;
-    }
-
-    private function arrayToString($array) {
-        $string = "";
-        $length = count($array);
-        $i = 0;
-        foreach ( $array  as $k => $v ) {
-            $i = $i + 1;
-            $string = $string . $v;
-            if ( $i < $length ) {
-                $string = $string . ", ";
-            }
-        }
-        return $string;
-    }
     /**
      * @param $filters
      *
@@ -300,12 +203,12 @@ METRIC
             $filters['metric'] = $v["query"];
             $conn = $this->get('database_connection');
 
-            $summarySqlParsed = $this->replaceFilters($summarySql, $filters);
+            $summarySqlParsed = $this->u->replaceFilters($summarySql, $filters);
 
             $a = $conn->fetchAll($summarySqlParsed);
             $ar["summaryData"] = $a[0];
 
-            $dataPointSqlParsed = $this->replaceFilters($dataPointSql, $filters);
+            $dataPointSqlParsed = $this->u->replaceFilters($dataPointSql, $filters);
 
             $ar["chartData"] = $conn->fetchAll($dataPointSqlParsed);
 
@@ -400,7 +303,7 @@ WHERE
   and xm.machine_id in ( :machineIds )
 
 SQL;
-        $sql = $this->replaceFilters($sql, $filters);
+        $sql = $this->u->replaceFilters($sql, $filters);
         $conn = $this->get('database_connection');
         $ar = $conn->fetchAll($sql);
 
@@ -603,7 +506,7 @@ METRIC
 
         $conn = $this->get('database_connection');
 
-        $machines = $conn->fetchAll($this->replaceFilters($machinesSql, $filters));
+        $machines = $conn->fetchAll($this->u->replaceFilters($machinesSql, $filters));
 
         // Machines
         foreach ($machines as $k => $machine ) {
@@ -617,7 +520,7 @@ METRIC
             $filters['machine_id'] = $machine["machine_id"];
 
             // Get all the classifications for this machine
-            $classificiationSqlParsed = $this->replaceFilters($classificiationSql, $filters);
+            $classificiationSqlParsed = $this->u->replaceFilters($classificiationSql, $filters);
             $classifications = $conn->fetchAll($classificiationSqlParsed);
 
             // Metrics
@@ -640,7 +543,7 @@ METRIC
 
                     $filters['classification_id'] = $class["classification_id"];
 
-                    $sqlParsed = $this->replaceFilters($sql, $filters);
+                    $sqlParsed = $this->u->replaceFilters($sql, $filters);
 
                     $results = $conn->fetchAll($sqlParsed);
 
@@ -653,4 +556,5 @@ METRIC
 
         return $data;
     }
+
 } 

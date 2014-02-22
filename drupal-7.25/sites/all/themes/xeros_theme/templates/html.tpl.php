@@ -66,6 +66,5 @@
 
   <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/news.js"></script>
 
-<!--  <script src="--><?php //print $base_path . $path_to_xeros_theme; ?><!--/js/scripts.js"></script>-->
 </body>
 </html>

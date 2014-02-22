@@ -131,13 +131,8 @@
         var apiUrlBase = '/api/report/consumption/{{fromDate}}/{{toDate}}.json';
         var dateRange = 'last30days';
     </script>
+<?php
+    $path = drupal_get_path('theme', 'xeros_theme');
+    drupal_add_js($path . '/js/ConsumptionView.js', array('scope' => 'footer', 'weight' => 1, 'preprocess' => TRUE));
+?>
 
-    <script src="/sites/all/themes/xeros_theme/js/spin.min.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/scripts.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/controls.js"></script>
-<script src="/sites/all/themes/xeros_theme/lib/kalendae/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
-
-    <script src="/sites/all/themes/xeros_theme/js/app.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/d3.min.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/chart.js"></script>
-    <script src="/sites/all/themes/xeros_theme/js/ConsumptionView.js"></script>

@@ -40,7 +40,20 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
   // The body tag's classes are controlled by the $classes_array variable. To
   // remove a class from $classes_array, use array_diff().
   //$variables['classes_array'] = array_diff($variables['classes_array'], array('class-to-remove'));
+
+    $path = drupal_get_path('theme', 'xeros_theme');
+    drupal_add_js($path . '/js/spin.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . 'lib/kalendae/kalendae.standalone.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/controls.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/lib/canvg-1.3/rgbcolor.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/lib/canvg-1.3/StackBlur.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/lib/canvg-1.3/canvg.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/d3.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/app.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/chart.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 }
+
+
 // */
 
 /**
