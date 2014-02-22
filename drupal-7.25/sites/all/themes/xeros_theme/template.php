@@ -43,7 +43,7 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
 
     $path = drupal_get_path('theme', 'xeros_theme');
     drupal_add_js($path . '/js/spin.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js($path . 'lib/kalendae/kalendae.standalone.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/lib/kalendae/kalendae.standalone.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/controls.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/canvg-1.3/rgbcolor.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/canvg-1.3/StackBlur.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
