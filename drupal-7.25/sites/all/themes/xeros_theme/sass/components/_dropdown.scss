@@ -138,3 +138,8 @@ dl {
 .cal__button-submit:hover, .cal__button-cancel:hover {
   border: 1px solid #333;
 }
+
+// Hide these controls until we get them working
+.download {
+  display: none;
+}

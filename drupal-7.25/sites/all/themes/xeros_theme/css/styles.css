@@ -846,6 +846,11 @@ img.flag {
   border: 1px solid #333;
 }
 
+/* line 143, ../sass/components/_dropdown.scss */
+.download {
+  display: none;
+}
+
 /** Base container **/
 /* line 2, ../sass/components/_kalendae.scss */
 .kalendae {
