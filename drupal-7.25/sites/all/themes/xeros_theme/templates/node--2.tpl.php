@@ -8,9 +8,11 @@
  */
 ?>
 <div id="page-1" class="main page">
+
     <div class="page-container">
         <div class="container">
             <div class="kpis">
+
                 <div class="legend">
                     <span class="swatch current"></span>
                     <span class="label">Current Consumption</span>
@@ -35,8 +37,17 @@
                             <div class="cal__button-cancel">Cancel</div>
                         </div>
                     </div>
-
                 </div>
+                <div class="download">
+                    <ul>
+                        <li><a href="" id="download__csv">Download Excel</a></li>
+                        <li><a href="" id="download__pdf">Download PDF</a></li>
+                    </ul>
+                </div>
+                <div class="data-range">
+                    Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
+                </div>
+
                 <div class="template-container">
 
                 </div>
@@ -131,5 +142,5 @@
 </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');
-    drupal_add_js($path . '/js/KpisView.js', array('scope' => 'footer', 'weight' => 1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/KpisView.js', array('scope' => 'footer', 'weight' => 1, 'preprocess' => FALSE));
 ?>
