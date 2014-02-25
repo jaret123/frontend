@@ -57,15 +57,20 @@ var chart = {
 
         // If we are dealing with less than 3 months data, put days on the ticks
         if ( data.length < 80 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"), 2)
+            xAxis.tickFormat(d3.time.format("%b %-d"), 2);
+            xAxis.ticks(6)
         }
         if ( data.length < 30 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"))
+            xAxis.tickFormat(d3.time.format("%b %-d"));
             xAxis.ticks(6);
         }
         if ( data.length < 8 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"))
+            xAxis.tickFormat(d3.time.format("%b %-d"));
             xAxis.ticks(data.length - 1);
+        }
+        if ( data.length == 1 ) {
+            xAxis.tickFormat(d3.time.format("%b %-d"));
+            xAxis.ticks(1);
         }
 
         // create the individual points for the line
@@ -78,9 +83,9 @@ var chart = {
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
-                return y(parseInt(0, 10));
-        //            return replaceNull(d["value"]);
+                return y(0);
             });
+
 
         var lineB = d3.svg.line()
             .x(function (d) {
@@ -92,7 +97,6 @@ var chart = {
                     return y(parseInt(value, 10)); // value 1
                 }
                 return y(0);
-        //            return replaceNull(d["value_xeros"]);
             });
 
         // adds SVG element to DOM, positioning properly
@@ -161,13 +165,6 @@ var chart = {
         // append the line itself
         svg.append("path")
             .datum(data)
-            .attr("class", "line-a")
-            .attr("d", lineA)
-            .attr("stroke", "#fff")
-            .attr("fill", "none");
-
-        svg.append("path")
-            .datum(data)
             .attr("class", "line-b")
             .attr("d", lineA)
             .attr("stroke", "blue")
@@ -176,6 +173,61 @@ var chart = {
             .duration(1500)
             .attr("d", lineB)
             .attr("fill", "none");
+
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line-a")
+            .attr("d", lineA)
+            .attr("stroke", "#fff")
+            .attr("fill", "none");
+
+        if (data.length < 8) {
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("class", "circle-b")
+                .attr("r", 3.5)
+                .attr("cx", function (d) {
+                    return x(parseDate(d["date"]));// date
+                })
+                .attr("cy", function (d) {
+                    var value = d["cost"];
+                    if (value !== "") {
+                        return y(parseInt(value, 10)); // value 1
+                    }
+                    return y(0);
+                })
+                .transition()
+                .delay(500)
+                .duration(1500)
+                .attr("cx", function (d) {
+                    return x(parseDate(d["date"]));// date
+                })
+                .attr("cy", function (d) {
+                    var value = d["cost_xeros"];
+                    if (value !== "") {
+                        return y(parseInt(value, 10)); // value 1
+                    }
+                    return y(0);
+                });
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("class", "circle-a")
+                .attr("r", 3.5)
+                .attr("cx", function (d) {
+                    return x(parseDate(d["date"]));// date
+                })
+                .attr("cy", function (d) {
+                    var value = d["cost"];
+                    if (value !== "") {
+                        return y(parseInt(value, 10)); // value 1
+                    }
+                    return y(0);
+                })
+            ;
+
+        }
     },
     drawBar: function () {
         self = this;

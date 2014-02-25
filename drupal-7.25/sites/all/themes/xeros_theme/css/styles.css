@@ -693,6 +693,14 @@ table {
 .kpi-chart .line-b {
   stroke: #0086bd;
 }
+/* line 53, ../sass/components/_chartKpi.scss */
+.kpi-chart circle.circle-a {
+  fill: white;
+}
+/* line 56, ../sass/components/_chartKpi.scss */
+.kpi-chart circle.circle-b {
+  fill: #0086bd;
+}
 
 /* line 10, ../sass/components/_dropdown.scss */
 .dropdown {
