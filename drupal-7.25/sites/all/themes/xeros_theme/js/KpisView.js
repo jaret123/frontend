@@ -16,13 +16,14 @@ var view = {
         app.reportData.data[0].summaryData.value_xeros = 0;
 
         for (var i = 1; i < 4; i++) {
-            app.reportData.data[0].summaryData.cost += parseInt(app.reportData.data[i].summaryData.cost, 10) ;
-            app.reportData.data[0].summaryData.cost_xeros += parseInt(app.reportData.data[i].summaryData.cost_xeros, 10);
-            app.reportData.data[0].summaryData.value += parseInt(app.reportData.data[i].summaryData.value, 10) ;
-            app.reportData.data[0].summaryData.value_xeros += parseInt(app.reportData.data[i].summaryData.value_xeros, 10) ;
+            if ( self.isValidSummaryData(app.reportData.data[i].summaryData) ) {
+                app.reportData.data[0].summaryData.cost += parseInt(app.reportData.data[i].summaryData.cost, 10) ;
+                app.reportData.data[0].summaryData.cost_xeros += parseInt(app.reportData.data[i].summaryData.cost_xeros, 10);
+                app.reportData.data[0].summaryData.value += parseInt(app.reportData.data[i].summaryData.value, 10) ;
+                app.reportData.data[0].summaryData.value_xeros += parseInt(app.reportData.data[i].summaryData.value_xeros, 10) ;
+            }
+
         }
-
-
         for ( i in app.reportData.data ) {
             s = app.reportData.data[i].summaryData;
             app.reportData.data[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
@@ -38,16 +39,28 @@ var view = {
         delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
         return delta;
     },
-    isValid : function(arr) { // TODO: Move to a utility library
+    isValidSummaryData : function( summaryData ) {
+       isValid = true;
+
+        if ( typeof(summaryData.cost) === "undefined" ||
+             typeof(summaryData.cost_xeros) === "undefined" ||
+             typeof(summaryData.value) === "undefined" ||
+             typeof(summaryData.value_xeros) === "undefined" ) {
+            isValid = false;
+            return isValid;
+        }
+
+        return isValid;
+    },
+    isValid : function(arr) {
+        // Test the chart data array
         var isValid = true;
 
-        for ( i in arr ) {
-            if ( isNaN(arr[i]) ) {
-                isValid = false;
-                return isValid;
-                // Break out because the whole array is invalid if one value is
-            }
+        if ( arr.length === 0 ) {
+            isValid = false;
+            return isValid;
         }
+
         return isValid;
     },
     drawCharts : function() {
@@ -55,7 +68,11 @@ var view = {
         chart.data = [];
         for ( i in app.data.data ) {
             chart.data = app.data.data[i];
-            chart.drawKPI();
+            if (self.isValid(chart.data.chartData)) {
+                chart.drawKPI();
+            } else {
+                jQuery(".kpi-chart." + app.data.data[i].name).html("No readings");
+            }
         }
     },
     showNews: function() {

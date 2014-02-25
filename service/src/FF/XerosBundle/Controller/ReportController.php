@@ -102,10 +102,10 @@ from
 	    xeros_dates as xd
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
+	      and xc.machine_id in ( :machineIds )
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
-	    and xc.machine_id in ( :machineIds )
 	group by
 		xd.date,
 		xc.reading_date
@@ -123,7 +123,6 @@ from
 	(
 	select
 	    xd.date,
-	    xc.reading_date,
         :metric
 	from
 	    xeros_dates as xd
@@ -133,6 +132,8 @@ from
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
 	    and xc.machine_id in ( :machineIds )
+	group by
+	    xd.date
 	) as b
 where
    1 = 1

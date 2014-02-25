@@ -36,16 +36,13 @@ var chart = {
         // setup the x-axis notation
         var xAxis = d3.svg.axis()
             .scale(x)
-            .ticks(6)
-            //.ticks(d3.time.months, 2)
-            .tickFormat(d3.time.format("%b"), 2)
-            .tickSize(0)
+            //.ticks(ticks)
+            .ticks(10)
+            .tickFormat(d3.time.format("%b"))
+            //.tickSize(0)
             .orient("bottom");
 
-        // If we are dealing with less than 3 months data, put days on the ticks
-        if ( data.length < 80 ) {
-            xAxis.tickFormat(d3.time.format("%b %d"), 2)
-        }
+
         //    .ticks(d3.time.days, 1)
 
         // use this based on chart date range
@@ -57,6 +54,19 @@ var chart = {
             .tickSize(-width)
             .ticks(6)
             .orient("left");
+
+        // If we are dealing with less than 3 months data, put days on the ticks
+        if ( data.length < 80 ) {
+            xAxis.tickFormat(d3.time.format("%b %-d"), 2)
+        }
+        if ( data.length < 30 ) {
+            xAxis.tickFormat(d3.time.format("%b %-d"))
+            xAxis.ticks(6);
+        }
+        if ( data.length < 8 ) {
+            xAxis.tickFormat(d3.time.format("%b %-d"))
+            xAxis.ticks(data.length - 1);
+        }
 
         // create the individual points for the line
         var lineA = d3.svg.line()
