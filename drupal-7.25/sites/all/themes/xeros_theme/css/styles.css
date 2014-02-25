@@ -683,7 +683,7 @@ table {
 /* line 41, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
-  stroke-width: 3px;
+  stroke-width: 2px;
 }
 /* line 46, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {

@@ -84,7 +84,8 @@ var chart = {
                     return y(parseInt(value, 10)); // value 1
                 }
                 return y(0);
-            });
+            })
+            .interpolate("cardinal");
 
 
         var lineB = d3.svg.line()
@@ -97,7 +98,8 @@ var chart = {
                     return y(parseInt(value, 10)); // value 1
                 }
                 return y(0);
-            });
+            })
+            .interpolate("cardinal");
 
         // adds SVG element to DOM, positioning properly
         var selector = ".kpi-chart." + name;
@@ -139,7 +141,7 @@ var chart = {
             return 0;
         //        return replaceNull(d["value_value"]);
         });
-        var min = d3.min([extentA[0], extentB[0]]);
+        var min = d3.min([extentA[0], extentB[0], 0]);
         var max = d3.max([extentA[1], extentB[1], 100]); // Added 1000 to deal with no records found
 
         var round = 100;
@@ -148,7 +150,7 @@ var chart = {
         y.domain([min, max]);
 
         // append the notation for x-axis to the DOM and position
-        svg.append("g")
+        var gxAxis = svg.append("g")
             .attr("class", "x axis")
             .attr("fill", "none")
             .attr("stroke", "white")
@@ -161,6 +163,9 @@ var chart = {
             .attr("fill", "none")
             .attr("stroke", "white")
             .call(yAxis);
+
+        if (data.length > 1) {
+
 
         // append the line itself
         svg.append("path")
@@ -181,7 +186,57 @@ var chart = {
             .attr("stroke", "#fff")
             .attr("fill", "none");
 
-        if (data.length < 8) {
+
+            if (data.length < 8) {
+                svg.selectAll("dot")
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("class", "circle-b")
+                    .attr("r", 3.5)
+                    .attr("cx", function (d) {
+                        return x(parseDate(d["date"]));// date
+                    })
+                    .attr("cy", function (d) {
+                        var value = d["cost"];
+                        if (value !== "") {
+                            return y(parseInt(value, 10)); // value 1
+                        }
+                        return y(0);
+                    })
+                    .transition()
+                    .delay(500)
+                    .duration(1500)
+                    .attr("cx", function (d) {
+                        return x(parseDate(d["date"]));// date
+                    })
+                    .attr("cy", function (d) {
+                        var value = d["cost_xeros"];
+                        if (value !== "") {
+                            return y(parseInt(value, 10)); // value 1
+                        }
+                        return y(0);
+                    });
+                svg.selectAll("dot")
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("class", "circle-a")
+                    .attr("r", 3.5)
+                    .attr("cx", function (d) {
+                        return x(parseDate(d["date"]));// date
+                    })
+                    .attr("cy", function (d) {
+                        var value = d["cost"];
+                        if (value !== "") {
+                            return y(parseInt(value, 10)); // value 1
+                        }
+                        return y(0);
+                    })
+                ;
+
+            }
+        }
+        if ( data.length == 1 ) {
+            //gxAxis.attr("transform", "translate(" + width / 2 + "," + height + ")");
             svg.selectAll("dot")
                 .data(data)
                 .enter().append("circle")
@@ -197,6 +252,7 @@ var chart = {
                     }
                     return y(0);
                 })
+                .attr("transform", "translate(" + width / 2 + "," + 0 + ")")
                 .transition()
                 .delay(500)
                 .duration(1500)
@@ -211,22 +267,22 @@ var chart = {
                     return y(0);
                 });
             svg.selectAll("dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("class", "circle-a")
-                .attr("r", 3.5)
-                .attr("cx", function (d) {
-                    return x(parseDate(d["date"]));// date
-                })
-                .attr("cy", function (d) {
-                    var value = d["cost"];
-                    if (value !== "") {
-                        return y(parseInt(value, 10)); // value 1
-                    }
-                    return y(0);
-                })
-            ;
-
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("class", "circle-a")
+                    .attr("r", 3.5)
+                    .attr("cx", function (d) {
+                        return x(parseDate(d["date"]));// date
+                    })
+                    .attr("cy", function (d) {
+                        var value = d["cost"];
+                        if (value !== "") {
+                            return y(parseInt(value, 10)); // value 1
+                        }
+                        return y(0);
+                    })
+                    .attr("transform", "translate(" + width / 2 + "," + 0 + ")")
+                ;
         }
     },
     drawBar: function () {
