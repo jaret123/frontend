@@ -73,7 +73,7 @@ var app = {
         fromDate = new Date();
         toDate = new Date();
 
-        fromDate.setMonth(self.date.getMonth() - 7);
+        fromDate.setMonth(self.date.getMonth() - 6);
         fromDate.setDate(1);
 
         toDate.setMonth(self.date.getMonth())
@@ -193,7 +193,14 @@ var app = {
                     // sessionTimeSelect as custom
                     if ( hashArray[2].substr(0,6) === "custom" ) {
                         var dr = hashArray[2].split(",");
-                        self.sessionDateRange = [ dr[1], dr[2] ];
+                        self.sessionDateRange[0] = dr[1];
+                        // If we only selected one value in the date range selector, then set the second param to the first
+                        if ( typeof(dr[2]) == "undefined" ) {
+                            self.sessionDateRange[1] = dr[1];
+                        } else {
+                            self.sessionDateRange[1] = dr[2];
+                        }
+
                         self.sessionTimeSelect = dr[0];
                         console.log(dr);
                     } else {
