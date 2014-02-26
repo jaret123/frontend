@@ -33,16 +33,13 @@
                     </span>
                     <div id="cal">
                         <div class="cal__button">
-                            <div class="cal__button-submit">Get Data</div>
+                            <div class="cal__button-submit">Update</div>
                             <div class="cal__button-cancel">Cancel</div>
                         </div>
                     </div>
                 </div>
                 <div class="download">
-                    <ul>
-                        <li><a href="" id="download__csv">Download Excel</a></li>
-                        <li><a href="" id="download__pdf">Download PDF</a></li>
-                    </ul>
+                    Download<a href="" id="download__csv">Excel</a><a href="" id="download__pdf">PDF</a>
                 </div>
                 <div class="data-range">
                     Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>

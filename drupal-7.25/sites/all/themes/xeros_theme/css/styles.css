@@ -701,7 +701,7 @@ table {
 }
 /* line 15, ../sass/components/_dropdown.scss */
 .dropdown a:hover {
-  color: black;
+  color: #0087be;
   border-bottom: none;
 }
 /* line 21, ../sass/components/_dropdown.scss */
@@ -722,19 +722,19 @@ table {
 }
 /* line 34, ../sass/components/_dropdown.scss */
 .dropdown a:hover {
-  color: black;
+  color: #0087be;
 }
 /* line 37, ../sass/components/_dropdown.scss */
 .dropdown dt a:hover {
-  color: black;
-  border: 1px solid gray;
+  color: #0087be;
+  border: 1px solid #5ba0d0;
 }
 /* line 41, ../sass/components/_dropdown.scss */
 .dropdown dt a {
   background-color: white;
   display: block;
   padding-right: 20px;
-  border: 1px solid gray;
+  border: 1px solid #cccccc;
   width: 160px;
   padding: 5px;
 }
@@ -752,44 +752,43 @@ table {
 /* line 58, ../sass/components/_dropdown.scss */
 .dropdown dd ul {
   background: white none repeat scroll 0 0;
-  border: 1px solid gray;
+  border: 1px solid #cccccc;
   color: #444444;
   display: none;
   left: 0px;
-  padding: 5px 0px;
   position: absolute;
-  top: 2px;
+  top: 1px;
   width: auto;
   min-width: 170px;
   list-style: none;
 }
-/* line 71, ../sass/components/_dropdown.scss */
+/* line 70, ../sass/components/_dropdown.scss */
 .dropdown span.value {
   display: none;
 }
-/* line 74, ../sass/components/_dropdown.scss */
+/* line 73, ../sass/components/_dropdown.scss */
 .dropdown dd ul li a {
   padding: 5px;
   display: block;
 }
-/* line 78, ../sass/components/_dropdown.scss */
+/* line 77, ../sass/components/_dropdown.scss */
 .dropdown dd ul li a:hover {
-  background-color: #bbbbbb;
+  background-color: #eeeeee;
 }
 
-/* line 83, ../sass/components/_dropdown.scss */
+/* line 82, ../sass/components/_dropdown.scss */
 img.flag {
   border: none;
   vertical-align: middle;
   margin-left: 10px;
 }
 
-/* line 89, ../sass/components/_dropdown.scss */
+/* line 88, ../sass/components/_dropdown.scss */
 .flagvisibility {
   display: none;
 }
 
-/* line 97, ../sass/components/_dropdown.scss */
+/* line 96, ../sass/components/_dropdown.scss */
 #cal {
   position: absolute;
   right: 0;
@@ -797,7 +796,7 @@ img.flag {
   padding-right: 0;
   margin-right: 0;
   background: white;
-  border: 1px solid #333;
+  border: 1px solid #ccc;
   border-radius: 0;
   margin-top: -11px;
   z-index: 1;
@@ -805,51 +804,78 @@ img.flag {
   padding-bottom: 15px;
 }
 
-/* line 111, ../sass/components/_dropdown.scss */
+/* line 110, ../sass/components/_dropdown.scss */
 #cal.show {
   display: block;
 }
 
-/* line 114, ../sass/components/_dropdown.scss */
+/* line 113, ../sass/components/_dropdown.scss */
 #time-select__dl {
   /* border-bottom: 1px solid white; */
   /*position: relative;*/
   /*z-index: 10;*/
 }
 
-/* line 119, ../sass/components/_dropdown.scss */
+/* line 118, ../sass/components/_dropdown.scss */
 .dropdown dt a {
   /*border-bottom: 1px solid white;*/
 }
 
-/* line 122, ../sass/components/_dropdown.scss */
+/* line 121, ../sass/components/_dropdown.scss */
 .cal__button {
   position: absolute;
   bottom: 0;
   right: 0;
   z-index: 999;
-  padding-right: 15px;
+  padding-right: 18px;
 }
 
-/* line 129, ../sass/components/_dropdown.scss */
+/* line 128, ../sass/components/_dropdown.scss */
 .cal__button-submit, .cal__button-cancel {
-  font-size: 10px;
+  font-size: 11px;
   display: inline-block;
-  color: #333;
-  border: 1px solid #ddd;
+  color: #777;
+  border: 1px solid #cccccc;
   border-radius: 3px;
   line-height: 20px;
-  padding: 0 5px;
+  padding: 1px 5px;
+  margin: 5px 0 5px 3px;
+  text-transform: uppercase;
 }
 
-/* line 138, ../sass/components/_dropdown.scss */
+/* line 139, ../sass/components/_dropdown.scss */
 .cal__button-submit:hover, .cal__button-cancel:hover {
-  border: 1px solid #333;
+  border: 1px solid #5ba0d0;
+  background: #eeeeee;
+  color: #0087be;
+  cursor: pointer;
 }
 
-/* line 143, ../sass/components/_dropdown.scss */
+/* line 147, ../sass/components/_dropdown.scss */
 .download {
-  display: none;
+  float: left;
+  font-size: 12px;
+  margin-left: 3px;
+}
+/* line 152, ../sass/components/_dropdown.scss */
+.download a:link, .download a:visited {
+  background-color: #aaa;
+  margin-left: 5px;
+  padding: 3px;
+  border-radius: 3px;
+  font-size: 11px;
+  text-decoration: none;
+  color: white;
+}
+/* line 162, ../sass/components/_dropdown.scss */
+.download a:hover, .download a:active {
+  background-color: #5ba0d0;
+}
+
+/* line 167, ../sass/components/_dropdown.scss */
+.data-range {
+  float: right;
+  font-size: 12px;
 }
 
 /** Base container **/
@@ -859,19 +885,20 @@ img.flag {
   zoom: 1;
   *display: inline;
   background: #eee;
-  padding: 10px;
+  padding: 12px;
   margin: 5px;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   font-size: 11px;
-  font-family: 'Helvetica Neue', 'Helvetica';
+  /*	font-family:'Helvetica Neue', 'Helvetica'; */
   cursor: default;
   position: relative;
+  margin: 5px 4px 19px 4px;
 }
 
 /** Popup Container for Kalendae.Input **/
-/* line 17, ../sass/components/_kalendae.scss */
+/* line 18, ../sass/components/_kalendae.scss */
 .kalendae.k-floating {
   position: absolute;
   top: 0;
@@ -884,7 +911,7 @@ img.flag {
 }
 
 /** Kalendae.Input's popup close button **/
-/* line 29, ../sass/components/_kalendae.scss */
+/* line 30, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-close {
   position: absolute;
   top: -8px;
@@ -903,12 +930,12 @@ img.flag {
   text-decoration: none;
 }
 
-/* line 46, ../sass/components/_kalendae.scss */
+/* line 47, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-close:after {
   content: "\2716";
 }
 
-/* line 47, ../sass/components/_kalendae.scss */
+/* line 48, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-close:hover {
   color: #7EA0E2;
   background: white;
@@ -916,7 +943,7 @@ img.flag {
 }
 
 /** Month Container **/
-/* line 54, ../sass/components/_kalendae.scss */
+/* line 55, ../sass/components/_kalendae.scss */
 .kalendae .k-calendar {
   display: inline-block;
   zoom: 1;
@@ -926,7 +953,7 @@ img.flag {
 }
 
 /** Month Separator **/
-/* line 57, ../sass/components/_kalendae.scss */
+/* line 58, ../sass/components/_kalendae.scss */
 .kalendae .k-separator {
   display: inline-block;
   zoom: 1;
@@ -939,7 +966,7 @@ img.flag {
 }
 
 /** Month Title Row **/
-/* line 60, ../sass/components/_kalendae.scss */
+/* line 61, ../sass/components/_kalendae.scss */
 .kalendae .k-title {
   text-align: center;
   white-space: nowrap;
@@ -947,14 +974,14 @@ img.flag {
   height: 18px;
 }
 
-/* line 61, ../sass/components/_kalendae.scss */
+/* line 62, ../sass/components/_kalendae.scss */
 .kalendae .k-caption {
   font-size: 12px;
   line-height: 18px;
 }
 
 /** Month and Year Buttons **/
-/* line 68, ../sass/components/_kalendae.scss */
+/* line 69, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-month,
 .kalendae .k-btn-next-month,
 .kalendae .k-btn-previous-year,
@@ -963,69 +990,69 @@ img.flag {
   height: 16px;
   cursor: pointer;
   position: absolute;
-  top: -3px;
+  top: 1px;
   color: #777;
-  font-size: 26px;
+  font-size: 20px;
   line-height: 18px;
   font-weight: bold;
   font-family: arial;
   text-decoration: none;
 }
 
-/* line 82, ../sass/components/_kalendae.scss */
+/* line 83, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-year {
   left: 0;
 }
 
-/* line 83, ../sass/components/_kalendae.scss */
+/* line 84, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-month {
   left: 16px;
 }
 
-/* line 84, ../sass/components/_kalendae.scss */
+/* line 85, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-next-month {
   right: 16px;
 }
 
-/* line 85, ../sass/components/_kalendae.scss */
+/* line 86, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-next-year {
   right: 0;
 }
 
-/* line 87, ../sass/components/_kalendae.scss */
+/* line 88, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-month:after {
   content: "\2039";
 }
 
-/* line 88, ../sass/components/_kalendae.scss */
+/* line 89, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-next-month:after {
   content: "\203A";
 }
 
-/* line 90, ../sass/components/_kalendae.scss */
+/* line 91, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-year:after {
   content: "\00AB";
 }
 
-/* line 91, ../sass/components/_kalendae.scss */
+/* line 92, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-next-year:after {
   content: "\00BB";
 }
 
-/* line 94, ../sass/components/_kalendae.scss */
+/* line 95, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-month:hover,
 .kalendae .k-btn-next-month:hover {
   color: #7EA0E2;
 }
 
-/* line 97, ../sass/components/_kalendae.scss */
+/* line 98, ../sass/components/_kalendae.scss */
 .kalendae .k-btn-previous-year:hover,
 .kalendae .k-btn-next-year:hover {
   color: #6FDF81;
 }
 
 /** Remove extra buttons when calendar shows multiple months **/
-/* line 107, ../sass/components/_kalendae.scss */
+/* line 108, ../sass/components/_kalendae.scss */
 .kalendae .k-first-month .k-btn-next-month,
 .kalendae .k-middle-month .k-btn-next-month,
 .kalendae .k-middle-month .k-btn-previous-month,
@@ -1038,24 +1065,24 @@ img.flag {
 }
 
 /** Disable year nav option **/
-/* line 111, ../sass/components/_kalendae.scss */
+/* line 112, ../sass/components/_kalendae.scss */
 .kalendae .k-title.k-disable-year-nav .k-btn-next-year,
 .kalendae .k-title.k-disable-year-nav .k-btn-previous-year {
   display: none;
 }
 
-/* line 112, ../sass/components/_kalendae.scss */
+/* line 113, ../sass/components/_kalendae.scss */
 .kalendae .k-title.k-disable-year-nav .k-btn-next-month {
   right: 0;
 }
 
-/* line 113, ../sass/components/_kalendae.scss */
+/* line 114, ../sass/components/_kalendae.scss */
 .kalendae .k-title.k-disable-year-nav .k-btn-previous-month {
   left: 0;
 }
 
 /** Force specific width for month container contents **/
-/* line 118, ../sass/components/_kalendae.scss */
+/* line 119, ../sass/components/_kalendae.scss */
 .kalendae .k-title,
 .kalendae .k-header,
 .kalendae .k-days {
@@ -1065,7 +1092,7 @@ img.flag {
 }
 
 /** Hide unusable buttons **/
-/* line 129, ../sass/components/_kalendae.scss */
+/* line 130, ../sass/components/_kalendae.scss */
 .kalendae.k-disable-next-month-btn .k-btn-next-month,
 .kalendae.k-disable-previous-month-btn .k-btn-previous-month,
 .kalendae.k-disable-next-year-btn .k-btn-next-year,
@@ -1074,14 +1101,14 @@ img.flag {
 }
 
 /** Week columns and day cells **/
-/* line 136, ../sass/components/_kalendae.scss */
+/* line 137, ../sass/components/_kalendae.scss */
 .kalendae .k-header span,
 .kalendae .k-days span {
   float: left;
   margin: 1px 1px;
 }
 
-/* line 141, ../sass/components/_kalendae.scss */
+/* line 142, ../sass/components/_kalendae.scss */
 .kalendae .k-header span {
   text-align: center;
   font-weight: bold;
@@ -1090,7 +1117,7 @@ img.flag {
   color: #666;
 }
 
-/* line 149, ../sass/components/_kalendae.scss */
+/* line 150, ../sass/components/_kalendae.scss */
 .kalendae .k-days span {
   text-align: right;
   width: 13px;
@@ -1105,13 +1132,13 @@ img.flag {
 }
 
 /** Today **/
-/* line 163, ../sass/components/_kalendae.scss */
+/* line 164, ../sass/components/_kalendae.scss */
 .kalendae .k-today {
   text-decoration: underline;
 }
 
 /** Days inside of the month view **/
-/* line 168, ../sass/components/_kalendae.scss */
+/* line 169, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-in-month.k-active {
   border-color: #ddd;
   background-color: #fff;
@@ -1119,59 +1146,65 @@ img.flag {
 }
 
 /** Days outside of the month view (before the first day of the month, after the last day of the month) **/
-/* line 174, ../sass/components/_kalendae.scss */
+/* line 175, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-out-of-month {
   color: #ddd;
 }
 
 /** Selectable  **/
-/* line 177, ../sass/components/_kalendae.scss */
+/* line 178, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-active {
   cursor: pointer;
 }
 
 /** Selected day, when outside the selectable area **/
-/* line 182, ../sass/components/_kalendae.scss */
+/* line 183, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-selected {
   border-color: #1072A5;
   color: #1072A5;
 }
 
 /** Selected day, when inside the selectable area **/
-/* line 188, ../sass/components/_kalendae.scss */
+/* line 189, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-selected.k-active {
   background: #7EA0E2;
   color: white;
 }
 
+/* line 193, ../sass/components/_kalendae.scss */
+.kalendae .k-days span.k-selected.k-out-of-month.k-active {
+  background: none;
+  color: #ddd;
+  border: 0;
+}
+
 /** Days between the start and end points on a range, outside of the selectable area **/
-/* line 194, ../sass/components/_kalendae.scss */
+/* line 200, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-range {
   background: none;
-  border-color: #6DD4FE;
 }
 
 /** Days between the start and end points on a range, inside of the selectable area **/
-/* line 200, ../sass/components/_kalendae.scss */
+/* line 205, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-range.k-in-month {
-  background: #C4D4F1;
-  border-color: #19AEFE;
+  background: #e2e8ed;
+  border-color: #529cc4;
   color: #333;
 }
 
 /** Selectable day, hovered **/
-/* line 207, ../sass/components/_kalendae.scss */
+/* line 212, ../sass/components/_kalendae.scss */
 .kalendae .k-days span.k-active:hover {
   border-color: #666;
 }
 
 /** Selectable week, hovered **/
-/* line 212, ../sass/components/_kalendae.scss */
+/* line 217, ../sass/components/_kalendae.scss */
 .kalendae .k-week:hover span.k-active {
   border-color: #666;
 }
 
-/* line 216, ../sass/components/_kalendae.scss */
+/* line 221, ../sass/components/_kalendae.scss */
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -1182,12 +1215,12 @@ img.flag {
 }
 
 /*-------------------------------------IE8 ONLY CODE BELOW THIS LINE--------------------------------------------*/
-/* line 220, ../sass/components/_kalendae.scss */
+/* line 225, ../sass/components/_kalendae.scss */
 .kalendae.ie8.k-floating {
   border: 1px solid #ccc;
 }
 
-/* line 224, ../sass/components/_kalendae.scss */
+/* line 229, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-close {
   width: 20px;
   height: 20px;
@@ -1195,12 +1228,12 @@ img.flag {
   background: url("close.png") no-repeat top left;
 }
 
-/* line 230, ../sass/components/_kalendae.scss */
+/* line 235, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-close:after {
   display: none;
 }
 
-/* line 235, ../sass/components/_kalendae.scss */
+/* line 240, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-previous-month,
 .kalendae.ie8 .k-btn-next-month,
 .kalendae.ie8 .k-btn-previous-year,
@@ -1213,31 +1246,31 @@ img.flag {
   top: 0;
 }
 
-/* line 238, ../sass/components/_kalendae.scss */
+/* line 243, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-next-month,
 .kalendae.ie8 .k-btn-next-year {
   background-position: center right;
 }
 
-/* line 241, ../sass/components/_kalendae.scss */
+/* line 246, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-previous-month:hover,
 .kalendae.ie8 .k-btn-next-month:hover {
   background-color: #7EA0E2;
 }
 
-/* line 244, ../sass/components/_kalendae.scss */
+/* line 249, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-previous-year,
 .kalendae.ie8 .k-btn-next-year {
   background-color: #333;
 }
 
-/* line 247, ../sass/components/_kalendae.scss */
+/* line 252, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-previous-year:hover,
 .kalendae.ie8 .k-btn-next-year:hover {
   background-color: #6FDF81;
 }
 
-/* line 252, ../sass/components/_kalendae.scss */
+/* line 257, ../sass/components/_kalendae.scss */
 .kalendae.ie8 .k-btn-previous-month:after,
 .kalendae.ie8 .k-btn-next-month:after,
 .kalendae.ie8 .k-btn-previous-year:after,
@@ -2083,7 +2116,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1376896851');
+  background-image: url('../images/progress.gif?1393276868');
 }
 
 /* line 2, ../sass/components/_footer.scss */
@@ -2219,7 +2252,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2230,15 +2263,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -2268,7 +2301,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2279,15 +2312,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -2438,7 +2471,7 @@ h1 {
   width: 20px;
   height: 12px;
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 3px;
   margin-bottom: -1px;
 }
 /* line 17, ../sass/components/_legend.scss */
@@ -3369,42 +3402,42 @@ html {
  */
 @media print {
   /* Underline all links. */
-  /* line 16, ../sass/_print.scss */
+  /* line 17, ../sass/_print.scss */
   a:link,
   a:visited {
     text-decoration: underline !important;
     /* Don't underline header. */
   }
-  /* line 20, ../sass/_print.scss */
+  /* line 21, ../sass/_print.scss */
   a:link.header__site-link,
   a:visited.header__site-link {
     text-decoration: none !important;
   }
 
-  /* line 25, ../sass/_print.scss */
+  /* line 26, ../sass/_print.scss */
   #content {
     /* Add visible URL after links. */
     /* Only display useful links. */
     /* Add visible title after abbreviations. */
   }
-  /* line 27, ../sass/_print.scss */
+  /* line 28, ../sass/_print.scss */
   #content a[href]:after {
     content: " (" attr(href) ")";
     font-weight: normal;
     font-size: 16px;
   }
-  /* line 35, ../sass/_print.scss */
+  /* line 36, ../sass/_print.scss */
   #content a[href^="javascript:"]:after,
   #content a[href^="#"]:after {
     content: "";
   }
-  /* line 40, ../sass/_print.scss */
+  /* line 41, ../sass/_print.scss */
   #content abbr[title]:after {
     content: " (" attr(title) ")";
   }
 
   /* Un-float the content. */
-  /* line 46, ../sass/_print.scss */
+  /* line 47, ../sass/_print.scss */
   #content {
     float: none !important;
     width: 100% !important;
@@ -3413,7 +3446,7 @@ html {
   }
 
   /* Turn off any background colors or images. */
-  /* line 57, ../sass/_print.scss */
+  /* line 58, ../sass/_print.scss */
   body,
   #page,
   #main,
@@ -3424,7 +3457,7 @@ html {
   }
 
   /* Hide sidebars and nav elements. */
-  /* line 77, ../sass/_print.scss */
+  /* line 78, ../sass/_print.scss */
   #skip-link,
   #toolbar,
   #navigation,
