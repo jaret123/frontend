@@ -14,27 +14,6 @@ class FPDF extends tFPDF
      */
     protected $_tplIdx;
 
-    /**
-     * Draw a background on
-     */
-//    public function Header()
-//    {
-//        if (is_null($this->_tplIdx)) {
-//            $this->setSourceFile("dash-template.pdf");
-//            $this->_tplIdx = $this->importPage(1);
-//        }
-//        $size = $this->useTemplate($this->_tplIdx, 0, 0, 0);
-//
-//        $this->SetFont('DejaVu', 'B', 16);
-//        $this->SetTextColor(0);
-//        $this->SetXY($this->lMargin, 5);
-//
-//        $text = 'tFPDF (v' . tFPDF_VERSION . ') and FPDI (v'
-//            . FPDI_VERSION . ')';
-//        $this->Cell(0, $size['h'], $text);
-//        $this->Ln();
-//    }
-
     // use the background template
     public function AddPage($orientation='', $size='') {
         parent::AddPage($orientation,$size);
@@ -54,101 +33,13 @@ $b = 0; // Show borders on cells
 
 // Load the dynamice content from the post
 $content = json_decode(utf8_encode($_POST['content']));
-//
-//$content["t"]
-//    "title" => "Operational Health Dashboard",
-//    "legend" => array(
-//        "Current Consumption",
-//        "Potential Consumption with Xeros"
-//    ),
-//    "charts" => array(
-//        array(
-//            "name" => "TOTAL SAVINGS",
-//            "value" => 438,
-//            "label" => "Actual Cost",
-//            "value2" => 182,
-//            "label2" => "Potential Cost",
-//            "delta" => 58
-//        ),
-//        array(
-//            "name" => "WATER COST",
-//            "value" => 222,
-//            "label" => "Actual Cost",
-//            "value2" => 182,
-//            "label2" => "Potential Cost",
-//            "delta" => 58
-//        ),
-//        array(
-//            "name" => "Total Savings",
-//            "value" => 54,
-//            "label" => "Actual Cost",
-//            "value2" => 182,
-//            "label2" => "Potential Cost",
-//            "delta" => 58
-//        ),
-//        array(
-//            "name" => "Total Savings",
-//            "value" => 321,
-//            "label" => "Actual Cost",
-//            "value2" => 182,
-//            "label2" => "Potential Cost",
-//            "delta" => 58
-//        ),
-//        array(
-//            "name" => "Total Savings",
-//            "value" => 100,
-//            "label" => "Actual Cost",
-//            "value2" => 182,
-//            "label2" => "Potential Cost",
-//            "delta" => 58
-//        )
-//    ),
-//    "news" => array(
-//        array(
-//            "title" => "In the News",
-//            "copy" => "Eco-conscious cleaning with polymer beads",
-//            "image" => "Image"
-//        ),
-//        array(
-//            "title" => "In the News",
-//            "copy" => "Eco-conscious cleaning with polymer beads",
-//            "image" => "Image"
-//        ),
-//        array(
-//            "title" => "In the News",
-//            "copy" => "Eco-conscious cleaning with polymer beads",
-//            "image" => "Image"
-//        )
-//    )
-//);
+
 // Add some Unicode font (uses UTF-8)
-$pdf->AddFont('Lato', '', 'Lato-lig.ttf', true);
-//$pdf->AddFont('Lato', 'B', 'Lato-lig.ttf', true);
+$pdf->AddFont('Lato', '', 'Lato-Lig.ttf', true);
 
-// add a page
-//$pdf->AddPage();
-
-//$pageCount = $pdf->setSourceFile("dash-template.pdf");
-//$tplIdx = $pdf->importPage(1, '/MediaBox');
-//
-//$pdf->addPage();
-//$pdf->useTemplate($tplIdx, 0, 0, 0);
 
 $pdf->AddPage("portrait", "letter");
 $pdf->SetFont('Lato','',10);
-
-
-//$pdf->SetFont('Lato', '', 16);
-//$pdf->SetTextColor(128,128,128);
-//
-////$pdf->Write(8, 'Hello ' . $content->name);
-//
-//// Select a standard font (uses windows-1252)
-//$pdf->SetFont('Lato', '', 16);
-//$pdf->Ln(15);
-//$pdf->Write(5, 'Operational Health Dashboard');
-//
-//
 
 // print header
 

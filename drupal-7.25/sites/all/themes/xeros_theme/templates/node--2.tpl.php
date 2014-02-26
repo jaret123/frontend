@@ -116,7 +116,7 @@
 
 <!--    <a href="#" class="btn btn-primary download-pdf">Download PDF</a>-->
 <!---->
-    <canvas id="drawingArea"></canvas>
+    <canvas id="drawingArea" style="display:none;"></canvas>
 </div>
 <script>
     var reports = [
