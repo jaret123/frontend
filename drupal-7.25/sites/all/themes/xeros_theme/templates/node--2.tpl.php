@@ -46,6 +46,11 @@
                 </div>
                 <div class="data-range">
                     Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
+
+                    <span class="export-pdf">PDF</span> <span class="export-csv">CSV</span>
+                    <form id="export-pdf__form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
+                        <textarea id="export-pdf__form-data" name="content">json string</textarea>
+                    </form>
                 </div>
 
                 <div class="template-container">
@@ -60,7 +65,7 @@
                             <div class="col title">{{meta.title}}</div>
                         </div>
                         <div class="col col-2">
-                            <div class="col kpi-chart {{name}}"></div>
+                            <div class="col kpi-chart chart {{name}}" name="{{name}}"></div>
                         </div>
                         <div class="col col-3">
                             <div class="col unit">{{meta.title}}&nbsp;</div>
@@ -117,7 +122,7 @@
 
 <!--    <a href="#" class="btn btn-primary download-pdf">Download PDF</a>-->
 <!---->
-<!--    <canvas id="drawingArea"></canvas>-->
+    <canvas id="drawingArea"></canvas>
 </div>
 <script>
     var reports = [
@@ -128,7 +133,6 @@
             callback : "newsCallback"
         }
     ];
-
 </script>
 <script>
     var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';

@@ -20,6 +20,12 @@
 
     text {
         fill: #FFF;
+        font-family: Lato;
+        font-size: 12px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 300;
+        text-rendering: optimizeLegibility;
     }
 
     .x.axis line {
@@ -40,7 +46,7 @@
 
     .line-a, .line-b {
         fill: none;
-        stroke-width: 2px;
+        stroke-width: 3px;
     }
 
     .line-a {

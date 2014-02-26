@@ -119,6 +119,13 @@ var chart = {
             .attr("width",  width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + -(margin.left) + "," + -(margin.top) + ")")
+            .style("font-family", "Lato")
+            .style("font-size", "12px")
+            .style("font-style", "normal")
+            .style("font-variant", "normal")
+            .style("font-weight", "300")
+            .style("text-rendering", "optimizeLegibility")
+            .style("shape-rendering", "default")
             //.attr("fill", "red")
 
         // find the extent (min / max) of the values

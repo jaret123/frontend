@@ -679,25 +679,31 @@ table {
 /* line 21, ../sass/components/_chartKpi.scss */
 .kpi-chart text {
   fill: #FFF;
+  font-family: Lato;
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
 }
-/* line 41, ../sass/components/_chartKpi.scss */
+/* line 47, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 3px;
 }
-/* line 46, ../sass/components/_chartKpi.scss */
+/* line 52, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {
   stroke: white;
 }
-/* line 50, ../sass/components/_chartKpi.scss */
+/* line 56, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-b {
   stroke: #0086bd;
 }
-/* line 53, ../sass/components/_chartKpi.scss */
+/* line 59, ../sass/components/_chartKpi.scss */
 .kpi-chart circle.circle-a {
   fill: white;
 }
-/* line 56, ../sass/components/_chartKpi.scss */
+/* line 62, ../sass/components/_chartKpi.scss */
 .kpi-chart circle.circle-b {
   fill: #0086bd;
 }
@@ -2227,7 +2233,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2238,15 +2244,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -2276,7 +2282,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2287,15 +2293,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }

@@ -133,6 +133,33 @@ var controls = {
         });
 
     },
+    createExport : function() {
+        // Bind the download links
+
+        // On clicking export PDF put the data into the form then redirect to the PDF.
+        jQuery(".export-pdf").click(function() {
+
+            app.data.chart = {};
+
+            // Add the images to app.data.charts[]
+            jQuery(".chart").each(function() {
+
+                var content = jQuery(this).html().trim(),
+                    canvas = document.getElementById('drawingArea');
+
+                canvg(canvas, content);
+
+                var theImage = canvas.toDataURL('image/png');
+                app.data.chart[jQuery(this).attr("name")] = theImage;
+            });
+
+            var form = jQuery("#export-pdf__form");
+            jQuery(form).find("#export-pdf__form-data").html(JSON.stringify(app.data));
+            console.log(form);
+
+            jQuery(form).submit();
+        });
+    },
     createMachineNav : function() {
         // Machine navigation
         jQuery("#machine").find(".caret-left-wrapper").click(function () {

@@ -82,6 +82,7 @@ var view = {
     initialize : function() {
         // Do any initialization unique to this view.
         controls.createTimeSelect();
+        controls.createExport();
     },
     bindNav : function() {
         // Bind any navigation that is on an item in a template.
