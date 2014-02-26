@@ -39,20 +39,14 @@
                     </div>
                 </div>
                 <div class="download">
-                    <ul>
-                        <li><a href="" id="download__csv">Download Excel</a></li>
-                        <li><a href="" id="download__pdf">Download PDF</a></li>
-                    </ul>
+                    Download<a href="" id="download__csv">Excel</a><a href="" id="download__pdf">PDF</a>
+                    <form id="download__pdf-form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
+                        <textarea id="download__pdf-form-data" name="content">json string</textarea>
+                    </form>
                 </div>
                 <div class="data-range">
                     Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
-
-                    <span class="export-pdf">PDF</span> <span class="export-csv">CSV</span>
-                    <form id="export-pdf__form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
-                        <textarea id="export-pdf__form-data" name="content">json string</textarea>
-                    </form>
                 </div>
-
                 <div class="template-container">
 
                 </div>

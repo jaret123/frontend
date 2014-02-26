@@ -1,11 +1,11 @@
 $color: #444;
-$color-hover: #000;
+$color-hover: #0087be;
 
 $background-color: white;
-$background-color-hover: #bbb;
+$background-color-hover: #eee;
 
-$border-color: $font-color;
-$border-color-hover: $font-color;
+$border-color: #ccc;
+$border-color-hover: #5ba0d0;
 
 .dropdown {
 
@@ -61,9 +61,8 @@ $border-color-hover: $font-color;
     color: $color;
     display: none;
     left: 0px;
-    padding: 5px 0px;
     position: absolute;
-    top: 2px;
+    top: 1px;
     width: auto;
     min-width: 170px;
     list-style: none;
@@ -101,7 +100,7 @@ dl {
    padding-right: 0;
    margin-right:0;
    background: white;
-   border: 1px solid #333;
+   border: 1px solid #ccc;
    border-radius: 0;
    margin-top: -11px;
    z-index: 1;
@@ -124,22 +123,48 @@ dl {
   bottom: 0;
   right: 0;
   z-index: 999;
-  padding-right: 15px;
+  padding-right: 18px;
 }
 .cal__button-submit, .cal__button-cancel {
-  font-size: 10px;
+  font-size: 11px;
   display: inline-block;
-  color: #333;
-  border: 1px solid #ddd;
+  color: #777;
+  border: 1px solid $border-color;
   border-radius: 3px;
   line-height: 20px;
-  padding: 0 5px;
+  padding: 1px 5px;
+  margin: 5px 0 5px 3px;
+  text-transform: uppercase;
 }
 .cal__button-submit:hover, .cal__button-cancel:hover {
-  border: 1px solid #333;
+  border: 1px solid $border-color-hover;
+  background: $background-color-hover;
+  color: #0087be;
+  cursor: pointer;
 }
 
 // Hide these controls until we get them working
 .download {
-  display: none;
+  float: left;
+	font-size: 12px;
+	margin-left: 3px;
+	
+	a:link, a:visited {
+		background-color: #aaa;
+		margin-left: 5px;
+		padding: 3px;
+		border-radius: 3px;
+		font-size: 11px;
+		text-decoration: none;
+		color: white;
+	}
+	
+	a:hover, a:active {
+		background-color:$border-color-hover;
+	}
+}
+
+.data-range {
+	float: right;
+	font-size: 12px;
 }

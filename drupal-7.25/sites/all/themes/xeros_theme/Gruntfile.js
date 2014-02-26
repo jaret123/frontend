@@ -12,7 +12,8 @@ module.exports = function(grunt) {
         watch: {
             sass: {
                 files: ['**/*.scss'],
-                tasks: ['compass:dist']
+                tasks: ['compass:dist' ],
+                nocache: 'true'
             },
             css: {
                 files: ['*.css']
@@ -24,6 +25,7 @@ module.exports = function(grunt) {
         }
     });
 
+ //   grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compass');
 

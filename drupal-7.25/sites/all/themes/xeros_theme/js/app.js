@@ -170,6 +170,8 @@ var app = {
         self = this;
         self.apiUrl = self.apiUrlBase.replace("{{fromDate}}", self.sessionDateRange[0]);
         self.apiUrl = self.apiUrl.replace("{{toDate}}", self.sessionDateRange[1]);
+
+
     },
     route: function () {
         var self = this;
@@ -211,6 +213,7 @@ var app = {
                 }
             }
         }
+        controls.setCsvLink();
         // This is a little funky, but we are going to let the view inherit our showReport method - sort of
         self.saveCookie();
         // if dataRefresh equals 1, then go to the web service again and get new data

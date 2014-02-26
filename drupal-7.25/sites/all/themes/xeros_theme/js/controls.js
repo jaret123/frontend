@@ -137,8 +137,9 @@ var controls = {
         // Bind the download links
 
         // On clicking export PDF put the data into the form then redirect to the PDF.
-        jQuery(".export-pdf").click(function() {
+        jQuery("#download__pdf").click(function(e) {
 
+            e.preventDefault();
             app.data.chart = {};
 
             // Add the images to app.data.charts[]
@@ -153,12 +154,16 @@ var controls = {
                 app.data.chart[jQuery(this).attr("name")] = theImage;
             });
 
-            var form = jQuery("#export-pdf__form");
-            jQuery(form).find("#export-pdf__form-data").html(JSON.stringify(app.data));
+            var form = jQuery("#download__pdf-form");
+            jQuery(form).find("#download__pdf-form-data").html(JSON.stringify(app.data));
             console.log(form);
 
             jQuery(form).submit();
         });
+    },
+    setCsvLink : function() {
+        var href = "/api/csv/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1] ;
+        jQuery("#download__csv").attr("href", href ) ;
     },
     createMachineNav : function() {
         // Machine navigation
