@@ -31,6 +31,7 @@
       border-top: 1px dashed $font-color;
     }
     .template-container {
+        margin-top: 28px;
       @include single-transition(opacity, .3s, ease-in, 0);
       &.fade {
         opacity: .5;

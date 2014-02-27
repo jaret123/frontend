@@ -49,6 +49,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="download">
+                    Download<a href="" id="download__csv">Excel</a>
+                    <!--                    <a href="" id="download__pdf">PDF</a>-->
+                    <form id="download__pdf-form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
+                        <textarea id="download__pdf-form-data" name="content">json string</textarea>
+                    </form>
+                </div>
+                <div class="data-range">
+                    Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
+                </div>
+
 
                 <div id="page-container" class="template-container">
 
