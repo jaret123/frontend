@@ -214,6 +214,7 @@ var app = {
             }
         }
         controls.setCsvLink();
+        controls.setDateRangeDisplay();
         // This is a little funky, but we are going to let the view inherit our showReport method - sort of
         self.saveCookie();
         // if dataRefresh equals 1, then go to the web service again and get new data

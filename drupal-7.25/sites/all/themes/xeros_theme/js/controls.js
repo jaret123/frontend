@@ -165,6 +165,10 @@ var controls = {
         var href = "/api/csv/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1] ;
         jQuery("#download__csv").attr("href", href ) ;
     },
+    setDateRangeDisplay : function() {
+        jQuery(".date-range__from").html(app.sessionDateRange[0]);
+        jQuery(".date-range__to").html(app.sessionDateRange[1]);
+    },
     createMachineNav : function() {
         // Machine navigation
         jQuery("#machine").find(".caret-left-wrapper").click(function () {
