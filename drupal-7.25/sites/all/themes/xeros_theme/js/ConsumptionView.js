@@ -26,6 +26,7 @@ var view = {
     delta : function(base, change) {
 
         var delta = 0;
+        // BUG - Divide by zero throws NaN
 
         delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
         return delta;

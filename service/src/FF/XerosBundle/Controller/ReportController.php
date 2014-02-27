@@ -132,25 +132,11 @@ from
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
 	    and xc.machine_id in ( :machineIds )
-	group by
-	    xd.date
 	) as b
 where
    1 = 1
-order by
-	b.date
-SQL;
-        array_push($metrics, array(
-                                  "name" => "total",
-                                  "meta" => array( "title" => "Total Savings", "label" => "Overall Expense", "icon" => "Globe", "cssClass" => "overall"),
-                                  "query" => <<<METRIC
-   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as value,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as value_xeros,
-   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as cost,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as cost_xeros
-METRIC
-                             ));
 
+SQL;
         array_push($metrics, array(
             "name" => "cold-water",
             "meta" => array( "title" => "Cold Water", "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
@@ -206,7 +192,10 @@ METRIC
 
             $summarySqlParsed = $this->u->replaceFilters($summarySql, $filters);
 
+            // BUG - Check whether we get data before we process it or send back a notice
+            // LOG all SQL requests
             $a = $conn->fetchAll($summarySqlParsed);
+
             $ar["summaryData"] = $a[0];
 
             $dataPointSqlParsed = $this->u->replaceFilters($dataPointSql, $filters);
