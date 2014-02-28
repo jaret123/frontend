@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 .idea
 .idea/*
 .sass-cache
-
-=======
-.idea/
-.sass-cache
->>>>>>> 876288af2c38c3ee48628c7b0303ffe32342a127
+service/app/config/parameters.yml
+service/app/config/config.yml
