@@ -155,7 +155,7 @@ var view = {
         controls.createTimeSelect();
     },
     bindNav : function() {
-        jQuery('.consumption__machine, .link').click(function (event) {
+        jQuery('.link').click(function (event) {
             var classification = jQuery(this).attr("classification");
             var machine_id = jQuery(this).attr("machine");
             event.preventDefault();
