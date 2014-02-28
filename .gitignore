@@ -2,4 +2,3 @@
 .idea/*
 .sass-cache
 service/app/config/parameters.yml
-service/app/config/config.yml

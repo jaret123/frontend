@@ -5,7 +5,7 @@ parameters:
     database_port: 3306
     database_name: xeros-qa
     database_user: xeros
-    database_password: *****
+    database_password: X#r)S2014
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

@@ -1,4 +1,3 @@
 parameters.yml
-config.yml
 *.local
 parameters.yml.local
