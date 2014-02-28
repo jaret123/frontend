@@ -145,6 +145,7 @@ CREATE TABLE xeros_cycle
 -- Base measures
 -- Should always equal one in this view
     reading_date timestamp,
+    reading_timestamp timestamp,
     cycle_load_size decimal(15,4),
     cycle_xeros_load_size decimal(15,4),
 
@@ -210,6 +211,7 @@ BEGIN
     classification_id,
     location_id,
     reading_date,
+    reading_timestamp,
     cycle_load_size,
     cycle_xeros_load_size,
 -- Cold water
@@ -263,6 +265,7 @@ BEGIN
 -- Base measures
 -- Should always equal one in this view
     date(reading_timestamp)                                                                     AS reading_date,
+    reading_timestamp                                                                           AS reading_timestamp,
     xmc.load_size                                                                               AS cycle_load_size,
     xmc.xeros_load_size                                                                         AS cycle_xeros_load_size,
 

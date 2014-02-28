@@ -2130,7 +2130,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1393276868');
+  background-image: url('../images/progress.gif?1376896851');
 }
 
 /* line 2, ../sass/components/_footer.scss */
@@ -2193,22 +2193,22 @@ tr.selected td {
   float: right;
   color: white;
 }
-/* line 49, ../sass/components/_footer.scss */
-.footer .footer-wrapper [class^="icon-"] {
+/* line 48, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right [class^="icon-"] {
   font-size: 30px;
 }
-/* line 52, ../sass/components/_footer.scss */
-.footer .footer-wrapper .icon-Twitter {
+/* line 51, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right .icon-Twitter {
   text-decoration: none;
   color: white;
 }
-/* line 55, ../sass/components/_footer.scss */
-.footer .footer-wrapper .icon-Facebook {
+/* line 54, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right .icon-Facebook {
   text-decoration: none;
   color: white;
 }
-/* line 58, ../sass/components/_footer.scss */
-.footer .footer-wrapper .icon-LinkedIn {
+/* line 57, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__right .icon-LinkedIn {
   text-decoration: none;
   color: white;
 }
@@ -2266,7 +2266,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2277,15 +2277,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -2315,7 +2315,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2326,15 +2326,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -2466,6 +2466,24 @@ h1 {
 }
 
 /* line 66, ../sass/components/_icons.scss */
+.icon-Washer {
+  color: gray;
+  font-size: 80px;
+  display: inline-block;
+}
+
+/* line 73, ../sass/components/_icons.scss */
+.Xeros .icon-Washer {
+  color: #0086bd;
+  font-size: 80px;
+  display: inline-block;
+}
+/* line 78, ../sass/components/_icons.scss */
+.Xeros .icon-Washer:before {
+  content: "\e60c";
+}
+
+/* line 85, ../sass/components/_icons.scss */
 #spinner {
   top: 40%;
   left: 50%;
@@ -2924,49 +2942,40 @@ h1 {
 #page-2 .consumption-container .row .link {
   cursor: pointer;
 }
-/* line 62, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.xeros-machine-row {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
-  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -ms-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: linear-gradient(to bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-}
-/* line 77, ../sass/components/_page-2.scss */
+/* line 61, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .link:hover {
   opacity: 0.8;
 }
-/* line 81, ../sass/components/_page-2.scss */
+/* line 65, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col {
   position: absolute;
   bottom: 20px;
 }
-/* line 85, ../sass/components/_page-2.scss */
+/* line 69, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first {
   padding-top: 10px;
   padding-bottom: 10px;
   height: 50px;
 }
-/* line 89, ../sass/components/_page-2.scss */
+/* line 73, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label, #page-2 .consumption-container .row.first .sub-label {
   text-align: center;
 }
-/* line 92, ../sass/components/_page-2.scss */
+/* line 76, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label {
   font-weight: 400;
 }
-/* line 95, ../sass/components/_page-2.scss */
+/* line 79, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .sub-label {
   font-weight: 100;
   font-size: .83em;
   line-height: 1em;
 }
-/* line 101, ../sass/components/_page-2.scss */
+/* line 85, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.last {
   border-bottom: 1px dashed gray;
 }
-/* line 104, ../sass/components/_page-2.scss */
+/* line 88, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 {
   float: left;
   width: 16.66667%;
@@ -2981,23 +2990,16 @@ h1 {
   word-wrap: break-word;
   font-weight: 300;
 }
-/* line 108, ../sass/components/_page-2.scss */
+/* line 92, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .small {
   font-size: 9px;
 }
-/* line 109, ../sass/components/_page-2.scss */
+/* line 93, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-Washer {
-  color: gray;
   font-size: 80px;
   display: inline-block;
 }
-/* line 114, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-Xeros-Washer {
-  color: #0086bd;
-  font-size: 80px;
-  display: inline-block;
-}
-/* line 119, ../sass/components/_page-2.scss */
+/* line 97, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .machine-label {
   display: inline-block;
   font-size: 0.8em;
@@ -3005,18 +3007,7 @@ h1 {
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 126, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 a, #page-2 .consumption-container .row .col-1 a .icon-Washer {
-  text-decoration: none;
-  color: inherit;
-}
-/* line 130, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 a:hover, #page-2 .consumption-container .row .col-1 a:hover .icon-Washer {
-  color: #0087be;
-  border-bottom: 0px solid white;
-  text-decoration: none;
-}
-/* line 136, ../sass/components/_page-2.scss */
+/* line 105, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 {
   float: left;
   width: 16.66667%;
@@ -3030,7 +3021,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 139, ../sass/components/_page-2.scss */
+/* line 108, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-3 {
   float: left;
   width: 16.66667%;
@@ -3044,7 +3035,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 142, ../sass/components/_page-2.scss */
+/* line 111, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 {
   float: left;
   width: 16.66667%;
@@ -3058,7 +3049,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 145, ../sass/components/_page-2.scss */
+/* line 114, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 {
   float: left;
   width: 16.66667%;
@@ -3072,7 +3063,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 148, ../sass/components/_page-2.scss */
+/* line 117, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 {
   float: left;
   width: 16.66667%;
@@ -3086,7 +3077,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 153, ../sass/components/_page-2.scss */
+/* line 122, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart, #page-2 .consumption-container .row .col-6 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -3097,7 +3088,7 @@ h1 {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 159, ../sass/components/_page-2.scss */
+/* line 128, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels, #page-2 .consumption-container .row .col-6 .labels {
   position: relative;
   display: inline-block;
@@ -3105,35 +3096,35 @@ h1 {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 168, ../sass/components/_page-2.scss */
+/* line 137, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential, #page-2 .consumption-container .row .col-6 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 176, ../sass/components/_page-2.scss */
+/* line 145, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 img {
   display: inline-block;
 }
-/* line 179, ../sass/components/_page-2.scss */
+/* line 148, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 182, ../sass/components/_page-2.scss */
+/* line 151, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 187, ../sass/components/_page-2.scss */
+/* line 156, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 196, ../sass/components/_page-2.scss */
+/* line 165, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -3141,17 +3132,26 @@ h1 {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 200, ../sass/components/_page-2.scss */
+/* line 169, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 205, ../sass/components/_page-2.scss */
+/* line 174, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-6 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
+}
+/* line 182, ../sass/components/_page-2.scss */
+#page-2 .consumption-container .row.Xeros {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
+  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -ms-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: linear-gradient(to bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
 }
 
 /* line 2, ../sass/components/_page-3.scss */
@@ -3207,118 +3207,119 @@ h1 {
 #page-3 .consumption-details-container .container .section-wrapper.show {
   display: block;
 }
-/* line 50, ../sass/components/_page-3.scss */
+/* line 48, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine {
   position: absolute;
   text-align: center;
 }
-/* line 53, ../sass/components/_page-3.scss */
+/* line 51, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .machine .icon-Washer {
   font-size: 80px;
+  display: block;
 }
-/* line 59, ../sass/components/_page-3.scss */
+/* line 56, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row {
   overflow: hidden;
   margin-top: 10px;
   margin-left: 150px;
 }
-/* line 63, ../sass/components/_page-3.scss */
+/* line 60, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-title.first {
   margin-top: 0px;
 }
-/* line 66, ../sass/components/_page-3.scss */
+/* line 63, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row.row-data.first {
   border-bottom: 1px dashed gray;
   margin-bottom: 35px;
 }
-/* line 70, ../sass/components/_page-3.scss */
+/* line 67, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .title {
   font-size: 20px;
   color: #444;
   font-weight: 400;
 }
-/* line 76, ../sass/components/_page-3.scss */
+/* line 73, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top, #page-3 .consumption-details-container .container .row .bottom {
   height: 72px;
   text-align: center;
   vertical-align: middle;
 }
-/* line 81, ../sass/components/_page-3.scss */
+/* line 78, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top {
   border: 1px solid gray;
   border-bottom: none;
 }
-/* line 85, ../sass/components/_page-3.scss */
+/* line 82, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .bottom {
   border-color: #0087be;
   background-color: #0087be;
   color: white;
 }
-/* line 91, ../sass/components/_page-3.scss */
+/* line 88, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .label {
   font-size: .7em;
   font-weight: 300;
 }
-/* line 95, ../sass/components/_page-3.scss */
+/* line 92, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .value {
   font-size: 1.8em;
   font-weight: 300;
 }
-/* line 99, ../sass/components/_page-3.scss */
+/* line 96, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top .value {
   padding-top: 5px;
 }
-/* line 104, ../sass/components/_page-3.scss */
+/* line 101, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .box {
   display: inline-block;
   margin-left: 27.9px;
 }
-/* line 108, ../sass/components/_page-3.scss */
+/* line 105, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-1 {
   width: 90px;
   margin-left: 0px;
 }
-/* line 112, ../sass/components/_page-3.scss */
+/* line 109, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-2 {
   width: 90px;
 }
-/* line 115, ../sass/components/_page-3.scss */
+/* line 112, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-3 {
   width: 135px;
 }
-/* line 118, ../sass/components/_page-3.scss */
+/* line 115, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-4 {
   width: 180px;
 }
-/* line 122, ../sass/components/_page-3.scss */
+/* line 119, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 {
   width: 15px;
   margin-left: 20.4px;
 }
-/* line 125, ../sass/components/_page-3.scss */
+/* line 122, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .top, #page-3 .consumption-details-container .container .row .col-5 .bottom {
   background-color: white;
   border-color: white;
 }
-/* line 130, ../sass/components/_page-3.scss */
+/* line 127, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-5 .bottom {
   color: #0087be;
 }
-/* line 135, ../sass/components/_page-3.scss */
+/* line 132, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 {
   width: 180px;
   margin-left: 20.4px;
 }
-/* line 138, ../sass/components/_page-3.scss */
+/* line 135, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top {
   background-color: #0087be;
   color: white;
 }
-/* line 142, ../sass/components/_page-3.scss */
+/* line 139, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .col-6 .top, #page-3 .consumption-details-container .container .row .col-6 .bottom {
   border-color: #0087be;
 }
-/* line 153, ../sass/components/_page-3.scss */
+/* line 150, ../sass/components/_page-3.scss */
 #page-3 .legend .swatch.current {
   background-color: white;
   border: 1px solid gray;

@@ -63,6 +63,25 @@
 	content: "\e60c";
 }
 
+.icon-Washer {
+  color: $font-color;
+  font-size: 80px;
+  display: inline-block;
+}
+
+.Xeros {
+  .icon-Washer {
+    color: #0086bd;
+    font-size: 80px;
+    display: inline-block;
+  }
+  .icon-Washer:before {
+    content: "\e60c";
+  }
+}
+
+
+
 #spinner {
   top: 40%;
   left: 50%;

@@ -58,22 +58,6 @@
       .link {
         cursor: pointer;
       }
-			
-			&.xeros-machine-row {
-				background-image: -webkit-gradient(
-					linear,
-					left top,
-					left bottom,
-					color-stop(0, #E5F4FA),
-					color-stop(0.5, #F2F9FC)
-					color-stop(1, #E5F4FA)
-				);
-				background-image: -o-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
-				background-image: -moz-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
-				background-image: -webkit-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
-				background-image: -ms-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
-				background-image: linear-gradient(to bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
-			}
       .link:hover {
         opacity: 0.8;
       }
@@ -107,12 +91,6 @@
         font-weight: 300;
         .small { font-size: 9px; }
         .icon-Washer {
-          color: $font-color;
-          font-size: 80px;
-          display: inline-block;
-        }
-        .icon-Xeros-Washer {
-          color: #0086bd;
           font-size: 80px;
           display: inline-block;
         }
@@ -122,15 +100,6 @@
 		  line-height: 1.5em;
           vertical-align: top;
           margin-top: 12px;
-        }
-        a, a .icon-Washer {
-          text-decoration: none;
-          color:inherit;
-        }
-        a:hover, a:hover .icon-Washer {
-          color: $font-accent-color;
-          border-bottom: 0px solid white;
-          text-decoration: none;
         }
       }
       .col-2 {
@@ -210,6 +179,22 @@
         }
       }
       @include zen-clear();
+      &.Xeros {
+        background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #E5F4FA),
+            color-stop(0.5, #F2F9FC)
+            color-stop(1, #E5F4FA)
+        );
+        background-image: -o-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -moz-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -webkit-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -ms-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: linear-gradient(to bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+
+      }
     }
   }
 }

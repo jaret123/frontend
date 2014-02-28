@@ -84,8 +84,8 @@
 
         <div class="footer__middle">
             <a href="http://www.xeroscleaning.com/contact-us/">CONTACT US</a><br/>
-            <phone>1-855-XEROS NA (1-855-937-6762)</phone><br/>
-            <a href="mailto:Jonathan.benjamin@xeroscleaning.com">Jonathan.benjamin@xeroscleaning.com</a><br/>
+            <phone><span class="icon-Phone"></span>1-855-XEROS NA (1-855-937-6762)</phone><br/>
+            <a href="mailto:Jonathan.benjamin@xeroscleaning.com"><span class="icon-Email"></span>Jonathan.benjamin@xeroscleaning.com</a><br/>
         </div>
 
         <div class="footer__right">
