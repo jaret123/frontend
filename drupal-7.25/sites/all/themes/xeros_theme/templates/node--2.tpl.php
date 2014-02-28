@@ -52,7 +52,7 @@
                 </div>
                 <div id="spinner"></div>
                 <script id="page-tpl" type="text/x-handlebars-template">
-                    {{#data}}
+                    {{#each this}}
                     <div class="kpis-{{meta.cssClass}} row">
                         <div class="col col-1">
                             <div class="icon icon-{{meta.icon}}"></div>
@@ -72,7 +72,7 @@
                             <div class="col info icon-Info"></div>
                         </div>
                     </div>
-                    {{/data}}
+                    {{/each}}
                 </script>
             </div> <!-- kpis -->
 

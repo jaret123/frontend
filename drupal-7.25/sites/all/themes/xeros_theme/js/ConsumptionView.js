@@ -26,6 +26,7 @@ var view = {
     delta : function(base, change) {
 
         var delta = 0;
+        // BUG - Divide by zero throws NaN
 
         delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
         return delta;
@@ -154,7 +155,7 @@ var view = {
         controls.createTimeSelect();
     },
     bindNav : function() {
-        jQuery('.consumption__machine, .link').click(function (event) {
+        jQuery('.link').click(function (event) {
             var classification = jQuery(this).attr("classification");
             var machine_id = jQuery(this).attr("machine");
             event.preventDefault();

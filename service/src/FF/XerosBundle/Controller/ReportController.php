@@ -87,16 +87,14 @@ class ReportController extends Controller {
         $dataPointSql = <<<SQL
 select
     b.date,
-	b.reading_date,
-	coalesce(b.value, "") as value,
-	coalesce(b.value_xeros, "") as value_xeros,
-	coalesce(b.cost, "") as cost,
-	coalesce(b.cost_xeros, "") as cost_xeros
+	coalesce(b.value, 0) as value,
+	coalesce(b.value_xeros, 0) as value_xeros,
+	coalesce(b.cost, 0) as cost,
+	coalesce(b.cost_xeros, 0) as cost_xeros
 from
 	(
 	select
 	    xd.date,
-	    xc.reading_date,
         :metric
 	from
 	    xeros_dates as xd
@@ -107,8 +105,7 @@ from
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
 	group by
-		xd.date,
-		xc.reading_date
+		xd.date
 	) as b
 where
    1 = 1
@@ -118,7 +115,11 @@ SQL;
 
         $summarySql = <<<SQL
 select
-  b.*
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
 from
 	(
 	select
@@ -128,67 +129,54 @@ from
 	    xeros_dates as xd
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( :machineIds )
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
-	    and xc.machine_id in ( :machineIds )
-	group by
-	    xd.date
+
 	) as b
 where
    1 = 1
-order by
-	b.date
-SQL;
-        array_push($metrics, array(
-                                  "name" => "total",
-                                  "meta" => array( "title" => "Total Savings", "label" => "Overall Expense", "icon" => "Globe", "cssClass" => "overall"),
-                                  "query" => <<<METRIC
-   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as value,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as value_xeros,
-   		truncate(sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost + xc.cycle_time_labor_cost + xc.cycle_chemical_cost), 0) as cost,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost + xc.cycle_time_xeros_labor_cost + xc.cycle_chemical_xeros_cost), 0) as cost_xeros
-METRIC
-                             ));
 
+SQL;
         array_push($metrics, array(
             "name" => "cold-water",
             "meta" => array( "title" => "Cold Water", "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_cold_water_volume), 0) as value,
-   		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as value_xeros,
-   		truncate(sum(xc.cycle_cold_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "hot-water",
             "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_hot_water_volume), 0) as value,
-   		truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as value_xeros,
-   		truncate(sum(xc.cycle_hot_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_hot_water_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_hot_water_volume) as value,
+   		sum(xc.cycle_hot_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_hot_water_cost) as cost,
+   		sum(xc.cycle_hot_water_xeros_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "cycle-time",
             "meta" => array( "title" => "Cycle Time", "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_time_total_time), 0) as value,
-   		truncate(sum(xc.cycle_time_xeros_total_time), 0) as value_xeros,
-   		truncate(sum(xc.cycle_time_labor_cost), 0) as cost,
-   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as cost_xeros
+   		sum(xc.cycle_time_total_time) as value,
+   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
+   		sum(xc.cycle_time_labor_cost) as cost,
+   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "chemical",
             "meta" => array( "title" => "Chemical Strength", "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_chemical_strength), 0) as value,
-   		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as value_xeros,
-   		truncate(sum(xc.cycle_chemical_cost), 0) as cost,
-   		truncate(sum(xc.cycle_chemical_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_chemical_strength) as value,
+   		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
+   		sum(xc.cycle_chemical_cost) as cost,
+   		sum(xc.cycle_chemical_xeros_cost) as cost_xeros
 METRIC
         ));
 
@@ -206,7 +194,10 @@ METRIC
 
             $summarySqlParsed = $this->u->replaceFilters($summarySql, $filters);
 
+            // BUG - Check whether we get data before we process it or send back a notice
+            // LOG all SQL requests
             $a = $conn->fetchAll($summarySqlParsed);
+
             $ar["summaryData"] = $a[0];
 
             $dataPointSqlParsed = $this->u->replaceFilters($dataPointSql, $filters);
@@ -320,6 +311,11 @@ SQL;
      */
     private function reportConsumptionDetails($filters) {
 
+        $logger = $this->get('logger');
+        $logger->info('I just got the logger');
+
+        $logger->info('Started reportConsumptionDetails');
+
         $data = array();
         $metrics = array();
 
@@ -355,38 +351,20 @@ classificationSQL;
                 b.*
             from
                 xeros_machine as xm
-                left join
+                inner join
                 ( -- metrics
                 select
                     xc.machine_id,
                     xc.classification_id,
-
-                    xmc.load_size,
-                    xmc.xeros_load_size,
-
-                    xcl.name,
-
                     :metric
                 from
                     xeros_cycle as xc
-                        left join xeros_machine_classification as xmc
-                            on xc.machine_id = xmc.machine_id
-                            and xc.classification_id = xmc.classification_id
-                        left join xeros_classification as xcl
-                            on xmc.classification_id = xcl.classification_id
                 where
-                    1 = 1
-                    and reading_date >= ':fromDate' and reading_date <= ':toDate'
-                    and xc.machine_id in ( :machineIds )
-                group by
-                    xc.machine_id,
-                    xc.classification_id
+                    reading_date >= ':fromDate' and reading_date <= ':toDate'
+                    and xc.machine_id = :machine_id
+                    and xc.classification_id = :classification_id
                 ) as b
-                    on xm.machine_id = b.machine_id
-            where
-               1 = 1
-               and xm.machine_id = :machine_id
-               and b.classification_id = :classification_id
+                   on b.machine_id = xm.machine_id
 SQL;
 
         // TODO: Make all these field names the same
@@ -394,44 +372,30 @@ SQL;
             "name" => "Cold Water",
             "id" => "cold_water",
             "query" => <<<METRIC
-                'Gallons' as value_one_label,
-                truncate(sum(xc.cycle_cold_water_volume), 0) as value_one,
-                truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
 
-                'Load Size' as value_two_label,
-                '50' as value_two,
-                '50' as xeros_value_two,
+                sum(xc.cycle_cold_water_volume) as value_one,
+                sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
 
-                'Gallons Per Pound' as value_three_label,
-                truncate(sum(xc.cycle_cold_water_volume_per_pound), 0) as value_three,
-                truncate(sum(xc.cycle_cold_water_xeros_volume_per_pound), 0) as xeros_value_three,
+                sum(xc.cycle_cold_water_volume_per_pound) as value_three,
+                sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
 
-                'Cost Per Pound' as value_four_label,
-                truncate(sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
-                truncate(sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
+                sum(xc.cycle_cold_water_cost_per_pound) as value_four,
+                sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
 METRIC
         ));
-        // TODO: Cost Reduction need to be total, not per pound
 
         array_push($metrics, array(
             "name" => "Hot Water",
             "id" => "hot_water",
             "query" => <<<METRIC
-                'Gallons' as value_one_label,
-                truncate(sum(xc.cycle_hot_water_volume), 0) as value_one,
-                truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as xeros_value_one,
+                sum(xc.cycle_hot_water_volume) as value_one,
+                sum(xc.cycle_hot_water_xeros_volume) as xeros_value_one,
 
-                'Load Size' as value_two_label,
-                '50' as value_two,
-                '50' as xeros_value_two,
+                sum(xc.cycle_hot_water_volume_per_pound) as value_three,
+                sum(xc.cycle_hot_water_xeros_volume_per_pound) as xeros_value_three,
 
-                'Gallons Per Pound' as value_three_label,
-                truncate(sum(xc.cycle_hot_water_volume_per_pound), 0) as value_three,
-                truncate(sum(xc.cycle_hot_water_xeros_volume_per_pound), 0) as xeros_value_three,
-
-                'Cost Per Pound' as value_four_label,
-                truncate(sum(xc.cycle_hot_water_cost_per_pound), 2) as value_four,
-                truncate(sum(xc.cycle_hot_water_xeros_cost_per_pound), 2) as xeros_value_four
+                sum(xc.cycle_hot_water_cost_per_pound) as value_four,
+                sum(xc.cycle_hot_water_xeros_cost_per_pound) as xeros_value_four
 METRIC
         ));
 
@@ -440,21 +404,14 @@ METRIC
             "id" => "total_water",
             "query" => <<<METRIC
 
-                'Gallons' as value_one_label,
-                truncate( sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) , 0) as value_one,
-                truncate( sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume), 0) as xeros_value_one,
+                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
+                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
 
-                'Load Size' as value_two_label,
-                '50' as value_two,
-                '50' as xeros_value_two,
+                 sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) as value_three,
+                 sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
 
-                'Gallons Per Pound' as value_three_label,
-                truncate( sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) , 0) as value_three,
-                truncate( sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound)  , 0) as xeros_value_three,
-
-                'Cost Per Pound' as value_four_label,
-                truncate( sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound), 2) as value_four,
-                truncate( sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound), 2) as xeros_value_four
+                 sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound) as value_four,
+                 sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
 
 METRIC
         ));
@@ -464,21 +421,14 @@ METRIC
             "id" => "cycle_time",
             "query" => <<<METRIC
 
-                'Total Cycle Time' as value_one_label,
-                truncate(sum(xc.cycle_time_run_time), 0) as value_one,
-                truncate(sum(xc.cycle_time_xeros_run_time), 0) as xeros_value_one,
+                sum(xc.cycle_time_run_time) as value_one,
+                sum(xc.cycle_time_xeros_run_time) as xeros_value_one,
 
-                'Load Size' as value_two_label,
-                '50' as value_two,
-                '50' as xeros_value_two,
+                sum(xc.cycle_time_labor_cost) as value_three,
+                sum(xc.cycle_time_xeros_labor_cost) as xeros_value_three,
 
-                'Labor Cost' as value_three_label,
-                truncate(sum(xc.cycle_time_labor_cost), 0) as value_three,
-                truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as xeros_value_three,
-
-                'Cost Per Pound' as value_four_label,
-                truncate(sum(xc.cycle_time_labor_cost_per_pound), 2) as value_four,
-                truncate(sum(xc.cycle_time_xeros_labor_cost_per_pound), 2) as xeros_value_four
+                sum(xc.cycle_time_labor_cost_per_pound) as value_four,
+                sum(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_four
 METRIC
         ));
 
@@ -487,27 +437,21 @@ METRIC
             "id" => "chemical",
             "query" => <<<METRIC
 
-                'Total Ounces' as value_one_label,
-                truncate(sum(xc.cycle_chemical_strength), 0) as value_one,
-                truncate(sum(xc.cycle_chemical_xeros_strength), 0) as xeros_value_one,
+                sum(xc.cycle_chemical_strength) as value_one,
+                sum(xc.cycle_chemical_xeros_strength) as xeros_value_one,
 
-                'Load Size' as value_two_label,
-                '50' as value_two,
-                '50' as xeros_value_two,
+                sum(xc.cycle_chemical_strength_per_pound) as value_three,
+                sum(xc.cycle_chemical_xeros_strength_per_pound) as xeros_value_three,
 
-                'Ounces Per Pound' as value_three_label,
-                truncate(sum(xc.cycle_chemical_strength_per_pound), 0) as value_three,
-                truncate(sum(xc.cycle_chemical_xeros_strength_per_pound), 0) as xeros_value_three,
-
-                'Cost Per Pound' as value_four_label,
-                truncate(sum(xc.cycle_chemical_cost_per_pound), 2) as value_four,
-                truncate(sum(xc.cycle_chemical_xeros_cost_per_pound), 2) as xeros_value_four
+                sum(xc.cycle_chemical_cost_per_pound) as value_four,
+                sum(xc.cycle_chemical_xeros_cost_per_pound) as xeros_value_four
 METRIC
         ));
 
         $conn = $this->get('database_connection');
 
         $machines = $conn->fetchAll($this->u->replaceFilters($machinesSql, $filters));
+        $logger->info('get machines  ' . $machinesSql);
 
         // Machines
         foreach ($machines as $k => $machine ) {
@@ -524,10 +468,14 @@ METRIC
             $classificiationSqlParsed = $this->u->replaceFilters($classificiationSql, $filters);
             $classifications = $conn->fetchAll($classificiationSqlParsed);
 
+            $logger->info('get classifications  ');
+
             // Metrics
             foreach ($metrics as $k2 => $metric) {
 
                 $metric_id = $metric["id"];
+
+                $logger->info('metric id'  . $metric_id);
                 // Add the metric meta data
                 $data[$machine_id]["metrics"][$metric_id] = $metric;
                 $data[$machine_id]["metrics"][$metric_id]["classifications"] = array();
@@ -548,8 +496,11 @@ METRIC
 
                     $results = $conn->fetchAll($sqlParsed);
 
+                    $logger->info('get classification data ' . $class["classification_id"] );
+
                     $data[$machine_id]["metrics"][$metric_id]["classifications"][$class_id]["data"] = $results;
 
+                    unset($data[$machine_id]["metrics"][$metric_id]["query"]);
                 }
 
             }
