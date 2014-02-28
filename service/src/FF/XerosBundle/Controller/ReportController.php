@@ -87,16 +87,14 @@ class ReportController extends Controller {
         $dataPointSql = <<<SQL
 select
     b.date,
-	b.reading_date,
-	coalesce(b.value, "") as value,
-	coalesce(b.value_xeros, "") as value_xeros,
-	coalesce(b.cost, "") as cost,
-	coalesce(b.cost_xeros, "") as cost_xeros
+	coalesce(b.value, 0) as value,
+	coalesce(b.value_xeros, 0) as value_xeros,
+	coalesce(b.cost, 0) as cost,
+	coalesce(b.cost_xeros, 0) as cost_xeros
 from
 	(
 	select
 	    xd.date,
-	    xc.reading_date,
         :metric
 	from
 	    xeros_dates as xd
@@ -107,8 +105,7 @@ from
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
 	group by
-		xd.date,
-		xc.reading_date
+		xd.date
 	) as b
 where
    1 = 1
@@ -118,7 +115,11 @@ SQL;
 
         $summarySql = <<<SQL
 select
-  b.*
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
 from
 	(
 	select
@@ -128,10 +129,11 @@ from
 	    xeros_dates as xd
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( :machineIds )
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
-	    and xc.machine_id in ( :machineIds )
+
 	) as b
 where
    1 = 1
@@ -141,40 +143,40 @@ SQL;
             "name" => "cold-water",
             "meta" => array( "title" => "Cold Water", "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_cold_water_volume), 0) as value,
-   		truncate(sum(xc.cycle_cold_water_xeros_volume), 0) as value_xeros,
-   		truncate(sum(xc.cycle_cold_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_cold_water_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "hot-water",
             "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_hot_water_volume), 0) as value,
-   		truncate(sum(xc.cycle_hot_water_xeros_volume), 0) as value_xeros,
-   		truncate(sum(xc.cycle_hot_water_cost), 0) as cost,
-   		truncate(sum(xc.cycle_hot_water_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_hot_water_volume) as value,
+   		sum(xc.cycle_hot_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_hot_water_cost) as cost,
+   		sum(xc.cycle_hot_water_xeros_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "cycle-time",
             "meta" => array( "title" => "Cycle Time", "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_time_total_time), 0) as value,
-   		truncate(sum(xc.cycle_time_xeros_total_time), 0) as value_xeros,
-   		truncate(sum(xc.cycle_time_labor_cost), 0) as cost,
-   		truncate(sum(xc.cycle_time_xeros_labor_cost), 0) as cost_xeros
+   		sum(xc.cycle_time_total_time) as value,
+   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
+   		sum(xc.cycle_time_labor_cost) as cost,
+   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(
             "name" => "chemical",
             "meta" => array( "title" => "Chemical Strength", "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
             "query" => <<<METRIC
-   		truncate(sum(xc.cycle_chemical_strength), 0) as value,
-   		truncate(sum(xc.cycle_chemical_xeros_strength), 0) as value_xeros,
-   		truncate(sum(xc.cycle_chemical_cost), 0) as cost,
-   		truncate(sum(xc.cycle_chemical_xeros_cost), 0) as cost_xeros
+   		sum(xc.cycle_chemical_strength) as value,
+   		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
+   		sum(xc.cycle_chemical_cost) as cost,
+   		sum(xc.cycle_chemical_xeros_cost) as cost_xeros
 METRIC
         ));
 

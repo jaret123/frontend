@@ -1,4 +1,4 @@
--- USE `xeros-qa`;
+USE `xeros_local`;
 
 DELIMITER ;;
 
@@ -261,58 +261,43 @@ BEGIN
     xm.location_id,
 -- Base measures
 -- Should always equal one in this view
-    date(reading_timestamp)                                                                 AS reading_date,
-    xmc.load_size                                                                           AS cycle_load_size,
-    xmc.xeros_load_size                                                                     AS cycle_xeros_load_size,
+    date(reading_timestamp)                                                                     AS reading_date,
+    xmc.load_size                                                                               AS cycle_load_size,
+    xmc.xeros_load_size                                                                         AS cycle_xeros_load_size,
 
 -- Cold water
-    xdma.cold_water                                                                         AS cycle_cold_water_volume,
-    xxlsv.cold_water_gallons                                                                AS cycle_cold_water_xeros_volume,
---    xua.period_cost / xua.period_usage                                         AS cycle_unit_cost,
-    xdma.cold_water * (xua.period_cost / xua.period_usage)                                  AS cycle_cold_water_cost,
-    xxlsv.hot_water_gallons * (xua.period_cost / xua.period_usage)                          AS cycle_cold_water_xeros_cost,
+    xdma.cold_water / 10                                                                        AS cycle_cold_water_volume,
+    xxlsv.cold_water_gallons                                                                    AS cycle_cold_water_xeros_volume,
+    ( xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)                                      AS cycle_cold_water_cost,
+    xxlsv.hot_water_gallons * (xua.period_cost / xua.period_usage)                              AS cycle_cold_water_xeros_cost,
 
-    xdma.cold_water /
-    xmc.load_size                                                                           AS cycle_cold_water_volume_per_pound,
-    xxlsv.cold_water_gallons /
-    xmc.load_size                                                                           AS cycle_cold_water_xeros_volume_per_pound,
-    (xdma.cold_water * (xua.period_cost / xua.period_usage)) /
-    xmc.load_size                                                                           AS cycle_cold_water_cost_per_pound,
-    (xxlsv.cold_water_gallons * (xua.period_cost / xua.period_usage)) /
-    xmc.load_size                                                                           AS cycle_cold_water_xeros_cost_per_pound,
+    ( xdma.cold_water / 10 ) / xmc.load_size                                                             AS cycle_cold_water_volume_per_pound,
+    xxlsv.cold_water_gallons / xmc.load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
+    ( (xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)) / xmc.load_size                    AS cycle_cold_water_cost_per_pound,
+    (xxlsv.cold_water_gallons * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_xeros_cost_per_pound,
 
 -- hot water
 -- Should always equal one in this view
-    xdma.hot_water                                                                          AS cycle_hot_water_volume,
+    ( xdma.hot_water / 10 )                                                                            AS cycle_hot_water_volume,
 # TODO: Change gallons to volume
-    xxlsv.hot_water_gallons                                                                 AS cycle_hot_water_xeros_volume,
---     xuah.period_cost / xuah.period_usage                                       AS cycle_hot_water_unit_cost,
-    xdma.hot_water * (xuah.period_cost / xuah.period_usage)                                 AS cycle_hot_water_cost,
-    xxlsv.hot_water_gallons * (xuah.period_cost /
-                               xuah.period_usage)                                           AS cycle_hot_water_xeros_cost,
-    xdma.hot_water /
-    xmc.load_size                                                                           AS cycle_hot_water_volume_per_pound,
-    xxlsv.hot_water_gallons /
-    xmc.load_size                                                                           AS cycle_hot_water_xeros_volume_per_pound,
-    (xdma.hot_water * (xuah.period_cost / xuah.period_usage)) /
-    xmc.load_size                                                                           AS cycle_hot_water_cost_per_pound,
-    (xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)) /
-    xmc.xeros_load_size                                                                     AS cycle_hot_water_xeros_cost_per_pound,
+    xxlsv.hot_water_gallons                                                                     AS cycle_hot_water_xeros_volume,
+    ( xdma.hot_water / 10 ) * (xuah.period_cost / xuah.period_usage)                                     AS cycle_hot_water_cost,
+    xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)                            AS cycle_hot_water_xeros_cost,
+    ( xdma.hot_water / 10 ) / xmc.load_size                                                              AS cycle_hot_water_volume_per_pound,
+    xxlsv.hot_water_gallons / xmc.load_size                                                     AS cycle_hot_water_xeros_volume_per_pound,
+    ( ( xdma.hot_water / 10 ) * (xuah.period_cost / xuah.period_usage)) / xmc.load_size                   AS cycle_hot_water_cost_per_pound,
+    (xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)) / xmc.xeros_load_size    AS cycle_hot_water_xeros_cost_per_pound,
 
 -- Labor and cycle time measures
-    xdma.run_time                                                                           AS cycle_time_run_time,
-    xxlsv.run_time                                                                          AS cycle_time_xeros_run_time,
-    xmc.unload_time                                                                         AS cycle_time_unload_time,
-    xdma.run_time + xmc.unload_time                                                         AS cycle_time_total_time,
-    xxlsv.run_time +
-    xmc.unload_time                                                                         AS cycle_time_xeros_total_time,
-    (xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                          AS cycle_time_labor_cost,
-    (xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate /
-                                          60)                                               AS cycle_time_xeros_labor_cost,
-    ((xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) /
-    xmc.load_size                                                                           AS cycle_time_labor_cost_per_pound,
-    ((xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) /
-    xmc.xeros_load_size                                                                     AS cycle_time_xeros_labor_cost_per_pound,
+    xdma.run_time                                                                               AS cycle_time_run_time,
+    xxlsv.run_time                                                                              AS cycle_time_xeros_run_time,
+    xmc.unload_time                                                                             AS cycle_time_unload_time,
+    xdma.run_time + xmc.unload_time                                                             AS cycle_time_total_time,
+    xxlsv.run_time + xmc.unload_time                                                            AS cycle_time_xeros_total_time,
+    (xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                              AS cycle_time_labor_cost,
+    (xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                             AS cycle_time_xeros_labor_cost,
+    ((xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) / xmc.load_size            AS cycle_time_labor_cost_per_pound,
+    ((xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) / xmc.xeros_load_size     AS cycle_time_xeros_labor_cost_per_pound,
 
     xcc.cycle_chemical_cost,
     xcc.cycle_chemical_xeros_cost,
@@ -332,22 +317,20 @@ BEGIN
            AND xdma.classification_id = xmc.classification_id
       LEFT JOIN xeros_machine AS xm
         ON xdma.machine_id = xm.machine_id
+      left join field_data_field_location as fl
+        on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
       LEFT JOIN xeros_xeros_local_static_value AS xxlsv
         ON xmc.classification_id = xxlsv.classification_id
--- Cold Water
       LEFT JOIN xeros_utility_actual AS xua
         ON xua.utility_type = 'water'
--- TODO: Can we assume a unique value?
-     -- Hot Water
       LEFT JOIN xeros_utility_actual AS xuah
         ON xuah.utility_type = 'electric'
--- TODO: Can we assume a unique value?
-     -- Labor
       LEFT JOIN xeros_labor_profile AS xlp
-        ON xm.location_id = xlp.location_id
+        ON fl.field_location_target_id  = xlp.location_id
       LEFT JOIN xeros_chemical_cycle AS xcc
         ON xdma.dai_meter_actual_id = xcc.dai_meter_actual_id
-        ;
+
+  ;
 END;;
 
 
@@ -361,3 +344,5 @@ BEGIN
   call sp_xeros_cycle();
 
 END;;
+
+call sp_refresh_report_data();

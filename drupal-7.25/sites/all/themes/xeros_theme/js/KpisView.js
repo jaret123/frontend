@@ -42,21 +42,25 @@ var view = {
                 var l = app.reportData[i].chartData.length,
                     d = 0;
 
+
+
                 for (d; d < l; d++ ) {
-                    var cd = {
-                        cost: 0,
-                        cost_xeros: 0,
-                        date : '',
-                        value: 0,
-                        value_xeros: 0
-                    };
+                    if ( i == 1 ) {
+                        app.reportData[0].chartData[d] = {
+                            cost: 0,
+                            cost_xeros: 0,
+                            date : '',
+                            value: 0,
+                            value_xeros: 0
+                        };
+                    }
                     var x = app.reportData[i].chartData[d];
-                    cd["cost"] += self.pInt(x["cost"]);
-                    cd["cost_xeros"] += self.pInt(x["cost_xeros"]);
-                    cd["value"] += self.pInt(x["value"]);
-                    cd["value_xeros"] += self.pInt(x["value_xeros"]);
-                    cd["date"] = x["date"];
-                    app.reportData[0].chartData[d] = cd;
+                    app.reportData[0].chartData[d].cost += self.pInt(x.cost);
+                    app.reportData[0].chartData[d].cost_xeros += self.pInt(x.cost_xeros);
+                    app.reportData[0].chartData[d].value += self.pInt(x.value);
+                    app.reportData[0].chartData[d].value_xeros += self.pInt(x.value_xeros);
+                    app.reportData[0].chartData[d]["date"] = x["date"];
+
                 }
 
             }
@@ -81,7 +85,12 @@ var view = {
     },
     delta : function(base, change) { // TODO: Move to a utility library
         var delta = 0;
-        delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+
+        if ( base == 0) {
+            delta = 0;
+        } else {
+            delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+        }
         return delta;
     },
     isValidSummaryData : function( summaryData ) {
