@@ -79,10 +79,10 @@
                     <div class="template-container">
                         <script id="page-tpl" type="text/x-handlebars-template">
                             {{#data}}
-                            <div class="row {{meta.cssClass}} {{machine_name}}" machineId={{id}}>
+                            <div class="row {{meta.cssClass}} {{machine_name}} xeros-machine-row" machineId={{id}}>
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
-                                        <div class="icon-Washer"></div>
+                                        <div class="icon-Washer icon-Xeros-Washer"></div>
                                         <div class="machine-label">{{machine_name}} <br/> ({{size}}) <br/> <span class="small">{{serial_number}}</span> </div>
                                         <div class="metric__message"></div>
                                     </span>

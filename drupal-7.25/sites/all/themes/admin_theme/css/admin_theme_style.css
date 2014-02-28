@@ -1,0 +1,13 @@
+
+
+#data-entity-entity-edit-form label,
+#data-entity-entity-edit-form input {
+    display: inline-block;
+}
+#data-entity-entity-edit-form label {
+    width: 200px;
+}
+#data-entity-entity-edit-form .field-item {
+    padding: 4px 0;
+    margin: 0;
+}
