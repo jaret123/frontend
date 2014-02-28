@@ -138,7 +138,7 @@ DROP VIEW IF EXISTS xeros_cycle ;;
 
 CREATE TABLE xeros_cycle
 (
-	dai_meter_actual_id INT UNSIGNED PRIMARY KEY,
+	dai_meter_actual_id INT UNSIGNED,
     machine_id INT,
     classification_id INT,
     location_id INT,
@@ -190,6 +190,7 @@ CREATE TABLE xeros_cycle
     cycle_chemical_xeros_strength decimal(15,4),
     cycle_chemical_strength_per_pound decimal(15,4),
     cycle_chemical_xeros_strength_per_pound decimal(15,4),
+    KEY dai_meter_actual_id (dai_meter_actual_id),
     KEY `reading_date` (`reading_date`),
     KEY `classification_id` (`classification_id`),
     KEY `machine_id` (`machine_id`)

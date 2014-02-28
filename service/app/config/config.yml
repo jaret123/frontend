@@ -79,3 +79,20 @@ fos_rest:
     format_listener: true
     view:
         view_response_listener: 'force'
+
+monolog:
+    handlers:
+        applog:
+            type: stream
+            path: %kernel.root_dir%/%kernel.environment%.log
+            level: info
+        main:
+            type: fingers_crossed
+            action_level: warning
+            handler: file
+        file:
+            type: stream
+            level: debug
+        syslog:
+            type: syslog
+            level: error
