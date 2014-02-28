@@ -68,9 +68,9 @@
                     <script id="page-tpl" type="text/x-handlebars-template">
 
                         <div class="line"></div>
-                        <div class="container">
+                        <div class="container {{machine_name}}">
                             <div id="machine" class="machine">
-                                <div class="icon-Washer"></div>
+                                <div class="icon-Washer {{machine_name}}"></div>
                                 {{this.machine_name}}<br/>
                                 {{this.serial_number}}<br/>
                                 {{this.machine_id}}
