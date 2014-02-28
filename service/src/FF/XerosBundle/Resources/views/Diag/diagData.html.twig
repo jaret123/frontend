@@ -1,0 +1,23 @@
+<html>
+<head>
+
+</head>
+
+<body>
+Diagnosis
+
+<!-- Config/Readings -->
+{% for k1, d1 in data %}
+    <br>
+    Section: {{ k1 }}
+    {% for k2, d2 in d1  %}
+        {{ k2 }}<br>
+        {% for k3 in d2 %}
+            {{ k3 }} <br>
+                {{ dump(d2) }}
+        {%  endfor %}
+    {% endfor %}
+
+{% endfor %}
+</body>
+</html>
