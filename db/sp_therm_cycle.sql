@@ -18,7 +18,7 @@ BEGIN
 			ELSE 'undefined'
 		END INTO temp_rise 
 	FROM
-		xeros_location_static_value
+		xeros_location_profile
 	WHERE
 		location_id = _location_id;
 
@@ -59,7 +59,7 @@ BEGIN
 		_thermal_conversion,
 		_temp_rise
 	FROM
-		xeros_location_static_value 
+		xeros_location_profile 
 	WHERE
 		location_id = _location_id;
 
@@ -152,7 +152,7 @@ BEGIN
 	left join xeros_machine_classification as mc
 		on xdma.machine_id = mc.machine_id
 		and xdma.classification_id = mc.classification_id
-	left join xeros_location_static_value as lsv
+	left join xeros_location_profile as lsv
 		on m.location_id = lsv.location_id
 	left join xeros_xeros_local_static_value as xlsv
 		on xdma.classification_id = xlsv.classification_id

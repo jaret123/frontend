@@ -186,6 +186,8 @@ CREATE TABLE xeros_cycle
     cycle_time_xeros_labor_cost decimal(15,4),
     cycle_time_labor_cost_per_pound decimal(15,4),
     cycle_time_xeros_labor_cost_per_pound decimal(15,4),
+cycle_hot_water_cost decimal(15,4),
+cycle_hot_water_xeros_cost decimal(15,4),
 
     cycle_chemical_cost decimal(15,4),
     cycle_chemical_xeros_cost decimal(15,4),
@@ -237,6 +239,8 @@ BEGIN
 	cycle_hot_water_xeros_volume_per_pound,
     cycle_hot_water_cost_per_pound,
     cycle_hot_water_xeros_cost_per_pound,
+cycle_hot_water_cost,
+cycle_hot_water_xeros_cost,
 
 	cycle_therms,
 	cycle_therms_xeros,
@@ -297,6 +301,9 @@ BEGIN
 
     (cycle_hot_water_volume_per_pound * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_hot_water_cost_per_pound,
     (cycle_hot_water_xeros_volume_per_pound * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_hot_water_xeros_cost_per_pound,
+
+    (cycle_hot_water_volume_per_pound * (xua.period_cost / xua.period_usage))        AS cycle_hot_water_cost,
+    (cycle_hot_water_xeros_volume_per_pound * (xua.period_cost / xua.period_usage))           AS cycle_hot_water_xeros_cost,
 
 	cycle_therms,
 	cycle_therms_xeros,
@@ -369,4 +376,4 @@ END;;
 
 call sp_refresh_report_data();;
 
-select * from xeros_cycle limit 100;
+select * from xeros_cycle where machine_id = 6 limit 100;
