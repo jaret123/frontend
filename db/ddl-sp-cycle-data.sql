@@ -161,16 +161,20 @@ CREATE TABLE xeros_cycle
     cycle_cold_water_xeros_cost_per_pound decimal(15,4),
 
 -- hot water
--- Should always equal one in this view
-    cycle_hot_water_volume decimal(15,4),
-# TODO: Change gallons to volume
-    cycle_hot_water_xeros_volume decimal(15,4),
-    cycle_hot_water_cost decimal(15,4),
-    cycle_hot_water_xeros_cost decimal(15,4),
-    cycle_hot_water_volume_per_pound decimal(15,4),
-    cycle_hot_water_xeros_volume_per_pound decimal(15,4),
+	cycle_hot_water_volume decimal(15,4),
+	cycle_hot_water_pounds decimal(15,4),
+	cycle_hot_water_xeros_volume decimal(15,4),
+	cycle_hot_water_xeros_pounds decimal(15,4),
+	cycle_hot_water_volume_per_pound decimal(15,4),
+	cycle_hot_water_xeros_volume_per_pound decimal(15,4),
     cycle_hot_water_cost_per_pound decimal(15,4),
     cycle_hot_water_xeros_cost_per_pound decimal(15,4),
+	cycle_therms decimal(15,4),
+	cycle_therms_xeros decimal(15,4),
+	cycle_therms_per_pound decimal(15,4),
+	cycle_therms_per_pound_xeros decimal(15,4),
+	cycle_therm_cost_per_pound decimal(15,4),
+	cycle_therm_cost_per_pound_xeros decimal(15,4),
 
 -- Labor and cycle time measures
     cycle_time_run_time decimal(15,4),
@@ -225,16 +229,21 @@ BEGIN
     cycle_cold_water_xeros_cost_per_pound,
 
 -- hot water
--- Should always equal one in this view
-    cycle_hot_water_volume,
-# TODO: Change gallons to volume
-    cycle_hot_water_xeros_volume,
-    cycle_hot_water_cost,
-    cycle_hot_water_xeros_cost,
-    cycle_hot_water_volume_per_pound,
-    cycle_hot_water_xeros_volume_per_pound,
+	cycle_hot_water_volume,
+	cycle_hot_water_pounds,
+	cycle_hot_water_xeros_volume,
+	cycle_hot_water_xeros_pounds,
+	cycle_hot_water_volume_per_pound,
+	cycle_hot_water_xeros_volume_per_pound,
     cycle_hot_water_cost_per_pound,
     cycle_hot_water_xeros_cost_per_pound,
+
+	cycle_therms,
+	cycle_therms_xeros,
+	cycle_therms_per_pound,
+	cycle_therms_per_pound_xeros,
+	cycle_therm_cost_per_pound,
+	cycle_therm_cost_per_pound_xeros,
 
 -- Labor and cycle time measures
     cycle_time_run_time,
@@ -269,27 +278,32 @@ BEGIN
     xmc.xeros_load_size                                                                         AS cycle_xeros_load_size,
 
 -- Cold water
-    xdma.cold_water / 10                                                                        AS cycle_cold_water_volume,
-    xxlsv.cold_water_gallons                                                                    AS cycle_cold_water_xeros_volume,
-    ( xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)                             AS cycle_cold_water_cost,
-    xxlsv.hot_water_gallons * (xua.period_cost / xua.period_usage)                              AS cycle_cold_water_xeros_cost,
+    ( xdma.cold_water + xdma.hot_water) / 10                                                                        AS cycle_cold_water_volume,
+    xxlsv.cold_water_gallons + xxlsv.hot_water_gallons                                                                   AS cycle_cold_water_xeros_volume,
+    ( xdma.cold_water + xdma.hot_water / 10 ) * (xua.period_cost / xua.period_usage)                             AS cycle_cold_water_cost,
+    ( xxlsv.cold_water_gallons + xxlsv.hot_water_gallons ) * (xua.period_cost / xua.period_usage)                              AS cycle_cold_water_xeros_cost,
 
-    ( xdma.cold_water / 10 ) / xmc.load_size                                                    AS cycle_cold_water_volume_per_pound,
-    xxlsv.cold_water_gallons / xmc.load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
-    ( (xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_cost_per_pound,
-    (xxlsv.cold_water_gallons * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_xeros_cost_per_pound,
+    ( xdma.cold_water + xdma.hot_water / 10 ) / xmc.load_size                                                    AS cycle_cold_water_volume_per_pound,
+    ( xxlsv.hot_water_gallons + xxlsv.hot_water_gallons )  / xmc.load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
+    ( (xdma.cold_water + xdma.hot_water / 10 ) * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_cost_per_pound,
+    (( xxlsv.cold_water_gallons + xxlsv.hot_water_gallons )  * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_xeros_cost_per_pound,
 
--- hot water
--- Should always equal one in this view
-    ( xdma.hot_water / 10 )                                                                            AS cycle_hot_water_volume,
-# TODO: Change gallons to volume
-    xxlsv.hot_water_gallons                                                                     AS cycle_hot_water_xeros_volume,
-    ( xdma.hot_water / 10 ) * (xuah.period_cost / xuah.period_usage)                                     AS cycle_hot_water_cost,
-    xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)                            AS cycle_hot_water_xeros_cost,
-    ( xdma.hot_water / 10 ) / xmc.load_size                                                              AS cycle_hot_water_volume_per_pound,
-    xxlsv.hot_water_gallons / xmc.load_size                                                     AS cycle_hot_water_xeros_volume_per_pound,
-    ( ( xdma.hot_water / 10 ) * (xuah.period_cost / xuah.period_usage)) / xmc.load_size                   AS cycle_hot_water_cost_per_pound,
-    (xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)) / xmc.xeros_load_size    AS cycle_hot_water_xeros_cost_per_pound,
+	cycle_hot_water_volume,
+	cycle_hot_water_pounds,
+	cycle_hot_water_xeros_volume,
+	cycle_hot_water_xeros_pounds,
+	cycle_hot_water_volume_per_pound,
+	cycle_hot_water_xeros_volume_per_pound,
+
+    (cycle_hot_water_volume_per_pound * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_hot_water_cost_per_pound,
+    (cycle_hot_water_xeros_volume_per_pound * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_hot_water_xeros_cost_per_pound,
+
+	cycle_therms,
+	cycle_therms_xeros,
+	cycle_therms_per_pound,
+	cycle_therms_per_pound_xeros,
+	cycle_therm_cost_per_pound,
+	cycle_therm_cost_per_pound_xeros,
 
 -- Labor and cycle time measures
 
@@ -305,14 +319,14 @@ BEGIN
       ( ( ( xdma.run_time / 60 ) + xmc.unload_time) * (xlp.ops_hourly_rate / 60) ) / xmc.load_size            AS cycle_time_labor_cost_per_pound,
     ((xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) / xmc.xeros_load_size     AS cycle_time_xeros_labor_cost_per_pound,
 
-    xcc.cycle_chemical_cost,
-    xcc.cycle_chemical_xeros_cost,
-    xcc.cycle_chemical_cost_per_pound,
-    xcc.cycle_chemical_xeros_cost_per_pound,
-    xcc.cycle_chemical_strength,
-    xcc.cycle_chemical_xeros_strength,
-    xcc.cycle_chemical_strength_per_pound,
-    xcc.cycle_chemical_xeros_strength_per_pound
+    cycle_chemical_cost,
+    cycle_chemical_xeros_cost,
+    cycle_chemical_cost_per_pound,
+    cycle_chemical_xeros_cost_per_pound,
+    cycle_chemical_strength,
+    cycle_chemical_xeros_strength,
+    cycle_chemical_strength_per_pound,
+    cycle_chemical_xeros_strength_per_pound
 
   FROM
       xeros_dai_meter_actual AS xdma
@@ -330,9 +344,8 @@ BEGIN
       LEFT JOIN xeros_utility_actual AS xua
         ON fl.field_location_target_id = xua.location_id
            AND xua.utility_type = 'water'
-      LEFT JOIN xeros_utility_actual AS xuah
-        ON fl.field_location_target_id = xuah.location_id
-           AND xua.utility_type = 'electric'
+	  LEFT JOIN xeros_therm_cycle AS xtc
+		ON xdma.dai_meter_actual_id = xtc.dai_meter_actual_id
       LEFT JOIN xeros_labor_profile AS xlp
         ON fl.field_location_target_id  = xlp.location_id
       LEFT JOIN xeros_chemical_cycle AS xcc
@@ -349,8 +362,11 @@ BEGIN
 
   call sp_chemical_unit();
   call sp_chemical_cycle() ;
+  call sp_therm_cycle();
   call sp_xeros_cycle();
 
 END;;
 
-call sp_refresh_report_data();
+call sp_refresh_report_data();;
+
+select * from xeros_cycle limit 100;
