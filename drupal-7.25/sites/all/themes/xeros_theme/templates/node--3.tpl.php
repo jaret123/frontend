@@ -60,11 +60,11 @@
                         </div>
                         <div class="col col-3">
                             <div class="label">Hot Water</div>
-                            <div class="sub-label">(Energy/Pound)</div>
+                            <div class="sub-label">(Therms)</div>
                         </div>
                         <div class="col col-4">
                             <div class="label">Total Water</div>
-                            <div class="sub-label">(Energy/Pound)</div>
+                            <div class="sub-label">(Cost)</div>
                         </div>
                         <div class="col col-5">
                             <div class="label">Cycle Time</div>
@@ -83,7 +83,12 @@
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer"></div>
-                                        <div class="machine-label">{{machine_name}} <br/> ({{size}}) <br/> <span class="small">{{serial_number}}</span> </div>
+                                        <div class="machine-label">
+                                            {{machine_name}} <br/>
+                                            ({{size}}) <br/>
+                                            <span class="small">{{serial_number}}</span> <br/>
+                                            <span class="small">cycles: {{cycles}}</span>
+                                        </div>
                                         <div class="metric__message"></div>
                                     </span>
                                 </div>

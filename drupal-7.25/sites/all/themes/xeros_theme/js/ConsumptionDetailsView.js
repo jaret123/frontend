@@ -20,9 +20,9 @@ var view = {
             "hot_water": [
                 "Gallons",
                 "Load Size",
-                "Gallons Per Pound",
+                "Therms Per Pound",
                 "Cost Per Pound",
-                "Water Reduction",
+                "Therms Reduction",
                 "Cost Reduction"
             ],
             "total_water": [

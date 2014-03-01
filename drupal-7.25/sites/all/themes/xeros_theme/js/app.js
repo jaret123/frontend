@@ -286,11 +286,15 @@ var app = {
             };
         });
 
-        Handlebars.registerHelper("toLocaleString", function(value) {
+        Handlebars.registerHelper("toLocaleString", function(value, dec) {
             if ( typeof(value) === "undefined" )  {
                 return 0
             } else {
-                return parseInt(value, 10).toLocaleString();
+                var d = parseInt(dec);
+                if ( typeof(d) !== "number" ) {
+                    dec = 0;
+                }
+                return parseFloat(value).toFixed(dec).toLocaleString();
             };
         })
 

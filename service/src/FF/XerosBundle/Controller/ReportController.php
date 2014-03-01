@@ -87,6 +87,7 @@ class ReportController extends Controller {
         $dataPointSql = <<<SQL
 select
     b.date,
+    b.cycles,
 	coalesce(b.value, 0) as value,
 	coalesce(b.value_xeros, 0) as value_xeros,
 	coalesce(b.cost, 0) as cost,
@@ -95,6 +96,7 @@ from
 	(
 	select
 	    xd.date,
+	    count(*) as cycles,
         :metric
 	from
 	    xeros_dates as xd
@@ -228,71 +230,53 @@ SELECT
   xm.manufacturer AS machine_name,
   xm.serial_number,
   xm.size,
-  truncate(b.cold_water_volume, 0) as cold_water_value,
-  truncate(b.cold_water_xeros_volume, 0) as cold_water_xeros_value,
-  truncate(b.cold_water_delta_volume, 0) as cold_water_delta_value,
+  b.cycles,
+  truncate(b.cold_water_value, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,
 
-  truncate(b.hot_water_volume, 0) as hot_water_value,
-  truncate(b.hot_water_xeros_volume, 0) as hot_water_xeros_value,
-  truncate(b.hot_water_delta_volume, 0) as hot_water_delta_value,
+  truncate(b.hot_water_value, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
   
-  truncate(b.total_water_volume, 0) as total_water_value,
-  truncate(b.total_water_xeros_volume, 0) as total_water_xeros_value,
-  truncate(b.total_water_delta_volume, 0) as total_water_delta_value,
+  truncate(b.total_water_value, 0) as total_water_value,
+  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,
   
   truncate(b.time_run_time, 0) as time_value,
   truncate(b.time_xeros_run_time, 0) as time_xeros_value,
-  truncate(b.time_delta_run_time, 0) as time_delta_value,
   
   truncate(b.chemical_strength, 0) as chemical_value,
-  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value,
-  truncate(b.chemical_delta_strength, 0) as chemical_delta_value
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
+
 FROM
     xeros_machine AS xm
-    LEFT JOIN
+    INNER JOIN
     (-- metrics
      SELECT
        machine_id,
-       sum(cycle_cold_water_volume)             AS cold_water_volume,
-       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_volume,
-       (sum(cycle_cold_water_volume) - sum(cycle_cold_water_xeros_volume)) /
-       sum(cycle_cold_water_volume)             AS cold_water_delta_volume,
+       count(*) as cycles,
+       sum(cycle_cold_water_volume)             AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,
 
-       sum(cycle_hot_water_volume)              AS hot_water_volume,
-       sum(cycle_hot_water_xeros_volume)        AS hot_water_xeros_volume,
-       (sum(cycle_hot_water_volume) - sum(cycle_hot_water_xeros_volume)) /
-       sum(cycle_hot_water_volume)              AS hot_water_delta_volume,
+       sum(cycle_therms)              AS hot_water_value,
+       sum(cycle_therms_xeros)        AS hot_water_xeros_value,
 
-       sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume)
-                                                AS total_water_volume,
-       sum(cycle_cold_water_xeros_volume) + sum(cycle_cold_water_xeros_volume)
-                                                as total_water_xeros_volume,
-
-       (( sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume) ) -  ( sum(cycle_cold_water_xeros_volume) + sum(cycle_cold_water_xeros_volume) ))
-           / ( sum(cycle_cold_water_volume) + sum(cycle_hot_water_volume) )  as total_water_delta_volume,
+       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,
+       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,
 
        sum(cycle_time_run_time)           AS time_run_time,
        sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
-       (sum(cycle_time_run_time) - sum(cycle_time_xeros_run_time)) /
-       sum(cycle_time_run_time)       AS time_delta_run_time,
 
        sum(cycle_chemical_strength)       AS chemical_strength,
-       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength,
-       (sum(cycle_chemical_strength) - sum(cycle_chemical_xeros_strength)) /
-       sum(cycle_chemical_strength)       AS chemical_delta_strength
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
+
      FROM
        xeros_cycle
      WHERE
-       1 = 1
-       AND reading_date >= ':fromDate' AND reading_date <= ':toDate'
+       reading_date >= ':fromDate' AND reading_date <= ':toDate'
        and machine_id in ( :machineIds )
      GROUP BY
        machine_id
     ) AS b
       ON xm.machine_id = b.machine_id
-WHERE
-  1 = 1
-  and xm.machine_id in ( :machineIds )
 
 SQL;
         $sql = $this->u->replaceFilters($sql, $filters);
@@ -356,6 +340,7 @@ classificationSQL;
                 select
                     xc.machine_id,
                     xc.classification_id,
+                    count(*) as cycles,
                     :metric
                 from
                     xeros_cycle as xc
@@ -376,11 +361,11 @@ SQL;
                 sum(xc.cycle_cold_water_volume) as value_one,
                 sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
 
-                sum(xc.cycle_cold_water_volume_per_pound) as value_three,
-                sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
+                avg(xc.cycle_cold_water_volume_per_pound) as value_three,
+                avg(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
 
-                sum(xc.cycle_cold_water_cost_per_pound) as value_four,
-                sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
+                avg(xc.cycle_cold_water_cost_per_pound) as value_four,
+                avg(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
 METRIC
         ));
 
@@ -391,11 +376,11 @@ METRIC
                 sum(xc.cycle_hot_water_volume) as value_one,
                 sum(xc.cycle_hot_water_xeros_volume) as xeros_value_one,
 
-                sum(xc.cycle_hot_water_volume_per_pound) as value_three,
-                sum(xc.cycle_hot_water_xeros_volume_per_pound) as xeros_value_three,
+                avg(xc.cycle_therms_per_pound) as value_three,
+                avg(xc.cycle_therms_per_pound_xeros) as xeros_value_three,
 
-                sum(xc.cycle_hot_water_cost_per_pound) as value_four,
-                sum(xc.cycle_hot_water_xeros_cost_per_pound) as xeros_value_four
+                avg(xc.cycle_therm_cost_per_pound) as value_four,
+                avg(xc.cycle_therm_cost_per_pound_xeros) as xeros_value_four
 METRIC
         ));
 
@@ -407,11 +392,11 @@ METRIC
                  sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
                  sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
 
-                 sum(xc.cycle_hot_water_volume_per_pound) + sum(xc.cycle_cold_water_volume_per_pound) as value_three,
-                 sum(xc.cycle_hot_water_xeros_volume_per_pound) + sum(xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
+                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,
+                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
 
-                 sum(xc.cycle_hot_water_cost_per_pound) + sum(xc.cycle_cold_water_cost_per_pound) as value_four,
-                 sum(xc.cycle_hot_water_xeros_cost_per_pound) + sum(xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
+                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,
+                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
 
 METRIC
         ));
@@ -427,8 +412,8 @@ METRIC
                 sum(xc.cycle_time_labor_cost) as value_three,
                 sum(xc.cycle_time_xeros_labor_cost) as xeros_value_three,
 
-                sum(xc.cycle_time_labor_cost_per_pound) as value_four,
-                sum(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_four
+                avg(xc.cycle_time_labor_cost_per_pound) as value_four,
+                avg(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_four
 METRIC
         ));
 
@@ -440,11 +425,11 @@ METRIC
                 sum(xc.cycle_chemical_strength) as value_one,
                 sum(xc.cycle_chemical_xeros_strength) as xeros_value_one,
 
-                sum(xc.cycle_chemical_strength_per_pound) as value_three,
-                sum(xc.cycle_chemical_xeros_strength_per_pound) as xeros_value_three,
+                avg(xc.cycle_chemical_strength_per_pound) as value_three,
+                avg(xc.cycle_chemical_xeros_strength_per_pound) as xeros_value_three,
 
-                sum(xc.cycle_chemical_cost_per_pound) as value_four,
-                sum(xc.cycle_chemical_xeros_cost_per_pound) as xeros_value_four
+                avg(xc.cycle_chemical_cost_per_pound) as value_four,
+                avg(xc.cycle_chemical_xeros_cost_per_pound) as xeros_value_four
 METRIC
         ));
 

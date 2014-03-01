@@ -138,7 +138,7 @@ DROP VIEW IF EXISTS xeros_cycle ;;
 
 CREATE TABLE xeros_cycle
 (
-	dai_meter_actual_id INT UNSIGNED,
+	dai_meter_actual_id INT UNSIGNED PRIMARY KEY,
     machine_id INT,
     classification_id INT,
     location_id INT,
@@ -191,7 +191,6 @@ CREATE TABLE xeros_cycle
     cycle_chemical_xeros_strength decimal(15,4),
     cycle_chemical_strength_per_pound decimal(15,4),
     cycle_chemical_xeros_strength_per_pound decimal(15,4),
-    KEY dai_meter_actual_id (dai_meter_actual_id),
     KEY `reading_date` (`reading_date`),
     KEY `classification_id` (`classification_id`),
     KEY `machine_id` (`machine_id`)
@@ -272,12 +271,12 @@ BEGIN
 -- Cold water
     xdma.cold_water / 10                                                                        AS cycle_cold_water_volume,
     xxlsv.cold_water_gallons                                                                    AS cycle_cold_water_xeros_volume,
-    ( xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)                                      AS cycle_cold_water_cost,
+    ( xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)                             AS cycle_cold_water_cost,
     xxlsv.hot_water_gallons * (xua.period_cost / xua.period_usage)                              AS cycle_cold_water_xeros_cost,
 
-    ( xdma.cold_water / 10 ) / xmc.load_size                                                             AS cycle_cold_water_volume_per_pound,
+    ( xdma.cold_water / 10 ) / xmc.load_size                                                    AS cycle_cold_water_volume_per_pound,
     xxlsv.cold_water_gallons / xmc.load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
-    ( (xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)) / xmc.load_size                    AS cycle_cold_water_cost_per_pound,
+    ( (xdma.cold_water / 10 ) * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_cost_per_pound,
     (xxlsv.cold_water_gallons * (xua.period_cost / xua.period_usage)) / xmc.load_size           AS cycle_cold_water_xeros_cost_per_pound,
 
 -- hot water
@@ -293,14 +292,17 @@ BEGIN
     (xxlsv.hot_water_gallons * (xuah.period_cost / xuah.period_usage)) / xmc.xeros_load_size    AS cycle_hot_water_xeros_cost_per_pound,
 
 -- Labor and cycle time measures
-    xdma.run_time                                                                               AS cycle_time_run_time,
+
+      -- DMA Run time is in seconds - need to convert to minutes ( / 60 )
+      -- Hourly Rate is per hour, need to convert to minutes ( / 60 )
+    xdma.run_time / 60                                                                              AS cycle_time_run_time,
     xxlsv.run_time                                                                              AS cycle_time_xeros_run_time,
     xmc.unload_time                                                                             AS cycle_time_unload_time,
-    xdma.run_time + xmc.unload_time                                                             AS cycle_time_total_time,
+    ( xdma.run_time / 60 ) + xmc.unload_time                                                             AS cycle_time_total_time,
     xxlsv.run_time + xmc.unload_time                                                            AS cycle_time_xeros_total_time,
-    (xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                              AS cycle_time_labor_cost,
+    ( ( xdma.run_time / 60 ) + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                              AS cycle_time_labor_cost,
     (xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)                             AS cycle_time_xeros_labor_cost,
-    ((xdma.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) / xmc.load_size            AS cycle_time_labor_cost_per_pound,
+      ( ( ( xdma.run_time / 60 ) + xmc.unload_time) * (xlp.ops_hourly_rate / 60) ) / xmc.load_size            AS cycle_time_labor_cost_per_pound,
     ((xxlsv.run_time + xmc.unload_time) * (xlp.ops_hourly_rate / 60)) / xmc.xeros_load_size     AS cycle_time_xeros_labor_cost_per_pound,
 
     xcc.cycle_chemical_cost,
@@ -326,9 +328,11 @@ BEGIN
       LEFT JOIN xeros_xeros_local_static_value AS xxlsv
         ON xmc.classification_id = xxlsv.classification_id
       LEFT JOIN xeros_utility_actual AS xua
-        ON xua.utility_type = 'water'
+        ON fl.field_location_target_id = xua.location_id
+           AND xua.utility_type = 'water'
       LEFT JOIN xeros_utility_actual AS xuah
-        ON xuah.utility_type = 'electric'
+        ON fl.field_location_target_id = xuah.location_id
+           AND xua.utility_type = 'electric'
       LEFT JOIN xeros_labor_profile AS xlp
         ON fl.field_location_target_id  = xlp.location_id
       LEFT JOIN xeros_chemical_cycle AS xcc

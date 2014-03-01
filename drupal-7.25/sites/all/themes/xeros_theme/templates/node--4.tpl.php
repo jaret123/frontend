@@ -88,9 +88,9 @@
                                         <div class="title">
                                             {{name}}
                                         </div>
+                                        <div class="cycles">Cycles: {{data.0.cycles}}</div>
                                     </div>
                                     <div class="row row-data {{id}}">
-
                                         <div class="box col-1">
                                             <div class="top">
                                                 <div class="label">{{../labels.[0]}}</div>
@@ -116,22 +116,22 @@
                                         <div class="box col-3">
                                             <div class="top">
                                                 <div class="label">{{../labels.[2]}}</div>
-                                                <div class="value">{{toLocaleString data.0.value_three}}</div>
+                                                <div class="value">{{toLocaleString data.0.value_three 3}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{toLocaleString data.0.xeros_value_three}}</div>
+                                                <div class="value">{{toLocaleString data.0.xeros_value_three 3}}</div>
                                             </div>
                                         </div>
 
                                         <div class="box col-4">
                                             <div class="top">
                                                 <div class="label">{{../labels.[3]}}</div>
-                                                <div class="value">{{toLocaleString data.0.value_four}}</div>
+                                                <div class="value">{{toLocaleString data.0.value_four 3}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{toLocaleString data.0.xeros_value_four}}</div>
+                                                <div class="value">{{toLocaleString data.0.xeros_value_four 3}}</div>
                                             </div>
                                         </div>
 

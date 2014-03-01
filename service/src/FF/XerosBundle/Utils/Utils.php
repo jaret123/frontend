@@ -49,8 +49,10 @@ class Utils {
                         users as u
                         left join field_data_field_company as fc
                              on u.uid = fc.entity_id
+                             and fc.entity_type = 'user'
                         left join node as n
                              on fc.field_company_target_id = n.nid
+                             and n.type = 'company'
                     where u.uid = :uid
 SQL;
                 $sqlParsed = $this->replaceFilters($sql, array("uid" => $user[0]['uid']));
