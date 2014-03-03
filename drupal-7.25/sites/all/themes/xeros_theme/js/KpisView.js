@@ -133,6 +133,7 @@ var view = {
     },
     initialize : function() {
         // Do any initialization unique to this view.
+        app.initialize();
         controls.createTimeSelect();
         controls.createExport();
     },

@@ -3,18 +3,17 @@
 var app = {
     apiUrlBase: "",
     apiUrl: "",
-    machine: 1, // Initial machine when there is no hash
-    metric: "cold_water", // Initial metric when there is no hash
+    machine: 0, // Initial machine when there is no hash
+    metric: "", // Initial metric when there is no hash
     tpl: {}, // Our page template
     dataRefresh: 1,
     reportData: {},
     data: {}, // Any event that wants new data should flag dataRefresh to be 1
-    machineMax: 2, //TODO: This needs to be made dynamic
 
     date : new Date(), // The current date
     sessionDateRange : [], // The apps current date range
     sessionTimeSelect : "",
-    sessionMetric : "cold_water",
+    sessionMetric : "",
     dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
     dateRanges : {
         last30days : this.dateRange,
@@ -128,8 +127,6 @@ var app = {
         fromDate.setDate(1);
 
         toDate.setYear(self.date.getFullYear() - 1);
-        //toDate.setMonth(0);
-        //toDate.setDate(0);
 
         // Do nothing to toDate;
         self.dateRanges.lastYearToDate = [
@@ -140,7 +137,6 @@ var app = {
     saveCookie : function() {
         self = this;
         document.cookie = "sessionDateRange=" + self.sessionDateRange;
-        document.cookie = "sessionMetric=" + self.sessionMetric;
         document.cookie = "sessionTimeSelect=" + self.sessionTimeSelect;
     },
     getCookie : function() {
@@ -150,9 +146,6 @@ var app = {
             var kv = c[i].trim().split("=");
             if ( kv[0] == "sessionDateRange" ) {
                 self.sessionDateRange = kv[1].split(",");
-            }
-            if (kv[0] == "sessionMetric") {
-                self.sessionMetric = kv[1];
             }
             if (kv[0] == "sessionTimeSelect") {
                 self.sessionTimeSelect = kv[1];
@@ -170,8 +163,6 @@ var app = {
         self = this;
         self.apiUrl = self.apiUrlBase.replace("{{fromDate}}", self.sessionDateRange[0]);
         self.apiUrl = self.apiUrl.replace("{{toDate}}", self.sessionDateRange[1]);
-
-
     },
     route: function () {
         var self = this;
@@ -180,7 +171,19 @@ var app = {
         //var data = [];
         // If no hash - set data to defaults
         if (!hash) {
+//            controls.showSpinner();
+            // Do the things that have no dependencies
 
+            // Initialize the date ranges for the report
+            self.sessionDateRange = self.dateRanges[window.dateRange];
+
+            // If there is a cookie set, override the default settings
+            self.getCookie();
+
+            // Build the apiUrl
+
+            self.setApiUrl();
+            //self.getData();
         } else {
             //alert('hash' );
             hashArray = hash.substr(1).split("+");
@@ -209,7 +212,6 @@ var app = {
                         self.sessionDateRange = self.dateRanges[hashArray[2]];
                         self.sessionTimeSelect = hashArray[2];
                     }
-
                 }
             }
         }
@@ -298,27 +300,16 @@ var app = {
             };
         })
 
-        controls.showSpinner();
-        //self.hideReport();
-        // Do the things that have no dependencies
-        self.createDateRanges();
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
-        self.registerEvents();
 
+
+        self.createDateRanges();
+
+        self.registerEvents();
         // Do the things that get values from the template (window)
         self.apiUrlBase = window.apiUrlBase;
-        // Initialize the date ranges for the report
-        self.sessionDateRange = self.dateRanges[window.dateRange];
 
-        // If there is a cookie set, override the default settings
-        self.getCookie();
-
-        // Build the apiUrl
-
-        self.setApiUrl();
-        self.getData();
-
-
+        self.route();
         //self.sessionDateRange = this.dateRanges.last30days;
         //self.sessionMetric = "hot_water";
         //self.saveCookie();
@@ -326,4 +317,4 @@ var app = {
     }
 }
 
-app.initialize();
+//app.initialize();

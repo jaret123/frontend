@@ -607,8 +607,8 @@ table {
   border-left: 4px solid transparent;
 }
 
-/* line 13, ../sass/components/_caret.scss */
-.caret-left-wrapper .caret-left {
+/* line 12, ../sass/components/_caret.scss */
+.caret-left {
   display: inline-block;
   width: 0;
   height: 0;
@@ -617,20 +617,10 @@ table {
   border-right: 10px solid;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  opacity: .2;
-}
-/* line 25, ../sass/components/_caret.scss */
-.caret-left-wrapper.active .caret-left {
-  cursor: pointer;
-  opacity: 1;
-}
-/* line 28, ../sass/components/_caret.scss */
-.caret-left-wrapper.active .caret-left:hover {
-  opacity: .8;
 }
 
-/* line 36, ../sass/components/_caret.scss */
-.caret-right-wrapper .caret-right {
+/* line 23, ../sass/components/_caret.scss */
+.caret-right {
   display: inline-block;
   width: 0;
   height: 0;
@@ -639,14 +629,32 @@ table {
   border-left: 10px solid;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
+}
+
+/* line 35, ../sass/components/_caret.scss */
+.caret-left-wrapper .caret-left {
   opacity: .2;
 }
-/* line 48, ../sass/components/_caret.scss */
+/* line 39, ../sass/components/_caret.scss */
+.caret-left-wrapper.active .caret-left {
+  cursor: pointer;
+  opacity: 1;
+}
+/* line 42, ../sass/components/_caret.scss */
+.caret-left-wrapper.active .caret-left:hover {
+  opacity: .8;
+}
+
+/* line 50, ../sass/components/_caret.scss */
+.caret-right-wrapper .caret-right {
+  opacity: .2;
+}
+/* line 54, ../sass/components/_caret.scss */
 .caret-right-wrapper.active .caret-right {
   cursor: pointer;
   opacity: 1;
 }
-/* line 51, ../sass/components/_caret.scss */
+/* line 57, ../sass/components/_caret.scss */
 .caret-right-wrapper.active .caret-right:hover {
   opacity: .8;
 }

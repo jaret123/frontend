@@ -152,17 +152,27 @@ var view = {
     },
     initialize : function() {
         //createDropDown();
+        app.initialize();
         controls.createTimeSelect();
     },
     bindNav : function() {
         jQuery('.link').click(function (event) {
-            var classification = jQuery(this).attr("classification");
-            var machine_id = jQuery(this).attr("machine");
             event.preventDefault();
-            console.log(jQuery(this).attr("classification"));
+            var classification,
+                machine_id,
+                date_range;
+
+            classification = jQuery(this).attr("classification");
+            machine_id = jQuery(this).attr("machine");
             app.sessionMetric = classification;
+
+            if ( app.sessionTimeSelect == "custom" ) {
+                date_range = app.sessionTimeSelect + "," + app.sessionDateRange;
+            } else {
+                date_range = app.sessionTimeSelect;
+            }
             app.saveCookie();
-            document.location.href = 'consumption-details#' + machine_id + "+" + classification + "+" + app.sessionTimeSelect;
+            document.location.href = 'consumption-details#' + machine_id + "+" + classification + "+" + date_range;
         });
     }
 }

@@ -86,6 +86,7 @@ var view = {
         }
     },
     initialize : function() {
+        app.initialize();
         controls.createReportSelect();
         controls.createTimeSelect();
     }
