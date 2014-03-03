@@ -42,8 +42,6 @@ var view = {
                 var l = app.reportData[i].chartData.length,
                     d = 0;
 
-
-
                 for (d; d < l; d++ ) {
                     if ( i == 1 ) {
                         app.reportData[0].chartData[d] = {

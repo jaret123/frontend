@@ -1,4 +1,6 @@
 var controls = {
+
+    machines : [],
     showSpinner: function () {
         var opts = {
             lines: 10, // The number of lines to draw
@@ -171,19 +173,45 @@ var controls = {
     },
     createMachineNav : function() {
         // Machine navigation
-        jQuery("#machine").find(".caret-left-wrapper").click(function () {
-            if (app.machine > 1) {
-                app.machine = app.machine - 1;
-            }
-            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
-        })
+        self = this;
+        self.machines = [];
+        for (var key in app.data.data) {
+            self.machines.push(key);
+        };
 
-        jQuery("#machine").find(".caret-right-wrapper").click(function () {
-            if (app.machine < app.machineMax) {
-                app.machine = parseInt(app.machine) + parseInt(1);
-            }
-            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
-        })
+        var currentMachineIndex,
+            leftArrow,
+            rightArrow,
+            machinesLength;
+
+        leftArrow = jQuery("#machine").find(".caret-left-wrapper");
+        rightArrow = jQuery("#machine").find(".caret-right-wrapper");
+
+        machinesLength = controls.machines.length;
+
+        //currentMachine = controls.machines.indexOf(app.machine);
+        currentMachineIndex = controls.machines.indexOf(app.machine);
+
+        jQuery(leftArrow).removeClass("active")
+            .unbind();
+        jQuery(rightArrow).removeClass("active")
+            .unbind();
+
+        if (currentMachineIndex > 0) {
+            jQuery(leftArrow).addClass("active")
+                .click(function () {
+                    app.machine = controls.machines[currentMachineIndex - 1];
+                    window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+            })
+        }
+        if (currentMachineIndex < (machinesLength - 1)) {
+            jQuery(rightArrow).addClass("active")
+                .click(function () {
+                    app.machine = controls.machines[currentMachineIndex + 1];
+                    window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+                })
+        }
+
     },
     initialize : function() {
         // We can call all of these because the jQuery selectors will just return an empty result if the element

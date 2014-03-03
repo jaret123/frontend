@@ -42,6 +42,7 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
   //$variables['classes_array'] = array_diff($variables['classes_array'], array('class-to-remove'));
 
     $path = drupal_get_path('theme', 'xeros_theme');
+    drupal_add_js($path . '/js/underscore-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/spin.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/kalendae/kalendae.standalone.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/controls.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
