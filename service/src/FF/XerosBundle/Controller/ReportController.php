@@ -152,13 +152,23 @@ SQL;
 METRIC
         ));
         array_push($metrics, array(
+                                  "name" => "total-water",
+                                  "meta" => array( "title" => "Total Water", "label" => "Total Water", "icon" => "Drop", "cssClass" => "gallons"),
+                                  "query" => <<<METRIC
+   		sum(xc.cycle_cold_water_volume + xc.cycle_hot_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume +xc.cycle_hot_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost) as cost_xeros
+METRIC
+                             ));
+        array_push($metrics, array(
             "name" => "hot-water",
             "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
-   		sum(xc.cycle_hot_water_volume) as value,
-   		sum(xc.cycle_hot_water_xeros_volume) as value_xeros,
-   		sum(xc.cycle_hot_water_cost) as cost,
-   		sum(xc.cycle_hot_water_xeros_cost) as cost_xeros
+   		sum(xc.cycle_therms) as value,
+   		sum(xc.cycle_therms_xeros) as value_xeros,
+   		sum(xc.cycle_therms_cost) as cost,
+   		sum(xc.cycle_therms_cost_xeros) as cost_xeros
 METRIC
         ));
         array_push($metrics, array(

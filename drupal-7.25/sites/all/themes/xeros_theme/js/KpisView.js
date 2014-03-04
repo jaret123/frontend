@@ -25,25 +25,94 @@ var view = {
                     'value': 0,
                     'value_xeros': 0
                 },
+                chartData : [],
+                total : [2, 3, 4, 5]
+            },
+            {
+                name : 'cold-water',
+                meta : {
+                    cssClass : "gallons",
+                    icon : "Drop",
+                    label : "Gallons",
+                    title : "Cold Water"
+                },
+                summaryData: {},
                 chartData : []
-
+            },
+            {
+                name : 'total-water',
+                meta : {
+                    cssClass : "gallons",
+                    icon : "Drop",
+                    label : "Gallons",
+                    title : "Total Water"
+                },
+                summaryData: {},
+                chartData : []
+            },
+            {
+                name : 'hot-water',
+                meta : {
+                    cssClass : "efficiency",
+                    icon : "Thermometer",
+                    label : "Efficiency",
+                    title : "Hot Water"
+                },
+                summaryData: {},
+                chartData : []
+            },
+            {
+                name : 'cycle-time',
+                meta : {
+                    cssClass : "labor",
+                    icon : "Clock",
+                    label : "Labor",
+                    title : "Cycle Time"
+                },
+                summaryData: {},
+                chartData : []
+            },
+            {
+                name : 'chemical',
+                meta : {
+                    cssClass : "chemicals",
+                    icon : "Atom",
+                    label : "Chemical Strength",
+                    title : "Usage"
+                },
+                summaryData: {},
+                chartData : []
             }
+
         ];
 
-        app.reportData = ar.concat(app.data.data);
+        //app.reportData = ar.concat(app.data.data);
 
-        for (var i = 1; i < 4; i++) {
-            if ( self.isValidSummaryData(app.reportData[i].summaryData) ) {
-                app.reportData[0].summaryData.cost += parseInt(app.reportData[i].summaryData.cost, 10) ;
-                app.reportData[0].summaryData.cost_xeros += parseInt(app.reportData[i].summaryData.cost_xeros, 10);
-                app.reportData[0].summaryData.value += parseInt(app.reportData[i].summaryData.value, 10) ;
-                app.reportData[0].summaryData.value_xeros += parseInt(app.reportData[i].summaryData.value_xeros, 10) ;
+        app.reportData = ar;
 
-                var l = app.reportData[i].chartData.length,
+        for ( var m in app.data.data ) {
+            var mi = parseInt(m);
+            app.reportData[mi + 1].summaryData = app.data.data[mi].summaryData;
+            app.reportData[mi + 1].chartData = app.data.data[mi].chartData;
+        }
+
+        var sums = app.reportData[0].total;
+
+        // For each of the values in the summary.total add them.
+        for (var i in sums ) {
+
+            var ij = sums[i];
+            if ( self.isValidSummaryData(app.reportData[ij].summaryData) ) {
+                app.reportData[0].summaryData.cost += parseInt(app.reportData[ij].summaryData.cost, 10) ;
+                app.reportData[0].summaryData.cost_xeros += parseInt(app.reportData[ij].summaryData.cost_xeros, 10);
+                app.reportData[0].summaryData.value += parseInt(app.reportData[ij].summaryData.value, 10) ;
+                app.reportData[0].summaryData.value_xeros += parseInt(app.reportData[ij].summaryData.value_xeros, 10) ;
+
+                var l = app.reportData[ij].chartData.length,
                     d = 0;
 
                 for (d; d < l; d++ ) {
-                    if ( i == 1 ) {
+                    if ( i == 0 ) {
                         app.reportData[0].chartData[d] = {
                             cost: 0,
                             cost_xeros: 0,
@@ -52,7 +121,7 @@ var view = {
                             value_xeros: 0
                         };
                     }
-                    var x = app.reportData[i].chartData[d];
+                    var x = app.reportData[ij].chartData[d];
                     app.reportData[0].chartData[d].cost += self.pInt(x.cost);
                     app.reportData[0].chartData[d].cost_xeros += self.pInt(x.cost_xeros);
                     app.reportData[0].chartData[d].value += self.pInt(x.value);

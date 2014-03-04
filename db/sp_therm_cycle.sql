@@ -88,6 +88,8 @@ CREATE TABLE xeros_therm_cycle
 	cycle_hot_water_xeros_volume_per_pound decimal(15,4),
 	cycle_therms decimal(15,4),
 	cycle_therms_xeros decimal(15,4),
+	cycle_therms_cost decimal(15,4),
+	cycle_therms_cost_xeros decimal(15,4),
 	cycle_therms_per_pound decimal(15,4),
 	cycle_therms_per_pound_xeros decimal(15,4),
 	cycle_therm_cost_per_pound decimal(15,4),
@@ -113,6 +115,8 @@ BEGIN
 	cycle_hot_water_xeros_volume_per_pound,
 	cycle_therms,
 	cycle_therms_xeros,
+	cycle_therms_cost,
+	cycle_therms_cost_xeros,
 	cycle_therms_per_pound,
 	cycle_therms_per_pound_xeros,
 	cycle_therm_cost_per_pound,
@@ -136,6 +140,10 @@ BEGIN
 	-- Total Therms
 	udf_total_therms(xdma.reading_timestamp, m.location_id, xdma.hot_water / 10) as cycle_therms,
 	udf_total_therms(xdma.reading_timestamp, m.location_id, xlsv.hot_water_gallons) as cycle_therms_xeros,	
+
+	-- Total Therms Cost
+	udf_total_therms(xdma.reading_timestamp, m.location_id, xdma.hot_water / 10)  * lsv.cost_per_therm   as cycle_therms_cost,
+	udf_total_therms(xdma.reading_timestamp, m.location_id, xlsv.hot_water_gallons)  * lsv.cost_per_therm  as cycle_therms_cost_xeros,	
 
 	-- Therms per pound
 	udf_total_therms(xdma.reading_timestamp, m.location_id, xdma.hot_water / 10) / mc.load_size as cycle_therms_per_pound,
