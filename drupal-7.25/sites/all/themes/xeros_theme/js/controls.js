@@ -65,7 +65,7 @@ var controls = {
             event.preventDefault();
             // Update display
 
-            var text = jQuery(this).html();
+            var text = jQuery(this).html() + '<span class="caret-down"></span>';
             source_dl.find("dt a").html(text);
             source_dl.find("dd ul").hide();
 
