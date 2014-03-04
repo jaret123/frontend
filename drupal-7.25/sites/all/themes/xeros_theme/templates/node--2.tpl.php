@@ -76,41 +76,44 @@
                 </script>
             </div> <!-- kpis -->
 
-                <div class="news">
-                    <h1>News</h1>
-                            <a href="/news-and-press" class="view-all">View all</a>
-                            <article>
-                                <h3>In the News</h3>
-                                <p>Eco-conscious cleaning with polymer beads, Physics Today Jan 8, 2014
-                                    http://is.gd/pfgZ8S &nbsp;… <br><a
-                                        href="http://www.xeroscleaning.com/in-the-news-3/" class="read-more-link">Read
-                                        more</a></p>
-                                <img width="73" height="100"
-                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/10/web-logo1.jpg"
-                                     class="attachment-thumb-home-news wp-post-image" alt="web logo" title="web logo">
-                            </article>
-                            <article>
-                                <h3>UK Company Providing Breakthrough in Laundering Joins Sustainable Apparel
-                                    Coalition</h3>
-                                <p>November 11, 2013 A UK company delivering revolutionary clothes laundering technology
-                                    has… <br><a
-                                        href="http://www.xeroscleaning.com/uk-company-providing-breakthrough-in-laundering-joins-sustainable-apparel-coalition/"
-                                        class="read-more-link">Read more</a></p>
-                                <img width="100" height="100"
-                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/11/SAC-Logo-100x100.jpg"
-                                     class="attachment-thumb-home-news wp-post-image" alt="SAC Logo" title="SAC Logo">
-                            </article>
-                            <article>
-                                <h3>In the News</h3>
-                                <p>Forbes 10/16/2013 Xeros Greens The Business of Laundry
-                                    http://www.forbes.com/sites/heatherclancy/2013/10/16/xeros-greens-the-business-of-laundry/
-                                    Green Lodging News… <br><a href="http://www.xeroscleaning.com/in-the-news-2/"
-                                                               class="read-more-link">Read more</a></p>
-                                <img width="73" height="100"
-                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/10/web-logo.jpg"
-                                     class="attachment-thumb-home-news wp-post-image" alt="web logo" title="web logo">
-                            </article>
-                </div><!-- news -->
+            <div class="news">
+                <?php print render(block_get_blocks_by_region('sidebar_first'));?>
+            </div>
+<!--                <div class="news">-->
+<!--                    <h1>News</h1>-->
+<!--                            <a href="/news-and-press" class="view-all">View all</a>-->
+<!--                            <article>-->
+<!--                                <h3>In the News</h3>-->
+<!--                                <p>Eco-conscious cleaning with polymer beads, Physics Today Jan 8, 2014-->
+<!--                                    http://is.gd/pfgZ8S &nbsp;… <br><a-->
+<!--                                        href="http://www.xeroscleaning.com/in-the-news-3/" class="read-more-link">Read-->
+<!--                                        more</a></p>-->
+<!--                                <img width="73" height="100"-->
+<!--                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/10/web-logo1.jpg"-->
+<!--                                     class="attachment-thumb-home-news wp-post-image" alt="web logo" title="web logo">-->
+<!--                            </article>-->
+<!--                            <article>-->
+<!--                                <h3>UK Company Providing Breakthrough in Laundering Joins Sustainable Apparel-->
+<!--                                    Coalition</h3>-->
+<!--                                <p>November 11, 2013 A UK company delivering revolutionary clothes laundering technology-->
+<!--                                    has… <br><a-->
+<!--                                        href="http://www.xeroscleaning.com/uk-company-providing-breakthrough-in-laundering-joins-sustainable-apparel-coalition/"-->
+<!--                                        class="read-more-link">Read more</a></p>-->
+<!--                                <img width="100" height="100"-->
+<!--                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/11/SAC-Logo-100x100.jpg"-->
+<!--                                     class="attachment-thumb-home-news wp-post-image" alt="SAC Logo" title="SAC Logo">-->
+<!--                            </article>-->
+<!--                            <article>-->
+<!--                                <h3>In the News</h3>-->
+<!--                                <p>Forbes 10/16/2013 Xeros Greens The Business of Laundry-->
+<!--                                    http://www.forbes.com/sites/heatherclancy/2013/10/16/xeros-greens-the-business-of-laundry/-->
+<!--                                    Green Lodging News… <br><a href="http://www.xeroscleaning.com/in-the-news-2/"-->
+<!--                                                               class="read-more-link">Read more</a></p>-->
+<!--                                <img width="73" height="100"-->
+<!--                                     src="http://www.xeroscleaning.com/wp-content/uploads/2013/10/web-logo.jpg"-->
+<!--                                     class="attachment-thumb-home-news wp-post-image" alt="web logo" title="web logo">-->
+<!--                            </article>-->
+<!--                </div><!-- news -->-->
         </div>
     </div>
 

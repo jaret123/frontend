@@ -256,6 +256,12 @@ var app = {
                 self.dataRefresh = 0;
                 //self.showReport();
                 self.route();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                var err = jQuery(".error-messages");
+                console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
+                jQuery(err).addClass("active");
+                jQuery(err).html("Oops, something happened with the data service.  Please contact your system administrator.");
             }
         })
     },

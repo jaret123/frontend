@@ -3353,6 +3353,19 @@ h1 {
   border: 1px solid gray;
 }
 
+/* line 1, ../sass/components/_error.scss */
+.error-messages {
+  border: 1px solid red;
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.05);
+  color: black;
+  display: none;
+}
+/* line 8, ../sass/components/_error.scss */
+.error-messages.active {
+  display: inherit;
+}
+
 /* Layout rules */
 /**
  * @file
