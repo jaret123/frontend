@@ -39,6 +39,7 @@ function news_feed_views_default_views() {
   $handler->display->display_options['fields']['field_more_link']['label'] = '';
   $handler->display->display_options['fields']['field_more_link']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_more_link']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_more_link']['element_default_classes'] = FALSE;
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
@@ -57,20 +58,29 @@ function news_feed_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['path'] = '[field_more_link]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_class'] = 'news__title';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Source Publish Date */
   $handler->display->display_options['fields']['field_source_publish_date']['id'] = 'field_source_publish_date';
   $handler->display->display_options['fields']['field_source_publish_date']['table'] = 'field_data_field_source_publish_date';
   $handler->display->display_options['fields']['field_source_publish_date']['field'] = 'field_source_publish_date';
   $handler->display->display_options['fields']['field_source_publish_date']['label'] = '';
+  $handler->display->display_options['fields']['field_source_publish_date']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_source_publish_date']['element_class'] = 'news__date';
   $handler->display->display_options['fields']['field_source_publish_date']['element_label_colon'] = FALSE;
-  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['field_source_publish_date']['element_default_classes'] = FALSE;
+  /* Field: Parsed Body */
   $handler->display->display_options['fields']['php']['id'] = 'php';
   $handler->display->display_options['fields']['php']['table'] = 'views';
   $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['ui_name'] = 'Parsed Body';
   $handler->display->display_options['fields']['php']['label'] = '';
+  $handler->display->display_options['fields']['php']['element_class'] = 'news__body';
   $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['php']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php 
 $b = $data->_field_data[\'nid\'][\'entity\']->body[\'und\'][0][\'value\'];
@@ -80,15 +90,26 @@ print $b;
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Global: Custom text */
+  /* Field: Read More Link */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['ui_name'] = 'Read More Link';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Read More';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = '[field_more_link]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'news__read-more';
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = FALSE;
+  /* Field: Content: Hubspot Tags HTML */
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['id'] = 'field_hubspot_tags_html';
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['table'] = 'field_data_field_hubspot_tags_html';
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['field'] = 'field_hubspot_tags_html';
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['label'] = '';
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['element_class'] = 'news__tags';
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_hubspot_tags_html']['element_default_classes'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
