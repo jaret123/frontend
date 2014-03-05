@@ -23,7 +23,6 @@
                         <select id="report-select" autofocus class="flagvisibility">
                             <option value="cold_water" selected>Cold Water</option>
                             <option value="hot_water">Hot Water</option>
-                            <option value="total_water">Total Water</option>
                             <option value="cycle_time">Cycle Time</option>
                             <option value="chemical">Chemical</option>
                         </select>

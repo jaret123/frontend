@@ -10,12 +10,10 @@ var view = {
 
         app.reportData = app.data;
 
-        // TODO: Remove the delta value from the SQL report and calculate here
         for ( i in app.reportData.data) {
             app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
             app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
             app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
-            app.reportData.data[i].total_water_delta_value = self.delta(app.reportData.data[i].total_water_value, app.reportData.data[i].total_water_xeros_value);
             app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
         }
         draw(); // This does the html template draw
@@ -65,18 +63,11 @@ var view = {
             c.push(parseInt(row.cold_water_value));
             c.push(parseInt(row.cold_water_xeros_value));
 
-
             h.push(parseInt(row.hot_water_value));
             h.push(parseInt(row.hot_water_xeros_value));
 
-
-            t.push(parseInt(row.total_water_value));
-            t.push(parseInt(row.total_water_xeros_value));
-
-
             tm.push(parseInt(row.time_value));
             tm.push(parseInt(row.time_xeros_value));
-
 
             ch.push(parseInt(row.chemical_value));
             ch.push(parseInt(row.chemical_xeros_value));
@@ -100,13 +91,6 @@ var view = {
             // Hot Water
             chart.selector = "[chart=hot_water-" + row.id + "] .chart";
             chart.data = [parseInt(row.hot_water_value), parseInt(row.hot_water_xeros_value), d3.max(h) * domainMultiple];
-            if ( self.isValid(chart.data) ) {
-                chart.drawBar();
-            }
-
-            // Total Water
-            chart.selector = "[chart=total_water-" + row.id + "] .chart";
-            chart.data = [parseInt(row.total_water_value), parseInt(row.total_water_xeros_value), d3.max(t) * domainMultiple];
             if ( self.isValid(chart.data) ) {
                 chart.drawBar();
             }

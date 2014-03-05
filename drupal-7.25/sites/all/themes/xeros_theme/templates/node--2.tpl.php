@@ -78,34 +78,20 @@
 
             <div class="news">
                 <div class="alerts"><div class="copy">Alerts</div></div>
-                <?php print render(block_get_blocks_by_region('sidebar_first'));?>
+
+                <?php
+                $news_block = block_get_blocks_by_region('sidebar_first');
+                print render($news_block);
+                ?>
             </div>
         </div>
     </div>
-
-<!--    <a href="#" class="btn btn-primary download-pdf">Download PDF</a>-->
-<!---->
     <canvas id="drawingArea" style="display:none;"></canvas>
 </div>
-<script>
-    var reports = [
-        {
-            rid : 2,
-            apiUrl : '/api/report/news/123/321.json',
-            template : "news",
-            callback : "newsCallback"
-        }
-    ];
-</script>
+
 <script>
     var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';
     var dateRange = 'last30days';
-
-//    var closeButton = k.util.make('a', {'class': classes.closeButton}, self.containter);
-//    k.addEvent(closeButton, 'click', function () {
-//        this.addClass("hide");
-//    });
-
 </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');

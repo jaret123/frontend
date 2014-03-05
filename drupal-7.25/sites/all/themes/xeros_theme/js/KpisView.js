@@ -26,7 +26,7 @@ var view = {
                     'value_xeros': 0
                 },
                 chartData : [],
-                total : [2, 3, 4, 5]
+                total : [1, 2, 3, 4]
             },
             {
                 name : 'cold-water',
@@ -35,17 +35,6 @@ var view = {
                     icon : "Drop",
                     label : "Gallons",
                     title : "Cold Water"
-                },
-                summaryData: {},
-                chartData : []
-            },
-            {
-                name : 'total-water',
-                meta : {
-                    cssClass : "gallons",
-                    icon : "Drop",
-                    label : "Gallons",
-                    title : "Total Water"
                 },
                 summaryData: {},
                 chartData : []

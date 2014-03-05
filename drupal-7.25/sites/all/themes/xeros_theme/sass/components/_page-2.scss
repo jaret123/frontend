@@ -6,7 +6,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  $zen-column-count: 6;
+  $zen-column-count: 5;
   $zen-gutter-width: 5px;
 
   &.active {
@@ -114,10 +114,7 @@
       .col-5 {
         @include zen-grid-item(1,5);
       }
-      .col-6 {
-        @include zen-grid-item(1,6);
-      }
-      .col-2, .col-3, .col-4, .col-6 {
+      .col-2, .col-3, .col-4 {
 
         img.bar-chart {
           @include transform(rotate(90deg));
@@ -141,7 +138,7 @@
           }
         }
       }
-      .col-5 {
+      .col-4 {
         img {
           display: inline-block;
         }
@@ -161,7 +158,7 @@
           }
         }
       }
-      .col-6 {
+      .col-5 {
         img.bar-chart {
           @include transform(rotate(90deg) scaleY(2));
         }

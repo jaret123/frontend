@@ -142,28 +142,16 @@ where
 
 SQL;
         array_push($metrics, array(
-            "name" => "cold-water",
-            "meta" => array( "title" => "Cold Water", "label" => "Gallons", "icon" => "Drop", "cssClass" => "gallons"),
-            "query" => <<<METRIC
-   		sum(xc.cycle_cold_water_volume) as value,
-   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
-   		sum(xc.cycle_cold_water_cost) as cost,
-   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
-METRIC
-        ));
-        array_push($metrics, array(
-                                  "name" => "total-water",
-                                  "meta" => array( "title" => "Total Water", "label" => "Total Water", "icon" => "Drop", "cssClass" => "gallons"),
+                                  "name" => "cold-water",
                                   "query" => <<<METRIC
    		sum(xc.cycle_cold_water_volume + xc.cycle_hot_water_volume) as value,
-   		sum(xc.cycle_cold_water_xeros_volume +xc.cycle_hot_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_xeros_volume + xc.cycle_hot_water_xeros_volume) as value_xeros,
    		sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost) as cost,
    		sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost) as cost_xeros
 METRIC
                              ));
         array_push($metrics, array(
             "name" => "hot-water",
-            "meta" => array( "title" => "Hot Water", "label" => "Efficiency", "icon" => "Thermometer", "cssClass" => "efficiency"),
             "query" => <<<METRIC
    		sum(xc.cycle_therms) as value,
    		sum(xc.cycle_therms_xeros) as value_xeros,
@@ -173,7 +161,6 @@ METRIC
         ));
         array_push($metrics, array(
             "name" => "cycle-time",
-            "meta" => array( "title" => "Cycle Time", "label" => "Labor", "icon" => "Clock", "cssClass" => "labor"),
             "query" => <<<METRIC
    		sum(xc.cycle_time_total_time) as value,
    		sum(xc.cycle_time_xeros_total_time) as value_xeros,
@@ -183,7 +170,6 @@ METRIC
         ));
         array_push($metrics, array(
             "name" => "chemical",
-            "meta" => array( "title" => "Chemical Strength", "label" => "Usage", "icon" => "Atom", "cssClass" => "chemicals"),
             "query" => <<<METRIC
    		sum(xc.cycle_chemical_strength) as value,
    		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
@@ -247,9 +233,6 @@ SELECT
   truncate(b.hot_water_value, 0) as hot_water_value,
   truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
   
-  truncate(b.total_water_value, 0) as total_water_value,
-  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,
-  
   truncate(b.time_run_time, 0) as time_value,
   truncate(b.time_xeros_run_time, 0) as time_xeros_value,
   
@@ -263,14 +246,11 @@ FROM
      SELECT
        machine_id,
        count(*) as cycles,
-       sum(cycle_cold_water_volume)             AS cold_water_value,
-       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,
+       sum(cycle_cold_water_volume + cycle_hot_water_volume) AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume + cycle_hot_water_xeros_volume) as cold_water_xeros_value,
 
        sum(cycle_therms)              AS hot_water_value,
        sum(cycle_therms_xeros)        AS hot_water_xeros_value,
-
-       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,
-       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,
 
        sum(cycle_time_run_time)           AS time_run_time,
        sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,

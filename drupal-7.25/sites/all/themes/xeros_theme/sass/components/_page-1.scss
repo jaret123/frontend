@@ -138,6 +138,11 @@
         .kpi-chart {background-color: $chart-color-2;}
         .col-3 {border: 1px solid $chart-color-2;}
       }
+    .kpis-bucket {
+      .icon { color: $chart-color-6;}
+      .kpi-chart {background-color: $chart-color-6;}
+      .col-3 {border: 1px solid $chart-color-6;}
+    }
       .kpis-efficiency {
         .icon { color: $chart-color-3;}
         .kpi-chart {background-color: $chart-color-3;}

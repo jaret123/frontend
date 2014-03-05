@@ -63,16 +63,12 @@
                             <div class="sub-label">(Therms)</div>
                         </div>
                         <div class="col col-4">
-                            <div class="label">Total Water</div>
-                            <div class="sub-label">(Cost)</div>
-                        </div>
-                        <div class="col col-5">
                             <div class="label">Cycle Time</div>
                             <div class="sub-label">(Minutes)</div>
                         </div>
-                        <div class="col col-6">
+                        <div class="col col-5">
                             <div class="label">Chemical</div>
-                            <div class="sub-label">(Ounces/Pound)</div>
+                            <div class="sub-label">(Ounces)</div>
                         </div>
                     </div>
 
@@ -109,15 +105,7 @@
                                     <div class="arrow {{hot-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>
                                 </div>
-                                <div class="col col-4 link metric" classification="total_water" machine="{{id}}"
-                                     chart="total_water-{{id}}">
-                                    <div class="chart"></div>
-                                    <div class="delta" data="{{total_water_delta_value}}">{{total_water_delta_value}}%
-                                    </div>
-                                    <div class="arrow {{total-water-up-or-down}}"></div>
-                                    <div class="metric__message"></div>
-                                </div>
-                                <div class="col col-5 link metric" classification="cycle_time" machine="{{id}}"
+                                <div class="col col-4 link metric" classification="cycle_time" machine="{{id}}"
                                      chart="cycle_time-{{id}}">
                                     <div class="chart"></div>
                                     <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
@@ -125,7 +113,7 @@
                                     <div class="metric__message"></div>
                                 </div>
 
-                                <div class="col col-6 link metric" classification="chemical" machine="{{id}}"
+                                <div class="col col-5 link metric" classification="chemical" machine="{{id}}"
                                      chart="chemical-{{id}}">
                                     <div class="chart"></div>
                                     <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
