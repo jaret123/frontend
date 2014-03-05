@@ -77,7 +77,7 @@
             </div> <!-- kpis -->
 
             <div class="news">
-                <div class="alerts"><div class="copy">Alerts</div></div>
+<!--                <div class="alerts"><div class="copy">Alerts</div></div>-->
 
                 <?php
                 $news_block = block_get_blocks_by_region('sidebar_first');

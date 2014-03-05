@@ -182,7 +182,6 @@ METRIC
         foreach ( $metrics as $k => $v) {
             $ar = array (
                 'name' => $v["name"],
-                //'meta' => $v["meta"],
                 'summaryData' => array(),
                 'chartData' => array()
             );

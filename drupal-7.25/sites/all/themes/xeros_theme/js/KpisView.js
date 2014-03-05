@@ -196,15 +196,15 @@ var view = {
         controls.createExport();
 
         // Demo of the alerts functionality;
-        var alertDelay = 1000;
-        window.setTimeout(
-            function() {
-                jQuery(".alerts").delay(alertDelay).toggleClass("alerts__active");
-            },
-            2000);
-        jQuery(".alerts").click(function() {
-            jQuery(this).toggleClass("alerts__active");
-        });
+//        var alertDelay = 1000;
+//        window.setTimeout(
+//            function() {
+//                jQuery(".alerts").delay(alertDelay).toggleClass("alerts__active");
+//            },
+//            2000);
+//        jQuery(".alerts").click(function() {
+//            jQuery(this).toggleClass("alerts__active");
+//        });
     },
     bindNav : function() {
         // Bind any navigation that is on an item in a template.
