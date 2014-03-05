@@ -24,6 +24,7 @@ var app = {
         lastYearToDate : this.dateRange,
         custom : this.dateRange
     }, // Available date ranges
+    err : jQuery(".error-messages"),
     sqlDate : function(d) {
         // date needs to be a native js date object (new Date())
         var sqlDate = "";
@@ -168,6 +169,8 @@ var app = {
         var self = this;
         var hash = window.location.hash;
         var hashArray = hash.substr(1).split("+");
+
+        jQuery(app.err).removeClass("active");
         //var data = [];
         // If no hash - set data to defaults
         if (!hash) {
@@ -254,14 +257,12 @@ var app = {
                 console.log(data);
                 self.data = data;
                 self.dataRefresh = 0;
-                //self.showReport();
                 self.route();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                var err = jQuery(".error-messages");
                 console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
-                jQuery(err).addClass("active");
-                jQuery(err).html("Oops, something happened with the data service.  Please contact your system administrator.");
+                jQuery(app.err).addClass("active");
+                jQuery(app.err).html("Oops, something happened with the data service.  Please contact your system administrator.");
             }
         })
     },
