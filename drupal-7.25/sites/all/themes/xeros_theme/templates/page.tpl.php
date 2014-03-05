@@ -70,9 +70,7 @@
 <!--            --><?php //print $sidebar_second; ?>
 <!--          </aside>-->
 <!--        --><?php //endif; ?>
-    <div class="error-messages">
-        Status Message
-    </div>
+
 </div>
 <footer class="footer">
     <div class="footer-wrapper">
@@ -86,8 +84,8 @@
 
         <div class="footer__middle">
             <a href="http://www.xeroscleaning.com/contact-us/">CONTACT US</a><br/>
-            <phone><span class="icon-Phone"></span>1-855-XEROS NA (1-855-937-6762)</phone><br/>
-            <a href="mailto:Jonathan.benjamin@xeroscleaning.com"><span class="icon-Email"></span>Jonathan.benjamin@xeroscleaning.com</a><br/>
+            <span class="icon-Phone"></span><phone>1-855-XEROS NA (1-855-937-6762)</phone><br/>
+            <span class="icon-Email"></span><a href="mailto:Jonathan.benjamin@xeroscleaning.com">Jonathan.benjamin@xeroscleaning.com</a><br/>
         </div>
 
         <div class="footer__right">

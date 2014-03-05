@@ -90,8 +90,11 @@ $base-font-family: $lato; // The font family set on the html element.
 $font-body:        $lato;
 $font-monospace:   $courier;
 
-h1 {
+h1, h2 {
   font-weight: 100;
+}
+h3 {
+  font-weight: 300;
 }
 //
 // Colors, etc.
