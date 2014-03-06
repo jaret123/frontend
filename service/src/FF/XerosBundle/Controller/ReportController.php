@@ -245,8 +245,8 @@ FROM
      SELECT
        machine_id,
        count(*) as cycles,
-       sum(cycle_cold_water_volume + cycle_hot_water_volume) AS cold_water_value,
-       sum(cycle_cold_water_xeros_volume + cycle_hot_water_xeros_volume) as cold_water_xeros_value,
+       sum(cycle_cold_water_volume) AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume) as cold_water_xeros_value,
 
        sum(cycle_therms)              AS hot_water_value,
        sum(cycle_therms_xeros)        AS hot_water_xeros_value,
@@ -372,24 +372,6 @@ METRIC
                 avg(xc.cycle_therm_cost_per_pound_xeros) as xeros_value_four
 METRIC
         ));
-
-        array_push($metrics, array(
-            "name" => "Total Water",
-            "id" => "total_water",
-            "query" => <<<METRIC
-
-                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
-                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
-
-                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,
-                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
-
-                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,
-                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
-
-METRIC
-        ));
-
         array_push($metrics, array(
             "name" => "Cycle Time",
             "id" => "cycle_time",
@@ -405,7 +387,6 @@ METRIC
                 avg(xc.cycle_time_xeros_labor_cost_per_pound) as xeros_value_four
 METRIC
         ));
-
         array_push($metrics, array(
             "name" => "Chemical",
             "id" => "chemical",
