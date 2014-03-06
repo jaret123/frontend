@@ -144,10 +144,10 @@ SQL;
         array_push($metrics, array(
                                   "name" => "cold-water",
                                   "query" => <<<METRIC
-   		sum(xc.cycle_cold_water_volume + xc.cycle_hot_water_volume) as value,
-   		sum(xc.cycle_cold_water_xeros_volume + xc.cycle_hot_water_xeros_volume) as value_xeros,
-   		sum(xc.cycle_cold_water_cost + xc.cycle_hot_water_cost) as cost,
-   		sum(xc.cycle_cold_water_xeros_cost + xc.cycle_hot_water_xeros_cost) as cost_xeros
+   		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
 METRIC
                              ));
         array_push($metrics, array(
