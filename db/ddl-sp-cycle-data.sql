@@ -1,4 +1,4 @@
-USE `xeros_local`;
+USE `xeros-qa`;
 
 DELIMITER ;;
 
@@ -62,12 +62,12 @@ BEGIN
   FROM
       xeros_dai_meter_actual AS dma
       LEFT JOIN xeros_machine_classification AS mc
-        ON m.machine_id = mc.machine_id
-       AND m.classification_id = mc.classification_id
+        ON dma.machine_id = mc.machine_id
+       AND dma.classification_id = mc.classification_id
       LEFT JOIN xeros_chemical_usage AS cu
         ON mc.machine_classification_id = cu.machine_classification_id
       LEFT JOIN xeros_chemical_profile AS cp
-        ON cu.chemical_profile_id = cp.chemical_profile_id;
+        ON cu.chemical_profile_id = cp.chemical_profile_id
         
 END ;;
 
@@ -368,7 +368,7 @@ CREATE PROCEDURE sp_refresh_report_data()
 BEGIN
 
   call sp_chemical_unit();
-  call sp_chemical_cycle() ;
+  call sp_chemical_cycle();
   call sp_therm_cycle();
   call sp_xeros_cycle();
 
