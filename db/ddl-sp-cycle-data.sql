@@ -67,7 +67,7 @@ BEGIN
       LEFT JOIN xeros_chemical_usage AS cu
         ON mc.machine_classification_id = cu.machine_classification_id
       LEFT JOIN xeros_chemical_profile AS cp
-        ON cu.chemical_profile_id = cp.chemical_profile_id
+        ON cu.chemical_profile_id = cp.chemical_profile_id;
         
 END ;;
 
