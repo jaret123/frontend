@@ -71,11 +71,54 @@ class CSVController extends Controller
         $conn = $this->get('database_connection');
 
         $sql = <<<SQL
-  SELECT * FROM xeros_cycle
+select
+    dai_meter_actual_id as 'Meter ID',
+    machine_id as 'Machine ID',
+    classification_id as 'Classification ID',
+    reading_timestamp as 'Reading Date',
+    cycle_load_size as 'Load Size',
+    cycle_xeros_load_size as 'Load Size (Xeros)',
+    cycle_cold_water_volume + cycle_hot_water_volume as 'Cold Water Volume',
+    cycle_cold_water_xeros_volume + cycle_hot_water_xeros_volume as 'Cold Water Volume (Xeros)',
+    cycle_cold_water_cost + cycle_hot_water_cost as 'Cold Water Cost',
+    cycle_cold_water_xeros_cost + cycle_hot_water_xeros_cost as 'Cold Water Cost (Xeros)',
+    cycle_cold_water_volume_per_pound + cycle_hot_water_volume_per_pound as 'Cold Water Volume Per Pound',
+    cycle_cold_water_xeros_volume_per_pound + cycle_hot_water_xeros_volume_per_pound as 'Cold Water Volume Per Pound (Xeros)',
+    cycle_cold_water_cost_per_pound + cycle_hot_water_cost_per_pound as 'Cold Water Cost Per Pound',
+    cycle_cold_water_xeros_cost_per_pound + cycle_hot_water_xeros_cost_per_pound as 'Cold Water Cost Per Pound (Xeros)',
+    cycle_hot_water_volume as 'Hot Water Volume',
+    cycle_therms as 'Therms',
+    cycle_therms_xeros as 'Therms (Xeros)',
+    cycle_therms_cost as 'Therms Cost',
+    cycle_therms_cost_xeros as 'Therms Cost (Xeros)',
+    cycle_therms_per_pound as 'Therms Per Pound',
+    cycle_therms_per_pound_xeros as 'Therms Per Pound (Xeros)',
+    cycle_therm_cost_per_pound as 'Therms Cost Per Pound',
+    cycle_therm_cost_per_pound_xeros as 'Therms Cost Per Pound (Xeros)',
+    cycle_time_total_time as 'Cycle Time',
+    cycle_time_xeros_total_time as 'Cycle Time (Xeros)',
+    cycle_time_labor_cost as 'Labor Cost',
+    cycle_time_xeros_labor_cost as 'Labor Cost (Xeros)',
+    cycle_time_labor_cost_per_pound as 'Labor Cost Per Pound',
+    cycle_time_xeros_labor_cost_per_pound as 'Labor Cost Per Pound (Xeros)',
+    cycle_chemical_cost as 'Chemical Cost',
+    cycle_chemical_xeros_cost as 'Chemical Cost (Xeros)',
+    cycle_chemical_cost_per_pound as 'Chemical Cost Per Pound',
+    cycle_chemical_xeros_cost_per_pound as 'Chemical Cost Per Pound (Xeros)',
+    cycle_chemical_strength as 'Chemical Volume',
+    cycle_chemical_xeros_strength as 'Chemical Volume (Xeros)',
+    cycle_chemical_strength_per_pound as 'Chemical Volume Per Pound',
+    cycle_chemical_xeros_strength_per_pound as 'Chemical Volume Per Pound (Xeros)'
+  from
+    xeros_cycle
   WHERE
     reading_date >= ':fromDate'
     AND reading_date <= ':toDate'
     AND machine_id in ( :machineIds )
+  ORDER BY
+    reading_date,
+    machine_id,
+    classification_id
 SQL;
 
         $sqlParsed = $this->u->replaceFilters($sql, $filters);
