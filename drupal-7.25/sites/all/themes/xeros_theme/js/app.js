@@ -303,7 +303,11 @@ var app = {
                 if ( typeof(d) !== "number" ) {
                     dec = 0;
                 }
-                return parseFloat(value).toFixed(dec).toLocaleString();
+                var t = parseFloat(value);
+                t = t.toFixed(dec);
+                t = parseFloat(t);
+                t = t.toLocaleString({style: "decimal"});
+                return t;
             };
         })
 

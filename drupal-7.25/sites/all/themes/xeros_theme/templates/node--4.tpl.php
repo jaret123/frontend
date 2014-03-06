@@ -93,7 +93,7 @@
                                         <div class="box col-1">
                                             <div class="top">
                                                 <div class="label">{{../labels.[0]}}</div>
-                                                <div class="value">{{toLocaleString data.0.value_one}}</div>
+                                                <div class="value">{{toLocaleString data.0.value_one 0}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
