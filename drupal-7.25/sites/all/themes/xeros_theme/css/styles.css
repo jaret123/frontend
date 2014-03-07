@@ -900,9 +900,9 @@ img.flag {
 
 /* line 147, ../sass/components/_dropdown.scss */
 .download {
-  float: left;
   font-size: 12px;
   margin-left: 3px;
+  position: relative;
 }
 /* line 152, ../sass/components/_dropdown.scss */
 .download a:link, .download a:visited {
@@ -921,8 +921,10 @@ img.flag {
 
 /* line 167, ../sass/components/_dropdown.scss */
 .data-range {
-  float: right;
   font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 46px;
 }
 
 /** Base container **/
@@ -2163,7 +2165,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1393276868');
+  background-image: url('../images/progress.gif?1376896851');
 }
 
 /* line 2, ../sass/components/_footer.scss */
@@ -2222,25 +2224,32 @@ tr.selected td {
   color: white;
 }
 /* line 45, ../sass/components/_footer.scss */
+.footer .footer-wrapper .footer__middle .icon-Phone, .footer .footer-wrapper .footer__middle .icon-Email {
+  font-size: 24px;
+  margin-right: 5px;
+  position: relative;
+  top: 4px;
+}
+/* line 52, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right {
   float: right;
   color: white;
 }
-/* line 48, ../sass/components/_footer.scss */
+/* line 55, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right [class^="icon-"] {
   font-size: 30px;
 }
-/* line 51, ../sass/components/_footer.scss */
+/* line 58, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-Twitter {
   text-decoration: none;
   color: white;
 }
-/* line 54, ../sass/components/_footer.scss */
+/* line 61, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-Facebook {
   text-decoration: none;
   color: white;
 }
-/* line 57, ../sass/components/_footer.scss */
+/* line 64, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-LinkedIn {
   text-decoration: none;
   color: white;
@@ -2299,7 +2308,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2310,15 +2319,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -2348,7 +2357,7 @@ h1 {
   margin-left: 250px;
   margin-top: -10px;
 }
-/* line 60, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2359,15 +2368,15 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -2419,7 +2428,7 @@ h1 {
   font-style: normal;
 }
 
-/* line 12, ../sass/components/_icons.scss */
+/* line 14, ../sass/components/_icons.scss */
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'xeros-icon';
   speak: none;
@@ -2433,95 +2442,95 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* line 27, ../sass/components/_icons.scss */
+/* line 29, ../sass/components/_icons.scss */
 .icon-Globe:before {
   content: "\e600";
 }
 
-/* line 30, ../sass/components/_icons.scss */
+/* line 32, ../sass/components/_icons.scss */
 .icon-Drop:before {
   content: "\e601";
 }
 
-/* line 33, ../sass/components/_icons.scss */
+/* line 35, ../sass/components/_icons.scss */
 .icon-Thermometer:before {
   content: "\e602";
 }
 
-/* line 36, ../sass/components/_icons.scss */
+/* line 38, ../sass/components/_icons.scss */
 .icon-Clock:before {
   content: "\e603";
 }
 
-/* line 39, ../sass/components/_icons.scss */
+/* line 41, ../sass/components/_icons.scss */
 .icon-Atom:before {
   content: "\e604";
 }
 
-/* line 42, ../sass/components/_icons.scss */
+/* line 44, ../sass/components/_icons.scss */
 .icon-Washer:before {
   content: "\e605";
 }
 
-/* line 45, ../sass/components/_icons.scss */
+/* line 47, ../sass/components/_icons.scss */
 .icon-Info:before {
   content: "\e606";
 }
 
-/* line 48, ../sass/components/_icons.scss */
+/* line 50, ../sass/components/_icons.scss */
 .icon-Phone:before {
   content: "\e607";
 }
 
-/* line 51, ../sass/components/_icons.scss */
+/* line 53, ../sass/components/_icons.scss */
 .icon-Email:before {
   content: "\e608";
 }
 
-/* line 54, ../sass/components/_icons.scss */
+/* line 56, ../sass/components/_icons.scss */
 .icon-Twitter:before {
   content: "\e609";
 }
 
-/* line 57, ../sass/components/_icons.scss */
+/* line 59, ../sass/components/_icons.scss */
 .icon-Facebook:before {
   content: "\e60a";
 }
 
-/* line 60, ../sass/components/_icons.scss */
+/* line 62, ../sass/components/_icons.scss */
 .icon-LinkedIn:before {
   content: "\e60b";
 }
 
-/* line 63, ../sass/components/_icons.scss */
+/* line 65, ../sass/components/_icons.scss */
 .icon-Xeros-Washer:before {
   content: "\e60c";
 }
 
-/* line 66, ../sass/components/_icons.scss */
+/* line 68, ../sass/components/_icons.scss */
 .icon-Bucket:before {
   content: "\e60d";
 }
 
-/* line 69, ../sass/components/_icons.scss */
+/* line 71, ../sass/components/_icons.scss */
 .icon-Total-Water:before {
   content: "\e60e";
 }
 
-/* line 73, ../sass/components/_icons.scss */
+/* line 75, ../sass/components/_icons.scss */
 .icon-Washer {
   color: gray;
   font-size: 80px;
   display: inline-block;
 }
 
-/* line 80, ../sass/components/_icons.scss */
+/* line 82, ../sass/components/_icons.scss */
 .Xeros .icon-Washer {
   color: #0086bd;
   font-size: 80px;
   display: inline-block;
 }
-/* line 85, ../sass/components/_icons.scss */
+/* line 87, ../sass/components/_icons.scss */
 .Xeros .icon-Washer:before {
   content: "\e60c";
 }
@@ -2853,72 +2862,14 @@ h1 {
   word-wrap: break-word;
   margin-top: 22px;
   padding-left: 30px;
-  position: relative;
-}
-/* line 167, ../sass/components/_page-1.scss */
-#page-1 .news .view-all {
-  position: absolute;
-  right: 0px;
-  top: 20px;
-  text-decoration: none;
-  color: inherit;
-  font-weight: 300;
-}
-/* line 175, ../sass/components/_page-1.scss */
-#page-1 .news .view-all:hover {
-  color: #00A5E2;
-}
-/* line 180, ../sass/components/_page-1.scss */
-#page-1 .news article {
-  position: relative;
-  min-height: 180px;
-}
-/* line 184, ../sass/components/_page-1.scss */
-#page-1 .news p {
-  display: inline-block;
-  width: 60%;
-}
-/* line 188, ../sass/components/_page-1.scss */
-#page-1 .news img {
-  float: right;
-  margin-top: 2px;
-}
-/* line 192, ../sass/components/_page-1.scss */
-#page-1 .news h3 {
-  /* max-width: 100px; */
-}
-/* line 195, ../sass/components/_page-1.scss */
-#page-1 .news h1 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-/* line 199, ../sass/components/_page-1.scss */
-#page-1 .news h3 {
-  color: #0087be;
-  font-size: 14px;
-  line-height: 18px;
-  margin: 0px;
-  margin-bottom: 6px;
-  font-weight: 400;
-}
-/* line 207, ../sass/components/_page-1.scss */
-#page-1 .news .news__news-item {
-  padding-left: 22px;
-}
-/* line 210, ../sass/components/_page-1.scss */
-#page-1 .news p {
-  font-size: .75em;
-  line-height: 1.25em;
-  margin: 0px;
-  margin-bottom: 4px;
 }
 
-/* line 219, ../sass/components/_page-1.scss */
+/* line 171, ../sass/components/_page-1.scss */
 a:link, a:visited {
   text-decoration: none;
 }
 
-/* line 220, ../sass/components/_page-1.scss */
+/* line 172, ../sass/components/_page-1.scss */
 a:hover, a:active {
   text-decoration: underline;
 }
@@ -2966,13 +2917,13 @@ a:hover, a:active {
 #page-2 .consumption-container:after {
   clear: both;
 }
-/* line 35, ../sass/components/_page-2.scss */
+/* line 34, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .consumption__grid-container {
   margin-top: 20px;
   position: relative;
   min-height: 400px;
 }
-/* line 42, ../sass/components/_page-2.scss */
+/* line 41, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .template-container {
   -webkit-transition: opacity 0.3s ease-in;
   -webkit-transition-delay: 0;
@@ -2980,11 +2931,11 @@ a:hover, a:active {
   -o-transition: opacity 0.3s ease-in 0;
   transition: opacity 0.3s ease-in 0;
 }
-/* line 44, ../sass/components/_page-2.scss */
+/* line 43, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .template-container.fade {
   opacity: .5;
 }
-/* line 48, ../sass/components/_page-2.scss */
+/* line 47, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row {
   overflow: hidden;
   border-top: 1px dashed gray;
@@ -2995,44 +2946,44 @@ a:hover, a:active {
   height: 75px;
   clear: left;
 }
-/* line 58, ../sass/components/_page-2.scss */
+/* line 57, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .link {
   cursor: pointer;
 }
-/* line 61, ../sass/components/_page-2.scss */
+/* line 60, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .link:hover {
   opacity: 0.8;
 }
-/* line 65, ../sass/components/_page-2.scss */
+/* line 64, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col {
   position: absolute;
   bottom: 20px;
 }
-/* line 69, ../sass/components/_page-2.scss */
+/* line 68, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first {
   padding-top: 10px;
   padding-bottom: 10px;
   height: 50px;
 }
-/* line 73, ../sass/components/_page-2.scss */
+/* line 72, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label, #page-2 .consumption-container .row.first .sub-label {
   text-align: center;
 }
-/* line 76, ../sass/components/_page-2.scss */
+/* line 75, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .label {
   font-weight: 400;
 }
-/* line 79, ../sass/components/_page-2.scss */
+/* line 78, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.first .sub-label {
   font-weight: 100;
   font-size: .83em;
   line-height: 1em;
 }
-/* line 85, ../sass/components/_page-2.scss */
+/* line 84, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.last {
   border-bottom: 1px dashed gray;
 }
-/* line 88, ../sass/components/_page-2.scss */
+/* line 87, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 {
   float: left;
   width: 20%;
@@ -3047,16 +2998,16 @@ a:hover, a:active {
   word-wrap: break-word;
   font-weight: 300;
 }
-/* line 92, ../sass/components/_page-2.scss */
+/* line 91, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .small {
   font-size: 9px;
 }
-/* line 93, ../sass/components/_page-2.scss */
+/* line 92, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-Washer {
   font-size: 80px;
   display: inline-block;
 }
-/* line 97, ../sass/components/_page-2.scss */
+/* line 96, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .machine-label {
   display: inline-block;
   font-size: 0.8em;
@@ -3064,7 +3015,7 @@ a:hover, a:active {
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 105, ../sass/components/_page-2.scss */
+/* line 104, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 {
   float: left;
   width: 20%;
@@ -3078,7 +3029,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 108, ../sass/components/_page-2.scss */
+/* line 107, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-3 {
   float: left;
   width: 20%;
@@ -3092,7 +3043,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 111, ../sass/components/_page-2.scss */
+/* line 110, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 {
   float: left;
   width: 20%;
@@ -3106,7 +3057,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 114, ../sass/components/_page-2.scss */
+/* line 113, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 {
   float: left;
   width: 20%;
@@ -3120,7 +3071,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 119, ../sass/components/_page-2.scss */
+/* line 118, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -3131,7 +3082,7 @@ a:hover, a:active {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 125, ../sass/components/_page-2.scss */
+/* line 124, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels {
   position: relative;
   display: inline-block;
@@ -3139,35 +3090,35 @@ a:hover, a:active {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 134, ../sass/components/_page-2.scss */
+/* line 133, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 142, ../sass/components/_page-2.scss */
+/* line 141, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 img {
   display: inline-block;
 }
-/* line 145, ../sass/components/_page-2.scss */
+/* line 144, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 148, ../sass/components/_page-2.scss */
+/* line 147, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 153, ../sass/components/_page-2.scss */
+/* line 152, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 162, ../sass/components/_page-2.scss */
+/* line 161, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -3175,19 +3126,19 @@ a:hover, a:active {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 166, ../sass/components/_page-2.scss */
+/* line 165, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 171, ../sass/components/_page-2.scss */
+/* line 170, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
 }
-/* line 179, ../sass/components/_page-2.scss */
+/* line 178, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.Xeros {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
   background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
@@ -3553,6 +3504,9 @@ a:hover, a:active {
 /* line 54, ../sass/components/_news.scss */
 .news .view-content .news__tags {
   margin-bottom: 30px;
+}
+/* line 56, ../sass/components/_news.scss */
+.news .view-content .news__tags p {
   display: inline-block;
   margin: 0;
   font-style: italic;

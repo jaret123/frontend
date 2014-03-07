@@ -53,10 +53,12 @@
     }
     .news__tags {
       margin-bottom: 30px;
-			display: inline-block;
-			margin: 0;
-			font-style: italic;
-			font-size: 11px;
+      p {
+        display: inline-block;
+        margin: 0;
+        font-style: italic;
+        font-size: 11px;
+      }
     }
   }
 }
