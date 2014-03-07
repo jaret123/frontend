@@ -8,6 +8,7 @@ $aliases['xeros.dev'] = array (
   array (
     '%drush' => '/usr/bin',
     '%site' => 'sites/default/',
+    '%files' => 'sites/default/files'
   ),
   'databases' => 
   array (
@@ -34,6 +35,7 @@ $aliases['xeros.qa'] = array (
         array (
             '%drush' => '/usr/bin',
             '%site' => 'sites/default/',
+	    '%files' => 'sites/default/files'
         ),
     'databases' =>
         array (
@@ -53,13 +55,14 @@ $aliases['xeros.qa'] = array (
         ),
 );
 $aliases['xeros.prod'] = array (
-    'root' => '/var/www/ELYXOR/prod/www/drupal-7.25',
-    'uri' => 'http://xeros-prod.d.ffinno.com',
-    'remote-host' => 'ffinno',
+    'root' => '/var/www/xeros/www/drupal',
+    'uri' => 'http://sbeadycare.xeroscleaning.com',
+    'remote-host' => 'xeros-prod',
     'path-aliases' =>
         array (
             '%drush' => '/usr/bin',
             '%site' => 'sites/default/',
+	    '%files' => 'sites/default/files'
         ),
     'databases' =>
         array (
@@ -68,8 +71,8 @@ $aliases['xeros.prod'] = array (
                     'default' =>
                         array (
                             'database' => 'xeros_prod',
-                            'username' => 'root',
-                            'password' => 'root',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
                             'host' => 'localhost',
                             'port' => '',
                             'driver' => 'mysql',
