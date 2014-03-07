@@ -79,7 +79,6 @@ fos_rest:
     format_listener: true
     view:
         view_response_listener: 'force'
-
 monolog:
     handlers:
         applog:

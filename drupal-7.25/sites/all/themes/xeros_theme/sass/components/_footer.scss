@@ -41,6 +41,13 @@
     .footer__middle {
       margin-left: 40px;
       color: white;
+
+			.icon-Phone, .icon-Email {
+				font-size: 24px;
+				margin-right: 5px;
+				position: relative;
+				top: 4px;
+			}
     }
     .footer__right {
       float: right;

@@ -8,20 +8,15 @@
  */
 ?>
 
-This is a generic page wrapper template
-
+<div id="landing">
+	<div class="sb_banner_bar">
+  	<div class="sb_logo"></div>
+  </div>
 <!--
 
      You can add or remove anything in this page.  We will set to home page later.
 -->
 
-<!-- Render the login block -->
-<?php   $sidebar_second = render($page['sidebar_second']); ?>
-        <?php if ($sidebar_second): ?>
-          <aside class="login">
-            <?php print $sidebar_second; ?>
-          </aside>
-        <?php endif; ?>
 
 <div class="page-wrapper">
 <!--      <div id="page">-->
@@ -41,6 +36,16 @@ This is a generic page wrapper template
             </div>
           <?php print render($tabs); ?>
           <?php print render($page['help']); ?>
+
+<!-- Render the login block -->
+<?php   $sidebar_second = render($page['sidebar_second']); ?>
+        <?php if ($sidebar_second): ?>
+          <aside class="login"><h3>Member Login</h3>
+            <?php print $sidebar_second; ?>
+          </aside>
+        <?php endif; ?>
+
+
           <?php if ($action_links): ?>
             <ul class="action-links"><?php print render($action_links); ?></ul>
           <?php endif; ?>
@@ -62,7 +67,7 @@ This is a generic page wrapper template
 <!--        --><?php //endif; ?>
 
 </div>
-Hello world
+</div>
 <footer class="footer">
     <div class="footer-wrapper">
 
@@ -76,7 +81,7 @@ Hello world
         <div class="footer__middle">
             <a href="http://www.xeroscleaning.com/contact-us/">CONTACT US</a><br/>
             <span class="icon-Phone"></span><phone>1-855-XEROS NA (1-855-937-6762)</phone><br/>
-            <span class="icon-Email"></span><a href="mailto:Jonathan.benjamin@xeroscleaning.com">Jonathan.benjamin@xeroscleaning.com</a><br/>
+            <span class="icon-Email"></span><a href="mailto:SbeadyCareSupport@xeroscleaning.com">SbeadyCareSupport@xeroscleaning.com</a><br/>
         </div>
 
         <div class="footer__right">
