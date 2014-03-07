@@ -81,7 +81,7 @@
             font-size: .7em;
           }
           .dollars {
-            margin-top: 6px;
+            margin-top: 3px;
             font-size: 1.6em;
             letter-spacing: 1px;
             font-weight: 300;
@@ -102,20 +102,20 @@
             font-size: .8em;
 			padding: 0 20px;
 			line-height: 130%;
-			margin-top:0px;
+			margin-top: 2px;
           }
           .percent {
             font-weight: 300;
             font-size: 1.1em;
-            margin-top: 8px;
+            margin-top: 4px;
           }
           .border {
             height: 1px;
             border-top: 1px dashed $font-color;
             width: 60%;
             margin-left: 20%;
-            margin-top: 2px;
-            margin-bottom: -2px;
+            margin-top: 4px;
+            margin-bottom: -1px;
           }
           .info {
             position: absolute;
@@ -162,7 +162,69 @@
 
     .news {
       @include zen-grid-item(4,9);
-      //margin-top: 22px;
+      margin-top: 22px;
       padding-left: 30px;
+      .view-all {
+        position: absolute;
+        right: 0px;
+        top: 20px;
+
+          text-decoration: none;
+          color: inherit;
+        font-weight: 300;
+        &:hover {
+          color: #00A5E2;
+        }
+      }
+      position: relative;
+      article {
+        position: relative;
+        min-height: 180px;
+      }
+      p {
+        display: inline-block;
+        width: 60%;
+      }
+      img {
+        float: right;
+				margin-top: 2px;
+      }
+      h3 {
+        /* max-width: 100px; */
+      }
+      h1 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      h3 {
+        color: $font-accent-color;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0px;
+				margin-bottom: 6px;
+				font-weight:400;
+      }
+      .news__news-item {
+        padding-left: 22px;
+      }
+      p {
+        font-size: .75em;
+        line-height: 1.25em;
+        margin: 0px;
+        margin-bottom: .25 * $base-font-size ;
+      }
+      a.read-more-link {
+        color: $font-accent-color;
+				font-size: 10px;
+				font-weight:bold;
+				text-transform: uppercase;
+      }
+      .tags {
+        margin-bottom: 1.7em;
+		font-style:italic;
+      }
     }
   }
+
+a:link, a:visited {text-decoration: none;}
+a:hover, a:active {text-decoration: underline;}

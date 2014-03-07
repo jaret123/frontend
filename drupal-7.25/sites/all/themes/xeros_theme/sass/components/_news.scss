@@ -45,31 +45,21 @@
       display: none;
     }
     .news__read-more {
-      color: #222;
+      color: $font-accent-color;;
       a {
-        @include single-transition(opacity .75s linear);
-        text-decoration: none;
-        &:visited {
-          color: #222;
-        }
-        &:hover {
-          color: #222;
-          opacity: .75;
-        }
+        font-size: 11px;
+				text-transform: uppercase;
       }
     }
     .news__tags {
       margin-bottom: 30px;
-      p {
-        display: inline-block;
-        margin: 0;
-        font-style: italic;
-        font-size: .9em;
-      }
+			display: inline-block;
+			margin: 0;
+			font-style: italic;
+			font-size: 11px;
     }
   }
 }
-
 
 
 

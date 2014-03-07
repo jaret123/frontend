@@ -1,0 +1,112 @@
+
+#landing {
+	background: url("http://cdn2.hubspot.net/hub/303944/file-526066930-jpg/images/layout/bg.jpg") no-repeat scroll 0 0 / 100% auto rgba(0, 0, 0, 0);
+	min-height: 770px;
+	
+	.sb_banner_bar {
+		height: 85px;
+		margin-top: 73px;
+		background-image: url(/sites/all/themes/xeros_theme/images/menuBg.jpg);
+		position: relative;
+	}
+
+	.sb_logo {
+		width: 980px;
+		height: 167px;
+		background-image: url(/sites/all/themes/xeros_theme/images/sb_logo.png);
+		background-repeat: no-repeat;
+		margin: auto;
+		position: relative;
+		top: -15px;
+	}
+	
+	.page-wrapper {
+		margin-top: 80px;
+		padding-left: 40px;
+	}
+	
+	h1 {
+		font-weight: 500;
+		font-size: 2.5em;
+		color: #444;
+		}
+
+	h3 {
+		font-weight: 500;
+		color: #444;
+		}
+
+	aside {
+		-moz-box-sizing: border-box;
+		float: left;
+		margin-left: 66.6667%;
+		margin-right: -100%;
+		margin-top: 22px;
+		padding-right: 0;
+		position: relative;
+		width: 33.3333%;
+		word-wrap: break-word;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
+		background-color: #eee;
+		
+		h3, section {
+			padding-left: 30px;
+			}
+			
+		ul {
+			margin-top: 0;
+			padding: 0;
+		}
+
+		li {
+			list-style: none;
+		}
+			
+		input#edit-submit {
+			background-clip: padding-box;
+			background-color: #000000;
+			background-image: -moz-linear-gradient(center bottom , rgba(0, 0, 0, 0.98) 0px, rgba(34, 34, 34, 0.98) 100%);
+			border: 0 none;
+			border-radius: 6px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+			color: #FFFFFF;
+			display: inline-block;
+			font-size: 18px;
+			line-height: 1;
+			padding: 21px 19px;
+			width: 250px;
+			}
+			
+		input[type="text"], input[type="email"], input[type="password"], textarea, select {
+			background-clip: padding-box;
+			background-color: #FFFFFF;
+			background-image: -moz-linear-gradient(center bottom , #EDEDED 0px, #FFFFFF 100%, rgba(255, 255, 255, 0) 100%, #FFFFFF 100%);
+			border: 1px solid #526C9C;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			padding: 8px;
+			width: 250px;
+			}
+			
+		input:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0px 1000px white inset;
+			}
+		}
+		
+	article {
+		-moz-box-sizing: border-box;
+    float: left;
+    margin-left: 0;
+    margin-right: -66.6667%;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    width: 60%;
+    word-wrap: break-word;
+	}
+
+
+}
+
