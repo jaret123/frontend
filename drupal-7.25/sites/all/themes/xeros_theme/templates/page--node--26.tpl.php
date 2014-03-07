@@ -75,7 +75,7 @@
             <img src="/sites/all/themes/xeros_theme/images/xeros_logo.png"/>
         </div>
         <div class="footer__left">
-            <a href="www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>
+            <a href="http://www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>
         </div>
 
         <div class="footer__middle">
