@@ -195,6 +195,12 @@ var view = {
         controls.createTimeSelect();
         controls.createExport();
 
+        if (typeof(app.companies) !== 'undefined') {
+            controls.adminMenuControls();
+            controls.createCompanySelect();
+            controls.createLocationSelect();
+        }
+
         // Demo of the alerts functionality;
 //        var alertDelay = 1000;
 //        window.setTimeout(

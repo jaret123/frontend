@@ -75,6 +75,38 @@
 <!--        --><?php //endif; ?>
 
 </div>
+<?php
+// TODO: We need to figure out a different set of controls for the consumption details page since the navigation is
+// by machine instead of location.
+?>
+<?php if (isset($node->nid)): ?>
+    <?php if ( (array_search('xeros admin', $user->roles) <> null)  && ($node->nid == 2 || $node->nid == 3)): ?>
+        <div class="xeros-admin-menu">
+            <div class="xeros-admin-menu__menu-wrapper">
+                <a href="#" class="xeros-admin-menu__button">Menu</a>
+                <h4>
+                    Admin Menu
+                </h4>
+                <div>
+                    Select Company
+                </div>
+
+                <select id="company-select" autofocus="" class="flagvisibility">
+                    <option value="">-select-</option>
+                </select>
+                <select id="location-select" autofocus="" class="flagvisibility">
+                    <option value="">-select company-</option>
+                </select>
+                <script id="options-tpl" type="text/x-handlebars-template">
+                    <option value="">-select-</option>
+                    {{#each data}}
+                    <option value="{{@key}}">{{this.name}}</option>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    <?php  endif; ?>
+<?php  endif; ?>
 <footer class="footer">
     <div class="footer-wrapper">
 

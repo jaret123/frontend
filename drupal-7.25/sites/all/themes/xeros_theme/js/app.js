@@ -11,9 +11,6 @@ var app = {
     data: {}, // Any event that wants new data should flag dataRefresh to be 1
 
     date : new Date(), // The current date
-    sessionDateRange : [], // The apps current date range
-    sessionTimeSelect : "",
-    sessionMetric : "",
     dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
     dateRanges : {
         last30days : this.dateRange,
@@ -24,6 +21,10 @@ var app = {
         lastYearToDate : this.dateRange,
         custom : this.dateRange
     }, // Available date ranges
+    location : "",
+    sessionDateRange : [], // The apps current date range
+    sessionTimeSelect : "",
+    sessionMetric : "",
     err : jQuery(".error-messages"),
     sqlDate : function(d) {
         // date needs to be a native js date object (new Date())
@@ -162,8 +163,11 @@ var app = {
     },
     setApiUrl: function () {
         self = this;
-        self.apiUrl = self.apiUrlBase.replace("{{fromDate}}", self.sessionDateRange[0]);
-        self.apiUrl = self.apiUrl.replace("{{toDate}}", self.sessionDateRange[1]);
+        self.apiUrl = "/api/report/" + self.reportName + "/" + self.sessionDateRange[0] + "/" + self.sessionDateRange[1];
+        if ( self.location !== "" ) {
+            self.apiUrl += "/" + self.location;
+        }
+        self.apiUrl += ".json";
     },
     route: function () {
         var self = this;
@@ -178,7 +182,8 @@ var app = {
             // Do the things that have no dependencies
 
             // Initialize the date ranges for the report
-            self.sessionDateRange = self.dateRanges[window.dateRange];
+            app.dateRange = window.dateRange;
+            self.sessionDateRange = self.dateRanges[app.dateRange];
 
             // If there is a cookie set, override the default settings
             self.getCookie();
@@ -215,6 +220,9 @@ var app = {
                         self.sessionDateRange = self.dateRanges[hashArray[2]];
                         self.sessionTimeSelect = hashArray[2];
                     }
+                }
+                if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 1 )  {
+                    self.location = hashArray[3];
                 }
             }
         }
@@ -270,6 +278,7 @@ var app = {
     initialize: function () {
         var self = this;
 
+        self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.
 
         Handlebars.registerHelper("formatMoney", function(value, decPlaces, thouSeparator, decSeparator) {
@@ -313,13 +322,13 @@ var app = {
 
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 
-
         self.createDateRanges();
 
         self.registerEvents();
         // Do the things that get values from the template (window)
         self.apiUrlBase = window.apiUrlBase;
-
+        self.fromDate = self.sessionDateRange[0];
+        self.toDate = self.sessionDateRange[1];
         self.route();
         //self.sessionDateRange = this.dateRanges.last30days;
         //self.sessionMetric = "hot_water";

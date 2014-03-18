@@ -65,9 +65,25 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
-function xeros_theme_preprocess_page(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+function xeros_theme_preprocess_page(&$vars, $hook) {
+
+    // Select all the companies and all the child locations and add to page
+    // as array or JSON object
+
+    if ( array_search('xeros admin', $vars['user']->roles) <> null ) {
+        $s = xeros_get_companies($vars);
+        // TODO: Test for existence of app
+        if ( array_search('xeros admin', $vars['user']->roles) <> null  ) {
+            drupal_add_js('app.companies = ' . json_encode($s), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
+        }
+        $vars['user']->show_admin_bar = 1;
+
+    } else {
+        $vars['user']->show_admin_bar = 0;
+    }
+
+
+//  $variables['sample_variable'] = t('Lorem ipsum.');
 }
 // */
 
