@@ -2329,6 +2329,7 @@ h1 {
 
 /* line 14, ../sass/components/_header.scss */
 .header {
+  position: relative;
   width: 980px;
   margin-left: auto;
   margin-right: auto;
@@ -2340,25 +2341,28 @@ h1 {
 .header .block {
   margin-bottom: 0;
 }
-/* line 27, ../sass/components/_header.scss */
+/* line 25, ../sass/components/_header.scss */
 .header .header__logo {
   position: absolute;
   z-index: 10;
   top: 10px;
   margin-left: -12px;
+  overflow: visible;
 }
-/* line 32, ../sass/components/_header.scss */
-.header .header__logo img {
+/* line 31, ../sass/components/_header.scss */
+.header .header__logo a {
+  display: block;
   height: 76px;
-  width: 184px;
+  width: 177px;
+  background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo.png");
 }
-/* line 37, ../sass/components/_header.scss */
+/* line 39, ../sass/components/_header.scss */
 .header .header__row-1 {
   position: relative;
   text-align: right;
   line-height: 2em;
 }
-/* line 42, ../sass/components/_header.scss */
+/* line 44, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu {
   display: inline-block;
   margin: 0;
@@ -2389,23 +2393,23 @@ h1 {
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
-/* line 45, ../sass/components/_header.scss */
+/* line 47, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu li {
   text-transform: uppercase;
   margin-left: 10px;
   font-size: 75%;
 }
-/* line 50, ../sass/components/_header.scss */
+/* line 52, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu a, .header .header__row-1 ul.menu a:hover, .header .header__row-1 ul.menu a:visited {
   color: #0087be;
   border: 0;
 }
-/* line 56, ../sass/components/_header.scss */
+/* line 58, ../sass/components/_header.scss */
 .header .header__row-2 {
   line-height: 2em;
   text-align: left;
 }
-/* line 59, ../sass/components/_header.scss */
+/* line 61, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu {
   display: inline-block;
   margin: 0;
@@ -2438,7 +2442,7 @@ h1 {
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
-/* line 64, ../sass/components/_header.scss */
+/* line 66, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li {
   text-transform: uppercase;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6bcaee), color-stop(100%, #0b7fb0));
@@ -2456,20 +2460,20 @@ h1 {
   color: #fff;
   font-size: 90%;
 }
-/* line 72, ../sass/components/_header.scss */
+/* line 74, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li.active {
   background: #0086bd;
 }
-/* line 76, ../sass/components/_header.scss */
+/* line 78, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li:hover {
   background: #0ea2e0;
 }
-/* line 79, ../sass/components/_header.scss */
+/* line 81, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li a {
   text-decoration: none;
   color: inherit;
 }
-/* line 86, ../sass/components/_header.scss */
+/* line 88, ../sass/components/_header.scss */
 .header .header__row-2 .header__welcome {
   color: gray;
   display: inline-block;
@@ -2478,6 +2482,18 @@ h1 {
   margin-top: -40px;
 }
 
+/* line 99, ../sass/components/_header.scss */
+.admin-menu .header {
+  margin-top: 24px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  /* line 108, ../sass/components/_header.scss */
+  .header__logo a {
+    background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
+  }
+}
 @font-face {
   font-family: 'xeros-icon';
   src: url("../fonts/xeros-icon.eot?-ibma36");

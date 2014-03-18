@@ -12,7 +12,8 @@
 <header class="header">
     <div class="header__logo">
         <?php if ($logo): ?>
-            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/></a>
+            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+            </a>
         <?php endif; ?>
     </div>
     <div class="header__row-1">

@@ -12,28 +12,30 @@ h1 {
 	margin-bottom:0;
 }
 .header {
+  position: relative;
   width: 980px;
   margin-left: auto;
   margin-right: auto;
   color: $font-accent-color;
   margin-bottom: 20px;
   min-height: 80px;
-
   .block {
     margin-bottom: 0;
   }
-
-
   .header__logo {
     position: absolute;
     z-index: 10;
     top: 10px;
 	margin-left: -12px;
-    img {
+    overflow: visible;
+    a {
+      display: block;
       height: 76px;
-      width: 184px;
+      width: 177px;
+      background-image:url("/sites/all/themes/xeros_theme/images/sbeadycare_logo.png");
     }
   }
+
   .header__row-1 {
     //background-color: $header-background-color;
     position: relative;
@@ -90,5 +92,20 @@ h1 {
 	  font-size: 80%;
       margin-top: -40px;
     }
+  }
+}
+
+.admin-menu {
+  .header {
+      margin-top: 24px;
+  }
+}
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  .header__logo a {
+    background-image:url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
   }
 }
