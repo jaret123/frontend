@@ -2492,6 +2492,7 @@ h1 {
   /* line 108, ../sass/components/_header.scss */
   .header .header__logo a {
     background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
+    background-size: 177px 76px;
   }
 }
 @font-face {
