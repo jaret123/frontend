@@ -105,7 +105,7 @@ h1 {
 (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  .header__logo a {
+  .header .header__logo a {
     background-image:url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
   }
 }
