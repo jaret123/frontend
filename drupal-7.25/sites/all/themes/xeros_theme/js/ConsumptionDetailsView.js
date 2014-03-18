@@ -89,6 +89,11 @@ var view = {
         app.initialize();
         controls.createReportSelect();
         controls.createTimeSelect();
+        if (typeof(app.companies) !== 'undefined') {
+            controls.adminMenuControls();
+            controls.createCompanySelect();
+            controls.createLocationSelect();
+        }
     }
 }
 

@@ -132,8 +132,8 @@
 </div>
 
     <script>
-        var apiUrlBase = '/api/report/consumption/{{fromDate}}/{{toDate}}.json';
-        var dateRange = 'last30days';
+        window.reportName = 'consumption';
+        window.dateRange = 'last30days';
     </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');

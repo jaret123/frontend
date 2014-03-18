@@ -1,6 +1,3 @@
-
-
-
 .news {
   position: relative;
   .view-all {
@@ -53,32 +50,12 @@
     }
     .news__tags {
       margin-bottom: 30px;
-			display: inline-block;
-			margin: 0;
-			font-style: italic;
-			font-size: 11px;
+      p {
+        display: inline-block;
+        margin: 0;
+        font-style: italic;
+        font-size: 11px;
+      }
     }
   }
 }
-
-
-
-
-
-
-
-
-//  p {
-//    font-size: .75em;
-//    line-height: 1.25em;
-//    margin: 0px;
-//    margin-bottom: .25 * $base-font-size ;
-//  }
-//  .read-more {
-//    font-color: $font-accent-color;
-//    font-weight:bold;
-//  }
-//  .tags {
-//    margin-bottom: 1.7em;
-//    font-style:italic;
-//  }

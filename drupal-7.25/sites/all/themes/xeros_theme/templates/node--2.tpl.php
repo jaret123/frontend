@@ -90,10 +90,10 @@
 </div>
 
 <script>
-    var apiUrlBase = '/api/report/kpis/{{fromDate}}/{{toDate}}.json';
-    var dateRange = 'last30days';
+    window.reportName = 'kpis';
+    window.dateRange = 'last30days';
 </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');
-    drupal_add_js($path . '/js/KpisView.js', array('scope' => 'footer', 'weight' => 1, 'preprocess' => FALSE));
+    drupal_add_js($path . '/js/KpisView.js', array('scope' => 'footer', 'weight' => 5, 'preprocess' => FALSE));
 ?>
