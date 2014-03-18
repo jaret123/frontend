@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * Implements hook_theme()
+ */
+//function xeros_utils_theme() {
+//    return array(
+//      'xeros_get_companies' => array(
+//          'variables' => array('companies' => null)
+//      ),
+//    );
+//}
+
+function xeros_utils_preprocess_html(&$vars) {
+
+}
+
+function xeros_get_companies(&$vars) {
+    // Get companies
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'company')
+        ->propertyCondition('status', 1)
+        ->addMetaData('account', user_load(1));
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $company_items_nids = array_keys($result['node']);
+        $company_items = entity_load('node', $company_items_nids);
+    }
+
+    unset($query);
+    unset($result);
+
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'location')
+        ->propertyCondition('status', 1)
+        ->addMetaData('account', user_load(1));
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+        $location_items_nids = array_keys($result['node']);
+        $location_items = entity_load('node', $location_items_nids);
+    }
+
+    //print_r($result);
+
+    foreach ( $location_items as $nid => $location ) {
+        $company_nid = $location->field_company['und'][0]['target_id'];
+        $field_location = new stdClass();
+        $field_location->nid = $nid;
+        $field_location->name = $location->title;
+
+        if ( !isset( $company_items[$company_nid]->field_location )) {
+            $company_items[$company_nid]->field_location = array();
+        }
+
+
+        $company_items[$company_nid]->field_location[$field_location->nid] = $field_location;
+    }
+
+    foreach ($company_items as $c_nid => $c_node ) {
+        $settings[$c_nid]["name"] = $c_node->title;
+        if (isset($c_node->field_location)) {
+            foreach ( $c_node->field_location as $l_nid => $l_node ) {
+                $settings[$c_nid]['location'][$l_nid]["name"] = $l_node->name;
+            }
+        }
+    }
+
+
+    unset($query);
+    unset($result);
+
+    return $settings;
+  //  dpm($company_items);
+}

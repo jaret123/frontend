@@ -1,0 +1,5 @@
+name = Xeros Utilities
+description = Provides Utility Functions.
+package = Xeros
+core = 7.x
+configure = admin/config/administration/xeros
