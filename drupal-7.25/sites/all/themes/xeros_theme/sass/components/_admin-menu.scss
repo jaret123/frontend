@@ -1,0 +1,58 @@
+.xeros-admin-menu {
+  background-color: rgba(255,255,255, .8);
+  position: absolute;
+  top: 200px;
+  left: -185px;
+  @include single-transition( left, 150ms );
+  //left: -95%;
+  overflow: visible;
+
+
+  > * {
+    //opacity: 0;
+    border: 1px solid gray;
+    border-left: 0px solid white;
+    border-radius: 0 3px 3px 0;
+    display: block;
+    vertical-align: top;
+  }
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 3px;
+    line-height: 1em;
+  }
+  .xeros-admin-menu__menu-wrapper {
+    padding: 5px;
+    padding-top: 15px;
+    width: 180px;
+
+  }
+  .xeros-admin-menu__button {
+    position: absolute;
+    @include single-transition( right, 150ms );
+    right: -38px;
+    top: 3px;
+    background-color: #aaa;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 12px;
+    text-decoration: none;
+    color: white;
+  }
+
+  //@include border-left-radius(emCalc(5px));
+  &.open {
+    left: 0;
+
+    .admin-menu__button {
+      right: 3px;
+
+    }
+  }
+
+
+
+}
+

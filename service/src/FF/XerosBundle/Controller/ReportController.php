@@ -22,13 +22,18 @@ class ReportController extends Controller {
     /**
      * @return array
      * @View()
-     * @Route("/report/{reportName}/{fromDate}/{toDate}.{_format}")
+     * @Route("/report/{reportName}/{fromDate}/{toDate}.{_format}", name="ff_report")
+     * @Route("/report/{reportName}/{fromDate}/{toDate}/{locationId}.{_format}", name="ff_report_location", defaults={"locationId" = null})
+
      *
      * reportAction handles the routing of request to the functions below
      * reportName maps to a function call below and fromDate adn toDate are
      * SQL formatted dates ('YYYY-MM-DD')
      */
-    public function reportAction($reportName, $fromDate, $toDate)
+
+    // TODO : Add company ID and location ID as optional parameters.
+    // Only use them if the user is a Xeros Admin
+    public function reportAction($reportName, $fromDate, $toDate, $locationId = null)
     {
 
         // Resources directory
@@ -37,7 +42,7 @@ class ReportController extends Controller {
         $this->u = new Utils();
         $conn = $this->get('database_connection');
 
-        $userRole = $this->u->getUserRole($conn);
+        $userRole = $this->u->getUserRole($conn, $locationId);
 
         if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
             return array ("message" => "Access denied");
@@ -314,6 +319,12 @@ machineSQL;
                    on xmc.classification_id = xc.classification_id
             where
                 xmc.machine_id = :machine_id
+            order by
+				case
+					when xc.name = 'Unknown' then 1
+					else 0
+				end,
+				xc.name
 classificationSQL;
 
         $sql = <<<SQL
@@ -439,6 +450,7 @@ METRIC
                 $filters['metric'] = $metric["query"];
 
                 // Classifications
+
                 foreach ($classifications as $k1 => $class) {
 
                     $class_id = $class["classification_id"];

@@ -12,7 +12,8 @@
 <header class="header">
     <div class="header__logo">
         <?php if ($logo): ?>
-            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/></a>
+            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+            </a>
         <?php endif; ?>
     </div>
     <div class="header__row-1">
@@ -75,6 +76,38 @@
 <!--        --><?php //endif; ?>
 
 </div>
+<?php
+// TODO: We need to figure out a different set of controls for the consumption details page since the navigation is
+// by machine instead of location.
+?>
+<?php if (isset($node->nid)): ?>
+    <?php if ( (array_search('xeros admin', $user->roles) <> null)  && ($node->nid == 2)): ?>
+        <div class="xeros-admin-menu">
+            <div class="xeros-admin-menu__menu-wrapper">
+                <a href="#" class="xeros-admin-menu__button">Menu</a>
+                <h4>
+                    Admin Menu
+                </h4>
+                <div>
+                    Select Company
+                </div>
+
+                <select id="company-select" autofocus="" class="flagvisibility">
+                    <option value="">-select-</option>
+                </select>
+                <select id="location-select" autofocus="" class="flagvisibility">
+                    <option value="">-select company-</option>
+                </select>
+                <script id="options-tpl" type="text/x-handlebars-template">
+                    <option value="">-select-</option>
+                    {{#each data}}
+                    <option value="{{@key}}">{{this.name}}</option>
+                    {{/each}}
+                </script>
+            </div>
+        </div>
+    <?php  endif; ?>
+<?php  endif; ?>
 <footer class="footer">
     <div class="footer-wrapper">
 
@@ -82,13 +115,13 @@
             <img src="/sites/all/themes/xeros_theme/images/xeros_logo.png"/>
         </div>
         <div class="footer__left">
-            <a href="www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>
+            <a href="http://www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>
         </div>
 
         <div class="footer__middle">
             <a href="http://www.xeroscleaning.com/contact-us/">CONTACT US</a><br/>
             <span class="icon-Phone"></span><phone>1-855-XEROS NA (1-855-937-6762)</phone><br/>
-            <span class="icon-Email"></span><a href="mailto:Jonathan.benjamin@xeroscleaning.com">Jonathan.benjamin@xeroscleaning.com</a><br/>
+            <span class="icon-Email"></span><a href="SbeadyCareSupport@xeroscleaning.com">SbeadyCareSupport@xeroscleaning.com</a><br/>
         </div>
 
         <div class="footer__right">

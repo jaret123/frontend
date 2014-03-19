@@ -138,6 +138,11 @@ var view = {
         //createDropDown();
         app.initialize();
         controls.createTimeSelect();
+        if (typeof(app.companies) !== 'undefined') {
+            controls.adminMenuControls();
+            controls.createCompanySelect();
+            controls.createLocationSelect();
+        }
     },
     bindNav : function() {
         jQuery('.link').click(function (event) {

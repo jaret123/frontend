@@ -68,7 +68,17 @@ var view = {
                 app.reportData.classifications[i].data[j].delta_two = self.valueDelta(d1.value_three, d1.xeros_value_three);
             }
         }
+
+        //objs.sort(compare);
+
         draw();
+    },
+    consumptionCompare : function(a,b) {
+        if (a.last_nom < b.last_nom)
+            return -1;
+        if (a.last_nom > b.last_nom)
+            return 1;
+        return 0;
     },
     percentDelta : function(a, b) {
         if ( b == 0 || typeof(b) == "undefined") {
@@ -89,6 +99,11 @@ var view = {
         app.initialize();
         controls.createReportSelect();
         controls.createTimeSelect();
+        if (typeof(app.companies) !== 'undefined') {
+            controls.adminMenuControls();
+            controls.createCompanySelect();
+            controls.createLocationSelect();
+        }
     }
 }
 

@@ -81,7 +81,7 @@
             font-size: .7em;
           }
           .dollars {
-            margin-top: 6px;
+            margin-top: 3px;
             font-size: 1.6em;
             letter-spacing: 1px;
             font-weight: 300;
@@ -102,20 +102,20 @@
             font-size: .8em;
 			padding: 0 20px;
 			line-height: 130%;
-			margin-top:0px;
+			margin-top: 2px;
           }
           .percent {
             font-weight: 300;
             font-size: 1.1em;
-            margin-top: 8px;
+            margin-top: 4px;
           }
           .border {
             height: 1px;
             border-top: 1px dashed $font-color;
             width: 60%;
             margin-left: 20%;
-            margin-top: 2px;
-            margin-bottom: -2px;
+            margin-top: 4px;
+            margin-bottom: -1px;
           }
           .info {
             position: absolute;
@@ -162,7 +162,10 @@
 
     .news {
       @include zen-grid-item(4,9);
-      //margin-top: 22px;
+      margin-top: 22px;
       padding-left: 30px;
     }
   }
+
+a:link, a:visited {text-decoration: none;}
+a:hover, a:active {text-decoration: underline;}

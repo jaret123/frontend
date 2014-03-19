@@ -135,6 +135,37 @@ var controls = {
         });
 
     },
+    createCompanySelect : function() {
+        var self = this;
+
+        var opts = app.options_tpl( {'data' : app.companies } );
+        jQuery("#company-select").html(opts);
+
+
+        //jQuery("#company-select").val(app.sessionMetric);
+        self.createDropDown("#company-select", function (event) {
+            app.company = jQuery(event.target).find("span.value").html();;
+            //app.metric = jQuery(event.target).find("span.value").html();
+            //window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+            self.updateLocationSelect({'data' : app.companies[app.company].location });
+        });
+    },
+    createLocationSelect : function() {
+        var self = this;
+        //jQuery("#company-select").val(app.sessionMetric);
+        self.createDropDown("#location-select", function (event) {
+            app.location = jQuery(event.target).find("span.value").html();
+            app.dataRefresh = 1;
+            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange + "+" + app.location;
+        });
+    },
+    updateLocationSelect : function(locations) {
+        var self = this;
+        var opts = app.options_tpl( locations );
+        jQuery("#location-select").html(opts);
+        jQuery("#location-select__dl").remove();
+        self.createLocationSelect();
+    },
     createExport : function() {
         // Bind the download links
 
@@ -213,12 +244,19 @@ var controls = {
         }
 
     },
+    adminMenuControls : function () {
+        // Add open close button
+        jQuery(".xeros-admin-menu .xeros-admin-menu__button").click(function(e) {
+            jQuery(".xeros-admin-menu").toggleClass("open");
+            jQuery(".xeros-admin-menu__button").html("Menu");
+            jQuery(".open .xeros-admin-menu__button").html("Close");
+        });
+
+        self.options_tpl = Handlebars.compile(jQuery("#options-tpl").html());
+    },
     initialize : function() {
         // We can call all of these because the jQuery selectors will just return an empty result if the element
         // is not on the page.
-        //this.showSpinner();
-//        this.createReportSelect();
-//        this.createTimeSelect();
     }
 }
 
