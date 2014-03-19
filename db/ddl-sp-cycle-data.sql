@@ -6,7 +6,6 @@ DELIMITER ;;
 -- Broken down by each chemical in each cycle
 
 	DROP TABLE IF EXISTS xeros_chemical_unit;;
-	DROP VIEW IF EXISTS xeros_chemical_unit;;
 	
 	CREATE TABLE xeros_chemical_unit
 	(
@@ -56,7 +55,7 @@ BEGIN
     cp.unit_cost,
     cu.xeros_strength,
     cp.unit_cost * cu.strength       AS chemical_unit_cost,
-    cp.unit_cost * cu.xeros_strength AS xeros_chemical_unit_cost,
+    cp.xeros_unit_cost * cu.xeros_strength AS xeros_chemical_unit_cost,
     mc.load_size,
     mc.xeros_load_size
   FROM
@@ -75,7 +74,6 @@ END ;;
 -- Summing the component parts of the chemical formulas
 
 DROP TABLE IF EXISTS xeros_chemical_cycle ;;
-DROP VIEW IF EXISTS xeros_chemical_cycle ;;
 
 CREATE TABLE xeros_chemical_cycle
 (
@@ -134,7 +132,6 @@ END ;;
 -- Cold Water Usage
 -- Calculations by cycle
 DROP TABLE IF EXISTS xeros_cycle ;;
-DROP VIEW IF EXISTS xeros_cycle ;;
 
 CREATE TABLE xeros_cycle
 (
@@ -284,7 +281,7 @@ cycle_therms_cost_xeros,
     ( xlsv.cold_water_gallons + xlsv.hot_water_gallons ) * (ua.period_cost / ua.period_usage)                              AS cycle_cold_water_xeros_cost,
 
     ( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) / mc.load_size                                                    AS cycle_cold_water_volume_per_pound,
-    ( xlsv.hot_water_gallons + xlsv.hot_water_gallons )  / mc.xeros_load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
+    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  / mc.xeros_load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
     (( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) * (ua.period_cost / ua.period_usage)) / mc.load_size           AS cycle_cold_water_cost_per_pound,
     (( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  * (ua.period_cost / ua.period_usage)) / mc.xeros_load_size           AS cycle_cold_water_xeros_cost_per_pound,
 
@@ -295,16 +292,10 @@ cycle_therms_cost_xeros,
 	cycle_hot_water_volume_per_pound,
 	cycle_hot_water_xeros_volume_per_pound,
 
-    (cycle_hot_water_volume_per_pound * (ua.period_cost / ua.period_usage)) / mc.load_size           AS cycle_hot_water_cost_per_pound,
-    (cycle_hot_water_xeros_volume_per_pound * (ua.period_cost / ua.period_usage)) / mc.xeros_load_size           AS cycle_hot_water_xeros_cost_per_pound,
-
-    (cycle_hot_water_volume_per_pound * (ua.period_cost / ua.period_usage))        AS cycle_hot_water_cost,
-    (cycle_hot_water_xeros_volume_per_pound * (ua.period_cost / ua.period_usage))           AS cycle_hot_water_xeros_cost,
-
 	cycle_therms,
 	cycle_therms_xeros,
-cycle_therms_cost,
-cycle_therms_cost_xeros,
+	cycle_therms_cost,
+	cycle_therms_cost_xeros,
 	cycle_therms_per_pound,
 	cycle_therms_per_pound_xeros,
 	cycle_therm_cost_per_pound,
