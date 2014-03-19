@@ -235,8 +235,8 @@ BEGIN
 
 	cycle_therms,
 	cycle_therms_xeros,
-cycle_therms_cost,
-cycle_therms_cost_xeros,
+	cycle_therms_cost,
+	cycle_therms_cost_xeros,
 	cycle_therms_per_pound,
 	cycle_therms_per_pound_xeros,
 	cycle_therm_cost_per_pound,
@@ -277,13 +277,13 @@ cycle_therms_cost_xeros,
 -- Cold water
     ( dma.cold_water + dma.hot_water) * lp.water_meter_rate                                                                        AS cycle_cold_water_volume,
     xlsv.cold_water_gallons + xlsv.hot_water_gallons                                                                   AS cycle_cold_water_xeros_volume,
-    ( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) * (ua.period_cost / ua.period_usage)                             AS cycle_cold_water_cost,
-    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons ) * (ua.period_cost / ua.period_usage)                              AS cycle_cold_water_xeros_cost,
+    ( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) * lp.cost_per_gallon                             AS cycle_cold_water_cost,
+    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons ) * lp.cost_per_gallon                              AS cycle_cold_water_xeros_cost,
 
     ( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) / mc.load_size                                                    AS cycle_cold_water_volume_per_pound,
     ( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  / mc.xeros_load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
-    (( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) * (ua.period_cost / ua.period_usage)) / mc.load_size           AS cycle_cold_water_cost_per_pound,
-    (( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  * (ua.period_cost / ua.period_usage)) / mc.xeros_load_size           AS cycle_cold_water_xeros_cost_per_pound,
+    (( (dma.cold_water + dma.hot_water) * lp.water_meter_rate ) * lp.cost_per_gallon) / mc.load_size           AS cycle_cold_water_cost_per_pound,
+    (( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  * lp.cost_per_gallon) / mc.xeros_load_size           AS cycle_cold_water_xeros_cost_per_pound,
 
 	cycle_hot_water_volume,
 	cycle_hot_water_pounds,
