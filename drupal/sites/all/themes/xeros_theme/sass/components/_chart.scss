@@ -1,0 +1,23 @@
+.chart {
+  text {
+    font-size: 12px;
+  }
+}
+
+.metric {
+  .arrow {
+    display: inline-block;
+    width: inherit;
+    height: 15px;
+    background: no-repeat left bottom;
+  }
+  .arrow.up {
+    background: url("/sites/all/themes/xeros_theme/images/up-arrow.png") no-repeat left bottom;
+  }
+  .arrow.down {
+    background: url("/sites/all/themes/xeros_theme/images/arrow.png") no-repeat left bottom;
+  }
+  .delta {
+    display: inline-block;
+  }
+}

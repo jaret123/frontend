@@ -1,0 +1,72 @@
+
+.footer {
+  margin-top: 60px;
+  background-color: #333;
+  color: white;
+  height: 110px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  .footer-wrapper {
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+	padding-top:10px;
+	font-size: 80%;
+	letter-spacing: 0.08em;
+	
+    > div {
+      display: inline-block;
+    }
+    a {
+      @include single-transition(color, .3s, ease, 0);
+      text-decoration: none;
+      color: white;
+    }
+	a:hover {
+	  border:0;
+      color: #00A5E2;
+	}
+    .footer__logo {
+      position: absolute;
+      top: -40px;
+    }
+    .footer__left {
+      margin-left: 70px;
+      height: 100px;
+      vertical-align: top;
+    }
+    .footer__middle {
+      margin-left: 40px;
+      color: white;
+
+			.icon-Phone, .icon-Email {
+				font-size: 24px;
+				margin-right: 5px;
+				position: relative;
+				top: 4px;
+			}
+    }
+    .footer__right {
+      float: right;
+      color: white;
+      [class^="icon-"] {
+        font-size: 30px;
+      }
+      .icon-Twitter{
+        text-decoration: none;
+        color: white; }
+      .icon-Facebook {
+        text-decoration: none;
+        color: white; }
+      .icon-LinkedIn {
+        text-decoration: none;
+        color: white; }
+    }
+
+
+  }
+
+}

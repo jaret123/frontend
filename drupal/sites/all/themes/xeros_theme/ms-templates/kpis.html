@@ -1,0 +1,42 @@
+<div class="kpis">
+    <div class="legend">
+        <span class="swatch current"></span>
+        <span class="label">Current Consumption</span>
+        <span class="swatch xeros"></span>
+        <span class="label">Potential Consumption with Xeros</span>
+    </div>
+    <p class="kpis__select select">
+        <span>
+            <span>Timeframe</span>
+            <select id="kpi-select" autofocus class="flagvisibility">
+                <option value="1">Last 30 days</option>
+                <option value="2">Previous Month</option>
+                <option value="3" selected>Last 6 Months</option>
+                <option value="4">Year to Date</option>
+                <option value="5">Last Year</option>
+                <option value="6">Custom...</option>
+            </select>
+        </span>
+    </p>
+    {{#data}}
+    <div class="kpis-{{meta.cssClass}} row">
+        <div class="col col-1">
+            <div class="icon icon-{{meta.icon}}"></div>
+            <div class="col title">{{meta.title}}</div>
+        </div>
+        <div class="col col-2">
+            <div class="col kpi-chart {{name}}"></div>
+        </div>
+        <div class="col col-3">
+            <div class="col unit">{{meta.title}}&nbsp;</div>
+            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{summaryData.cost}}</div>
+            <div class="col saved">Actual Cost</div>
+            <div class="col border"></div>
+            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{summaryData.cost_xeros}}</div>
+            <div class="col saved">Potential Cost</div>
+            <div class="col percent">{{summaryData.savings}}%</div>
+            <div class="col info icon-Info"></div>
+        </div>
+    </div>
+    {{/data}}
+</div>

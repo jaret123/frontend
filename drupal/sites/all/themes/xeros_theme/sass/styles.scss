@@ -1,0 +1,56 @@
+/**
+ * @file
+ * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
+ *
+ * When you turn on CSS aggregation at admin/config/development/performance, all
+ * of these @include files will be combined into a single file.
+ Live Reload
+ */
+
+/* Import Sass mixins, variables, Compass modules, etc. */
+@import "init";
+
+
+/* HTML element (SMACSS base) rules */
+@import "normalize";
+
+@import "compass/typography/lists/horizontal-list";
+@import "compass/css3/images";
+@import "compass/css3/border-radius";
+@import "compass/css3/transform";
+
+@import "components/admin";
+@import "components/admin-menu";
+@import "components/caret";
+@import "components/chart";
+@import "components/chartBar";
+@import "components/chartDonut";
+@import "components/chartKpi";
+@import "components/dropdown";
+@import "components/kalendae";
+@import "components/drupal-misc";
+@import "components/footer";
+@import "components/grids";
+@import "components/header";
+@import "components/icons";
+@import "components/legend";
+@import "components/misc";
+@import "components/page-1";
+@import "components/page-2";
+@import "components/page-3";
+@import "components/landing";
+@import "components/error";
+@import "components/news";
+@import "components/alerts";
+
+/* Layout rules */
+@import "layouts/layout";
+
+/* Component (SMACSS module) rules */
+//@import "components/misc";
+// Optionally, add your own components here.
+@import "print";
+
+/* SMACSS theme rules */
+/* @import "theme-A"; */
+/* @import "theme-B"; */

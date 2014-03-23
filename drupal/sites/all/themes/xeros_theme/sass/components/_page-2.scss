@@ -1,0 +1,197 @@
+
+#page-2 {
+  opacity: 1;
+  z-index: 0;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+
+  $zen-column-count: 5;
+  $zen-gutter-width: 5px;
+
+  &.active {
+    z-index: 10;
+  }
+  .consumption-container {
+    position: relative;
+    .kpis__select {
+      font-weight: 300;
+      @include zen-clear(both);
+      overflow: hidden;
+      > span {
+        float: right;
+      }
+	  dl {
+		margin:0 0 10px 0;
+	  }
+      select, option {
+        margin-left: 10px;
+      }
+    }
+
+    @include zen-grid-container;
+
+    .consumption__grid-container{
+      margin-top: 20px;
+      position: relative;
+      min-height: 400px;
+
+
+    }
+    .template-container {
+      @include single-transition(opacity, .3s, ease-in, 0);
+      &.fade {
+        opacity: .5;
+      }
+    }
+    .row {
+      overflow: hidden;
+      border-top: 1px dashed $font-color;
+
+      padding-top: 25px;
+      padding-bottom: 25px;
+      text-align: center;
+      position: relative;
+      height: 75px;
+
+      .link {
+        cursor: pointer;
+      }
+      .link:hover {
+        opacity: 0.8;
+      }
+
+      .col {
+        position: absolute;
+        bottom: 20px;
+      }
+      &.first {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        height: 50px;
+        .label, .sub-label {
+          text-align: center;
+        }
+        .label {
+          font-weight: 400;
+        }
+        .sub-label {
+          font-weight: 100;
+          font-size: .83em;
+		  line-height:1em;
+        }
+      }
+      &.last {
+        border-bottom: 1px dashed $font-color;
+      }
+      .col-1 {
+
+        @include zen-grid-item(1,1);
+        font-weight: 300;
+        .small { font-size: 9px; }
+        .icon-Washer {
+          font-size: 80px;
+          display: inline-block;
+        }
+        .machine-label {
+          display: inline-block;
+		  font-size: 0.8em;
+		  line-height: 1.5em;
+          vertical-align: top;
+          margin-top: 12px;
+        }
+      }
+      .col-2 {
+        @include zen-grid-item(1,2);
+      }
+      .col-3 {
+        @include zen-grid-item(1,3);
+      }
+      .col-4 {
+        @include zen-grid-item(1,4);
+      }
+      .col-5 {
+        @include zen-grid-item(1,5);
+      }
+      .col-2, .col-3, .col-4 {
+
+        img.bar-chart {
+          @include transform(rotate(90deg));
+          display: inline-block;
+          margin-bottom: -4px;
+          position: relative;
+        }
+        .labels {
+          position: relative;
+          display: inline-block;
+          font-size: 11px;
+          font-weight: 300;
+          margin-left: 1px;
+          .actual {
+
+          }
+          .potential {
+            color: $font-accent-color;
+            margin-left: -40px;
+            margin-top: -5px;
+          }
+        }
+      }
+      .col-4 {
+        img {
+          display: inline-block;
+        }
+        .labels {
+          display: inline-block;
+          font-size: 11px;
+          .actual {
+            position: absolute;
+            top: 10px;
+            left: 74px;
+          }
+          .potential {
+            position:absolute;
+            top: -15px;
+            left: 91px;
+            color: $font-accent-color;
+          }
+        }
+      }
+      .col-5 {
+        img.bar-chart {
+          @include transform(rotate(90deg) scaleY(2));
+        }
+        .labels {
+          .actual {
+            color: white;
+            z-index: 10;
+            margin-left: 0px;
+          }
+          .potential {
+            color: $font-accent-color;
+            margin-left: -37px;
+            margin-top: -5px;
+          }
+        }
+      }
+      @include zen-clear();
+      &.Xeros {
+        background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #E5F4FA),
+            color-stop(0.5, #F2F9FC)
+            color-stop(1, #E5F4FA)
+        );
+        background-image: -o-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -moz-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -webkit-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: -ms-linear-gradient(bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+        background-image: linear-gradient(to bottom, #E5F4FA 0%, #F2F9FC 50%, #E5F4FA 100%);
+
+      }
+    }
+  }
+}
+

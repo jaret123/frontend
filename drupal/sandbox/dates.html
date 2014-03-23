@@ -1,0 +1,174 @@
+<html>
+<head>
+
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+</head>
+<body>
+Hello world
+
+<div class="output"></div>
+<script>
+
+    var app = {
+        // Date ranges are stored in SQL string YYYY-MM-DD
+        date : new Date(), // The current date
+        sessionDateRange : [], // The apps current date range
+        sessionMetric : [],
+        dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
+        dateRanges : {
+            last30days : this.dateRange,
+            previousMonth : this.dateRange,
+            previousYear : this.dateRange,
+            last6months : this.dateRange,
+            yearToDate : this.dateRange,
+            lastYearToDate : this.dateRange,
+            custom : this.dateRange
+        }, // Available date ranges
+        sqlDate : function(d) {
+            // date needs to be a native js date object (new Date())
+            var sqlDate = "";
+            sqlDate = "" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+            return sqlDate;
+        },
+        createDateRanges : function() {
+            self = this;
+
+            var today = new Date(),
+                    year = today.getFullYear(),
+                    month = today.getMonth(),
+                    day = today.getDate();
+
+            var fromDate = new Date();
+            var toDate = new Date();
+
+            // last 30 days
+            console.log(self);
+            fromDate.setDate(self.date.getDate() - 30);
+            toDate.setDate(self.date.getDate());
+            self.dateRanges.last30days = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+
+            // last month
+            fromDate = new Date();
+            toDate = new Date();
+
+            // First day of last month
+            fromDate.setMonth(self.date.getMonth() - 1);
+            fromDate.setDate(1);
+
+            // First day of this month - one day = last day of last month
+            toDate.setMonth(self.date.getMonth());
+            toDate.setDate(1-1);
+            // Last day of last month
+            self.dateRanges.previousMonth = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+
+            // Last 6 months
+
+            fromDate = new Date();
+            toDate = new Date();
+
+            fromDate.setMonth(self.date.getMonth() - 7);
+            fromDate.setDate(1);
+
+            toDate.setMonth(self.date.getMonth())
+            toDate.setDate(1-1);
+            // Last day of last month
+            self.dateRanges.last6months = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+
+            // Year to date
+
+            fromDate = new Date();
+            toDate = new Date();
+
+            fromDate.setMonth(0);
+            fromDate.setDate(1);
+
+            // Do nothing to toDate;
+            self.dateRanges.yearToDate = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+
+            // Previous year
+
+            fromDate = new Date();
+            toDate = new Date();
+
+            fromDate.setYear(self.date.getFullYear() - 1);
+            fromDate.setMonth(0);
+            fromDate.setDate(1);
+
+            //toDate.setYear(self.date.getYear() - 1);
+            toDate.setMonth(0);
+            toDate.setDate(0);
+
+            // Do nothing to toDate;
+            self.dateRanges.previousYear = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+
+
+            // Last Year To Date
+
+            fromDate = new Date();
+            toDate = new Date();
+
+            fromDate.setYear(self.date.getFullYear() - 1);
+            fromDate.setMonth(0);
+            fromDate.setDate(1);
+
+            toDate.setYear(self.date.getFullYear() - 1);
+            //toDate.setMonth(0);
+            //toDate.setDate(0);
+
+            // Do nothing to toDate;
+            self.dateRanges.lastYearToDate = [
+                self.sqlDate(fromDate),
+                self.sqlDate(toDate)
+            ];
+        },
+        saveCookie : function() {
+            self = this;
+            document.cookie = "sessionDateRange=" + self.sessionDateRange;
+            document.cookie = "sessionMetric=" + self.sessionMetric;
+        },
+        getCookie : function() {
+            self = this;
+            var c = document.cookie.split(";");
+            for ( i in c ) {
+                var kv = c[i].split("=");
+                if ( kv[0] == "sessionDateRange" ) {
+                    self.sessionDateRange = kv[1].split(",");
+                }
+                if (kv[0] == "sessionMetric") {
+                    self.sessionMetric = kv[1].split(",");
+                }
+                console.log(kv);
+            };
+            console.log(c);
+        },
+        initialize : function() {
+            // Create Date Ranges
+            this.createDateRanges();
+            this.sessionDateRange = this.dateRanges.last30days;
+            this.sessionMetric = "hot_water";
+            this.saveCookie();
+        }
+    }
+
+    app.initialize();
+    document.write(app.dateRanges);
+    console.log(app.dateRanges);
+</script>
+</body>
+</html>

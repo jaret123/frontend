@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Dedupe and add a primary key to the chemical unit table
+ */
+function db_reporting_update_7201() {
+  run_external_script("db-update-2014-03-06__add-key-to-xeros_chemical_usage.sql");
+}
+
+
+/**
+ *  Add variance column to tables
+ **/
+function db_reporting_update_7202() {
+    // Do nothing
+  $scripts = array(
+    "db-update-2014-03-19_add-2-variance-columns-to-xeros_machine-for-mapping.sql",
+    "db-update-2014-03-19_add-column-xeros_unit_cost-to-xeros_chemical_profile.sql",
+    "db-update-2014-09-19_add-column-cost_per_gallon-to-xeros_location_profile.sql"
+  );
+  foreach ( $scripts as $s ) {
+    run_external_script("$s");
+  }
+}
+
+/**
+ * Update the report builds to implement incremental refresh functionality.
+ */
+function db_reporting_update_7203() {
+  $scripts = array(
+    "aggregate_tables/ddl-sp-therm-cycle.sql",
+    "aggregate_tables/ddl-sp-cycle-data.sql"
+  );
+  foreach ( $scripts as $s ) {
+    run_external_script("$s");
+  }
+}
+
+
+/**
+ * Helper functions
+ */
+function run_external_script($script) {
+    $db = $GLOBALS['GLOBALS']['databases']['default']['default'];
+    $script_path = $GLOBALS['conf']['database_script_dir'];
+    $mysql_bin = $GLOBALS['conf']['mysql_bin'];
+
+    $command = $mysql_bin . " -u{$db['username']} -p{$db['password']} "
+        . "-h {$db['host']} -D {$db['database']} < {$script_path}";
+
+    $message = shell_exec($command . $script . " 2>&1");
+
+    if ( startsWith($message, "ERROR") ) {
+      $watchdog_level = 3;
+    } else {
+      $watchdog_level = 6;
+    }
+
+    watchdog("db_reporting", '<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
+}
+
+function startsWith($haystack, $needle)
+{
+  return $needle === "" || strpos($haystack, $needle) === 0;
+}
