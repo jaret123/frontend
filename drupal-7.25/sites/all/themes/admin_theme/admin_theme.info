@@ -1,8 +1,0 @@
-name = Admin Theme
-description = This is a sub-theme of theme Seven, made by FF for the website Matlaws.com.
-core = 7.x
-base theme = seven
-
-stylesheets[all][]   = css/admin_theme_style.css
-
-scripts[] = js/admin_theme_script.js

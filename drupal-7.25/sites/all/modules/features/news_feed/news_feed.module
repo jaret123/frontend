@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the News Feed feature.
- */
-
-include_once 'news_feed.features.inc';
