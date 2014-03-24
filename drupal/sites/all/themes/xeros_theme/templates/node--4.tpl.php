@@ -151,7 +151,7 @@
                                             </div>
                                             <div class="blue bottom">
                                                 <div class="label">{{../labels.[5]}}</div>
-                                                <div class="value">{{toLocaleString data.0.delta_two 2}} &nbsp;</div>
+                                                <div class="value">{{toLocaleString data.0.delta_two 3}} &nbsp;</div>
                                             </div>
                                         </div>
                                     </div>

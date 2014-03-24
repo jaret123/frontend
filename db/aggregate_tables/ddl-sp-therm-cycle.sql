@@ -203,6 +203,6 @@ BEGIN
 	DEALLOCATE PREPARE stmt;
 END ;;
 
-call sp_therm_cycle('FULL', null);;
+-- call sp_therm_cycle('FULL', null);;
 
-SELECT * FROM xeros_therm_cycle;;
+-- SELECT * FROM xeros_therm_cycle;;

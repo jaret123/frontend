@@ -51,7 +51,6 @@ var view = {
             ]
     };
 
-        // TODO Change this to a concat of the three arrays we care about.
         app.reportData = app.data.data[app.machine].metrics[app.metric];
         app.reportData.labels = reportLabels[app.reportData.id];
 
@@ -65,7 +64,7 @@ var view = {
             for ( j in d.data ) {
                 var d1 = d.data[j];
                 app.reportData.classifications[i].data[j].delta_one = self.percentDelta(d1.value_three, d1.xeros_value_three);
-                app.reportData.classifications[i].data[j].delta_two = self.valueDelta(d1.value_three, d1.xeros_value_three);
+                app.reportData.classifications[i].data[j].delta_two = self.valueDelta(d1.value_four, d1.xeros_value_four);
             }
         }
 
@@ -81,8 +80,11 @@ var view = {
         return 0;
     },
     percentDelta : function(a, b) {
-        if ( b == 0 || typeof(b) == "undefined") {
-            return 0
+        if ( ( a == 0 || typeof(a) == "undefined)")
+            && ( b == 0 || typeof(b) == "undefined") ) {
+            return 0;
+        } else if ( b == 0 || typeof(b) == "undefined") {
+            return 100
         } else {
             return parseInt( 100 * ( ( parseFloat(a) - parseFloat(b) ) / parseFloat(a) ), 10);
         }
