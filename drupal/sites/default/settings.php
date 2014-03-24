@@ -254,6 +254,7 @@ switch ($host) {
         ),
     );
     $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
+    $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
   case 'sbeadycare.xeroscleaning.com':
     $databases = array(
@@ -272,6 +273,7 @@ switch ($host) {
         ),
     );
     $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
+    $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
 }
 

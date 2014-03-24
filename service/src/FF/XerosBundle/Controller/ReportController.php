@@ -237,8 +237,8 @@ SELECT
   truncate(b.hot_water_value, 0) as hot_water_value,
   truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
   
-  truncate(b.time_run_time, 0) as time_value,
-  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  truncate(b.time_total_time, 0) as time_value,
+  truncate(b.time_xeros_total_time, 0) as time_xeros_value,
   
   truncate(b.chemical_strength, 0) as chemical_value,
   truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
@@ -256,8 +256,8 @@ FROM
        sum(cycle_therms)              AS hot_water_value,
        sum(cycle_therms_xeros)        AS hot_water_xeros_value,
 
-       sum(cycle_time_run_time)           AS time_run_time,
-       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
+       sum(cycle_time_total_time)           AS time_total_time,
+       sum(cycle_time_xeros_total_time)     AS time_xeros_total_time,
 
        sum(cycle_chemical_strength)       AS chemical_strength,
        sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
@@ -388,8 +388,8 @@ METRIC
             "id" => "cycle_time",
             "query" => <<<METRIC
 
-                sum(xc.cycle_time_run_time) as value_one,
-                sum(xc.cycle_time_xeros_run_time) as xeros_value_one,
+                sum(xc.cycle_time_total_time) as value_one,
+                sum(xc.cycle_time_xeros_total_time) as xeros_value_one,
 
                 sum(xc.cycle_time_labor_cost) as value_three,
                 sum(xc.cycle_time_xeros_labor_cost) as xeros_value_three,
