@@ -238,6 +238,7 @@ CREATE TABLE xeros_cycle
 (
 	dai_meter_actual_id INT UNSIGNED PRIMARY KEY,
     machine_id INT,
+	manufacturer varchar(255),
     classification_id INT,
     location_id INT,
 -- Base measures
@@ -347,6 +348,7 @@ BEGIN
 	(
 	dai_meter_actual_id,
     machine_id,
+	manufacturer,
     classification_id,
     location_id,
     reading_date,
@@ -404,6 +406,7 @@ BEGIN
   SELECT
     dma.dai_meter_actual_id,
     dma.machine_id,
+	m.manufacturer,
     dma.classification_id,
     m.location_id,
 -- Base measures

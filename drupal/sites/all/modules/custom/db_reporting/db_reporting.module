@@ -16,7 +16,7 @@ function db_reporting_update_7202() {
   $scripts = array(
     "db-update-2014-03-19_add-2-variance-columns-to-xeros_machine-for-mapping.sql",
     "db-update-2014-03-19_add-column-xeros_unit_cost-to-xeros_chemical_profile.sql",
-    "db-update-2014-09-19_add-column-cost_per_gallon-to-xeros_location_profile.sql"
+    "db-update-2014-03-19_add-column-cost_per_gallon-to-xeros_location_profile.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -36,6 +36,17 @@ function db_reporting_update_7203() {
   }
 }
 
+/**
+ * Add model field to xeros_machine
+ */
+function db_reporting_update_7204() {
+  $scripts = array(
+    "db-update-2014-03-24-alter-xeros-machine"
+  );
+  foreach ( $scripts as $s ) {
+    run_external_script("$s");
+  }
+}
 
 /**
  * Helper functions
