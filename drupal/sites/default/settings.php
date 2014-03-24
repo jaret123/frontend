@@ -215,7 +215,7 @@ $host = $_SERVER['HTTP_HOST'];
 $base_url = 'http://'.$host;
 $cookie_domain = $host;
 
-var_dump($host);
+//var_dump($host);
 
 switch ($host) {
   case 'xeros.local':
@@ -255,7 +255,7 @@ switch ($host) {
     );
     $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
     break;
-  case 'sbeadycare-qa.xeroscleaning.com':
+  case 'sbeadycare.xeroscleaning.com':
     $databases = array(
       'default' =>
         array(
