@@ -108,11 +108,11 @@
         </div>
     <?php  endif; ?>
 <?php  endif; ?>
+
 <footer class="footer">
     <div class="footer-wrapper">
 
         <div class="footer__logo">
-            <img src="/sites/all/themes/xeros_theme/images/xeros_logo.png"/>
         </div>
         <div class="footer__left">
             <a href="http://www.xeroscleaning.com">BACK TO XEROS WEBSITE</a>

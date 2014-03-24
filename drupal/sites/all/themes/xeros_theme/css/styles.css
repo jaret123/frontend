@@ -2269,50 +2269,61 @@ tr.selected td {
 .footer .footer-wrapper .footer__logo {
   position: absolute;
   top: -40px;
+  background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo.png");
+  width: 51px;
+  height: 69px;
 }
-/* line 36, ../sass/components/_footer.scss */
+/* line 39, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__left {
   margin-left: 70px;
   height: 100px;
   vertical-align: top;
 }
-/* line 41, ../sass/components/_footer.scss */
+/* line 44, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__middle {
   margin-left: 40px;
   color: white;
 }
-/* line 45, ../sass/components/_footer.scss */
+/* line 48, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__middle .icon-Phone, .footer .footer-wrapper .footer__middle .icon-Email {
   font-size: 24px;
   margin-right: 5px;
   position: relative;
   top: 4px;
 }
-/* line 52, ../sass/components/_footer.scss */
+/* line 55, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right {
   float: right;
   color: white;
 }
-/* line 55, ../sass/components/_footer.scss */
+/* line 58, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right [class^="icon-"] {
   font-size: 30px;
 }
-/* line 58, ../sass/components/_footer.scss */
+/* line 61, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-Twitter {
   text-decoration: none;
   color: white;
 }
-/* line 61, ../sass/components/_footer.scss */
+/* line 64, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-Facebook {
   text-decoration: none;
   color: white;
 }
-/* line 64, ../sass/components/_footer.scss */
+/* line 67, ../sass/components/_footer.scss */
 .footer .footer-wrapper .footer__right .icon-LinkedIn {
   text-decoration: none;
   color: white;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  /* line 79, ../sass/components/_footer.scss */
+  .footer .footer-wrappper .footer__logo {
+    background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo_@2x.png");
+    background-size: 102px 138px;
+  }
+}
 /* line 4, ../sass/components/_header.scss */
 .top-border {
   height: 2em;
@@ -3410,7 +3421,7 @@ a:hover, a:active {
 #landing .sb_logo {
   width: 980px;
   height: 167px;
-  background-image: url(/sites/all/themes/xeros_theme/images/sb_logo.png);
+  background-image: url(/sites/all/themes/xeros_theme/images/sb_welcome.png);
   background-repeat: no-repeat;
   margin: auto;
   position: relative;
@@ -3504,6 +3515,14 @@ a:hover, a:active {
   word-wrap: break-word;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  /* line 117, ../sass/components/_landing.scss */
+  #landing .sb_logo {
+    background-image: url("/sites/all/themes/xeros_theme/images/sb_welcome_@2x.png");
+    background-size: 672px 334px;
+  }
+}
 /* line 1, ../sass/components/_error.scss */
 .error-messages {
   border: 1px solid red;

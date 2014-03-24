@@ -13,7 +13,7 @@
 	.sb_logo {
 		width: 980px;
 		height: 167px;
-		background-image: url(/sites/all/themes/xeros_theme/images/sb_logo.png);
+		background-image: url(/sites/all/themes/xeros_theme/images/sb_welcome.png);
 		background-repeat: no-repeat;
 		margin: auto;
 		position: relative;
@@ -110,3 +110,12 @@
 
 }
 
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  #landing .sb_logo {
+    background-image: url("/sites/all/themes/xeros_theme/images/sb_welcome_@2x.png");
+    background-size: 672px 334px;
+  }
+}

@@ -32,6 +32,9 @@
     .footer__logo {
       position: absolute;
       top: -40px;
+      background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo.png");
+      width: 51px;
+      height: 69px;
     }
     .footer__left {
       margin-left: 70px;
@@ -65,8 +68,16 @@
         text-decoration: none;
         color: white; }
     }
-
-
   }
 
+}
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  /* Retina-specific stuff here */
+  .footer .footer-wrappper .footer__logo {
+    background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo_@2x.png");
+    background-size: 102px 138px;
+  }
 }
