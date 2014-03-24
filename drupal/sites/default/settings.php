@@ -215,6 +215,8 @@ $host = $_SERVER['HTTP_HOST'];
 $base_url = 'http://'.$host;
 $cookie_domain = $host;
 
+var_dump($host);
+
 switch ($host) {
   case 'xeros.local':
     $databases = array(
