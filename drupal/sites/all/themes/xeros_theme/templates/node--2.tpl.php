@@ -23,11 +23,9 @@
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
-                            <option value="last30days" selected>Last 30 days</option>
-                            <option value="previousMonth">Previous Month</option>
-                            <option value="last6months">Last 6 Months</option>
+                            <option value="weekToDate">Week To Date</option>
+                            <option value="monthToDate">Month to Date</option>
                             <option value="yearToDate">Year to Date</option>
-                            <option value="previousYear">Last Year</option>
                             <option value="custom">Custom...</option>
                         </select>
                     </span>
@@ -91,7 +89,7 @@
 
 <script>
     window.reportName = 'kpis';
-    window.dateRange = 'last30days';
+    window.dateRange = 'monthToDate';
 </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');

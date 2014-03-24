@@ -13,12 +13,9 @@ var app = {
     date : new Date(), // The current date
     dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
     dateRanges : {
-        last30days : this.dateRange,
-        previousMonth : this.dateRange,
-        previousYear : this.dateRange,
-        last6months : this.dateRange,
+        weekToDate : this.dateRange,
+        monthToDate : this.dateRange,
         yearToDate : this.dateRange,
-        lastYearToDate : this.dateRange,
         custom : this.dateRange
     }, // Available date ranges
     location : "",
@@ -35,106 +32,34 @@ var app = {
     createDateRanges : function() {
         self = this;
 
-        var today = new Date(),
-            year = today.getFullYear(),
-            month = today.getMonth(),
-            day = today.getDate();
-
         var fromDate = new Date();
         var toDate = new Date();
 
-        // last 30 days
-        console.log(self);
-        fromDate.setDate(self.date.getDate() - 30);
-        toDate.setDate(self.date.getDate());
-        self.dateRanges.last30days = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
-        ];
-
-        // last month
-        fromDate = new Date();
-        toDate = new Date();
-
-        // First day of last month
-        fromDate.setMonth(self.date.getMonth() - 1);
-        fromDate.setDate(1);
-
-        // First day of this month - one day = last day of last month
-        toDate.setMonth(self.date.getMonth());
-        toDate.setDate(1-1);
-        // Last day of last month
-        self.dateRanges.previousMonth = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
-        ];
-
-        // Last 6 months
-
-        fromDate = new Date();
-        toDate = new Date();
-
-        fromDate.setMonth(self.date.getMonth() - 6);
-        fromDate.setDate(1);
-
-        toDate.setMonth(self.date.getMonth())
-        toDate.setDate(1-1);
-        // Last day of last month
-        self.dateRanges.last6months = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
-        ];
-
         // Year to date
-
-        fromDate = new Date();
-        toDate = new Date();
-
         fromDate.setMonth(0);
         fromDate.setDate(1);
-
-        // Do nothing to toDate;
         self.dateRanges.yearToDate = [
             self.sqlDate(fromDate),
             self.sqlDate(toDate)
         ];
 
-        // Previous year
-
+        // Month to date
         fromDate = new Date();
-        toDate = new Date();
-
-        fromDate.setYear(self.date.getFullYear() - 1);
-        fromDate.setMonth(0);
         fromDate.setDate(1);
-
-        //toDate.setYear(self.date.getYear() - 1);
-        toDate.setMonth(0);
-        toDate.setDate(0);
-
-        // Do nothing to toDate;
-        self.dateRanges.previousYear = [
+        self.dateRanges.monthToDate = [
             self.sqlDate(fromDate),
             self.sqlDate(toDate)
-        ];
+        ]
 
-
-        // Last Year To Date
-
+        // Week to date
         fromDate = new Date();
-        toDate = new Date();
-
-        fromDate.setYear(self.date.getFullYear() - 1);
-        fromDate.setMonth(0);
-        fromDate.setDate(1);
-
-        toDate.setYear(self.date.getFullYear() - 1);
-
-        // Do nothing to toDate;
-        self.dateRanges.lastYearToDate = [
+        fromDate.setDate(toDate.getDate() - (toDate.getDay() - 1))
+        self.dateRanges.weekToDate = [
             self.sqlDate(fromDate),
             self.sqlDate(toDate)
-        ];
+        ]
+
+
     },
     saveCookie : function() {
         self = this;
@@ -330,9 +255,6 @@ var app = {
         self.fromDate = self.sessionDateRange[0];
         self.toDate = self.sessionDateRange[1];
         self.route();
-        //self.sessionDateRange = this.dateRanges.last30days;
-        //self.sessionMetric = "hot_water";
-        //self.saveCookie();
 
     }
 }

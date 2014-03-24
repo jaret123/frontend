@@ -81,11 +81,11 @@ function xeros_theme_preprocess_page(&$vars, $hook) {
     } else {
         $vars['user']->show_admin_bar = 0;
     }
-
-
 //  $variables['sample_variable'] = t('Lorem ipsum.');
 }
 // */
+
+
 
 /**
  * Override or insert variables into the node templates.

@@ -37,16 +37,10 @@ var chart = {
         var xAxis = d3.svg.axis()
             .scale(x)
             //.ticks(ticks)
-            .ticks(10)
+            //.ticks(10)
             .tickFormat(d3.time.format("%b"))
             //.tickSize(0)
             .orient("bottom");
-
-
-        //    .ticks(d3.time.days, 1)
-
-        // use this based on chart date range
-        //    .tickFormat(d3.time.format('%a %d'))
 
         // setup the y-axis notation
         var yAxis = d3.svg.axis()
@@ -56,9 +50,9 @@ var chart = {
             .orient("left");
 
         // If we are dealing with less than 3 months data, put days on the ticks
-        if ( data.length < 80 ) {
+        if ( data.length < 90 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"), 2);
-            xAxis.ticks(6)
+            xAxis.ticks(5)
         }
         if ( data.length < 30 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"));

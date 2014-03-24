@@ -108,10 +108,10 @@ from
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
 	      and xc.machine_id in ( :machineIds )
+	      and xc.manufacturer <> 'xeros'
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
-	    and xc.manufacturer <> 'xeros'
 	group by
 		xd.date
 	) as b
@@ -137,12 +137,11 @@ from
 	    xeros_dates as xd
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
-	      	    and xc.machine_id in ( :machineIds )
+	      and xc.machine_id in ( :machineIds )
+	      and xc.manufacturer <> 'xeros'
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
-	    and xc.manufacturer <> 'xeros'
-
 	) as b
 where
    1 = 1
