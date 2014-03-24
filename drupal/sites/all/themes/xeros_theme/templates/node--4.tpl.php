@@ -33,12 +33,10 @@
                 <span>
                     <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
-                            <option value="last30days">Last 30 days</option>
-                            <option value="previousMonth">Previous Month</option>
-                            <option value="last6months" selected>Last 6 Months</option>
-                            <option value="yearToDate">Year to Date</option>
-                            <option value="previousYear">Last Year</option>
-                            <option value="custom">Custom...</option>
+                          <option value="weekToDate">Week To Date</option>
+                          <option value="monthToDate" selected>Month to Date</option>
+                          <option value="yearToDate">Year to Date</option>
+                          <option value="custom">Custom...</option>
                         </select>
                     </span>
                     <div id="cal">
