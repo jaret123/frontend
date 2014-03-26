@@ -14,24 +14,24 @@ var view = {
                 "Load Size",
                 "Gallons Per Pound",
                 "Cost Per Pound",
-                "Water Reduction",
-                "Cost Reduction"
+                "Water Usage Reduction",
+                "Cost Per Pound Reduction"
             ],
             "hot_water": [
                 "Gallons",
                 "Load Size",
                 "Therms Per Pound",
                 "Cost Per Pound",
-                "Therms Reduction",
-                "Cost Reduction"
+                "Therms Usage Reduction",
+                "Cost Per Pound Reduction"
             ],
             "total_water": [
                 "Gallons",
                 "Load Size",
                 "Gallons Per Pound",
                 "Cost Per Pound",
-                "Water Reduction",
-                "Cost Reduction"
+                "Water Usage Reduction",
+                "Cost Per Pound Reduction"
             ],
             "cycle_time": [
                 "Total Cycle Time",
@@ -39,15 +39,15 @@ var view = {
                 "Labor Cost",
                 "Cost Per Pound",
                 "Cycle Time Reduction",
-                "Cost Reduction"
+                "Cost Per Pound Reduction"
             ],
             "chemical": [
                 "Total Ounces",
                 "Load Size",
                 "Ounces Per Pound",
                 "Cost Per Pound",
-                "Chemical Reduction",
-                "Cost Reduction"
+                "Chemical Usage Reduction",
+                "Cost Per Pound Reduction"
             ]
     };
 
