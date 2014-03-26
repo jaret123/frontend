@@ -165,15 +165,15 @@ METRIC
    		sum(xc.cycle_therms_cost_xeros) as cost_xeros
 METRIC
         ));
-        array_push($metrics, array(
-            "name" => "cycle-time",
-            "query" => <<<METRIC
-   		sum(xc.cycle_time_total_time) as value,
-   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
-   		sum(xc.cycle_time_labor_cost) as cost,
-   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
-METRIC
-        ));
+//        array_push($metrics, array(
+//            "name" => "cycle-time",
+//            "query" => <<<METRIC
+//   		sum(xc.cycle_time_total_time) as value,
+//   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
+//   		sum(xc.cycle_time_labor_cost) as cost,
+//   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
+//METRIC
+//        ));
         array_push($metrics, array(
             "name" => "chemical",
             "query" => <<<METRIC

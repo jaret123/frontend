@@ -51,17 +51,6 @@ var view = {
                 chartData : []
             },
             {
-                name : 'cycle-time',
-                meta : {
-                    cssClass : "labor",
-                    icon : "Clock",
-                    label : "Labor",
-                    title : "Cycle Time"
-                },
-                summaryData: {},
-                chartData : []
-            },
-            {
                 name : 'chemical',
                 meta : {
                     cssClass : "chemicals",
@@ -74,8 +63,6 @@ var view = {
             }
 
         ];
-
-        //app.reportData = ar.concat(app.data.data);
 
         app.reportData = ar;
 
