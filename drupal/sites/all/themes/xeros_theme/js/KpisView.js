@@ -26,7 +26,7 @@ var view = {
                     'value_xeros': 0
                 },
                 chartData : [],
-                total : [1, 2, 3, 4]
+                total : [1, 2, 3]
             },
             {
                 name : 'cold-water',
