@@ -59,6 +59,7 @@ var view = {
         app.reportData.serial_number = app.data.data[app.machine].serial_number;
         app.reportData.size = app.data.data[app.machine].size;
 
+
         for ( i in app.reportData.classifications ) {
             var d = app.reportData.classifications[i];
             for ( j in d.data ) {
@@ -68,14 +69,22 @@ var view = {
             }
         }
 
-        //objs.sort(compare);
+        var sortable = [];
+        for ( var classification in app.reportData.classifications ) {
+            sortable.push(app.reportData.classifications[classification])
+        }
+        sortable.sort(self.classificationCompare);
+
+        app.reportData.classifications = sortable;
 
         draw();
     },
-    consumptionCompare : function(a,b) {
-        if (a.last_nom < b.last_nom)
+    classificationCompare : function(a,b) {
+        if (a.name === "Unknown")
             return -1;
-        if (a.last_nom > b.last_nom)
+        if (a.classification_id < b.classification_id)
+            return -1;
+        if (a.classification_id > b.classification_id)
             return 1;
         return 0;
     },

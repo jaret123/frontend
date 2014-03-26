@@ -173,7 +173,7 @@ var controls = {
         jQuery("#download__pdf").click(function(e) {
 
             e.preventDefault();
-            app.data.chart = {};
+            var charts = {};
 
             // Add the images to app.data.charts[]
             jQuery(".chart").each(function() {
@@ -184,14 +184,36 @@ var controls = {
                 canvg(canvas, content);
 
                 var theImage = canvas.toDataURL('image/png');
-                app.data.chart[jQuery(this).attr("name")] = theImage;
+                charts[jQuery(this).attr("name")] = theImage;
             });
 
-            var form = jQuery("#download__pdf-form");
-            jQuery(form).find("#download__pdf-form-data").html(JSON.stringify(app.data));
-            console.log(form);
+            // Get the news from the json feed
 
-            jQuery(form).submit();
+            jQuery.ajax({
+                url: '/json/news',
+                dataType: 'json',
+                success: function (data) {
+                    console.log("data retrieved");
+                    var news = data.news;
+                    // Put the data into the form we are going to use for the post
+                    var form = jQuery("#download__pdf-form");
+                    jQuery(form).find("#download__pdf-form-data").html(JSON.stringify({
+                        news : news,
+                        reportData : app.reportData,
+                        charts : charts,
+                        dateRange : app.sessionDateRange
+                    }));
+                    console.log(form);
+
+                    jQuery(form).submit();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
+                    jQuery(app.err).addClass("active");
+                    jQuery(app.err).html("Oops, something happened with the data service.  Please contact your system administrator.");
+                }
+            })
+
         });
     },
     setCsvLink : function() {

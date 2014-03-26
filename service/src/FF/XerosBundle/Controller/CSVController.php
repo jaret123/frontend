@@ -20,19 +20,22 @@ class CSVController extends Controller
     /**
      * @return array
      * @Template()
-     * @Route("/csv/{fromDate}/{toDate}")
+     *
+     * @Route("/csv/{fromDate}/{toDate}.{_format}", name="ff_csv")
+     * @Route("/csv/{fromDate}/{toDate}/{locationId}.{_format}", name="ff_csv_location", defaults={"locationId" = null})
+
      *
      * reportAction handles the routing of request to the functions below
      * reportName maps to a function call below and fromDate adn toDate are
      * SQL formatted dates ('YYYY-MM-DD')
      */
-    public function CSVAction($fromDate, $toDate)
+    public function CSVAction($fromDate, $toDate, $locationId = null)
     {
 
         $this->u = new Utils();
         $conn = $this->get('database_connection');
 
-        $userRole = $this->u->getUserRole($conn);
+        $userRole = $this->u->getUserRole($conn, $locationId);
 
         if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
             return array ("message" => "Access denied");

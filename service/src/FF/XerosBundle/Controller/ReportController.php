@@ -320,12 +320,6 @@ machineSQL;
                    on xmc.classification_id = xc.classification_id
             where
                 xmc.machine_id = :machine_id
-            order by
-				case
-					when xc.name = 'Unknown' then 1
-					else 0
-				end,
-				xc.name
 classificationSQL;
 
         $sql = <<<SQL
