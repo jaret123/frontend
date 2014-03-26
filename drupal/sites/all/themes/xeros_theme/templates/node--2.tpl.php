@@ -89,7 +89,6 @@
 
 <script>
     window.reportName = 'kpis';
-    window.dateRange = 'monthToDate';
 </script>
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');

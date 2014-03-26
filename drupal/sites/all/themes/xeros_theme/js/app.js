@@ -1,6 +1,10 @@
 // The main router of the report app
 
 var app = {
+
+    defaults : {
+        timeSelect : "monthToDate"
+    },
     apiUrlBase: "",
     apiUrl: "",
     machine: 0, // Initial machine when there is no hash
@@ -23,12 +27,14 @@ var app = {
     sessionTimeSelect : "",
     sessionMetric : "",
     err : jQuery(".error-messages"),
+
     sqlDate : function(d) {
         // date needs to be a native js date object (new Date())
         var sqlDate = "";
         sqlDate = "" + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
         return sqlDate;
     },
+
     createDateRanges : function() {
         self = this;
 
@@ -58,14 +64,14 @@ var app = {
             self.sqlDate(fromDate),
             self.sqlDate(toDate)
         ]
-
-
     },
+
     saveCookie : function() {
         self = this;
-        document.cookie = "sessionDateRange=" + self.sessionDateRange;
-        document.cookie = "sessionTimeSelect=" + self.sessionTimeSelect;
+        document.cookie = 'sessionDateRange=' + self.sessionDateRange;
+        document.cookie = 'sessionTimeSelect=' + self.sessionTimeSelect;
     },
+
     getCookie : function() {
         self = this;
         var c = document.cookie.split(";");
@@ -81,11 +87,13 @@ var app = {
         };
         console.log(c);
     },
+
     registerEvents: function () {
         var self = this;
         // Register routing listener
         jQuery(window).on('hashchange', jQuery.proxy(this.route, this));
     },
+
     setApiUrl: function () {
         self = this;
         self.apiUrl = "/api/report/" + self.reportName + "/" + self.sessionDateRange[0] + "/" + self.sessionDateRange[1];
@@ -94,31 +102,30 @@ var app = {
         }
         self.apiUrl += ".json";
     },
+
     route: function () {
         var self = this;
         var hash = window.location.hash;
         var hashArray = hash.substr(1).split("+");
 
+        // See if there are setting in the session cookie.
+        self.getCookie();
+
+        // Remove any error messages from the page
         jQuery(app.err).removeClass("active");
-        //var data = [];
-        // If no hash - set data to defaults
+
+        // If no hash
         if (!hash) {
-//            controls.showSpinner();
-            // Do the things that have no dependencies
 
-            // Initialize the date ranges for the report
-            app.dateRange = window.dateRange;
-            self.sessionDateRange = self.dateRanges[app.dateRange];
-
-            // If there is a cookie set, override the default settings
-            self.getCookie();
-
+            // If there is no value in the session, then use the app default.
+            if ( self.sessionDateRange.length === 0 ) {
+                self.sessionDateRange = self.dateRanges[self.defaults.timeSelect];
+                self.sessionTimeSelect = self.defaults.timeSelect;
+            }
             // Build the apiUrl
-
             self.setApiUrl();
-            //self.getData();
+        // If there is a hash
         } else {
-            //alert('hash' );
             hashArray = hash.substr(1).split("+");
             if (hashArray.length > 1) {
                 self.machine = hashArray[0];
@@ -153,17 +160,15 @@ var app = {
         }
         controls.setCsvLink();
         controls.setDateRangeDisplay();
-        // This is a little funky, but we are going to let the view inherit our showReport method - sort of
+        // This is a little funky, but we are going to let the view inherit our showReport method
         self.saveCookie();
         // if dataRefresh equals 1, then go to the web service again and get new data
         if ( app.dataRefresh == 1 ) {
             self.setApiUrl();
-            //controls.showSpinner();
             app.fadeReport();
             app.getData();
         } else {
             view.parseData(self.showReport);
-            //console.log(hash.substr(1).split("+"));
         }
     },
 
@@ -174,10 +179,12 @@ var app = {
         jQuery('.template-container').html(html).removeClass("fade");
         controls.createMachineNav();
     },
+
     fadeReport: function () {
         jQuery('.template-container').addClass("fade");
         jQuery('#spinner').show();
     },
+
     getData: function () {
         var self = this;
         // Get the data then go to routing
@@ -218,7 +225,7 @@ var app = {
                 i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
                 j = (j = i.length) > 3 ? j % 3 : 0;
                 return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
-            };
+            }
         });
 
         Handlebars.registerHelper("isBlank", function(value) {
@@ -226,7 +233,7 @@ var app = {
                 return 0
             } else {
                 return value;
-            };
+            }
         });
 
         Handlebars.registerHelper("toLocaleString", function(value, dec) {
@@ -242,7 +249,7 @@ var app = {
                 t = parseFloat(t);
                 t = t.toLocaleString({style: "decimal"});
                 return t;
-            };
+            }
         })
 
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
