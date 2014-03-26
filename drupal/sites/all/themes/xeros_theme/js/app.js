@@ -26,6 +26,8 @@ var app = {
     sessionDateRange : [], // The apps current date range
     sessionTimeSelect : "",
     sessionMetric : "",
+    sessionCompany : "",
+    sessionLocation : "",
     err : jQuery(".error-messages"),
 
     sqlDate : function(d) {
@@ -70,6 +72,8 @@ var app = {
         self = this;
         document.cookie = 'sessionDateRange=' + self.sessionDateRange;
         document.cookie = 'sessionTimeSelect=' + self.sessionTimeSelect;
+        document.cookie = 'sessionCompany=' + self.sessionCompany;
+        document.cookie = 'sessionLocation=' + self.sessionLocation;
     },
 
     getCookie : function() {
@@ -83,9 +87,13 @@ var app = {
             if (kv[0] == "sessionTimeSelect") {
                 self.sessionTimeSelect = kv[1];
             }
-            console.log(kv);
+            if (kv[0] == "sessionCompany") {
+                self.sessionCompany = kv[1];
+            }
+            if (kv[0] == "sessionLocation") {
+                self.sessionLocation = kv[1];
+            }
         };
-        console.log(c);
     },
 
     registerEvents: function () {
@@ -97,8 +105,8 @@ var app = {
     setApiUrl: function () {
         self = this;
         self.apiUrl = "/api/report/" + self.reportName + "/" + self.sessionDateRange[0] + "/" + self.sessionDateRange[1];
-        if ( self.location !== "" ) {
-            self.apiUrl += "/" + self.location;
+        if ( self.sessionLocation !== "" ) {
+            self.apiUrl += "/" + self.sessionLocation;
         }
         self.apiUrl += ".json";
     },
@@ -107,9 +115,6 @@ var app = {
         var self = this;
         var hash = window.location.hash;
         var hashArray = hash.substr(1).split("+");
-
-        // See if there are setting in the session cookie.
-        self.getCookie();
 
         // Remove any error messages from the page
         jQuery(app.err).removeClass("active");
@@ -192,9 +197,7 @@ var app = {
             url: self.apiUrl,
             dataType: 'json',
             success: function (data) {
-                console.log("data retrieved");
-                console.log(app.apiUrl);
-                console.log(data);
+                console.log("data retrieved: " + self.apiUrl);
                 self.data = data;
                 self.dataRefresh = 0;
                 self.route();
@@ -209,6 +212,9 @@ var app = {
 
     initialize: function () {
         var self = this;
+
+        // See if there are setting in the session cookie.
+        self.getCookie();
 
         self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.

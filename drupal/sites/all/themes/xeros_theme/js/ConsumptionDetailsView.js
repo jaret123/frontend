@@ -110,11 +110,19 @@ var view = {
         app.initialize();
         controls.createReportSelect();
         controls.createTimeSelect();
+
+        if (app.sessionCompany == "") {
+            app.sessionCompany = app.user.field_company['und'][0].target_id;
+        }
+        if (app.sessionLocation == "") {
+            app.sessionLocation = app.user.field_location['und'][0].target_id;
+        }
+
         if (typeof(app.companies) !== 'undefined') {
             controls.adminMenuControls();
             controls.createCompanySelect();
-            controls.createLocationSelect();
         }
+
     }
 }
 

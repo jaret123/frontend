@@ -93,7 +93,7 @@ var controls = {
 
             var click_value = jQuery(event.target).find("span.value").html();
 
-            // This is specific to the time select - TODO: Refactor if we add more controls
+            // This is specific to the time select
             if ( click_value === "custom") {
                 // Show the custom date range picker
                 jQuery("#cal").addClass("show");
@@ -137,32 +137,40 @@ var controls = {
     },
     createCompanySelect : function() {
         var self = this;
-
         var opts = app.options_tpl( {'data' : app.companies } );
         jQuery("#company-select").html(opts);
-
-
-        //jQuery("#company-select").val(app.sessionMetric);
+        if ( app.sessionCompany != "") {
+            jQuery("#company-select").val(app.sessionCompany);
+        }
         self.createDropDown("#company-select", function (event) {
-            app.company = jQuery(event.target).find("span.value").html();;
-            //app.metric = jQuery(event.target).find("span.value").html();
-            //window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
-            self.updateLocationSelect({'data' : app.companies[app.company].location });
+            app.sessionCompany = jQuery(event.target).find("span.value").html();
+            self.updateLocationSelect({'data' : app.companies[app.sessionCompany].location });
         });
+        var locations = {data : ""};
+        if ( app.sessionCompany != "" ) {
+            locations.data = app.companies[app.sessionCompany].location;
+        }
+        self.updateLocationSelect(locations, app.sessionLocation);
     },
     createLocationSelect : function() {
         var self = this;
-        //jQuery("#company-select").val(app.sessionMetric);
         self.createDropDown("#location-select", function (event) {
-            app.location = jQuery(event.target).find("span.value").html();
+            app.sessionLocation = jQuery(event.target).find("span.value").html();
             app.dataRefresh = 1;
-            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange + "+" + app.location;
+            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange + "+" + app.sessionLocation;
         });
     },
-    updateLocationSelect : function(locations) {
+    updateLocationSelect : function(locations, selected) {
         var self = this;
-        var opts = app.options_tpl( locations );
-        jQuery("#location-select").html(opts);
+
+        var opts;
+        if ( locations.data != "" ) {
+            opts = app.options_tpl( locations );
+            jQuery("#location-select").html(opts);
+        }
+        if ( typeof(selected) != 'undefined' ) {
+            jQuery("#location-select").val(selected);
+        }
         jQuery("#location-select__dl").remove();
         self.createLocationSelect();
     },
@@ -274,7 +282,10 @@ var controls = {
             jQuery(".open .xeros-admin-menu__button").html("Close");
         });
 
+        //jQuery("#company-select").val()
+
         self.options_tpl = Handlebars.compile(jQuery("#options-tpl").html());
+
     },
     initialize : function() {
         // We can call all of these because the jQuery selectors will just return an empty result if the element

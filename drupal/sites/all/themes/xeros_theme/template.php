@@ -70,6 +70,12 @@ function xeros_theme_preprocess_page(&$vars, $hook) {
     // Select all the companies and all the child locations and add to page
     // as array or JSON object
 
+  $user = user_load($vars["user"]->uid);
+
+  unset($user->pass);
+
+    drupal_add_js('app.user = ' . json_encode($user), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
+
     if ( array_search('xeros admin', $vars['user']->roles) <> null ) {
         $s = xeros_get_companies($vars);
         // TODO: Test for existence of app

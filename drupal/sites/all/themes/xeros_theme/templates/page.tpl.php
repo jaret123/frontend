@@ -81,7 +81,7 @@
 // by machine instead of location.
 ?>
 <?php if (isset($node->nid)): ?>
-    <?php if ( (array_search('xeros admin', $user->roles) <> null)  && ($node->nid == 2)): ?>
+    <?php if ( (array_search('xeros admin', $user->roles) <> null)  && ($node->nid == 2 || $node->nid == 3 || $node->nid == 4)): ?>
         <div class="xeros-admin-menu">
             <div class="xeros-admin-menu__menu-wrapper">
                 <a href="#" class="xeros-admin-menu__button">Menu</a>

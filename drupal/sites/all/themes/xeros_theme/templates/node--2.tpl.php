@@ -67,7 +67,7 @@
                             <div class="col saved">Potential Cost</div>
                             <div class="col border"></div>
                             <div class="col percent">{{toLocaleString summaryData.savings}}%</div>
-                            <div class="col info saved">Potential Savings</div>
+                            <div class="col saved">Potential Savings</div>
                         </div>
                     </div>
                     {{/each}}
