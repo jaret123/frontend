@@ -21,8 +21,8 @@ class CSVController extends Controller
      * @return array
      * @Template()
      *
-     * @Route("/csv/{fromDate}/{toDate}.{_format}", name="ff_csv")
-     * @Route("/csv/{fromDate}/{toDate}/{locationId}.{_format}", name="ff_csv_location", defaults={"locationId" = null})
+     * @Route("/csv/{fromDate}/{toDate}", name="ff_csv")
+     * @Route("/csv/{fromDate}/{toDate}/{locationId}", name="ff_csv_location", defaults={"locationId" = null})
 
      *
      * reportAction handles the routing of request to the functions below
