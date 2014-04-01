@@ -38,6 +38,7 @@ var chart = {
             .scale(x)
             //.ticks(ticks)
             //.ticks(10)
+            .ticks(d3.time.months, 1)
             .tickFormat(d3.time.format("%b"))
             //.tickSize(0)
             .orient("bottom");
@@ -52,7 +53,7 @@ var chart = {
         // If we are dealing with less than 3 months data, put days on the ticks
         if ( data.length < 90 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"), 2);
-            xAxis.ticks(5)
+            xAxis.ticks(d3.time.weeks, 1)
         }
         if ( data.length < 30 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"));
