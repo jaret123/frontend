@@ -64,8 +64,8 @@ var view = {
             var d = app.reportData.classifications[i];
             for ( j in d.data ) {
                 var d1 = d.data[j];
-                app.reportData.classifications[i].data[j].delta_one = self.percentDelta(d1.value_three, d1.xeros_value_three);
-                app.reportData.classifications[i].data[j].delta_two = self.valueDelta(d1.value_four, d1.xeros_value_four);
+                app.reportData.classifications[i].data[j].delta_one = view.percentDelta(d1.value_three, d1.xeros_value_three);
+                app.reportData.classifications[i].data[j].delta_two = view.valueDelta(d1.value_four, d1.xeros_value_four);
             }
         }
 
@@ -73,7 +73,7 @@ var view = {
         for ( var classification in app.reportData.classifications ) {
             sortable.push(app.reportData.classifications[classification])
         }
-        sortable.sort(self.classificationCompare);
+        sortable.sort(view.classificationCompare);
 
         app.reportData.classifications = sortable;
 

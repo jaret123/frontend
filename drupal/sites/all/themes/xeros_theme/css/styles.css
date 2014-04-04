@@ -1,3 +1,4 @@
+@import url(../fonts/webfontkit-lato/stylesheet.css);
 /**
  * @file
  * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
@@ -751,36 +752,10 @@ table {
 .kpi-chart {
   height: 150px;
   text-align: center;
-  font-size: 10px;
-  color: #FFF;
-}
-/* line 5, ../sass/components/_chartKpi.scss */
-.kpi-chart svg {
-  margin: 0px 0px 0px 0px;
-  width: 327px;
-  height: 150px;
-}
-/* line 15, ../sass/components/_chartKpi.scss */
-.kpi-chart .axis path,
-.kpi-chart .axis line {
-  fill: none;
-  stroke: #FFF;
-  shape-rendering: crispEdges;
-}
-/* line 21, ../sass/components/_chartKpi.scss */
-.kpi-chart text {
-  fill: #FFF;
-  font-family: Lato;
-  font-size: 12px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 300;
-  text-rendering: optimizeLegibility;
 }
 /* line 47, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
-  stroke-width: 3px;
 }
 /* line 52, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {

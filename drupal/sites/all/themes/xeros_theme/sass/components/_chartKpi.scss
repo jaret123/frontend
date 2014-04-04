@@ -3,30 +3,30 @@
     text-align: center;
 
     svg {
-        margin: 0px 0px 0px 0px;
-        width: 327px;
-        height: 150px;
+//        margin: 0px 0px 0px 0px;
+//        width: 600px;
+//        height: 300px;
       // background-color: yellow;
     }
-    font-size: 10px;
-    color: #FFF;
+    //font-size: 10px;
+    //color: #FFF;
 
     .axis path,
     .axis line {
-        fill: none;
-        stroke: #FFF;
-        shape-rendering: crispEdges;
+//        fill: none;
+//        stroke: #FFF;
+//        shape-rendering: crispEdges;
     }
 
-    text {
-        fill: #FFF;
-        font-family: Lato;
-        font-size: 12px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 300;
-        text-rendering: optimizeLegibility;
-    }
+//    text {
+//        fill: #FFF;
+//        font-family: Lato;
+//        font-size: 12px;
+//        font-style: normal;
+//        font-variant: normal;
+//        font-weight: 300;
+//        text-rendering: optimizeLegibility;
+//    }
 
     .x.axis line {
 //        display: none;
@@ -46,7 +46,7 @@
 
     .line-a, .line-b {
         fill: none;
-        stroke-width: 3px;
+      //  stroke-width: 3px;
     }
 
     .line-a {

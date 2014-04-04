@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <canvas id="drawingArea" style="display:none;"></canvas>
+    <canvas id="drawingArea" style="display:none; position: fixed; top: 0; left: 150px; background-color: antiquewhite;"></canvas>
 </div>
 
 <script>

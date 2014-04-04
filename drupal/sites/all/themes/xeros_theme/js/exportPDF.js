@@ -88,12 +88,13 @@ var exportPDF = {
             var chart = $(".kpi-chart.total").html();
             var canvas = document.getElementById("drawingArea");
 
+            canvas.show();
             canvg(canvas, chart, {ignoreDimensions: false,
                 ignoreAnimation: false,
                 offSetX: 0,
                 offSetY: 0});
 
-            var img = canvas.toDataURL("image/jpeg");
+            var img = canvas.toDataURL("image/png");
 
             doc.addImage(img, 'JPEG', 60, 20 - 5);
 

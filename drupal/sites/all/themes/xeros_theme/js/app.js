@@ -46,25 +46,25 @@ var app = {
         // Year to date
         fromDate.setMonth(0);
         fromDate.setDate(1);
-        self.dateRanges.yearToDate = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
+        app.dateRanges.yearToDate = [
+            app.sqlDate(fromDate),
+            app.sqlDate(toDate)
         ];
 
         // Month to date
         fromDate = new Date();
         fromDate.setDate(1);
-        self.dateRanges.monthToDate = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
+        app.dateRanges.monthToDate = [
+            app.sqlDate(fromDate),
+            app.sqlDate(toDate)
         ]
 
         // Week to date
         fromDate = new Date();
         fromDate.setDate(toDate.getDate() - (toDate.getDay() - 1))
-        self.dateRanges.weekToDate = [
-            self.sqlDate(fromDate),
-            self.sqlDate(toDate)
+        app.dateRanges.weekToDate = [
+            app.sqlDate(fromDate),
+            app.sqlDate(toDate)
         ]
     },
 
@@ -104,11 +104,11 @@ var app = {
 
     setApiUrl: function () {
         self = this;
-        self.apiUrl = "/api/report/" + self.reportName + "/" + self.sessionDateRange[0] + "/" + self.sessionDateRange[1];
-        if ( self.sessionLocation !== "" ) {
-            self.apiUrl += "/" + self.sessionLocation;
+        app.apiUrl = "/api/report/" + app.reportName + "/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1];
+        if ( app.sessionLocation !== "" ) {
+            app.apiUrl += "/" + app.sessionLocation;
         }
-        self.apiUrl += ".json";
+        app.apiUrl += ".json";
     },
 
     route: function () {
@@ -209,7 +209,11 @@ var app = {
             }
         })
     },
-
+    numberWithCommas: function (x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+    },
     initialize: function () {
         var self = this;
 
@@ -252,8 +256,8 @@ var app = {
                 }
                 var t = parseFloat(value);
                 t = t.toFixed(dec);
-                t = parseFloat(t);
-                t = t.toLocaleString({style: "decimal"});
+                //t = parseFloat(t);
+                t = app.numberWithCommas(t);
                 return t;
             }
         })
@@ -267,6 +271,14 @@ var app = {
         self.apiUrlBase = window.apiUrlBase;
         self.fromDate = self.sessionDateRange[0];
         self.toDate = self.sessionDateRange[1];
+
+//        if (self.sessionCompany == "") {
+//            self.sessionCompany = self.user.field_company['und'][0].target_id;
+//        }
+//        if (self.sessionLocation == "") {
+//            self.sessionLocation = self.user.field_location['und'][0].target_id;
+//        }
+
         self.route();
 
     }

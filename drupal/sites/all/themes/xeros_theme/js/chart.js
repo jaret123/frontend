@@ -7,10 +7,10 @@ var chart = {
     classes : [],
     drawKPI : function () {
         self = this;
-        var data = self.data;
+//        var data = chart.data;
         var parseDate = d3.time.format("%Y-%m-%d").parse;
-        var name = data["name"];
-        var data = data["chartData"];
+        var name = chart.data["name"];
+        var data = chart.data["chartData"];
 
         function replaceNull(value) {
             if (value !== "") {
@@ -114,7 +114,7 @@ var chart = {
             .attr("width",  width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .attr("transform", "translate(" + -(margin.left) + "," + -(margin.top) + ")")
-            .style("font-family", "Lato")
+            .style("font-family", "Arial")
             .style("font-size", "12px")
             .style("font-style", "normal")
             .style("font-variant", "normal")
@@ -179,14 +179,23 @@ var chart = {
             .delay(500)
             .duration(1500)
             .attr("d", lineB)
-            .attr("fill", "none");
+            .attr("fill", "none")
+            .style({
+                'stroke-width' : '3px'
+
+            });
 
         svg.append("path")
             .datum(data)
             .attr("class", "line-a")
             .attr("d", lineA)
             .attr("stroke", "#fff")
-            .attr("fill", "none");
+            .attr("fill", "none")
+            .style({
+                'stroke-width' : '3px',
+                'shape-rendering' : 'smoothEdges'
+            });
+        ;
 
 
             if (data.length < 8) {
@@ -292,12 +301,12 @@ var chart = {
         var data = [],
             colors = [],
             selector = "",
-            domainMax;
+            domainMax = 0;
 
-        data = self.data;
-        colors = self.colors;
-        selector = self.selector;
-        classes = self.classes;
+        data = chart.data;
+        colors = chart.colors;
+        selector = chart.selector;
+        classes = chart.classes;
 
         domainMax = data[2];
 
@@ -371,9 +380,9 @@ var chart = {
             colors = [],
             selector = "";
 
-        data = self.data;
-        colors = self.colors;
-        selector = self.selector;
+        data = chart.data;
+        colors = chart.colors;
+        selector = chart.selector;
 
         // data range 0 - 60 minutes
 

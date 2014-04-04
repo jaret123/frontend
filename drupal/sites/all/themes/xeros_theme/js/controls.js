@@ -89,7 +89,7 @@ var controls = {
     createTimeSelect : function() {
         var self = this;
         jQuery("#time-select").val(app.sessionTimeSelect);
-        self.createDropDown("#time-select", function (event) {
+        controls.createDropDown("#time-select", function (event) {
 
             var click_value = jQuery(event.target).find("span.value").html();
 
@@ -189,7 +189,7 @@ var controls = {
                 var content = jQuery(this).html().trim(),
                     canvas = document.getElementById('drawingArea');
 
-                canvg(canvas, content);
+                canvg(canvas, content, { ignoreDimensions: true });
 
                 var theImage = canvas.toDataURL('image/png');
                 charts[jQuery(this).attr("name")] = theImage;
@@ -284,7 +284,7 @@ var controls = {
 
         //jQuery("#company-select").val()
 
-        self.options_tpl = Handlebars.compile(jQuery("#options-tpl").html());
+        app.options_tpl = Handlebars.compile(jQuery("#options-tpl").html());
 
     },
     initialize : function() {
