@@ -132,7 +132,7 @@
         </div>
 
     </div>
-
+  <canvas id="drawingArea" style="display:none;position: fixed; top: 100px; left: 150px; background-color: antiquewhite;"></canvas>
 </footer>
 
 <?php print render($page['bottom']); ?>

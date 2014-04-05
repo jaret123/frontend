@@ -8,17 +8,17 @@
  Live Reload
  */
 /* Import Sass mixins, variables, Compass modules, etc. */
-/* line 93, ../sass/_init.scss */
+/* line 92, ../sass/_init.scss */
 h1, h2 {
   font-weight: 100;
 }
 
-/* line 96, ../sass/_init.scss */
+/* line 95, ../sass/_init.scss */
 h3 {
   font-weight: 300;
 }
 
-/* line 128, ../sass/_init.scss */
+/* line 127, ../sass/_init.scss */
 html {
   color: gray;
   font-weight: 300;
@@ -721,11 +721,6 @@ table {
 /* line 57, ../sass/components/_caret.scss */
 .caret-right-wrapper.active .caret-right:hover {
   opacity: .8;
-}
-
-/* line 2, ../sass/components/_chart.scss */
-.chart text {
-  font-size: 12px;
 }
 
 /* line 8, ../sass/components/_chart.scss */
@@ -2431,11 +2426,13 @@ h1 {
 /* line 66, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li {
   text-transform: uppercase;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6bcaee), color-stop(100%, #0b7fb0));
-  background-image: -webkit-linear-gradient(#6bcaee, #0b7fb0);
-  background-image: -moz-linear-gradient(#6bcaee, #0b7fb0);
-  background-image: -o-linear-gradient(#6bcaee, #0b7fb0);
-  background-image: linear-gradient(#6bcaee, #0b7fb0);
+  background-color: #0b7fb0;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF6BCAEE', endColorstr='#FF0B7FB0');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #6bcaee), color-stop(100%, #0b7fb0));
+  background: -webkit-linear-gradient(top, #6bcaee, #0b7fb0);
+  background: -moz-linear-gradient(top, #6bcaee, #0b7fb0);
+  background: -o-linear-gradient(top, #6bcaee, #0b7fb0);
+  background: linear-gradient(top, #6bcaee, #0b7fb0);
   -webkit-border-radius: 0px 0px 7px 7px;
   -moz-border-radius: 0px 0px 7px 7px;
   -ms-border-radius: 0px 0px 7px 7px;
@@ -2446,20 +2443,21 @@ h1 {
   color: #fff;
   font-size: 90%;
 }
-/* line 74, ../sass/components/_header.scss */
+/* line 76, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li.active {
-  background: #0086bd;
-}
-/* line 78, ../sass/components/_header.scss */
-.header .header__row-2 ul.menu li:hover {
-  background: #0ea2e0;
+  background-color: #0086bd;
 }
 /* line 81, ../sass/components/_header.scss */
+.header .header__row-2 ul.menu li:hover {
+  background-color: #6bcaee;
+  background: #0ea2e0;
+}
+/* line 85, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li a {
   text-decoration: none;
   color: inherit;
 }
-/* line 88, ../sass/components/_header.scss */
+/* line 92, ../sass/components/_header.scss */
 .header .header__row-2 .header__welcome {
   color: gray;
   display: inline-block;
@@ -2468,14 +2466,14 @@ h1 {
   margin-top: -40px;
 }
 
-/* line 99, ../sass/components/_header.scss */
+/* line 103, ../sass/components/_header.scss */
 .admin-menu .header {
   margin-top: 24px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  /* line 108, ../sass/components/_header.scss */
+  /* line 112, ../sass/components/_header.scss */
   .header .header__logo a {
     background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
     background-size: 177px 76px;

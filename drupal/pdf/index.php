@@ -83,101 +83,10 @@ $pdf->Cell(30, 4, 'Potential Consumption', $b, 0, 'L');
 $reportDateRange = "Report Date Range: " . $content->dateRange[0] . " to " . $content->dateRange[1];
 $pdf->Cell(30, 4, $reportDateRange, $b, 0, 'L');
 
-
-// Draw Charts
-$x = 110;
-$y = 50;
-$row_height = 40;
-$row_margin = 2;
-
-$rows = array(
-  array(
-    'bg_color' => array(121, 189, 181),
-  ),
-  array(
-    'bg_color' => array(119, 184, 213),
-  ),
-  array(
-    'bg_color' => array(244, 127, 72),
-  ),
-  array(
-    'bg_color' => array(251, 176, 59),
-  ),
-);
-
-foreach ( $content->reportData as $key => $data ) {
-  $bg = $rows[$key]['bg_color'];
-
-    $name = $data->name;
-    // Left column
-    $pdf->SetXY(10, $y + 20);
-    $pdf->SetFontSize(6);
-
-    $pdf->SetFillColor($bg[0], $bg[1], $bg[2]);
-    $pdf->Cell(30,4.5,$data->meta->title,$b,2,'C');
-
-    // data Column
-    $pdf->SetXY(44, $y);
-    //$pdf->SetFontSize(6);
-    $pdf->Cell(85,$row_height,"",$b,2,'C',1);
-    $pdf->SetXY(44, $y);
-    $pdf->Image($content->charts->{$data->name}, null, null, 0, 0, 'png');
-
-    //$pdf->Cell(65,29,$content->data->$name ,$b,2,'C');
-    // Summary Column
-    $pdf->SetXY(130,$y);
-    $pdf->SetFontSize(6);
-    $pdf->Cell(30,4.5,$data->meta->title,$b,2,'C');
-    $pdf->Cell(30,2,'',$b,2,'C');
-    $pdf->SetFontSize(12);
-    $pdf->Cell(30,4,'$' . $data->summaryData->cost, $b,2,'C');
-    $pdf->SetFontSize(6);
-    $pdf->Cell(30,3,'Actual Cost',$b,2,'C');
-    $pdf->Cell(30,2,'',$b,2,'C');
-    $pdf->SetFontSize(12);
-    $pdf->Cell(30,4,'$' . $data->summaryData->cost, $b,2,'C');
-    $pdf->SetFontSize(6);
-    $pdf->Cell(30,3,'Potential Cost',$b,2,'C');
-    $pdf->Cell(30,2,'',$b,2,'C');
-    $pdf->Cell(30,5,$data->summaryData->savings . '%',$b,2,'C');
-    $y += $row_height + $row_margin;
+if (isset($_GET['r'])) {
+  $report = $_GET['r'];
 }
 
-//// Draw News
-//$x = 147;
-//$y = 41;
-//
-//$w = 60;
-//$h = 4;
-//
-//$pdf->SetXY($x, $y);
-//
-//$pdf->SetFontSize(14);
-//$pdf->Cell($w,$h,'News',$b,2,'L');
-//
-//
-//$y = 50;
-//
-//$pdf->SetXY($x, $y);
-//
-//$pdf->SetFillColor(255, 255, 255);
-//
-//
-//foreach ( $content->news as $article ) {
-//
-//    $pdf->SetX($x);
-//  $pdf->SetTextColor(0, 135, 190);
-//    $pdf->SetFontSize(9);
-//    $pdf->MultiCell($w,$h,$article->article->title,$b,2,'L');
-//  $pdf->SetTextColor(0, 0, 0);
-//    $pdf->SetFontSize(6);
-//  $pdf->SetX($x);
-//  $pdf->Cell($w, 1, "", $b, 2, 'L');
-//  // PHP is the name of the field because there was some parsing in PHP on the server.
-//  $pdf->SetX($x);
-//  $pdf->MultiCell($w,3,trim($article->article->php),$b,2,'L');
-//  $pdf->SetX($x);
-//  $pdf->Cell($w, $h, "", $b, 2, 'L');
-//}
+include_once("templates/" . $report . ".php.inc");
 
 $pdf->Output('doc.pdf', 'I');

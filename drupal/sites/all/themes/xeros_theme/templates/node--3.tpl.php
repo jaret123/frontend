@@ -37,8 +37,8 @@
                 </div>
                 <div class="download">
                     Download<a href="" id="download__csv">Excel</a>
-<!--                    <a href="" id="download__pdf">PDF</a>-->
-                    <form id="download__pdf-form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
+                    <a href="" id="download__pdf">PDF</a>
+                    <form id="download__pdf-form" action="/pdf/index.php?r=consumption" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
                         <textarea id="download__pdf-form-data" name="content">json string</textarea>
                     </form>
                 </div>
@@ -89,7 +89,7 @@
                                 <div class="col col-2 link metric" classification="cold_water" machine="{{id}}"
                                      chart="cold_water-{{id}}">
 
-                                    <div class="chart"></div>
+                                    <div class="chart" name="{{id}}-cold_water"></div>
                                     <div class="delta" data="{{cold_water_delta_value}}">{{cold_water_delta_value}}%
                                     </div>
                                     <div class="arrow {{cold-water-up-or-down}}"></div>
@@ -98,14 +98,14 @@
 
                                 <div class="col col-3 link metric" classification="hot_water" machine="{{id}}"
                                      chart="hot_water-{{id}}">
-                                    <div class="chart"></div>
+                                    <div class="chart" name="{{id}}-hot_water"></div>
                                     <div class="delta" data="{{hot_water_delta_value}}">{{hot_water_delta_value}}%</div>
                                     <div class="arrow {{hot-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>
                                 </div>
                                 <div class="col col-4 link metric" classification="cycle_time" machine="{{id}}"
                                      chart="cycle_time-{{id}}">
-                                    <div class="chart"></div>
+                                    <div class="chart" name="{{id}}-cycle_time""></div>
                                     <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
                                     <div class="arrow {{cold-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>
@@ -113,7 +113,7 @@
 
                                 <div class="col col-5 link metric" classification="chemical" machine="{{id}}"
                                      chart="chemical-{{id}}">
-                                    <div class="chart"></div>
+                                    <div class="chart" name="{{id}}-chemical""></div>
                                     <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
                                     <div class="arrow {{cold-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>

@@ -3,17 +3,17 @@
  * RTL companion for the styles.scss file.
  */
 /* Import Sass mixins, variables, Compass modules, etc. */
-/* line 93, ../sass/_init.scss */
+/* line 92, ../sass/_init.scss */
 h1, h2 {
   font-weight: 100;
 }
 
-/* line 96, ../sass/_init.scss */
+/* line 95, ../sass/_init.scss */
 h3 {
   font-weight: 300;
 }
 
-/* line 128, ../sass/_init.scss */
+/* line 127, ../sass/_init.scss */
 html {
   color: gray;
   font-weight: 300;

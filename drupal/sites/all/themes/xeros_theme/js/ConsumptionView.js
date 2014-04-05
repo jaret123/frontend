@@ -138,6 +138,7 @@ var view = {
         //createDropDown();
         app.initialize();
         controls.createTimeSelect();
+        controls.createExport();
 
         if (app.sessionCompany == "") {
             app.sessionCompany = app.user.field_company['und'][0].target_id;

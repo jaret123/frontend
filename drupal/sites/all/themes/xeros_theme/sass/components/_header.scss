@@ -65,7 +65,9 @@ h1 {
 	  margin-top: -10px;
       li {
         text-transform: uppercase;
-		@include background-image(linear-gradient($navbutton-highlight, $navbutton-base));
+        background-color: $navbutton-base;
+        @include filter-gradient($navbutton-highlight, $navbutton-base, vertical);
+        @include background(linear-gradient(top, $navbutton-highlight, $navbutton-base));
 		@include border-radius(0px 0px 7px 7px);
 		margin-right: 10px;
 		padding: 0 10px !important;
@@ -73,9 +75,11 @@ h1 {
         font-size:90%;
         &.active {
           //color: $font-accent-color;
-          background: #0086bd;//lighten($navbutton-base, 10%);
+          //background-color: $navbutton-hightlight;
+          background-color: #0086bd;//lighten($navbutton-base, 10%);
         }
 		&:hover {
+          background-color: $navbutton-highlight;
 		  background: lighten($navbutton-base, 10%);
 		}
         a {

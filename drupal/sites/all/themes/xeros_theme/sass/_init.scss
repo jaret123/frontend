@@ -39,7 +39,6 @@ $legacy-support-for-ie6: false;
 $legacy-support-for-ie7: false;
 $legacy-support-for-ie8: true;
 
-
 //
 // Font faces, stacks and sizes.
 //
@@ -149,6 +148,8 @@ $navbutton-base: #0b7fb0;
 // Helps set up a vertical rhythm.
 @import "compass/typography/vertical_rhythm";
 // Add the Zen Grids responsive layout mixins.
+@import "compass/css3/border-radius";
+
 @import "zen";
 
 // Now we add our custom helper mixins.

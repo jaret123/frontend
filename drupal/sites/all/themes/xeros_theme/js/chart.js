@@ -48,7 +48,8 @@ var chart = {
             .scale(y)
             .tickSize(-width)
             .ticks(6)
-            .orient("left");
+            .orient("left")
+            ;
 
         // If we are dealing with less than 3 months data, put days on the ticks
         if ( data.length < 90 ) {
@@ -98,6 +99,7 @@ var chart = {
 
         // adds SVG element to DOM, positioning properly
         var selector = ".kpi-chart." + name;
+        // Add the SVG
         var svg = d3.selectAll(selector).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -107,21 +109,14 @@ var chart = {
             .attr("fill", "none")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        svg.append("g")
-            .append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width",  width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .attr("transform", "translate(" + -(margin.left) + "," + -(margin.top) + ")")
-            .style("font-family", "Arial")
-            .style("font-size", "12px")
-            .style("font-style", "normal")
-            .style("font-variant", "normal")
-            .style("font-weight", "300")
-            .style("text-rendering", "optimizeLegibility")
-            .style("shape-rendering", "default")
-            //.attr("fill", "red")
+//        svg.append("g")
+//            .append("rect")
+//            .attr("x", 0)
+//            .attr("y", 0)
+//            .attr("width",  width + margin.left + margin.right)
+//            .attr("height", height + margin.top + margin.bottom)
+//            .attr("transform", "translate(" + -(margin.left) + "," + -(margin.top) + ")")
+//        ;
 
         // find the extent (min / max) of the values
         x.domain(d3.extent(data, function (d) {
@@ -152,11 +147,11 @@ var chart = {
         y.domain([min, max]);
 
         // append the notation for x-axis to the DOM and position
-        var gxAxis = svg.append("g")
-            .attr("class", "x axis")
+        svg.append("g")
             .attr("fill", "none")
             .attr("stroke", "white")
             .attr("transform", "translate(0," + height + ")")
+            //.attr("font-size", "12px")
             .call(xAxis);
 
         // append the notation for y-axis to the DOM and position
@@ -179,7 +174,8 @@ var chart = {
             .delay(500)
             .duration(1500)
             .attr("d", lineB)
-            .attr("fill", "none")
+            .attr("fill", "white")
+
             .style({
                 'stroke-width' : '3px'
 
@@ -294,7 +290,14 @@ var chart = {
                     })
                     .attr("transform", "translate(" + width / 2 + "," + 0 + ")")
                 ;
+
+
         }
+        svg.selectAll("text")
+            .attr("fill", "white")
+            .attr("stroke", "none")
+            .attr("font-family", "Arial")
+            .attr("font-size", "12px");
     },
     drawBar: function () {
         self = this;

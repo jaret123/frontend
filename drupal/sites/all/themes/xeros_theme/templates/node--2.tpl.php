@@ -37,8 +37,9 @@
                     </div>
                 </div>
                 <div class="download">
-                    Download<a href="" id="download__csv">Excel</a><a href="" id="download__pdf">PDF</a>
-                    <form id="download__pdf-form" action="/pdf/index.php" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
+                    Download<a href="" id="download__csv">Excel</a>
+                    <a href="" id="download__pdf">PDF</a>
+                    <form id="download__pdf-form" action="/pdf/index.php?r=kpi" method="POST" enctype="multipart/form-data" target="_blank" style="display:none">
                         <textarea id="download__pdf-form-data" name="content">json string</textarea>
                     </form>
                 </div>
@@ -84,7 +85,6 @@
             </div>
         </div>
     </div>
-    <canvas id="drawingArea" style="display:none; position: fixed; top: 0; left: 150px; background-color: antiquewhite;"></canvas>
 </div>
 
 <script>
