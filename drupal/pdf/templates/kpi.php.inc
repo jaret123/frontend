@@ -42,6 +42,8 @@ $cols = array(25, 54, 145);
 
 foreach ($content->reportData as $key => $data) {
 
+  $pdf->style("normal");
+
   $bg = $rows[$key]['bg_color'];
   $icon = "templates/" . $rows[$key]['icon'];
   $icon_text = $rows[$key]['icon_text'];
@@ -60,7 +62,7 @@ foreach ($content->reportData as $key => $data) {
   // Left column
   //
   $pdf->SetXY($cols[0], $y + 10);
-  $pdf->SetFontSize($font["label"][2]);
+  $pdf->style("label-large");
   $pdf->space(7,0);
   $pdf->Image($icon, $pdf->GetX() - 1.5, NULL, 15, 15, 'png');
   $pdf->SetXY($cols[0], $y + 15);
@@ -96,7 +98,7 @@ foreach ($content->reportData as $key => $data) {
   $pdf->numberFormat($data->summaryData->cost, $w, $h1, array( $font["h2"] * .7, $font["h2"] ));
 
   $pdf->SetX($cols[2]);
-  $pdf->SetFontSize($font["label"][1]);
+  $pdf->style("label-medium");
   $pdf->Cell($w, $h2, 'Actual Cost', $b, 2, 'C');
 
   $pdf->SetDash(1, .7);
@@ -107,17 +109,17 @@ foreach ($content->reportData as $key => $data) {
   $pdf->numberFormat($data->summaryData->cost, $w, $h1, array( $font["h2"] * .7, $font["h2"] ));
 
   $pdf->SetX($cols[2]);
-  $pdf->SetFontSize($font["label"][1]);
+  $pdf->style("label-medium");
   $pdf->Cell($w, $h2, 'Potential Cost', $b, 2, 'C');
 
   $pdf->space(0, .8);
   $pdf->hr($w);
   $pdf->space(0,.8);
 
-  $pdf->SetFontSize($font["h2"]);
+  $pdf->style("h2");
   $pdf->Cell($w, $h1, $data->summaryData->savings . '%', $b, 2, 'C');
 
-  $pdf->SetFontSize($font["label"][1]);
+  $pdf->style("label-medium");
   $pdf->Cell($w, $h2, 'Potential Savings', $b, 2, 'C');
 
 
