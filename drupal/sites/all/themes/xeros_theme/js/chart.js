@@ -167,18 +167,17 @@ var chart = {
         // append the line itself
         svg.append("path")
             .datum(data)
-            .attr("class", "line-b")
             .attr("d", lineA)
-            .attr("stroke", "blue")
+            .attr("stroke", "#0086bd")
+            .attr("fill", "none")
             .transition()
             .delay(500)
             .duration(1500)
             .attr("d", lineB)
-            .attr("fill", "white")
+            .attr("fill", "none")
 
             .style({
                 'stroke-width' : '3px'
-
             });
 
         svg.append("path")
@@ -198,7 +197,7 @@ var chart = {
                 svg.selectAll("dot")
                     .data(data)
                     .enter().append("circle")
-                    .attr("class", "circle-b")
+                    .attr("fill", "#0086bd")
                     .attr("r", 3.5)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
@@ -226,7 +225,7 @@ var chart = {
                 svg.selectAll("dot")
                     .data(data)
                     .enter().append("circle")
-                    .attr("class", "circle-a")
+                    .attr("fill", "white")
                     .attr("r", 3.5)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
@@ -247,7 +246,7 @@ var chart = {
             svg.selectAll("dot")
                 .data(data)
                 .enter().append("circle")
-                .attr("class", "circle-b")
+                .attr("fill", "#0086bd")
                 .attr("r", 3.5)
                 .attr("cx", function (d) {
                     return x(parseDate(d["date"]));// date
@@ -276,7 +275,7 @@ var chart = {
             svg.selectAll("dot")
                     .data(data)
                     .enter().append("circle")
-                    .attr("class", "circle-a")
+                    .attr("fill", "white")
                     .attr("r", 3.5)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
@@ -293,6 +292,7 @@ var chart = {
 
 
         }
+        // We need to explicitly set the styles on text to make rendering in the PDF better.
         svg.selectAll("text")
             .attr("fill", "white")
             .attr("stroke", "none")
@@ -376,6 +376,12 @@ var chart = {
             .text(function (d) {
                 return d.toLocaleString();
             });
+        // We need to explicitly set the styles on text to make rendering in the PDF better.
+        svg.selectAll("text")
+            .attr("fill", "white")
+            .attr("stroke", "none")
+            .attr("font-family", "Arial")
+            .attr("font-size", "12px");
     },
     drawDonut: function () {
         self = this;
@@ -427,7 +433,7 @@ var chart = {
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + (height - 20) + ")");
+            .attr("transform", "translate(" + width / 2 + "," + (height - 30) + ")");
 
         // Draw the donut in the SVG
         var donut = svg.selectAll(".arc")
@@ -465,6 +471,12 @@ var chart = {
             .attr("text-anchor", "middle")
             .style("fill", colorOuter)
             .text(outer.toLocaleString())
+
+        svg.selectAll("text")
+            .attr("fill", "white")
+            .attr("stroke", "none")
+            .attr("font-family", "Arial")
+            .attr("font-size", "12px");
 
 //        // Add text labels
 //        svg.append("text")

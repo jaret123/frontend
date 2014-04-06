@@ -197,7 +197,7 @@ var controls = {
 
             var form = jQuery("#download__pdf-form");
             jQuery(form).find("#download__pdf-form-data").html(JSON.stringify({
-                news : news,
+                title : jQuery("#page-title").html(),
                 reportData : app.reportData,
                 charts : charts,
                 dateRange : app.sessionDateRange
