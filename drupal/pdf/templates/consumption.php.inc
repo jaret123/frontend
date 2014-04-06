@@ -130,7 +130,7 @@ foreach ($content->reportData->data as $key => $data) {
 
 
   $pdf->space(0, $row_margin/2);
-  $y += $row_height + row_margin;
+  $y += $row_height + $row_margin;
 
 }
 
