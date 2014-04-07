@@ -39,7 +39,7 @@ var app = {
 
     createDateRanges : function() {
         self = this;
-
+        console.log("app.createDateRanges");
         var fromDate = new Date();
         var toDate = new Date();
 
@@ -50,7 +50,7 @@ var app = {
             app.sqlDate(fromDate),
             app.sqlDate(toDate)
         ];
-
+        console.log(app.dateRanges.yearToDate);
         // Month to date
         fromDate = new Date();
         fromDate.setDate(1);
@@ -116,22 +116,29 @@ var app = {
         var hash = window.location.hash;
         var hashArray = hash.substr(1).split("+");
 
+        console.log("app.route");
+        console.log(app.dateRanges.yearToDate);
         // Remove any error messages from the page
         jQuery(app.err).removeClass("active");
+
+        console.log("One");
+        console.log(app.dateRanges.yearToDate);
 
         // If no hash
         if (!hash) {
 
             // If there is no value in the session, then use the app default.
             if ( self.sessionDateRange.length === 0 ) {
-                self.sessionDateRange = self.dateRanges[self.defaults.timeSelect];
-                self.sessionTimeSelect = self.defaults.timeSelect;
+                self.sessionDateRange = self.dateRanges[self.defaults.timeSelect].slice(0);
+                self.sessionTimeSelect = new String(self.defaults.timeSelect);
             }
             // Build the apiUrl
             self.setApiUrl();
         // If there is a hash
         } else {
             hashArray = hash.substr(1).split("+");
+            console.log("app.route.hasharray");
+            console.log(app.dateRanges.yearToDate);
             if (hashArray.length > 1) {
                 self.machine = hashArray[0];
                 if ( hashArray[1].length > 1 ) {
@@ -150,11 +157,9 @@ var app = {
                         } else {
                             self.sessionDateRange[1] = dr[2];
                         }
-
                         self.sessionTimeSelect = dr[0];
-                        console.log(dr);
                     } else {
-                        self.sessionDateRange = self.dateRanges[hashArray[2]];
+                        self.sessionDateRange = self.dateRanges[hashArray[2]].slice(0);
                         self.sessionTimeSelect = hashArray[2];
                     }
                 }
@@ -163,6 +168,8 @@ var app = {
                 }
             }
         }
+        console.log("Two");
+        console.log(app.dateRanges.yearToDate);
         controls.setCsvLink();
         controls.setDateRangeDisplay();
         // This is a little funky, but we are going to let the view inherit our showReport method

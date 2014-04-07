@@ -118,8 +118,8 @@ var controls = {
 
         jQuery(".cal__button-submit").unbind().click(function (e) {
             jQuery("#cal").removeClass("show");
-            console.log("submit");
-
+            console.log("Kalandae Submit");
+            console.log(app.dateRanges.yearToDate);
             // Set date range
             app.dateRange = 'custom,' + k.getSelectedAsText();
             // Refresh data
