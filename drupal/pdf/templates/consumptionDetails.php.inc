@@ -86,7 +86,8 @@ foreach ( $content->reportData->classifications as $i => $classification) {
 
   $pdf->style("normal");
 
-  $d = $classification->data[0];
+  if (isset($classification->data[0])) {
+    $d = $classification->data[0];
 
   // Column 1
 
@@ -205,5 +206,7 @@ foreach ( $content->reportData->classifications as $i => $classification) {
 
   $x = $pdf->GetX();
   $y += $row_height;
+  }
+
 }
 
