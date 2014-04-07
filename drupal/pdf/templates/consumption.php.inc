@@ -48,7 +48,7 @@ foreach ($content->reportData->data as $key => $data) {
   if ( strtolower($data->machine_name) == 'xeros' ) {
     $logo = "Xeros Logo";
     $bg_color = "xeros-bg-color"; //array(211, 239, 252);
-    $machine_icon = "templates/18mm_xeros_icon.png";
+    $machine_icon = "templates/18mm_xeros-icon.png";
   }
 
 
