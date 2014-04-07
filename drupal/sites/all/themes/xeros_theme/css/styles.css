@@ -732,13 +732,21 @@ table {
 }
 /* line 14, ../sass/components/_chart.scss */
 .metric .arrow.up {
-  background: url("/sites/all/themes/xeros_theme/images/up-arrow.png") no-repeat left bottom;
+  background: url("/sites/all/themes/xeros_theme/images/18px_up-red.png") no-repeat left bottom;
 }
 /* line 17, ../sass/components/_chart.scss */
 .metric .arrow.down {
-  background: url("/sites/all/themes/xeros_theme/images/arrow.png") no-repeat left bottom;
+  background: url("/sites/all/themes/xeros_theme/images/18px_down-green.png") no-repeat left bottom;
 }
 /* line 20, ../sass/components/_chart.scss */
+.metric .arrow.up.inverse {
+  background: url("/sites/all/themes/xeros_theme/images/18px_up-green.png") no-repeat left bottom;
+}
+/* line 23, ../sass/components/_chart.scss */
+.metric .arrow.down.inverse {
+  background: url("/sites/all/themes/xeros_theme/images/18px_down-red.png") no-repeat left bottom;
+}
+/* line 26, ../sass/components/_chart.scss */
 .metric .delta {
   display: inline-block;
 }

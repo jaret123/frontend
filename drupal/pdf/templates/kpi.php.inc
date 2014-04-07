@@ -9,22 +9,22 @@ $row_margin = 3;
 $rows = array(
   array(
     'bg_color' => array(121, 189, 181),
-    'icon' => 'globe-icon.png',
+    'icon' => '15mm_globe.png',
     'icon_text' => '\e600'
   ),
   array(
     'bg_color' => array(119, 184, 213),
-    'icon' => 'water-icon.png',
+    'icon' => '15mm_water-drop.png',
     'icon_text' => '\e600'
   ),
   array(
     'bg_color' => array(244, 127, 72),
-    'icon' => 'therm-icon.png',
+    'icon' => '15mm_thermometer.png',
     'icon_text' => '\e600'
   ),
   array(
     'bg_color' => array(251, 176, 59),
-    'icon' => 'chem-icon.png',
+    'icon' => '15mm_chemical.png',
     'icon_text' => '\e600'
   ),
 );

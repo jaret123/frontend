@@ -12,10 +12,16 @@
     background: no-repeat left bottom;
   }
   .arrow.up {
-    background: url("/sites/all/themes/xeros_theme/images/up-arrow.png") no-repeat left bottom;
+    background: url("/sites/all/themes/xeros_theme/images/18px_up-red.png") no-repeat left bottom;
   }
   .arrow.down {
-    background: url("/sites/all/themes/xeros_theme/images/arrow.png") no-repeat left bottom;
+    background: url("/sites/all/themes/xeros_theme/images/18px_down-green.png") no-repeat left bottom;
+  }
+  .arrow.up.inverse {
+    background: url("/sites/all/themes/xeros_theme/images/18px_up-green.png") no-repeat left bottom;
+  }
+  .arrow.down.inverse {
+    background: url("/sites/all/themes/xeros_theme/images/18px_down-red.png") no-repeat left bottom;
   }
   .delta {
     display: inline-block;

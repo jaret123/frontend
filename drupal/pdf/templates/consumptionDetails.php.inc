@@ -75,11 +75,11 @@ $l = $content->reportData->labels;
 $write_page_sub_header = 1;
 
 $xeros_machine = false;
-$machine_icon = "templates/machine-icon.png";
+$machine_icon = "templates/25mm_washer.png";
 
 if ( strtolower($content->reportData->machine_name) == 'xeros') {
   $xeros_machine = false;
-  $machine_icon = "templates/machine-icon-xeros.png";
+  $machine_icon = "templates/25mm_xeros-icon.png";
 }
 
 foreach ( $content->reportData->classifications as $i => $classification) {

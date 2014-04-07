@@ -17,10 +17,10 @@ var app = {
     date : new Date(), // The current date
     dateRange : ["", ""], // SQL formatted date ranges "2013-11-01", "2013-12-02"
     dateRanges : {
-        weekToDate : this.dateRange,
-        monthToDate : this.dateRange,
-        yearToDate : this.dateRange,
-        custom : this.dateRange
+        weekToDate : ["", ""],
+        monthToDate : ["", ""],
+        yearToDate : ["", ""],
+        custom : ["", ""]
     }, // Available date ranges
     location : "",
     sessionDateRange : [], // The apps current date range

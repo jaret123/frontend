@@ -244,9 +244,9 @@ class FPDF extends tFPDF
   function arrow($value) {
     $return = "";
     if ( $value > 0) {
-        $return = "templates/down-arrow.png";
+        $return = "templates/18px_down-green.png";
     } elseif ($value < 0) {
-        $return = "templates/up-arrow.png";
+        $return = "templates/18px_up-red.png";
     } else {
         $return = "";
     }
