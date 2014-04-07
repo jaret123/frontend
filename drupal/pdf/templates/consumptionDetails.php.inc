@@ -101,12 +101,13 @@ foreach ( $content->reportData->classifications as $i => $classification) {
   }
 
   if ($write_page_sub_header == 1) {
-    $pdf->style("label-large");
+    $pdf->style("normal label-large");
     $pdf->SetXY($pdf->lMargin, $y + $cells->machine->position[1]);
     $pdf->Cell($cells->machine->width, 20,
-      $pdf->Image($machine_icon,$pdf->GetX() + ($cells->machine->width - 20)/2, $pdf->GetY(), 19, 20, 'png'),
+      $pdf->Image($machine_icon,$pdf->GetX() + ($cells->machine->width - 20)/2, $pdf->GetY(), 20, 20, 'png'),
       $b, 2, 'C');
 
+    $pdf->space(0, 2);
     $pdf->Cell($cells->machine->width, 6, $content->reportData->machine_name, $b, 2, 'C');
     $pdf->Cell($cells->machine->width, 6, $content->reportData->serial_number, $b, 2, 'C');
 //    $pdf->Cell($cells->machine->width, 4, $content->reportData->machine_id, $b, 2, 'C');

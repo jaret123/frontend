@@ -71,7 +71,7 @@ foreach ($content->reportData->data as $key => $data) {
 
   $pdf->space(0, 4);
   $pdf->Cell($col_width/2, $row_height,
-    $pdf->Image($machine_icon,$pdf->GetX() + 2, $pdf->GetY(), 14, 16, 'png'),
+    $pdf->Image($machine_icon,$pdf->GetX() + 2, $pdf->GetY(), 16, 16, 'png'),
     $b, 2, 'C');
 
   $pdf->SetXY($x + $col_width/2, $y + $row_margin);
