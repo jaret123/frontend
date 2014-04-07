@@ -80,11 +80,11 @@ var view = {
         draw();
     },
     classificationCompare : function(a,b) {
-        if (a.name === "Unknown")
+        if (a.name.toLowerCase().substr(0,7) === "unknown")
             return -1;
-        if (a.classification_id < b.classification_id)
+        if (parseInt(a.classification_id, 10) < parseInt(b.classification_id, 10))
             return -1;
-        if (a.classification_id > b.classification_id)
+        if (parseInt(a.classification_id, 10) > parseInt(b.classification_id, 10))
             return 1;
         return 0;
     },
