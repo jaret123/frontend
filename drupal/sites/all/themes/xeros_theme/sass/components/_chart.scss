@@ -10,18 +10,19 @@
     width: inherit;
     height: 15px;
     background: no-repeat left bottom;
+    background-size: contain;
   }
   .arrow.up {
-    background: url("/sites/all/themes/xeros_theme/images/18px_up-red.png") no-repeat left bottom;
+    background-image: url("/sites/all/themes/xeros_theme/images/18px_up-red.png");
   }
   .arrow.down {
-    background: url("/sites/all/themes/xeros_theme/images/18px_down-green.png") no-repeat left bottom;
+    background-image: url("/sites/all/themes/xeros_theme/images/18px_down-green.png");
   }
   .arrow.up.inverse {
-    background: url("/sites/all/themes/xeros_theme/images/18px_up-green.png") no-repeat left bottom;
+    background-image: url("/sites/all/themes/xeros_theme/images/18px_up-green.png");
   }
   .arrow.down.inverse {
-    background: url("/sites/all/themes/xeros_theme/images/18px_down-red.png") no-repeat left bottom;
+    background-image: url("/sites/all/themes/xeros_theme/images/18px_down-red.png");
   }
   .delta {
     display: inline-block;
