@@ -88,7 +88,7 @@ var controls = {
     },
     createTimeSelect : function() {
         var self = this;
-        jQuery("#time-select").val(app.sessionTimeSelect);
+        jQuery("#time-select").val(app.sessionTimeSelect.toString());
         controls.createDropDown("#time-select", function (event) {
 
             var click_value = jQuery(event.target).find("span.value").html();
