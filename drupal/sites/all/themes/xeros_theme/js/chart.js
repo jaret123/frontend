@@ -306,12 +306,13 @@ var chart = {
             selector = "",
             domainMax = 0;
 
-        data = chart.data;
+        var ar = chart.data;
+
+        domainMax = ar.splice(2,1);
+        data = ar;
         colors = chart.colors;
         selector = chart.selector;
         classes = chart.classes;
-
-        domainMax = data[2];
 
         var margin = {top: 10, right: 20, bottom: 0, left: 20},
             width = 120 - (margin.left + margin.right),
