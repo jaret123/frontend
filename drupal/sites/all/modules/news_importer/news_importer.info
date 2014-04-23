@@ -1,0 +1,11 @@
+name = News Importer
+description = News Importer
+core = 7.x
+package = Xeros
+version = 7.x-2.0
+project = news_importer
+dependencies[] = ctools
+dependencies[] = feeds
+features[ctools][] = feeds:feeds_importer_default:1
+features[features_api][] = api:2
+features[feeds_importer][] = xeros_in_the_news
