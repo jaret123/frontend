@@ -211,6 +211,9 @@ var controls = {
     },
     setCsvLink : function() {
         var href = "/api/csv/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1] ;
+
+        href += "/" + app.sessionLocation;
+
         jQuery("#download__csv").attr("href", href ) ;
     },
     setDateRangeDisplay : function() {
