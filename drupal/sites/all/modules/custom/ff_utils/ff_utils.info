@@ -1,0 +1,5 @@
+name = FF Utilities
+description = Provides Utility Functions.
+package = Fast Forward Innovation
+core = 7.x
+configure = admin/config/administration/ff
