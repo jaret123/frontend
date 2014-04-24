@@ -27,13 +27,17 @@
         <!--                      <li id="menu-consumption">Consumption</li>-->
         <!--                  </ul>-->
         <?php
-            if ( $user->uid > 0 ) {
+        // If logged in (0 is anonymous)
+            if ( $user->uid > 0 ) :
+              $u = user_load($user->uid);
+              $company = node_load($u->field_company['und'][0]['target_id']);
+              $location = node_load($u->field_location['und'][0]['target_id']);
         ?>
-            <span class="header__welcome">Welcome <?php print $user->name ; ?></span>
-        <?php
-            }; // endif
-        ?>
-
+            <span class="header__welcome">Welcome <?php print $user->name ; ?><br/>
+              Company: <span class="header__company"><?php print $company->title ?></span><br/>
+              Location: <span class="header__location"><?php print $location->title ?></span>
+            </span>
+        <?php endif; ?>
     </div>
 </header>
 

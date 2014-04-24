@@ -2473,16 +2473,18 @@ h1 {
   float: right;
   font-size: 80%;
   margin-top: -40px;
+  line-height: 1.5em;
+  text-align: right;
 }
 
-/* line 103, ../sass/components/_header.scss */
+/* line 105, ../sass/components/_header.scss */
 .admin-menu .header {
   margin-top: 24px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  /* line 112, ../sass/components/_header.scss */
+  /* line 114, ../sass/components/_header.scss */
   .header .header__logo a {
     background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
     background-size: 177px 76px;

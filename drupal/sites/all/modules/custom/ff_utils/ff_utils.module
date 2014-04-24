@@ -6,3 +6,11 @@
 function ff_utils_views_api() {
   return array('api' => 3.0);
 }
+
+
+function ff_utils_ctools_plugin_api($module = '', $api = '') {
+  if ($module == "feeds" && $api == "feeds_importer_default") {
+    // The current API version is 1.
+    return array("version" => 1);
+  }
+}

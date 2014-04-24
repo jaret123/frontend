@@ -99,4 +99,3 @@ $feeds_importer->config = array(
   'import_on_create' => 1,
   'process_in_background' => 0,
 );
-

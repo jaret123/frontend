@@ -50,3 +50,8 @@ This step is all done in the database
 	** Insert classification into classification table
 * Create Usage with classification and chemical ids as Fks
 * Create xeros_local_static values
+
+
+Xeros Admin
+
+xerosadmin/sorex39
