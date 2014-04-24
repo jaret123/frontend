@@ -72,6 +72,19 @@ function xeros_theme_preprocess_page(&$vars, $hook) {
 
   $user = user_load($vars["user"]->uid);
 
+  $company = node_load($user->field_company['und'][0]['target_id']);
+  $location = node_load($user->field_location['und'][0]['target_id']);
+
+  $user->company = array(
+    'id' => $company->nid,
+    'name' => $company->title
+  );
+
+  $user->location = array(
+    'id' => $location->nid,
+    'name' => $location->title
+  );
+
   unset($user->pass);
 
     drupal_add_js('app.user = ' . json_encode($user), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
