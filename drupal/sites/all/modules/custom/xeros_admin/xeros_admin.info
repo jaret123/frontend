@@ -1,0 +1,5 @@
+name = Xeros Admin
+description = Provides Setup Functionality for New Machines.
+package = Xeros
+core = 7.x
+configure = admin/config/administration/xeros

@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_admin_menu() {
+  $items['config/machines'] = array(
+    'title' => 'Machine Listing',
+    'page callback' => 'machine_listing',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_machines.inc',
+  );
+  $items['config/machine'] = array(
+    'title' => 'Machine Configuration',
+    'page callback' => 'machine_edit_page',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_machines.inc',
+  );
+  $items['config/location'] = array(
+    'title' => 'Location Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('location_form'),
+    'access arguments' => array('xeros admin'),
+  );
+
+
+  return $items;
+}
