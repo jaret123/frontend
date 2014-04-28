@@ -158,7 +158,7 @@ function machine_form($form, &$form_state, $vars) {
       '#collapsed' => TRUE,
       '#tree' => TRUE,
     );
-    $form['classification_set'][$i]['classification'] = classification($form, &$form_state, $row);
+    $form['classification_set'][$i]['classification'] = classification($form, $form_state, $row);
   }
 
   $form['submit'] = array(
