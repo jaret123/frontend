@@ -1,7 +1,7 @@
 <?php
 
 $aliases['xeros.dev'] = array (
-  'root' => '/var/www/ELYXOR/dev/www/drupal-7.25',
+  'root' => '/var/www/ELYXOR/dev/www/drupal',
   'uri' => 'http://xeros-dev.d.ffinno.com',
   'remote-host' => 'ffinno',
   'path-aliases' => 
@@ -82,7 +82,7 @@ $aliases['xeros.prod'] = array (
         ),
 );
 $aliases['xeros.local'] = array (
-  'root' => '/Users/jason/dev/ELYXOR/xeros/drupal-7.25',
+  'root' => '/Users/jason/dev/ELYXOR/xeros/drupal',
   'uri' => 'http://xeros.local',
   'path-aliases' => 
   array (

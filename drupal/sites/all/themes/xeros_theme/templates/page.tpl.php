@@ -30,12 +30,22 @@
         // If logged in (0 is anonymous)
             if ( $user->uid > 0 ) :
               $u = user_load($user->uid);
-              $company = node_load($u->field_company['und'][0]['target_id']);
-              $location = node_load($u->field_location['und'][0]['target_id']);
+
+              $user->company = "No company assigned";
+              $user->location = "No location assigned";
+
+              if (isset($u->field_company['und'][0]['target_id'])) {
+                $company = node_load($u->field_company['und'][0]['target_id']);
+                $user->company = $company->title;
+              }
+              if (isset($u->field_location['und'][0]['target_id'])) {
+                $location = node_load($u->field_location['und'][0]['target_id']);
+                $user->location = $location->title;
+              }
         ?>
             <span class="header__welcome">Welcome <?php print $user->name ; ?><br/>
-              Company: <span class="header__company"><?php print $company->title ?></span><br/>
-              Location: <span class="header__location"><?php print $location->title ?></span>
+              Company: <span class="header__company"><?php print $user->company ?></span><br/>
+              Location: <span class="header__location"><?php print $user->location ?></span>
             </span>
         <?php endif; ?>
     </div>
