@@ -59,7 +59,6 @@ function location_listing($company_id = NULL) {
 
 function location_form($form, &$form_state, $vars) {
 
-
   // Location values
   $sections['local_static_value'] = array(
     '#type' => 'fieldset',
