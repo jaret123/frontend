@@ -15,6 +15,25 @@ class location extends orm_abstract {
 
   public function select_by_company($company_id = NULL) {
 
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'location')
+      ->propertyCondition('status', 1);
+
+    if ($company_id != NULL) {
+      $query->fieldCondition('field_company', $company_id);
+    }
+
+    $result = $query->execute();
+
+    if (isset($result['node'])) {
+      $rows_nids = array_keys($result['node']);
+      $rows = entity_load('node', $rows_nids);
+    }
+    return $rows;
+  }
+
+    /*
     $select = db_select($this->table, 'a');
     $select->fields('a', $this->fields);
     if ($company_id <> NULL) {
@@ -31,4 +50,5 @@ class location extends orm_abstract {
     }
     return $rows;
   }
+    */
 }

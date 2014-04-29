@@ -7,7 +7,7 @@
  */
 
 require_once('db/location.inc');
-
+require_once('xeros_admin_machines.inc');
 /**
  * @param null $company_id
  *
@@ -31,7 +31,12 @@ function location_listing($company_id = NULL) {
 
   if (count($rows) > 0) {
     foreach ($rows as $i => $row) {
-      array_push($rows[$i], '<a href="/config/location/edit/' . $row['location_id'] . '">Edit</a>');
+      $data[$i]['company_id'] = $row->field_company['und'][0]['target_id'];
+      $company = node_load($data[$i]['company_id']);
+      $data[$i]['company_name'] = $company->title;
+      $data[$i]['location_id'] = $row->nid;
+      $data[$i]['location_name'] = $row->title;
+      $data[$i]['link'] =  '<a href="/config/location/edit/' . $row->nid . '">Edit</a>';
     }
 
     // Make a table
@@ -46,7 +51,7 @@ function location_listing($company_id = NULL) {
     $r = array(
       '#theme' => 'table',
       '#header' => $header,
-      '#rows' => $rows
+      '#rows' => $data
     );
 
     $output .= drupal_render($r);
@@ -57,110 +62,164 @@ function location_listing($company_id = NULL) {
   return $output;
 }
 
+function location_edit_page($function_call = NULL, $location_id = NULL) {
+
+  if ($location_id != NULL) {
+    $location = node_load($location_id);
+    $company = node_load($location->field_company['und'][0]['target_id']);
+  }
+  $output = '';
+  $output = '<a href="/config/locations">Back to location listing</a> <br />';
+  $output .= 'Function: ' . $function_call . '<br />';
+  $output .= 'Company: ' . $company->title . '<br />';
+  $output .= 'Location: ' . $location->title . '<br />';
+
+  $vars = array();
+  $vars['location'] = $location;
+  $vars['company'] = $company;
+
+  if( ! function_exists("node_page_edit")) {
+    include_once(drupal_get_path('module', 'node') . '/node.pages.inc');
+  }
+
+  $f = drupal_get_form('location_form', $vars);
+
+  $output .= drupal_render($f);
+
+  $output .= machine_listing($location->nid);
+
+  return $output;
+}
+
 function location_form($form, &$form_state, $vars) {
 
-  // Location values
-  $sections['local_static_value'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Xeros Static Values'),
-    '#description' => t('Xeros static values for this classification'),
+  $form_state['values']['company_id'] = $vars['company']->nid;
+  $form_state['values']['location_id'] = $vars['location']->nid;
+  $form_state['values']['location_name'] = $vars['location']->title;
 
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#tree' => TRUE,
-    'xeros_local_static_value_id' => array(
-      '#title' => 'Unique ID',
-      '#type' => 'markup',
-      '#markup' => '<div>Unique ID from database</div>'
-    ),
-    'classification_id' => array(
-      '#title' => 'unique classification',
-      '#type' => 'hidden'
-    ),
-    'hot_water_gallons' => array(
-      '#title' => 'Hot Water Gallons',
-      '#description' => 'Always 0 (Xeros does not use Hot Water)',
-      '#type' => 'textfield'
-    ),
-    'cold_water_gallons' => array(
-      '#title' => 'Cold Water',
-      '#description' => "How much water a Xeros machine uses for the same classification",
-      '#type' => 'textfield'
-    ),
-    'run_time' => array(
-      '#title' => 'Run Time',
-      '#description' => "How long a Xeros machine runs for the same classification",
-      '#type' => 'textfield'
-    ),
+  $form['#tree'] = TRUE;
+
+  // Hidden fields for processing between validate and submit
+  $form['location_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,
   );
 
-  $sections['chemical_profile'] = array(
-    '#type' => 'fieldset',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#tree' => TRUE,
-    'chemical_profile_id' => array(
-      '#type' => 'hidden',
-      '#name' => 'Chemical Profile ID',
-      '#description' => "Primary Key",
-    ),
-    'chemical_type' => array(
-      '#type' => 'textfield',
-      '#name' => 'Chemical Type',
-      '#description' => "Name of Chemical",
-    ),
-    'supplier' => array(
-      '#type' => 'textfield',
-      '#name' => 'Supplier',
-      '#description' => "Name of Supplier",
-    ),
-    'material_type' => array(
-      '#type' => 'textfield',
-      '#name' => 'Material Type',
-      '#description' => "Liquid, Powder, Bead, etc.",
-    ),
-    'unit' => array(
-      '#type' => 'textfield',
-      '#name' => 'Measurement Unit',
-      '#description' => "The Unit the chemical is measured in (Ounces or Grams)",
-    ),
-    'unit_cost' => array(
-      '#type' => 'textfield',
-      '#name' => 'Cost per Unit',
-      '#description' => "",
-    ),
-    'location_id' => array(
-      '#type' => 'hidden',
-      '#name' => 'Location ID',
-      '#description' => "",
-    ),
-    'xeros_unit_cost' => array(
-      '#type' => 'textfield',
-      '#name' => 'Xeros Cost Per Unit',
-      '#description' => "Cost per unit of xeros provided chemical (this is generally 0 because Xeros provides chemicals with machine lease.",
-    ),
+  $form['company_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,
   );
 
-  $sections['labor_profile'] = array(
+  //Visible fields
+  $form['location_name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Location Name',
+    '#default_value' => !empty($form_state['values']['location_name']) ? $form_state['values']['location_name'] : NULL,
+  );
+
+  $form['location_profile'] = location_profile($form, $form_state, $vars);
+
+  $form['labor_profile'] = labor_profile($form, $form_state, $vars);
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+
+  return $form;
+}
+
+function location_profile($vars) {
+
+// Location values
+  $location_profile = array(
     '#type' => 'fieldset',
-    '#description' => 'There may be more than one chemical used per machine and classification',
+    '#title' => t('Location Profile Values'),
+    '#description' => t('Location specific values used for calculations for this location'),
+
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
-    '#tree' => TRUE,
+    'water_volume_unit' => array(
+      '#title' => 'Water Volume Unit',
+      '#description' => 'What unit is the water measured in (gallons or liters)',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc(array('gallons', 'liters'))
+    ),
+    'chemical_volume_unit' => array(
+      '#title' => 'Chemical Volume Unit',
+      '#description' => 'What unit are the chemicals measured in (ouncs, grams)',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc(array('ounces', 'grams'))
+    ),
+    'water_meter_rate' => array(
+      '#title' => 'Water Meter Rate',
+      '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
+      '#type' => 'textfield'
+    ),
+    'temperature_rise_spring' => array(
+      '#title' => 'Temperature Rise Spring',
+      '#description' => "Constant which is used in the therms calculation.  The temperature difference between water coming in the building and the temperature of hot water",
+      '#type' => 'textfield'
+    ),
+    'temperature_rise_summer' => array(
+      '#title' => 'Temperature Rise Summer',
+      '#description' => "Constant which is used in the therms calculation.  The temperature difference between water coming in the building and the temperature of hot water",
+      '#type' => 'textfield'
+    ),
+    'temperature_rise_fall' => array(
+      '#title' => 'Temperature Rise Fall',
+      '#description' => "Constant which is used in the therms calculation.  The temperature difference between water coming in the building and the temperature of hot water",
+      '#type' => 'textfield'
+    ),
+    'temperature_rise_winter' => array(
+      '#title' => 'Temperature Rise Winter',
+      '#description' => "Constant which is used in the therms calculation.  The temperature difference between water coming in the building and the temperature of hot water",
+      '#type' => 'textfield'
+    ),
+    'heating_efficiency' => array(
+      '#title' => 'Heating Efficiency',
+      '#description' => "",
+      '#type' => 'textfield'
+    ),
+    'thermal_conversion' => array(
+      '#title' => 'Thermal Conversion',
+      '#description' => "",
+      '#type' => 'textfield'
+    ),
+    'cost_per_therm' => array(
+      '#title' => 'Cost per Therm',
+      '#description' => 'Analyst entered calculation based on the heating bill for the location',
+      '#type' => 'textfield'
+    ),
+    'cost_per_gallon' => array(
+      '#title' => 'Cost per gallon',
+      '#description' => 'Analyst entered calculation based on the utility bill for the location',
+      '#type' => 'textfield'
+    )
+  );
+
+  return $location_profile;
+}
+
+function labor_profile($vars) {
+
+  $labor_profile = array(
+    '#type' => 'fieldset',
+    '#title' => t('Labor Profile Values'),
+    '#description' => t('Labor specific values used for calculations for this location'),
+
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
     'labor_profile_id' => array(
       '#type' => 'hidden',
-      '#name' => 'Labor Profile ID',
-      '#description' => '',
+      '#default_value' => ''
     ),
     'ops_hourly_rate' => array(
-      '#type' => 'textfield',
-      '#name' => 'Average hourly rate of labor',
-      '#description' => '',
-    ),
-    'location_id' => array(
-      '#type' => 'hidden',
-      '#name' => 'Location ID',
-      '#description' => '',
+      '#title' => 'Operations Hourly Rate',
+      '#description' => 'Analyst entered calculation based on location\'s hourly rate of operations',
+      '#type' => 'textfield'
     ),
   );
+
+  return $labor_profile;
 }
