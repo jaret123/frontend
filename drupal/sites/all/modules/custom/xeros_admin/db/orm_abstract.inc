@@ -18,7 +18,7 @@ abstract class orm_abstract {
 
     $select = db_select($this->table, 'a');
     $select->fields('a', $this->fields);
-    if ($id <> NULL) {
+    if ($id != NULL) {
       $select->condition('a.' . $this->key, $id);
     }
 

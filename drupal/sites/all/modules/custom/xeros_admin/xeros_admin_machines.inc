@@ -7,6 +7,7 @@
  */
 require_once('db/machine.inc');
 require_once('db/machine_classification.inc');
+require_once('db/chemical_usage.inc');
 /**
  * Page callback for use with most of the menu entries. The arguments it
  * receives determine what it outputs.
@@ -66,21 +67,28 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
 
   $rows = $machine->select($location_id, $machine_id);
 
-  $mc = new machine_classification();
-
-  $mc->id = $machine_id;
-
-  $classifications = $mc->select_by_machine($machine_id);
-
   $vars = array(
     'machine_id' => $machine_id,
     'location_id' => $rows[0]['location_id'],
     'serial_number' => $rows[0]['serial_number'],
-    'machine' => $rows[0],
-    'classifications' => $classifications,
+    'machine' => $rows[0]
   );
 
-  $output .= drupal_render(drupal_get_form('machine_form', $vars));
+  $mc = new machine_classification();
+
+  $mc->id = $machine_id;
+
+  $vars['classifications'] = $mc->select_by_machine($machine_id);
+
+  $cu = new chemical_usage;
+
+  foreach ( $vars['classifications'] as $id => $c) {
+    $vars['classifications'][$id]['chemical_usage'] = $cu->select($c['machine_classification_id']);
+  }
+
+  $f = drupal_get_form('machine_form', $vars);
+
+  $output .= drupal_render($f);
 
   return $output;
 }
@@ -98,8 +106,8 @@ function machine_form($form, &$form_state, $vars) {
   $form_state['values']['location_id'] = $vars['location_id'];
   $form_state['values']['serial_number']= $vars['serial_number'];
   $form_state['values']['machine_settings']['machine'] = $vars['machine'];
-
   $form_state['values']['classifications'] = $vars['classifications'];
+
 
   $form['header'] = array(
     '#title' => 'Form header',
@@ -159,7 +167,22 @@ function machine_form($form, &$form_state, $vars) {
       '#tree' => TRUE,
     );
     $form['classification_set'][$i]['classification'] = classification($form, $form_state, $row);
+
+    foreach( $form_state['values']['classifications'][$i]['chemical_usage'] as $j => $jrow) {
+
+      $form['classification_set'][$i]['classification']['chemical_usage_set'][$j] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Chemical Type: ' . $jrow['chemical_type']),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#tree' => TRUE,
+      );
+      $form['classification_set'][$i]['classification']['chemical_usage_set'][$j]['chemical_usage'] = chemical_usage($form, $form_state, $jrow);
+    }
   }
+
+
+
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -222,37 +245,6 @@ function machine_form_submit($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
 }
 
-function chemical_usage() {
-  $chemical_usage = array(
-    '#type' => 'fieldset',
-    '#description' => 'There may be more than one chemical used per machine and classification',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#tree' => TRUE,
-    'machine_classification_id' => array(
-      '#type' => 'textfield',
-      '#name' => 'Machine ID',
-      '#description' => "",
-    ),
-    'chemical_profile_id' => array(
-      '#type' => 'textfield',
-      '#name' => 'strength',
-      '#description' => '',
-    ),
-    'strength' => array(
-      '#type' => 'textfield',
-      '#name' => 'Stength',
-      '#description' => 'Number of units (Oz or Grams) per cycle in this classification',
-    ),
-    'xeros_strength' => array(
-      '#type' => 'textfield',
-      '#name' => 'Xeros Strength',
-      '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
-    ),
-  );
-
-  return $chemical_usage;
-}
 
 function machine_settings($form, &$form_state, $vars) {
   
@@ -437,8 +429,105 @@ function classification($form, &$form_state, $row) {
       '#description' => 'How long does it take to load and unload the machine after the cycle -- this is used in the run time calculation.',
       '#type' => 'textfield',
       '#default_value' => !empty($row['unload_time']) ? $row['unload_time'] : '',
+    ),
+    'local_static_values_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($row['local_static_values_id']) ? $row['local_static_values_id'] : NULL,
+    ),
+    'hot_water_gallons' => array(
+      '#type' => 'textfield',
+      '#title' => 'Xeros hot water usage',
+      '#desription' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
+      '#default_value' => !empty($row['hot_water_gallons']) ? $row['hot_water_gallons'] : NULL,
+    ),
+    'cold_water_gallons' => array(
+      '#type' => 'textfield',
+      '#title' => 'Xeros cold water usage',
+      '#desription' => 'The model data for cold water usage for this type of laundry on a comparable Xeros machine',
+      '#default_value' => !empty($row['cold_water_gallons']) ? $row['cold_water_gallons'] : NULL,
     )
   );
+// TODO: Run time is in the fields spreadsheet but not in the xeros_local_static_values database.
+//    'run_time' => array(
+//      '#type' => 'textfield',
+//      '#title' => 'Xeros hot water usage',
+//      '#desription' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
+//      '#default_value' => !empty($row['run_time']) ? $row['run_time'] : NULL,
+//    )
 
   return $classification;
+}
+
+function chemical_usage($form, &$form_state, $row) {
+
+  $chemical_usage = array(
+    'machine_classification_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($row['machine_classification_id']) ? $row['machine_classification_id'] : '',
+    ),
+    'chemical_profile_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
+    ),
+    'strength' => array(
+      '#type' => 'textfield',
+      '#title' => 'Strength',
+      '#description' => 'Number of units (Oz or Grams) per cycle in this classification',
+      '#default_value' => !empty($row['strength']) ? $row['strength'] : '',
+    ),
+    'xeros_strength' => array(
+      '#type' => 'textfield',
+      '#title' => 'Xeros Strength',
+      '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
+      '#default_value' => !empty($row['xeros_strength']) ? $row['xeros_strength'] : '',
+    ),
+    'chemical_profile_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
+    ),
+    'chemical_type' => array(
+      '#type' => 'textfield',
+      '#title' => 'Chemical Type',
+      '#description' => '',
+      '#default_value' => !empty($row['chemical_type']) ? $row['chemical_type'] : '',
+    ),
+    'supplier' => array(
+      '#type' => 'textfield',
+      '#title' => 'Supplier',
+      '#description' => '',
+      '#default_value' => !empty($row['supplier']) ? $row['supplier'] : '',
+    ),
+    'material_type' => array(
+      '#type' => 'textfield',
+      '#title' => 'Material Type',
+      '#description' => '',
+      '#default_value' => !empty($row['material_type']) ? $row['material_type'] : '',
+    ),
+    'unit' => array(
+      '#type' => 'select',
+      '#title' => 'Unit',
+      '#description' => '',
+      '#options' => drupal_map_assoc(array('oz', 'grams')),
+      '#default_value' => !empty($row['unit']) ? $row['unit'] : '',
+    ),
+    'unit_cost' => array(
+      '#type' => 'textfield',
+      '#title' => 'Unit Cost',
+      '#description' => 'Cost per unit',
+      '#default_value' => !empty($row['unit_cost']) ? $row['unit_cost'] : '',
+    ),
+    'location_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($row['location_id']) ? $row['location_id'] : '',
+    ),
+    'xeros_unit_cost' => array(
+      '#type' => 'textfield',
+      '#title' => 'Xeros Unit Cost',
+      '#description' => 'Note: All chemicals are included with a Xeros lease.  Enter 0',
+      '#default_value' => !empty($row['xeros_unit_cost']) ? $row['xeros_unit_cost'] : '',
+    ),
+
+  );
+
+  return $chemical_usage;
 }

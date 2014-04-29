@@ -22,14 +22,12 @@ class machine_classification extends orm_abstract {
 
     $select = db_select('xeros_machine_classification', 'mc');
     $select->leftJoin('xeros_classification', 'c', 'mc.classification_id = c.classification_id');
-
+    $select->leftJoin('xeros_local_static_values', 'lsv', 'c.classification_id = lsv.classification');
     $select->fields('c');
     $select->fields('mc');
+    $select->fields('lsv');
 
-
-
-
-    if ($machine_id <> NULL) {
+    if ($machine_id != NULL) {
       $select->condition('mc.machine_id', $machine_id);
     }
 
