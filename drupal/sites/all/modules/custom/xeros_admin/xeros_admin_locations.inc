@@ -88,6 +88,8 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
 
   $output .= machine_listing($location->nid);
 
+
+
   return $output;
 }
 
@@ -117,9 +119,20 @@ function location_form($form, &$form_state, $vars) {
     '#default_value' => !empty($form_state['values']['location_name']) ? $form_state['values']['location_name'] : NULL,
   );
 
-  $form['location_profile'] = location_profile($form, $form_state, $vars);
+  $form['location_profile'] = location_profile($vars);
 
-  $form['labor_profile'] = labor_profile($form, $form_state, $vars);
+  $form['labor_profile'] = labor_profile($vars);
+
+  $form['chemical_profiles'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Chemical Profile Information'),
+    '#description' => t('Location specific values used for chemicals for this location'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  for ($i = 0; $i < 5; $i++) {
+    $form['chemical_profiles'][] = chemical_profile($vars);
+  }
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -222,4 +235,56 @@ function labor_profile($vars) {
   );
 
   return $labor_profile;
+}
+
+function chemical_profile($vars) {
+  $chemical_profile = array(
+    '#type' => 'fieldset',
+    '#title' => t('Chemical Profile: ' . 'Name'),
+    '#description' => t('Location specific values used for chemicals for this location'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    'chemical_profile_id' => array(
+      '#type' => 'hidden',
+      '#default_value' => ''
+    ),
+    'chemical_type' => array(
+      '#title' => 'Chemical Type',
+      '#description' => '',
+      '#type' => 'textfield',
+      '#default_value' => ''
+    ),
+    'supplier' => array(
+      '#title' => 'Supplier',
+      '#description' => '',
+      '#type' => 'textfield',
+      '#default_value' => ''
+    ),
+    'material_type' => array(
+      '#title' => 'Material Type',
+      '#description' => '',
+      '#type' => 'textfield',
+      '#default_value' => ''
+    ),
+    'unit' => array(
+      '#title' => 'Unit',
+      '#description' => '',
+      '#type' => 'textfield',
+      '#default_value' => ''
+    ),
+    'unit_cost' => array(
+      '#title' => 'Unit Cost',
+      '#description' => '',
+      '#type' => 'textfield',
+      '#default_value' => ''
+    ),
+    'xeros_unit_cost' => array(
+      '#title' => 'Xeros Unit Cost',
+      '#description' => 'Cost of Xeros Chemicals are included in Xeros lease.  Set to 0 by default',
+      '#type' => 'hidden',
+      '#default_value' => ''
+    ),
+  );
+
+  return $chemical_profile;
 }
