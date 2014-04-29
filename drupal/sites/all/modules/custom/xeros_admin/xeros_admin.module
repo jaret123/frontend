@@ -20,11 +20,19 @@ function xeros_admin_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_admin_machines.inc',
   );
+  $items['config/locations'] = array(
+    'title' => 'Location Listing',
+    'page callback' => 'location_listing',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_locations.inc'
+  );
   $items['config/location'] = array(
     'title' => 'Location Configuration',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('location_form'),
+    'page callback' => 'location_edit_page',
+    'page arguments' => array(),
     'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_locations.inc',
   );
 
 

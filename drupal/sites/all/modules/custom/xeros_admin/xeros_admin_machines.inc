@@ -8,16 +8,12 @@
 require_once('db/machine.inc');
 require_once('db/machine_classification.inc');
 require_once('db/chemical_usage.inc');
+
 /**
- * Page callback for use with most of the menu entries. The arguments it
- * receives determine what it outputs.
+ * @param null $location_id
+ * @param null $machine_id
  *
- * @param $content
- *   The base content to output.
- * @param $arg1
- *   First additional argument from the path used to access the menu
- * @param $arg2
- *   Second additional argument.
+ * @return string
  */
 function machine_listing($location_id = NULL, $machine_id = NULL) {
   $output =  '<div>This is the machine listing page for location: ' . $location_id . '</div>';

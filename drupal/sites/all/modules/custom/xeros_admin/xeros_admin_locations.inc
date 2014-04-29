@@ -5,21 +5,56 @@
  * Date: 4/26/14
  * Time: 12:33 PM
  */
-//require_once('db/location.inc');
+
+require_once('db/location.inc');
+
 /**
- * Page callback for use with most of the menu entries. The arguments it
- * receives determine what it outputs.
+ * @param null $company_id
  *
- * @param $content
- *   The base content to output.
- * @param $arg1
- *   First additional argument from the path used to access the menu
- * @param $arg2
- *   Second additional argument.
+ * @return string
  */
-function location_listing($location_id = NULL, $machine_id = NULL) {
+function location_listing($company_id = NULL) {
 
+  $output =  '<div>This is the location listing page for company: ' . $company_id . '</div>';
 
+  $location = new location();
+
+  $location->fields = array(
+    'company_id',
+    'location_id',
+    'location_name'
+  );
+
+  // TODO: If Xeros Admin, then show all the locations grouped by company
+
+  $rows = $location->select_by_company($company_id);
+
+  if (count($rows) > 0) {
+    foreach ($rows as $i => $row) {
+      array_push($rows[$i], '<a href="/config/location/edit/' . $row['location_id'] . '">Edit</a>');
+    }
+
+    // Make a table
+    $header = array(
+      t('Company ID'),
+      //t('Company Name'),
+      t('Location ID'),
+      t('Location Name'),
+      t('Edit')
+    );
+
+    $r = array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows
+    );
+
+    $output .= drupal_render($r);
+  } else {
+    drupal_set_message(t('No locations found.'));
+  }
+
+  return $output;
 }
 
 function location_form($form, &$form_state, $vars) {
