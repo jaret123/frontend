@@ -59,6 +59,10 @@ abstract class orm_abstract {
           ->key(array($this->key => $this->id))
           ->fields($this->fields)
           ->execute();
+      } else {
+        $num_updated = db_insert($this->table)
+          ->fields($this->fields)
+          ->execute();
       }
       return $num_updated;
     }
