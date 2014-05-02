@@ -8,6 +8,7 @@
 require_once('db/machine.inc');
 require_once('db/machine_classification.inc');
 require_once('db/chemical_usage.inc');
+require_once('db/chemical_profile.inc');
 
 /**
  * @param null $location_id
@@ -49,7 +50,7 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
     drupal_set_message(t('No machines found for this location.'));
   }
 
-  $output .= '<div><a href="/config/machine/' . $location_id . '/add">Add another machine</a>';
+  $output .= '<div><a href="/config/machine/' . $location_id . '/add">Add another machine</a></div>';
   return $output;
 };
 
@@ -69,6 +70,10 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
     'serial_number' => $rows[0]['serial_number'],
     'machine' => $rows[0]
   );
+
+  $chem = new chemical_profile();
+
+  $vars['chemical_profiles'] = $chem->select_by_location($location_id);
 
   $mc = new machine_classification();
 
@@ -104,15 +109,19 @@ function machine_form($form, &$form_state, $vars) {
   $form_state['values']['machine_settings']['machine'] = $vars['machine'];
   $form_state['values']['classifications'] = $vars['classifications'];
 
+  // Save this for reference in the form_state so each sub form can access it, even on callback.
+  if (empty($form_state['#vars'])) {
+    $form_state['#vars'] = $vars;
+  }
 
   $form['header'] = array(
     '#title' => 'Form header',
-    '#markup' => '<div>Configure the machine settings</div>'
+    '#markup' => 'Configure the machine settings<br />'
   );
 
   $form['header'] = array(
     '#type' => 'markup',
-    '#markup' => '<div>' . t("Machine ID - Unique ID of the Machine (Auto Generated)") . ': ' . $vars['machine_id'],
+    '#markup' => t("Machine ID - Unique ID of the Machine (Auto Generated)") . ': ' . $vars['machine_id'] . '<br />',
   );
 
   // Hidden fields for processing between validate and submit
@@ -161,6 +170,8 @@ function machine_form($form, &$form_state, $vars) {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#tree' => TRUE,
+      '#prefix' => '<div id="chemical-usage-fieldset-wrapper[' . $i . ']">',
+      '#suffix' => '</div>'
     );
     $form['classification_set'][$i]['classification'] = classification($form, $form_state, $row);
 
@@ -175,10 +186,19 @@ function machine_form($form, &$form_state, $vars) {
       );
       $form['classification_set'][$i]['classification']['chemical_usage_set'][$j]['chemical_usage'] = chemical_usage($form, $form_state, $jrow);
     }
+
+    // Adds "Add another name" button
+    $form['classification_set'][$i]['classification']['add'] = array(
+      '#type' => 'submit',
+      '#value' => t('Add another chemical'),
+      '#ff-process' => 'add',
+      '#submit' => array('chemical_usage_add'),
+      '#ajax' => array(
+        'callback' => 'chemical_usage_add_callback',
+        'wrapper' => 'chemical-usage-fieldset-wrapper',  // Need to add an index
+      ),
+    );
   }
-
-
-
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -240,7 +260,6 @@ function machine_form_submit($form, &$form_state) {
   drupal_set_message(t('The form has been submitted.'));
   $form_state['rebuild'] = TRUE;
 }
-
 
 function machine_settings($form, &$form_state, $vars) {
   
@@ -454,7 +473,20 @@ function classification($form, &$form_state, $row) {
   return $classification;
 }
 
+
 function chemical_usage($form, &$form_state, $row) {
+  $chem_map = function($value) {
+    return array($value['chemical_profile_id'] => $value['chemical_type']);
+    //return $value['chemical_type'];
+  };
+
+  $ar = array_map($chem_map, $form_state['#vars']['chemical_profiles']);
+
+  foreach ($ar as $i => $value) {
+    foreach ($value as $j => $v) {
+      $chem_ar[$j] = $v;
+    }
+  }
 
   $chemical_usage = array(
     'machine_classification_id' => array(
@@ -464,6 +496,22 @@ function chemical_usage($form, &$form_state, $row) {
     'chemical_profile_id' => array(
       '#type' => 'hidden',
       '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
+    ),
+    'chemical_type' => array(
+      '#type' => 'markup',
+      '#markup' => 'Chemical Type: ' . $row['chemical_type'] . '<br />',
+    ),
+    'supplier' => array(
+      '#type' => 'markup',
+      '#markup' => 'Supplier: ' . $row['supplier'] . '<br />',
+    ),
+    'material_type' => array(
+      '#type' => 'markup',
+      '#markup' => 'Material Type: ' . $row['material_type'] . '<br />',
+    ),
+    'unit' => array(
+      '#type' => 'markup',
+      '#markup' => 'Unit: ' . $row['unit'] . '<br />',
     ),
     'strength' => array(
       '#type' => 'textfield',
@@ -477,53 +525,53 @@ function chemical_usage($form, &$form_state, $row) {
       '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
       '#default_value' => !empty($row['xeros_strength']) ? $row['xeros_strength'] : '',
     ),
-    'chemical_profile_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
-    ),
-    'chemical_type' => array(
-      '#type' => 'textfield',
-      '#title' => 'Chemical Type',
-      '#description' => '',
-      '#default_value' => !empty($row['chemical_type']) ? $row['chemical_type'] : '',
-    ),
-    'supplier' => array(
-      '#type' => 'textfield',
-      '#title' => 'Supplier',
-      '#description' => '',
-      '#default_value' => !empty($row['supplier']) ? $row['supplier'] : '',
-    ),
-    'material_type' => array(
-      '#type' => 'textfield',
-      '#title' => 'Material Type',
-      '#description' => '',
-      '#default_value' => !empty($row['material_type']) ? $row['material_type'] : '',
-    ),
-    'unit' => array(
-      '#type' => 'select',
-      '#title' => 'Unit',
-      '#description' => '',
-      '#options' => drupal_map_assoc(array('oz', 'grams')),
-      '#default_value' => !empty($row['unit']) ? $row['unit'] : '',
-    ),
-    'unit_cost' => array(
-      '#type' => 'textfield',
-      '#title' => 'Unit Cost',
-      '#description' => 'Cost per unit',
-      '#default_value' => !empty($row['unit_cost']) ? $row['unit_cost'] : '',
-    ),
-    'location_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['location_id']) ? $row['location_id'] : '',
-    ),
-    'xeros_unit_cost' => array(
-      '#type' => 'textfield',
-      '#title' => 'Xeros Unit Cost',
-      '#description' => 'Note: All chemicals are included with a Xeros lease.  Enter 0',
-      '#default_value' => !empty($row['xeros_unit_cost']) ? $row['xeros_unit_cost'] : '',
-    ),
+    // Delete chemical
+    'delete' => array(
+      '#type' => 'submit',
+      '#value' => t('Delete'),
+      //'#name' => t('delete-' . $row['#index']),
+      //'#default_value' => $vars['#index'],
+      '#submit' => array('chemical_usage_delete'),
+      '#ff-process' => 'delete',
+      '#ajax' => array(
+        'callback' => 'chemical_usage_add_callback',
+        'wrapper' => 'chemical-usage-fieldset-wrapper',
+      ),
+    )
 
   );
 
   return $chemical_usage;
+}
+
+function chemical_usage_add($form, &$form_state) {
+  // Chemical profile add will pick up the add in location_form.
+
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+}
+
+function chemical_usage_delete($form, &$form_state) {
+  // Everything in $form_state is persistent, so we'll just use
+  // $form_state['add_name']
+  $index = $form_state['triggering_element']['#parents'][1];
+
+  // TODO: Double check this.
+  $cu = new chemical_usage();
+
+  $cu->id = $form_state['values']['chemical_usage'][$index]['chemical_usage_id'];
+  $num_deleted = $cu->delete();
+
+  if ($num_deleted == 1) {
+    // Delete the form element
+    unset($form['chemical_usage'][$index]);
+    unset($form_state['values']['chemical_usage']['index']);
+  }
+
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+}
+
+function chemical_profile_add_callback($form, $form_state) {
+  return $form['chemical_usage'];
 }
