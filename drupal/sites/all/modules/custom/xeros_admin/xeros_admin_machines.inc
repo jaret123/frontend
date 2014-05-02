@@ -156,7 +156,7 @@ function machine_form($form, &$form_state, $vars) {
 
   $form['classification_set'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Classifications Settings'),
+    '#title' => t('Classifications (Laundry Type)'),
 
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
@@ -166,7 +166,7 @@ function machine_form($form, &$form_state, $vars) {
   foreach( $form_state['values']['classifications'] as $i => $row) {
     $form['classification_set'][$i] = array(
       '#type' => 'fieldset',
-      '#title' => t('Classification: ' . $row['name']),
+      '#title' => t($row['name']),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
       '#tree' => TRUE,
@@ -175,30 +175,65 @@ function machine_form($form, &$form_state, $vars) {
     );
     $form['classification_set'][$i]['classification'] = classification($form, $form_state, $row);
 
+    $form['classification_set'][$i]['classification']['chemicals'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Chemicals'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#tree' => TRUE,
+      '#prefix' => '<div id="chemicals-fieldset-wrapper[' . $i . ']">',
+      '#suffix' => '</div>'
+    );
+
     foreach( $form_state['values']['classifications'][$i]['chemical_usage'] as $j => $jrow) {
 
-      $form['classification_set'][$i]['classification']['chemical_usage_set'][$j] = array(
+      $form['classification_set'][$i]['classification']['chemicals']['chemical_usage_set'][$j] = array(
         '#type' => 'fieldset',
-        '#title' => t('Chemical Type: ' . $jrow['chemical_type']),
+        '#title' => t($jrow['chemical_type']),
         '#collapsible' => TRUE,
         '#collapsed' => TRUE,
         '#tree' => TRUE,
       );
-      $form['classification_set'][$i]['classification']['chemical_usage_set'][$j]['chemical_usage'] = chemical_usage($form, $form_state, $jrow);
+      $form['classification_set'][$i]['classification']['chemicals']['chemical_usage_set'][$j]['chemical_usage'] = chemical_usage($form, $form_state, $jrow);
     }
 
-    // Adds "Add another name" button
-    $form['classification_set'][$i]['classification']['add'] = array(
+    // Adds "Add another chem usage per classification" button
+    $form['classification_set'][$i]['classification']['chemicals']['add'] = array(
       '#type' => 'submit',
       '#value' => t('Add another chemical'),
       '#ff-process' => 'add',
       '#submit' => array('chemical_usage_add'),
       '#ajax' => array(
         'callback' => 'chemical_usage_add_callback',
-        'wrapper' => 'chemical-usage-fieldset-wrapper',  // Need to add an index
+        'wrapper' => 'chemical-fieldset-wrapper[' . $i . ']',  // Need to add an index
+      ),
+    );
+
+
+    // Adds "Add another chem usage per classification" button
+    $form['classification_set'][$i]['classification']['delete'] = array(
+      '#type' => 'submit',
+      '#value' => t('Delete classification'),
+      '#ff-process' => 'add',
+      '#submit' => array('classification_delete'),
+      '#ajax' => array(
+        'callback' => 'classification_add_callback',
+        'wrapper' => 'classification-set-fieldset-wrapper',  // Need to add an index
       ),
     );
   }
+
+  // Adds "Add another chem usage per classification" button
+  $form['classification_set']['add'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add another classification'),
+    '#ff-process' => 'add',
+    '#submit' => array('classification_add'),
+    '#ajax' => array(
+      'callback' => 'classification_add_callback',
+      'wrapper' => 'chemical-usage-fieldset-wrapper',  // Need to add an index
+    ),
+  );
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -473,6 +508,38 @@ function classification($form, &$form_state, $row) {
   return $classification;
 }
 
+function classification_add($form, &$form_state) {
+  // Chemical profile add will pick up the add in location_form.
+
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+}
+
+function classification_delete($form, &$form_state) {
+  // Everything in $form_state is persistent, so we'll just use
+  // $form_state['add_name']
+  $index = $form_state['triggering_element']['#parents'][1];
+
+  // TODO: Double check this.
+  $c = new classification();
+
+  $c->id = $form_state['values']['classification'][$index]['classification_id'];
+  $num_deleted = $c->delete();
+
+  if ($num_deleted == 1) {
+    // Delete the form element
+    unset($form['classification'][$index]);
+    unset($form_state['values']['classification']['index']);
+  }
+
+  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
+  $form_state['rebuild'] = TRUE;
+}
+
+function classification_add_callback($form, $form_state) {
+  return $form['classification'];
+}
+
 
 function chemical_usage($form, &$form_state, $row) {
   $chem_map = function($value) {
@@ -572,6 +639,6 @@ function chemical_usage_delete($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
 }
 
-function chemical_profile_add_callback($form, $form_state) {
+function chemical_usage_add_callback($form, $form_state) {
   return $form['chemical_usage'];
 }
