@@ -22,7 +22,7 @@ function classification_edit_page($machine_classification_id = NULL, $machine_id
 
   $cu = new chemical_usage;
 
-    $cu_rows = $cu->select($vars[0]['machine_classification_id']);
+    $cu_rows = $cu->select($machine_classification_id);
     // For the ajax callbacks we are going to have to let the chemical usage delete button be
     // aware of it's parent container ids (classification index)
     foreach ($cu_rows as $j => $v) {
@@ -197,10 +197,10 @@ function classification_add_callback($form, $form_state) {
 
 
 function chemical_usage($form, &$form_state, $row) {
-  $chem_map = function($value) {
-    return array($value['chemical_profile_id'] => $value['chemical_type']);
-    //return $value['chemical_type'];
-  };
+//  $chem_map = function($value) {
+//    return array($value['chemical_profile_id'] => $value['chemical_type']);
+//    //return $value['chemical_type'];
+//  };
 
 //  $ar = array_map($chem_map, $form_state['#vars']['chemical_profile_set']);
 //
@@ -253,12 +253,14 @@ function chemical_usage($form, &$form_state, $row) {
     'strength' => array(
       '#type' => 'textfield',
       '#title' => 'Strength',
+      '#name' => 'strength-' . $uniqid ,
       '#description' => 'Number of units (Oz or Grams) per cycle in this classification',
       '#default_value' => !empty($row['strength']) ? $row['strength'] : '',
     ),
     'xeros_strength' => array(
       '#type' => 'textfield',
       '#title' => 'Xeros Strength',
+      '#name' => 'xeros-strength-' . $uniqid ,
       '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
       '#default_value' => !empty($row['xeros_strength']) ? $row['xeros_strength'] : '',
     ),
