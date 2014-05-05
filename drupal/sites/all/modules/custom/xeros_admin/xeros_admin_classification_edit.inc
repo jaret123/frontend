@@ -4,6 +4,37 @@ require_once('db/machine_classification.inc');
 require_once('db/chemical_usage.inc');
 require_once('db/chemical_profile.inc');
 
+function classification_add_page($location_id = NULL, $machine_id = NULL) {
+
+  $output = '';
+  $mc = new machine_classification();
+
+//  //$mc->id = $machine_classification_id;
+//
+   $vars = array(
+     0 => array()
+   );
+//
+//  $cu = new chemical_usage;
+//
+//  $cu_rows = $cu->select($machine_classification_id);
+//  // For the ajax callbacks we are going to have to let the chemical usage delete button be
+//  // aware of it's parent container ids (classification index)
+//  foreach ($cu_rows as $j => $v) {
+//    $cu_rows[$j]['chemical_usage_set_index'] = $j;
+//  }
+  $vars['chemical_usage_set'] = array();
+
+  $output = '<h2>Classification</h2>';
+
+  $output = '<a href="/config/machine/' . $location_id . '/edit/' . $machine_id . '"> << Back to machine</a> <br />';
+
+  $f = drupal_get_form('classification_edit_form', $vars);
+
+  $output .= drupal_render($f);
+
+  return $output;
+}
 /**
  * @param null $machine_classification_id
  * @param null $function_call
@@ -11,7 +42,7 @@ require_once('db/chemical_profile.inc');
  *
  * @return string
  */
-function classification_edit_page($machine_classification_id = NULL, $machine_id = NULL) {
+function classification_edit_page($location_id = NULL, $machine_id = NULL, $machine_classification_id = NULL) {
 
   $output = '';
   $mc = new machine_classification();
@@ -31,6 +62,8 @@ function classification_edit_page($machine_classification_id = NULL, $machine_id
     $vars['chemical_usage_set'] = $cu_rows;
 
   $output = '<h2>Classification</h2>';
+
+  $output = '<a href="/config/machine/' . $location_id . '/edit/' . $machine_id . '"> << Back to machine</a> <br />';
 
   $f = drupal_get_form('classification_edit_form', $vars);
 
@@ -82,7 +115,7 @@ function classification_edit_form($form, &$form_state, $vars) {
     // Adds "Add another chem usage per classification" button
     $form['chemical_usage_set']['add'] = array(
       '#type' => 'submit',
-      '#value' => 'add-chemical',
+      '#value' => 'Add Another Chemical',
       '#id' => 'add-chemical',
       '#name' => 'add-chemical',
       '#ff-process' => 'add',
@@ -95,10 +128,53 @@ function classification_edit_form($form, &$form_state, $vars) {
         'action' => 'add-chemical',
       )
     );
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Save',
+      '#id' => 'save-classification',
+      '#name' => 'save-classification',
+      '#ff-process' => 'save-classification'
+    );
 
   return $form;
 }
+
+// TODO: Create the validate methods
+function classification_edit_form_validate($form, &$form_state) {
+
+}
+
+// TODO: Create the submit method
+function classification_edit_form_submit($form, &$form_state) {
+
+  // If new
+
+     // save the classification - get the id
+
+     // save the chemicals
+
+        // If new then insert
+
+  // If edit
+
+        // save the classification
+
+
+        // save the chemicals
+
+
+        // If new, then insert
+
+  // Don't need to deal with deletes, they are deleted during the ajax calls
+}
+
 function classification($form, &$form_state, $row) {
+
+  if (!empty($row['classification_id'])) {
+    $classification_id = $row['classification_id'];
+  } else {
+    $classification_id = 0;
+  }
 
   $classification = array(
     'name' => array(
@@ -114,8 +190,8 @@ function classification($form, &$form_state, $row) {
     ),
     'classification_id' => array(
       '#title' => 'Classification ID',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['classification_id']) ? $row['classification_id'] : '',
+      '#type' => 'markup',
+      '#markup' => '<div>Classification ID: ' . $classification_id . '</div>',
     ),
     'load_size' => array(
       '#title' => 'Load Size',
@@ -170,45 +246,11 @@ function classification_add($form, &$form_state) {
   $form_state['rebuild'] = TRUE;
 }
 
-//function classification_delete($form, &$form_state) {
-//  // Everything in $form_state is persistent, so we'll just use
-//  // $form_state['add_name']
-//  $index = $form_state['triggering_element']['#parents'][1];
-//
-//  // TODO: Double check this.
-//  $c = new classification();
-//
-//  $c->id = $form_state['values']['classification_set'][$index]['classification_id'];
-//  $num_deleted = $c->delete();
-//
-//  if ($num_deleted == 1) {
-//    // Delete the form element
-//    unset($form['classification_set'][$index]);
-//    unset($form_state['values']['classification_set']['index']);
-//  }
-//
-//  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-//  $form_state['rebuild'] = TRUE;
-//}
-
 function classification_add_callback($form, $form_state) {
   return $form['classification_set'];
 }
 
-
 function chemical_usage($form, &$form_state, $row) {
-//  $chem_map = function($value) {
-//    return array($value['chemical_profile_id'] => $value['chemical_type']);
-//    //return $value['chemical_type'];
-//  };
-
-//  $ar = array_map($chem_map, $form_state['#vars']['chemical_profile_set']);
-//
-//  foreach ($ar as $i => $value) {
-//    foreach ($value as $j => $v) {
-//      $chem_ar[$j] = $v;
-//    }
-//  }
 
   if (empty($row['chemical_type'])) {
     $row['chemical_type'] = '';
@@ -267,7 +309,7 @@ function chemical_usage($form, &$form_state, $row) {
     // Delete chemical
     'delete' => array(
       '#type' => 'submit',
-      '#value' => 'delete-' . $uniqid,
+      '#value' => 'Delete',
       '#id' => 'delete-' . $uniqid,
       '#name' => 'delete-' . $uniqid,
       //'#default_value' => $vars['#index'],

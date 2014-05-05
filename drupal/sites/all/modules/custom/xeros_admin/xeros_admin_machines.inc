@@ -22,20 +22,21 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
   $machine = new machine();
 
   $machine->fields = array(
-                      'machine_id', 'serial_number', 'manufacturer'
+                      'machine_id', 'serial_number', 'manufacturer', 'location_id'
                    );
   $rows = $machine->select($location_id, $machine_id);
 
   if (count($rows) > 0) {
 
     foreach ($rows as $i => $row) {
-      array_push($rows[$i], '<a href="/config/machine/' . $location_id . '/edit/' . $row['machine_id'] . '">Edit</a>');
+      array_push($rows[$i], '<a href="/config/machine/' . $row['location_id'] . '/edit/' . $row['machine_id'] . '">Edit</a>');
     }
     // Make a table
     $header = array(
       t('Machine ID'),
       t('Serial Number'),
       t('Manufacturer'),
+      t('Location ID'),
       t('Edit')
     );
     //$output .= theme('table', array('header' => $header, 'rows' => $rows));
@@ -87,7 +88,7 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
 
   $output .= drupal_render($f);
 
-  $output .= classification_listing($machine_id);
+  $output .= classification_listing($machine_id, $location_id);
 
   return $output;
 }
@@ -388,7 +389,7 @@ function machine_settings($form, &$form_state, $vars) {
   return $machine_settings;
 }
 
-function classification_listing($machine_id = NULL) {
+function classification_listing($machine_id = NULL, $location_id = NULL) {
   $output =  '<div>This is the classification listing for machine: ' . $machine_id . '</div>';
 
   $mc = new machine_classification();
@@ -413,7 +414,7 @@ function classification_listing($machine_id = NULL) {
   if (count($classification_set) > 0) {
 
     foreach ($classification_set as $i => $row) {
-      array_push($classification_set[$i], '<a href="/config/machine/classification/edit/' . $row['machine_classification_id'] . '/' . $row['machine_id'] . '">Edit</a>');
+      array_push($classification_set[$i], '<a href="/config/machine/classification/edit/' . $location_id . '/' . $row['machine_id'] . '/' . $row['machine_classification_id'] . '">Edit</a>');
     }
     // Make a table
     $header = array(
@@ -442,6 +443,6 @@ function classification_listing($machine_id = NULL) {
     drupal_set_message(t('No machines found for this location.'));
   }
 
-  $output .= '<div><a href="/config/machine/' . $machine_id . '/classification/add">Add another classification</a></div>';
+  $output .= '<div><a href="/config/machine/classification/add/' . $location_id . '/' . $machine_id . '">Add another classification</a></div>';
   return $output;
 }
