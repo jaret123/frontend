@@ -1,6 +1,8 @@
 <?php
 
 require_once 'orm_abstract.inc';
+require_once 'chemical_usage.inc';
+require_once 'dai_meter_actual.inc';
 
 class machine_classification extends orm_abstract {
   function __construct() {
@@ -44,4 +46,44 @@ class machine_classification extends orm_abstract {
     return $rows;
   }
 
+  /**
+   * Cascading delete
+   *
+   * @param $machine_classification_id
+   *
+   * @return DatabaseStatementInterface|int|void
+   */
+  public function delete() {
+
+    $children_records = true;
+    try {
+      // Check to see if there are dai_meter_actual readings with this classification_id.
+      // If there are, then this method considers these records to be locked and won't do anything.
+      // We want additional validation further up in order to do that.
+
+
+      // Delete chemical_usage
+
+      // Delete chemical_unit
+
+      //
+    }
+    catch (Exception $e) {
+      watchdog_exception('type', $e);
+    }
+
+    // Delete machine_classification
+    try {
+      $num_deleted = 0;
+      if ($this->id != NULL) {
+        $num_deleted = db_delete($this->table)
+          ->condition($this->key, $this->id)
+          ->execute();
+      }
+      return $num_deleted;
+    }
+    catch (Exception $e) {
+      watchdog_exception('type', $e);
+    }
+  }
 }

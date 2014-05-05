@@ -64,6 +64,23 @@ class chemical_usage {
     return $rows;
   }
 
+  public function new_record() {
+
+    $row = array(
+      'machine_classification_id' => '',
+      'chemical_profile_id' => '',
+      'strength' => '',
+      'xeros_strength' => '',
+      'chemical_type' => '',
+      'supplier' => '',
+      'material_type' => '',
+      'unit' => '',
+      'unit_cost' => ''
+    );
+
+    return $row;
+  }
+
   public function update() {
     try {
       $num_updated = 0;
@@ -117,4 +134,5 @@ class chemical_usage {
       watchdog_exception('type', $e);
     }
   }
+
 }

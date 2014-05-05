@@ -166,11 +166,11 @@ function location_form($form, &$form_state, $vars) {
     }
   }
 
-    foreach ($form_state['#vars']['chemical_profiles'] as $i => $row) {
-      $row = $form_state['#vars']['chemical_profiles'][$i];
-      $row['#index'] = $i;
-      $form['chemical_profiles'][$i] = chemical_profile($row);
-    }
+  foreach ($form_state['#vars']['chemical_profiles'] as $i => $row) {
+    $row = $form_state['#vars']['chemical_profiles'][$i];
+    $row['#index'] = $i;
+    $form['chemical_profiles'][$i] = chemical_profile($row);
+  }
 
   // Adds "Add another name" button
   $form['chemical_profiles']['add'] = array(

@@ -73,23 +73,21 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
 
   $chem = new chemical_profile();
 
-  $vars['chemical_profiles'] = $chem->select_by_location($location_id);
+  // TODO - want list of unique chemicals by location - make sure what makes them unique.  Is it just the name or the
+  // chemical profile id.
+  $vars['chemical_profile_set'] = $chem->select_by_location($location_id);
 
   $mc = new machine_classification();
 
   $mc->id = $machine_id;
 
-  $vars['classifications'] = $mc->select_by_machine($machine_id);
 
-  $cu = new chemical_usage;
-
-  foreach ( $vars['classifications'] as $id => $c) {
-    $vars['classifications'][$id]['chemical_usage'] = $cu->select($c['machine_classification_id']);
-  }
 
   $f = drupal_get_form('machine_form', $vars);
 
   $output .= drupal_render($f);
+
+  $output .= classification_listing($machine_id);
 
   return $output;
 }
@@ -101,18 +99,33 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
  */
 function machine_form($form, &$form_state, $vars) {
 
-  // Initialize values based on database.  These will only get used the first time the page is rendered.
-  // After that the input values from $form_state will be used.
-  $form_state['values']['machine_id'] = $vars['machine_id'];
-  $form_state['values']['location_id'] = $vars['location_id'];
-  $form_state['values']['serial_number']= $vars['serial_number'];
-  $form_state['values']['machine_settings']['machine'] = $vars['machine'];
-  $form_state['values']['classifications'] = $vars['classifications'];
-
-  // Save this for reference in the form_state so each sub form can access it, even on callback.
   if (empty($form_state['#vars'])) {
+    // Initialize values based on database.  These will only get used the first time the page is rendered.
+    // After that the input values from $form_state will be used.
+    $form_state['values']['machine_id'] = $vars['machine_id'];
+    $form_state['values']['location_id'] = $vars['location_id'];
+    $form_state['values']['serial_number']= $vars['serial_number'];
+    $form_state['values']['machine_settings']['machine'] = $vars['machine'];
+  // Save this for reference in the form_state so each sub form can access it, even on callback.
     $form_state['#vars'] = $vars;
   }
+
+//  if ( !empty($form_state['triggering_element']['#ff-process']) ) {
+//    $action = $form_state['triggering_element']['#ff-process'];
+//    if ($action == 'delete') {
+//      $classification_index = $form_state['triggering_element']['#attributes']['data-classification_set'];
+//      $chemical_index = $form_state['triggering_element']['#attributes']['data-chemical_usage_set'];
+////      unset($form_state['values']['classifications'][$classification_index]['chemical_usage'][$chemical_index]);
+////      unset($form['classifications'][$classification_index]['chemical_usage'][$chemical_index]);
+//    } elseif ($action == 'add') {
+//      $classification_index = $form_state['triggering_element']['#attributes']['data-classification_set'];
+//      //$c = new chemical_usage();
+//      $r = array();
+//      $r['chemical_usage_set_index'] = count($form_state['values']['classification_set'][$classification_index]['chemical_usage_set']);
+//      $r['classification_set_index'] = $classification_index;
+//      $form_state['values']['classification_set'][$classification_index]['chemical_usage_set'][] = $r;
+//    }
+//  }
 
   $form['header'] = array(
     '#title' => 'Form header',
@@ -135,107 +148,39 @@ function machine_form($form, &$form_state, $vars) {
     '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : '',
   );
 
-  // Visible fields
-  $form['serial_number'] = array(
-    '#title' => 'Machine Serial Number',
-    '#type' => 'textfield',
-    '#default_value' => !empty($form_state['values']['serial_number']) ? $form_state['values']['serial_number'] : '',
-  );
+
 
   $form['machine_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Machine Settings'),
 
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => FALSE,
     '#tree' => TRUE
   );
+  // Visible fields
+  $form['machine_settings']['serial_number'] = array(
+    '#title' => 'Machine Serial Number',
+    '#type' => 'textfield',
+    '#default_value' => !empty($form_state['values']['serial_number']) ? $form_state['values']['serial_number'] : '',
+  );
 
-  $form['machine_settings']['machine'] = machine_settings($form, $form_state, $vars);
+  $form['machine_settings'] = array_merge($form['machine_settings'], machine_settings($form, $form_state, $vars));
   
 
-  $form['classification_set'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Classifications (Laundry Type)'),
+  // Classification Add Button
+//  $form['classification_set']['add'] = array(
+//    '#type' => 'submit',
+//    '#value' => t('Add another classification'),
+//    '#ff-process' => 'add',
+//    '#submit' => array('classification_add'),
+//    '#ajax' => array(
+//      'callback' => 'classification_add_callback',
+//      'wrapper' => 'classification-set-wrapper',  // Need to add an index
+//    ),
+//  );
 
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#tree' => TRUE
-  );
-
-  foreach( $form_state['values']['classifications'] as $i => $row) {
-    $form['classification_set'][$i] = array(
-      '#type' => 'fieldset',
-      '#title' => t($row['name']),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#tree' => TRUE,
-      '#prefix' => '<div id="chemical-usage-fieldset-wrapper[' . $i . ']">',
-      '#suffix' => '</div>'
-    );
-    $form['classification_set'][$i]['classification'] = classification($form, $form_state, $row);
-
-    $form['classification_set'][$i]['classification']['chemicals'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Chemicals'),
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#tree' => TRUE,
-      '#prefix' => '<div id="chemicals-fieldset-wrapper[' . $i . ']">',
-      '#suffix' => '</div>'
-    );
-
-    foreach( $form_state['values']['classifications'][$i]['chemical_usage'] as $j => $jrow) {
-
-      $form['classification_set'][$i]['classification']['chemicals']['chemical_usage_set'][$j] = array(
-        '#type' => 'fieldset',
-        '#title' => t($jrow['chemical_type']),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-        '#tree' => TRUE,
-      );
-      $form['classification_set'][$i]['classification']['chemicals']['chemical_usage_set'][$j]['chemical_usage'] = chemical_usage($form, $form_state, $jrow);
-    }
-
-    // Adds "Add another chem usage per classification" button
-    $form['classification_set'][$i]['classification']['chemicals']['add'] = array(
-      '#type' => 'submit',
-      '#value' => t('Add another chemical'),
-      '#ff-process' => 'add',
-      '#submit' => array('chemical_usage_add'),
-      '#ajax' => array(
-        'callback' => 'chemical_usage_add_callback',
-        'wrapper' => 'chemical-fieldset-wrapper[' . $i . ']',  // Need to add an index
-      ),
-    );
-
-
-    // Adds "Add another chem usage per classification" button
-    $form['classification_set'][$i]['classification']['delete'] = array(
-      '#type' => 'submit',
-      '#value' => t('Delete classification'),
-      '#ff-process' => 'add',
-      '#submit' => array('classification_delete'),
-      '#ajax' => array(
-        'callback' => 'classification_add_callback',
-        'wrapper' => 'classification-set-fieldset-wrapper',  // Need to add an index
-      ),
-    );
-  }
-
-  // Adds "Add another chem usage per classification" button
-  $form['classification_set']['add'] = array(
-    '#type' => 'submit',
-    '#value' => t('Add another classification'),
-    '#ff-process' => 'add',
-    '#submit' => array('classification_add'),
-    '#ajax' => array(
-      'callback' => 'classification_add_callback',
-      'wrapper' => 'chemical-usage-fieldset-wrapper',  // Need to add an index
-    ),
-  );
-
-  $form['submit'] = array(
+  $form['machine_settings']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
   );
@@ -443,202 +388,60 @@ function machine_settings($form, &$form_state, $vars) {
   return $machine_settings;
 }
 
-function classification($form, &$form_state, $row) {
-  
-  $classification = array(
-    'name' => array(
-      '#title' => 'Classification Name',
-      '#description' => 'What type of laundry is in this classification',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['name']) ? $row['name'] : '',
-    ),
-    'machine_classification_id' => array(
-      '#title' => 'Machine Classification ID',
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['machine_classification_id']) ? $row['machine_classification_id'] : '',
-    ),
-    'classification_id' => array(
-      '#title' => 'Classification ID',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['classification_id']) ? $row['classification_id'] : '',
-    ),
-    'load_size' => array(
-      '#title' => 'Load Size',
-      '#description' => 'How many pounds are loaded into the machine for this classification',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['load_size']) ? $row['load_size'] : '',
-    ),
-    'xeros_load_size' => array(
-      '#title' => 'Xeros Load Size',
-      '#description' => 'How many pounds are loaded into a Xeros machine for this classification',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['xeros_load_size']) ? $row['xeros_load_size'] : '',
-    ),
-    'unload_time' => array(
-      '#title' => 'Manual Labor Time',
-      '#description' => 'How long does it take to load and unload the machine after the cycle -- this is used in the run time calculation.',
-      '#type' => 'textfield',
-      '#default_value' => !empty($row['unload_time']) ? $row['unload_time'] : '',
-    ),
-    'local_static_values_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['local_static_values_id']) ? $row['local_static_values_id'] : NULL,
-    ),
-    'hot_water_gallons' => array(
-      '#type' => 'textfield',
-      '#title' => 'Xeros hot water usage',
-      '#desription' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
-      '#default_value' => !empty($row['hot_water_gallons']) ? $row['hot_water_gallons'] : NULL,
-    ),
-    'cold_water_gallons' => array(
-      '#type' => 'textfield',
-      '#title' => 'Xeros cold water usage',
-      '#desription' => 'The model data for cold water usage for this type of laundry on a comparable Xeros machine',
-      '#default_value' => !empty($row['cold_water_gallons']) ? $row['cold_water_gallons'] : NULL,
-    )
-  );
-// TODO: Run time is in the fields spreadsheet but not in the xeros_local_static_values database.
-//    'run_time' => array(
-//      '#type' => 'textfield',
-//      '#title' => 'Xeros hot water usage',
-//      '#desription' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
-//      '#default_value' => !empty($row['run_time']) ? $row['run_time'] : NULL,
-//    )
+function classification_listing($machine_id = NULL) {
+  $output =  '<div>This is the classification listing for machine: ' . $machine_id . '</div>';
 
-  return $classification;
-}
+  $mc = new machine_classification();
 
-function classification_add($form, &$form_state) {
-  // Chemical profile add will pick up the add in location_form.
+  $mc->id = $machine_id;
 
-  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-  $form_state['rebuild'] = TRUE;
-}
+  $classification_set = $mc->select_by_machine($machine_id);
 
-function classification_delete($form, &$form_state) {
-  // Everything in $form_state is persistent, so we'll just use
-  // $form_state['add_name']
-  $index = $form_state['triggering_element']['#parents'][1];
+  $cu = new chemical_usage;
 
-  // TODO: Double check this.
-  $c = new classification();
-
-  $c->id = $form_state['values']['classification'][$index]['classification_id'];
-  $num_deleted = $c->delete();
-
-  if ($num_deleted == 1) {
-    // Delete the form element
-    unset($form['classification'][$index]);
-    unset($form_state['values']['classification']['index']);
-  }
-
-  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-  $form_state['rebuild'] = TRUE;
-}
-
-function classification_add_callback($form, $form_state) {
-  return $form['classification'];
-}
-
-
-function chemical_usage($form, &$form_state, $row) {
-  $chem_map = function($value) {
-    return array($value['chemical_profile_id'] => $value['chemical_type']);
-    //return $value['chemical_type'];
-  };
-
-  $ar = array_map($chem_map, $form_state['#vars']['chemical_profiles']);
-
-  foreach ($ar as $i => $value) {
-    foreach ($value as $j => $v) {
-      $chem_ar[$j] = $v;
+  foreach ( $classification_set as $id => $c) {
+    $cu_rows = $cu->select($c['machine_classification_id']);
+    // For the ajax callbacks we are going to have to let the chemical usage delete button be
+    // aware of it's parent container ids (classification index)
+    foreach ($cu_rows as $j => $v) {
+      $cu_rows[$j]['classification_set_index'] = $id;
+      $cu_rows[$j]['chemical_usage_set_index'] = $j;
     }
+    $classification_set[$id]['chemical_usage_set'] = $cu_rows;
   }
 
-  $chemical_usage = array(
-    'machine_classification_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['machine_classification_id']) ? $row['machine_classification_id'] : '',
-    ),
-    'chemical_profile_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
-    ),
-    'chemical_type' => array(
-      '#type' => 'markup',
-      '#markup' => 'Chemical Type: ' . $row['chemical_type'] . '<br />',
-    ),
-    'supplier' => array(
-      '#type' => 'markup',
-      '#markup' => 'Supplier: ' . $row['supplier'] . '<br />',
-    ),
-    'material_type' => array(
-      '#type' => 'markup',
-      '#markup' => 'Material Type: ' . $row['material_type'] . '<br />',
-    ),
-    'unit' => array(
-      '#type' => 'markup',
-      '#markup' => 'Unit: ' . $row['unit'] . '<br />',
-    ),
-    'strength' => array(
-      '#type' => 'textfield',
-      '#title' => 'Strength',
-      '#description' => 'Number of units (Oz or Grams) per cycle in this classification',
-      '#default_value' => !empty($row['strength']) ? $row['strength'] : '',
-    ),
-    'xeros_strength' => array(
-      '#type' => 'textfield',
-      '#title' => 'Xeros Strength',
-      '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
-      '#default_value' => !empty($row['xeros_strength']) ? $row['xeros_strength'] : '',
-    ),
-    // Delete chemical
-    'delete' => array(
-      '#type' => 'submit',
-      '#value' => t('Delete'),
-      //'#name' => t('delete-' . $row['#index']),
-      //'#default_value' => $vars['#index'],
-      '#submit' => array('chemical_usage_delete'),
-      '#ff-process' => 'delete',
-      '#ajax' => array(
-        'callback' => 'chemical_usage_add_callback',
-        'wrapper' => 'chemical-usage-fieldset-wrapper',
-      ),
-    )
+  if (count($classification_set) > 0) {
 
-  );
+    foreach ($classification_set as $i => $row) {
+      array_push($classification_set[$i], '<a href="/config/machine/classification/edit/' . $row['machine_classification_id'] . '/' . $row['machine_id'] . '">Edit</a>');
+    }
+    // Make a table
+    $header = array(
+      t('Machine Classification ID'),
+      t('Machine ID'),
+      t('Classification ID'),
+      t('Load Size'),
+      t('Xeros Load Size'),
+      t('Manual Labor Time'),
+      t('Name'),
+      t(''),
+      t(''),
+      t('Xeros Hot Water Usage'),
+      t('Xeros Cold Water Usage'),
+      t('Edit')
+    );
+    //$output .= theme('table', array('header' => $header, 'rows' => $rows));
 
-  return $chemical_usage;
-}
-
-function chemical_usage_add($form, &$form_state) {
-  // Chemical profile add will pick up the add in location_form.
-
-  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-  $form_state['rebuild'] = TRUE;
-}
-
-function chemical_usage_delete($form, &$form_state) {
-  // Everything in $form_state is persistent, so we'll just use
-  // $form_state['add_name']
-  $index = $form_state['triggering_element']['#parents'][1];
-
-  // TODO: Double check this.
-  $cu = new chemical_usage();
-
-  $cu->id = $form_state['values']['chemical_usage'][$index]['chemical_usage_id'];
-  $num_deleted = $cu->delete();
-
-  if ($num_deleted == 1) {
-    // Delete the form element
-    unset($form['chemical_usage'][$index]);
-    unset($form_state['values']['chemical_usage']['index']);
+    $r = array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $classification_set
+    );
+    $output .= drupal_render($r);
+  } else {
+    drupal_set_message(t('No machines found for this location.'));
   }
 
-  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-  $form_state['rebuild'] = TRUE;
-}
-
-function chemical_usage_add_callback($form, $form_state) {
-  return $form['chemical_usage'];
+  $output .= '<div><a href="/config/machine/' . $machine_id . '/classification/add">Add another classification</a></div>';
+  return $output;
 }
