@@ -5,8 +5,8 @@ require_once 'orm_abstract.inc';
 class local_static_value extends orm_abstract {
 
   function __construct() {
-    $this->table = 'xeros_local_static_value';
-    $this->key = 'local_static_value_id';
+    $this->table = 'xeros_local_static_values';
+    $this->key = 'local_static_values_id';
   }
 
   // TODO: Double check field names

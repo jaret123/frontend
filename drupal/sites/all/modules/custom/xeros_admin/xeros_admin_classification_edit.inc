@@ -1,8 +1,10 @@
 <?php
 require_once('db/machine.inc');
 require_once('db/machine_classification.inc');
+require_once('db/classification.inc');
 require_once('db/chemical_usage.inc');
 require_once('db/chemical_profile.inc');
+require_once('db/local_static_value.inc');
 
 function classification_add_page($location_id = NULL, $machine_id = NULL) {
 
@@ -14,6 +16,9 @@ function classification_add_page($location_id = NULL, $machine_id = NULL) {
    $vars = array(
      0 => array()
    );
+
+  $vars['location_id'] = $location_id;
+  $vars['machine_id'] = $machine_id;
 //
 //  $cu = new chemical_usage;
 //
@@ -51,6 +56,9 @@ function classification_edit_page($location_id = NULL, $machine_id = NULL, $mach
 
   $vars = $mc->select_detail($mc->id);
 
+  $vars['location_id'] = $location_id;
+  $vars['machine_id'] = $machine_id;
+
   $cu = new chemical_usage;
 
     $cu_rows = $cu->select($machine_classification_id);
@@ -82,6 +90,11 @@ function classification_edit_form($form, &$form_state, $vars) {
     // Save this for reference in the form_state so each sub form can access it, even on callback.
     $form_state['#vars'] = $vars;
   }
+  $form = array(
+    '#tree' => TRUE,
+    ''
+  );
+
   $form['classification']['settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Settings'),
@@ -101,10 +114,10 @@ function classification_edit_form($form, &$form_state, $vars) {
   );
 
   foreach ($form_state['#vars']['chemical_usage_set'] as $j => $jrow) {
-    $chemical_type = !empty($jrow['chemical_type']) ? $jrow['chemical_type'] : 'New';
+    $chemical_type = $form_state['values']['chemical_usage_set'][$j]['chemical_type'] ? $form_state['values']['chemical_usage_set'][$j]['chemical_type'] : 'New';
     $form['chemical_usage_set'][$j] = array(
       '#type' => 'fieldset',
-      '#title' => t('Chemical: ' . $chemical_type),
+      '#title' => 'Chemical: ' . $chemical_type,
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
     );
@@ -142,29 +155,152 @@ function classification_edit_form($form, &$form_state, $vars) {
 // TODO: Create the validate methods
 function classification_edit_form_validate($form, &$form_state) {
 
+  $errors = 0;
+
+  // Validation rules
+
+  // If there were errors, set error
+  if ($errors > 0) {
+    form_set_error('Save', 'Called validate');
+  }
 }
 
 // TODO: Create the submit method
 function classification_edit_form_submit($form, &$form_state) {
 
+  // #vars contains the array or references we want, but query the form_state fields for the actual values
+  // in case they have been updated.
+  $vars = $form_state['#vars'];
+
+  try {
   // If new
+    if ( $form_state['values']['classification']['settings']['machine_classification_id'] == '') {
 
-     // save the classification - get the id
+      $machine_id = $form_state['#vars']['machine_id'];
+      $location_id = $form_state['#vars']['location_id'];
+       // save the classification - get the id
+      $c = new classification();
+      $f = array(
+        'name'
+      );
+      foreach($f as $field) {
+        $c->fields[$field] = $form_state['values']['classification']['settings'][$field];
+      }
+      $classification_id = $c->insert();
 
-     // save the chemicals
+      // save the machine classification_id
+      // save the machine_classification
+      $mc = new machine_classification();
 
-        // If new then insert
+      $mc->fields['machine_id'] = $machine_id;
+      $mc->fields['classification_id'] = $classification_id;
+      $f = array(
+        'load_size',
+        'xeros_load_size',
+        'unload_time'
+      );
+      foreach($f as $field) {
+        $mc->fields[$field] = $form_state['values']['classification']['settings'][$field];
+      }
 
-  // If edit
+      $machine_classification_id = $mc->insert();
 
-        // save the classification
+      // save the local static values
 
+      $lsv = new local_static_value();
 
-        // save the chemicals
+      $lsv->fields['classification'] = $classification_id;
+      $lsv->fields['hot_water_gallons'] = $form_state['values']['classification']['settings']['hot_water_gallons'];
+      $lsv->fields['cold_water_gallons'] = $form_state['values']['classification']['settings']['cold_water_gallons'];
 
+      $local_static_values_id = $lsv->insert();
 
-        // If new, then insert
+      // save the chemicals
+      $cu = new chemical_usage();
 
+      foreach( $vars['chemical_usage_set'] as $i => $row ) {
+
+        $cu->machine_classification_id = $machine_classification_id;
+        $cu->chemical_profile_id = $form_state['values']['chemical_usage_set'][$i]['chemical_profile_id'];
+
+        $cu->fields['strength'] = $form_state['values']['chemical_usage_set'][$i]['strength'];
+        $cu->fields['xeros_strength'] = $form_state['values']['chemical_usage_set'][$i]['xeros_strength'];
+
+        $cu->merge();
+      }
+
+    // Else update an existing record
+    } else {
+
+      // save the machine_classification
+      $mc = new machine_classification();
+      $mc->id = $form_state['values']['classification']['settings']['machine_classification_id'];
+
+      $f = array(
+        'load_size',
+        'xeros_load_size',
+        'unload_time'
+      );
+      foreach($f as $field) {
+        $mc->fields[$field] = $form_state['values']['classification']['settings'][$field];
+      }
+
+      $mc->merge();
+
+      // save the classification
+
+      $c = new classification();
+      $c->id = $form_state['#vars'][0]['classification_id'];
+
+      $f = array(
+        'name'
+      );
+      foreach($f as $field) {
+        $c->fields[$field] = $form_state['values']['classification']['settings'][$field];
+      }
+
+      $c->merge();
+
+      // save the local_static_values
+
+      $lsv = new local_static_value();
+      $lsv->id = $form_state['values']['classification']['settings']['local_static_values_id'];
+
+      $f = array(
+        'hot_water_gallons',
+        'cold_water_gallons'
+      );
+      foreach($f as $field) {
+        $lsv->fields[$field] = $form_state['values']['classification']['settings'][$field];
+      }
+
+      $lsv->merge();
+
+      // save the chemicals
+
+      $cu = new chemical_usage();
+
+      foreach( $vars['chemical_usage_set'] as $i => $row ) {
+        $cu->machine_classification_id = $form_state['values']['chemical_usage_set'][$i]['machine_classification_id'];
+        $cu->chemical_profile_id = $form_state['values']['chemical_usage_set'][$i]['chemical_profile_id'];
+
+        $cu->fields['strength'] = $form_state['values']['chemical_usage_set'][$i]['strength'];
+        $cu->fields['xeros_strength'] = $form_state['values']['chemical_usage_set'][$i]['xeros_strength'];
+
+        $cu->merge();
+      }
+            // If new, then insert
+
+      drupal_set_message('Classification and Chemicals Updated');
+    }
+
+    $form_state['redirect'] = 'config/machine/' . $form_state['#vars']['location_id'] . '/edit/' . $form_state['#vars']['machine_id'];
+
+  }
+  catch (Exception $e) {
+    watchdog_exception('type', $e);
+    form_set_error('exception', $e);
+  }
   // Don't need to deal with deletes, they are deleted during the ajax calls
 }
 
@@ -239,19 +375,14 @@ function classification($form, &$form_state, $row) {
   return $classification;
 }
 
-function classification_add($form, &$form_state) {
-  // Chemical profile add will pick up the add in location_form.
-
-  // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
-  $form_state['rebuild'] = TRUE;
-}
-
-function classification_add_callback($form, $form_state) {
-  return $form['classification_set'];
-}
-
 function chemical_usage($form, &$form_state, $row) {
 
+  if (empty($row['machine_classification_id'])) {
+    $row['machine_classification_id'] = 0;
+  }
+  if (empty($row['chemical_profile_id'])) {
+    $row['chemical_profile_id'] = 0;
+  }
   if (empty($row['chemical_type'])) {
     $row['chemical_type'] = '';
   }
@@ -264,21 +395,29 @@ function chemical_usage($form, &$form_state, $row) {
   if (empty($row['unit'])) {
     $row['unit'] = '';
   }
+  if (empty($row['strength'])) {
+    $row['strength'] = '';
+  }
+  if (empty($row['xeros_strength'])) {
+    $row['xeros_strength'] = '';
+  }
 
   $uniqid = uniqid();
 
   $chemical_usage = array(
     'machine_classification_id' => array(
       '#type' => 'hidden',
-      '#default_value' => !empty($row['machine_classification_id']) ? $row['machine_classification_id'] : '',
-    ),
-    'chemical_profile_id' => array(
-      '#type' => 'hidden',
-      '#default_value' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : '',
+      '#default_value' => $row['machine_classification_id'],
     ),
     'chemical_type' => array(
-      '#type' => 'markup',
-      '#markup' => 'Chemical Type: ' . $row['chemical_type'] . '<br />',
+      '#type' => 'hidden',
+      '#default_value' => $row['chemical_type'],
+    ),
+    'chemical_profile_id' => array(
+      '#title' => 'Chemical Type',
+      '#type' => 'select',
+      '#options' => chemical_profiles($form_state['#vars']['location_id']),
+      '#default_value' => $row['chemical_profile_id'],
     ),
     'supplier' => array(
       '#type' => 'markup',
@@ -295,16 +434,16 @@ function chemical_usage($form, &$form_state, $row) {
     'strength' => array(
       '#type' => 'textfield',
       '#title' => 'Strength',
-      '#name' => 'strength-' . $uniqid ,
+//      '#name' => 'strength-' . $uniqid ,
       '#description' => 'Number of units (Oz or Grams) per cycle in this classification',
-      '#default_value' => !empty($row['strength']) ? $row['strength'] : '',
+      '#default_value' => $row['strength'],
     ),
     'xeros_strength' => array(
       '#type' => 'textfield',
       '#title' => 'Xeros Strength',
-      '#name' => 'xeros-strength-' . $uniqid ,
+//      '#name' => 'xeros-strength-' . $uniqid ,
       '#description' => 'Estimated number of units (Oz or Grams) per cycle in this classification',
-      '#default_value' => !empty($row['xeros_strength']) ? $row['xeros_strength'] : '',
+      '#default_value' => $row['xeros_strength'],
     ),
     // Delete chemical
     'delete' => array(
@@ -320,7 +459,8 @@ function chemical_usage($form, &$form_state, $row) {
         'wrapper' => 'chemical-usage-set-wrapper',
       ),
       '#attributes' => array(
-        'data-chemical_profile_id' => !empty($row['chemical_profile_id']) ? $row['chemical_profile_id'] : 0,
+        'data-machine_classification_id' => $row['machine_classification_id'],
+        'data-chemical_profile_id' => $row['chemical_profile_id'],
         'data-chemical_usage_set' => $row['chemical_usage_set_index'],
       )
     )
@@ -333,8 +473,10 @@ function chemical_usage_add($form, &$form_state) {
   // Chemical profile add will pick up the add in location_form.
   $attrs = $form_state['triggering_element']['#attributes'];
 
-  // Add a new set
-  $form_state['#vars']['chemical_usage_set'][] = array();
+  // Add a new set to the array
+  $form_state['#vars']['chemical_usage_set'][] = array(
+    'machine_classification_id' => $form_state['#vars'][0]['machine_classification_id']
+  );
 
   // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
   $form_state['rebuild'] = TRUE;
@@ -344,19 +486,26 @@ function chemical_usage_delete($form, &$form_state) {
 
   $attrs = $form_state['triggering_element']['#attributes'];
 
-  // Instantiate the object
-  $cu = new chemical_usage();
+  // If this is an actual record and not one just a form field that was created delete it.
+  if ( $attrs['data-chemical_profile_id'] != 0 && $attrs['data-machine_classification_id']) {
+    // Instantiate the object
+    $cu = new chemical_usage();
 
-  // Delete the record
-//  $cu->chemical_profile_id = $attrs['data-chemical_profile_id'];
-//  $cu->machine_classification_id = $attrs['data-machine_classification_id'];
-  //$num_deleted = $cu->delete();
+    // Delete the record
+    $cu->chemical_profile_id = $attrs['data-chemical_profile_id'];
+    $cu->machine_classification_id = $attrs['data-machine_classification_id'];
 
-  //if ($num_deleted == 1 || $attrs['data-chemical_profile_id'] == 0) {
-  // Delete the form element
-  //unset($form['classification_set'][$attrs['data-classification_set']]['chemical_usage_set'][$attrs['data-chemical_usage_set']]);
+    $num_deleted = $cu->delete();
+
+    if ($num_deleted > 0) {
+      drupal_set_message($num_deleted . ' Chemical Deleted');
+    } else {
+      form_set_error('Delete', 'No records found in the database to delete.  Check error log.');
+    }
+  }
+
+  // Regardless, we will remove the field set.
   unset($form_state['#vars']['chemical_usage_set'][$attrs['data-chemical_usage_set']]);
-  //}
 
   // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
   $form_state['rebuild'] = TRUE;
@@ -367,3 +516,18 @@ function chemical_usage_add_callback($form, $form_state) {
   return $form['chemical_usage_set'];
 }
 
+function chemical_profiles($location_id) {
+
+  $chemical_profiles_select = array();
+
+  $cp = new chemical_profile();
+
+  $chem_profiles = $cp->select_by_location($location_id);
+
+  $chemical_profiles_select[0] = '- select chemical type -';
+
+  foreach( $chem_profiles as $i => $value ) {
+    $chemical_profiles_select[$value['chemical_profile_id']] = $value['chemical_type'];
+  }
+  return $chemical_profiles_select;
+}

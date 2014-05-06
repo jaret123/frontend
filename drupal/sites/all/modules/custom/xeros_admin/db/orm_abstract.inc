@@ -71,6 +71,19 @@ abstract class orm_abstract {
     }
   }
 
+  public function insert() {
+    try {
+      $new_id = db_insert($this->table)
+        ->fields($this->fields)
+        ->execute();
+
+      return $new_id;
+    }
+    catch (Exception $e) {
+      watchdog_exception('type', $e);
+    }
+  }
+
   public function delete() {
     try {
       $num_deleted = 0;

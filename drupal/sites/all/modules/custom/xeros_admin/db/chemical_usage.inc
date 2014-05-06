@@ -45,7 +45,7 @@ class chemical_usage {
     $select = db_select($this->table, 'a');
     $select->leftJoin('xeros_chemical_profile', 'cp', 'a.chemical_profile_id = cp.chemical_profile_id');
     $select->fields('a');
-    $select->fields('cp');
+    $select->fields('cp', array('chemical_type', 'supplier', 'material_type', 'unit', 'unit_cost', 'location_id', 'xeros_unit_cost'));
 
     if ($machine_classification_id != NULL) {
       $select->condition('a.machine_classification_id', $machine_classification_id);
