@@ -500,7 +500,7 @@ function chemical_usage_delete($form, &$form_state) {
     if ($num_deleted > 0) {
       drupal_set_message($num_deleted . ' Chemical Deleted');
     } else {
-      form_set_error('Delete', 'No records found in the database to delete.  Check error log.');
+      drupal_set_message('No records found in the database to delete.  Check error log.');
     }
   }
 

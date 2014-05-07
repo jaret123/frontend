@@ -7,7 +7,8 @@ require_once 'orm_abstract.inc';
 /**
  * Class location
  */
-class location extends orm_abstract {
+class location  {
+
   function __construct() {
     $this->table = 'xeros_location';
     $this->key = 'location_id';
@@ -33,22 +34,4 @@ class location extends orm_abstract {
     return $rows;
   }
 
-    /*
-    $select = db_select($this->table, 'a');
-    $select->fields('a', $this->fields);
-    if ($company_id <> NULL) {
-      $select->condition('a.company_id', $company_id);
-    }
-
-    $entries = $select->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $rows = array();
-    if (!empty($entries)) {
-      foreach ($entries as $entry) {
-        // Sanitize the data before handing it off to the theme layer.
-        $rows[] = array_map('check_plain', $entry);
-      }
-    }
-    return $rows;
-  }
-    */
 }

@@ -10,6 +10,7 @@ require_once('db/location.inc');
 require_once('db/location_profile.inc');
 require_once('db/labor_profile.inc');
 require_once('db/chemical_profile.inc');
+require_once('db/company.inc');
 require_once('xeros_admin_machines.inc');
 /**
  * @param null $company_id
@@ -62,58 +63,79 @@ function location_listing($company_id = NULL) {
     drupal_set_message(t('No locations found.'));
   }
 
+  $output .= '<div><a href="/config/location/add">+ Add another location</a></div>';
+  return $output;
+
   return $output;
 }
 
+
 function location_edit_page($function_call = NULL, $location_id = NULL) {
 
-  if ($location_id != NULL) {
-    $location = node_load($location_id);
-    $company = node_load($location->field_company['und'][0]['target_id']);
-  }
   $output = '';
   $output = '<a href="/config/locations">Back to location listing</a> <br />';
-  $output .= 'Function: ' . $function_call . '<br />';
-  $output .= 'Company: ' . $company->title . '<br />';
-  $output .= 'Location: ' . $location->title . '<br />';
 
-  $vars = array();
-  $vars['location'] = $location;
-  $vars['company'] = $company;
+  if ( !in_array($function_call, array('edit', 'add')) || ($function_call == 'edit' && $location_id == NULL )) {
+    $output .= 'Page not found';
+  } else {
 
-  $lp = new location_profile();
+    $output .= 'Function: ' . $function_call . '<br />';
 
-  $vars['location_profile'] = $lp->select_by_location($location_id);
+    $vars = array();
+    $vars['#function_call'] = $function_call;
+    $vars['location'] = array();
+    $vars['company'] = array();
 
-  $labor = new labor_profile();
+    $lp = new location_profile();
+    $labor = new labor_profile();
 
-  $vars['labor_profile'] = $labor->select_by_location($location_id);
+    $vars['location_profile'] = array();
 
-  $chemical_profile = new chemical_profile();
+    $vars['labor_profile'] = array();
 
-  $vars['chemical_profiles'] = $chemical_profile->select_by_location($location_id);
+    if ( $function_call == 'edit' ) {
+      // Load company and location
+      $location = node_load($location_id);
+      $company = node_load($location->field_company['und'][0]['target_id']);
 
-//  if( ! function_exists("node_page_edit")) {
-//    include_once(drupal_get_path('module', 'node') . '/node.pages.inc');
-//  }
+      $vars['location'] = $location;
+      $vars['company'] = $company;
 
-  $f = drupal_get_form('location_form', $vars);
+      $output .= 'Company: ' . $company->title . '<br />';
+      $output .= 'Location: ' . $location->title . '<br />';
 
-  $output .= drupal_render($f);
+      $vars['location_profile'] = $lp->select_by_location($location_id);
 
-  $output .= machine_listing($location->nid);
+      $vars['labor_profile'] = $labor->select_by_location($location_id);
 
+      $chemical_profile = new chemical_profile();
+
+      $vars['chemical_profiles'] = $chemical_profile->select_by_location($location_id);
+
+    } else {
+
+      $output .= 'Company: New<br />';
+      $output .= 'Location: New<br />';
+    }
+
+    $f = drupal_get_form('location_form', $vars);
+
+    $output .= drupal_render($f);
+
+    if ( $function_call == 'edit' ) {
+      $output .= machine_listing($location->nid);
+    }
+  }
   return $output;
 }
 
 function location_form($form, &$form_state, $vars) {
 
-  $form_state['values']['company_id'] = $vars['company']->nid;
-  $form_state['values']['location_id'] = $vars['location']->nid;
-  $form_state['values']['location_name'] = $vars['location']->title;
-  $form_state['values']['location_profile'] = $vars['location_profile'];
-
   if (empty($form_state['#vars'])) {
+    $form_state['values']['company_id'] = isset($vars['company']->nid) ? $vars['company']->nid : NULL;
+    $form_state['values']['location_id'] = isset($vars['location']->nid) ? $vars['location']->nid : NULL;
+    $form_state['values']['location_name'] = isset($vars['location']->title) ? $vars['location']->title : NULL;
+    $form_state['values']['location_profile'] = $vars['location_profile'][0];
     $form_state['#vars'] = $vars;
   }
 
@@ -125,10 +147,29 @@ function location_form($form, &$form_state, $vars) {
     '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,
   );
 
-  $form['company_id'] = array(
-    '#type' => 'hidden',
-    '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,
-  );
+  if ( $form_state['#vars']['#function_call'] == 'add') {
+
+    $c = new company;
+    $companies = $c->select_all();
+    $company_options = array();
+
+    $company_options[0] = '-- Select a Company --';
+    foreach ( $companies as $id => $row ) {
+      $company_options[$id] = $row->title;
+    }
+
+    $form['company_id'] = array(
+      '#title' => 'Company',
+      '#type' => 'select',
+      '#options' => $company_options,
+    );
+  } else {
+    $form['company_id'] = array(
+      '#type' => 'hidden',
+      '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,
+    );
+  }
+
 
   //Visible fields
   $form['location_name'] = array(
@@ -141,48 +182,39 @@ function location_form($form, &$form_state, $vars) {
 
   $form['labor_profile'] = labor_profile($vars['labor_profile']);
 
-  $form['chemical_profiles'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Chemical Profile Information'),
-    '#description' => t('Location specific values used for chemicals for this location'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#prefix' => '<div id="chemical-profiles-fieldset-wrapper">',
-    '#suffix' => '</div>'
-  );
+  if ( $form_state['#vars']['#function_call'] == 'edit' ) {
+    $form['chemical_profiles'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Chemical Profile Information'),
+      '#description' => t('Location specific values used for chemicals for this location'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+      '#prefix' => '<div id="chemical-profiles-fieldset-wrapper">',
+      '#suffix' => '</div>'
+    );
 
-  if (empty($form_state['#count']['chemical_profiles'])) {
-    $form_state['#count']['chemical_profiles'] = count($vars['chemical_profiles']);
-  }
-
-
-  if ( !empty($form_state['triggering_element']['#ff-process']) ) {
-    $action = $form_state['triggering_element']['#ff-process'];
-    if ($action == 'delete') {
-      $index = $form_state['triggering_element']['#default_value'];
-      unset($form_state['#vars']['chemical_profiles'][$index]);
-    } elseif ($action == 'add') {
-      $form_state['#vars']['chemical_profiles'][] = array();
+    foreach ($form_state['#vars']['chemical_profiles'] as $i => $row) {
+      $row = $form_state['#vars']['chemical_profiles'][$i];
+      $row['#index'] = $i;
+      $form['chemical_profiles'][$i] = chemical_profile($row);
     }
-  }
 
-  foreach ($form_state['#vars']['chemical_profiles'] as $i => $row) {
-    $row = $form_state['#vars']['chemical_profiles'][$i];
-    $row['#index'] = $i;
-    $form['chemical_profiles'][$i] = chemical_profile($row);
+    // Adds "Add another chemical profile" button
+    $form['chemical_profiles']['add'] = array(
+      '#type' => 'submit',
+      '#value' => t('Add another chemical'),
+      '#name' => 'add-chemical',
+      '#ff-process' => 'add',
+      '#submit' => array('chemical_profile_add'),
+      '#attributes' => array(
+        'action' => 'add-chemical-profile',
+      ),
+      '#ajax' => array(
+        'callback' => 'chemical_profile_add_callback',
+        'wrapper' => 'chemical-profiles-fieldset-wrapper',
+      ),
+    );
   }
-
-  // Adds "Add another name" button
-  $form['chemical_profiles']['add'] = array(
-    '#type' => 'submit',
-    '#value' => t('Add another chemical'),
-    '#ff-process' => 'add',
-    '#submit' => array('chemical_profile_add'),
-    '#ajax' => array(
-      'callback' => 'chemical_profile_add_callback',
-      'wrapper' => 'chemical-profiles-fieldset-wrapper',
-    ),
-  );
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -197,108 +229,167 @@ function location_form_validate($form, &$form_state) {
   if ($location_name && ($location_name == 'ERROR')) {
     form_set_error('serial_number', t('Location name invalid'));
   }
-  drupal_set_message('Validation run');
+  if ($form_state['values']['company_id'] == 0) {
+    form_set_error('company_id', ('Company ID required'));
+  }
+  //drupal_set_message('Validation run');
 }
 
 function location_form_submit($form, &$form_state) {
 
-  // Update Location
+  if ( $form_state['#vars']['#function_call'] == 'add') {
+    // Add Location
 
-  $l = new location();
-  $l->id = $form_state['values']['location_id'];
+    $company_id = $form_state['values']['company_id'];
+    $l = new stdClass();
 
-  $f = array(
-    'location_id',
-    'location_name'
-  );
+    $l->type = 'location';
+    $l->status = 1;
+    $l->title = $form_state['values']['location_name'];
+    $l->body = '';
+    $l->field_company['und'][0]['target_id'] = $company_id;
 
+    node_save($l);
 
-  foreach( $f as $field ) {
-    $l->fields[$field] = $form_state['values'][$field];
-  }
+    // Get the returned ID
+    $location_id = $l->nid;
 
-  $l->merge();
+    // Insert Location Profile Values
+    $lp = new location_profile();
+    $lp->id = $location_id;
 
-  // Update Location Profile Values
+    $f = array(
+      'water_volume_unit',
+      'chemical_volume_unit',
+      'water_meter_rate',
+      'temperature_rise_spring',
+      'temperature_rise_summer',
+      'temperature_rise_fall',
+      'temperature_rise_winter',
+      'heating_efficiency',
+      'thermal_conversion',
+      'cost_per_therm',
+      'cost_per_gallon'
+    );
+    foreach($f as $field) {
+      $lp->fields[$field] = $form_state['values']['location_profile'][$field];
+    }
 
-  $lp = new location_profile();
-  $lp->id = $form_state['values']['location_id'];
+    $lp->insert();
 
-  $f = array(
-    'water_volume_unit',
-    'chemical_volume_unit',
-    'water_meter_rate',
-    'temperature_rise_spring',
-    'temperature_rise_summer',
-    'temperature_rise_fall',
-    'temperature_rise_winter',
-    'heating_efficiency',
-    'thermal_conversion',
-    'cost_per_therm',
-    'cost_per_gallon'
-  );
-  foreach($f as $field) {
-    $lp->fields[$field] = $form_state['values']['location_profile'][$field];
-  }
+    // Update Labor Profile Values
 
-  $lp->merge();
+    $labor_p = new labor_profile();
 
-  // Update Chemical Profiles Values
+    $f = array(
+      'ops_hourly_rate',
+    );
 
-  $cp = new chemical_profile();
+    $labor_p->fields['location_id'] = $location_id;
 
-  $f = array(
-    'chemical_type',
-    'supplier',
-    'material_type',
-    'unit',
-    'unit_cost',
-    'xeros_unit_cost'
-  );
+    foreach($f as $field) {
+      $labor_p->fields[$field] = $form_state['values']['labor_profile'][$field];
+    }
 
-  $cp->fields['location_id'] = (int)$form_state['values']['location_id'];
+    $labor_p->insert();
 
-  foreach( $form_state['values']['chemical_profiles'] as $i => $chemical_profile) {
-    if ( $i != 'add') {
+    drupal_set_message('New Location Added.  Add the chemical profiles then add machines.');
+  } else {
+    // Update Location
 
-      if ( $chemical_profile['chemical_profile_id'] == '' ) {
-        $chemical_profile['chemical_profile_id'] = NULL;
-      }
+    $company_id = $form_state['values']['company_id'];
 
-      $cp->id = $chemical_profile['chemical_profile_id'];
+    $l = node_load($form_state['values']['location_id']);
+
+    $l->title = $form_state['values']['location_name'];
+    $l->body = '';
+
+    node_save($l);
+
+    // Update Location Profile Values
+
+    $lp = new location_profile();
+    $lp->id = $l->nid;
+
+    $f = array(
+      'water_volume_unit',
+      'chemical_volume_unit',
+      'water_meter_rate',
+      'temperature_rise_spring',
+      'temperature_rise_summer',
+      'temperature_rise_fall',
+      'temperature_rise_winter',
+      'heating_efficiency',
+      'thermal_conversion',
+      'cost_per_therm',
+      'cost_per_gallon'
+    );
+    foreach($f as $field) {
+      $lp->fields[$field] = $form_state['values']['location_profile'][$field];
+    }
+
+    $lp->merge();
+
+    // Update Chemical Profiles Values
+
+    $cp = new chemical_profile();
+
+    $f = array(
+      'chemical_type',
+      'supplier',
+      'material_type',
+      'unit',
+      'unit_cost',
+      'xeros_unit_cost'
+    );
+
+    $cp->fields['location_id'] = (int)$l->nid;
+
+    foreach( $form_state['#vars']['chemical_profiles'] as $i => $chemical_profile) {
 
       foreach($f as $field) {
-        $cp->fields[$field] = $chemical_profile[$field];
+        if ( $field != 'delete') {
+          $cp->fields[$field] = $chemical_profile[$field];
+        }
       }
 
-      $cp->merge();
+      if ( $chemical_profile['chemical_profile_id'] == '' ) {
+        unset($cp->fields['chemical_profile_id']);
+        $cp->insert();
+      } else {
+        $cp->id = $chemical_profile['chemical_profile_id'];
+        $cp->merge();
+      }
+
     }
+
+    // Update Labor Profile Values
+
+    $labor_p = new labor_profile();
+
+    $f = array(
+      'ops_hourly_rate',
+    );
+
+    $labor_p->id = $form_state['values']['labor_profile']['labor_profile_id'];
+    $labor_p->fields['location_id'] = $l->nid;
+
+    foreach($f as $field) {
+      $labor_p->fields[$field] = $form_state['values']['labor_profile'][$field];
+    }
+
+    $labor_p->merge();
+
+    drupal_set_message(t('Location Saved.'));
+
   }
 
-  // Update Labor Profile Values
-
-  $labor_p = new labor_profile();
-
-  $f = array(
-    'ops_hourly_rate',
-  );
-
-  $labor_p->id = $form_state['values']['labor_profile']['labor_profile_id'];
-  $labor_p->fields['location_id'] = $form_state['values']['location_id'];
-
-  foreach($f as $field) {
-    $labor_p->fields[$field] = $form_state['values']['labor_profile'][$field];
-  }
-
-  $labor_p->merge();
-
-  drupal_set_message(t('The form has been submitted.'));
-  $form_state['rebuild'] = TRUE;
+  $form_state['redirect'] = 'config/location/edit/' . $form_state['values']['location_id'];
 }
 
 function location_profile($vars) {
 
-  $lp = $vars[0];
+  $lp = !empty($vars) ? $vars : array();
 // Location values
   $location_profile = array(
     '#type' => 'fieldset',
@@ -325,7 +416,7 @@ function location_profile($vars) {
       '#title' => 'Water Meter Rate',
       '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
       '#type' => 'textfield',
-      '#default_value' => !empty($lp['water_meter_rate']) ? $lp['water_meter_rate'] : '',
+      '#default_value' => !empty($lp['water_meter_rate']) ? $lp['water_meter_rate'] : .1,
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',
@@ -382,7 +473,7 @@ function location_profile($vars) {
 
 function labor_profile($vars) {
 
-  $lp = $vars[0];
+  $lp = !empty($vars) ? $vars[0] : array();
 
   $labor_profile = array(
     '#type' => 'fieldset',
@@ -408,6 +499,7 @@ function labor_profile($vars) {
 
 function chemical_profile($vars) {
   $title = !empty($vars['chemical_type']) ? $vars['chemical_type'] : 'New';
+  $uniqid = uniqid();
 
   $chemical_profile = array(
     '#type' => 'fieldset',
@@ -460,10 +552,14 @@ function chemical_profile($vars) {
     'delete' => array(
       '#type' => 'submit',
       '#value' => t('Delete'),
-      '#name' => t('delete-' . $vars['#index']),
+      '#id' => 'delete-' . $uniqid,
+      '#name' => 'delete-' . $uniqid,
       '#default_value' => $vars['#index'],
       '#submit' => array('chemical_profile_delete'),
       '#ff-process' => 'delete',
+      '#attributes' => array(
+        'data-chemical_profile_index' => $vars['#index'],
+      ),
       '#ajax' => array(
         'callback' => 'chemical_profile_add_callback',
         'wrapper' => 'chemical-profiles-fieldset-wrapper',
@@ -473,9 +569,15 @@ function chemical_profile($vars) {
   return $chemical_profile;
 }
 
-
 function chemical_profile_add($form, &$form_state) {
   // Chemical profile add will pick up the add in location_form.
+
+  $attrs = $form_state['triggering_element']['#attributes'];
+
+  // Add a new chemical profile to the array
+  $form_state['#vars']['chemical_profiles'][] = array(
+    'location_id' => $form_state['#vars']['location']->nid
+  );
 
   // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
   $form_state['rebuild'] = TRUE;
@@ -484,7 +586,8 @@ function chemical_profile_add($form, &$form_state) {
 function chemical_profile_delete($form, &$form_state) {
   // Everything in $form_state is persistent, so we'll just use
   // $form_state['add_name']
-  $index = $form_state['triggering_element']['#parents'][1];
+  $attrs = $form_state['triggering_element']['#attributes'];
+  $index = $attrs['data-chemical_profile_index'];
 
   // TODO: Delete the record from the database and if successful then delete the form element.
   $cp = new chemical_profile();
@@ -493,10 +596,15 @@ function chemical_profile_delete($form, &$form_state) {
   $num_deleted = $cp->delete();
 
   if ($num_deleted == 1) {
-    // Delete the form element
-    unset($form['chemical_profiles'][$index]);
-    unset($form_state['values']['chemical_profiles']['index']);
+    drupal_set_message('Chemical profile deleted');
+  } else {
+    drupal_set_message('Delete', 'No records found in the database to delete.  Check error log.');
   }
+
+  // Regardless we will delete the form array since it might have been newly created.
+  unset($form_state['#vars']['chemical_profiles'][$index]);
+  unset($form_state['values']['chemical_profiles'][$index]);
+  unset($form['chemical_profiles'][$index]);
 
   // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.
   $form_state['rebuild'] = TRUE;
