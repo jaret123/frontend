@@ -135,7 +135,7 @@ function location_form($form, &$form_state, $vars) {
     $form_state['values']['company_id'] = isset($vars['company']->nid) ? $vars['company']->nid : NULL;
     $form_state['values']['location_id'] = isset($vars['location']->nid) ? $vars['location']->nid : NULL;
     $form_state['values']['location_name'] = isset($vars['location']->title) ? $vars['location']->title : NULL;
-    $form_state['values']['location_profile'] = $vars['location_profile'][0];
+    $form_state['values']['location_profile'] = isset($vars['location_profile'][0]) ? $vars['location_profile'][0] : array();
     $form_state['#vars'] = $vars;
   }
 
