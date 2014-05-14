@@ -349,11 +349,11 @@ function location_form_submit($form, &$form_state) {
 
       foreach($f as $field) {
         if ( $field != 'delete') {
-          $cp->fields[$field] = $chemical_profile[$field];
+          $cp->fields[$field] = $form_state['values']['chemical_profiles'][$i][$field];
         }
       }
 
-      if ( $chemical_profile['chemical_profile_id'] == '' ) {
+      if ( $form_state['values']['chemical_profiles'][$i]['chemical_profile_id'] == '' ) {
         unset($cp->fields['chemical_profile_id']);
         $cp->insert();
       } else {
