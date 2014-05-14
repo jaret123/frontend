@@ -247,7 +247,7 @@ SELECT
 
 FROM
     xeros_machine AS xm
-    INNER JOIN
+    LEFT JOIN
     (-- metrics
      SELECT
        machine_id,
@@ -273,6 +273,7 @@ FROM
        machine_id
     ) AS b
       ON xm.machine_id = b.machine_id
+    WHERE xm.machine_id in ( :machineIds )
 
 SQL;
         $sql = $this->u->replaceFilters($sql, $filters);
