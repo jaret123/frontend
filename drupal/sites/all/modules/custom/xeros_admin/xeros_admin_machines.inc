@@ -163,12 +163,14 @@ function machine_form($form, &$form_state, $vars) {
     '#title' => 'Model',
     '#type' => 'textfield',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['model']) ? $form_state['values']['machine_settings']['machine']['model'] : '',
+    '#required' => TRUE,
   );
 
   $form['machine_settings']['size'] = array(
     '#title' => 'Maximum Load Size',
     '#type' => 'textfield',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['size']) ? $form_state['values']['machine_settings']['machine']['size'] : '',
+    '#required' => TRUE,
   );
 
   $form['machine_settings']['steam'] = array(
@@ -192,6 +194,7 @@ function machine_form($form, &$form_state, $vars) {
     '#type' => 'select',
     '#options' => drupal_map_assoc(array(t('Washer'), t('Dryer'))),
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['machine_type']) ? $form_state['values']['machine_settings']['machine']['machine_type'] : 'Washer',
+    '#required' => TRUE,
   );
 
   $form['machine_settings']['cold_water_meter_type'] = array(
@@ -246,13 +249,13 @@ function machine_form($form, &$form_state, $vars) {
   $form['machine_settings']['sensor_start_match_variance'] = array(
     '#title' => 'Sensor Start Match Variance',
     '#type' => 'textfield',
-    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['sensor_start_match_variance']) ? $form_state['values']['machine_settings']['machine']['sensor_start_match_variance'] : '',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['sensor_start_match_variance']) ? $form_state['values']['machine_settings']['machine']['sensor_start_match_variance'] : 0,
   );
 
   $form['machine_settings']['duration_match_variance'] = array(
     '#title' => 'Duration Match Variance',
     '#type' => 'textfield',
-    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['duration_match_variance']) ? $form_state['values']['machine_settings']['machine']['duration_match_variance'] : '',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['duration_match_variance']) ? $form_state['values']['machine_settings']['machine']['duration_match_variance'] : 0,
   );
 
   $form['machine_settings']['ignore_meter_type'] = array(
@@ -359,7 +362,8 @@ function machine_form_submit($form, &$form_state) {
   } else {
     $machine->merge();
     drupal_set_message(t('Machine settings saved.'));
-    $form_state['redirect'] = 'config/location/edit/' . $form_state['#vars']['location_id'];
+    $form_state['redirect'] = 'config/machine/' . $form_state['#vars']['location_id'] . '/edit/' . $machine->fields['machine_id'];
+    //$form_state['redirect'] = 'config/location/edit/' . $form_state['#vars']['location_id'];
   }
 
 }
