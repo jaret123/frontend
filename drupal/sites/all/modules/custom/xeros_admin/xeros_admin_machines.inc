@@ -286,6 +286,13 @@ function machine_form($form, &$form_state, $vars) {
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['dry_smart']) ? $form_state['values']['machine_settings']['machine']['dry_smart'] : 0,
   );
 
+  $form['machine_settings']['use_start_time'] = array(
+    '#title' => 'Use Start Time',
+    '#description' => 'Check this field if the machine uses the start time to match cycles to classifications.',
+    '#type' => 'checkbox',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['use_start_time']) ? (int)$form_state['values']['machine_settings']['machine']['use_start_time'] : 0,
+  );
+
   $form['machine_settings']['machine_profile_id'] = array(
     '#type' => 'hidden',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['machine_profile_id']) ? $form_state['values']['machine_settings']['machine']['machine_profile_id'] : 0,
@@ -346,7 +353,8 @@ function machine_form_submit($form, &$form_state) {
     'sensor_start_match_variance',
     'duration_match_variance',
     'ignore_meter_type',
-    'unknown_class'
+    'unknown_class',
+    'use_start_time'
   );
 
   foreach ($f as $field) {
