@@ -313,6 +313,8 @@ machineSQL;
         $classificiationSql = <<<classificationSQL
             select
                 xmc.classification_id,
+                xmc.load_size,
+                xmc.xeros_load_size,
                 xc.name
             from
                 xeros_machine_classification as xmc

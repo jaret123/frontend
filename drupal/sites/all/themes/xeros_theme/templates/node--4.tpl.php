@@ -102,11 +102,11 @@
                                         <div class="box col-2">
                                             <div class="top">
                                                 <div class="label">{{../labels.[1]}}</div>
-                                                <div class="value">{{toLocaleString ../size}}</div>
+                                                <div class="value">{{toLocaleString load_size}}</div>
                                             </div>
                                             <div class="bottom">
                                                 <div class="label">&nbsp;</div>
-                                                <div class="value">{{toLocaleString ../size}}</div>
+                                                <div class="value">{{toLocaleString xeros_load_size}}</div>
                                             </div>
                                         </div>
 
