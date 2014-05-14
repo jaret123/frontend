@@ -19,6 +19,8 @@ function classification_add_page($location_id = NULL, $machine_id = NULL) {
 
   $vars['location_id'] = $location_id;
   $vars['machine_id'] = $machine_id;
+
+  $vars['function_call'] = 'add';
 //
 //  $cu = new chemical_usage;
 //
@@ -33,6 +35,7 @@ function classification_add_page($location_id = NULL, $machine_id = NULL) {
   $output = '<h2>Classification</h2>';
 
   $output = '<a href="/config/machine/' . $location_id . '/edit/' . $machine_id . '"> << Back to machine</a> <br />';
+
 
   $f = drupal_get_form('classification_edit_form', $vars);
 
@@ -59,6 +62,8 @@ function classification_edit_page($location_id = NULL, $machine_id = NULL, $mach
   $vars['location_id'] = $location_id;
   $vars['machine_id'] = $machine_id;
 
+  $vars['function_call'] = 'edit';
+
   $cu = new chemical_usage;
 
     $cu_rows = $cu->select($machine_classification_id);
@@ -69,9 +74,9 @@ function classification_edit_page($location_id = NULL, $machine_id = NULL, $mach
     }
     $vars['chemical_usage_set'] = $cu_rows;
 
-  $output = '<h2>Classification</h2>';
+  $output = '<h2>Classification Edit Page</h2>';
 
-  $output = '<a href="/config/machine/' . $location_id . '/edit/' . $machine_id . '"> << Back to machine</a> <br />';
+  $output .= '<a href="/config/machine/' . $location_id . '/edit/' . $machine_id . '"> << Back to machine</a> <br />';
 
   $f = drupal_get_form('classification_edit_form', $vars);
 
@@ -104,26 +109,28 @@ function classification_edit_form($form, &$form_state, $vars) {
 
   $form['classification']['settings'] = array_merge($form['classification']['settings'] , classification($form, $form_state, $form_state['#vars'][0]));
 
-  $form['chemical_usage_set'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Chemicals'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
-    '#prefix' => '<div id="chemical-usage-set-wrapper">',
-    '#suffix' => '</div>'
-  );
+  //if ( $vars['function_call'] == 'edit') {
 
-  foreach ($form_state['#vars']['chemical_usage_set'] as $j => $jrow) {
-    $chemical_type = $form_state['values']['chemical_usage_set'][$j]['chemical_type'] ? $form_state['values']['chemical_usage_set'][$j]['chemical_type'] : 'New';
-    $form['chemical_usage_set'][$j] = array(
+    $form['chemical_usage_set'] = array(
       '#type' => 'fieldset',
-      '#title' => 'Chemical: ' . $chemical_type,
+      '#title' => t('Chemicals'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
+      '#prefix' => '<div id="chemical-usage-set-wrapper">',
+      '#suffix' => '</div>'
     );
-    $jrow['chemical_usage_set_index'] = $j;
-    $form['chemical_usage_set'][$j] = array_merge($form['chemical_usage_set'][$j], chemical_usage($form, $form_state, $jrow));
-  }
+
+    foreach ($form_state['#vars']['chemical_usage_set'] as $j => $jrow) {
+      $chemical_type = isset($form_state['values']['chemical_usage_set'][$j]['chemical_type']) ? $form_state['values']['chemical_usage_set'][$j]['chemical_type'] : 'New';
+      $form['chemical_usage_set'][$j] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Chemical: ' . $chemical_type,
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+      $jrow['chemical_usage_set_index'] = $j;
+      $form['chemical_usage_set'][$j] = array_merge($form['chemical_usage_set'][$j], chemical_usage($form, $form_state, $jrow));
+    }
 
     // Adds "Add another chem usage per classification" button
     $form['chemical_usage_set']['add'] = array(
@@ -141,6 +148,8 @@ function classification_edit_form($form, &$form_state, $vars) {
         'action' => 'add-chemical',
       )
     );
+
+ // }
     $form['submit'] = array(
       '#type' => 'submit',
       '#value' => 'Save',
@@ -209,11 +218,11 @@ function classification_edit_form_submit($form, &$form_state) {
 
       $lsv = new local_static_value();
 
-      $lsv->fields['classification'] = $classification_id;
+      $lsv->fields['classification_id'] = $classification_id;
       $lsv->fields['hot_water_gallons'] = $form_state['values']['classification']['settings']['hot_water_gallons'];
       $lsv->fields['cold_water_gallons'] = $form_state['values']['classification']['settings']['cold_water_gallons'];
 
-      $local_static_values_id = $lsv->insert();
+      $xeros_local_static_value_id = $lsv->insert();
 
       // save the chemicals
       $cu = new chemical_usage();
@@ -264,11 +273,14 @@ function classification_edit_form_submit($form, &$form_state) {
       // save the local_static_values
 
       $lsv = new local_static_value();
-      $lsv->id = $form_state['values']['classification']['settings']['local_static_values_id'];
+      $lsv->id = $form_state['values']['classification']['settings']['xeros_local_static_value_id'];
 
+      // We are not including the classification_id in the update because we can't change the chem usage setting to another
+      // classification in the UI.
       $f = array(
         'hot_water_gallons',
-        'cold_water_gallons'
+        'cold_water_gallons',
+        'run_time'
       );
       foreach($f as $field) {
         $lsv->fields[$field] = $form_state['values']['classification']['settings'][$field];
@@ -318,6 +330,7 @@ function classification($form, &$form_state, $row) {
       '#description' => 'What type of laundry is in this classification',
       '#type' => 'textfield',
       '#default_value' => !empty($row['name']) ? $row['name'] : '',
+      '#required' => TRUE,
     ),
     'machine_classification_id' => array(
       '#title' => 'Machine Classification ID',
@@ -334,34 +347,46 @@ function classification($form, &$form_state, $row) {
       '#description' => 'How many pounds are loaded into the machine for this classification',
       '#type' => 'textfield',
       '#default_value' => !empty($row['load_size']) ? $row['load_size'] : '',
+      '#required' => TRUE,
     ),
     'xeros_load_size' => array(
       '#title' => 'Xeros Load Size',
       '#description' => 'How many pounds are loaded into a Xeros machine for this classification',
       '#type' => 'textfield',
       '#default_value' => !empty($row['xeros_load_size']) ? $row['xeros_load_size'] : '',
+      '#required' => TRUE,
     ),
     'unload_time' => array(
       '#title' => 'Manual Labor Time',
       '#description' => 'How long does it take to load and unload the machine after the cycle -- this is used in the run time calculation.',
       '#type' => 'textfield',
       '#default_value' => !empty($row['unload_time']) ? $row['unload_time'] : '',
+      '#required' => TRUE,
     ),
-    'local_static_values_id' => array(
+    'xeros_local_static_value_id' => array(
       '#type' => 'hidden',
-      '#default_value' => !empty($row['local_static_values_id']) ? $row['local_static_values_id'] : NULL,
+      '#default_value' => !empty($row['xeros_local_static_value_id']) ? $row['xeros_local_static_value_id'] : NULL,
     ),
     'hot_water_gallons' => array(
       '#type' => 'textfield',
       '#title' => 'Xeros hot water usage',
-      '#desription' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
+      '#description' => 'The model data for hot water usage for this type of laundry on a comparable Xeros machine',
       '#default_value' => !empty($row['hot_water_gallons']) ? $row['hot_water_gallons'] : NULL,
+      '#required' => TRUE,
     ),
     'cold_water_gallons' => array(
       '#type' => 'textfield',
       '#title' => 'Xeros cold water usage',
-      '#desription' => 'The model data for cold water usage for this type of laundry on a comparable Xeros machine',
+      '#description' => 'The model data for cold water usage for this type of laundry on a comparable Xeros machine',
       '#default_value' => !empty($row['cold_water_gallons']) ? $row['cold_water_gallons'] : NULL,
+      '#required' => TRUE,
+    ),
+    'run_time' => array(
+      '#type' => 'textfield',
+      '#title' => 'Xeros run time',
+      '#description' => 'The model data for run time for this type of laundry on a comparable Xeros machine',
+      '#default_value' => !empty($row['run_time']) ? $row['run_time'] : NULL,
+      '#required' => TRUE,
     )
   );
 // TODO: Run time is in the fields spreadsheet but not in the xeros_local_static_values database.
@@ -473,9 +498,9 @@ function chemical_usage_add($form, &$form_state) {
   // Chemical profile add will pick up the add in location_form.
   $attrs = $form_state['triggering_element']['#attributes'];
 
-  // Add a new set to the array
+  // Add a new set to the array (set to NULL when it's a new machine classification)
   $form_state['#vars']['chemical_usage_set'][] = array(
-    'machine_classification_id' => $form_state['#vars'][0]['machine_classification_id']
+    'machine_classification_id' => isset($form_state['#vars'][0]['machine_classification_id']) ? $form_state['#vars'][0]['machine_classification_id'] : NULL,
   );
 
   // Setting $form_state['rebuild'] = TRUE causes the form to be rebuilt again.

@@ -16,7 +16,7 @@ class machine_classification extends orm_abstract {
 
     $select = db_select('xeros_machine_classification', 'mc');
     $select->leftJoin('xeros_classification', 'c', 'mc.classification_id = c.classification_id');
-    $select->leftJoin('xeros_local_static_values', 'lsv', 'c.classification_id = lsv.classification');
+    $select->leftJoin('xeros_xeros_local_static_value', 'lsv', 'c.classification_id = lsv.classification_id');
     $select->fields('c');
     $select->fields('mc');
     $select->fields('lsv');
@@ -47,7 +47,7 @@ class machine_classification extends orm_abstract {
 
     $select = db_select('xeros_machine_classification', 'mc');
     $select->leftJoin('xeros_classification', 'c', 'mc.classification_id = c.classification_id');
-    $select->leftJoin('xeros_local_static_values', 'lsv', 'c.classification_id = lsv.classification');
+    $select->leftJoin('xeros_xeros_local_static_value', 'lsv', 'c.classification_id = lsv.classification_id');
     $select->fields('c');
     $select->fields('mc');
     $select->fields('lsv');
@@ -71,6 +71,7 @@ class machine_classification extends orm_abstract {
 
   /**
    * Cascading delete
+   * Not implemented yet
    *
    * @param $machine_classification_id
    *

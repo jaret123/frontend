@@ -412,10 +412,10 @@ function classification_listing($machine_id = NULL, $location_id = NULL) {
       t('Xeros Load Size'),
       t('Manual Labor Time'),
       t('Name'),
-      t(''),
-      t(''),
+      t('Local Static Value ID'),
       t('Xeros Hot Water Usage'),
       t('Xeros Cold Water Usage'),
+      t('Xeros Run Time'),
       t('Edit')
     );
     //$output .= theme('table', array('header' => $header, 'rows' => $rows));

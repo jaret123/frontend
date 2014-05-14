@@ -5,14 +5,14 @@ require_once 'orm_abstract.inc';
 class local_static_value extends orm_abstract {
 
   function __construct() {
-    $this->table = 'xeros_local_static_values';
-    $this->key = 'local_static_values_id';
+    $this->table = 'xeros_xeros_local_static_value';
+    $this->key = 'xeros_local_static_value_id';
   }
 
   // TODO: Double check field names
   public function select_by_classification($classification_id = NULL) {
 
-    $select = db_select('xeros_local_static_value', 'lsv');
+    $select = db_select($this->table, 'lsv');
 
     $select->fields('lsv');
 
