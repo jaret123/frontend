@@ -73,7 +73,7 @@
                     <div class="template-container">
                         <script id="page-tpl" type="text/x-handlebars-template">
                             {{#data}}
-                            <div class="row {{meta.cssClass}} {{machine_name}}" machineId={{id}}>
+                            <div class="row {{meta.cssClass}} {{machine_name}} water-only-{{water_only}}" machineId={{id}}>
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer"></div>
@@ -81,7 +81,11 @@
                                             {{machine_name}} <br/>
                                             ({{size}}) <br/>
                                             <span class="small">{{serial_number}}</span> <br/>
+                                            {{#if water_only}}
+                                            <span class="small">Water Only</span>
+                                            {{else}}
                                             <span class="small">cycles: {{cycles}}</span>
+                                            {{/if}}
                                         </div>
                                         <div class="metric__message"></div>
                                     </span>
@@ -103,21 +107,34 @@
                                     <div class="arrow {{hot-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>
                                 </div>
-                                <div class="col col-4 link metric" classification="cycle_time" machine="{{id}}"
-                                     chart="cycle_time-{{id}}">
-                                    <div class="chart" name="{{id}}-cycle_time""></div>
-                                    <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
-                                    <div class="arrow {{cold-water-up-or-down}}"></div>
-                                    <div class="metric__message"></div>
-                                </div>
 
+                              {{#if water_only}}
+                            <div class="col col-4 metric">
+                              <div>
+                                Water<br/>Only<br/>&nbsp;
+                              </div>
+                            </div>
+                                <div class="col col-5 metric">
+                                  <div>
+                                    Water<br/>Only<br/>&nbsp;
+                                  </div>
+                                </div>
+                              {{else}}
+                              <div class="col col-4 link metric" classification="cycle_time" machine="{{id}}"
+                                   chart="cycle_time-{{id}}">
+                                <div class="chart" name="{{id}}-cycle_time""></div>
+                              <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
+                              <div class="arrow {{cold-water-up-or-down}}"></div>
+                              <div class="metric__message"></div>
+                            </div>
                                 <div class="col col-5 link metric" classification="chemical" machine="{{id}}"
                                      chart="chemical-{{id}}">
-                                    <div class="chart" name="{{id}}-chemical""></div>
-                                    <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
-                                    <div class="arrow {{cold-water-up-or-down}}"></div>
-                                    <div class="metric__message"></div>
+                                  <div class="chart" name="{{id}}-chemical""></div>
+                                  <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
+                                  <div class="arrow {{cold-water-up-or-down}}"></div>
+                                  <div class="metric__message"></div>
                                 </div>
+                              {{/if}}
                             </div>
                             {{/data}}
                         </script>

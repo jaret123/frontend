@@ -231,6 +231,7 @@ SELECT
   xm.manufacturer AS machine_name,
   xm.serial_number,
   xm.size,
+  xm.water_only,
   b.cycles,
   truncate(b.cold_water_value, 0) as cold_water_value,
   truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,

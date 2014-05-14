@@ -292,7 +292,12 @@ function machine_form($form, &$form_state, $vars) {
     '#type' => 'checkbox',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['use_start_time']) ? (int)$form_state['values']['machine_settings']['machine']['use_start_time'] : 0,
   );
-
+  $form['machine_settings']['water_only'] = array(
+    '#title' => 'Water Only',
+    '#description' => 'Check this field if this machine can only measure water.',
+    '#type' => 'checkbox',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['water_only']) ? (int)$form_state['values']['machine_settings']['machine']['water_only'] : 0,
+  );
   $form['machine_settings']['machine_profile_id'] = array(
     '#type' => 'hidden',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['machine_profile_id']) ? $form_state['values']['machine_settings']['machine']['machine_profile_id'] : 0,
@@ -354,7 +359,8 @@ function machine_form_submit($form, &$form_state) {
     'duration_match_variance',
     'ignore_meter_type',
     'unknown_class',
-    'use_start_time'
+    'use_start_time',
+    'water_only'
   );
 
   foreach ($f as $field) {

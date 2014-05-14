@@ -267,7 +267,11 @@ var app = {
                 t = app.numberWithCommas(t);
                 return t;
             }
-        })
+        });
+
+        Handlebars.registerHelper("waterOnly", function(water_only) {
+            return ( water_only === "1" || water_only === 1 );
+        });
 
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 

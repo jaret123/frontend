@@ -15,6 +15,11 @@ var view = {
             app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
             app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
             app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
+            app.reportData.data[i].water_only = parseInt(app.reportData.data[i].water_only, 10);
+
+            if ( app.reportData.data[i].water_only === 1 ) {
+                app.reportData.data[i].cycles = 'water only';
+            }
         }
         draw(); // This does the html template draw
 
@@ -154,7 +159,7 @@ var view = {
         }
     },
     bindNav : function() {
-        jQuery('.link').click(function (event) {
+        jQuery('.water-only-0 .link').click(function (event) {
             event.preventDefault();
             var classification,
                 machine_id,

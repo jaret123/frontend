@@ -54,13 +54,6 @@
       position: relative;
       height: 75px;
 
-      .link {
-        cursor: pointer;
-      }
-      .link:hover {
-        opacity: 0.8;
-      }
-
       .col {
         position: absolute;
         bottom: 20px;
@@ -83,6 +76,14 @@
       }
       &.last {
         border-bottom: 1px dashed $font-color;
+      }
+      &.water-only-0 {
+        .link {
+          cursor: pointer;
+        }
+        .link:hover {
+          opacity: 0.8;
+        }
       }
       .col-1 {
 
