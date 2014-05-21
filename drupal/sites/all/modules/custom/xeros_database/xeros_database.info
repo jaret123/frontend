@@ -1,4 +1,4 @@
-name = Database Update Management
+name = Xeros Database Update Management
 description = Provides Schema Change Tracking.
 package = Xeros
 core = 7.x

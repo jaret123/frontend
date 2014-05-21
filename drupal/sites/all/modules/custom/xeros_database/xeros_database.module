@@ -3,7 +3,7 @@
 /**
  * Dedupe and add a primary key to the chemical unit table
  */
-function db_reporting_update_7201() {
+function xeros_database_update_7201() {
   run_external_script("db-update-2014-03-06__add-key-to-xeros_chemical_usage.sql");
 }
 
@@ -11,7 +11,7 @@ function db_reporting_update_7201() {
 /**
  *  Add variance column to tables
  **/
-function db_reporting_update_7202() {
+function xeros_database_update_7202() {
     // Do nothing
   $scripts = array(
     "db-update-2014-03-19_add-2-variance-columns-to-xeros_machine-for-mapping.sql",
@@ -26,7 +26,7 @@ function db_reporting_update_7202() {
 /**
  * Update the report builds to implement incremental refresh functionality.
  */
-function db_reporting_update_7203() {
+function xeros_database_update_7203() {
   $scripts = array(
     "aggregate_tables/ddl-sp-therm-cycle.sql",
     "aggregate_tables/ddl-sp-cycle-data.sql"
@@ -39,7 +39,7 @@ function db_reporting_update_7203() {
 /**
  * Add model field to xeros_machine
  */
-function db_reporting_update_7204() {
+function xeros_database_update_7204() {
   $scripts = array(
     "db-update-2014-03-24-alter-xeros-machine.sql"
   );
@@ -51,7 +51,7 @@ function db_reporting_update_7204() {
 /**
  * Add static values table for the water only metrics and future static values
  */
-function db_reporting_update_7205() {
+function xeros_database_update_7205() {
   $scripts = array(
     "db-update-2014-05-21-create-table-xeros-static-values.sql",
     "ddl-sp-cycle-data.sql"
@@ -79,7 +79,7 @@ function run_external_script($script) {
       $watchdog_level = 6;
     }
 
-    watchdog("db_reporting", '<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
+    watchdog("xeros_database", '<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
     drupal_set_message('<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
 }
 

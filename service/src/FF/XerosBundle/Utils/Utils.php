@@ -72,7 +72,7 @@ SQL;
                 $userRole = array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
 
                 // If user is xerosAdmin and if they passed a location id
-                if ( $xerosAdmin && $locationId <> null ) {
+                if ( $xerosAdmin && $locationId != null ) {
 
                     // Get machines associated with the location in the session value sessionLocation
                     $sql = <<<SQL
@@ -124,6 +124,7 @@ SQL;
                               on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
                     where fc.field_company_target_id = :company_id
 SQL;
+                  // TODO: Need to deal with users who have not been assigned to a company
                     $sqlParsed = $this->replaceFilters($sql, array("company_id" => $userRole["company_id"]));
                     $machineData = $conn->fetchAll($sqlParsed);
                     // TODO : More error checking on this

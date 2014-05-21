@@ -1,0 +1,5 @@
+name = Xeros Analyst
+description = Provides Additional Report Views and Downloads for Analysts.
+package = Xeros
+core = 7.x
+configure = admin/config/administration/xeros/analyst

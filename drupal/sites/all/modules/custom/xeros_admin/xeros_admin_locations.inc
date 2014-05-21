@@ -64,7 +64,6 @@ function location_listing($company_id = NULL) {
   }
 
   $output .= '<div><a href="/config/location/add">+ Add another location</a></div>';
-  return $output;
 
   return $output;
 }

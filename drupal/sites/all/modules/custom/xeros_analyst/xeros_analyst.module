@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_analyst_menu() {
+  $items['analyst/reports'] = array(
+    'title' => 'Analyst Reports',
+    'page callback' => 'analyst_reports_page',
+    'page arguments' => array(),
+    'access arguments' => array('xeros analyst'),
+    'file' => 'xeros_analyst_reports.inc'
+  );
+
+  return $items;
+}
