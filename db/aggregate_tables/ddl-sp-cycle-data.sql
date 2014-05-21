@@ -1,5 +1,3 @@
-USE xeros_local;
-
 DELIMITER ;;
 
 -- Chemical usage
