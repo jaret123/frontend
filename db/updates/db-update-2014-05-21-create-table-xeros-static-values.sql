@@ -1,5 +1,3 @@
-USE xeros_local;
-
 CREATE TABLE xeros_static_values
 (
   name varchar(255) primary key,

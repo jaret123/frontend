@@ -49,6 +49,17 @@ function db_reporting_update_7204() {
 }
 
 /**
+ * Add model field to xeros_machine
+ */
+function db_reporting_update_7205() {
+  $scripts = array(
+    "db-update-2014-05-21-create-table-xeros-static-values"
+  );
+  foreach ( $scripts as $s ) {
+    run_external_script("$s");
+  }
+}
+/**
  * Helper functions
  */
 function run_external_script($script) {
