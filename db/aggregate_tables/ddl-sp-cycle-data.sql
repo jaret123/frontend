@@ -1,3 +1,4 @@
+USE xeros_local;
 
 DELIMITER ;;
 
@@ -236,9 +237,10 @@ DROP TABLE IF EXISTS xeros_cycle ;;
 
 CREATE TABLE xeros_cycle
 (
-	dai_meter_actual_id INT UNSIGNED PRIMARY KEY,
+	  dai_meter_actual_id INT UNSIGNED PRIMARY KEY,
     machine_id INT,
-	manufacturer varchar(255),
+    water_only INT,
+	  manufacturer varchar(255),
     classification_id INT,
     location_id INT,
 -- Base measures
@@ -260,20 +262,20 @@ CREATE TABLE xeros_cycle
     cycle_cold_water_xeros_cost_per_pound decimal(15,4),
 
 -- hot water
-	cycle_hot_water_volume decimal(15,4),
-	cycle_hot_water_pounds decimal(15,4),
-	cycle_hot_water_xeros_volume decimal(15,4),
-	cycle_hot_water_xeros_pounds decimal(15,4),
-	cycle_hot_water_volume_per_pound decimal(15,4),
-	cycle_hot_water_xeros_volume_per_pound decimal(15,4),
-	cycle_therms decimal(15,4),
-	cycle_therms_xeros decimal(15,4),
-	cycle_therms_cost decimal(15,4),
-	cycle_therms_cost_xeros decimal(15,4),
-	cycle_therms_per_pound decimal(15,4),
-	cycle_therms_per_pound_xeros decimal(15,4),
-	cycle_therm_cost_per_pound decimal(15,4),
-	cycle_therm_cost_per_pound_xeros decimal(15,4),
+    cycle_hot_water_volume decimal(15,4),
+    cycle_hot_water_pounds decimal(15,4),
+    cycle_hot_water_xeros_volume decimal(15,4),
+    cycle_hot_water_xeros_pounds decimal(15,4),
+    cycle_hot_water_volume_per_pound decimal(15,4),
+    cycle_hot_water_xeros_volume_per_pound decimal(15,4),
+    cycle_therms decimal(15,4),
+    cycle_therms_xeros decimal(15,4),
+    cycle_therms_cost decimal(15,4),
+    cycle_therms_cost_xeros decimal(15,4),
+    cycle_therms_per_pound decimal(15,4),
+    cycle_therms_per_pound_xeros decimal(15,4),
+    cycle_therm_cost_per_pound decimal(15,4),
+    cycle_therm_cost_per_pound_xeros decimal(15,4),
 
 -- Labor and cycle time measures
     cycle_time_run_time decimal(15,4),
@@ -346,9 +348,10 @@ BEGIN
 	SET @s = CONCAT('
 	INSERT INTO xeros_cycle
 	(
-	dai_meter_actual_id,
+	  dai_meter_actual_id,
     machine_id,
-	manufacturer,
+    water_only,
+	  manufacturer,
     classification_id,
     location_id,
     reading_date,
@@ -406,7 +409,8 @@ BEGIN
   SELECT
     dma.dai_meter_actual_id,
     dma.machine_id,
-	m.manufacturer,
+    m.water_only,
+	  m.manufacturer,
     dma.classification_id,
     m.location_id,
 -- Base measures

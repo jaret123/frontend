@@ -31,7 +31,11 @@ var view = {
         var delta = 0;
         // BUG - Divide by zero throws NaN
 
-        delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+        if ( parseInt(base, 10)  === 0 ) {
+            delta = ' - ';
+        } else {
+            delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+        }
         return delta;
     },
     isValid : function(arr) {

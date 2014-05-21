@@ -167,4 +167,22 @@ SQL;
         }
         return $string;
     }
+
+  public function getStaticValue($conn, $name) {
+
+    $sql = <<<SQL
+                select
+                    `value`
+                from
+                    xeros_static_values
+                where `name` = ':_name'
+SQL;
+
+    $sqlParsed = $this->replaceFilters($sql, array("_name" => $name));
+
+    $value = $conn->fetchColumn($sqlParsed, array(1), 0);
+
+    return $value;
+
+  }
 }

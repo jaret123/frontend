@@ -47,10 +47,12 @@ class ReportController extends Controller {
         if ( $userRole['uid'] === NULL or $userRole['uid'] === 0 ) {
             return array ("message" => "Access denied");
         } else {
+
             $filters = array(
                 'fromDate' => $fromDate,
                 'toDate' => $toDate,
-                'machineIds' => $this->u->arrayToString($userRole["machine_ids"])
+                'machineIds' => $this->u->arrayToString($userRole["machine_ids"]),
+                'water_only_diff' => $this->u->getStaticValue($conn, "water_only_diff")
             );
 
             switch ($reportName) {
@@ -124,7 +126,7 @@ SQL;
         $summarySql = <<<SQL
 select
   b.date,
-  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value, 0), 0) as value,
   coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
   coalesce(truncate(b.cost, 0), 0) as cost,
   coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
@@ -150,19 +152,33 @@ SQL;
         array_push($metrics, array(
                                   "name" => "cold-water",
                                   "query" => <<<METRIC
-   		sum(xc.cycle_cold_water_volume) as value,
-   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
-   		sum(xc.cycle_cold_water_cost) as cost,
-   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
+   		sum(truncate(xc.cycle_cold_water_volume, 0)) as value,
+   		sum(
+          case xc.water_only
+	        when 1 then
+		      :water_only_diff * coalesce(xc.cycle_cold_water_volume, 0)
+	        else
+		      coalesce(xc.cycle_cold_water_xeros_volume, 0)
+          end
+   		  ) as value_xeros,
+   		sum(coalesce(xc.cycle_cold_water_cost, 0)) as cost,
+   		sum(
+          case xc.water_only
+	        when 1 then
+		      :water_only_diff * coalesce(xc.cycle_cold_water_cost, 0)
+	        else
+		      coalesce(xc.cycle_cold_water_xeros_cost, 0)
+          end
+   		) as cost_xeros
 METRIC
                              ));
         array_push($metrics, array(
             "name" => "hot-water",
             "query" => <<<METRIC
-   		sum(xc.cycle_therms) as value,
-   		sum(xc.cycle_therms_xeros) as value_xeros,
-   		sum(xc.cycle_therms_cost) as cost,
-   		sum(xc.cycle_therms_cost_xeros) as cost_xeros
+   		sum(coalesce(xc.cycle_therms, 0)) as value,
+   		sum(coalesce(xc.cycle_therms_xeros, 0)) as value_xeros,
+   		sum(coalesce(xc.cycle_therms_cost, 0)) as cost,
+   		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) as cost_xeros
 METRIC
         ));
 //        array_push($metrics, array(
@@ -177,10 +193,10 @@ METRIC
         array_push($metrics, array(
             "name" => "chemical",
             "query" => <<<METRIC
-   		sum(xc.cycle_chemical_strength) as value,
-   		sum(xc.cycle_chemical_xeros_strength) as value_xeros,
-   		sum(xc.cycle_chemical_cost) as cost,
-   		sum(xc.cycle_chemical_xeros_cost) as cost_xeros
+   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
+   		sum(coalesce(xc.cycle_chemical_xeros_strength, 0)) as value_xeros,
+   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
+   		sum(coalesce(xc.cycle_chemical_xeros_cost, 0)) as cost_xeros
 METRIC
         ));
 
@@ -192,8 +208,10 @@ METRIC
                 'chartData' => array()
             );
 
-            $filters['metric'] = $v["query"];
+            $filters['metric'] = $this->u->replaceFilters($v["query"], $filters);
             $conn = $this->get('database_connection');
+
+
 
             $summarySqlParsed = $this->u->replaceFilters($summarySql, $filters);
 
@@ -234,10 +252,14 @@ SELECT
   xm.water_only,
   b.cycles,
   truncate(b.cold_water_value, 0) as cold_water_value,
-  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,
-
+  case xm.water_only
+	when 1 then
+		:water_only_diff * coalesce(b.cold_water_value, 0)
+	else
+		coalesce(b.cold_water_xeros_value, 0)
+  end as cold_water_xeros_value,
   truncate(b.hot_water_value, 0) as hot_water_value,
-  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
+  truncate(coalesce(b.hot_water_xeros_value, 0), 0) as hot_water_xeros_value,
   
   truncate(b.time_total_time, 0) as time_value,
   truncate(b.time_xeros_total_time, 0) as time_xeros_value,
