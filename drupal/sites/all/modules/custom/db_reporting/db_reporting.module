@@ -41,7 +41,7 @@ function db_reporting_update_7203() {
  */
 function db_reporting_update_7204() {
   $scripts = array(
-    "db-update-2014-03-24-alter-xeros-machine"
+    "db-update-2014-03-24-alter-xeros-machine.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -53,7 +53,8 @@ function db_reporting_update_7204() {
  */
 function db_reporting_update_7205() {
   $scripts = array(
-    "db-update-2014-05-21-create-table-xeros-static-values"
+    "db-update-2014-05-21-create-table-xeros-static-values.sql",
+    "ddl-sp-cycle-data.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -79,6 +80,7 @@ function run_external_script($script) {
     }
 
     watchdog("db_reporting", '<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
+    drupal_set_message('<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
 }
 
 function startsWith($haystack, $needle)
