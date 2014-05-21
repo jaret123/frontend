@@ -49,7 +49,7 @@ function db_reporting_update_7204() {
 }
 
 /**
- * Add model field to xeros_machine
+ * Add static values table for the water only metrics and future static values
  */
 function db_reporting_update_7205() {
   $scripts = array(
