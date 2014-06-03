@@ -1,0 +1,24 @@
+<?php
+
+function xeros_analyst_install() {
+
+    // Create the analyst role
+    $role = new stdClass();
+    $role->name = 'xeros analyst';
+    user_role_save($role);
+
+
+    // Grant the role the analyst permissions
+
+    $analyst_role = user_role_load_by_name('xeros analyst');
+    $analyst_role_rid = $analyst_role->rid;
+
+    // Define role permissions
+
+    $analyst_role_permissions = array(
+      'xeros analyst' => TRUE, // Grant Permission
+    );
+
+    user_role_change_permissions($analyst_role_rid, $analyst_role_permissions);
+
+}

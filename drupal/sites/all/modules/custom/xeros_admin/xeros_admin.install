@@ -1,0 +1,24 @@
+<?php
+
+function xeros_admin_install() {
+
+    // Create the admin role
+    $role = new stdClass();
+    $role->name = 'xeros admin';
+    user_role_save($role);
+
+
+    // Grant the role the admin permissions
+
+    $admin_role = user_role_load_by_name('xeros admin');
+    $admin_role_rid = $admin_role->rid;
+
+    // Define role permissions
+
+    $admin_role_permissions = array(
+      'xeros admin' => TRUE, // Grant Permission
+    );
+
+    user_role_change_permissions($admin_role_rid, $admin_role_permissions);
+
+}

@@ -16,3 +16,12 @@ function xeros_analyst_menu() {
 
   return $items;
 }
+
+function xeros_analyst_permission() {
+  return array(
+    'xeros analyst' => array(
+      'title' => t('Access the analyst reports'),
+      'description' => t('Roles with this permission have the ability to access the analyst reports.'),
+    )
+  );
+}
