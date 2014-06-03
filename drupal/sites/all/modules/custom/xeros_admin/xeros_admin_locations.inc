@@ -275,6 +275,8 @@ function location_form_submit($form, &$form_state) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
     }
 
+    $lp->fields['location_id'] = $location_id;
+
     $lp->insert();
 
     // Update Labor Profile Values
@@ -286,6 +288,8 @@ function location_form_submit($form, &$form_state) {
     );
 
     $labor_p->fields['location_id'] = $location_id;
+
+    $form_state['values']['location_id'] = $location_id;
 
     foreach($f as $field) {
       $labor_p->fields[$field] = $form_state['values']['labor_profile'][$field];
