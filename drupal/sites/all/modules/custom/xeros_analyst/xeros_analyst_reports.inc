@@ -3,23 +3,49 @@
 
 function analyst_reports_page() {
 
+  // Start Date for when we started collecting data
+  $origin_date = '2013-09-01';
   $to_date = new DateTime();
 
   $to_date_formatted = $to_date->format('Y-m-d');
 
-  $from_date = new DateTime();
-  $from_date->add(date_interval_create_from_date_string('-30 days'));
-
-  $from_date_formatted = $from_date->format('Y-m-d');
-
+  $from_date_formatted = _date('-30 days');
 
   $output =  '<h3>This is the listing of analyst reports</h3>';
 
-  $output .= '<div>DAI Meter Actual - Last 30 Days - <a href="/api/analyst/reportDAIMeterActual/' . $from_date_formatted . '/' . $to_date_formatted . '">Download</a></div>';
+  $output .= '<h4>DAI Meter Actual</h4>';
 
-  $output .= '<div>DAI Meter Collection - Last 30 Days - <a href="/api/analyst/reportDAIMeterCollection/' . $from_date_formatted . '/' . $to_date_formatted . '">Download</a></div>';
 
-  $output .= '<div>DAI Meter Collection Detail - Last 30 Days - <a href="/api/analyst/reportDAIMeterCollectionDetail/' . $from_date_formatted . '/' . $to_date_formatted . '">Download</a></div>';
+  $report_links = '<div><a href="/api/analyst/{{report_name}}/' . _date('')  . '/' . _date('') . '">Today</a></div>';
+  $report_links .= '<div><a href="/api/analyst/{{report_name}}/' . _date('-1days') . '/' . _date('-1days') . '">Yesterday</a></div>';
+  $report_links .= '<div><a href="/api/analyst/{{report_name}}/' . _date('last sunday') . '/' . _date('') . '">This Week</a></div>';
+  $report_links .= '<div><a href="/api/analyst/{{report_name}}/' . date('Y-m-01') . '/' . _date('') . '">This Month</a></div>';
+  $report_links .= '<div><a href="/api/analyst/{{report_name}}/' . date('Y-01-01') . '/' . _date('') . '">This Year</a></div>';
+  $report_links .= '<div><a href="/api/analyst/{{report_name}}/' . $origin_date . '/' . _date('') . '">All Time</a></div>';
+
+  $output .= _replace_filters($report_links, array('report_name' => 'reportDAIMeterActual'));
+
+  $output .= '<h4>DAI Meter Collection</h4>';
+  $output .= _replace_filters($report_links, array('report_name' => 'reportDAIMeterCollection'));
+
+
+  $output .= '<h4>DAI Meter Collection Detail</h4>';
+  $output .= _replace_filters($report_links, array('report_name' => 'reportDAIMeterCollectionDetail'));
 
   return $output;
+}
+
+function _date($date) {
+
+  $date = new DateTime($date);
+
+  return $date->format('Y-m-d');
+
+}
+
+function _replace_filters($string, $filters) {
+  foreach ($filters as $k => $v) {
+    $string = str_replace('{{' . $k . '}}', $v, $string);
+  }
+  return $string;
 }

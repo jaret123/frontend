@@ -20,5 +20,4 @@ function xeros_admin_install() {
     );
 
     user_role_change_permissions($admin_role_rid, $admin_role_permissions);
-
 }
