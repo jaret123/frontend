@@ -58,3 +58,13 @@ function xeros_admin_menu() {
 
   return $items;
 }
+
+
+function xeros_admin_permission() {
+  return array(
+    'xeros admin' => array(
+      'title' => t('Administer Xeros Machines and Configurations'),
+      'description' => t('Roles with this permission have the ability to access the xeros configuration'),
+    )
+  );
+}
