@@ -22,7 +22,7 @@ class location  {
       ->propertyCondition('status', 1);
 
     if ($company_id != NULL) {
-      $query->fieldCondition('field_company', $company_id);
+      $query->fieldCondition('field_company', 'target_id', (int)$company_id, '=');
     }
 
     $result = $query->execute();
@@ -30,6 +30,8 @@ class location  {
     if (isset($result['node'])) {
       $rows_nids = array_keys($result['node']);
       $rows = entity_load('node', $rows_nids);
+    } else {
+      $rows = entity_load('node', array());
     }
     return $rows;
   }

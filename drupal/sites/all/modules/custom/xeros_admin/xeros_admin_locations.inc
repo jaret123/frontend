@@ -55,7 +55,8 @@ function location_listing($company_id = NULL) {
     $r = array(
       '#theme' => 'table',
       '#header' => $header,
-      '#rows' => $data
+      '#rows' => $data,
+      '#empty' => 'No active locations found for this filter'
     );
 
     $output .= drupal_render($r);

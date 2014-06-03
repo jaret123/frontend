@@ -6,6 +6,20 @@
  * @return mixed
  */
 function xeros_admin_menu() {
+  $items['config/companies'] = array(
+    'title' => 'Company Listing',
+    'page callback' => 'company_listing',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_company.inc'
+  );
+  $items['config/machine/classification/add'] = array(
+    'title' => 'Classification Configuration',
+    'page callback' => 'classification_add_page',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_admin_classification_edit.inc'
+  );
   $items['config/machine/classification/edit'] = array(
     'title' => 'Classification Configuration',
     'page callback' => 'classification_edit_page',
@@ -20,13 +34,6 @@ function xeros_admin_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_admin_classification_edit.inc'
   );
-//  $items['config/machine/classification/delete'] = array(
-//    'title' => 'Delete Configuration',
-//    'page callback' => 'classification_delete_page',
-//    'page arguments' => array(),
-//    'access arguments' => array('xeros admin'),
-//    'file' => 'xeros_admin_classification_delete.inc'
-//  );
   $items['config/machines'] = array(
     'title' => 'Machine Listing',
     'page callback' => 'machine_listing',
