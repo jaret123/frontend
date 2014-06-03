@@ -69,15 +69,26 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
 
     $machine = new machine();
 
-    $rows = $machine->select($location_id, $machine_id);
+    if ( $function_call == 'edit' ) {
+      $rows = $machine->select($location_id, $machine_id);
 
-    $vars = array(
-      'machine_id' => $machine_id,
-      'function_call' => $function_call,
-      'location_id' => $rows[0]['location_id'],
-      'serial_number' => $rows[0]['serial_number'],
-      'machine' => $rows[0]
-    );
+      $vars = array(
+        'machine_id' => $machine_id,
+        'function_call' => $function_call,
+        'location_id' => $rows[0]['location_id'],
+        'serial_number' => $rows[0]['serial_number'],
+        'machine' => $rows[0]
+      );
+    } else {
+      $vars = array(
+        'machine_id' => NULL,
+        'function_call' => $function_call,
+        'location_id' => $location_id,
+        'serial_number' => '',
+        'machine' => ''
+      );
+    }
+
 
     $chem = new chemical_profile();
 
@@ -268,8 +279,9 @@ function machine_form($form, &$form_state, $vars) {
   $form['machine_settings']['unknown_class'] = array(
     '#title' => 'Unknown class number',
     '#type' => 'textfield',
+    '#required' => TRUE,
     '#description' => 'What classification (collection_map_id to be precise) to use when a cycle fails to map for this machine (generally set to 1)',
-    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['unknown_class']) ? $form_state['values']['machine_settings']['machine']['unknown_class'] : '',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['unknown_class']) ? $form_state['values']['machine_settings']['machine']['unknown_class'] : 1,
   );
 
   // Active DAI Fields
