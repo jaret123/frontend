@@ -186,7 +186,7 @@ function machine_form($form, &$form_state, $vars) {
 
   $form['machine_settings']['steam'] = array(
     '#title' => 'Connected to Steam?',
-    '#description' => 'Check if the machine is connected to steam, leave black if not.',
+    '#description' => 'Check if the machine is connected to steam, leave blank if not.',
     '#type' => 'checkbox',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['steam']) ? (int)$form_state['values']['machine_settings']['machine']['steam'] : 0,
   );
