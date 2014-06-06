@@ -190,7 +190,8 @@ function classification_edit_form_submit($form, &$form_state) {
        // save the classification - get the id
       $c = new classification();
       $f = array(
-        'name'
+        'name',
+        'classification_id'
       );
       foreach($f as $field) {
         $c->fields[$field] = $form_state['values']['classification']['settings'][$field];
@@ -322,7 +323,7 @@ function classification($form, &$form_state, $row) {
   if (!empty($row['classification_id'])) {
     $classification_id = $row['classification_id'];
   } else {
-    $classification_id = 0;
+    $classification_id = '';
   }
 
   $classification = array(
@@ -340,8 +341,9 @@ function classification($form, &$form_state, $row) {
     ),
     'classification_id' => array(
       '#title' => 'Classification ID',
-      '#type' => 'markup',
-      '#markup' => '<div>Classification ID: ' . $classification_id . '</div>',
+      '#type' => 'textfield',
+      '#default_value' => $classification_id,
+      '#required' => TRUE,
     ),
     'load_size' => array(
       '#title' => 'Load Size',
@@ -390,6 +392,21 @@ function classification($form, &$form_state, $row) {
       '#required' => TRUE,
     )
   );
+
+  if ( $form_state['#vars']['function_call'] == 'edit') {
+    $classification['classification_id'] = array(
+      '#title' => 'Classification ID',
+      '#type' => 'markup',
+      '#markup' => '<div>Classification ID<br/><strong> ' . $classification_id . '</strong></div>',
+    );
+  } else {
+
+  }
+  //    'classification_id' => array(
+//      '#title' => 'Classification ID',
+//      '#type' => 'markup',
+//      '#markup' => '<div>Classification ID: ' . $classification_id . '</div>',
+//    ),
 // TODO: Run time is in the fields spreadsheet but not in the xeros_local_static_values database.
 //    'run_time' => array(
 //      '#type' => 'textfield',
