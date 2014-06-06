@@ -445,7 +445,7 @@ function classification_listing($machine_id = NULL, $location_id = NULL) {
     );
     $output .= drupal_render($r);
   } else {
-    drupal_set_message(t('No machines found for this location.'));
+    drupal_set_message(t('No classifications found for this location.'));
   }
 
   $output .= '<div><a href="/config/machine/classification/add/' . $location_id . '/' . $machine_id . '">Add another classification</a></div>';
