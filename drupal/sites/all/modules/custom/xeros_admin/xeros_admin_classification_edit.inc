@@ -221,6 +221,7 @@ function classification_edit_form_submit($form, &$form_state) {
       $lsv->fields['classification_id'] = $classification_id;
       $lsv->fields['hot_water_gallons'] = $form_state['values']['classification']['settings']['hot_water_gallons'];
       $lsv->fields['cold_water_gallons'] = $form_state['values']['classification']['settings']['cold_water_gallons'];
+      $lsv->fields['run_time'] = $form_state['values']['classification']['settings']['run_time'];
 
       $xeros_local_static_value_id = $lsv->insert();
 
