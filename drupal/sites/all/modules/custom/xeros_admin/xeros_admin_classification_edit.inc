@@ -168,6 +168,27 @@ function classification_edit_form_validate($form, &$form_state) {
 
   // Validation rules
 
+
+  // Test for new records
+  if ( $form_state['#vars']['function_call'] == 'add' ) {
+
+    // Does the classification already exist>
+    $classification_id = $form_state['values']['classification']['settings']['classification_id'];
+
+    $c = new classification();
+    $rows = $c->select($classification_id);
+
+    if (count($rows) > 0) {
+      form_set_error('classification][settings][classification_id', 'The classification id already exists');
+    }
+  }
+
+  // Tests for editting records
+  if ( $form_state['#vars']['function_call'] == 'edit' ) {
+    // Do nothing
+
+  }
+
   // If there were errors, set error
   if ($errors > 0) {
     form_set_error('Save', 'Called validate');
