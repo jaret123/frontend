@@ -42,7 +42,7 @@ class CSVController extends Controller
         } else {
             $filters = array(
                 'fromDate' => $fromDate,
-                'toDate' => $toDate,
+                'toDate' => $toDate . " 12:59:59",
                 'machineIds' => $this->u->arrayToString($userRole["machine_ids"])
             );
 

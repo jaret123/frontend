@@ -50,7 +50,7 @@ class ReportController extends Controller {
 
             $filters = array(
                 'fromDate' => $fromDate,
-                'toDate' => $toDate,
+                'toDate' => $toDate . ' 12:59:59',
                 'machineIds' => $this->u->arrayToString($userRole["machine_ids"]),
                 'water_only_diff' => $this->u->getStaticValue($conn, "water_only_diff")
             );
