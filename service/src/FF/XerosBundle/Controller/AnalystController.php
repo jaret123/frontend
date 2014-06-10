@@ -61,7 +61,7 @@ class AnalystController extends Controller
             }
 
           $fromDate = $filters['fromDate'];
-          $toDate = $filters['toDate'];
+          $toDate = $filters['toDate'] . ' 12:59:59'; // Append 12:59:59 to make sure we get the whole day
 
           $response = $this->render('FFXerosBundle:CSV:csvfile.html.twig', array(
                                                                                 'fromDate' => $fromDate,
