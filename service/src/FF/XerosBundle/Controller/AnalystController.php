@@ -44,8 +44,7 @@ class AnalystController extends Controller
         } else {
             $filters = array(
                 'fromDate' => $fromDate,
-                'toDate' => $toDate,
-                'machineIds' => $this->u->arrayToString($userRole["machine_ids"])
+                'toDate' => $toDate . ' 23:59:59'
             );
 
             switch ($reportName) {
@@ -95,7 +94,6 @@ select
   WHERE
     reading_timestamp >= ':fromDate'
     AND reading_timestamp <= ':toDate'
-    AND machine_id in ( :machineIds )
   ORDER BY
     dai_meter_actual_id
 SQL;
@@ -117,7 +115,6 @@ SQL;
     WHERE
       dai_write_timestamp >= ':fromDate'
       AND dai_write_timestamp <= ':toDate'
-      AND machine_id in ( :machineIds )
     ORDER BY
       id
 SQL;
@@ -145,7 +142,6 @@ SQL;
             WHERE
               dai_write_timestamp >= ':fromDate'
               AND dai_write_timestamp <= ':toDate'
-              AND machine_id in ( :machineIds )
           )
       ORDER BY id
 SQL;
