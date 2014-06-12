@@ -76,15 +76,29 @@ SQL;
 
                     // Get machines associated with the location in the session value sessionLocation
                     $sql = <<<SQL
-
-                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                    select
+                        machine_id,
+                        serial_number,
+                        fc.nid as company_id,
+                        fl.nid as location_id
+                    from
                             xeros_machine as xm
-                            left join field_data_field_company as fc
-                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
-                            left join field_data_field_location as fl
-                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
-                    where fl.field_location_target_id = :location_id
+                            left join node as fl
+                              on xm.location_id = fl.nid and fl.type = 'location'
+                            left join field_data_field_company as flc
+                              on fl.nid = flc.entity_id and flc.entity_type = 'node' and flc.bundle = 'location' and flc.delta = 0
+                            left join node as fc
+                              on flc.field_company_target_id = fc.nid and fc.type = 'company'
+                    where fl.nid = :location_id
 SQL;
+//                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+//                            xeros_machine as xm
+//                            left join field_data_field_company as fc
+//                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+//                            left join field_data_field_location as fl
+//                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+//                    where fl.field_location_target_id = :location_id
+//SQL;
                     $sqlParsed = $this->replaceFilters($sql, array("location_id" => $locationId));
                     $machineData = $conn->fetchAll($sqlParsed);
                     foreach ( $machineData as $record ) {
@@ -115,15 +129,32 @@ SQL;
                     // Get machines associated with the company
 
                     $sql = <<<SQL
-
-                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                    select
+                        machine_id,
+                        serial_number,
+                        fc.nid as company_id,
+                        fl.nid as location_id
+                    from
                             xeros_machine as xm
-                            left join field_data_field_company as fc
-                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
-                            left join field_data_field_location as fl
-                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
-                    where fc.field_company_target_id = :company_id
+                            left join node as fl
+                              on xm.location_id = fl.nid and fl.type = 'location'
+                            left join field_data_field_company as flc
+                              on fl.nid = flc.entity_id and flc.entity_type = 'node' and flc.bundle = 'location' and flc.delta = 0
+                            left join node as fc
+                              on flc.field_company_target_id = fc.nid and fc.type = 'company'
+                    where fc.nid = :company_id
+
 SQL;
+
+//
+//                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+//                            xeros_machine as xm
+//                            left join field_data_field_company as fc
+//                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+//                            left join field_data_field_location as fl
+//                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+//                    where fc.field_company_target_id = :company_id
+
                   // TODO: Need to deal with users who have not been assigned to a company
                     $sqlParsed = $this->replaceFilters($sql, array("company_id" => $userRole["company_id"]));
                     $machineData = $conn->fetchAll($sqlParsed);
