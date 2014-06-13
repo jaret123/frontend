@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_mapper_menu() {
+
+  $items['config/mapper/cycles/list'] = array(
+    'title' => 'Cycles Listing',
+    'page callback' => 'cycle_listing_page',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_mapper_cycle_listing.inc'
+  );
+  $items['config/mapper/collection_map_detail'] = array(
+    'title' => 'Collection Map Detail',
+    'page callback' => 'collection_map_detail',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_mapper_collection_map_detail.inc'
+  );
+  $items['config/mapper/dai_meter_collection'] = array(
+    'title' => 'DAI Meter Collection',
+    'page callback' => 'dai_meter_collection',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_mapper_dai_meter_collection.inc'
+  );
+  $items['config/mapper/dai_meter_collection_detail'] = array(
+    'title' => 'DAI Meter Collection',
+    'page callback' => 'dai_meter_collection_detail',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_mapper_dai_meter_collection_detail.inc'
+  );
+  
+  return $items;
+}
