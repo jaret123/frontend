@@ -2,6 +2,9 @@
 (function ($) {
     Drupal.behaviors.xerosMapper = {
         attach: function (context, settings) {
+
+            jQuery('.classification_id').append('<div class="fa fa-caret-down classification__show"></div>');
+
             var els = {};
 
             var showDetails = function() {
@@ -33,29 +36,59 @@
             els.rows = els.table.find('tr');
             els.expandButtons = els.rows.find('.expand');
             els.closeButtons = els.rows.find('.close');
-            els.classificationCells = els.rows.find('.classification_id');
+            els.classificationCells = $('.classification__show');
 
             els.detailsUrl = '/config/mapper/dai_meter_collection_detail/{{id}}';
 
             els.classificationUrl = '/config/mapper/classification/{{id}}';
-
 
             /**
              * Show the details of a row
              */
             els.expandButtons.on('click', showDetails);
 
+            var submitClassification = function(collectionId, classificationId) {
+                console.log('Submit Classification', collectionId, classificationId);
+            };
+
             var showClassification = function() {
                 var row = $(this).parents('tr');
-                var cell = this;
+                var el = this;
                 var id = parseInt($(row[0]).find('.machine_id').html(), 10);
                 $.ajax({
                     url: els.classificationUrl.replace('{{id}}', id), // TODO: Needs to be the Machine ID
                     success: function(template) {
                         //row.after('<tr class="classifications" data-id="' + id + '"><td></td><td colspan="8">' + template + '</td></tr>');
-                        $(cell).append(
-                            '<div class="classification-form" data-id="' + id +  '"><div class="classification__close">X</div>' + template + '</div>'
+                        $(el).after(
+                            '<div class="classification-form" data-id="' + id +  '">' + template + '<div class="classification__close button">Cancel</div><div class="classification__submit button inactive">Save</div></div>'
                         );
+//                        $('.classification-form').on('click', function(e) {
+//                            e.stopPropagation;
+//                        });
+
+
+
+                        $('.classification-form tr').on('click', function(e) {
+                            e.stopPropagation;
+                            $(this).siblings().removeClass('active');
+                            $(this).addClass('active');
+                            $('.classification__submit').removeClass('inactive');
+
+                        });
+
+                        $('.classification__submit').on('click', function() {
+                            // TODO - check to see if I am active
+
+                            // TODO - get the active classification id from the table
+                            var classificationId = 1;
+                            // TODO - get the collection id from the row
+                            var collectionId = 1;
+                            submitClassification(collectionId, classificationId);
+
+                            // TODO - Close this window and put something in the Drupal Set Message (can we do that with JS)
+                        });
+
+
                         position(row.attr('data-id'));
                         // Add a close button
                         $('.classification__close').on('click', function(e) {
@@ -96,6 +129,8 @@
                     }
                 }
             }
+
+
 
         }
     }
