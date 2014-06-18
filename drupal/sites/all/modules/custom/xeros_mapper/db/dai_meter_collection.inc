@@ -17,19 +17,26 @@ class dai_meter_collection extends orm_abstract {
     ;
     $select->leftJoin('xeros_dai_meter_actual', 'b', 'a.dai_meter_actual_id = b.dai_meter_actual_id');
 
+    $select->fields('b', array(
+        'classification_id',
+      ));
+
     $select->fields('a', array(
         'id',
         'dai_write_timestamp',
         'machine_identifier',
-        'location_identifier',
+        //'location_identifier',
         'dai_meter_actual_id'
       ));
 
     $select->fields('b', array(
         'run_time',
-        'classification_id',
         'machine_id'
       ));
+
+
+    // Only select unknown classifications
+    $select->condition('b.classification_id', 1);
 
     if ($location_id != NULL) {
       $select->condition('a.location_identifier', $location_id);

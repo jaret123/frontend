@@ -42,13 +42,13 @@ function dai_meter_collection_form($id) {
 
   // TODO - We need the machine ID on this query
   $header = array(
+    'classification_id' => 'Classification ID',
     'id' => 'ID',
     'dai_write_timestamp' => 'Time Stamp',
     'machine_identifier' => 'Machine Identifier',
-    'location_identifier' => 'Location ID',
     'dai_meter_actual_id' => 'DAI Meter Actual ID',
     'run_time' => 'Run Time',
-    'classification_id' => 'Classification ID',
+
     'machine_id' => 'Machine ID',
     'controls' => 'Actions'
   );
