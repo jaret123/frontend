@@ -35,6 +35,13 @@ function xeros_mapper_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_mapper_dai_meter_collection_detail.inc'
   );
+  $items['config/mapper/classification'] = array(
+    'title' => 'Classifications List',
+    'page callback' => 'classification_listing',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'xeros_mapper_classifications.inc'
+  );
   
   return $items;
 }

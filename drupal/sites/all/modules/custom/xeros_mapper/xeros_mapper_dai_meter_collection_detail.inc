@@ -4,7 +4,7 @@ require_once('db/dai_meter_collection_detail.inc');
 
 function dai_meter_collection_detail($collection_id) {
 
-  $output =  '<div>This is the listing page for collection_id: ' . $collection_id . '</div>';
+  $output =  '';
 
   $dai_meter_collection_detail = new dai_meter_collection_detail();
 
@@ -28,5 +28,7 @@ function dai_meter_collection_detail($collection_id) {
 
   $output .= drupal_render($r);
 
-  return $output;
+  print $output;
+  drupal_exit();
+  //return $output;
 }

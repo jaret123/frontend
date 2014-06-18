@@ -4,8 +4,8 @@ require_once('db/collection_map_detail.inc');
 
 function collection_map_detail($mapping_id) {
 
-  $output =  '<div>This is the cycle listing page for machine: ' . $mapping_id . '</div>';
-
+  $output =  '';
+  $output .= '<tr data-id="' . $mapping_id . '"><td></td><td colspan="8">';
   $collection_map_detail = new collection_map_detail();
 
   $rows = $collection_map_detail->select_by_mapping_id($mapping_id);
@@ -26,5 +26,9 @@ function collection_map_detail($mapping_id) {
 
   $output .= drupal_render($r);
 
-  return $output;
+  $output .= '</td></tr>';
+
+  print $output;
+  drupal_exit();
+  //return $output;
 }
