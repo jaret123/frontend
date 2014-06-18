@@ -1,29 +1,9 @@
 <?php
 
-
-require_once drupal_get_path('module', 'xeros_admin') . '/db/machine_classification.inc';
-
 function classification_listing($machine_id = NULL) {
   $output =  '<div>This is the classification listing for machine: ' . $machine_id . '</div>';
 
-  $mc = new machine_classification();
-
-  $mc->id = $machine_id;
-
-  $classification_set = $mc->select_by_machine($machine_id);
-
-  $cu = new chemical_usage;
-
-//  foreach ( $classification_set as $id => $c) {
-//    $cu_rows = $cu->select($c['machine_classification_id']);
-//    // For the ajax callbacks we are going to have to let the chemical usage delete button be
-//    // aware of it's parent container ids (classification index)
-//    foreach ($cu_rows as $j => $v) {
-//      $cu_rows[$j]['classification_set_index'] = $id;
-//      $cu_rows[$j]['chemical_usage_set_index'] = $j;
-//    }
-//    $classification_set[$id]['chemical_usage_set'] = $cu_rows;
-//  }
+  $classification_set = select_by_machine($machine_id);
 
   if (count($classification_set) > 0) {
 
@@ -32,17 +12,10 @@ function classification_listing($machine_id = NULL) {
 //    }
     // Make a table
     $header = array(
+      t('Name'),
       t('Machine Classification ID'),
       t('Machine ID'),
       t('Classification ID'),
-      t('Load Size'),
-      t('Xeros Load Size'),
-      t('Manual Labor Time'),
-      t('Name'),
-      t('Local Static Value ID'),
-      t('Xeros Hot Water Usage'),
-      t('Xeros Cold Water Usage'),
-      t('Xeros Run Time')
 //      t('Edit')
     );
     //$output .= theme('table', array('header' => $header, 'rows' => $rows));
@@ -59,4 +32,53 @@ function classification_listing($machine_id = NULL) {
 
   print $output;
   drupal_exit();
+}
+
+/**
+ * @param $machine_id
+ *
+ * @return array
+ *
+ * Get the data and format it
+ */
+function select_by_machine($machine_id) {
+
+  $select = db_select('xeros_machine_classification', 'mc');
+  $select->leftJoin('xeros_classification', 'c', 'mc.classification_id = c.classification_id');
+  $select->fields('c', array(
+      'name'
+    ));
+  $select->fields('mc', array(
+      'machine_classification_id',
+      'machine_id',
+      'classification_id',
+    ));
+
+  if ($machine_id != NULL) {
+    $select->condition('mc.machine_id', $machine_id);
+  }
+
+  $select->orderBy('mc.classification_id');
+
+  $entries = $select->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  //
+  // Structure the data for the table
+  //
+  $rows = array();
+  if (!empty($entries)) {
+    foreach ($entries as $id => $row) {
+      // Add data to the cells
+      foreach ($row as $key => $col) {
+        $rows[$row['machine_classification_id']]['data'][$key] = array(
+          'data' => check_plain($col),
+          'class' => check_plain($key)
+        );
+        // Add the data as data attributes on the row as a convenience for the js events
+        $rows[$row['machine_classification_id']]['data-' . $key] = $col;
+      }
+    }
+  }
+
+  return $rows;
 }

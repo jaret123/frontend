@@ -1,0 +1,7 @@
+.table-select-processed > tbody > tr > td.classification_id, .expand {
+    color: blue;
+}
+
+.table-select-processed > tbody > tr >  td.classification_id:hover, .expand:hover {
+    color: red;
+}
