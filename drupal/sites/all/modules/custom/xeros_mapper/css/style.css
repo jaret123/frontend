@@ -40,3 +40,11 @@
 .classification-form table {
     width: 800px;
 }
+
+.classification-form tr:hover {
+    background-color: #ddd;
+}
+
+.classification-form tr:active {
+    background-color: #aaa;
+}
