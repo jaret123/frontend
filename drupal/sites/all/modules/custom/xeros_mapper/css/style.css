@@ -1,6 +1,14 @@
 .table-select-processed > tbody > tr > td.classification_id, .expand {
     color: blue;
 }
+.table-select-processed > tbody > tr > td.classification_id:after, .expand:after {
+    content: '\f107';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    margin:0px 0px 0px 10px;
+    text-decoration:none;
+}
 
 .table-select-processed > tbody > tr >  td.classification_id:hover, .expand:hover {
     color: red;

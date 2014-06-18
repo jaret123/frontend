@@ -36,7 +36,7 @@ function dai_meter_collection_form($id) {
     '#type' => 'item',
     '#title' => '',
     '#markup' => '
-      <span class="fa close">Hide Details</span>&nbsp;<span class="expand">Show Details</span>
+      <span class="expand">Show Details</span>
     '
   );
 
