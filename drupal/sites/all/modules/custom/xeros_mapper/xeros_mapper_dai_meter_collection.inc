@@ -90,9 +90,16 @@ function dai_meter_collection_form($id) {
 
   $form['pager'] = array('#markup' => theme('pager'));
 
-  $form['submit'] = array(
+  $form['edit-submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Submit'),
+    '#value' => t('Reclassify Selected'),
+    '#name' => 'default-submit'
+  );
+
+  $form['classify-submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Re-classify'),
+    '#name' => 'classify-submit'
   );
 
   $form['#attached']['js'] = array(
@@ -112,7 +119,7 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
   $output = 'Hello';
 
   // Submit classification
-  if ( $form_state['triggering_element']['#id'] ) {
+  if ( $form_state['triggering_element']['#id'] == 'edit-classify-submit') {
 
     $collection_id = $form_state['values']['classify-collection_id'];
     $classification_id = $form_state['values']['classify-classification_id'];

@@ -3,6 +3,10 @@
     Drupal.behaviors.xerosMapper = {
         attach: function (context, settings) {
 
+            $(document).ready(function() {
+                // Hide the classify button
+                $('#edit-classify-submit').css('display', 'none');
+            });
             jQuery('.classification_id').append('<div class="fa fa-caret-down classification__show"></div>');
 
             var els = {};
@@ -108,17 +112,16 @@
                             '<div class="classification-form" data-id="' + id + '">' +
                                 template +
                                 '<div class="classification__close button">Cancel</div>' +
-                                '<input type="submit" id="classify-submit" name="op" value="Submit" class="form-submit inactive">' +
                                 '</div>'
                         );
+                        $('#edit-classify-submit').clone().appendTo('.classification-form').css('display', 'inline-block').addClass('inactive');
 
-                        $('#classify-submit').on('click', function(e) {
-                            e.preventDefault();
 
+                        $('#edit-classify-submit').on('click', function(e) {
                             if ( $(e.target).hasClass('inactive') ) {
-                                // Do nothing;
+                                e.preventDefault();
                             } else {
-                                $('#dai-meter-collection-form').submit();
+                                // Allow form to submit
                             }
                         });
 
@@ -141,7 +144,7 @@
                             $('#classify-classification_id').val(classificationId);
 
                             // Remove the inactive class from the submit button
-                            $('#classify-submit').removeClass('inactive');
+                            $('#edit-classify-submit').removeClass('inactive');
 
                         });
 
