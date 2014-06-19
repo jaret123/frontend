@@ -1,4 +1,19 @@
 <?php
+/**
+ * Interface for remapping a cycle reading using the mapper web service.
+ *
+ * sbeadycare.xeroscleaning.com/xsvc/rs/unmatch/{collection_id}
+ * sbeadycare.xeroscleaning.com/xsvc/rs/match/{collection_id}
+ * sbeadycare.xeroscleaning.com/xsvc/rs/normalize/{collection_id}
+ * sbeadycare.xeroscleaning.com/xsvc/rs/classify/{collection_id}/{classification_id}
+ *
+ *
+ *  On reclassifying a single record call classify, unmatch, then match.
+ *  This is done with an ajax call in the classification popup.
+ *
+ *  On reclassifying a group, call unmatch then match for each record in the group.
+ *  This is done in the submit handler of the form.
+ */
 
 /**
  * Implements hook_menu()
@@ -45,3 +60,4 @@ function xeros_mapper_menu() {
   
   return $items;
 }
+

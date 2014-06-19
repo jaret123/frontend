@@ -7,13 +7,24 @@
 
             var els = {};
 
+            els.rsUrl = 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs';
+
+            els.rs = {
+                // Create a new classification mapping
+                'classify' : function(collection_id, classification_id) { return els.rsUrl + '/classify/' + collection_id + '/' + classification_id },
+                // Unmap a record
+                'unmatch' : function(collection_id) { return els.rsUrl + '/unmatch/' + collection_id },
+                // Try to automatch a record
+                'match' : function(collection_id) { return els.rsUrl + '/match/' + collection_id },
+            };
+
             var showDetails = function() {
                 var row = $(this).parents('tr');
                 var id = $(row[0]).find('input[type=checkbox]').val();
                 $.ajax({
                     url: els.detailsUrl.replace('{{id}}', id),
                     success: function(template) {
-                        row.after('<tr class="details" data-id="' + id + '"><td colspan="9"><div class="details__close">X</div>' + template + '</td></tr>');
+                        row.after('<tr class="details" data-id="' + id + '"><td colspan="9"><div class="details__close button">close</div>' + template + '</td></tr>');
                         position(id);
                         // Add a close button
                         $('.details__close').on('click', function(e) {
@@ -49,6 +60,27 @@
 
             var submitClassification = function(collectionId, classificationId) {
                 console.log('Submit Classification', collectionId, classificationId);
+
+                $.ajax({
+                   url: els.rs.classify(collectionId, classificationId),
+                   dataType: 'json',
+                   success: function() {
+                       $.ajax({
+                           url: els.rs.unmatch(collectionId),
+                           dataType: 'json',
+                           success: function() {
+                               $.ajax({
+                                   url: els.rs.match(collectionId),
+                                   dataType: 'json',
+                                   success: function() {
+                                       console.log('Success - TODO: Redraw the table row.');
+                                   }
+                               })
+                           }
+                       })
+                   }
+
+                });
             };
 
             var showClassification = function() {
@@ -76,16 +108,27 @@
 
                         });
 
+//                        $('.classification-form').on('dragstart', handleDragStart);
+//                        $('.classification-form').on('dragend', handleDragEnd);
+
                         $('.classification__submit').on('click', function() {
                             // TODO - check to see if I am active
+                            if ( $(this).hasClass('.inactive' )) {
+                                // Do nothing
+                            } else {
+                                var form = $(this).parent();
+                                var data = form.find('tr.active').data();
 
-                            // TODO - get the active classification id from the table
-                            var classificationId = 1;
-                            // TODO - get the collection id from the row
-                            var collectionId = 1;
-                            submitClassification(collectionId, classificationId);
+                                // TODO - get the active classification id from the table
+                                var classificationId = data.classification_id;
+                                // TODO - get the collection id from the row
+                                var collectionId = form.parent().parent().data().id;
 
-                            // TODO - Close this window and put something in the Drupal Set Message (can we do that with JS)
+                                submitClassification(collectionId, classificationId);
+
+                                // TODO - Close this window and put something in the Drupal Set Message (can we do that with JS)
+                            }
+
                         });
 
 
@@ -129,6 +172,21 @@
                     }
                 }
             }
+
+//            var handleDragStart = function(e) {
+//                var offset = $(this).offset();
+//                var relativeX = (e.originalEvent.x - offset.left);
+//                var relativeY = (e.originalEvent.y - offset.top);
+//
+//                console.log("Start - X: " + relativeX + "  Y: " + relativeY);
+//            }
+//            var handleDragEnd = function(e) {
+//                var offset = $(this).offset();
+//                var relativeX = (e.originalEvent.x - offset.left);
+//                var relativeY = (e.originalEvent.y - offset.top);
+//
+//                console.log("End - X: " + relativeX + "  Y: " + relativeY);
+//            }
 
 
 

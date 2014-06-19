@@ -95,17 +95,76 @@ function dai_meter_collection_form($id) {
   return $form;
 }
 
+function unmatch($collection_id) {
+  return 'http://' . $_SERVER['HTTP_HOST'] . '/xsvc/rs/unmatch/' . $collection_id;
+}
+
+function match($collection_id) {
+  return 'http://' . $_SERVER['HTTP_HOST'] . '/xsvc/rs/match/' . $collection_id;
+}
+
 function dai_meter_collection_form_submit(&$form, &$form_state ) {
 
   $output = 'Hello';
 
-  foreach ($form_state['values']['table'] as $field) {
-    if ($field != 0) {
+  foreach ($form_state['values']['table'] as $collection_id) {
+    if ($collection_id != 0) {
       // Process selected record
+
+      // create curl resource
+      $ch = curl_init();
+
+      // set url
+      curl_setopt($ch, CURLOPT_URL, unmatch($collection_id));
+
+      //return the transfer as a string
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+      // $output contains the output string
+      $output = curl_exec($ch);
+
+      // If we get a 200 message, then log and continue, else quit.
+      if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) == 200 )  {
+        watchdog('xeros_mapper', $output, WATCHDOG_INFO);
+      } else {
+        watchdog('xeros_mapper', curl_error($ch), WATCHDOG_NOTICE);
+        form_set_error('Collection ID: ' . $collection_id . ' could not be unmapped, check the logs.');
+      }
+
+      curl_reset($ch);
+      // TODO: Add error checking based on message in or curl response.
+
+      // set url
+      curl_setopt($ch, CURLOPT_URL, match($collection_id));
+
+      //return the transfer as a string
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+      // $output contains the output string
+      $output = curl_exec($ch);
+
+      watchdog('xeros_mapper', $output, WATCHDOG_INFO);
+
+      // TODO: Add error checking based on message in or curl response.
+
+      // close curl resource to free up system resources
+      curl_close($ch);
+
+      // If we get a 200 message, then log and continue, else quit.
+      if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) == 200 )  {
+        watchdog('xeros_mapper', $output, WATCHDOG_INFO);
+      } else {
+        watchdog('xeros_mapper', curl_error($ch), WATCHDOG_NOTICE);
+        form_set_error('Collection ID: ' . $collection_id . ' could not be mapped, check the logs.');
+      }
+
+      //TODO: Can we do a quick animation on the form rows after updating (add a class - newly updated>);
     } else {
       // Do nothing
     }
   }
+
+
 
   return $form;
 }

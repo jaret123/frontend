@@ -8,6 +8,13 @@
     padding: 5px;
     border-radius: 5px;
     margin: 10px;
+    cursor: pointer;
+}
+
+.button.inactive {
+    border: 1px solid #ddd;
+    color: #ddd;
+    cursor: auto;
 }
 
 .classification__show, .expand {
@@ -22,10 +29,16 @@
     background: yellow;
     border: 1px solid blue;
 }
-
+.details table {
+    margin: 0;
+}
 .details td {
     padding: 10px;
     color: initial;
+}
+.details .details__close {
+    margin: 0;
+    float: right;
 }
 
 .classification-form {
@@ -35,6 +48,11 @@
     background: yellow;
     padding: 10px;
     z-index: 10;
+
+}
+.classification__drag {
+    cursor: move;
+    float: right;
 }
 .classification_id {
     position: relative;
@@ -42,6 +60,7 @@
 
 .classification-form table {
     width: 800px;
+    margin: 0;
 }
 
 .classification-form tr:hover {
@@ -50,4 +69,8 @@
 
 .classification-form tr:active {
     background-color: #aaa;
+}
+
+.classification-form tr.active {
+    background-color: #66CCFF;
 }
