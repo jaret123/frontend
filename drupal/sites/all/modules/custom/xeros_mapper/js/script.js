@@ -61,19 +61,31 @@
             var submitClassification = function(collectionId, classificationId) {
                 console.log('Submit Classification', collectionId, classificationId);
 
+                // TODO: At each stage, check for a 200 (success), for now use the complete method.
+
+                // TODO: Console log the responses from the web service.
                 $.ajax({
                    url: els.rs.classify(collectionId, classificationId),
-                   dataType: 'json',
-                   success: function() {
+                   dataType: 'text',
+                   complete: function() {
+                       // Check for ID - data back is text not JSON because of bug in web service
+                       // classify web service has a bug where it returns a 500 response instead of a 200 even though
+                       // classify is successful.
+                       // Make this a complete method instead of success method for now.
+
+
                        $.ajax({
                            url: els.rs.unmatch(collectionId),
                            dataType: 'json',
-                           success: function() {
+                           complete: function() {
+                               // Check for a return response of "true" - string not JSON
+                               // This method will return a 200 if it does an unmatch.
                                $.ajax({
                                    url: els.rs.match(collectionId),
                                    dataType: 'json',
-                                   success: function() {
-                                       console.log('Success - TODO: Redraw the table row.');
+                                   complete: function() {
+                                       // Check for a string return - id not JSON
+
                                    }
                                })
                            }
@@ -82,6 +94,7 @@
 
                 });
             };
+
 
             var showClassification = function() {
                 var row = $(this).parents('tr');
@@ -92,45 +105,45 @@
                     success: function(template) {
                         //row.after('<tr class="classifications" data-id="' + id + '"><td></td><td colspan="8">' + template + '</td></tr>');
                         $(el).after(
-                            '<div class="classification-form" data-id="' + id +  '">' + template + '<div class="classification__close button">Cancel</div><div class="classification__submit button inactive">Save</div></div>'
+                            '<div class="classification-form" data-id="' + id + '">' +
+                                template +
+                                '<div class="classification__close button">Cancel</div>' +
+                                '<input type="submit" id="classify-submit" name="op" value="Submit" class="form-submit inactive">' +
+                                '</div>'
                         );
-//                        $('.classification-form').on('click', function(e) {
-//                            e.stopPropagation;
-//                        });
 
+                        $('#classify-submit').on('click', function(e) {
+                            e.preventDefault();
 
+                            if ( $(e.target).hasClass('inactive') ) {
+                                // Do nothing;
+                            } else {
+                                $('#dai-meter-collection-form').submit();
+                            }
+                        });
 
                         $('.classification-form tr').on('click', function(e) {
                             e.stopPropagation;
                             $(this).siblings().removeClass('active');
                             $(this).addClass('active');
-                            $('.classification__submit').removeClass('inactive');
+
+                            // Get the classification-form div and reference data from there
+                            var form = $(this).closest('.classification-form');
+
+                            // The collectionId is on the parent tr
+                            var collectionId = form.closest('tr').data().id;
+
+                            // The classificationId is on the descendant active row.
+                            var classificationId = form.find('tr.active').data().classification_id;
+
+                            // Place values in hidden field in form
+                            $('#classify-collection_id').val(collectionId);
+                            $('#classify-classification_id').val(classificationId);
+
+                            // Remove the inactive class from the submit button
+                            $('#classify-submit').removeClass('inactive');
 
                         });
-
-//                        $('.classification-form').on('dragstart', handleDragStart);
-//                        $('.classification-form').on('dragend', handleDragEnd);
-
-                        $('.classification__submit').on('click', function() {
-                            // TODO - check to see if I am active
-                            if ( $(this).hasClass('.inactive' )) {
-                                // Do nothing
-                            } else {
-                                var form = $(this).parent();
-                                var data = form.find('tr.active').data();
-
-                                // TODO - get the active classification id from the table
-                                var classificationId = data.classification_id;
-                                // TODO - get the collection id from the row
-                                var collectionId = form.parent().parent().data().id;
-
-                                submitClassification(collectionId, classificationId);
-
-                                // TODO - Close this window and put something in the Drupal Set Message (can we do that with JS)
-                            }
-
-                        });
-
 
                         position(row.attr('data-id'));
                         // Add a close button
@@ -172,24 +185,6 @@
                     }
                 }
             }
-
-//            var handleDragStart = function(e) {
-//                var offset = $(this).offset();
-//                var relativeX = (e.originalEvent.x - offset.left);
-//                var relativeY = (e.originalEvent.y - offset.top);
-//
-//                console.log("Start - X: " + relativeX + "  Y: " + relativeY);
-//            }
-//            var handleDragEnd = function(e) {
-//                var offset = $(this).offset();
-//                var relativeX = (e.originalEvent.x - offset.left);
-//                var relativeY = (e.originalEvent.y - offset.top);
-//
-//                console.log("End - X: " + relativeX + "  Y: " + relativeY);
-//            }
-
-
-
         }
     }
 } )(jQuery);

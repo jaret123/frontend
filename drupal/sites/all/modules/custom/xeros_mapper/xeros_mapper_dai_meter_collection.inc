@@ -76,6 +76,18 @@ function dai_meter_collection_form($id) {
     //'#empty' => t('No records found'),
   );
 
+  $form['classify-collection_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
+    '#attributes' => array('id' => 'classify-collection_id')
+  );
+
+  $form['classify-classification_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
+    '#attributes' => array('id' => 'classify-classification_id')
+  );
+
   $form['pager'] = array('#markup' => theme('pager'));
 
   $form['submit'] = array(
@@ -95,6 +107,61 @@ function dai_meter_collection_form($id) {
   return $form;
 }
 
+function dai_meter_collection_form_submit(&$form, &$form_state ) {
+
+  $output = 'Hello';
+
+  // Submit classification
+  if ( $form_state['triggering_element']['#id'] ) {
+
+    $collection_id = $form_state['values']['classify-collection_id'];
+    $classification_id = $form_state['values']['classify-classification_id'];
+
+    // create curl resource
+    $ch = curl_init();
+
+    $output = call_service($ch, classify($collection_id, $classification_id), 'classify');
+
+    $output = call_service($ch, unmatch($collection_id), 'unmatch');
+
+    $output = call_service($ch, match($collection_id), 'match');
+
+    // close curl resource to free up system resources
+    curl_close($ch);
+
+  } else {
+    // Remap all selected fields in the form
+    foreach ($form_state['values']['table'] as $collection_id) {
+      if ($collection_id != 0) {
+        // Process selected record
+
+        // create curl resource
+        $ch = curl_init();
+
+        call_service($ch, unmatch($collection_id), 'unmatch');
+
+        call_service($ch, match($collection_id), 'match');
+
+        // close curl resource to free up system resources
+        curl_close($ch);
+
+
+        //TODO: Can we do a quick animation on the form rows after updating (add a class - newly updated>);
+      } else {
+        // Do nothing
+      }
+    }
+  }
+
+
+
+  return $form;
+}
+
+function classify($collection_id, $classification_id) {
+  return 'http://' . $_SERVER['HTTP_HOST'] . '/xsvc/rs/classify/' . $collection_id . '/' . $classification_id;
+}
+
 function unmatch($collection_id) {
   return 'http://' . $_SERVER['HTTP_HOST'] . '/xsvc/rs/unmatch/' . $collection_id;
 }
@@ -103,70 +170,37 @@ function match($collection_id) {
   return 'http://' . $_SERVER['HTTP_HOST'] . '/xsvc/rs/match/' . $collection_id;
 }
 
-function dai_meter_collection_form_submit(&$form, &$form_state ) {
 
-  $output = 'Hello';
+function call_service(&$ch, $url, $call) {
 
-  foreach ($form_state['values']['table'] as $collection_id) {
-    if ($collection_id != 0) {
-      // Process selected record
+  // set url
+  curl_setopt($ch, CURLOPT_URL, $url);
 
-      // create curl resource
-      $ch = curl_init();
+  //return the transfer as a string
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-      // set url
-      curl_setopt($ch, CURLOPT_URL, unmatch($collection_id));
+  // $output contains the output string
+  $output = curl_exec($ch);
 
-      //return the transfer as a string
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-      // $output contains the output string
-      $output = curl_exec($ch);
-
-      // If we get a 200 message, then log and continue, else quit.
-      if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) == 200 )  {
-        watchdog('xeros_mapper', $output, WATCHDOG_INFO);
-      } else {
-        watchdog('xeros_mapper', curl_error($ch), WATCHDOG_NOTICE);
-        form_set_error('Collection ID: ' . $collection_id . ' could not be unmapped, check the logs.');
-      }
-
-      curl_reset($ch);
-      // TODO: Add error checking based on message in or curl response.
-
-      // set url
-      curl_setopt($ch, CURLOPT_URL, match($collection_id));
-
-      //return the transfer as a string
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-      // $output contains the output string
-      $output = curl_exec($ch);
-
-      watchdog('xeros_mapper', $output, WATCHDOG_INFO);
-
-      // TODO: Add error checking based on message in or curl response.
-
-      // close curl resource to free up system resources
-      curl_close($ch);
-
-      // If we get a 200 message, then log and continue, else quit.
-      if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) == 200 )  {
-        watchdog('xeros_mapper', $output, WATCHDOG_INFO);
-      } else {
-        watchdog('xeros_mapper', curl_error($ch), WATCHDOG_NOTICE);
-        form_set_error('Collection ID: ' . $collection_id . ' could not be mapped, check the logs.');
-      }
-
-      //TODO: Can we do a quick animation on the form rows after updating (add a class - newly updated>);
-    } else {
-      // Do nothing
-    }
+  // Success - we a 200 message, then log and continue, else quit.
+  if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) == 200 )  {
+    // watchdog('xeros_mapper', $output, WATCHDOG_INFO); -- There is a bug in one of the services, so we are not going to test for a 200
+  // Error
+  } else {
+    //watchdog('xeros_mapper', curl_error($ch), WATCHDOG_NOTICE); -- There is a bug in the service so we are not checking status
+    //form_set_error('Error: ' . $url . ' ' . $call); -- There is a bug in the service so we are not checking status
   }
 
+  // Complete
+  watchdog('xeros_mapper', 'complete - ' . $url, WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - ' . curl_error($ch), WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - ' . $output, WATCHDOG_NOTICE);
 
+  drupal_set_message('Records updated');
 
-  return $form;
+  curl_reset($ch);
+
+  return $output;
 }
 
 function dai_meter_collection($id) {
