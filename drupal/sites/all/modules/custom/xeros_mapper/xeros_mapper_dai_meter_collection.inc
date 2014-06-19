@@ -192,9 +192,10 @@ function call_service(&$ch, $url, $call) {
   }
 
   // Complete
-  watchdog('xeros_mapper', 'complete - ' . $url, WATCHDOG_NOTICE);
-  watchdog('xeros_mapper', 'complete - ' . curl_error($ch), WATCHDOG_NOTICE);
-  watchdog('xeros_mapper', 'complete - ' . $output, WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - url - ' . $url, WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - response-code - ' . curl_getinfo( $ch, CURLINFO_HTTP_CODE ) , WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - curl_error - ' . curl_error($ch) , WATCHDOG_NOTICE);
+  watchdog('xeros_mapper', 'complete - output - ' . $output, WATCHDOG_NOTICE);
 
   drupal_set_message('Records updated');
 
