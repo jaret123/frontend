@@ -7,7 +7,7 @@
 
             var els = {};
 
-            els.rsUrl = 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs';
+            els.rsUrl = 'http://' + window.location.host + '/xsvc/rs';
 
             els.rs = {
                 // Create a new classification mapping
@@ -166,9 +166,9 @@
 
                 if ( form.length > 0 ) {
                     if ( details.length > 0 ) {
-                        $(form).css('top', details.height());
+                        $(form).css('top', details.height() + 26);
                     } else {
-                        $(form).css('top', '10px');
+                        $(form).css('top', '26px');
                     }
                 }
             }
