@@ -13,7 +13,7 @@ class dai_meter_collection extends orm_abstract {
 
     $select = db_select($this->table, 'a')
       ->extend('PagerDefault')     //Pager Extender
-      ->limit(10)              //10 results per page;
+      ->limit(25)              //10 results per page;
     ;
     $select->leftJoin('xeros_dai_meter_actual', 'b', 'a.dai_meter_actual_id = b.dai_meter_actual_id');
 

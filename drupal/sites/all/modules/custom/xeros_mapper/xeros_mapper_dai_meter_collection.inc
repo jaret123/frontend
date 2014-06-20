@@ -42,15 +42,23 @@ function dai_meter_collection_form($id) {
 
   // TODO - We need the machine ID on this query
   $header = array(
-    'classification_id' => 'Classification ID',
-    'id' => 'ID',
+    'classification_id' => array(
+      'data' => 'Classification ID',
+      'class' => 'first classification_id_header',
+    ),
+    'id' => array(
+      'data' => 'ID',
+      'class' => 'id',
+    ),
     'dai_write_timestamp' => 'Time Stamp',
     'machine_identifier' => 'Machine Identifier',
     'dai_meter_actual_id' => 'DAI Meter Actual ID',
     'run_time' => 'Run Time',
-
     'machine_id' => 'Machine ID',
-    'controls' => 'Actions'
+    'controls' => array(
+      'data' => '&nbsp;',
+      'class' => 'last controls',
+  ),
   );
 
   $options = array();
@@ -69,10 +77,12 @@ function dai_meter_collection_form($id) {
 
   }
 
-  $form['table'] = array(
+  $form['dai-meter-collection'] = array(
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $options,
+    '#name' => 'dai-meter-collection',
+    '#attributes' => array('class' => array('dai-meter-collection')),
     //'#empty' => t('No records found'),
   );
 
@@ -88,7 +98,7 @@ function dai_meter_collection_form($id) {
     '#attributes' => array('id' => 'classify-classification_id')
   );
 
-  $form['pager'] = array('#markup' => theme('pager'));
+  $form['pager'] = array('#markup' => theme('pager', array('quantity' => 5)));
 
   $form['edit-submit'] = array(
     '#type' => 'submit',

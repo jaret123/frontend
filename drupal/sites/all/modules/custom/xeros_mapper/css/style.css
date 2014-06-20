@@ -2,6 +2,39 @@
     margin-bottom: 600px;
 }
 
+table.dai-meter-collection {
+    margin-bottom: -1.5em;
+}
+table.dai-meter-collection thead {
+    background-color: #ddd;
+    color: #333;
+}
+
+table.dai-meter-collection thead th {
+    font-weight: 300;
+}
+table.dai-meter-collection tr {
+    font-size: 14px;
+    cell-padding: 2px 15px;
+}
+table.dai-meter-collection tr td,
+table.dai-meter-collection thead th {
+    padding: 2px 15px;
+}
+
+table.dai-meter-collection thead th.select-all {
+    border-top-left-radius: 6px;
+}
+table.dai-meter-collection thead th.last {
+    border-top-right-radius: 6px;
+}
+
+.item-list {
+    background-color: #ddd;
+    color: #333;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
 .button {
     display: inline-block;
     border: 1px solid blue;
@@ -26,8 +59,8 @@
 }
 
 .details {
-    background: yellow;
-    border: 1px solid blue;
+    background: #ddd;
+    border: 1px solid #aaa;
 }
 .details table {
     margin: 0;
@@ -44,8 +77,8 @@
 .classification-form {
     color: initial;
     position: absolute;
-    border: 1px solid blue;
-    background: yellow;
+    border: 1px solid #aaa;
+    background: #ddd;
     padding: 10px;
     z-index: 10;
 
