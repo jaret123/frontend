@@ -2,30 +2,30 @@
     margin-bottom: 600px;
 }
 
-table.dai-meter-collection {
+#dai-meter-collection-form table {
     margin-bottom: -1.5em;
 }
-table.dai-meter-collection thead {
+#dai-meter-collection-form table thead {
     background-color: #ddd;
     color: #333;
 }
 
-table.dai-meter-collection thead th {
+#dai-meter-collection-form table thead th {
     font-weight: 300;
 }
-table.dai-meter-collection tr {
+#dai-meter-collection-form table tr {
     font-size: 14px;
     cell-padding: 2px 15px;
 }
-table.dai-meter-collection tr td,
-table.dai-meter-collection thead th {
+#dai-meter-collection-form table tr td,
+#dai-meter-collection-form table thead th {
     padding: 2px 15px;
 }
 
-table.dai-meter-collection thead th.select-all {
+#dai-meter-collection-form table thead th.select-all {
     border-top-left-radius: 6px;
 }
-table.dai-meter-collection thead th.last {
+#dai-meter-collection-form table thead th.last {
     border-top-right-radius: 6px;
 }
 
@@ -81,7 +81,6 @@ table.dai-meter-collection thead th.last {
     background: #ddd;
     padding: 10px;
     z-index: 10;
-
 }
 .classification__drag {
     cursor: move;
