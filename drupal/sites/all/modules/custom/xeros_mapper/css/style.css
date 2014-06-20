@@ -1,3 +1,6 @@
+.sticky-header {
+    z-index: 15;
+}
 #dai-meter-collection-form {
     margin-bottom: 600px;
 }
