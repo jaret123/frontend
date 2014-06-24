@@ -257,6 +257,7 @@ function call_xeros_cycle_delete($dai_meter_actual_id) {
   }
   return;
 
+
 }
 
 function call_xeros_cycle_refresh() {
