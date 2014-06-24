@@ -16,13 +16,13 @@ require_once('db/dai_meter_collection.inc');
  *
  * TODO: Add the validation and submission parameters.
  */
-function dai_meter_collection_form($id) {
+function dai_meter_collection_form($form, &$form_state, $location_id) {
 
   drupal_add_js(array('xeros_mapper' => array('basePath' => drupal_get_path('module', 'xeros_mapper'))), 'setting');
 
   $dai_meter_collection = new dai_meter_collection();
 
-  $rows = $dai_meter_collection->select_by_location($id);
+  $rows = $dai_meter_collection->select_by_location($location_id);
 
   $comment_field = array(
     '#type' => 'textfield',
@@ -137,11 +137,16 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
     // create curl resource
     $ch = curl_init();
 
-    $output = call_service($ch, classify($collection_id, $classification_id), 'classify');
+    $output .= call_service($ch, classify($collection_id, $classification_id), 'classify');
 
-    $output = call_service($ch, unmatch($collection_id), 'unmatch');
+    $output .= call_service($ch, unmatch($collection_id), 'unmatch');
 
-    $output = call_service($ch, match($collection_id), 'match');
+    $output .= call_service($ch, match($collection_id), 'match');
+
+    // TODO - refresh the data in the report
+
+    // call_refresh_report_data($dai_meter_actual_id)
+    //$output .= call_refresh_report_data($)
 
     // close curl resource to free up system resources
     curl_close($ch);
@@ -221,12 +226,17 @@ function call_service(&$ch, $url, $call) {
   return $output;
 }
 
-function dai_meter_collection($id) {
+function call_delete_dai_meter_actual($collection_id) {
+
+}
+
+function dai_meter_collection($company_id, $location_id) {
 
   $output =  '<div>This is the dai_meter_collection listing page</div>';
 
+  $output .= '<div><a href="/config/mapper/location/' . $company_id . '" >< Back to location list</a></div>';
 
-  $f = drupal_get_form('dai_meter_collection_form', $id);
+  $f = drupal_get_form('dai_meter_collection_form', $location_id);
 
   $output .= drupal_render($f);
 

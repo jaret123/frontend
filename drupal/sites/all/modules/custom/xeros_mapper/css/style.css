@@ -5,8 +5,11 @@
     margin-bottom: 600px;
 }
 
-#dai-meter-collection-form > table {
-    margin-bottom: -1.5em;
+.item-list {
+    margin-top: -1.5em;
+}
+.pager {
+    margin-top: 0px;
 }
 #dai-meter-collection-form table thead {
     background-color: #ddd;

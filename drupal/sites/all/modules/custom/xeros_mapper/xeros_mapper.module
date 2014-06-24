@@ -22,19 +22,27 @@
  */
 function xeros_mapper_menu() {
 
-  $items['config/mapper/cycles/list'] = array(
-    'title' => 'Cycles Listing',
-    'page callback' => 'cycle_listing_page',
+//  $items['config/mapper/cycles/list'] = array(
+//    'title' => 'Cycles Listing',
+//    'page callback' => 'cycle_listing_page',
+//    'page arguments' => array(),
+//    'access arguments' => array('xeros admin'),
+//    'file' => 'xeros_mapper_cycle_listing.inc'
+//  );
+
+  $items['config/mapper/company'] = array(
+    'title' => 'Company Listing',
+    'page callback' => 'company_listing',
     'page arguments' => array(),
     'access arguments' => array('xeros admin'),
-    'file' => 'xeros_mapper_cycle_listing.inc'
+    'file' => 'xeros_mapper_company.inc'
   );
-  $items['config/mapper/collection_map_detail'] = array(
-    'title' => 'Collection Map Detail',
-    'page callback' => 'collection_map_detail',
+  $items['config/mapper/location'] = array(
+    'title' => 'Location Listing',
+    'page callback' => 'location_listing',
     'page arguments' => array(),
     'access arguments' => array('xeros admin'),
-    'file' => 'xeros_mapper_collection_map_detail.inc'
+    'file' => 'xeros_mapper_locations.inc'
   );
   $items['config/mapper/dai_meter_collection'] = array(
     'title' => 'DAI Meter Collection',
@@ -43,6 +51,8 @@ function xeros_mapper_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_mapper_dai_meter_collection.inc'
   );
+
+  // Ajax screen for DAI Meter Detail
   $items['config/mapper/dai_meter_collection_detail'] = array(
     'title' => 'DAI Meter Collection',
     'page callback' => 'dai_meter_collection_detail',
@@ -50,6 +60,17 @@ function xeros_mapper_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_mapper_dai_meter_collection_detail.inc'
   );
+
+  // Ajax screen for collection_map_detail
+//  $items['config/mapper/collection_map_detail'] = array(
+//    'title' => 'Collection Map Detail',
+//    'page callback' => 'collection_map_detail',
+//    'page arguments' => array(),
+//    'access arguments' => array('xeros admin'),
+//    'file' => 'xeros_mapper_collection_map_detail.inc'
+//  );
+
+  // Ajax screen for classifications
   $items['config/mapper/classification'] = array(
     'title' => 'Classifications List',
     'page callback' => 'classification_listing',
