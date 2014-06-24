@@ -134,6 +134,8 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
     $collection_id = $form_state['values']['classify-collection_id'];
     $classification_id = $form_state['values']['classify-classification_id'];
 
+    $dai_meter_actual_id = $form['dai-meter-collection']['#options'][$collection_id]['dai_meter_actual_id']['data'];
+
     // create curl resource
     $ch = curl_init();
 
@@ -142,6 +144,8 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
     $output .= call_service($ch, unmatch($collection_id), 'unmatch');
 
     $output .= call_service($ch, match($collection_id), 'match');
+
+    $output .= call_xeros_cycle_delete($dai_meter_actual_id);
 
     // TODO - refresh the data in the report
 
@@ -153,9 +157,11 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
 
   } else {
     // Remap all selected fields in the form
-    foreach ($form_state['values']['table'] as $collection_id) {
+    foreach ($form_state['values']['dai-meter-collection'] as $collection_id) {
       if ($collection_id != 0) {
         // Process selected record
+
+        $dai_meter_actual_id = $form['dai-meter-collection']['#options'][$collection_id]['dai_meter_actual_id']['data'];
 
         // create curl resource
         $ch = curl_init();
@@ -164,9 +170,10 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
 
         call_service($ch, match($collection_id), 'match');
 
+        $output .= call_xeros_cycle_delete($dai_meter_actual_id);
+
         // close curl resource to free up system resources
         curl_close($ch);
-
 
         //TODO: Can we do a quick animation on the form rows after updating (add a class - newly updated>);
       } else {
@@ -175,7 +182,7 @@ function dai_meter_collection_form_submit(&$form, &$form_state ) {
     }
   }
 
-
+  $output .= call_xeros_cycle_refresh();
 
   return $form;
 }
@@ -226,8 +233,43 @@ function call_service(&$ch, $url, $call) {
   return $output;
 }
 
-function call_delete_dai_meter_actual($collection_id) {
+function call_xeros_cycle_delete($dai_meter_actual_id) {
 
+// Get the Drupal database connection and change the statement class to PDOStatement.
+// Save the current class for cleanup later.
+  $conn = Database::getConnection();
+  $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
+  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
+
+// Prepare the statement and bind params
+  $statement = $conn->prepare("Call sp_xeros_cycle_delete(?)");
+
+  $op_status = $statement->bindParam(1, $dai_meter_actual_id, PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT);
+
+// Execute the statement and reset the connection's statement class to the original.
+  $exec_result = $statement->execute();
+  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+
+  return;
+
+}
+
+function call_xeros_cycle_refresh() {
+
+  // Get the Drupal database connection and change the statement class to PDOStatement.
+// Save the current class for cleanup later.
+  $conn = Database::getConnection();
+  $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
+  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
+
+// Prepare the statement and bind params
+  $statement = $conn->prepare("Call sp_refresh_report_data('DIFF', null)");
+
+// Execute the statement and reset the connection's statement class to the original.
+  $exec_result = $statement->execute();
+  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+
+  return;
 }
 
 function dai_meter_collection($company_id, $location_id) {

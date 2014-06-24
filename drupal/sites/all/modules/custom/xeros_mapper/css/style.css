@@ -80,6 +80,12 @@
     float: right;
 }
 
+.classification__show.inactive,
+.classification__hide.inactive
+{
+    display: none;
+}
+
 .classification-form {
     color: initial;
     position: absolute;

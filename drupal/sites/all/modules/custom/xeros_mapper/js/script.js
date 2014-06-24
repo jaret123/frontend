@@ -7,7 +7,10 @@
                 // Hide the classify button
                 $('#edit-classify-submit').css('display', 'none');
             });
-            jQuery('.classification_id').append('<div class="fa fa-caret-down classification__show"></div>');
+            jQuery('.classification_id')
+                .append('<div class="fa fa-caret-down classification__show">&nbsp;</div>&nbsp;')
+                .append('<div class="fa fa-caret-up classification__hide inactive">&nbsp;</div>')
+                ;
 
             var els = {};
 
@@ -51,7 +54,9 @@
             els.rows = els.table.find('tr');
             els.expandButtons = els.rows.find('.expand');
             els.closeButtons = els.rows.find('.close');
-            els.classificationCells = $('.classification__show');
+
+            els.classificationShow = $('.classification__show');
+            els.classificationHide = $('.classification__hide');
 
             els.detailsUrl = '/config/mapper/dai_meter_collection_detail/{{id}}';
 
@@ -62,50 +67,37 @@
              */
             els.expandButtons.on('click', showDetails);
 
-            var submitClassification = function(collectionId, classificationId) {
-                console.log('Submit Classification', collectionId, classificationId);
-
-                // TODO: At each stage, check for a 200 (success), for now use the complete method.
-
-                // TODO: Console log the responses from the web service.
-                $.ajax({
-                   url: els.rs.classify(collectionId, classificationId),
-                   dataType: 'text',
-                   complete: function() {
-                       // Check for ID - data back is text not JSON because of bug in web service
-                       // classify web service has a bug where it returns a 500 response instead of a 200 even though
-                       // classify is successful.
-                       // Make this a complete method instead of success method for now.
-
-
-                       $.ajax({
-                           url: els.rs.unmatch(collectionId),
-                           dataType: 'json',
-                           complete: function() {
-                               // Check for a return response of "true" - string not JSON
-                               // This method will return a 200 if it does an unmatch.
-                               $.ajax({
-                                   url: els.rs.match(collectionId),
-                                   dataType: 'json',
-                                   complete: function() {
-                                       // Check for a string return - id not JSON
-
-                                   }
-                               })
-                           }
-                       })
-                   }
-
-                });
-            };
-
-
             var showClassification = function() {
+                console.log('showclassification');
+
                 var row = $(this).parents('tr');
                 var el = this;
                 var id = parseInt($(row[0]).find('.machine_id').html(), 10);
+
+                var classificationShow = $(row).find('.classification__show');
+
+                var classificationHide = $(row).find('.classification__hide');
+
+                // Any other oepn forms
+                var classificationForm = $('.classification-form');
+
+                classificationForm.remove();
+
+                // Reset the status of all the arrows
+                $('.classification__show').removeClass('inactive');
+                $('.classification__hide').addClass('inactive');
+
+                classificationShow.addClass('inactive');
+
+                classificationHide.removeClass('inactive');
+
+                // Get the classification form and show it.
+                var url = els.classificationUrl.replace('{{id}}', id);
+
+
+                console.log(url);
                 $.ajax({
-                    url: els.classificationUrl.replace('{{id}}', id), // TODO: Needs to be the Machine ID
+                    url: url, // TODO: Needs to be the Machine ID
                     success: function(template) {
                         //row.after('<tr class="classifications" data-id="' + id + '"><td></td><td colspan="8">' + template + '</td></tr>');
                         $(el).after(
@@ -149,21 +141,48 @@
                         });
 
                         position(row.attr('data-id'));
+
                         // Add a close button
                         $('.classification__close').on('click', function(e) {
                             e.stopPropagation();
-                            $('.classification-form[data-id="' + id + '"]').remove();
+                            hideClassification();
                         });
 
+                        // Add a close button
+                        //$('.classification__close').on('click', hideClassification(id));
                     },
                     dataType: "html"
                 });
             }
 
+            var hideClassification = function() {
+                console.log('Hide classfication');
+                event.stopPropagation();
+
+                var row = $(event.currentTarget).closest('tr');
+
+                // Get the machine Id from the parent row.
+                var machine_id = parseInt($(row).find('.machine_id').html(), 10);
+
+                var classificationForm = $(row).find('.classification-form');
+
+                var classificationShow = $(row).find('.classification__show');
+
+                var classificationHide = $(row).find('.classification__hide');
+
+                classificationForm.remove();
+
+                classificationShow.removeClass('inactive');
+
+                classificationHide.addClass('inactive');
+            }
+
             /**
              * Show the reclassification window
              */
-            els.classificationCells.on('click', showClassification);
+            els.classificationShow.on('click', showClassification);
+
+            els.classificationHide.on('click', hideClassification);
 
 
             els.rows.each(function() {
