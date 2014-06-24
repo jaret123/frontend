@@ -235,39 +235,49 @@ function call_service(&$ch, $url, $call) {
 
 function call_xeros_cycle_delete($dai_meter_actual_id) {
 
-// Get the Drupal database connection and change the statement class to PDOStatement.
-// Save the current class for cleanup later.
-  $conn = Database::getConnection();
-  $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
-  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
+  try {
+    // Get the Drupal database connection and change the statement class to PDOStatement.
+    // Save the current class for cleanup later.
+    $conn = Database::getConnection();
+    $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
+    $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
 
-// Prepare the statement and bind params
-  $statement = $conn->prepare("Call sp_xeros_cycle_delete(?)");
+    // Prepare the statement and bind params
+    $statement = $conn->prepare("Call sp_xeros_cycle_delete(?)");
 
-  $op_status = $statement->bindParam(1, $dai_meter_actual_id, PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT);
+    $op_status = $statement->bindParam(1, $dai_meter_actual_id, PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT);
 
-// Execute the statement and reset the connection's statement class to the original.
-  $exec_result = $statement->execute();
-  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+    // Execute the statement and reset the connection's statement class to the original.
+    $exec_result = $statement->execute();
+    $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
 
+  }
+  catch (Exception $e) {
+    watchdog_exception('call_xeros_cycle_delete', $e);
+  }
   return;
 
 }
 
 function call_xeros_cycle_refresh() {
 
-  // Get the Drupal database connection and change the statement class to PDOStatement.
-// Save the current class for cleanup later.
-  $conn = Database::getConnection();
-  $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
-  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
+  try {
+    // Get the Drupal database connection and change the statement class to PDOStatement.
+    // Save the current class for cleanup later.
+    $conn = Database::getConnection();
+    $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
+    $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
 
-// Prepare the statement and bind params
-  $statement = $conn->prepare("Call sp_refresh_report_data('DIFF', null)");
+    // Prepare the statement and bind params
+    $statement = $conn->prepare("Call sp_refresh_report_data('DIFF', null)");
 
-// Execute the statement and reset the connection's statement class to the original.
-  $exec_result = $statement->execute();
-  $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+    // Execute the statement and reset the connection's statement class to the original.
+    $exec_result = $statement->execute();
+    $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+  }
+  catch (Exception $e) {
+    watchdog_exception('call_xeros_cycle_refresh', $e);
+  }
 
   return;
 }
