@@ -55,14 +55,10 @@ BEGIN
 
 		SET where_clause = ' 
 			dai_meter_actual_id NOT IN (
-				SELECT 
-					a.dai_meter_actual_id
-				FROM
-					xeros_dai_meter_actual as a
-						left join
-					xeros_chemical_unit as b ON a.dai_meter_actual_id = b.dai_meter_actual_id
-				where
-					a.dai_meter_actual_id <> b.dai_meter_actual_id 
+          SELECT
+            distinct dai_meter_actual_id
+          FROM
+            xeros_chemical_unit
 				)  ';
 
 	ELSEIF refresh_mode = 'SINGLE' THEN
