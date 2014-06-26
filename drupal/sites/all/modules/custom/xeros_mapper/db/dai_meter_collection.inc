@@ -12,6 +12,7 @@ class dai_meter_collection extends orm_abstract {
   public function select_by_location($location_id) {
 
     $select = db_select($this->table, 'a')
+      ->orderBy('id', 'DESC')
       ->extend('PagerDefault')     //Pager Extender
       ->limit(25)              //10 results per page;
     ;
