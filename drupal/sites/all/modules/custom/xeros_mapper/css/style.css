@@ -41,27 +41,13 @@
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.button {
-    display: inline-block;
-    border: 1px solid blue;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 10px;
-    cursor: pointer;
-}
-
-.button.inactive {
-    border: 1px solid #ddd;
-    color: #ddd;
-    cursor: auto;
-}
 
 .classification__show, .expand {
-    color: blue;
+
 }
 
 .classification__show:hover, .expand:hover {
-    color: red;
+
 }
 
 .details {
@@ -117,4 +103,13 @@
 
 .classification-form tr.active {
     background-color: #66CCFF;
+}
+
+.sensors__show, .sensors__hide {
+    margin: 0;
+}
+.sensors__show.inactive,
+.sensors__hide.inactive
+{
+    display: none;
 }

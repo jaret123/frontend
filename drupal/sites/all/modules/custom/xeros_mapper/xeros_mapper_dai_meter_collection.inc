@@ -36,7 +36,8 @@ function dai_meter_collection_form($form, &$form_state, $location_id) {
     '#type' => 'item',
     '#title' => '',
     '#markup' => '
-      <span class="expand">Show Details</span>
+      <span class="button expand sensors__show">Sensors</span>
+      <span class="button close sensors__hide inactive">Close</span>
     '
   );
 

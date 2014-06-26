@@ -8,8 +8,8 @@
                 $('#edit-classify-submit').css('display', 'none');
             });
             jQuery('.classification_id')
-                .append('<div class="fa fa-caret-down classification__show">&nbsp;</div>&nbsp;')
-                .append('<div class="fa fa-caret-up classification__hide inactive">&nbsp;</div>')
+                .append('<div class="text-button fa fa-plus-square classification__show"></div>&nbsp;')
+                .append('<div class="text-button fa fa-minus-square classification__hide inactive"></div>')
                 ;
 
             var els = {};
@@ -31,29 +31,42 @@
                 $.ajax({
                     url: els.detailsUrl.replace('{{id}}', id),
                     success: function(template) {
-                        row.after('<tr class="details" data-id="' + id + '"><td colspan="9"><div class="details__close button">close</div>' + template + '</td></tr>');
+                        row.after('<tr class="details" data-id="' + id + '"><td colspan="9">' + template + '</td></tr>');
                         position(id);
                         // Add a close button
-                        $('.details__close').on('click', function(e) {
-                            e.stopPropagation();
-                            $('.details[data-id="' + id + '"]').remove();
-                            position(id);
-                            var expand = $(row).find('.expand');
-                            $(expand).removeClass('inactive');
-                            $(expand).on('click', showDetails);
-                        });
+//                        $('.details__close').on('click', function(e) {
+//                            e.stopPropagation();
+//                            $('.details[data-id="' + id + '"]').remove();
+//                            position(id);
+//                            var expand = $(row).find('.expand');
+//                            $(expand).removeClass('inactive');
+//                            $(expand).on('click', showDetails);
+//                        });
                     },
                     dataType: "html"
                 });
-                $(this).unbind();
-                $(this).addClass('inactive');
+                //$(this).unbind();
+                $(this).addClass('inactive')
+                    .siblings()
+                    .removeClass('inactive');
                 console.log(id);
+            }
+
+            var hideDetails = function() {
+                var row = $(this).parents('tr');
+                var id = $(row[0]).find('input[type=checkbox]').val();
+                event.stopPropagation();
+                $('.details[data-id="' + id + '"]').remove();
+                $(event.currentTarget)
+                    .addClass('inactive')
+                    .siblings()
+                    .removeClass('inactive');
             }
 
             els.table = $('#dai-meter-collection-form table');
             els.rows = els.table.find('tr');
-            els.expandButtons = els.rows.find('.expand');
-            els.closeButtons = els.rows.find('.close');
+            els.expandButtons = els.rows.find('.sensors__show');
+            els.closeButtons = els.rows.find('.sensors__hide');
 
             els.classificationShow = $('.classification__show');
             els.classificationHide = $('.classification__hide');
@@ -66,6 +79,7 @@
              * Show the details of a row
              */
             els.expandButtons.on('click', showDetails);
+            els.closeButtons.on('click', hideDetails);
 
             var showClassification = function() {
                 console.log('showclassification');
@@ -103,7 +117,7 @@
                         $(el).after(
                             '<div class="classification-form" data-id="' + id + '">' +
                                 template +
-                                '<div class="classification__close button">Cancel</div>' +
+                                '<div class="button classification__close">Cancel</div>' +
                                 '</div>'
                         );
                         $('#edit-classify-submit').clone().appendTo('.classification-form').css('display', 'inline-block').addClass('inactive');

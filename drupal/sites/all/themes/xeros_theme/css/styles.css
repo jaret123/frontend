@@ -964,6 +964,52 @@ img.flag {
   top: 46px;
 }
 
+/* line 2, ../sass/components/_widgets.scss */
+.text-button {
+  font-size: 16px;
+  margin-left: 3px;
+  position: relative;
+  color: #888;
+  margin-left: 5px;
+  margin-top: 4px;
+  padding: 4px;
+  border-radius: 3px;
+}
+/* line 13, ../sass/components/_widgets.scss */
+.text-button:hover, .text-button:active {
+  color: #5ba0d0;
+}
+
+/* line 19, ../sass/components/_widgets.scss */
+.button, .form-submit {
+  display: inline-block;
+  padding: 2px 6px 3px;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #888;
+  line-height: 1.5em;
+}
+/* line 29, ../sass/components/_widgets.scss */
+.button:hover, .form-submit:hover {
+  background-color: #5ba0d0;
+  color: white;
+}
+
+/* line 35, ../sass/components/_widgets.scss */
+.button.inactive, .inactive.form-submit {
+  border: 1px solid #eee;
+  background-color: #ccc;
+  color: #ddd;
+  cursor: auto;
+}
+
+/* line 42, ../sass/components/_widgets.scss */
+.form-submit {
+  border: none;
+}
+
 /** Base container **/
 /* line 2, ../sass/components/_kalendae.scss */
 .kalendae {
@@ -2004,7 +2050,7 @@ label.option {
 
 /* Buttons used by contrib modules like Media. */
 /* line 630, ../sass/components/_drupal-misc.scss */
-a.button {
+a.button, a.form-submit {
   -webkit-appearance: button;
   -moz-appearance: button;
   appearance: button;
