@@ -17,7 +17,9 @@ CREATE TABLE xeros_chemical_unit
 	chemical_unit_cost decimal(15,4),
 	xeros_chemical_unit_cost decimal(15,4),
 	load_size decimal(15,4),
-	xeros_load_size decimal(15,4)
+	xeros_load_size decimal(15,4),
+  UNIQUE KEY `dai_meter_actual_id--chemical_profile_id` (`dai_meter_actual_id`,`chemical_profile_id`),
+  KEY `dai_meter_actual_id` (`dai_meter_actual_id`)
 )
 ;;
 
