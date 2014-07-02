@@ -159,7 +159,7 @@
                         // Add a close button
                         $('.classification__close').on('click', function(e) {
                             e.stopPropagation();
-                            hideClassification();
+                            hideClassification(e);
                         });
 
                         // Add a close button
@@ -169,11 +169,14 @@
                 });
             }
 
-            var hideClassification = function() {
+            var hideClassification = function(e) {
                 console.log('Hide classfication');
-                event.stopPropagation();
 
-                var row = $(event.currentTarget).closest('tr');
+                if (!e) { e = window.event; };
+
+                e.stopPropagation();
+
+                var row = $(e.currentTarget).closest('tr');
 
                 // Get the machine Id from the parent row.
                 var machine_id = parseInt($(row).find('.machine_id').html(), 10);
