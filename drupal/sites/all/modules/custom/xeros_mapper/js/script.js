@@ -56,7 +56,7 @@
                 var row = $(this).parents('tr');
                 var id = $(row[0]).find('input[type=checkbox]').val();
                 event.stopPropagation();
-                $('.details[data-id="' + id + '"]').remove();
+                $('.details[data-id="' + parseInt(id, 10) + '"]').remove();
                 $(event.currentTarget)
                     .addClass('inactive')
                     .siblings()
@@ -214,7 +214,7 @@
              */
             var position = function(id) {
                 var form = $('.classification-form');
-                var details = $('.details[data-id="' + id +'"');
+                var details = $('.details[data-id="' + parseInt(id, 10) +'"]');
 
                 if ( form.length > 0 ) {
                     if ( details.length > 0 ) {
