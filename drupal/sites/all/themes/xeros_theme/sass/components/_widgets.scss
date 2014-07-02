@@ -9,10 +9,14 @@
     margin-top: 4px;
     padding: 4px;
     border-radius: 3px;
+  .ie9 & {
+    margin-top: 0px;
+  }
 
   &:hover, &:active {
     color:$border-color-hover;
   }
+
 }
 
 // Standard button style

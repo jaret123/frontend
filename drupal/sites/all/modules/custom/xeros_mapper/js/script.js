@@ -52,12 +52,15 @@
                 console.log(id);
             }
 
-            var hideDetails = function() {
+            var hideDetails = function(e) {
+
+                if (!e) { e = window.event; };
+
                 var row = $(this).parents('tr');
                 var id = $(row[0]).find('input[type=checkbox]').val();
-                event.stopPropagation();
+                e.stopPropagation();
                 $('.details[data-id="' + parseInt(id, 10) + '"]').remove();
-                $(event.currentTarget)
+                $(e.currentTarget)
                     .addClass('inactive')
                     .siblings()
                     .removeClass('inactive');
