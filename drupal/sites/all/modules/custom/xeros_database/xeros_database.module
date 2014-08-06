@@ -60,6 +60,22 @@ function xeros_database_update_7205() {
     run_external_script("$s");
   }
 }
+
+/**
+ * Move water_meter_rate to xeros_machine
+ *
+ * Re-run the aggregate table definitions - /ddl-sp-cycle-data.sql
+ *
+ */
+function xeros_database_update_7205() {
+  $scripts = array(
+    "updates/db-update-2014-08-06-move-water-meter-rate-to-machine.sql",
+    "aggregate_tables/ddl-sp-cycle-data.sql"
+  );
+  foreach ( $scripts as $s ) {
+    run_external_script("$s");
+  }
+}
 /**
  * Helper functions
  */

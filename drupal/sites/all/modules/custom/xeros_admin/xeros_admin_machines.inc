@@ -310,6 +310,12 @@ function machine_form($form, &$form_state, $vars) {
     '#type' => 'checkbox',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['water_only']) ? (int)$form_state['values']['machine_settings']['machine']['water_only'] : 0,
   );
+  $form['machine_settings']['water_meter_rate'] = array(
+    '#title' => 'Water Meter Rate',
+    '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
+    '#type' => 'textfield',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['water_meter_rate']) ? $form_state['values']['machine_settings']['machine']['water_meter_rate'] : .1,
+  );
   $form['machine_settings']['machine_profile_id'] = array(
     '#type' => 'hidden',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['machine_profile_id']) ? $form_state['values']['machine_settings']['machine']['machine_profile_id'] : 0,
@@ -372,7 +378,8 @@ function machine_form_submit($form, &$form_state) {
     'ignore_meter_type',
     'unknown_class',
     'use_start_time',
-    'water_only'
+    'water_only',
+    'water_meter_rate'
   );
 
   foreach ($f as $field) {

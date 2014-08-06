@@ -261,7 +261,6 @@ function location_form_submit($form, &$form_state) {
     $f = array(
       'water_volume_unit',
       'chemical_volume_unit',
-      'water_meter_rate',
       'temperature_rise_spring',
       'temperature_rise_summer',
       'temperature_rise_fall',
@@ -318,7 +317,6 @@ function location_form_submit($form, &$form_state) {
     $f = array(
       'water_volume_unit',
       'chemical_volume_unit',
-      'water_meter_rate',
       'temperature_rise_spring',
       'temperature_rise_summer',
       'temperature_rise_fall',
@@ -415,12 +413,6 @@ function location_profile($vars) {
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('ounces', 'grams')),
       '#default_value' => !empty($lp['chemical_volume_unit']) ? $lp['chemical_volume_unit'] : 'ounces',
-    ),
-    'water_meter_rate' => array(
-      '#title' => 'Water Meter Rate',
-      '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
-      '#type' => 'textfield',
-      '#default_value' => !empty($lp['water_meter_rate']) ? $lp['water_meter_rate'] : .1,
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',
