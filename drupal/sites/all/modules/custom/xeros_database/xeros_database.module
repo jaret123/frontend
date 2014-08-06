@@ -67,7 +67,7 @@ function xeros_database_update_7205() {
  * Re-run the aggregate table definitions - /ddl-sp-cycle-data.sql
  *
  */
-function xeros_database_update_7205() {
+function xeros_database_update_7206() {
   $scripts = array(
     "updates/db-update-2014-08-06-move-water-meter-rate-to-machine.sql",
     "aggregate_tables/ddl-sp-cycle-data.sql"
