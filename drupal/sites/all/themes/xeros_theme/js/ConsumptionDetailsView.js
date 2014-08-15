@@ -81,7 +81,7 @@ var view = {
     },
     classificationCompare : function(a,b) {
         if (a.name.toLowerCase().substr(0,7) === "unknown")
-            return -1;
+            return 1;
         if (parseInt(a.classification_id, 10) < parseInt(b.classification_id, 10))
             return -1;
         if (parseInt(a.classification_id, 10) > parseInt(b.classification_id, 10))

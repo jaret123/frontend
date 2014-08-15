@@ -70,7 +70,7 @@ $aliases['xeros.prod'] = array (
                 array (
                     'default' =>
                         array (
-                            'database' => 'xeros_prod',
+                            'database' => 'xeros-prod',
                             'username' => 'xeros',
                             'password' => 'X#r)S2014',
                             'host' => 'localhost',
