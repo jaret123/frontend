@@ -475,17 +475,15 @@ BEGIN
            AND dma.classification_id = mc.classification_id
       LEFT JOIN xeros_machine AS m
         ON dma.machine_id = m.machine_id
-      left join field_data_field_location as fl
-        on m.machine_id = fl.entity_id and fl.entity_type = \'data_xeros_machine\'
       LEFT JOIN xeros_xeros_local_static_value AS xlsv
         ON mc.classification_id = xlsv.classification_id
       LEFT JOIN xeros_utility_actual AS ua
-        ON fl.field_location_target_id = ua.location_id
+        ON m.location_id = ua.location_id
            AND ua.utility_type = \'water\'
 	  LEFT JOIN xeros_therm_cycle AS tc
 		ON dma.dai_meter_actual_id = tc.dai_meter_actual_id
       LEFT JOIN xeros_labor_profile AS labor_profile
-        ON fl.field_location_target_id  = labor_profile.location_id
+        ON m.location_id  = labor_profile.location_id
       LEFT JOIN xeros_chemical_cycle AS cc
         ON dma.dai_meter_actual_id = cc.dai_meter_actual_id
 	  LEFT JOIN xeros_location_profile as lp
