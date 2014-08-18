@@ -106,7 +106,7 @@ foreach ($content->reportData as $key => $data) {
   $pdf->hr($w);
   $pdf->space(0,1);
 
-  $pdf->numberFormat($data->summaryData->cost, $w, $h1, array( $font["h2"] * .7, $font["h2"] ));
+  $pdf->numberFormat($data->summaryData->cost_xeros, $w, $h1, array( $font["h2"] * .7, $font["h2"] ));
 
   $pdf->SetX($cols[2]);
   $pdf->style("label-medium");
