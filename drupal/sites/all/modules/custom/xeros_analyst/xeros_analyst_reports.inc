@@ -32,6 +32,9 @@ function analyst_reports_page() {
   $output .= '<h4>DAI Meter Collection Detail</h4>';
   $output .= _replace_filters($report_links, array('report_name' => 'reportDAIMeterCollectionDetail'));
 
+    $output .= '<h4>Xeros Cycle</h4>';
+    $output .= _replace_filters($report_links, array('report_name' => 'reportXerosCycle'));
+
   return $output;
 }
 

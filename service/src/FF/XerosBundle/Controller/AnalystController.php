@@ -52,11 +52,14 @@ class AnalystController extends Controller
                     $data = $this->reportDAIMeterActual($filters);
                     break;
                 case "reportDAIMeterCollection":
-                  $data = $this->reportDAIMeterCollection($filters);
-                  break;
+                    $data = $this->reportDAIMeterCollection($filters);
+                    break;
                 case "reportDAIMeterCollectionDetail":
-                  $data = $this->reportDAIMeterCollectionDetail($filters);
-                  break;
+                    $data = $this->reportDAIMeterCollectionDetail($filters);
+                    break;
+                case "reportXerosCycle":
+                    $data = $this->reportXerosCycle($filters);
+                    break;
             }
 
           $fromDate = $filters['fromDate'];
@@ -150,5 +153,33 @@ SQL;
       $data = $conn->fetchAll($sqlParsed);
 
       return $data;
+    }
+
+    private function reportXerosCycle($filters) {
+        $conn = $this->get('database_connection');
+
+        $sql = <<<SQL
+        select
+            *
+        from
+            xeros_cycle
+        WHERE
+            dai_meter_actual_id in (
+                select
+                    dai_meter_actual_id
+                from
+                    xeros_dai_meter_collection
+                WHERE
+                    dai_write_timestamp >= ':fromDate'
+                    AND dai_write_timestamp <= ':toDate'
+            )
+        ORDER BY dai_meter_actual_id
+SQL;
+
+        $sqlParsed = $this->u->replaceFilters($sql, $filters);
+        $data = $conn->fetchAll($sqlParsed);
+
+        return $data;
+
     }
 }
