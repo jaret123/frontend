@@ -1,0 +1,25 @@
+{{#each companies}}
+    <div class="company">
+        <div class="title"><h2>{{company_title}}</h2></div>
+        <div class="company__details-wrapper">
+            <div class="company__details">
+                {{#each locations}}
+                <div class="location">
+                    <div class="title"><h3>{{location_title}}</h3></div>
+                    {{#each machines}}
+                    <div class="machine">
+                        <div class="machine__wrapper  {{status}} {{manufacturer}}">
+                                <i class="icon-Washer"></i>
+                            <i class="fa status-icon"></i>
+                            <div>30</div>
+                            <div>73%</div>
+                            <i class="fa fa-ellipsis-h right"></i>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+{{/each}}

@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_ops_menu() {
+  $items['hud'] = array(
+    'title' => 'Xeros Global Operations',
+    'page callback' => 'hud',
+    'page arguments' => array(),
+    'access arguments' => array('xeros hud'),
+    'file' => 'xeros_ops_hud.inc'
+  );
+
+  return $items;
+}
+
+function xeros_ops_permission() {
+  return array(
+    'xeros hud' => array(
+      'title' => t('View Ops Center HUD'),
+      'description' => t('Roles with this permission have the ability to access the Ops Center HUD'),
+    )
+  );
+}
+
+
+function xeros_ops_theme(){
+  return array(
+    'page__hud' =>  array(
+      'template' => 'theme/page--hud',
+      'render element' => 'page'
+    ),
+  );
+}
+
+function xeros_ops_preprocess_html(&$variables) {
+  $variables['classes_array'][] = "page-ops";
+}

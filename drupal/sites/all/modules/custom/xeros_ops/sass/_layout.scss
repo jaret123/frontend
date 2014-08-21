@@ -1,0 +1,231 @@
+$color-red: red;
+$color-yellow: orange;
+$color-green: green;
+$color-blue: blue;
+$color-inactive: grey;
+
+.page-ops {
+  //background-color: blue;
+  #content {
+    padding: 30px;
+  }
+  .page-ops__key {
+    padding: 30px;
+  }
+  color: black;
+
+
+  h2,
+  h3 {
+    margin: 0;
+    line-height: 1.5em;
+  }
+
+  h2 {
+    font-weight: 300;
+  }
+
+  .page-wrapper {
+    width: auto !important;
+
+  }
+  .page__title {
+    //background-color: black !important;
+
+  }
+
+  .company {
+    //border: 1px solid blue;
+    padding: 5px;
+  }
+  .location {
+    //border: 1px solid yellow;
+    //padding: 5px;
+  }
+  .machine {
+    //margin: 10px;
+    background-color: #eee;
+  }
+
+  .footer {
+    position: relative;
+  }
+
+  .icon-Washer {
+    font-size: 20px;
+  }
+  .Xeros .icon-Washer {
+    font-size: 20px;
+  }
+
+  .company {
+    margin-top: 5px;
+    background-color: rgba(245,245,245, .9);
+    .company__details-wrapper {
+      //border: 1px solid yellow;
+      background-color: rgba(200,200,200, .8);
+      padding-left: 30px;
+    }
+    .company__details {
+      background-color: rgba(245,245,245, .9);
+    }
+  }
+
+
+  .machine__wrapper{
+    border: 1px solid $color-inactive;
+    background-color: #fff;
+    color: $color-inactive;
+    padding: 5px;
+    @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+    > div {
+      display: inline-block;
+    }
+    > i {
+      display: inline-block;
+    }
+    .right {
+      float: right;
+      padding: 3px;
+    }
+    &.Xeros {
+      background-color: #e5f4fa;
+    }
+  }
+
+
+
+
+  .green {
+    border: 1px solid $color-green;
+    color: $color-green;
+    .status-icon:before {
+      content: "\f00c";
+    }
+  }
+  .red {
+    border: 1px solid $color-red;
+    color: $color-red;
+    .status-icon:before {
+      content: "\f00d";
+    }
+  }
+  .yellow {
+    border: 1px solid $color-yellow;
+    color: $color-yellow;
+    .status-icon:before {
+      content: "\f1ce";
+    }
+  }
+  .blue {
+    border: 1px solid $color-blue;
+    color: $color-blue;
+    .status-icon:before {
+      content: "\f0e7";
+    }
+  }
+
+  @media all and (min-width: 500px) {
+    .machine {
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+
+  @media all and (min-width: 500px) and (max-width: 999px)  {
+    $zen-column-count: 4;
+    $zen-gutter-width:  20px;
+
+    .location {
+      @include zen-grid-container;
+
+      .title {
+        @include zen-grid-item(4,1);
+
+      }
+      .machine:nth-of-type(4n+2) {
+        @include zen-clear;
+        @include zen-grid-item(1,1);
+      }
+      .machine:nth-of-type(4n+3) {
+        @include zen-grid-item(1,2);
+      }
+      .machine:nth-of-type(4n+4) {
+        @include zen-grid-item(1,3);
+      }
+      .machine:nth-of-type(4n+5) {
+        @include zen-grid-item(1,4);
+      }
+    }
+  }
+
+  @media all and (min-width: 1000px) and (max-width: 1399px)  {
+    $zen-column-count: 6;
+    $zen-gutter-width:  20px;
+
+    .location {
+      @include zen-grid-container;
+      .title {
+        @include zen-clear;
+        @include zen-grid-item(6,1);
+      }
+      .machine {
+        float: left;
+        width: (100%/6);
+      }
+      .machine:nth-of-type(6n+2) {
+        @include zen-clear;
+      }
+    }
+  }
+
+  @media all and (min-width: 1400px) {
+    $zen-column-count: 8;
+    $zen-gutter-width: 20px;
+
+    .location {
+      @include zen-grid-container;
+      .title {
+        @include zen-clear;
+        @include zen-grid-item(8,1);
+
+      }
+      .machine {
+        width: (100%/8);
+        float: left;
+      }
+      .machine:nth-of-type(8n+2) {
+        @include zen-clear;
+        //@include zen-grid-item(1,1);
+      }
+      //    .machine:nth-of-type(8n+3) {
+      //      @include zen-grid-item(1,2);
+      //    }
+      //    .machine:nth-of-type(8n+4) {
+      //      @include zen-grid-item(1,3);
+      //    }
+      //    .machine:nth-of-type(8n+5) {
+      //      @include zen-grid-item(1,4);
+      //    }
+      //    .machine:nth-of-type(8n+6) {
+      //      @include zen-grid-item(1,5);
+      //    }
+      //    .machine:nth-of-type(8n+7) {
+      //      @include zen-grid-item(1,6);
+      //    }
+      //    .machine:nth-of-type(8n+8) {
+      //      @include zen-grid-item(1,7);
+      //    }
+      //    .machine:nth-of-type(8n+9) {
+      //      @include zen-grid-item(1,8);
+      //    }
+    }
+  }
+
+}
+
+
+
+
+
+

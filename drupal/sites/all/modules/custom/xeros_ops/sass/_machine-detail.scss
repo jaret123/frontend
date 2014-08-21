@@ -1,0 +1,83 @@
+.machine-detail {
+  border: 1px solid orange;
+  background-color: #eee;
+  padding: 0;
+  padding-top: 150px;
+  position: fixed;
+  top: 0;
+  right: -50%;
+  bottom: 0;
+  width: 50%;
+  @include transition(all 0.3s ease);
+  @include box-shadow(-2px 0px 5px 0px rgba(50, 50, 50, 0.75));
+  overflow: scroll;
+  &.show {
+    right: 0;
+  }
+
+  .machine-detail__wrapper {
+    padding: 30px;
+  }
+
+  .machine-detail__close {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .icon-Washer {
+    font-size: 40px !important;
+    display: inline-block;
+  }
+
+  .machine-detail__title {
+    display: inline-block;
+  }
+
+  .machine-detail__location {
+    display: block;
+  }
+
+  .status {
+    border-top: 1px dotted gray;
+    .status-message {
+      display: inline-block;
+      padding: 5px;
+      font-weight: 300;
+      margin-bottom: 15px;
+    }
+    padding-bottom: 30px;
+    p {
+      margin: 0;
+    }
+  }
+  .details {
+    border-top: 1px dotted gray;
+    padding-bottom: 30px;
+    p {
+      margin: 0;
+    }
+  }
+  .log {
+    border-top: 1px dotted gray;
+    .log__row {
+      margin-bottom: 10px;
+    }
+    .log__timestamp {
+      display: inline-block;
+      font-style: italic;
+    }
+    .log__status {
+      display: inline-block;
+    }
+    .log__message {
+
+    }
+  }
+
+  .comment {
+    border-top: 1px dotted gray;
+  }
+}
+
+.machine-detail {
+
+}

@@ -1,0 +1,19 @@
+.key {
+  max-width: 300px;
+
+  .key__item {
+    margin: 3px auto;
+    position: relative;
+    i {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+    p {
+      display: block;
+      margin: 0;
+      padding-left: 25px;
+    }
+  }
+
+}

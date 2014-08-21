@@ -1,0 +1,397 @@
+/* line 7, ../sass/_layout.scss */
+.page-ops {
+  color: black;
+}
+/* line 9, ../sass/_layout.scss */
+.page-ops #content {
+  padding: 30px;
+}
+/* line 12, ../sass/_layout.scss */
+.page-ops .page-ops__key {
+  padding: 30px;
+}
+/* line 19, ../sass/_layout.scss */
+.page-ops h2,
+.page-ops h3 {
+  margin: 0;
+  line-height: 1.5em;
+}
+/* line 24, ../sass/_layout.scss */
+.page-ops h2 {
+  font-weight: 300;
+}
+/* line 28, ../sass/_layout.scss */
+.page-ops .page-wrapper {
+  width: auto !important;
+}
+/* line 37, ../sass/_layout.scss */
+.page-ops .company {
+  padding: 5px;
+}
+/* line 45, ../sass/_layout.scss */
+.page-ops .machine {
+  background-color: #eee;
+}
+/* line 50, ../sass/_layout.scss */
+.page-ops .footer {
+  position: relative;
+}
+/* line 54, ../sass/_layout.scss */
+.page-ops .icon-Washer {
+  font-size: 20px;
+}
+/* line 57, ../sass/_layout.scss */
+.page-ops .Xeros .icon-Washer {
+  font-size: 20px;
+}
+/* line 61, ../sass/_layout.scss */
+.page-ops .company {
+  margin-top: 5px;
+  background-color: rgba(245, 245, 245, 0.9);
+}
+/* line 64, ../sass/_layout.scss */
+.page-ops .company .company__details-wrapper {
+  background-color: rgba(200, 200, 200, 0.8);
+  padding-left: 30px;
+}
+/* line 69, ../sass/_layout.scss */
+.page-ops .company .company__details {
+  background-color: rgba(245, 245, 245, 0.9);
+}
+/* line 75, ../sass/_layout.scss */
+.page-ops .machine__wrapper {
+  border: 1px solid grey;
+  background-color: #fff;
+  color: grey;
+  padding: 5px;
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
+  box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
+}
+/* line 81, ../sass/_layout.scss */
+.page-ops .machine__wrapper > div {
+  display: inline-block;
+}
+/* line 84, ../sass/_layout.scss */
+.page-ops .machine__wrapper > i {
+  display: inline-block;
+}
+/* line 87, ../sass/_layout.scss */
+.page-ops .machine__wrapper .right {
+  float: right;
+  padding: 3px;
+}
+/* line 91, ../sass/_layout.scss */
+.page-ops .machine__wrapper.Xeros {
+  background-color: #e5f4fa;
+}
+/* line 99, ../sass/_layout.scss */
+.page-ops .green {
+  border: 1px solid green;
+  color: green;
+}
+/* line 102, ../sass/_layout.scss */
+.page-ops .green .status-icon:before {
+  content: "\f00c";
+}
+/* line 106, ../sass/_layout.scss */
+.page-ops .red {
+  border: 1px solid red;
+  color: red;
+}
+/* line 109, ../sass/_layout.scss */
+.page-ops .red .status-icon:before {
+  content: "\f00d";
+}
+/* line 113, ../sass/_layout.scss */
+.page-ops .yellow {
+  border: 1px solid orange;
+  color: orange;
+}
+/* line 116, ../sass/_layout.scss */
+.page-ops .yellow .status-icon:before {
+  content: "\f1ce";
+}
+/* line 120, ../sass/_layout.scss */
+.page-ops .blue {
+  border: 1px solid blue;
+  color: blue;
+}
+/* line 123, ../sass/_layout.scss */
+.page-ops .blue .status-icon:before {
+  content: "\f0e7";
+}
+@media all and (min-width: 500px) {
+  /* line 129, ../sass/_layout.scss */
+  .page-ops .machine {
+    padding: 10px;
+    margin: 10px;
+  }
+}
+@media all and (min-width: 500px) and (max-width: 999px) {
+  /* line 46, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:before, .page-ops .location:after {
+    content: "";
+    display: table;
+  }
+  /* line 50, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:after {
+    clear: both;
+  }
+  /* line 142, ../sass/_layout.scss */
+  .page-ops .location .title {
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 146, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(4n+2) {
+    clear: left;
+    float: left;
+    width: 25%;
+    margin-left: 0%;
+    margin-right: -25%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 150, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(4n+3) {
+    float: left;
+    width: 25%;
+    margin-left: 25%;
+    margin-right: -50%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 153, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(4n+4) {
+    float: left;
+    width: 25%;
+    margin-left: 50%;
+    margin-right: -75%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 156, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(4n+5) {
+    float: left;
+    width: 25%;
+    margin-left: 75%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+}
+@media all and (min-width: 1000px) and (max-width: 1399px) {
+  /* line 46, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:before, .page-ops .location:after {
+    content: "";
+    display: table;
+  }
+  /* line 50, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:after {
+    clear: both;
+  }
+  /* line 168, ../sass/_layout.scss */
+  .page-ops .location .title {
+    clear: left;
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 172, ../sass/_layout.scss */
+  .page-ops .location .machine {
+    float: left;
+    width: 16.66667%;
+  }
+  /* line 176, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(6n+2) {
+    clear: left;
+  }
+}
+@media all and (min-width: 1400px) {
+  /* line 46, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:before, .page-ops .location:after {
+    content: "";
+    display: table;
+  }
+  /* line 50, ../../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/zen-grids-1.4/stylesheets/zen/_grids.scss */
+  .page-ops .location:after {
+    clear: both;
+  }
+  /* line 188, ../sass/_layout.scss */
+  .page-ops .location .title {
+    clear: left;
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 193, ../sass/_layout.scss */
+  .page-ops .location .machine {
+    width: 12.5%;
+    float: left;
+  }
+  /* line 197, ../sass/_layout.scss */
+  .page-ops .location .machine:nth-of-type(8n+2) {
+    clear: left;
+  }
+}
+
+/* line 1, ../sass/_machine-detail.scss */
+.machine-detail {
+  border: 1px solid orange;
+  background-color: #eee;
+  padding: 0;
+  padding-top: 150px;
+  position: fixed;
+  top: 0;
+  right: -50%;
+  bottom: 0;
+  width: 50%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  overflow: scroll;
+}
+/* line 14, ../sass/_machine-detail.scss */
+.machine-detail.show {
+  right: 0;
+}
+/* line 18, ../sass/_machine-detail.scss */
+.machine-detail .machine-detail__wrapper {
+  padding: 30px;
+}
+/* line 22, ../sass/_machine-detail.scss */
+.machine-detail .machine-detail__close {
+  display: block;
+  margin-bottom: 10px;
+}
+/* line 26, ../sass/_machine-detail.scss */
+.machine-detail .icon-Washer {
+  font-size: 40px !important;
+  display: inline-block;
+}
+/* line 31, ../sass/_machine-detail.scss */
+.machine-detail .machine-detail__title {
+  display: inline-block;
+}
+/* line 35, ../sass/_machine-detail.scss */
+.machine-detail .machine-detail__location {
+  display: block;
+}
+/* line 39, ../sass/_machine-detail.scss */
+.machine-detail .status {
+  border-top: 1px dotted gray;
+  padding-bottom: 30px;
+}
+/* line 41, ../sass/_machine-detail.scss */
+.machine-detail .status .status-message {
+  display: inline-block;
+  padding: 5px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+/* line 48, ../sass/_machine-detail.scss */
+.machine-detail .status p {
+  margin: 0;
+}
+/* line 52, ../sass/_machine-detail.scss */
+.machine-detail .details {
+  border-top: 1px dotted gray;
+  padding-bottom: 30px;
+}
+/* line 55, ../sass/_machine-detail.scss */
+.machine-detail .details p {
+  margin: 0;
+}
+/* line 59, ../sass/_machine-detail.scss */
+.machine-detail .log {
+  border-top: 1px dotted gray;
+}
+/* line 61, ../sass/_machine-detail.scss */
+.machine-detail .log .log__row {
+  margin-bottom: 10px;
+}
+/* line 64, ../sass/_machine-detail.scss */
+.machine-detail .log .log__timestamp {
+  display: inline-block;
+  font-style: italic;
+}
+/* line 68, ../sass/_machine-detail.scss */
+.machine-detail .log .log__status {
+  display: inline-block;
+}
+/* line 76, ../sass/_machine-detail.scss */
+.machine-detail .comment {
+  border-top: 1px dotted gray;
+}
+
+/* line 1, ../sass/_key.scss */
+.key {
+  max-width: 300px;
+}
+/* line 4, ../sass/_key.scss */
+.key .key__item {
+  margin: 3px auto;
+  position: relative;
+}
+/* line 7, ../sass/_key.scss */
+.key .key__item i {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+/* line 12, ../sass/_key.scss */
+.key .key__item p {
+  display: block;
+  margin: 0;
+  padding-left: 25px;
+}
