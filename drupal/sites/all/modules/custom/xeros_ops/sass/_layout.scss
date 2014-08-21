@@ -77,7 +77,10 @@ $color-inactive: grey;
     background-color: #fff;
     color: $color-inactive;
     padding: 5px;
-    @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+    @include box-shadow(0px 1px 1px 1px rgba(50, 50, 50, 0.5));
+    &:hover {
+      @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+    }
     > div {
       display: inline-block;
     }
