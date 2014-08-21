@@ -152,9 +152,9 @@ BEGIN
 	SELECT
 		xdma.dai_meter_actual_id							as dai_meter_actual_id,
 		-- Hot water gallons
-		( xdma.hot_water / 10 )                                                                     AS cycle_hot_water_volume,
+		( xdma.hot_water * m.water_meter_rate )                                                                     AS cycle_hot_water_volume,
 		-- Hot water pounds
-		( xdma.hot_water / 10 ) * 8.34 																AS cycle_hot_water_pounds,  	
+		( xdma.hot_water / m.water_meter_rate ) * 8.34 																AS cycle_hot_water_pounds,
 		-- Xeros hot water gallons
 		xlsv.hot_water_gallons                                                                     AS cycle_hot_water_xeros_volume,
 		-- Xeros hot water pounds
