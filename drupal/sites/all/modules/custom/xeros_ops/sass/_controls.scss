@@ -1,0 +1,18 @@
+.controls {
+  border: 1px solid #444;
+  padding: 3px;
+  border-radius: 2px;
+  //.filter {
+    background-color: #fff;
+    &.hide,
+    &.active {
+      background-color: #ddd;
+    }
+  //}
+}
+
+.machine {
+  &.hide {
+    display: none;
+  }
+}

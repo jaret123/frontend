@@ -19,8 +19,10 @@ $legacy-support-for-ie8: true;
 @import "zen";
 
 @import "layout";
+@import "display-full-screen";
 
 @import "machine-detail";
 
 @import "machine-status";
 @import "key";
+@import "controls";

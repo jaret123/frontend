@@ -131,14 +131,43 @@ FF.Hud = (function($){
 
         els.alerts =      $('.machine');
 
-        // Hide and show right side view
+        // Show machine details
         els.alerts.on('click', function() {
             // Rerender with new data
            $('.machine-detail').addClass('show');
         });
 
+        // Close machine details
         $('.machine-detail__close').on('click', function() {
             $(this).closest('.machine-detail').removeClass('show');
+        });
+
+        // Toggle key display
+        $('.page-ops__key').on('click', function() {
+            $(this).toggleClass('show');
+        });
+
+        // Filter results
+        $('.controls.filter').on('click', function() {
+            var filter = $(this).data('filter');
+            $(this).toggleClass('hide');
+            $('.machine__wrapper.' + filter).parent().toggleClass('hide');
+        });
+
+        // Change Display
+        $('.controls.display-type').on('click', function() {
+            var display = $(this).data('display-type');
+            $('body')
+                .removeClass(function(index, css) {
+                    return (css.match (/(^|\s)display-\S+/g) || []).join(' ');
+                })
+                .addClass('display-' + display);
+        });
+
+        // Toggle Full Screen
+        $('.controls.full-screen').on('click', function() {
+            $('body').toggleClass('full-screen');
+            $(this).toggleClass('active');
         })
     }
     /**
@@ -166,6 +195,8 @@ FF.Hud = (function($){
         $('html').css('padding-bottom', '0');
 
         console.log(els.data);
+
+        $('body').addClass('display-block');
 
     }
 

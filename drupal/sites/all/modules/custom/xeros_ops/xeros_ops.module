@@ -7,7 +7,7 @@
  */
 function xeros_ops_menu() {
   $items['hud'] = array(
-    'title' => 'Xeros Global Operations',
+    'title' => 'Xeros Global Operations Status Board',
     'page callback' => 'hud',
     'page arguments' => array(),
     'access arguments' => array('xeros hud'),

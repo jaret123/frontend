@@ -1,5 +1,6 @@
+
 .machine-detail {
-  border: 1px solid orange;
+  //border: 1px solid orange;
   background-color: #eee;
   padding: 0;
   padding-top: 150px;
@@ -9,10 +10,11 @@
   bottom: 0;
   width: 50%;
   @include transition(all 0.3s ease);
-  @include box-shadow(-2px 0px 5px 0px rgba(50, 50, 50, 0.75));
+
   overflow: scroll;
   &.show {
     right: 0;
+    @include box-shadow(-2px 0px 5px 0px rgba(50, 50, 50, 0.75));
   }
 
   .machine-detail__wrapper {

@@ -1,0 +1,21 @@
+body.full-screen {
+  #admin-menu,
+  .top-border,
+  .header,
+  .footer
+  {
+    display: none;
+  }
+
+  #content {
+    padding: 0 !important;
+  }
+  h2, h3 {
+    font-size: 16px;
+  }
+  .machine {
+    padding: 0 10px;
+    margin: 0 10px;
+  }
+}
+

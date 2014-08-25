@@ -1,0 +1,11 @@
+{
+  "name": "xeros_ops",
+  "description" : "Xeros Status Board module",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-compass": "~0.7.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "qunitjs": "~1.14.0"
+  }
+}
