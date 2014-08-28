@@ -83,7 +83,8 @@ FF.Hud = (function($){
 
     loadMachineTemplate = function(callback) {
         $.ajax({
-            url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine.tpl.html',
+            //url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine.tpl.html',
+            url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine-block.tpl.html',
             success: function(source) {
                 tpl.machine = source;
                 callback();
@@ -164,8 +165,21 @@ FF.Hud = (function($){
                 .addClass('display-' + display);
         });
 
+        // Show Detail
+        $('.controls.show-details').on('click', function() {
+            $('body').toggleClass('show-details');
+            $(this).toggleClass('active');
+        })
+
         // Toggle Full Screen
         $('.controls.full-screen').on('click', function() {
+
+            if (FF.Utils.fullscreenElement() !== null) {
+                FF.Utils.exitFullscreen();
+            } else {
+                FF.Utils.launchFullscreen(document.documentElement);
+            }
+
             $('body').toggleClass('full-screen');
             $(this).toggleClass('active');
         })

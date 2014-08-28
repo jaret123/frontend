@@ -1,18 +1,44 @@
+.controls__section {
+  padding: 10px 0;
+  position: relative;
+}
 .controls {
   border: 1px solid #444;
-  padding: 3px;
+  padding: 3px 6px;
   border-radius: 2px;
   //.filter {
-    background-color: #fff;
+    opacity: 1;
     &.hide,
     &.active {
-      background-color: #ddd;
+      //background-color: #ddd;
+      opacity: .5;
     }
   //}
+  margin: 0 2px;
+  display: inline-block;
+  //min-width: 30px;
 }
 
 .machine {
   &.hide {
     display: none;
   }
+}
+
+
+.controls__details {
+  display: inline-block;
+}
+.page-ops__key {
+  display: inline-block;
+}
+
+@media all and (min-width: 800px) {
+
+  .controls__display {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
 }

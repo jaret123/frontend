@@ -17,6 +17,7 @@ function hud() {
   drupal_add_css($module_path . '/css/ops.css', array( 'group' => CSS_THEME, 'weight' => 1) );
 
   drupal_add_js($module_path . '/js/handlebars.js');
+  drupal_add_js($module_path . '/js/ff-utils.js');
   drupal_add_js($module_path . '/js/ops.js');
 
   $query = <<<SQL
@@ -25,8 +26,8 @@ function hud() {
 	m.serial_number,
 	m.manufacturer,
 	m.location_id,
-	l.title as location_title,
-	c.title as company_title
+	coalesce(l.title, 'Unknown Location') as location_title,
+	coalesce(c.title, 'Unknown Company') as company_title
 from
     xeros_machine as m
 left join node as l

@@ -1,18 +1,25 @@
 <div class="machine-detail__wrapper Xeros">
     <i class="fa fa-times machine-detail__close"></i>
     <i class="icon-Washer"></i>
-    <h3 class="machine-detail__title">Machine Name</h3>
-
+    <i class="fa fa-print icon-print"></i>
+    <h3 class="machine-detail__title">Washer 01</h3>
+    <div class="manufacturer">Manufacturer/Model: Xeros</div>
+    <div class="description">
+        This is the machine installed on the third floor utility closet.
+    </div>
+    <!-- TODO: Experiment with Machine Name and Model in the board view -->
+    <!-- TODO: Move the key and move the display controls -->
+    <!-- TODO: Create a PDF of the drill down screen -->
     <div class="status">
         <h4>Status</h4>
         <div class="green status-message">
         <i class="fa status-icon"></i>Operational</div>
         <p>The machine is currently operational</p>
         <p>Last Ping: Aug 1 - 11:35 AM EST</p>
-        <p>Last Cycle: Aug 1 - 10:24 AM EST</p>
+        <p>Last Cycle Run: Aug 1 - 10:24 AM EST</p>
         <p>Cycles Today: 30</p>
-        <p>Utilization: 73%</p>
-        <p>Idle: 27%</p>
+        <p>Utilization Today: 73%</p>
+        <p>Idle Time Today: 27%</p>
     </div>
     <div class="details">
         <h4 class="machine-detail__location">Machine Details</h4>
@@ -48,6 +55,18 @@
             <div class="log__timestamp">11:45 AM EST</div>
             <div class="log__status">Operational</div>
             <div class="log__message">Lorem Ipsum.</div>
+        </div>
+    </div>
+
+    <div class="machine-detail__cycles log">
+        <h4>Cycles Today</h4>
+        <div class="log__row">
+            <div class="log__timestamp">Start Time: 11:45 AM EST</div>
+            <div class="log__timestamp">End Time: 11:45 AM EST</div>
+            <div class="log__status">Rinse and Spin</div>
+            <div class="log__detail">Water Used: 5 gallons</div>
+            <div class="log__detail">KwH: 32</div>
+            <div class="log__detail">Chemical Usage: 33 Oz</div>
         </div>
     </div>
 

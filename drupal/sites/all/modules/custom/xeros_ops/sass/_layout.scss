@@ -55,6 +55,12 @@ $color-inactive: grey;
   .machine {
     //margin: 10px;
     background-color: #eee;
+    //TODO: set this dynamically
+
+  }
+  .machine__wrapper {
+    height: 75px;
+    width: 75px;
   }
 
   .footer {
@@ -62,10 +68,10 @@ $color-inactive: grey;
   }
 
   .icon-Washer {
-    font-size: 20px;
+    font-size: 40px;
   }
   .Xeros .icon-Washer {
-    font-size: 20px;
+    font-size: 40px;
   }
 
   .company {
@@ -80,16 +86,10 @@ $color-inactive: grey;
       background-color: rgba(245,245,245, .9);
     }
   }
-
-
-
-
-
-
-
-
-
-
+  .company__container {
+    background-color: rgba(245,245,245, .9);
+    border-top: 2px solid white;
+  }
 
 }
 
@@ -103,6 +103,16 @@ $color-inactive: grey;
     @include box-shadow(0px 1px 1px 1px rgba(50, 50, 50, 0.5));
     &:hover {
       @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+    }
+    .machine__icons {
+      text-align: center;
+      > i {
+        display: block;
+        &.fa {
+          font-size: 25px;
+          padding-top: 5px;
+        }
+      }
     }
     > div {
       display: inline-block;
@@ -152,61 +162,91 @@ $color-inactive: grey;
     }
   }
 
+  .company__container {
+    display: block;
+    vertical-align: top;
+    width: 100%;
+  }
+  .location__container {
+    display: inline-block;
+    vertical-align: top;
+    //width: 400px;
+  }
+  .machine {
+    padding: 5px;
+    margin: 0px;
+    display: inline-block;
+  }
   @media all and (min-width: 500px) {
-    .machine {
-      padding: 10px;
-      margin: 10px;
-      display: inline-block;
-    }
+
     .title {
       display: block;
     }
   }
 
-  @media all and (min-width: 500px) and (max-width: 999px)  {
+  @media all and (min-width: 500px) and (max-width: 999px) {
     .machine {
-      width: (99%/4);
+      //width: (99%/4);
     }
   }
 
-  @media all and (min-width: 1000px) and (max-width: 1399px)  {
+  @media all and (min-width: 1000px)  {
+    .company__container {
+      display: inline-block;
+      vertical-align: top;
+      width: 49.5%;
+      width: calc(50% - 2px) ;
+    }
     .machine {
-      width: (99%/6);
+      //width: (99%/6);
     }
   }
 
   @media all and (min-width: 1400px) {
     .machine {
-      width: (99%/8);
+      //width: (99%/8);
+    }
+  }
+
+  &.show-details {
+    .machine__wrapper {
+      width: 200px !important;
+    }
+
+    .annotation {
+      display: inline;
     }
   }
 }
 
 .display-list {
 
-  .machine__wrapper{
-    //border: 1px solid $color-inactive;
-    background-color: #fff;
-    color: $color-inactive;
-    padding: 5px;
-    //@include box-shadow(0px 1px 1px 1px rgba(50, 50, 50, 0.5));
-    &:hover {
-      @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
-    }
-    > div {
-      display: block;
-    }
+//  .machine__wrapper{
+//    //border: 1px solid $color-inactive;
+//    background-color: #fff;
+//    color: $color-inactive;
+//    padding: 5px;
+//    //@include box-shadow(0px 1px 1px 1px rgba(50, 50, 50, 0.5));
+//    &:hover {
+//      @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+//    }
+//    > div {
+//      display: block;
+//    }
+//
+//    .right {
+//      float: right;
+//      padding: 3px;
+//    }
+//    &.Xeros {
+//      background-color: #e5f4fa;
+//    }
+//  }
 
-    .right {
-      float: right;
-      padding: 3px;
-    }
-    &.Xeros {
-      background-color: #e5f4fa;
-    }
-  }
 
 }
+
+
 
 
 

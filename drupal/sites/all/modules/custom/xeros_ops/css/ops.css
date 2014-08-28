@@ -44,31 +44,41 @@
 .page-ops .machine {
   background-color: #eee;
 }
-/* line 60, ../sass/_layout.scss */
+/* line 61, ../sass/_layout.scss */
+.page-ops .machine__wrapper {
+  height: 75px;
+  width: 75px;
+}
+/* line 66, ../sass/_layout.scss */
 .page-ops .footer {
   position: relative;
 }
-/* line 64, ../sass/_layout.scss */
+/* line 70, ../sass/_layout.scss */
 .page-ops .icon-Washer {
-  font-size: 20px;
+  font-size: 40px;
 }
-/* line 67, ../sass/_layout.scss */
+/* line 73, ../sass/_layout.scss */
 .page-ops .Xeros .icon-Washer {
-  font-size: 20px;
+  font-size: 40px;
 }
-/* line 71, ../sass/_layout.scss */
+/* line 77, ../sass/_layout.scss */
 .page-ops .company {
   margin-top: 5px;
   background-color: rgba(245, 245, 245, 0.9);
 }
-/* line 74, ../sass/_layout.scss */
+/* line 80, ../sass/_layout.scss */
 .page-ops .company .company__details-wrapper {
   background-color: rgba(200, 200, 200, 0.8);
   padding-left: 30px;
 }
-/* line 79, ../sass/_layout.scss */
+/* line 85, ../sass/_layout.scss */
 .page-ops .company .company__details {
   background-color: rgba(245, 245, 245, 0.9);
+}
+/* line 89, ../sass/_layout.scss */
+.page-ops .company__container {
+  background-color: rgba(245, 245, 245, 0.9);
+  border-top: 2px solid white;
 }
 
 /* line 98, ../sass/_layout.scss */
@@ -88,117 +98,114 @@
   box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
 }
 /* line 107, ../sass/_layout.scss */
+.display-block .machine__wrapper .machine__icons {
+  text-align: center;
+}
+/* line 109, ../sass/_layout.scss */
+.display-block .machine__wrapper .machine__icons > i {
+  display: block;
+}
+/* line 111, ../sass/_layout.scss */
+.display-block .machine__wrapper .machine__icons > i.fa {
+  font-size: 25px;
+  padding-top: 5px;
+}
+/* line 117, ../sass/_layout.scss */
 .display-block .machine__wrapper > div {
   display: inline-block;
 }
-/* line 110, ../sass/_layout.scss */
+/* line 120, ../sass/_layout.scss */
 .display-block .machine__wrapper > i {
   display: inline-block;
 }
-/* line 113, ../sass/_layout.scss */
+/* line 123, ../sass/_layout.scss */
 .display-block .machine__wrapper .right {
   float: right;
   padding: 3px;
 }
-/* line 117, ../sass/_layout.scss */
+/* line 127, ../sass/_layout.scss */
 .display-block .machine__wrapper.Xeros {
   background-color: #e5f4fa;
 }
-/* line 122, ../sass/_layout.scss */
+/* line 132, ../sass/_layout.scss */
 .display-block .annotation {
   display: none;
 }
-/* line 126, ../sass/_layout.scss */
+/* line 136, ../sass/_layout.scss */
 .display-block .green {
   border: 1px solid green;
   color: green;
 }
-/* line 129, ../sass/_layout.scss */
+/* line 139, ../sass/_layout.scss */
 .display-block .green .status-icon:before {
   content: "\f00c";
 }
-/* line 133, ../sass/_layout.scss */
+/* line 143, ../sass/_layout.scss */
 .display-block .red {
   border: 1px solid red;
   color: red;
 }
-/* line 136, ../sass/_layout.scss */
+/* line 146, ../sass/_layout.scss */
 .display-block .red .status-icon:before {
   content: "\f00d";
 }
-/* line 140, ../sass/_layout.scss */
+/* line 150, ../sass/_layout.scss */
 .display-block .yellow {
   border: 1px solid orange;
   color: orange;
 }
-/* line 143, ../sass/_layout.scss */
+/* line 153, ../sass/_layout.scss */
 .display-block .yellow .status-icon:before {
   content: "\f1ce";
 }
-/* line 147, ../sass/_layout.scss */
+/* line 157, ../sass/_layout.scss */
 .display-block .blue {
   border: 1px solid blue;
   color: blue;
 }
-/* line 150, ../sass/_layout.scss */
+/* line 160, ../sass/_layout.scss */
 .display-block .blue .status-icon:before {
   content: "\f0e7";
 }
+/* line 165, ../sass/_layout.scss */
+.display-block .company__container {
+  display: block;
+  vertical-align: top;
+  width: 100%;
+}
+/* line 170, ../sass/_layout.scss */
+.display-block .location__container {
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 175, ../sass/_layout.scss */
+.display-block .machine {
+  padding: 5px;
+  margin: 0px;
+  display: inline-block;
+}
 @media all and (min-width: 500px) {
-  /* line 156, ../sass/_layout.scss */
-  .display-block .machine {
-    padding: 10px;
-    margin: 10px;
-    display: inline-block;
-  }
-  /* line 161, ../sass/_layout.scss */
+  /* line 182, ../sass/_layout.scss */
   .display-block .title {
     display: block;
   }
 }
-@media all and (min-width: 500px) and (max-width: 999px) {
-  /* line 167, ../sass/_layout.scss */
-  .display-block .machine {
-    width: 24.75%;
+@media all and (min-width: 1000px) {
+  /* line 194, ../sass/_layout.scss */
+  .display-block .company__container {
+    display: inline-block;
+    vertical-align: top;
+    width: 49.5%;
+    width: calc(50% - 2px);
   }
 }
-@media all and (min-width: 1000px) and (max-width: 1399px) {
-  /* line 173, ../sass/_layout.scss */
-  .display-block .machine {
-    width: 16.5%;
-  }
+/* line 212, ../sass/_layout.scss */
+.display-block.show-details .machine__wrapper {
+  width: 200px !important;
 }
-@media all and (min-width: 1400px) {
-  /* line 179, ../sass/_layout.scss */
-  .display-block .machine {
-    width: 12.375%;
-  }
-}
-
-/* line 187, ../sass/_layout.scss */
-.display-list .machine__wrapper {
-  background-color: #fff;
-  color: grey;
-  padding: 5px;
-}
-/* line 193, ../sass/_layout.scss */
-.display-list .machine__wrapper:hover {
-  -webkit-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-  box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-}
-/* line 196, ../sass/_layout.scss */
-.display-list .machine__wrapper > div {
-  display: block;
-}
-/* line 200, ../sass/_layout.scss */
-.display-list .machine__wrapper .right {
-  float: right;
-  padding: 3px;
-}
-/* line 204, ../sass/_layout.scss */
-.display-list .machine__wrapper.Xeros {
-  background-color: #e5f4fa;
+/* line 216, ../sass/_layout.scss */
+.display-block.show-details .annotation {
+  display: inline;
 }
 
 /* line 6, ../sass/_display-full-screen.scss */
@@ -224,107 +231,118 @@ body.full-screen .machine {
 
 /* line 2, ../sass/_machine-detail.scss */
 .machine-detail {
+  z-index: 1000;
   background-color: #eee;
   padding: 0;
-  padding-top: 150px;
   position: fixed;
   top: 0;
-  right: -50%;
+  right: -100%;
   bottom: 0;
-  width: 50%;
+  width: 100%;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   overflow: scroll;
 }
-/* line 15, ../sass/_machine-detail.scss */
+/* line 16, ../sass/_machine-detail.scss */
 .machine-detail.show {
   right: 0;
   -webkit-box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
 }
-/* line 20, ../sass/_machine-detail.scss */
+/* line 21, ../sass/_machine-detail.scss */
+.machine-detail .icon-print {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+/* line 27, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__wrapper {
   padding: 30px;
 }
-/* line 24, ../sass/_machine-detail.scss */
+/* line 31, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__close {
   display: block;
   margin-bottom: 10px;
 }
-/* line 28, ../sass/_machine-detail.scss */
+/* line 35, ../sass/_machine-detail.scss */
 .machine-detail .icon-Washer {
   font-size: 40px !important;
   display: inline-block;
 }
-/* line 33, ../sass/_machine-detail.scss */
+/* line 40, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__title {
   display: inline-block;
 }
-/* line 37, ../sass/_machine-detail.scss */
+/* line 44, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__location {
   display: block;
 }
-/* line 41, ../sass/_machine-detail.scss */
+/* line 48, ../sass/_machine-detail.scss */
 .machine-detail .status {
   border-top: 1px dotted gray;
   padding-bottom: 30px;
 }
-/* line 43, ../sass/_machine-detail.scss */
+/* line 50, ../sass/_machine-detail.scss */
 .machine-detail .status .status-message {
   display: inline-block;
   padding: 5px;
   font-weight: 300;
   margin-bottom: 15px;
 }
-/* line 50, ../sass/_machine-detail.scss */
+/* line 57, ../sass/_machine-detail.scss */
 .machine-detail .status p {
   margin: 0;
 }
-/* line 54, ../sass/_machine-detail.scss */
+/* line 61, ../sass/_machine-detail.scss */
 .machine-detail .details {
   border-top: 1px dotted gray;
   padding-bottom: 30px;
 }
-/* line 57, ../sass/_machine-detail.scss */
+/* line 64, ../sass/_machine-detail.scss */
 .machine-detail .details p {
   margin: 0;
 }
-/* line 61, ../sass/_machine-detail.scss */
+/* line 68, ../sass/_machine-detail.scss */
 .machine-detail .log {
   border-top: 1px dotted gray;
 }
-/* line 63, ../sass/_machine-detail.scss */
+/* line 70, ../sass/_machine-detail.scss */
 .machine-detail .log .log__row {
   margin-bottom: 10px;
 }
-/* line 66, ../sass/_machine-detail.scss */
+/* line 73, ../sass/_machine-detail.scss */
 .machine-detail .log .log__timestamp {
   display: inline-block;
   font-style: italic;
 }
-/* line 70, ../sass/_machine-detail.scss */
+/* line 77, ../sass/_machine-detail.scss */
 .machine-detail .log .log__status {
   display: inline-block;
 }
-/* line 78, ../sass/_machine-detail.scss */
+/* line 85, ../sass/_machine-detail.scss */
 .machine-detail .comment {
   border-top: 1px dotted gray;
+}
+@media screen and (min-width: 800px) {
+  /* line 2, ../sass/_machine-detail.scss */
+  .machine-detail {
+    right: -50%;
+    width: 50%;
+  }
+}
+
+/* line 1, ../sass/_machine-status.scss */
+.machine-status {
+  background-color: rgba(245, 245, 245, 0.9);
 }
 
 /* line 2, ../sass/_key.scss */
 .page-ops__key {
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 5px 30px 5px 5px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-/* line 8, ../sass/_key.scss */
-.page-ops__key .key__header {
-  text-align: right;
+  position: relative;
 }
 /* line 11, ../sass/_key.scss */
 .page-ops__key .key__title {
@@ -361,8 +379,11 @@ body.full-screen .machine {
   display: block;
   border: 1px solid rgba(0, 0, 0, 0.7);
   padding: 30px;
+  position: absolute;
+  background-color: white;
+  width: 300px;
 }
-/* line 46, ../sass/_key.scss */
+/* line 49, ../sass/_key.scss */
 .page-ops__key.show .key__open-close {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -372,18 +393,45 @@ body.full-screen .machine {
 }
 
 /* line 1, ../sass/_controls.scss */
-.controls {
-  border: 1px solid #444;
-  padding: 3px;
-  border-radius: 2px;
-  background-color: #fff;
-}
-/* line 8, ../sass/_controls.scss */
-.controls.hide, .controls.active {
-  background-color: #ddd;
+.controls__section {
+  padding: 10px 0;
+  position: relative;
 }
 
-/* line 15, ../sass/_controls.scss */
+/* line 5, ../sass/_controls.scss */
+.controls {
+  border: 1px solid #444;
+  padding: 3px 6px;
+  border-radius: 2px;
+  opacity: 1;
+  margin: 0 2px;
+  display: inline-block;
+}
+/* line 12, ../sass/_controls.scss */
+.controls.hide, .controls.active {
+  opacity: .5;
+}
+
+/* line 23, ../sass/_controls.scss */
 .machine.hide {
   display: none;
+}
+
+/* line 29, ../sass/_controls.scss */
+.controls__details {
+  display: inline-block;
+}
+
+/* line 32, ../sass/_controls.scss */
+.page-ops__key {
+  display: inline-block;
+}
+
+@media all and (min-width: 800px) {
+  /* line 38, ../sass/_controls.scss */
+  .controls__display {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }

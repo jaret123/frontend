@@ -77,42 +77,46 @@
       </div>
       <div class="controls__details">
         <span>Filter: </span>
-        <span class="controls filter red" data-filter="red"><i class="fa"></i>Red </span>
-        <span class="controls filter yellow" data-filter="yellow">Yellow </span>
-        <span class="controls filter green" data-filter="green">Green </span>
-        <span class="controls filter blue" data-filter="blue">Blue </span>
-        <span>Display: </span>
-        <span class="controls display-type block" data-display-type="block">Block </span>
-        <span class="controls display-type list" data-display-type="list">List </span>
+        <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i>4 </span>
+        <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i>13 </span>
+        <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i>10 </span>
+        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>
+      </div>
+      <div class="page-ops__key">
+        <div class="key__header">
+          <div class="key__title">Key</div>
+          <i class="fa fa-chevron-down key__open-close"></i>
+        </div>
+        <div class="key__details">
+          <div class="green key__item">
+            <i class="fa fa-check"></i>
+            <p>Connected, and in use according to usage parameters</p>
+          </div>
+          <div class="yellow key__item">
+            <i class="fa fa-circle-o-notch"></i>
+            <p>Connected, but idle</p>
+          </div>
+          <div class="red key__item">
+            <i class="fa fa-times"></i>
+            <p>Been idle for too long - machine not in use.</p>
+          </div>
+          <div class="blue key__item">
+            <i class="fa fa-bolt"></i>
+            <p>Cannot connect to machine.</p>
+          </div>
+        </div>
+      </div>
 
+      <div class="controls__display">
+        <span>Display: </span>
+<!--        <span class="controls display-type block" data-display-type="block">Block </span>-->
+<!--        <span class="controls display-type list" data-display-type="list">List </span>-->
+        <span class="controls show-details" >Show Details </span>
 
         <span class="controls full-screen" data-display="full-screen">Full Screen</span>
       </div>
     </div>
-    <div class="page-ops__key">
-      <div class="key__header">
-        <h3 class="key__title">Key</h3>
-        <i class="fa fa-chevron-down key__open-close"></i>
-      </div>
-      <div class="key__details">
-        <div class="green key__item">
-          <i class="fa fa-check"></i>
-          <p>Connected, and in use according to usage parameters</p>
-        </div>
-        <div class="yellow key__item">
-          <i class="fa fa-circle-o-notch"></i>
-          <p>Connected, but idle</p>
-        </div>
-        <div class="red key__item">
-          <i class="fa fa-times"></i>
-          <p>Been idle for too long - machine not in use.</p>
-        </div>
-        <div class="blue key__item">
-          <i class="fa fa-bolt"></i>
-          <p>Cannot connect to machine.</p>
-        </div>
-      </div>
-    </div>
+
 
     <?php print render($page['content']); ?>
 

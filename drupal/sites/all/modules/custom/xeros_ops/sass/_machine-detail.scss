@@ -1,20 +1,27 @@
 
 .machine-detail {
   //border: 1px solid orange;
+  z-index: 1000;
   background-color: #eee;
   padding: 0;
-  padding-top: 150px;
+  //padding-top: 30px;
   position: fixed;
   top: 0;
-  right: -50%;
+  right: -100%;
   bottom: 0;
-  width: 50%;
+  width: 100%;
   @include transition(all 0.3s ease);
 
   overflow: scroll;
   &.show {
     right: 0;
     @include box-shadow(-2px 0px 5px 0px rgba(50, 50, 50, 0.75));
+  }
+
+  .icon-print {
+    position: absolute;
+    top: 30px;
+    right: 30px;
   }
 
   .machine-detail__wrapper {
@@ -78,8 +85,9 @@
   .comment {
     border-top: 1px dotted gray;
   }
-}
 
-.machine-detail {
-
+  @media screen and (min-width: 800px) {
+    right: -50%;
+    width: 50%;
+  }
 }

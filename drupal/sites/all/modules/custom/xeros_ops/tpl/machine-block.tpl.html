@@ -1,5 +1,5 @@
 {{#each companies}}
-    <div class="company__container">
+    <div class="company__container machine-details">
     <div class="company">
         <div class="company__wrapper">
             <div class="title"><h2>{{company_title}}</h2></div>
@@ -20,11 +20,15 @@
             {{#each machines}}
                 <div class="machine">
                     <div class="machine__wrapper  {{status}} {{manufacturer}}">
-                        <i class="icon-Washer"></i>
-                        <i class="fa status-icon"></i>
-                        <div>30 <span class="annotation">Cycles</span></div>
-                        <div>73% <span class="annotation">Utilization</span></div>
-                        <i class="fa fa-ellipsis-h right"></i>
+                        <div class="machine__icons">
+                            <i class="icon-Washer"></i>
+                            <i class="fa status-icon"></i>
+                        </div>
+                        <div class="machine__data">
+                            <div>30 <span class="annotation">Cycles</span></div>
+                            <div>73% <span class="annotation">Utilization</span></div>
+                            <div>27% <span class="annotation">Idle Time</span></div>
+                        </div>
                     </div>
                 </div>
             {{/each}}
