@@ -258,71 +258,85 @@ body.full-screen .machine {
   top: 30px;
   right: 30px;
 }
-/* line 27, ../sass/_machine-detail.scss */
+/* line 28, ../sass/_machine-detail.scss */
+.machine-detail .status-message,
+.machine-detail .silence {
+  display: inline-block;
+}
+/* line 30, ../sass/_machine-detail.scss */
+.machine-detail .status-message i,
+.machine-detail .silence i {
+  margin-right: 5px;
+}
+/* line 34, ../sass/_machine-detail.scss */
+.machine-detail .icon-silence {
+  margin-left: 10px;
+}
+/* line 37, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__wrapper {
   padding: 30px;
 }
-/* line 31, ../sass/_machine-detail.scss */
+/* line 41, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__close {
   display: block;
   margin-bottom: 10px;
 }
-/* line 35, ../sass/_machine-detail.scss */
+/* line 45, ../sass/_machine-detail.scss */
 .machine-detail .icon-Washer {
   font-size: 40px !important;
   display: inline-block;
 }
-/* line 40, ../sass/_machine-detail.scss */
+/* line 50, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__title {
   display: inline-block;
 }
-/* line 44, ../sass/_machine-detail.scss */
+/* line 54, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__location {
   display: block;
 }
-/* line 48, ../sass/_machine-detail.scss */
+/* line 58, ../sass/_machine-detail.scss */
 .machine-detail .status {
   border-top: 1px dotted gray;
   padding-bottom: 30px;
 }
-/* line 50, ../sass/_machine-detail.scss */
+/* line 60, ../sass/_machine-detail.scss */
 .machine-detail .status .status-message {
   display: inline-block;
   padding: 5px;
   font-weight: 300;
   margin-bottom: 15px;
 }
-/* line 57, ../sass/_machine-detail.scss */
+/* line 67, ../sass/_machine-detail.scss */
 .machine-detail .status p {
   margin: 0;
 }
-/* line 61, ../sass/_machine-detail.scss */
+/* line 71, ../sass/_machine-detail.scss */
 .machine-detail .details {
   border-top: 1px dotted gray;
   padding-bottom: 30px;
 }
-/* line 64, ../sass/_machine-detail.scss */
+/* line 74, ../sass/_machine-detail.scss */
 .machine-detail .details p {
   margin: 0;
 }
-/* line 68, ../sass/_machine-detail.scss */
+/* line 78, ../sass/_machine-detail.scss */
 .machine-detail .log {
   border-top: 1px dotted gray;
 }
-/* line 70, ../sass/_machine-detail.scss */
+/* line 80, ../sass/_machine-detail.scss */
 .machine-detail .log .log__row {
   margin-bottom: 10px;
 }
-/* line 73, ../sass/_machine-detail.scss */
+/* line 83, ../sass/_machine-detail.scss */
 .machine-detail .log .log__timestamp {
   display: inline-block;
   font-style: italic;
 }
-/* line 77, ../sass/_machine-detail.scss */
+/* line 87, ../sass/_machine-detail.scss */
 .machine-detail .log .log__status {
   display: inline-block;
 }
-/* line 85, ../sass/_machine-detail.scss */
+/* line 95, ../sass/_machine-detail.scss */
 .machine-detail .comment {
   border-top: 1px dotted gray;
 }
@@ -337,6 +351,120 @@ body.full-screen .machine {
 /* line 1, ../sass/_machine-status.scss */
 .machine-status {
   background-color: rgba(245, 245, 245, 0.9);
+}
+
+@-webkit-keyframes throb {
+  /* line 6, ../sass/_machine-status.scss */
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 7, ../sass/_machine-status.scss */
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-moz-keyframes throb {
+  /* line 11, ../sass/_machine-status.scss */
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+
+  /* line 12, ../sass/_machine-status.scss */
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes throb {
+  /* line 16, ../sass/_machine-status.scss */
+  0% {
+    -o-transform: rotate(0deg);
+  }
+
+  /* line 17, ../sass/_machine-status.scss */
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+
+@keyframes throb {
+  /* line 21, ../sass/_machine-status.scss */
+  0% {
+    transform: rotate(0deg);
+  }
+
+  /* line 22, ../sass/_machine-status.scss */
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes pulse {
+  /* line 27, ../sass/_machine-status.scss */
+  0% {
+    -webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+
+  /* line 28, ../sass/_machine-status.scss */
+  50% {
+    -webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  /* line 29, ../sass/_machine-status.scss */
+  100% {
+    -webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-moz-keyframes pulse {
+  /* line 34, ../sass/_machine-status.scss */
+  0% {
+    -moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5);
+  }
+
+  /* line 35, ../sass/_machine-status.scss */
+  100% {
+    -moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5);
+  }
+}
+
+@-o-keyframes pulse {
+  /* line 39, ../sass/_machine-status.scss */
+  0% {
+    -o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5);
+  }
+
+  /* line 40, ../sass/_machine-status.scss */
+  100% {
+    -o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5);
+  }
+}
+
+@keyframes pulse {
+  /* line 44, ../sass/_machine-status.scss */
+  0% {
+    box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+
+  /* line 45, ../sass/_machine-status.scss */
+  50% {
+    box-shadow: 7px 7px 1px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  /* line 46, ../sass/_machine-status.scss */
+  100% {
+    box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+/* line 51, ../sass/_machine-status.scss */
+.machine .red {
+  -webkit-animation: pulse 1s infinite linear;
+  -moz-animation: pulse 1s infinite linear;
+  -o-animation: pulse 1s infinite linear;
+  animation: pulse 1s infinite linear;
 }
 
 /* line 2, ../sass/_key.scss */

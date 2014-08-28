@@ -24,6 +24,16 @@
     right: 30px;
   }
 
+  .status-message,
+  .silence {
+    display: inline-block;
+    i {
+      margin-right: 5px;
+    }
+  }
+  .icon-silence {
+    margin-left: 10px;
+  }
   .machine-detail__wrapper {
     padding: 30px;
   }
