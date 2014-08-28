@@ -353,116 +353,81 @@ body.full-screen .machine {
   background-color: rgba(245, 245, 245, 0.9);
 }
 
-@-webkit-keyframes throb {
+@-moz-keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
-  0% {
-    -webkit-transform: rotate(0deg);
+  0%, 100% {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 
-  /* line 7, ../sass/_machine-status.scss */
-  100% {
-    -webkit-transform: rotate(359deg);
-  }
-}
-
-@-moz-keyframes throb {
-  /* line 11, ../sass/_machine-status.scss */
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-
-  /* line 12, ../sass/_machine-status.scss */
-  100% {
-    -moz-transform: rotate(359deg);
-  }
-}
-
-@-o-keyframes throb {
-  /* line 16, ../sass/_machine-status.scss */
-  0% {
-    -o-transform: rotate(0deg);
-  }
-
-  /* line 17, ../sass/_machine-status.scss */
-  100% {
-    -o-transform: rotate(359deg);
-  }
-}
-
-@keyframes throb {
-  /* line 21, ../sass/_machine-status.scss */
-  0% {
-    transform: rotate(0deg);
-  }
-
-  /* line 22, ../sass/_machine-status.scss */
-  100% {
-    transform: rotate(359deg);
+  /* line 10, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 }
 
 @-webkit-keyframes pulse {
-  /* line 27, ../sass/_machine-status.scss */
-  0% {
-    -webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  /* line 6, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 
-  /* line 28, ../sass/_machine-status.scss */
+  /* line 10, ../sass/_machine-status.scss */
   50% {
-    -webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.5);
-  }
-
-  /* line 29, ../sass/_machine-status.scss */
-  100% {
-    -webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
-}
-
-@-moz-keyframes pulse {
-  /* line 34, ../sass/_machine-status.scss */
-  0% {
-    -moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5);
-  }
-
-  /* line 35, ../sass/_machine-status.scss */
-  100% {
-    -moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 }
 
 @-o-keyframes pulse {
-  /* line 39, ../sass/_machine-status.scss */
-  0% {
-    -o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5);
+  /* line 6, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 
-  /* line 40, ../sass/_machine-status.scss */
-  100% {
-    -o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5);
+  /* line 10, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-ms-keyframes pulse {
+  /* line 6, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+
+  /* line 10, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 }
 
 @keyframes pulse {
-  /* line 44, ../sass/_machine-status.scss */
-  0% {
-    box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5);
+  /* line 6, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 
-  /* line 45, ../sass/_machine-status.scss */
+  /* line 10, ../sass/_machine-status.scss */
   50% {
-    box-shadow: 7px 7px 1px 1px rgba(0, 0, 0, 0.5);
-  }
-
-  /* line 46, ../sass/_machine-status.scss */
-  100% {
-    box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5);
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
   }
 }
 
-/* line 51, ../sass/_machine-status.scss */
-.machine .red {
+/* line 16, ../sass/_machine-status.scss */
+.machine .red.alert {
   -webkit-animation: pulse 1s infinite linear;
   -moz-animation: pulse 1s infinite linear;
+  -ms-animation: pulse 1s infinite linear;
   -o-animation: pulse 1s infinite linear;
   animation: pulse 1s infinite linear;
 }

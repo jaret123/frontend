@@ -2,55 +2,17 @@
   background-color: rgba(245,245,245, .9);
 }
 
-@-webkit-keyframes throb {
-  0% {-webkit-transform: rotate(0deg);}
-  100% {-webkit-transform: rotate(359deg);}
+@include keyframes(pulse) {
+  0%, 100% {
+    background-color: rgba(255,0,0, .05);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    background-color: rgba(255,0,0, .2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
 }
 
-@-moz-keyframes throb {
-  0% {-moz-transform: rotate(0deg);}
-  100% {-moz-transform: rotate(359deg);}
-}
-
-@-o-keyframes throb {
-  0% {-o-transform: rotate(0deg);}
-  100% {-o-transform: rotate(359deg);}
-}
-
-@keyframes throb {
-  0% {transform: rotate(0deg);}
-  100% {transform: rotate(359deg);}
-}
-
-
-@-webkit-keyframes pulse {
-  0% {-webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5)}
- 50% {-webkit-box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.5)}
-100% {-webkit-box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5)}
-
-}
-
-@-moz-keyframes pulse {
-  0% {-moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5)}
-100% {-moz-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5)}
-}
-
-@-o-keyframes pulse {
-  0% {-o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 255, 0.5)}
-100% {-o-box-shadow: 0px 2px 1px 1px rgba(50, 50, 0, 0.5)}
-}
-
-@keyframes pulse {
-  0% {box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5)}
- 50% {box-shadow: 7px 7px 1px 1px rgba(0, 0, 0, 0.5)}
-100% {box-shadow: 7px 7px 1px 1px rgba(255, 0, 0, 0.5)}
-
-}
-
-
-.machine .red {
-  -webkit-animation: pulse 1s infinite linear;
-  -moz-animation: pulse 1s infinite linear;
-  -o-animation: pulse 1s infinite linear;
-  animation: pulse 1s infinite linear;
+.machine .red.alert {
+  @include animation(pulse 1s infinite linear);
 }

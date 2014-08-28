@@ -39,6 +39,7 @@ FF.Hud = (function($){
         };
 
         var j = 0;
+        var alert = 0;
 
         for (i = 0; i < data.machineSource.length; i++) {
             //console.log(data.machineSource[i]);
@@ -66,6 +67,10 @@ FF.Hud = (function($){
                     break;
                 case 3:
                     m.status = 'red';
+                    if (alert < 2) {
+                        m.status += ' alert';
+                    }
+                    alert++;
                     break;
                 case 4:
                     m.status = 'blue';
