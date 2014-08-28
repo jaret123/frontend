@@ -357,7 +357,7 @@ body.full-screen .machine {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
     background-color: rgba(255, 0, 0, 0.05);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
   /* line 10, ../sass/_machine-status.scss */
@@ -371,7 +371,7 @@ body.full-screen .machine {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
     background-color: rgba(255, 0, 0, 0.05);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
   /* line 10, ../sass/_machine-status.scss */
@@ -385,7 +385,7 @@ body.full-screen .machine {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
     background-color: rgba(255, 0, 0, 0.05);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
   /* line 10, ../sass/_machine-status.scss */
@@ -399,7 +399,7 @@ body.full-screen .machine {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
     background-color: rgba(255, 0, 0, 0.05);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
   /* line 10, ../sass/_machine-status.scss */
@@ -413,7 +413,7 @@ body.full-screen .machine {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
     background-color: rgba(255, 0, 0, 0.05);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
   /* line 10, ../sass/_machine-status.scss */
@@ -423,13 +423,92 @@ body.full-screen .machine {
   }
 }
 
-/* line 16, ../sass/_machine-status.scss */
+@-moz-keyframes pulse-blue {
+  /* line 17, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(0, 0, 255, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 21, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-webkit-keyframes pulse-blue {
+  /* line 17, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(0, 0, 255, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 21, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-o-keyframes pulse-blue {
+  /* line 17, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(0, 0, 255, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 21, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-ms-keyframes pulse-blue {
+  /* line 17, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(0, 0, 255, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 21, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@keyframes pulse-blue {
+  /* line 17, ../sass/_machine-status.scss */
+  0%, 100% {
+    background-color: rgba(0, 0, 255, 0.05);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 21, ../sass/_machine-status.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+/* line 27, ../sass/_machine-status.scss */
 .machine .red.alert {
-  -webkit-animation: pulse 1s infinite linear;
-  -moz-animation: pulse 1s infinite linear;
-  -ms-animation: pulse 1s infinite linear;
-  -o-animation: pulse 1s infinite linear;
-  animation: pulse 1s infinite linear;
+  -webkit-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -ms-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* line 31, ../sass/_machine-status.scss */
+.machine .blue.alert {
+  -webkit-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -ms-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 /* line 2, ../sass/_key.scss */

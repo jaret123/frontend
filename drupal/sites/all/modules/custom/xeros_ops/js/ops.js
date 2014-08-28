@@ -67,13 +67,17 @@ FF.Hud = (function($){
                     break;
                 case 3:
                     m.status = 'red';
-                    if (alert < 2) {
+                    if (alert < 4) {
                         m.status += ' alert';
                     }
                     alert++;
                     break;
                 case 4:
                     m.status = 'blue';
+                    if (alert < 4) {
+                        m.status += ' alert';
+                    }
+                    alert++;
                     j = 0;
                     break;
             }
