@@ -356,7 +356,7 @@ body.full-screen .machine {
 @-moz-keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(255, 0, 0, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
@@ -370,7 +370,7 @@ body.full-screen .machine {
 @-webkit-keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(255, 0, 0, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
@@ -384,7 +384,7 @@ body.full-screen .machine {
 @-o-keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(255, 0, 0, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
@@ -398,7 +398,7 @@ body.full-screen .machine {
 @-ms-keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(255, 0, 0, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
@@ -412,7 +412,7 @@ body.full-screen .machine {
 @keyframes pulse {
   /* line 6, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(255, 0, 0, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
@@ -426,7 +426,7 @@ body.full-screen .machine {
 @-moz-keyframes pulse-blue {
   /* line 17, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(0, 0, 255, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
@@ -440,7 +440,7 @@ body.full-screen .machine {
 @-webkit-keyframes pulse-blue {
   /* line 17, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(0, 0, 255, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
@@ -454,7 +454,7 @@ body.full-screen .machine {
 @-o-keyframes pulse-blue {
   /* line 17, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(0, 0, 255, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
@@ -468,7 +468,7 @@ body.full-screen .machine {
 @-ms-keyframes pulse-blue {
   /* line 17, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(0, 0, 255, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
@@ -482,7 +482,7 @@ body.full-screen .machine {
 @keyframes pulse-blue {
   /* line 17, ../sass/_machine-status.scss */
   0%, 100% {
-    background-color: rgba(0, 0, 255, 0.05);
+    background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
