@@ -90,6 +90,7 @@
 
 .display-icon {
   .machine__wrapper {
+    position: relative;
     height: auto;
     width: auto;
     &:hover {
@@ -112,24 +113,61 @@
     }
   }
   .machine .red.alert .icon-Washer:before {
-    @include animation(pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+    //@include animation(pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+    //@include animation(shake .2s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+    //@include animation(fontbulger 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
   }
+  .machine .red {
+    &:before {
+      font-family: FontAwesome;
+      font-size: 12px;
+      content: '\f1f7';
+      position: absolute;
+      left: -6px;
+      top: -6px;
+      z-index: 999;
+      color: rgba(255,0,0,.5);
+    }
+  }
+  .machine .alert {
+    &:before {
+      content: '\f0f3';
+      @include animation(shake .2s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+      color: rgba(255,0,0,1);
+    }
+  }
+
 }
 
 .show-details {
   .machine__wrapper {
     width: 200px !important;
   }
-
   .annotation {
     display: inline;
   }
 }
 
-
-
 .machine-status {
   background-color: rgba(245,245,245, .9);
+}
+
+@include keyframes(shake) {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@include keyframes(fontbulger) {
+  0%, 100% {
+    font-size: 1em;
+  }
+  50% {
+    font-size: 1.3em;
+  }
 }
 
 @include keyframes(pulse-icon) {

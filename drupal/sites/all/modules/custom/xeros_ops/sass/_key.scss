@@ -17,6 +17,7 @@
 
   // details
   .key__details {
+    z-index: 2000;
     max-width: 300px;
     display: none;
     .key__item {
@@ -26,6 +27,7 @@
       height: 50px;
       vertical-align: middle;
       display: inline-block;
+      padding-right: 10px;
     }
     .key__item:before {
       position: absolute;
@@ -69,8 +71,9 @@
   .display-block & {
     .key__details {
       .key__item:before {
+        left: 10px;
         font-family: 'FontAwesome';
-        font-size: 20px;
+        font-size: 25px;
       }
       .green {
         &:before {
@@ -80,6 +83,7 @@
       }
       .red {
         &:before {
+          left: 19px;
           content: '\f12a';
           color: $color-red;
         }

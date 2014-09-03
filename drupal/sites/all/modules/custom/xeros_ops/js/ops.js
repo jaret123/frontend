@@ -29,6 +29,10 @@ FF.Hud = (function($){
 
     var tpl = {};
 
+    // Turn refresh on
+    var refresh = true;
+
+
     loadData = function() {
         // Grab the global data object and create a local copy so we can
         // refactor easily later;
@@ -57,6 +61,12 @@ FF.Hud = (function($){
                     'machines' : {},
                     'location_title' : m.location_title,
                 };
+            }
+
+            if (m.manufacturer == 'Xeros' ) {
+                m.modelFilter = 'xeros';
+            } else {
+                m.modelFilter = 'non-xeros';
             }
 
             m.cycles = Math.floor(Math.random() * 6) + 0;
@@ -267,9 +277,11 @@ FF.Hud = (function($){
 
         refreshDisplay();
 
-        setInterval(function () {
-            refreshDisplay();
-        }, 10000);
+        if ( refresh ) {
+            setInterval(function () {
+                refreshDisplay();
+            }, 10000);
+        }
 
         $('html').css('padding-bottom', '0');
 

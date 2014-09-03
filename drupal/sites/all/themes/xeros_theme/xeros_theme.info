@@ -53,7 +53,7 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = css/styles.css
 
 ; Add Font Awesome Stylesheet
-stylesheets[all][] = fonts/font-awesome-4.1.0/css/font-awesome.min.css
+stylesheets[all][] = fonts/font-awesome-4.2.0/css/font-awesome.min.css
 
 ; Built-in conditional stylesheet support has been removed from Zen 7.x-5.x.
 ; Instead, Zen now adds conditional-comment-included classes to the html

@@ -29,6 +29,55 @@
 .controls__details {
   display: inline-block;
 }
+.controls__model {
+  .controls {
+    &.xeros {
+      color: #0086bd;
+      &:before {
+        font-family: xeros-icon;
+        content: "\e60c";
+      }
+    }
+    &.non-xeros {
+      &:before {
+        color: gray;
+        font-family: xeros-icon;
+        content: "\e605";
+      }
+    }
+  }
+}
+
+.display-icon {
+  .controls__details {
+    .controls {
+      &.green {
+        border: 1px solid $color-green;
+        color: $color-green;
+        .status-icon:before {
+          font-family: xeros-icon;
+          content: "\e60c";
+        }
+      }
+      &.red {
+        border: 1px solid $color-red;
+        color: $color-red;
+        .status-icon:before {
+          font-family: xeros-icon;
+          content: "\e60c";
+        }
+      }
+      &.yellow {
+        border: 1px solid $color-yellow;
+        color: $color-yellow;
+        .status-icon:before {
+          font-family: xeros-icon;
+          content: "\e60c";
+        }
+      }
+    }
+  }
+}
 .page-ops__key {
   display: inline-block;
 }
