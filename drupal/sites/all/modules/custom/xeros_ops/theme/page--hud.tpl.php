@@ -71,16 +71,24 @@
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
 
+    <div class="countdown-timer"></div>
+    <div class="refresh-timestamp">Data refreshed <span class="refresh-timestamp__data"></span></div>
+
     <div class="controls__section">
       <div class="controls__header">
 
       </div>
       <div class="controls__details">
-        <span>Filter: </span>
-        <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i>4 </span>
-        <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i>13 </span>
-        <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i>10 </span>
-        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>
+        <span>Status Filter: </span>
+        <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i> 4 </span>
+        <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i> 13 </span>
+        <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i> 10 </span>
+<!--        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>-->
+      </div>
+      <div class="controls__model">
+        <span>Model Filter: </span>
+        <span class="controls filter xeros" data-filter="xeros"><i class="fa model-icon"></i> 12 </span>
+        <span class="controls filter non-xeros" data-filter="non-xeros"><i class="fa model-icon"></i> 12 </span>
       </div>
       <div class="page-ops__key">
         <div class="key__header">
@@ -89,21 +97,18 @@
         </div>
         <div class="key__details">
           <div class="green key__item">
-            <i class="fa fa-check"></i>
-            <p>Connected, and in use according to usage parameters</p>
+            Connected, and in use according to usage parameters
           </div>
           <div class="yellow key__item">
-            <i class="fa fa-circle-o-notch"></i>
-            <p>Connected, but idle</p>
+            Connected, but idle
           </div>
           <div class="red key__item">
-            <i class="fa fa-times"></i>
-            <p>Been idle for too long - machine not in use.</p>
+            Been idle for too long - machine not in use.
           </div>
-          <div class="blue key__item">
-            <i class="fa fa-bolt"></i>
-            <p>Cannot connect to machine.</p>
-          </div>
+<!--          <div class="blue key__item">-->
+<!--            <i class="fa fa-bolt"></i>-->
+<!--            <p>Cannot connect to machine.</p>-->
+<!--          </div>-->
         </div>
       </div>
 
@@ -111,19 +116,20 @@
         <span>Display: </span>
 <!--        <span class="controls display-type block" data-display-type="block">Block </span>-->
 <!--        <span class="controls display-type list" data-display-type="list">List </span>-->
+        <span class="controls display-type" data-display-type="icon" >Icons </span>
+        <span class="controls display-type" data-display-type="block" >Blocks </span>
+
+        <span class="controls show-label" >Show Labels </span>
         <span class="controls show-details" >Show Details </span>
 
         <span class="controls full-screen" data-display="full-screen">Full Screen</span>
       </div>
     </div>
 
-
     <?php print render($page['content']); ?>
 
     <div class="machine-status">...</div>
-
   </div>
-
 
 </div>
 <?php

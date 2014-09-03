@@ -45,6 +45,7 @@ FF.Hud = (function($){
             //console.log(data.machineSource[i]);
             var m = data.machineSource[i];
 
+
             if ( typeof data.machine.companies[m.company_title] == 'undefined') {
                 data.machine.companies[m.company_title] = {
                     'locations' : {},
@@ -58,29 +59,51 @@ FF.Hud = (function($){
                 };
             }
 
-            switch(j) {
-                case 1:
-                    m.status = 'green';
-                    break;
-                case 2:
-                    m.status = 'yellow';
-                    break;
-                case 3:
-                    m.status = 'red';
-                    if (alert < 4) {
-                        m.status += ' alert';
-                    }
-                    alert++;
-                    break;
-                case 4:
-                    m.status = 'blue';
-                    if (alert < 4) {
-                        m.status += ' alert';
-                    }
-                    alert++;
-                    j = 0;
-                    break;
+            m.cycles = Math.floor(Math.random() * 6) + 0;
+            if (m.cycles == 0) {
+                m.runTime = '0:00';
+            } else {
+                m.runTime = String(Math.floor(Math.random() * 3) + 1) + ':' + ('0'+ String(Math.floor(Math.random() * 59) + 1)).slice(-2);
             }
+
+            if (m.cycles == 0 ) {
+                m.status = 'red';
+                if (alert < 4) {
+                    m.status += ' alert';
+                }
+                alert++;
+            } else if (m.cycles <= 2) {
+                m.status = 'yellow';
+            } else {
+                m.status = 'green';
+            }
+            // Random assignment of status
+//            switch(j) {
+//                case 1:
+//                    m.status = 'green';
+//                    break;
+//                case 2:
+//                    m.status = 'yellow';
+//                    break;
+//                case 3:
+//                    m.status = 'red';
+//                    if (alert < 4) {
+//                        m.status += ' alert';
+//                    }
+//                    alert++;
+//                    j=0;
+//                    break;
+////                case 4:
+////                    m.status = 'blue';
+////                    if (alert < 4) {
+////                        m.status += ' alert';
+////                    }
+////                    alert++;
+////                    j = 0;
+////                    break;
+//            }
+
+
             j++;
             data.machine.companies[m.company_title].locations[m.location_title].machines[m.machine_id] = m;
 
@@ -178,7 +201,13 @@ FF.Hud = (function($){
         $('.controls.show-details').on('click', function() {
             $('body').toggleClass('show-details');
             $(this).toggleClass('active');
-        })
+        });
+
+        // Show Detail
+        $('.controls.show-label').on('click', function() {
+            $('body').toggleClass('show-label');
+            $(this).toggleClass('active');
+        });
 
         // Toggle Full Screen
         $('.controls.full-screen').on('click', function() {
@@ -192,6 +221,32 @@ FF.Hud = (function($){
             $('body').toggleClass('full-screen');
             $(this).toggleClass('active');
         })
+    }
+
+    function updateCountdown() {
+
+        $('.refresh-timestamp .refresh-timestamp__data').html(String(Date()));
+
+        //$('.countdown-timer').html('');
+        $('.countdown-timer').countdown('destroy');
+        $('.countdown-timer').countdown({until: +10,
+            format: 'S',
+            compact: true,
+            layout: 'Data refresh in {snn} {desc}',
+            description: 'seconds'
+        });
+    }
+
+    function refreshDisplay() {
+        loadData();
+
+        // Load the templates
+        loadMachineTemplate(renderStatus);
+
+        loadMachineDetailTemplate(renderDetail);
+
+        updateCountdown();
+
     }
     /**
      * Function: CC.Form.init
@@ -208,18 +263,19 @@ FF.Hud = (function($){
         doc = $(document);
         body = $('body');
 
-        loadData();
+        updateCountdown();
 
-        // Load the templates
-        loadMachineTemplate(renderStatus);
+        refreshDisplay();
 
-        loadMachineDetailTemplate(renderDetail);
+        setInterval(function () {
+            refreshDisplay();
+        }, 10000);
 
         $('html').css('padding-bottom', '0');
 
         console.log(els.data);
 
-        $('body').addClass('display-block');
+        $('body').addClass('display-icon');
 
     }
 

@@ -1,0 +1,172 @@
+
+.machine__wrapper {
+  padding: 5px;
+
+  > div {
+    display: inline-block;
+  }
+  > i {
+    display: inline-block;
+  }
+  .right {
+    float: right;
+    padding: 3px;
+  }
+  .machine__label {
+    display: none;
+  }
+}
+
+// Hide or show labels
+.show-label  {
+  .machine__wrapper {
+    .machine__label {
+      display: block;
+      font-size: .9em;
+      //text-align: center;
+      padding-left: 5px;
+    }
+  }
+}
+
+.display-block {
+  .machine__wrapper{
+    border: 1px solid $color-inactive;
+    background-color: #fff;
+    color: $color-inactive;
+    @include box-shadow(0px 1px 1px 1px rgba(50, 50, 50, 0.5));
+    &:hover {
+      @include box-shadow(2px 2px 5px 1px rgba(50, 50, 50, 0.75));
+    }
+    .machine__icons {
+      text-align: center;
+      > i {
+        display: block;
+        &.fa {
+          font-size: 25px;
+          padding-top: 5px;
+        }
+      }
+    }
+
+    &.Xeros {
+      background-color: #e5f4fa;
+    }
+
+  }
+  .green {
+    border: 1px solid $color-green;
+    color: $color-green;
+    .status-icon:before {
+      content: "\f00c";
+    }
+  }
+  .red {
+    border: 1px solid $color-red;
+    color: $color-red;
+    .status-icon:before {
+      content: "\f12a";
+    }
+  }
+  .yellow {
+    border: 1px solid $color-yellow;
+    color: $color-yellow;
+    .status-icon:before {
+      content: "\f1ce";
+    }
+  }
+  .blue {
+    border: 1px solid $color-blue;
+    color: $color-blue;
+    .status-icon:before {
+      content: "\f0e7";
+    }
+  }
+
+  .machine .red.alert {
+    @include animation(pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+  }
+}
+
+.display-icon {
+  .machine__wrapper {
+    height: auto;
+    width: auto;
+    &:hover {
+      @include box-shadow(1px 1px 3px 1px rgba(25, 25, 25, 0.5));
+    }
+    &.green {
+      i {
+        color: $color-green;
+      }
+    }
+    &.red {
+      i {
+        color: $color-red;
+      }
+    }
+    &.yellow {
+      i {
+        color: $color-yellow;
+      }
+    }
+  }
+  .machine .red.alert .icon-Washer:before {
+    @include animation(pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+  }
+}
+
+.show-details {
+  .machine__wrapper {
+    width: 200px !important;
+  }
+
+  .annotation {
+    display: inline;
+  }
+}
+
+
+
+.machine-status {
+  background-color: rgba(245,245,245, .9);
+}
+
+@include keyframes(pulse-icon) {
+  0%, 100% {
+    color: rgba(255,0,0, .3);
+    //box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+  50% {
+    color: rgba(255,0,0, 1);
+    //box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@include keyframes(pulse) {
+  0%, 100% {
+    background-color: rgba(255,255,255, 1);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+  50% {
+    background-color: rgba(255,0,0, .2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@include keyframes(pulse-blue) {
+  0%, 100% {
+    background-color: rgba(255,255,255, 1);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+  50% {
+    background-color: rgba(0,0,255, .2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+
+
+//.machine .blue.alert {
+//  @include animation(pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
+//}

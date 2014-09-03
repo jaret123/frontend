@@ -44,11 +44,6 @@
 .page-ops .machine {
   background-color: #eee;
 }
-/* line 61, ../sass/_layout.scss */
-.page-ops .machine__wrapper {
-  height: 75px;
-  width: 75px;
-}
 /* line 66, ../sass/_layout.scss */
 .page-ops .footer {
   position: relative;
@@ -81,133 +76,46 @@
   border-top: 2px solid white;
 }
 
-/* line 98, ../sass/_layout.scss */
-.display-block .machine__wrapper {
-  border: 1px solid grey;
-  background-color: #fff;
-  color: grey;
-  padding: 5px;
-  -webkit-box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
-  -moz-box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
-  box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
-}
-/* line 104, ../sass/_layout.scss */
-.display-block .machine__wrapper:hover {
-  -webkit-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-  box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
-}
-/* line 107, ../sass/_layout.scss */
-.display-block .machine__wrapper .machine__icons {
-  text-align: center;
-}
-/* line 109, ../sass/_layout.scss */
-.display-block .machine__wrapper .machine__icons > i {
-  display: block;
-}
-/* line 111, ../sass/_layout.scss */
-.display-block .machine__wrapper .machine__icons > i.fa {
-  font-size: 25px;
-  padding-top: 5px;
-}
-/* line 117, ../sass/_layout.scss */
-.display-block .machine__wrapper > div {
-  display: inline-block;
-}
-/* line 120, ../sass/_layout.scss */
-.display-block .machine__wrapper > i {
-  display: inline-block;
-}
-/* line 123, ../sass/_layout.scss */
-.display-block .machine__wrapper .right {
-  float: right;
-  padding: 3px;
-}
-/* line 127, ../sass/_layout.scss */
-.display-block .machine__wrapper.Xeros {
-  background-color: #e5f4fa;
-}
-/* line 132, ../sass/_layout.scss */
-.display-block .annotation {
+/* line 96, ../sass/_layout.scss */
+.annotation {
   display: none;
 }
-/* line 136, ../sass/_layout.scss */
-.display-block .green {
-  border: 1px solid green;
-  color: green;
-}
-/* line 139, ../sass/_layout.scss */
-.display-block .green .status-icon:before {
-  content: "\f00c";
-}
-/* line 143, ../sass/_layout.scss */
-.display-block .red {
-  border: 1px solid red;
-  color: red;
-}
-/* line 146, ../sass/_layout.scss */
-.display-block .red .status-icon:before {
-  content: "\f00d";
-}
-/* line 150, ../sass/_layout.scss */
-.display-block .yellow {
-  border: 1px solid orange;
-  color: orange;
-}
-/* line 153, ../sass/_layout.scss */
-.display-block .yellow .status-icon:before {
-  content: "\f1ce";
-}
-/* line 157, ../sass/_layout.scss */
-.display-block .blue {
-  border: 1px solid blue;
-  color: blue;
-}
-/* line 160, ../sass/_layout.scss */
-.display-block .blue .status-icon:before {
-  content: "\f0e7";
-}
-/* line 165, ../sass/_layout.scss */
-.display-block .company__container {
+
+/* line 100, ../sass/_layout.scss */
+.company__container {
   display: block;
   vertical-align: top;
   width: 100%;
 }
-/* line 170, ../sass/_layout.scss */
-.display-block .location__container {
+
+/* line 105, ../sass/_layout.scss */
+.location__container {
   display: inline-block;
   vertical-align: top;
 }
-/* line 175, ../sass/_layout.scss */
-.display-block .machine {
-  padding: 5px;
+
+/* line 110, ../sass/_layout.scss */
+.machine {
+  padding: 3px;
   margin: 0px;
   display: inline-block;
 }
+
 @media all and (min-width: 500px) {
-  /* line 182, ../sass/_layout.scss */
-  .display-block .title {
+  /* line 117, ../sass/_layout.scss */
+  .title {
     display: block;
   }
 }
 @media all and (min-width: 1000px) {
-  /* line 194, ../sass/_layout.scss */
-  .display-block .company__container {
+  /* line 129, ../sass/_layout.scss */
+  .company__container {
     display: inline-block;
     vertical-align: top;
     width: 49.5%;
     width: calc(50% - 2px);
   }
 }
-/* line 212, ../sass/_layout.scss */
-.display-block.show-details .machine__wrapper {
-  width: 200px !important;
-}
-/* line 216, ../sass/_layout.scss */
-.display-block.show-details .annotation {
-  display: inline;
-}
-
 /* line 6, ../sass/_display-full-screen.scss */
 body.full-screen #admin-menu,
 body.full-screen .top-border,
@@ -348,153 +256,105 @@ body.full-screen .machine {
   }
 }
 
-/* line 1, ../sass/_machine-status.scss */
-.machine-status {
-  background-color: rgba(245, 245, 245, 0.9);
+/* line 2, ../sass/_machine-block.scss */
+.machine__wrapper {
+  padding: 5px;
+}
+/* line 5, ../sass/_machine-block.scss */
+.machine__wrapper > div {
+  display: inline-block;
+}
+/* line 8, ../sass/_machine-block.scss */
+.machine__wrapper > i {
+  display: inline-block;
+}
+/* line 11, ../sass/_machine-block.scss */
+.machine__wrapper .right {
+  float: right;
+  padding: 3px;
+}
+/* line 15, ../sass/_machine-block.scss */
+.machine__wrapper .machine__label {
+  display: none;
 }
 
-@-moz-keyframes pulse {
-  /* line 6, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
-  }
-
-  /* line 10, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(255, 0, 0, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
+/* line 23, ../sass/_machine-block.scss */
+.show-label .machine__wrapper .machine__label {
+  display: block;
+  font-size: .9em;
+  padding-left: 5px;
 }
 
-@-webkit-keyframes pulse {
-  /* line 6, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
-  }
-
-  /* line 10, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(255, 0, 0, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
+/* line 33, ../sass/_machine-block.scss */
+.display-block .machine__wrapper {
+  border: 1px solid grey;
+  background-color: #fff;
+  color: grey;
+  -webkit-box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
+  box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
 }
-
-@-o-keyframes pulse {
-  /* line 6, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
-  }
-
-  /* line 10, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(255, 0, 0, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
+/* line 38, ../sass/_machine-block.scss */
+.display-block .machine__wrapper:hover {
+  -webkit-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
+  box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
 }
-
-@-ms-keyframes pulse {
-  /* line 6, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
-  }
-
-  /* line 10, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(255, 0, 0, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
+/* line 41, ../sass/_machine-block.scss */
+.display-block .machine__wrapper .machine__icons {
+  text-align: center;
 }
-
-@keyframes pulse {
-  /* line 6, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
-  }
-
-  /* line 10, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(255, 0, 0, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
-  }
+/* line 43, ../sass/_machine-block.scss */
+.display-block .machine__wrapper .machine__icons > i {
+  display: block;
 }
-
-@-moz-keyframes pulse-blue {
-  /* line 17, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
-  }
-
-  /* line 21, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(0, 0, 255, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
-  }
+/* line 45, ../sass/_machine-block.scss */
+.display-block .machine__wrapper .machine__icons > i.fa {
+  font-size: 25px;
+  padding-top: 5px;
 }
-
-@-webkit-keyframes pulse-blue {
-  /* line 17, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
-  }
-
-  /* line 21, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(0, 0, 255, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
-  }
+/* line 52, ../sass/_machine-block.scss */
+.display-block .machine__wrapper.Xeros {
+  background-color: #e5f4fa;
 }
-
-@-o-keyframes pulse-blue {
-  /* line 17, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
-  }
-
-  /* line 21, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(0, 0, 255, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
-  }
+/* line 57, ../sass/_machine-block.scss */
+.display-block .green {
+  border: 1px solid green;
+  color: green;
 }
-
-@-ms-keyframes pulse-blue {
-  /* line 17, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
-  }
-
-  /* line 21, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(0, 0, 255, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
-  }
+/* line 60, ../sass/_machine-block.scss */
+.display-block .green .status-icon:before {
+  content: "\f00c";
 }
-
-@keyframes pulse-blue {
-  /* line 17, ../sass/_machine-status.scss */
-  0%, 100% {
-    background-color: white;
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
-  }
-
-  /* line 21, ../sass/_machine-status.scss */
-  50% {
-    background-color: rgba(0, 0, 255, 0.2);
-    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
-  }
+/* line 64, ../sass/_machine-block.scss */
+.display-block .red {
+  border: 1px solid red;
+  color: red;
 }
-
-/* line 27, ../sass/_machine-status.scss */
-.machine .red.alert {
+/* line 67, ../sass/_machine-block.scss */
+.display-block .red .status-icon:before {
+  content: "\f12a";
+}
+/* line 71, ../sass/_machine-block.scss */
+.display-block .yellow {
+  border: 1px solid orange;
+  color: orange;
+}
+/* line 74, ../sass/_machine-block.scss */
+.display-block .yellow .status-icon:before {
+  content: "\f1ce";
+}
+/* line 78, ../sass/_machine-block.scss */
+.display-block .blue {
+  border: 1px solid blue;
+  color: blue;
+}
+/* line 81, ../sass/_machine-block.scss */
+.display-block .blue .status-icon:before {
+  content: "\f0e7";
+}
+/* line 86, ../sass/_machine-block.scss */
+.display-block .machine .red.alert {
   -webkit-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
   -moz-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
   -ms-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -502,13 +362,250 @@ body.full-screen .machine {
   animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-/* line 31, ../sass/_machine-status.scss */
-.machine .blue.alert {
-  -webkit-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-  -moz-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-  -ms-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-  -o-animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-  animation: pulse-blue 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+/* line 92, ../sass/_machine-block.scss */
+.display-icon .machine__wrapper {
+  height: auto;
+  width: auto;
+}
+/* line 95, ../sass/_machine-block.scss */
+.display-icon .machine__wrapper:hover {
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
+  -moz-box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
+  box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
+}
+/* line 99, ../sass/_machine-block.scss */
+.display-icon .machine__wrapper.green i {
+  color: green;
+}
+/* line 104, ../sass/_machine-block.scss */
+.display-icon .machine__wrapper.red i {
+  color: red;
+}
+/* line 109, ../sass/_machine-block.scss */
+.display-icon .machine__wrapper.yellow i {
+  color: orange;
+}
+/* line 114, ../sass/_machine-block.scss */
+.display-icon .machine .red.alert .icon-Washer:before {
+  -webkit-animation: pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-animation: pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -ms-animation: pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-animation: pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: pulse-icon 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* line 120, ../sass/_machine-block.scss */
+.show-details .machine__wrapper {
+  width: 200px !important;
+}
+/* line 124, ../sass/_machine-block.scss */
+.show-details .annotation {
+  display: inline;
+}
+
+/* line 131, ../sass/_machine-block.scss */
+.machine-status {
+  background-color: rgba(245, 245, 245, 0.9);
+}
+
+@-moz-keyframes pulse-icon {
+  /* line 136, ../sass/_machine-block.scss */
+  0%, 100% {
+    color: rgba(255, 0, 0, 0.3);
+  }
+
+  /* line 140, ../sass/_machine-block.scss */
+  50% {
+    color: red;
+  }
+}
+
+@-webkit-keyframes pulse-icon {
+  /* line 136, ../sass/_machine-block.scss */
+  0%, 100% {
+    color: rgba(255, 0, 0, 0.3);
+  }
+
+  /* line 140, ../sass/_machine-block.scss */
+  50% {
+    color: red;
+  }
+}
+
+@-o-keyframes pulse-icon {
+  /* line 136, ../sass/_machine-block.scss */
+  0%, 100% {
+    color: rgba(255, 0, 0, 0.3);
+  }
+
+  /* line 140, ../sass/_machine-block.scss */
+  50% {
+    color: red;
+  }
+}
+
+@-ms-keyframes pulse-icon {
+  /* line 136, ../sass/_machine-block.scss */
+  0%, 100% {
+    color: rgba(255, 0, 0, 0.3);
+  }
+
+  /* line 140, ../sass/_machine-block.scss */
+  50% {
+    color: red;
+  }
+}
+
+@keyframes pulse-icon {
+  /* line 136, ../sass/_machine-block.scss */
+  0%, 100% {
+    color: rgba(255, 0, 0, 0.3);
+  }
+
+  /* line 140, ../sass/_machine-block.scss */
+  50% {
+    color: red;
+  }
+}
+
+@-moz-keyframes pulse {
+  /* line 147, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+
+  /* line 151, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-webkit-keyframes pulse {
+  /* line 147, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+
+  /* line 151, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-o-keyframes pulse {
+  /* line 147, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+
+  /* line 151, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-ms-keyframes pulse {
+  /* line 147, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+
+  /* line 151, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@keyframes pulse {
+  /* line 147, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
+  }
+
+  /* line 151, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+@-moz-keyframes pulse-blue {
+  /* line 158, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 162, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-webkit-keyframes pulse-blue {
+  /* line 158, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 162, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-o-keyframes pulse-blue {
+  /* line 158, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 162, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@-ms-keyframes pulse-blue {
+  /* line 158, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 162, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@keyframes pulse-blue {
+  /* line 158, ../sass/_machine-block.scss */
+  0%, 100% {
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
+  }
+
+  /* line 162, ../sass/_machine-block.scss */
+  50% {
+    background-color: rgba(0, 0, 255, 0.2);
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
+  }
 }
 
 /* line 2, ../sass/_key.scss */
@@ -533,20 +630,30 @@ body.full-screen .machine {
 .page-ops__key .key__details .key__item {
   margin: 3px auto;
   position: relative;
-}
-/* line 25, ../sass/_key.scss */
-.page-ops__key .key__details .key__item i {
-  position: absolute;
-  left: 5px;
-  top: 5px;
+  padding-left: 45px;
+  height: 50px;
+  vertical-align: middle;
+  display: inline-block;
 }
 /* line 30, ../sass/_key.scss */
-.page-ops__key .key__details .key__item p {
-  display: block;
-  margin: 0;
-  padding-left: 25px;
+.page-ops__key .key__details .key__item:before {
+  position: absolute;
+  top: 15px;
+  left: 0;
 }
-/* line 40, ../sass/_key.scss */
+/* line 36, ../sass/_key.scss */
+.page-ops__key .key__details .green:before {
+  color: green;
+}
+/* line 41, ../sass/_key.scss */
+.page-ops__key .key__details .red:before {
+  color: red;
+}
+/* line 46, ../sass/_key.scss */
+.page-ops__key .key__details .yellow:before {
+  color: orange;
+}
+/* line 54, ../sass/_key.scss */
 .page-ops__key.show .key__details {
   display: block;
   border: 1px solid rgba(0, 0, 0, 0.7);
@@ -555,13 +662,39 @@ body.full-screen .machine {
   background-color: white;
   width: 300px;
 }
-/* line 49, ../sass/_key.scss */
+/* line 63, ../sass/_key.scss */
 .page-ops__key.show .key__open-close {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+}
+/* line 71, ../sass/_key.scss */
+.display-block .page-ops__key .key__details .key__item:before {
+  font-family: 'FontAwesome';
+  font-size: 20px;
+}
+/* line 76, ../sass/_key.scss */
+.display-block .page-ops__key .key__details .green:before {
+  content: '\f00c';
+  color: green;
+}
+/* line 82, ../sass/_key.scss */
+.display-block .page-ops__key .key__details .red:before {
+  content: '\f12a';
+  color: red;
+}
+/* line 88, ../sass/_key.scss */
+.display-block .page-ops__key .key__details .yellow:before {
+  content: '\f1ce';
+  color: orange;
+}
+/* line 98, ../sass/_key.scss */
+.display-icon .page-ops__key .key__details .key__item:before {
+  font-family: 'xeros-icon';
+  content: "\e60c";
+  font-size: 40px;
 }
 
 /* line 1, ../sass/_controls.scss */

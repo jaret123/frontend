@@ -22,15 +22,29 @@
     .key__item {
       margin: 3px auto;
       position: relative;
-      i {
-        position: absolute;
-        left: 5px;
-        top: 5px;
+      padding-left: 45px;
+      height: 50px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    .key__item:before {
+      position: absolute;
+      top: 15px;
+      left: 0;
+    }
+    .green {
+      &:before {
+        color: $color-green;
       }
-      p {
-        display: block;
-        margin: 0;
-        padding-left: 25px;
+    }
+    .red {
+      &:before {
+        color: $color-red;
+      }
+    }
+    .yellow {
+      &:before {
+        color: $color-yellow;
       }
     }
   }
@@ -48,6 +62,44 @@
     // icon
     .key__open-close {
       @include transform(rotate(180deg));
+    }
+
+  }
+
+  .display-block & {
+    .key__details {
+      .key__item:before {
+        font-family: 'FontAwesome';
+        font-size: 20px;
+      }
+      .green {
+        &:before {
+          content: '\f00c';
+          color: $color-green;
+        }
+      }
+      .red {
+        &:before {
+          content: '\f12a';
+          color: $color-red;
+        }
+      }
+      .yellow {
+        &:before {
+          content: '\f1ce';
+          color: $color-yellow;
+        }
+      }
+    }
+  }
+  .display-icon & {
+    //border: 10px solid blue;
+    .key__details {
+      .key__item:before {
+        font-family: 'xeros-icon';
+        content: "\e60c";
+        font-size: 40px;
+      }
     }
   }
 }
