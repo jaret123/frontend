@@ -80,13 +80,22 @@ var view = {
         draw();
     },
     classificationCompare : function(a,b) {
-        if (a.name.toLowerCase().substr(0,7) === "unknown")
+        // If A is unknown, sort B lower than A.
+        if (a.name.toLowerCase().substr(0,7) === "unknown") {
             return 1;
-        if (parseInt(a.classification_id, 10) < parseInt(b.classification_id, 10))
+        // If B is unknown, sort A lower than B.
+        } else if (b.name.toLowerCase().substr(0,7) === "unknown") {
             return -1;
-        if (parseInt(a.classification_id, 10) > parseInt(b.classification_id, 10))
+        // If A is larger than B, sort A lower than B
+        } else if (parseInt(a.classification_id, 10) > parseInt(b.classification_id, 10)) {
+            return -1;
+        // If B is larger than A, sort B lower than A
+        } else if (parseInt(a.classification_id, 10) < parseInt(b.classification_id, 10)) {
             return 1;
-        return 0;
+        // Don't change sort
+        } else {
+            return 0;
+        }
     },
     percentDelta : function(a, b) {
         if ( ( a == 0 || typeof(a) == "undefined)")
