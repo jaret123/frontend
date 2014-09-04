@@ -30,7 +30,7 @@ FF.Hud = (function($){
     var tpl = {};
 
     // Turn refresh on
-    var refresh = true;
+    var refresh = false;
 
 
     loadData = function() {
