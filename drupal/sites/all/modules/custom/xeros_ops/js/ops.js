@@ -341,5 +341,9 @@ FF.Hud = (function($){
 
 })(jQuery);
 
+var window.status = {};
+
+var window.history = {};
+
 jQuery(document).ready(FF.Hud.init);
 
