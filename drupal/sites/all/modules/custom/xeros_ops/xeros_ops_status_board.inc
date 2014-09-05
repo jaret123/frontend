@@ -1,6 +1,6 @@
 <?php
 
-function hud() {
+function status_board() {
 
   $module_name = 'xeros_ops';
   $module_path = drupal_get_path('module', $module_name);
@@ -53,8 +53,15 @@ SQL;
     'inline'
   );
 
+  $services = array();
+  $services['status'] = variable_get('ops_service_status');
+  $services['history'] = variable_get('ops_service_history');
+
+  $json_services =
+  drupal_add_js('Drupal.settings.services = ' . json_encode($services), 'inline');
+
   $output = "";
 
-   return $output;
+  return $output;
 }
 

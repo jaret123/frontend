@@ -875,11 +875,15 @@ body.full-screen .machine {
 
 /* line 1, ../sass/_controls.scss */
 .controls__section {
-  padding: 10px 0;
+  padding: 5px 0;
   position: relative;
 }
+/* line 4, ../sass/_controls.scss */
+.controls__section > * {
+  padding: 5px 0;
+}
 
-/* line 5, ../sass/_controls.scss */
+/* line 8, ../sass/_controls.scss */
 .controls {
   border: 1px solid #444;
   padding: 3px 6px;
@@ -888,78 +892,82 @@ body.full-screen .machine {
   margin: 0 2px;
   display: inline-block;
 }
-/* line 12, ../sass/_controls.scss */
+/* line 15, ../sass/_controls.scss */
 .controls.hide, .controls.active {
   opacity: .5;
 }
 
-/* line 23, ../sass/_controls.scss */
+/* line 26, ../sass/_controls.scss */
 .machine.hide {
   display: none;
 }
 
-/* line 29, ../sass/_controls.scss */
+/* line 32, ../sass/_controls.scss */
 .controls__details {
   display: inline-block;
 }
 
-/* line 34, ../sass/_controls.scss */
+/* line 35, ../sass/_controls.scss */
+.controls__model {
+  display: inline-block;
+}
+/* line 38, ../sass/_controls.scss */
 .controls__model .controls.xeros {
   color: #0086bd;
 }
-/* line 36, ../sass/_controls.scss */
+/* line 40, ../sass/_controls.scss */
 .controls__model .controls.xeros:before {
   font-family: xeros-icon;
   content: "\e60c";
 }
-/* line 42, ../sass/_controls.scss */
+/* line 46, ../sass/_controls.scss */
 .controls__model .controls.non-xeros:before {
   color: gray;
   font-family: xeros-icon;
   content: "\e605";
 }
 
-/* line 54, ../sass/_controls.scss */
+/* line 58, ../sass/_controls.scss */
 .display-icon .controls__details .controls.green {
   border: 1px solid green;
   color: green;
 }
-/* line 57, ../sass/_controls.scss */
+/* line 61, ../sass/_controls.scss */
 .display-icon .controls__details .controls.green .status-icon:before {
   font-family: xeros-icon;
   content: "\e60c";
 }
-/* line 62, ../sass/_controls.scss */
+/* line 66, ../sass/_controls.scss */
 .display-icon .controls__details .controls.red {
   border: 1px solid red;
   color: red;
 }
-/* line 65, ../sass/_controls.scss */
+/* line 69, ../sass/_controls.scss */
 .display-icon .controls__details .controls.red .status-icon:before {
   font-family: xeros-icon;
   content: "\e60c";
 }
-/* line 70, ../sass/_controls.scss */
+/* line 74, ../sass/_controls.scss */
 .display-icon .controls__details .controls.yellow {
   border: 1px solid orange;
   color: orange;
 }
-/* line 73, ../sass/_controls.scss */
+/* line 77, ../sass/_controls.scss */
 .display-icon .controls__details .controls.yellow .status-icon:before {
   font-family: xeros-icon;
   content: "\e60c";
 }
 
-/* line 81, ../sass/_controls.scss */
+/* line 85, ../sass/_controls.scss */
 .page-ops__key {
   display: inline-block;
 }
 
-@media all and (min-width: 800px) {
-  /* line 87, ../sass/_controls.scss */
+@media all and (min-width: 1200px) {
+  /* line 91, ../sass/_controls.scss */
   .controls__display {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 10px;
   }
 }

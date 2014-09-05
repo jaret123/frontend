@@ -29,8 +29,33 @@ FF.Hud = (function($){
 
     var tpl = {};
 
+    var services = {};
+
+    var status = {};
+
+
+    var machineIds = [6,7];
+
     // Turn refresh on
     var refresh = false;
+
+
+    loadStatus = function(callback) {
+        jQuery.ajax({
+            url: services.status,
+            data: machineIds,
+            success: function(d) {
+                console.log(d);
+            },
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json'
+        });
+    };
+//
+//    loadHistory = function(machineIds = []) {
+//
+//    };
 
 
     loadData = function() {
@@ -248,6 +273,9 @@ FF.Hud = (function($){
     }
 
     function refreshDisplay() {
+
+        loadStatus(function() {});
+
         loadData();
 
         // Load the templates
@@ -272,6 +300,8 @@ FF.Hud = (function($){
         win = $(window);
         doc = $(document);
         body = $('body');
+
+        services = Drupal.settings.services;
 
         updateCountdown();
 

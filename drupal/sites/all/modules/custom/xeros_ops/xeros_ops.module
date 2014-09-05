@@ -6,12 +6,20 @@
  * @return mixed
  */
 function xeros_ops_menu() {
-  $items['hud'] = array(
+  $items['status-board'] = array(
     'title' => 'Xeros Global Operations Status Board',
-    'page callback' => 'hud',
+    'page callback' => 'status_board',
     'page arguments' => array(),
-    'access arguments' => array('xeros hud'),
-    'file' => 'xeros_ops_hud.inc'
+    'access arguments' => array('xeros status board'),
+    'file' => 'xeros_ops_status_board.inc'
+  );
+  $items['admin/config/settings/ops'] = array(
+    'title' => 'Ops Module Settings',
+    'description' => 'Ops Module Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ops_settings'),
+    'access arguments' => array('admin'),
+    'type' => MENU_NORMAL_ITEM,
   );
 
   return $items;
@@ -20,8 +28,8 @@ function xeros_ops_menu() {
 function xeros_ops_permission() {
   return array(
     'xeros hud' => array(
-      'title' => t('View Ops Center HUD'),
-      'description' => t('Roles with this permission have the ability to access the Ops Center HUD'),
+      'title' => t('View Ops Center Status Board'),
+      'description' => t('Roles with this permission have the ability to access the Ops Center Status Board'),
     )
   );
 }
@@ -29,13 +37,36 @@ function xeros_ops_permission() {
 
 function xeros_ops_theme(){
   return array(
-    'page__hud' =>  array(
-      'template' => 'theme/page--hud',
+    'page__status_board' =>  array(
+      'template' => 'theme/page--status-board',
       'render element' => 'page'
     ),
   );
 }
 
+// Add a class for the page
+// TODO: Change this to status-board
 function xeros_ops_preprocess_html(&$variables) {
   $variables['classes_array'][] = "page-ops";
 }
+
+// Configuration form form
+function ops_settings() {
+  $form = array();
+  $form['ops_service_status'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Status Webservice endpoint'),
+    '#default_value' => variable_get('ops_service_status', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/status'),
+    '#description' => t('The webservice for the machine status'),
+    '#required' => TRUE,
+  );
+  $form['ops_service_history'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Status Webservice endpoint'),
+    '#default_value' => variable_get('ops_service_history', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/history'),
+    '#description' => t('The webservice for the machine status'),
+    '#required' => TRUE,
+  );
+  return system_settings_form($form);
+}
+
