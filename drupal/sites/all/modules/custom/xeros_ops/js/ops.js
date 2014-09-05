@@ -47,7 +47,7 @@ FF.Hud = (function($){
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = d;
-                window.status = d;
+                windowStatus = d;
                 console.log('status', status);
             },
             dataType: 'json',
@@ -62,7 +62,7 @@ FF.Hud = (function($){
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = d;
-                window.history = d;
+                windowHistory = d;
                 console.log('history', status);
             },
             dataType: 'json',
@@ -341,9 +341,9 @@ FF.Hud = (function($){
 
 })(jQuery);
 
-var window.status = {};
+var windowStatus = {};
 
-var window.history = {};
+var windowHistory = {};
 
 jQuery(document).ready(FF.Hud.init);
 
