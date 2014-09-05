@@ -47,6 +47,7 @@ FF.Hud = (function($){
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = d;
+                window.status = d;
                 console.log('status', status);
             },
             dataType: 'json',
@@ -61,6 +62,7 @@ FF.Hud = (function($){
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = d;
+                window.history = d;
                 console.log('history', status);
             },
             dataType: 'json',
