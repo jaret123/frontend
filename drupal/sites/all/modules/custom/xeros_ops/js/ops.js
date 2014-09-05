@@ -52,7 +52,7 @@ FF.Hud = (function($){
                     var _machineStatus = d[i];
                     var _machineId = _machineStatus.machineId;
                     delete _machineStatus.machineId;
-                    _status[machineId] = _machineStatus;
+                    _status[_machineId] = _machineStatus;
                 };
                 status = _status;
                 //TODO: Remove after debugging
