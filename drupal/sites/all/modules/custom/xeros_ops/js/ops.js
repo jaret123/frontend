@@ -46,9 +46,17 @@ FF.Hud = (function($){
             url: services.status,
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
-                status = d;
-                windowStatus = d;
-                console.log('status', status);
+                // TODO: Remove this function when the service get's refactored
+                var _status = {};
+                for (i=0; i < d.length; i++) {
+                    var _machineStatus = d[i];
+                    var _machineId = _machineStatus.machineId;
+                    delete _machineStatus.machineId;
+                    _status[machineId] = _machineStatus;
+                };
+                status = _status;
+                //TODO: Remove after debugging
+                windowStatus = _status;
             },
             dataType: 'json',
             type: 'POST',
