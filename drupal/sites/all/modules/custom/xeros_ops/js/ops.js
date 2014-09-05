@@ -33,6 +33,7 @@ FF.Hud = (function($){
 
     var status = {};
 
+    var machineHistory = {};
 
     var machineIds = [6,7];
 
@@ -54,9 +55,19 @@ FF.Hud = (function($){
         });
     };
 //
-//    loadHistory = function(machineIds = []) {
-//
-//    };
+    loadHistory = function(callback) {
+        jQuery.ajax({
+            url: services.history,
+            data: '[' + machineIds.toString() + ']',
+            success: function(d) {
+                status = d;
+                console.log('history', status);
+            },
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json'
+        });
+    };
 
 
     loadData = function() {
@@ -276,6 +287,8 @@ FF.Hud = (function($){
     function refreshDisplay() {
 
         loadStatus(function() {});
+
+        loadHistory(function() {});
 
         loadData();
 
