@@ -43,7 +43,7 @@ FF.Hud = (function($){
     loadStatus = function(callback) {
         jQuery.ajax({
             url: services.status,
-            data: machineIds,
+            data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = d;
                 console.log('status', status);
