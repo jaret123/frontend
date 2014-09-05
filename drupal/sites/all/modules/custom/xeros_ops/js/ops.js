@@ -45,7 +45,8 @@ FF.Hud = (function($){
             url: services.status,
             data: machineIds,
             success: function(d) {
-                console.log(d);
+                status = d;
+                console.log('status', status);
             },
             dataType: 'json',
             type: 'POST',
