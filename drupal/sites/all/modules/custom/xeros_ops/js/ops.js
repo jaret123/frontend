@@ -51,6 +51,18 @@ FF.Hud = (function($){
         };
         return _status;
     }
+
+    formatHistory = function(data) {
+        var _status = {};
+        for (i=0; i < data.length; i++) {
+            var _machineStatus = data[i];
+            var _machineId = _machineStatus.machineId;
+            delete _machineStatus.machineId;
+            _status[_machineId] = _machineStatus;
+        };
+        return _status;
+    }
+
     loadStatus = function(callback) {
         jQuery.ajax({
             url: services.status,
