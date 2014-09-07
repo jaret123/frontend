@@ -41,22 +41,26 @@ FF.Hud = (function($){
     var refresh = false;
 
 
+    formatStatus = function(data) {
+        var _data = {};
+
+        // TODO: Remove this function when the service get's refactored
+        var _status = {};
+        for (i=0; i < d.length; i++) {
+            var _machineStatus = d[i];
+            var _machineId = _machineStatus.machineId;
+            delete _machineStatus.machineId;
+            _status[_machineId] = _machineStatus;
+        };
+
+        return _data;
+    }
     loadStatus = function(callback) {
         jQuery.ajax({
             url: services.status,
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
-                // TODO: Remove this function when the service get's refactored
-                var _status = {};
-                for (i=0; i < d.length; i++) {
-                    var _machineStatus = d[i];
-                    var _machineId = _machineStatus.machineId;
-                    delete _machineStatus.machineId;
-                    _status[_machineId] = _machineStatus;
-                };
-                status = _status;
-                //TODO: Remove after debugging
-                windowStatus = _status;
+                status = formatStatus(d);
             },
             dataType: 'json',
             type: 'POST',
