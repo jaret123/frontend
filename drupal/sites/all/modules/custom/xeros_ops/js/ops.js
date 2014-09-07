@@ -81,9 +81,7 @@ FF.Hud = (function($){
             url: services.history,
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
-                status = d;
-                windowHistory = d;
-                console.log('history', status);
+                status = formatHistory(d);
             },
             dataType: 'json',
             type: 'POST',
