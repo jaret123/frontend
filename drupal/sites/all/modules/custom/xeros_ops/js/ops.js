@@ -42,18 +42,14 @@ FF.Hud = (function($){
 
 
     formatStatus = function(data) {
-        var _data = {};
-
-        // TODO: Remove this function when the service get's refactored
         var _status = {};
-        for (i=0; i < d.length; i++) {
-            var _machineStatus = d[i];
+        for (i=0; i < data.length; i++) {
+            var _machineStatus = data[i];
             var _machineId = _machineStatus.machineId;
             delete _machineStatus.machineId;
             _status[_machineId] = _machineStatus;
         };
-
-        return _data;
+        return _status;
     }
     loadStatus = function(callback) {
         jQuery.ajax({
