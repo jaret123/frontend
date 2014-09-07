@@ -57,8 +57,17 @@ FF.Hud = (function($){
         for (i=0; i < data.length; i++) {
             var _machineStatus = data[i];
             var _machineId = _machineStatus.machineId;
+            var _statusId = _machineStatus.id;
+
             delete _machineStatus.machineId;
-            _status[_machineId] = _machineStatus;
+            delete _machineStatus.id;
+
+            if ( typeof _status[_machineId] === 'undefined' ) {
+                _status[_machineId] = {} ;
+            } else {
+                _status[_machineId][_statusId] = _machineStatus;
+            }
+
         };
         return _status;
     }
