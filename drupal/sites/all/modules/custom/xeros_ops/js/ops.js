@@ -40,7 +40,7 @@ FF.Hud = (function($){
     var machineIds = [];
 
     // Turn refresh on
-    var refresh = true;
+    var refresh = false;
 
 
     formatData = function() {
