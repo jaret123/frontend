@@ -192,13 +192,13 @@ FF.Hud = (function($){
 
         var template = Handlebars.compile(tpl.machineDetail);
 
-        var _foo = data.machineSource[machineId];
+        var foo = data.machineSource[machineId];
 
 //        var _d = { history: d, machine: data.machineSource[machineId]};
 //
-        var machineDetailData = loadHistory(machineId, function(d) {
+        var machineDetailData = loadHistory(machineId, function(d, machineId) {
 
-            _boo = { history: d, machine: foo};
+            var boo = { history: d, machine: foo};
 
             var html = template();
 
