@@ -16,11 +16,13 @@
         <!--<div class="silence">-->
             <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
         <!--</div>-->
+        {{#each currentStatus}}
         <div class="log__row">
-            <div class="log__timestamp">11:45 AM EST</div>
-            <div class="log__status">Alert</div>
-            <div class="log__message">Message: Lorem Ipsum.</div>
+            <div class="log__timestamp">{{timestamp}}</div>
+            <div class="log__status">{{statusCode}}</div>
+            <div class="log__message">{{statusMessage}}</div>
         </div>
+        {{/each}}
 
         <h4>View Log </h4>
         {{#each history}}
