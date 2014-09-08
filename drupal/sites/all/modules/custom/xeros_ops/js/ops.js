@@ -198,8 +198,12 @@ FF.Hud = (function($){
 //
         var machineDetailData = loadHistory(machineId, function(d, machineId) {
 
+            var templateData = {
+                currentStatus: d.slice(0,1),
+                history: d.slice(1,6),  // Just first five rows of data
+                machine: clickedMachineData};
 
-            var html = template( { history: d, machine: clickedMachineData});
+            var html = template(templateData );
 
             jQuery('.machine-detail').html(html);
 
