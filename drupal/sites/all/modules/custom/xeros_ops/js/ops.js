@@ -325,6 +325,7 @@ FF.Hud = (function($){
 //  usage: {{dateFormat creation_date format="MMMM YYYY"}}
         Handlebars.registerHelper('dateFormat', function(context, block) {
             console.log(context);
+            console.log(Date(context));
             if (window.moment) {
                 var f = block.hash.format || "MMM Do, YYYY";
 
