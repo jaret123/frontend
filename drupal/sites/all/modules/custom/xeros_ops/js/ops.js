@@ -87,10 +87,10 @@ FF.Hud = (function($){
         });
     };
 //
-    loadHistory = function(callback) {
+    loadHistory = function(machineId, callback) {
         jQuery.ajax({
             url: services.history,
-            data: '[' + machineIds.toString() + ']',
+            data: '[' + machineId.toString() + ']',
             success: function(d) {
                 history = formatHistory(d);
             },
@@ -218,7 +218,7 @@ FF.Hud = (function($){
         var template = Handlebars.compile(tpl.machineDetail);
 
 
-        var machineDetailData = loadHistory('[' + machineId + ']', function(d) {
+        var machineDetailData = loadHistory(machineId, function(d) {
             var html = template(d);
 
             jQuery('.machine-detail').html(html);
