@@ -241,6 +241,11 @@ FF.Hud = (function($){
         $('.machine-detail__close').on('click', function() {
             $(this).closest('.machine-detail').removeClass('show');
         });
+
+        // Show the log
+        $('.log__open-close').on('click', function() {
+            $('.log').toggleClass('show');
+        });
     };
 
     bindEvents = function() {
