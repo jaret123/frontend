@@ -33,6 +33,8 @@ FF.Hud = (function($){
 
     var status = {};
 
+    var history = {};
+
     var machineHistory = {};
 
     var machineIds = [6,7];
@@ -90,7 +92,7 @@ FF.Hud = (function($){
             url: services.history,
             data: '[' + machineIds.toString() + ']',
             success: function(d) {
-                status = formatHistory(d);
+                history = formatHistory(d);
             },
             dataType: 'json',
             type: 'POST',
@@ -211,15 +213,19 @@ FF.Hud = (function($){
         })
     };
 
-    renderDetail = function() {
+    renderDetail = function(machineId) {
 
         var template = Handlebars.compile(tpl.machineDetail);
 
-        var html = template({});
 
-        jQuery('.machine-detail').html(html);
+        var machineDetailData = loadHistory('[' + machineId + ']', function(d) {
+            var html = template(d);
 
-        bindEvents();
+            jQuery('.machine-detail').html(html);
+
+            bindDetailEvents();
+        });
+
 
     };
 
@@ -234,6 +240,22 @@ FF.Hud = (function($){
 
         jQuery('.machine-status').html(html);
 
+        bindEvents();
+
+    };
+
+    showMachine = function(machineId) {
+
+        renderDetail();
+
+        $('.machine-detail').addClass('show');
+    };
+
+    bindDetailEvents = function() {
+        // Close machine details
+        $('.machine-detail__close').on('click', function() {
+            $(this).closest('.machine-detail').removeClass('show');
+        });
     };
 
     bindEvents = function() {
@@ -243,13 +265,10 @@ FF.Hud = (function($){
         // Show machine details
         els.alerts.on('click', function() {
             // Rerender with new data
-           $('.machine-detail').addClass('show');
+           showMachine($(this).data('machine-id'));
         });
 
-        // Close machine details
-        $('.machine-detail__close').on('click', function() {
-            $(this).closest('.machine-detail').removeClass('show');
-        });
+
 
         // Toggle key display
         $('.page-ops__key').on('click', function() {
@@ -324,8 +343,6 @@ FF.Hud = (function($){
         // Load the templates
         loadMachineTemplate(renderStatus);
 
-        loadMachineDetailTemplate(renderDetail);
-
         updateCountdown();
 
     }
@@ -347,6 +364,8 @@ FF.Hud = (function($){
         services = Drupal.settings.services;
 
         updateCountdown();
+
+        loadMachineDetailTemplate(function() {});
 
         refreshDisplay();
 
