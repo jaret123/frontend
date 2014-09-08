@@ -332,6 +332,33 @@ FF.Hud = (function($){
             };
         });
 
+        Handlebars.registerHelper('status', function(statusCode, format)) {
+            if (format == 'color') {
+                if (statusCode > 0) {
+                    return 'green';
+                } else if (statusCode == 0) {
+                    return 'yellow';
+                } else if (statusCode < 0 ) {
+                    return 'red';
+                } else {
+                    return 'error';
+                }
+            } else if (format == 'code') {
+                if (statusCode > 0) {
+                    return 'OK';
+                } else if (statusCode == 0) {
+                    return 'idle';
+                } else if (statusCode < 0 ) {
+                    return 'fault';
+                } else {
+                    return 'error';
+                }
+            } else {
+                return statusCode;
+            }
+
+        };
+
         loadStatus(function() {});
 
         loadHistory(function() {});
