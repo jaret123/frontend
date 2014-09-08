@@ -18,7 +18,7 @@
         <!--</div>-->
         {{#each currentStatus}}
         <div class="log__row">
-            <div class="log__timestamp">{{dateFormat timestamp format="lll"}}</div>
+            <div class="log__timestamp">{{dateFormat timestamp format=""}}</div>
             <div class="log__status">{{statusFormat statusCode "color"}}</div>
             <div class="log__message">{{statusMessage}}</div>
         </div>
