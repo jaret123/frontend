@@ -345,7 +345,7 @@ FF.Hud = (function($){
                 } else if (statusCode < 0 ) {
                     return 'red';
                 } else {
-                    return 'error';
+                    return 'red';
                 }
             } else if (format == 'code') {
                 if (statusCode > 0) {
@@ -355,7 +355,7 @@ FF.Hud = (function($){
                 } else if (statusCode < 0 ) {
                     return 'fault';
                 } else {
-                    return 'error';
+                    return 'fault';
                 }
             } else {
                 return statusCode;
