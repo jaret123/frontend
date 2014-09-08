@@ -35,7 +35,7 @@ function xeros_ops_menu() {
 
 function xeros_ops_permission() {
   return array(
-    'xeros hud' => array(
+    'xeros status board' => array(
       'title' => t('View Ops Center Status Board'),
       'description' => t('Roles with this permission have the ability to access the Ops Center Status Board'),
     )

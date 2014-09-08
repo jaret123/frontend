@@ -97,13 +97,13 @@
         </div>
         <div class="key__details">
           <div class="green key__item">
-            Connected, and in use according to usage parameters
+            Machine is active.
           </div>
           <div class="yellow key__item">
-            Connected, but idle
+            Machine is idle.
           </div>
           <div class="red key__item">
-            Been idle for too long - machine not in use.
+            Alert.  See status message for details.
           </div>
 <!--          <div class="blue key__item">-->
 <!--            <i class="fa fa-bolt"></i>-->
