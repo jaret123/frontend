@@ -232,7 +232,7 @@ body.full-screen .machine {
   display: none;
 }
 /* line 80, ../sass/_machine-detail.scss */
-.machine-detail .log:show {
+.machine-detail .log.show {
   display: block;
 }
 /* line 84, ../sass/_machine-detail.scss */

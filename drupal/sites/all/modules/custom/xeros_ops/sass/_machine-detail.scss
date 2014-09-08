@@ -77,7 +77,7 @@
   }
   .log {
     display: none;
-    &:show {
+    &.show {
       display: block;
     }
   }
