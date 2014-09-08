@@ -2,8 +2,8 @@
     <i class="fa fa-times machine-detail__close"></i>
     <i class="icon-Washer"></i>
     <!--<i class="fa fa-print icon-print"></i>-->
-    <h3 class="machine-detail__title">Washer 01{{clickedMachineDetail.machine_name}}</h3>
-    <div class="manufacturer">Manufacturer/Model: {{clickedMachineDetail.manufacturer}}</div>
+    <h3 class="machine-detail__title">Washer 01{{machine.machine_name}}</h3>
+    <div class="manufacturer">Manufacturer/Model: {{machine.manufacturer}}</div>
     <div class="description">
         This is the machine installed on the third floor utility closet.
     </div>
@@ -23,7 +23,7 @@
         </div>
 
         <h4>View Log </h4>
-        {{#each d}}
+        {{#each history}}
         <div class="log__row">
             <div class="log__timestamp">{{timestamp}}</div>
             <div class="log__status">{{statuscode}}</div>
@@ -41,9 +41,9 @@
     </div>
     <div class="details">
         <h4 class="machine-detail__location">Machine Details</h4>
-        <p>Company: {{clickedMachineDetail.company_title}}</p>
-        <p>Location: {{clickedMachineDetail.location_title}}</p>
-        <p>Serial Number: {{clickedMachineDetail.serial_number}}</p>
+        <p>Company: {{machine.company_title}}</p>
+        <p>Location: {{machine.location_title}}</p>
+        <p>Serial Number: {{machine.serial_number}}</p>
     </div>
 
     <!--<div class="machine-detail__log log">-->
