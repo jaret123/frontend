@@ -203,6 +203,7 @@ FF.Hud = (function($){
                 history: d.slice(1,6),  // Just first five rows of data
                 machine: clickedMachineData};
 
+            console.log(templateData);
             var html = template(templateData );
 
             jQuery('.machine-detail').html(html);
