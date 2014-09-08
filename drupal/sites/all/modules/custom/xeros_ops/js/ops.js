@@ -37,11 +37,15 @@ FF.Hud = (function($){
 
     var machineHistory = {};
 
-    var machineIds = [6,7];
+    var machineIds = [];
 
     // Turn refresh on
-    var refresh = false;
+    var refresh = true;
 
+
+    formatData = function() {
+
+    };
 
     formatStatus = function(data) {
         var _status = {};
@@ -114,10 +118,16 @@ FF.Hud = (function($){
         var alert = 0;
 
         for (i = 0; i < xerosMachines.length; i++) {
-            //console.log(data.machineSource[i]);
             var m = xerosMachines[i];
 
             data.machineSource[m.machine_id] = m;
+
+            machineIds.push(parseInt(m.machine_id));
+        }
+
+        for (i = 0; i < xerosMachines.length; i++) {
+            //console.log(data.machineSource[i]);
+            var m = xerosMachines[i];
 
             if ( typeof data.machine.companies[m.company_title] == 'undefined') {
                 data.machine.companies[m.company_title] = {
@@ -369,11 +379,11 @@ FF.Hud = (function($){
 
         });
 
-        loadStatus(function() {});
-
-        //loadHistory(function() {});
-
         loadData();
+
+        loadStatus();
+
+        formatData();
 
         // Load the templates
         loadMachineTemplate(renderStatus);
