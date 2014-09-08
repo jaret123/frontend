@@ -246,7 +246,7 @@ FF.Hud = (function($){
 
     showMachine = function(machineId) {
 
-        renderDetail();
+        renderDetail(machineId);
 
         $('.machine-detail').addClass('show');
     };
