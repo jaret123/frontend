@@ -332,7 +332,7 @@ FF.Hud = (function($){
             };
         });
 
-        Handlebars.registerHelper('status', function(statusCode, format) {
+        Handlebars.registerHelper('statusFormat', function(statusCode, format) {
             if (format == 'color') {
                 if (statusCode > 0) {
                     return 'green';
