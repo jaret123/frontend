@@ -93,7 +93,7 @@ FF.Hud = (function($){
             data: '[' + machineId.toString() + ']',
             success: function(d) {
                 history = formatHistory(d);
-                callback(d);
+                callback(d, machineId);
             },
             dataType: 'json',
             type: 'POST',
@@ -101,11 +101,10 @@ FF.Hud = (function($){
         });
     };
 
-
     loadData = function() {
         // Grab the global data object and create a local copy so we can
         // refactor easily later;
-        data.machineSource = xerosMachines;
+        data.machineSource = {}; //xerosMachines;
 
         data.machine = {
             'companies' : {}
@@ -114,10 +113,11 @@ FF.Hud = (function($){
         var j = 0;
         var alert = 0;
 
-        for (i = 0; i < data.machineSource.length; i++) {
+        for (i = 0; i < xerosMachines.length; i++) {
             //console.log(data.machineSource[i]);
-            var m = data.machineSource[i];
+            var m = xerosMachines[i];
 
+            data.machineSource[m.machine_id] = m;
 
             if ( typeof data.machine.companies[m.company_title] == 'undefined') {
                 data.machine.companies[m.company_title] = {
@@ -156,32 +156,6 @@ FF.Hud = (function($){
             } else {
                 m.status = 'green';
             }
-            // Random assignment of status
-//            switch(j) {
-//                case 1:
-//                    m.status = 'green';
-//                    break;
-//                case 2:
-//                    m.status = 'yellow';
-//                    break;
-//                case 3:
-//                    m.status = 'red';
-//                    if (alert < 4) {
-//                        m.status += ' alert';
-//                    }
-//                    alert++;
-//                    j=0;
-//                    break;
-////                case 4:
-////                    m.status = 'blue';
-////                    if (alert < 4) {
-////                        m.status += ' alert';
-////                    }
-////                    alert++;
-////                    j = 0;
-////                    break;
-//            }
-
 
             j++;
             data.machine.companies[m.company_title].locations[m.location_title].machines[m.machine_id] = m;
@@ -219,7 +193,12 @@ FF.Hud = (function($){
         var template = Handlebars.compile(tpl.machineDetail);
 
 
-        var machineDetailData = loadHistory(machineId, function(d) {
+        var machineDetailData = loadHistory(machineId, function(d, machineId) {
+
+            var data = {
+                history: d,
+                machine: data.machineSource(machineId)
+            }
             var html = template(d);
 
             jQuery('.machine-detail').html(html);
