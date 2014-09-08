@@ -76,27 +76,27 @@ FF.Hud = (function($){
 
     loadStatus = function(callback) {
         jQuery.ajax({
-            url: services.status,
-            data: '[' + machineIds.toString() + ']',
+            url: 'status-board-request/status/' + machineIds.toString(),
+            //data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = formatStatus(d);
             },
             dataType: 'json',
-            type: 'POST',
+            type: 'GET',
             contentType: 'application/json'
         });
     };
 //
     loadHistory = function(machineId, callback) {
         jQuery.ajax({
-            url: services.history,
-            data: '[' + machineId.toString() + ']',
+            url: 'status-board-request/history/' + machineId.toString(),
+            //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 history = formatHistory(d);
                 callback(d, machineId);
             },
             dataType: 'json',
-            type: 'POST',
+            type: 'GET',
             contentType: 'application/json'
         });
     };
@@ -371,7 +371,7 @@ FF.Hud = (function($){
 
         loadStatus(function() {});
 
-        loadHistory(function() {});
+        //loadHistory(function() {});
 
         loadData();
 

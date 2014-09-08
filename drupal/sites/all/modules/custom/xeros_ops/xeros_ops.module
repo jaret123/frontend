@@ -21,6 +21,14 @@ function xeros_ops_menu() {
     'access arguments' => array('admin'),
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['status-board-request'] = array(
+    'title' => 'Proxy for web services',
+    'page callback' => 'service',
+    //'page callback' => 'service',
+    'page arguments' => array(1,2),
+    'access arguments' => array('xeros status board'),
+    'file' => 'xeros_ops_service.inc',
+  );
 
   return $items;
 }
