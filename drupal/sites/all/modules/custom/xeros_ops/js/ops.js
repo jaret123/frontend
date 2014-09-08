@@ -357,7 +357,7 @@ FF.Hud = (function($){
                 return statusCode;
             }
 
-        };
+        });
 
         loadStatus(function() {});
 
