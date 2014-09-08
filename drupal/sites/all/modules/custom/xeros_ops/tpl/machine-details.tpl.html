@@ -10,7 +10,7 @@
 
     <div class="status">
         <h4>Status</h4>
-        <div class="red status-message">
+        <div class="{{statusFormat statusCode "color"}} status-message">
             <i class="fa status-icon"></i>Alert
         </div>
         <!--<div class="silence">-->
@@ -24,14 +24,16 @@
         </div>
         {{/each}}
 
-        <h4>View Log </h4>
+        <h4>View Log <i class="fa fa-chevron-down log__open-close"></i></h4>
+        <div class="log">
         {{#each history}}
-        <div class="log__row">
-            <div class="log__timestamp">{{dateFormat timestamp format="h:mm:ss a"}}</div>
-            <div class="log__status">{{statusFormat statusCode "code"}}</div>
-            <div class="log__message">{{statusMessage}}</div>
-        </div>
+            <div class="log__row">
+                <div class="log__timestamp">{{dateFormat timestamp format="h:mm:ss a"}}</div>
+                <div class="log__status">{{statusFormat statusCode "code"}}</div>
+                <div class="log__message">{{statusMessage}}</div>
+            </div>
         {{/each}}
+        </div>
 
         <!-- TODO: Get the last cycle data -->
         <p>The machine is currently operational</p>
