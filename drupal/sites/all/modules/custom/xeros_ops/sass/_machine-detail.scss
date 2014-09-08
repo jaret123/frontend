@@ -75,10 +75,9 @@
       margin: 0;
     }
   }
-  .log {
-    border-top: 1px dotted gray;
     .log__row {
       margin-bottom: 10px;
+
     }
     .log__timestamp {
       display: inline-block;
@@ -90,7 +89,6 @@
     .log__message {
 
     }
-  }
 
   .comment {
     border-top: 1px dotted gray;

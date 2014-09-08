@@ -228,23 +228,19 @@ body.full-screen .machine {
   margin: 0;
 }
 /* line 78, ../sass/_machine-detail.scss */
-.machine-detail .log {
-  border-top: 1px dotted gray;
-}
-/* line 80, ../sass/_machine-detail.scss */
-.machine-detail .log .log__row {
+.machine-detail .log__row {
   margin-bottom: 10px;
 }
-/* line 83, ../sass/_machine-detail.scss */
-.machine-detail .log .log__timestamp {
+/* line 82, ../sass/_machine-detail.scss */
+.machine-detail .log__timestamp {
   display: inline-block;
   font-style: italic;
 }
-/* line 87, ../sass/_machine-detail.scss */
-.machine-detail .log .log__status {
+/* line 86, ../sass/_machine-detail.scss */
+.machine-detail .log__status {
   display: inline-block;
 }
-/* line 95, ../sass/_machine-detail.scss */
+/* line 93, ../sass/_machine-detail.scss */
 .machine-detail .comment {
   border-top: 1px dotted gray;
 }
