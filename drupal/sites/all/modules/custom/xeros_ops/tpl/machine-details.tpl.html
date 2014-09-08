@@ -1,23 +1,21 @@
 <div class="machine-detail__wrapper Xeros">
     <i class="fa fa-times machine-detail__close"></i>
     <i class="icon-Washer"></i>
-    <i class="fa fa-print icon-print"></i>
-    <h3 class="machine-detail__title">Washer 01</h3>
-    <div class="manufacturer">Manufacturer/Model: Xeros</div>
+    <!--<i class="fa fa-print icon-print"></i>-->
+    <h3 class="machine-detail__title">Washer 01{{clickedMachineDetail.machine_name}}</h3>
+    <div class="manufacturer">Manufacturer/Model: {{clickedMachineDetail.manufacturer}}</div>
     <div class="description">
         This is the machine installed on the third floor utility closet.
     </div>
-    <!-- TODO: Experiment with Machine Name and Model in the board view -->
-    <!-- TODO: Move the key and move the display controls -->
-    <!-- TODO: Create a PDF of the drill down screen -->
+
     <div class="status">
         <h4>Status</h4>
         <div class="red status-message">
             <i class="fa status-icon"></i>Alert
         </div>
-        <div class="silence">
-            <i class="fa fa-pause icon-silence"></i>Pause Alarm
-        </div>
+        <!--<div class="silence">-->
+            <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
+        <!--</div>-->
         <div class="log__row">
             <div class="log__timestamp">11:45 AM EST</div>
             <div class="log__status">Alert</div>
@@ -25,26 +23,15 @@
         </div>
 
         <h4>View Log </h4>
+        {{#each d}}
         <div class="log__row">
-            <div class="log__timestamp">11:30 AM EST</div>
-            <div class="log__status">Warning</div>
-            <div class="log__message">Message: Lorem Ipsum</div>
+            <div class="log__timestamp">{{timestamp}}</div>
+            <div class="log__status">{{statuscode}}</div>
+            <div class="log__message">{{status_message}}</div>
         </div>
-        <div class="log__row">
-            <div class="log__timestamp">11:15 AM EST</div>
-            <div class="log__status">Ok</div>
-            <div class="log__message">Message: Lorem Ipsum</div>
-        </div>
-        <div class="log__row">
-            <div class="log__timestamp">11:00 AM EST</div>
-            <div class="log__status">Ok</div>
-            <div class="log__message">Message: Lorem Ipsum</div>
-        </div>
-        <div class="log__row">
-            <div class="log__timestamp">10:45 AM EST</div>
-            <div class="log__status">Ok</div>
-            <div class="log__message">Message: Lorem Ipsum</div>
-        </div>
+        {{/each}}
+
+        <!-- TODO: Get the last cycle data -->
         <p>The machine is currently operational</p>
         <p>Last Ping: Aug 1 - 11:35 AM EST</p>
         <p>Last Cycle Run: Aug 1 - 10:24 AM EST</p>
@@ -54,16 +41,16 @@
     </div>
     <div class="details">
         <h4 class="machine-detail__location">Machine Details</h4>
-        <p>Company: Wyndam Hotels</p>
-        <p>Location: Wyndam Hamilton Park</p>
-        <p>Serial Number: 676767676</p>
-        <p></p>
+        <p>Company: {{clickedMachineDetail.company_title}}</p>
+        <p>Location: {{clickedMachineDetail.location_title}}</p>
+        <p>Serial Number: {{clickedMachineDetail.serial_number}}</p>
     </div>
 
     <!--<div class="machine-detail__log log">-->
         <!---->
     <!--</div>-->
 
+    <!-- TODO: Get the cycles for the machine for the day -->
     <div class="machine-detail__cycles log">
         <h4>Cycles Today</h4>
         <div class="log__row">
@@ -76,12 +63,12 @@
         </div>
     </div>
 
-    <div class="comment">
-        <h4>Add Comment</h4>
-            <form>
+    <!--<div class="comment">-->
+        <!--<h4>Add Comment</h4>-->
+            <!--<form>-->
 
-                <input type="text"/>
-                <input type="submit"/>
-            </form>
-    </div>
+                <!--<input type="text"/>-->
+                <!--<input type="submit"/>-->
+            <!--</form>-->
+    <!--</div>-->
 </div>
