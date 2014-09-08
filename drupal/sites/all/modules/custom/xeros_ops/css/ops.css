@@ -227,28 +227,36 @@ body.full-screen .machine {
 .machine-detail .details p {
   margin: 0;
 }
-/* line 78, ../sass/_machine-detail.scss */
+/* line 79, ../sass/_machine-detail.scss */
+.machine-detail .log__open-close.rotate {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+/* line 83, ../sass/_machine-detail.scss */
 .machine-detail .log {
   display: none;
 }
-/* line 80, ../sass/_machine-detail.scss */
+/* line 85, ../sass/_machine-detail.scss */
 .machine-detail .log.show {
   display: block;
 }
-/* line 84, ../sass/_machine-detail.scss */
+/* line 89, ../sass/_machine-detail.scss */
 .machine-detail .log__row {
   margin-bottom: 10px;
 }
-/* line 88, ../sass/_machine-detail.scss */
+/* line 93, ../sass/_machine-detail.scss */
 .machine-detail .log__timestamp {
   display: inline-block;
   font-style: italic;
 }
-/* line 92, ../sass/_machine-detail.scss */
+/* line 97, ../sass/_machine-detail.scss */
 .machine-detail .log__status {
   display: inline-block;
 }
-/* line 99, ../sass/_machine-detail.scss */
+/* line 104, ../sass/_machine-detail.scss */
 .machine-detail .comment {
   border-top: 1px dotted gray;
 }

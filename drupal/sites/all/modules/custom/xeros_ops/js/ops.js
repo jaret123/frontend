@@ -245,6 +245,7 @@ FF.Hud = (function($){
         // Show the log
         $('.log__open-close').on('click', function() {
             $('.log').toggleClass('show');
+            $(this).toggleClass('rotate');
         });
     };
 

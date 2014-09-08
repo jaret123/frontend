@@ -75,6 +75,11 @@
       margin: 0;
     }
   }
+  .log__open-close {
+    &.rotate {
+      @include transform(rotate(180deg));
+    }
+  }
   .log {
     display: none;
     &.show {
