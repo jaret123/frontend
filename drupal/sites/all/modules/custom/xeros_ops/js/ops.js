@@ -93,6 +93,7 @@ FF.Hud = (function($){
             data: '[' + machineId.toString() + ']',
             success: function(d) {
                 history = formatHistory(d);
+                callback(d);
             },
             dataType: 'json',
             type: 'POST',
