@@ -125,6 +125,9 @@ FF.Hud = (function($){
             machineIds.push(parseInt(m.machine_id));
         }
 
+        // Temp
+        machineIds = [6,7];
+
         for (i = 0; i < xerosMachines.length; i++) {
             //console.log(data.machineSource[i]);
             var m = xerosMachines[i];
