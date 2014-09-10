@@ -87,6 +87,7 @@ function get_machines($machineIds) {
 	m.serial_number,
 	m.manufacturer,
 	m.machine_name,
+	m.notes,
 	m.location_id,
 	coalesce(l.title, 'Unknown Location') as location_title,
 	coalesce(c.title, 'Unknown Company') as company_title

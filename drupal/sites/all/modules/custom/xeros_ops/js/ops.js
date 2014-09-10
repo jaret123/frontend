@@ -153,8 +153,9 @@ FF.Hud = (function($){
             url: 'status-board-request/history/' + machineId.toString(),
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
-                history = formatHistory(d);
-                callback(d, machineId);
+                for (var first in d) break;
+                //history = formatHistory(d[first]);
+                callback(d[first], machineId);
             },
             dataType: 'json',
             type: 'GET',
@@ -203,11 +204,11 @@ FF.Hud = (function($){
 
         var clickedMachineData = data.machineSource[machineId];
 //
-        var machineDetailData = loadHistory(machineId, function(d, machineId) {
+        loadHistory(machineId, function(d, machineId) {
 
             var templateData = {
-                currentStatus: d.slice(0,1),
-                history: d.slice(1,6),  // Just first five rows of data
+                //currentStatus: d.slice(0,1),
+                history: d,  // Just first five rows of data
                 machine: clickedMachineData};
 
             console.log(templateData);

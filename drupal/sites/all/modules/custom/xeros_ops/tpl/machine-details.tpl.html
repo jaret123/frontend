@@ -2,45 +2,40 @@
     <i class="fa fa-times machine-detail__close"></i>
     <i class="icon-Washer"></i>
     <!--<i class="fa fa-print icon-print"></i>-->
-    <h3 class="machine-detail__title">Washer 01{{machine.machine_name}}</h3>
-    <div class="manufacturer">Manufacturer/Model: {{machine.manufacturer}}</div>
+    <h3 class="machine-detail__title">{{machine.machine_name}}</h3>
+    <div class="manufacturer">{{machine.manufacturer}}</div>
     <div class="description">
-        This is the machine installed on the third floor utility closet.
+        {{machine.notes}}
     </div>
 
-    <div class="status">
+    <div class="status {{statusFormat currentStatus.0.statusCode "color"}} {{currentStatus.0.statusCode}}">
         <h4>Status</h4>
-        <div class="{{statusFormat currentStatus.0.statusCode "color"}} status-message">
-            <i class="fa status-icon"></i>{{statusFormat currentStatus.0.statusCode "code"}}
+        <div class=" status-message">
+            <i class="fa status-icon"></i>{{statusFormat machine.status.status_code "code"}}
         </div>
         <!--<div class="silence">-->
             <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
         <!--</div>-->
-        {{#each currentStatus}}
         <div class="log__row">
-            <div class="log__timestamp">{{dateFormat timestamp format="h:mm:ss a"}}</div>
-            <div class="log__status">{{statusFormat statusCode "color"}}</div>
-            <div class="log__message">{{statusMessage}}</div>
+            <div class="log__timestamp">{{dateFormat machine.status.time_stamp format="h:mm:ss a"}}</div>
+            <div class="log__status">{{statusFormat machine.status.status_code "color"}}</div>
+            <div class="log__message">{{machine.status.status_message}}</div>
         </div>
-        {{/each}}
 
         <h4>View Log <i class="fa fa-chevron-down log__open-close"></i></h4>
         <div class="log">
         {{#each history}}
             <div class="log__row">
-                <div class="log__timestamp">{{dateFormat timestamp format="h:mm:ss a"}}</div>
-                <div class="log__status">{{statusFormat statusCode "code"}}</div>
-                <div class="log__message">{{statusMessage}}</div>
+                <div class="log__timestamp">{{dateFormat time_stamp format="h:mm:ss a"}}</div>
+                <div class="log__status">{{statusFormat status_code "code"}}</div>
+                <div class="log__message">{{status_message}}</div>
             </div>
         {{/each}}
         </div>
 
         <!-- TODO: Get the last cycle data -->
-        <p>The machine is currently operational</p>
-        <p>Last Ping: Aug 1 - 11:35 AM EST</p>
-        <p>Last Cycle Run: Aug 1 - 10:24 AM EST</p>
-        <p>Cycles Today: 30</p>
-        <p>Run Time Today: 2.43</p>
+        <p>Last Message: {{machine.status.time_stamp}}</p>
+
     </div>
     <div class="details">
         <h4 class="machine-detail__location">Machine Details</h4>
@@ -56,14 +51,16 @@
     <!-- TODO: Get the cycles for the machine for the day -->
     <div class="machine-detail__cycles log">
         <h4>Cycles Today</h4>
-        <div class="log__row">
-            <div class="log__timestamp">Start Time: 11:45 AM EST</div>
-            <div class="log__timestamp">End Time: 11:45 AM EST</div>
-            <div class="log__status">Rinse and Spin</div>
-            <div class="log__detail">Water Used: 5 gallons</div>
-            <div class="log__detail">KwH: 32</div>
-            <div class="log__detail">Chemical Usage: 33 Oz</div>
-        </div>
+        <p>Last Cycle Run: Aug 1 - 10:24 AM EST</p>
+        <p>Cycles Today: 30</p>
+        <p>Run Time Today: 2.43</p>
+
+            <div class="cycle__timestamp">Start Time: 11:45 AM EST</div>
+            <div class="cycle__timestamp">End Time: 11:45 AM EST</div>
+            <div class="cycle__status">Rinse and Spin</div>
+            <div class="cycle__detail">Water Used: 5 gallons</div>
+            <div class="cycle__detail">KwH: 32</div>
+            <div class="cycle__detail">Chemical Usage: 33 Oz</div>
     </div>
 
     <!--<div class="comment">-->
