@@ -161,73 +161,70 @@ body.full-screen .machine {
   box-shadow: -2px 0px 5px 0px rgba(50, 50, 50, 0.75);
 }
 /* line 21, ../sass/_machine-detail.scss */
+.machine-detail h4 {
+  margin-bottom: 15px;
+}
+/* line 27, ../sass/_machine-detail.scss */
+.machine-detail .machine-detail__header > div {
+  display: inline-block;
+}
+/* line 31, ../sass/_machine-detail.scss */
 .machine-detail .icon-print {
   position: absolute;
   top: 30px;
   right: 30px;
 }
-/* line 28, ../sass/_machine-detail.scss */
+/* line 38, ../sass/_machine-detail.scss */
 .machine-detail .status-message,
 .machine-detail .silence {
   display: inline-block;
 }
-/* line 30, ../sass/_machine-detail.scss */
+/* line 40, ../sass/_machine-detail.scss */
 .machine-detail .status-message i,
 .machine-detail .silence i {
   margin-right: 5px;
 }
-/* line 34, ../sass/_machine-detail.scss */
+/* line 44, ../sass/_machine-detail.scss */
 .machine-detail .icon-silence {
   margin-left: 10px;
 }
-/* line 37, ../sass/_machine-detail.scss */
+/* line 47, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__wrapper {
   padding: 30px;
 }
-/* line 41, ../sass/_machine-detail.scss */
+/* line 51, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__close {
   display: block;
   margin-bottom: 10px;
 }
-/* line 45, ../sass/_machine-detail.scss */
+/* line 55, ../sass/_machine-detail.scss */
 .machine-detail .icon-Washer {
   font-size: 40px !important;
   display: inline-block;
 }
-/* line 50, ../sass/_machine-detail.scss */
+/* line 60, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__title {
   display: inline-block;
 }
-/* line 54, ../sass/_machine-detail.scss */
+/* line 64, ../sass/_machine-detail.scss */
 .machine-detail .machine-detail__location {
   display: block;
 }
-/* line 58, ../sass/_machine-detail.scss */
-.machine-detail .status {
-  border-top: 1px dotted gray;
-  padding-bottom: 30px;
-}
-/* line 60, ../sass/_machine-detail.scss */
+/* line 70, ../sass/_machine-detail.scss */
 .machine-detail .status .status-message {
   display: inline-block;
   padding: 5px;
   font-weight: 300;
-  margin-bottom: 15px;
 }
-/* line 67, ../sass/_machine-detail.scss */
+/* line 75, ../sass/_machine-detail.scss */
 .machine-detail .status p {
   margin: 0;
 }
-/* line 71, ../sass/_machine-detail.scss */
-.machine-detail .details {
-  border-top: 1px dotted gray;
-  padding-bottom: 30px;
-}
-/* line 74, ../sass/_machine-detail.scss */
+/* line 81, ../sass/_machine-detail.scss */
 .machine-detail .details p {
   margin: 0;
 }
-/* line 79, ../sass/_machine-detail.scss */
+/* line 86, ../sass/_machine-detail.scss */
 .machine-detail .log__open-close.rotate {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -235,30 +232,66 @@ body.full-screen .machine {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* line 83, ../sass/_machine-detail.scss */
+/* line 90, ../sass/_machine-detail.scss */
 .machine-detail .log {
   display: none;
 }
-/* line 85, ../sass/_machine-detail.scss */
+/* line 92, ../sass/_machine-detail.scss */
 .machine-detail .log.show {
   display: block;
 }
-/* line 89, ../sass/_machine-detail.scss */
-.machine-detail .log__row {
-  margin-bottom: 10px;
-}
-/* line 93, ../sass/_machine-detail.scss */
-.machine-detail .log__timestamp {
+/* line 97, ../sass/_machine-detail.scss */
+.machine-detail .log__row > div {
   display: inline-block;
+}
+/* line 102, ../sass/_machine-detail.scss */
+.machine-detail .log__timestamp {
   font-style: italic;
 }
-/* line 97, ../sass/_machine-detail.scss */
-.machine-detail .log__status {
+/* line 111, ../sass/_machine-detail.scss */
+.machine-detail .label {
   display: inline-block;
+  width: 175px;
 }
-/* line 104, ../sass/_machine-detail.scss */
+/* line 115, ../sass/_machine-detail.scss */
 .machine-detail .comment {
   border-top: 1px dotted gray;
+}
+/* line 120, ../sass/_machine-detail.scss */
+.machine-detail .red .icon-Washer {
+  color: red;
+}
+/* line 128, ../sass/_machine-detail.scss */
+.machine-detail .green .icon-Washer {
+  color: green;
+}
+/* line 136, ../sass/_machine-detail.scss */
+.machine-detail .yellow .icon-Washer {
+  color: yellow;
+}
+/* line 144, ../sass/_machine-detail.scss */
+.machine-detail .green .status-icon {
+  color: green;
+}
+/* line 147, ../sass/_machine-detail.scss */
+.machine-detail .green .status-icon:before {
+  content: "\f00c";
+}
+/* line 152, ../sass/_machine-detail.scss */
+.machine-detail .red .status-icon {
+  color: red;
+}
+/* line 155, ../sass/_machine-detail.scss */
+.machine-detail .red .status-icon:before {
+  content: "\f12a";
+}
+/* line 160, ../sass/_machine-detail.scss */
+.machine-detail .yellow .status-icon {
+  color: orange;
+}
+/* line 163, ../sass/_machine-detail.scss */
+.machine-detail .yellow .status-icon:before {
+  content: "\f1ce";
 }
 @media screen and (min-width: 800px) {
   /* line 2, ../sass/_machine-detail.scss */

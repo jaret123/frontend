@@ -1,67 +1,71 @@
-<div class="machine-detail__wrapper {{statusFormat currentStatus.0.statusCode "color"}} {{machine.manufacturer}}">
+<div class="machine-detail__wrapper {{statusFormat machine.status.status_code "color"}} {{machine.manufacturer}}">
     <i class="fa fa-times machine-detail__close"></i>
-    <i class="icon-Washer"></i>
-    <!--<i class="fa fa-print icon-print"></i>-->
-    <h3 class="machine-detail__title">{{machine.machine_name}}</h3>
-    <div class="manufacturer">{{machine.manufacturer}}</div>
+    <div class="machine-detail__header">
+        <div>
+            <i class="icon-Washer"></i>
+        </div>
+        <div>
+            <!--<i class="fa fa-print icon-print"></i>-->
+            <h3 class="machine-detail__title">{{machine.machine_name}}</h3>
+            <div class="manufacturer">{{machine.manufacturer}}</div>
+        </div>
+    </div>
+
     <div class="description">
         {{machine.notes}}
     </div>
 
-    <div class="status {{statusFormat currentStatus.0.statusCode "color"}} {{currentStatus.0.statusCode}}">
+    <div class="status">
         <h4>Status</h4>
         <div class=" status-message">
-            <i class="fa status-icon"></i>{{statusFormat machine.status.status_code "code"}}
+            <i class="fa status-icon"></i>
+            {{statusFormat machine.status.status_code "code"}} -
+            <span class="log__timestamp">{{dateFormat machine.status.time_stamp format="h:mm:ss a"}} - </span>
+            <span class="log__message">{{machine.status.status_message}}</span>
         </div>
         <!--<div class="silence">-->
             <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
         <!--</div>-->
-        <div class="log__row">
-            <div class="log__timestamp">{{dateFormat machine.status.time_stamp format="h:mm:ss a"}}</div>
-            <div class="log__status">{{statusFormat machine.status.status_code "color"}}</div>
-            <div class="log__message">{{machine.status.status_message}}</div>
-        </div>
-
-        <h4>View Log <i class="fa fa-chevron-down log__open-close"></i></h4>
-        <div class="log">
-        {{#each history}}
-            <div class="log__row">
-                <div class="log__timestamp">{{dateFormat time_stamp format="h:mm:ss a"}}</div>
-                <div class="log__status">{{statusFormat status_code "code"}}</div>
-                <div class="log__message">{{status_message}}</div>
-            </div>
-        {{/each}}
-        </div>
-
-        <!-- TODO: Get the last cycle data -->
-        <p>Last Message: {{machine.status.time_stamp}}</p>
-
     </div>
+
+    <h4>View Status Log <i class="fa fa-chevron-down log__open-close"></i></h4>
+    <div class="log">
+        {{#each history}}
+        <div class="log__row">
+            <div class="log__timestamp">{{dateFormat time_stamp format="h:mm:ss a"}} - </div>
+            <div class="log__status">{{statusFormat status_code "code"}} - </div>
+            <div class="log__message">{{status_message}}</div>
+        </div>
+        {{/each}}
+    </div>
+
     <div class="details">
         <h4 class="machine-detail__location">Machine Details</h4>
-        <p>Company: {{machine.company_title}}</p>
-        <p>Location: {{machine.location_title}}</p>
-        <p>Serial Number: {{machine.serial_number}}</p>
+        Company: {{machine.company_title}}<br/>
+        Location: {{machine.location_title}}<br/>
+        Serial Number: {{machine.serial_number}}
     </div>
-
 
     <!-- TODO: Get the cycles for the machine for the day -->
     <div class="machine-detail__cycles">
-        <h4>Cycles Today</h4>
-        <p>Last Cycle Ended: {{cycles.0.cycle_end_time}}</p>
-        <p>Cycles Today: {{machine.usage.cycles}}</p>
-        <p>Run Time Today: {{machine.usage.run_time}}</p>
+        <h4>Cycles</h4>
+        <h5>Summary</h5>
+        <span class="label">Last Cycle Ended:</span>{{cycles.0.cycle_end_time}}<br/>
+        <span class="label">Cycles Today:</span>{{machine.usage.cycles}}<br/>
+        <span class="label">Total Run Time Today:</span>{{machine.usage.run_time}}<br/>
 
+        <h5>Details</h5>
         {{#each cycles}}
         <div>
-            <div class="cycle__timestamp">Start Time: {{cycle_start_time}}</div>
-            <div class="cycle__timestamp">End Time: {{cycle_end_time}}</div>
-            <div class="cycle__status">{{classification_name}}</div>
-            <div class="cycle__detail">Cold Water Used: {{cycle_cold_water_volume}} gallons</div>
-            <div class="cycle__detail">Hot Water Used: {{cycle_hot_water_volume}} gallons</div>
-            <div class="cycle__detail">Therms: {{cycle_therms}}</div>
-            <div class="cycle__detail">Chemicals: {{cycle_chemical_strength}} ounces</div>
+            <div class="cycle__status"><em>{{classification_name}}</em></div>
+            <div class="cycle__timestamp"><span class="label">Start Time:</span>{{cycle_start_time}}</div>
+            <div class="cycle__timestamp"><span class="label">End Time:</span>{{cycle_end_time}}</div>
+            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{cycle_cold_water_volume}} gallons</div>
+            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{cycle_hot_water_volume}} gallons</div>
+            <div class="cycle__detail"><span class="label">Therms:</span>{{cycle_therms}}</div>
+            <div class="cycle__detail"><span class="label">Chemicals:</span>{{cycle_chemical_strength}} ounces</div>
         </div>
+        <br/>
         {{/each}}
     </div>
 
