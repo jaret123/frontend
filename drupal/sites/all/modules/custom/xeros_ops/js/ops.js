@@ -40,23 +40,78 @@ FF.Hud = (function($){
     var machineIds = [];
 
     // Turn refresh on
-    var refresh = false;
+    var refresh = true;
 
 
     formatData = function() {
+        // Grab the global data object and create a local copy so we can
+        // refactor easily later;
 
+        data.machine = {
+            'companies' : {}
+        };
+
+        //var j = 0;
+        var alert = 0;
+
+//        for (i = 0; i < xerosMachines.length; i++) {
+//            var m = xerosMachines[i];
+//
+//            data.machineSource[m.machine_id] = m;
+//
+//            machineIds.push(parseInt(m.machine_id));
+//        }
+
+        // Temp
+        //machineIds = [6,7];
+
+        //for (i = 0; i < data.machineSource.length; i++) {
+        for (var i in data.machineSource) {
+            if (data.machineSource.hasOwnProperty(i)) {
+
+                //console.log(data.machineSource[i]);
+                var m = data.machineSource[i];
+
+                // If the company is not on the object yet, initialize it
+                if ( typeof data.machine.companies[m.company_title] == 'undefined') {
+                    data.machine.companies[m.company_title] = {
+                        'locations' : {},
+                        'company_title' : m.company_title
+                    };
+                }
+                // If the location is not on the object yet, initialize it
+                if ( typeof data.machine.companies[m.company_title].locations[m.location_title] == 'undefined') {
+                    data.machine.companies[m.company_title].locations[m.location_title] = {
+                        'machines' : {},
+                        'location_title' : m.location_title,
+                    };
+                }
+
+                // Set the model filter
+                if (m.manufacturer == 'Xeros' ) {
+                    m.modelFilter = 'xeros';
+                } else {
+                    m.modelFilter = 'non-xeros';
+                }
+
+                data.machine.companies[m.company_title].locations[m.location_title].machines[i] = m;
+            }
+        }
+        console.log (data.machine);
     };
 
     formatStatus = function(data) {
         var _status = {};
         for (i=0; i < data.length; i++) {
             var _machineStatus = data[i];
-            var _machineId = _machineStatus.machineId;
-            delete _machineStatus.machineId;
-            _status[_machineId] = _machineStatus;
+            if ( _machineStatus !== null ) {
+                var _machineId = _machineStatus.machineId;
+                delete _machineStatus.machineId;
+                _status[_machineId] = _machineStatus;
+            }
         };
         return _status;
-    }
+    };
 
     formatHistory = function(data) {
         var _status = {};
@@ -76,7 +131,7 @@ FF.Hud = (function($){
 
         };
         return _status;
-    }
+    };
 
     loadStatus = function(callback) {
         jQuery.ajax({
@@ -90,7 +145,7 @@ FF.Hud = (function($){
             contentType: 'application/json'
         });
     };
-//
+
     loadHistory = function(machineId, callback) {
         jQuery.ajax({
             url: 'status-board-request/history/' + machineId.toString(),
@@ -106,76 +161,16 @@ FF.Hud = (function($){
     };
 
     loadData = function() {
-        // Grab the global data object and create a local copy so we can
-        // refactor easily later;
-        data.machineSource = {}; //xerosMachines;
-
-        data.machine = {
-            'companies' : {}
-        };
-
-        var j = 0;
-        var alert = 0;
-
-        for (i = 0; i < xerosMachines.length; i++) {
-            var m = xerosMachines[i];
-
-            data.machineSource[m.machine_id] = m;
-
-            machineIds.push(parseInt(m.machine_id));
-        }
-
-        // Temp
-        machineIds = [6,7];
-
-        for (i = 0; i < xerosMachines.length; i++) {
-            //console.log(data.machineSource[i]);
-            var m = xerosMachines[i];
-
-            if ( typeof data.machine.companies[m.company_title] == 'undefined') {
-                data.machine.companies[m.company_title] = {
-                    'locations' : {},
-                    'company_title' : m.company_title
-                };
-            }
-            if ( typeof data.machine.companies[m.company_title].locations[m.location_title] == 'undefined') {
-                data.machine.companies[m.company_title].locations[m.location_title] = {
-                    'machines' : {},
-                    'location_title' : m.location_title,
-                };
-            }
-
-            if (m.manufacturer == 'Xeros' ) {
-                m.modelFilter = 'xeros';
-            } else {
-                m.modelFilter = 'non-xeros';
-            }
-
-            m.cycles = Math.floor(Math.random() * 6) + 0;
-            if (m.cycles == 0) {
-                m.runTime = '0:00';
-            } else {
-                m.runTime = String(Math.floor(Math.random() * 3) + 1) + ':' + ('0'+ String(Math.floor(Math.random() * 59) + 1)).slice(-2);
-            }
-
-            if (m.cycles == 0 ) {
-                m.status = 'red';
-                if (alert < 4) {
-                    m.status += ' alert';
-                }
-                alert++;
-            } else if (m.cycles <= 2) {
-                m.status = 'yellow';
-            } else {
-                m.status = 'green';
-            }
-
-            j++;
-            data.machine.companies[m.company_title].locations[m.location_title].machines[m.machine_id] = m;
-
-
-        }
-        console.log (data.machine);
+        jQuery.ajax({
+           url: 'status-board-request/machines',
+            success: function(d) {
+                data.machineSource = d;
+                formatData();
+            },
+            dataType: 'json',
+            type: 'GET',
+            contentType: 'application/json'
+        });
     };
 
 
@@ -206,8 +201,6 @@ FF.Hud = (function($){
         var template = Handlebars.compile(tpl.machineDetail);
 
         var clickedMachineData = data.machineSource[machineId];
-
-//        var _d = { history: d, machine: data.machineSource[machineId]};
 //
         var machineDetailData = loadHistory(machineId, function(d, machineId) {
 
@@ -384,11 +377,11 @@ FF.Hud = (function($){
 
         loadData();
 
-        loadStatus();
+        //loadStatus();
 
-        formatData();
+        //formatData();
 
-        // Load the templates
+        // TODO: Need to move to a callback on loadData
         loadMachineTemplate(renderStatus);
 
         updateCountdown();

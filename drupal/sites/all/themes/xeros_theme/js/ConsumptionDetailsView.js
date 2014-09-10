@@ -54,9 +54,10 @@ var view = {
         app.reportData = app.data.data[app.machine].metrics[app.metric];
         app.reportData.labels = reportLabels[app.reportData.id];
 
-        app.reportData.machine_name = app.data.data[app.machine].name;
+        app.reportData.machine_name = app.data.data[app.machine].machine_name;
         app.reportData.machine_id = app.data.data[app.machine].machine_id;
         app.reportData.serial_number = app.data.data[app.machine].serial_number;
+        app.reportData.manufacturer = app.data.data[app.machine].manufacturer;
         app.reportData.size = app.data.data[app.machine].size;
 
 

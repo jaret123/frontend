@@ -25,35 +25,6 @@ function status_board() {
   drupal_add_js($module_path . '/js/ff-utils.js');
   drupal_add_js($module_path . '/js/ops.js');
 
-  $query = <<<SQL
-    select
-	m.machine_id,
-	m.serial_number,
-	m.manufacturer,
-	m.location_id,
-	coalesce(l.title, 'Unknown Location') as location_title,
-	coalesce(c.title, 'Unknown Company') as company_title
-from
-    xeros_machine as m
-left join node as l
-	on m.location_id = l.nid
-	and l.type = 'location'
-left join field_data_field_company as lc
-	on l.nid = lc.entity_id
-	and lc.bundle = 'location'
-left join node as c
-	on lc.field_company_target_id = c.nid
-	and c.type = 'company';
-SQL;
-
-  $result = db_query($query, array());
-
-  $json_result = json_encode($result->fetchAll());
-
-  drupal_add_js('var xerosMachines = ' . $json_result,
-    'inline'
-  );
-
   $services = array();
   $services['status'] = variable_get('ops_service_status');
   $services['history'] = variable_get('ops_service_history');

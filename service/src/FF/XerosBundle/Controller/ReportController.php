@@ -246,7 +246,8 @@ METRIC
         $sql = <<<SQL
 SELECT
   xm.machine_id   AS id,
-  xm.manufacturer AS machine_name,
+  xm.machine_name AS machine_name,
+  xm.manufacturer AS manufacturer,
   xm.serial_number,
   xm.size,
   xm.water_only,
@@ -325,7 +326,8 @@ SQL;
         $machinesSql = <<<machineSQL
             select
                 machine_id,
-                manufacturer as name,
+                machine_name as machine_name,
+                manufacturer as manufacturer,
                 serial_number,
                 size,
                 fuel_type

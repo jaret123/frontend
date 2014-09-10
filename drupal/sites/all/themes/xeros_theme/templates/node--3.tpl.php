@@ -79,13 +79,14 @@
                                         <div class="icon-Washer"></div>
                                         <div class="machine-label">
                                             {{machine_name}} <br/>
-                                            ({{size}}) <br/>
-                                            <span class="small">{{serial_number}}</span> <br/>
+                                            {{manufacturer}} <br/>
                                             {{#if water_only}}
-                                            <span class="small">Water Only</span>
+                                            <span>Water Only</span> <br/>
                                             {{else}}
-                                            <span class="small">cycles: {{cycles}}</span>
+                                            <span>cycles: {{cycles}}</span> <br/>
                                             {{/if}}
+                                            <span>({{size}}) </span><br/>
+                                            <!-- Serial Number: {{serial_number}} -->
                                         </div>
                                         <div class="metric__message"></div>
                                     </span>

@@ -24,7 +24,7 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
   $machine = new machine();
 
   $machine->fields = array(
-                      'machine_id', 'serial_number', 'manufacturer', 'location_id'
+                      'machine_id', 'machine_name', 'serial_number', 'manufacturer', 'location_id'
                    );
   $rows = $machine->select($location_id, $machine_id);
 
@@ -36,6 +36,7 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
     // Make a table
     $header = array(
       t('Machine ID'),
+      t('Machine Name'),
       t('Serial Number'),
       t('Manufacturer'),
       t('Location ID'),
@@ -77,6 +78,8 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
         'function_call' => $function_call,
         'location_id' => $rows[0]['location_id'],
         'serial_number' => $rows[0]['serial_number'],
+        'machine_name' => $rows[0]['machine_name'],
+        'notes' => $rows[0]['notes'],
         'machine' => $rows[0]
       );
     } else {
@@ -84,6 +87,8 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
         'machine_id' => NULL,
         'function_call' => $function_call,
         'location_id' => $location_id,
+        'machine_name' => '',
+        'notes' => '',
         'serial_number' => '',
         'machine' => ''
       );
@@ -125,6 +130,8 @@ function machine_form($form, &$form_state, $vars) {
     $form_state['values']['machine_id'] = $vars['machine_id'];
     $form_state['values']['location_id'] = $vars['location_id'];
     $form_state['values']['serial_number']= $vars['serial_number'];
+    $form_state['values']['machine_name'] = $vars['machine_name'];
+    $form_state['values']['notes'] = $vars['notes'];
     $form_state['values']['machine_settings']['machine'] = $vars['machine'];
   // Save this for reference in the form_state so each sub form can access it, even on callback.
     $form_state['#vars'] = $vars;
@@ -158,6 +165,16 @@ function machine_form($form, &$form_state, $vars) {
     '#tree' => TRUE
   );
   // Visible fields
+  $form['machine_settings']['machine_name'] = array(
+    '#title' => 'Machine Name',
+    '#type' => 'textfield',
+    '#default_value' => !empty($form_state['values']['machine_name']) ? $form_state['values']['machine_name'] : '',
+  );
+  $form['machine_settings']['notes'] = array(
+    '#title' => 'Notes',
+    '#type' => 'textarea',
+    '#default_value' => !empty($form_state['values']['notes']) ? $form_state['values']['notes'] : '',
+  );
   $form['machine_settings']['serial_number'] = array(
     '#title' => 'Machine Serial Number',
     '#type' => 'textfield',
@@ -379,7 +396,9 @@ function machine_form_submit($form, &$form_state) {
     'unknown_class',
     'use_start_time',
     'water_only',
-    'water_meter_rate'
+    'water_meter_rate',
+    'machine_name',
+    'notes'
   );
 
   foreach ($f as $field) {
