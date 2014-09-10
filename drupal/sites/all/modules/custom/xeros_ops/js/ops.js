@@ -329,6 +329,12 @@ FF.Hud = (function($){
         });
     }
 
+    function pad(n, width, z) {
+        z = z || '0';
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+    }
+
     function registerHelpers() {
         Handlebars.registerHelper('dateFormat', function(context, block) {
             console.log(context);
@@ -381,9 +387,9 @@ FF.Hud = (function($){
 
             var time = "";
             if (hours > 0) {
-                time = hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+                time = hours.toString() + ":" + minutes.toString() + ":" + pad(seconds.toString(),2);
             } else {
-                time = minutes.toString() + ":" + seconds.toString();
+                time = minutes.toString() + ":" + pad(seconds.toString(),2);
             }
             return time;
         });
