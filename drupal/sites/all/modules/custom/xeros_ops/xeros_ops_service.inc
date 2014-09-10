@@ -22,7 +22,10 @@ function service($service_name, $machineIds) {
       $result = get_usage();
       echo json_encode($result);
       break;
-
+    case 'cycles':
+      $result = get_cycles($machineIds);
+      echo json_encode($result);
+      break;
   }
 
   //echo $result;
@@ -164,4 +167,48 @@ SQL;
 
   return $a;
   //return json_encode($r);
+}
+
+function get_cycles($machineIds) {
+
+  $query = <<<SQL
+select
+	x.cycle_load_size,
+	x.cycle_cold_water_volume,
+	x.cycle_hot_water_volume,
+    x.cycle_therms,
+	x.cycle_chemical_strength,
+	x.reading_timestamp as cycle_end_time,
+	date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute) as cycle_start_time,
+	x.cycle_time_run_time,
+	x.classification_id,
+	x.machine_id,
+	xc.name as classification_name
+from
+	xeros_cycle AS x
+	left join xeros_classification as xc
+		on x.classification_id = xc.classification_id
+where
+	x.reading_timestamp > date(now())
+	and x.machine_id in ({{machineIds}});
+SQL;
+
+  $query = str_replace('{{machineIds}}', $machineIds, $query);
+
+  $result = db_query($query, array());
+
+  $r = $result->fetchAll();
+
+  $a = array();
+
+  foreach ($r as $key => $value) {
+    $machine_id = $value->machine_id;
+    unset($value->machine_id);
+    $a[$machine_id][] = $value;
+  }
+
+  return $a;
+
+  //return $r;
+
 }

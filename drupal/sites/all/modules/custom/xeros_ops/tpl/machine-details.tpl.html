@@ -44,31 +44,25 @@
         <p>Serial Number: {{machine.serial_number}}</p>
     </div>
 
-    <!--<div class="machine-detail__log log">-->
-        <!---->
-    <!--</div>-->
 
     <!-- TODO: Get the cycles for the machine for the day -->
-    <div class="machine-detail__cycles log">
+    <div class="machine-detail__cycles">
         <h4>Cycles Today</h4>
-        <p>Last Cycle Run: Aug 1 - 10:24 AM EST</p>
-        <p>Cycles Today: 30</p>
-        <p>Run Time Today: 2.43</p>
+        <p>Last Cycle Ended: {{cycles.0.cycle_end_time}}</p>
+        <p>Cycles Today: {{machine.usage.cycles}}</p>
+        <p>Run Time Today: {{machine.usage.run_time}}</p>
 
-            <div class="cycle__timestamp">Start Time: 11:45 AM EST</div>
-            <div class="cycle__timestamp">End Time: 11:45 AM EST</div>
-            <div class="cycle__status">Rinse and Spin</div>
-            <div class="cycle__detail">Water Used: 5 gallons</div>
-            <div class="cycle__detail">KwH: 32</div>
-            <div class="cycle__detail">Chemical Usage: 33 Oz</div>
+        {{#each cycles}}
+        <div>
+            <div class="cycle__timestamp">Start Time: {{cycle_start_time}}</div>
+            <div class="cycle__timestamp">End Time: {{cycle_end_time}}</div>
+            <div class="cycle__status">{{classification_name}}</div>
+            <div class="cycle__detail">Cold Water Used: {{cycle_cold_water_volume}} gallons</div>
+            <div class="cycle__detail">Hot Water Used: {{cycle_hot_water_volume}} gallons</div>
+            <div class="cycle__detail">Therms: {{cycle_therms}}</div>
+            <div class="cycle__detail">Chemicals: {{cycle_chemical_strength}} ounces</div>
+        </div>
+        {{/each}}
     </div>
 
-    <!--<div class="comment">-->
-        <!--<h4>Add Comment</h4>-->
-            <!--<form>-->
-
-                <!--<input type="text"/>-->
-                <!--<input type="submit"/>-->
-            <!--</form>-->
-    <!--</div>-->
 </div>

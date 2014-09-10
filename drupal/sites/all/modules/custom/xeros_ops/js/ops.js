@@ -154,14 +154,30 @@ FF.Hud = (function($){
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 for (var first in d) break;
+                data.details.history = d[first];
                 //history = formatHistory(d[first]);
-                callback(d[first], machineId);
+                callback(machineId);
             },
             dataType: 'json',
             type: 'GET',
             contentType: 'application/json'
         });
     };
+
+    loadCycles = function(machineId, callback) {
+        jQuery.ajax({
+            url: 'status-board-request/cycles/' + machineId.toString(),
+            //data: '[' + machineId.toString() + ']',
+            success: function(d) {
+                for (var first in d) break;
+                data.details.cycles = d[first];
+                callback();
+            },
+            dataType: 'json',
+            type: 'GET',
+            contentType: 'application/json'
+        });
+    }
 
     loadData = function(callback) {
         jQuery.ajax({
@@ -202,21 +218,25 @@ FF.Hud = (function($){
 
         var template = Handlebars.compile(tpl.machineDetail);
 
-        var clickedMachineData = data.machineSource[machineId];
-//
-        loadHistory(machineId, function(d, machineId) {
+        // Reinitialize the details data
+        data.details = {};
 
-            var templateData = {
-                //currentStatus: d.slice(0,1),
-                history: d,  // Just first five rows of data
-                machine: clickedMachineData};
+        // Pass the data for the machine that was clicked
+        data.details.machine = data.machineSource[machineId];;
 
-            console.log(templateData);
-            var html = template(templateData);
+        // Load status history
+        loadHistory(machineId, function(machineId) {
 
-            jQuery('.machine-detail').html(html);
+            loadCycles(machineId, function(d) {
 
-            bindDetailEvents();
+                console.log(data.details);
+                var html = template(data.details);
+
+                jQuery('.machine-detail').html(html);
+
+                bindDetailEvents();
+            })
+
         });
 
 
