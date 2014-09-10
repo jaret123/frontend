@@ -7,7 +7,7 @@ function service($service_name, $machineIds) {
 
   switch ($service_name) {
     case 'status':
-      $result = get_status('current');
+      $result = get_status('current', $machineIds);
       echo json_encode($result);
       break;
     case 'history':
@@ -15,7 +15,7 @@ function service($service_name, $machineIds) {
       echo json_encode($result);
       break;
     case 'machines':
-      $result = get_machines();
+      $result = get_machines($machineIds);
       echo json_encode($result, true);
       break;
     case 'usage':
@@ -28,7 +28,7 @@ function service($service_name, $machineIds) {
   //echo $result;
 }
 
-function get_status($record_count) {
+function get_status($record_count, $machineIds) {
 
   $status = false;
   if ($record_count == 'current') {
@@ -36,7 +36,7 @@ function get_status($record_count) {
     $record_count = 1;
   }
 
-  $query = "call sp_get_status_history(" . $record_count . ")";
+  $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";
 
   $result = db_query($query, array());
   $r = $result->fetchAll();
@@ -79,7 +79,7 @@ function get_logs($service_name, $machineIds) {
 
 }
 
-function get_machines() {
+function get_machines($machineIds) {
 
   $query = <<<SQL
     select
@@ -110,7 +110,7 @@ SQL;
   $machines = array();
 
   // Append the status
-  $status = get_status('current');
+  $status = get_status('current', $machineIds);
 
   // Append the usage
   $usage = get_usage();

@@ -1,3 +1,5 @@
+USE xeros_local;
+
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_get_status $$
 

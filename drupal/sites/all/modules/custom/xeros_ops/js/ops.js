@@ -42,6 +42,8 @@ FF.Hud = (function($){
     // Turn refresh on
     var refresh = true;
 
+    var refreshInterval = 5 * 60; // 5 minutes
+
 
     formatData = function() {
         // Grab the global data object and create a local copy so we can
@@ -160,12 +162,12 @@ FF.Hud = (function($){
         });
     };
 
-    loadData = function() {
+    loadData = function(callback) {
         jQuery.ajax({
-           url: 'status-board-request/machines',
+           url: 'status-board-request/machines/NULL',
             success: function(d) {
                 data.machineSource = d;
-                formatData();
+                callback();
             },
             dataType: 'json',
             type: 'GET',
@@ -185,12 +187,11 @@ FF.Hud = (function($){
             dataType: 'html'
         });
     }
-    loadMachineDetailTemplate = function(callback) {
+    loadMachineDetailTemplate = function() {
         $.ajax({
             url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine-details.tpl.html',
             success: function(source) {
                 tpl.machineDetail = source;
-                callback();
             },
             dataType: 'html'
         })
@@ -210,7 +211,7 @@ FF.Hud = (function($){
                 machine: clickedMachineData};
 
             console.log(templateData);
-            var html = template(templateData );
+            var html = template(templateData);
 
             jQuery('.machine-detail').html(html);
 
@@ -321,20 +322,14 @@ FF.Hud = (function($){
 
         //$('.countdown-timer').html('');
         $('.countdown-timer').countdown('destroy');
-        $('.countdown-timer').countdown({until: +10,
-            format: 'S',
+        $('.countdown-timer').countdown({until: +refreshInterval,
+            format: 'MS',
             compact: true,
-            layout: 'Data refresh in {snn} {desc}',
-            description: 'seconds'
+            layout: 'Data refresh in {mnn}:{snn}'
         });
     }
 
-    function refreshDisplay() {
-
-        //  format an ISO date using Moment.js
-//  http://momentjs.com/
-//  moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
-//  usage: {{dateFormat creation_date format="MMMM YYYY"}}
+    function registerHelpers() {
         Handlebars.registerHelper('dateFormat', function(context, block) {
             console.log(context);
             var d = new Date(context);
@@ -372,17 +367,21 @@ FF.Hud = (function($){
             } else {
                 return statusCode;
             }
-
         });
+    }
 
-        loadData();
+    function refreshDisplay() {
 
-        //loadStatus();
+        //  format an ISO date using Moment.js
+//  http://momentjs.com/
+//  moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
+//  usage: {{dateFormat creation_date format="MMMM YYYY"}}
 
-        //formatData();
 
-        // TODO: Need to move to a callback on loadData
-        loadMachineTemplate(renderStatus);
+        loadData(function() {
+            formatData();
+            renderStatus();
+        });
 
         updateCountdown();
 
@@ -402,23 +401,27 @@ FF.Hud = (function($){
         doc = $(document);
         body = $('body');
 
-        services = Drupal.settings.services;
+        //services = Drupal.settings.services;
+
+
+        registerHelpers();
+
+        loadMachineDetailTemplate();
+
+        loadMachineTemplate(function() {
+            refreshDisplay();
+        });
+
 
         updateCountdown();
-
-        loadMachineDetailTemplate(function() {});
-
-        refreshDisplay();
 
         if ( refresh ) {
             setInterval(function () {
                 refreshDisplay();
-            }, 10000);
+            }, refreshInterval * 1000);
         }
 
         $('html').css('padding-bottom', '0');
-
-        console.log(els.data);
 
         $('body').addClass('display-icon');
 

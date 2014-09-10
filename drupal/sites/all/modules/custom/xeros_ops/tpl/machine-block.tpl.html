@@ -19,7 +19,7 @@
             <div class="machine-list__wrapper">
             {{#each machines}}
                 <div class="machine" data-machine-id="{{@key}}">
-                    <div class="machine__wrapper {{statusFormat status.status_code "color"}} {{manufacturer}} {{modelFilter}}">
+                    <div class="machine__wrapper {{statusFormat status.status_code "color"}} {{manufacturer}} {{modelFilter}}" data-status="{{status.status_code}}">
                         <div class="machine__icons">
                             <i class="icon-Washer"></i>
                             <i class="fa status-icon"></i>
