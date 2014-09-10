@@ -368,6 +368,25 @@ FF.Hud = (function($){
                 return statusCode;
             }
         });
+
+        Handlebars.registerHelper('runTimeFormat', function(seconds) {
+
+            seconds = Math.round(seconds);
+
+            var hours = Math.floor(seconds / 3600);
+            seconds = seconds - hours * 3600;
+
+            var minutes = Math.floor(seconds / 60);
+            var seconds = seconds - minutes * 60;
+
+            var time = "";
+            if (hours > 0) {
+                time = hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+            } else {
+                time = minutes.toString() + ":" + seconds.toString();
+            }
+            return time;
+        });
     }
 
     function refreshDisplay() {
