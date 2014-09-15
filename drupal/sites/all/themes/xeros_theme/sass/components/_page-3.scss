@@ -45,6 +45,8 @@
         }
       }
       margin-top: 25px;
+      max-height: 800px;
+      overflow: scroll;
       .machine {
         position: absolute;
         text-align: center;

@@ -83,6 +83,7 @@
                 print render($news_block);
                 ?>
             </div>
+          <div class="news__gradient"></div>
         </div>
     </div>
 </div>
