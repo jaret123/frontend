@@ -250,8 +250,18 @@ FF.Hud = (function($){
 
         // Render Template
         var html = template(data.machine);
+        $('.machine-status').html(html);
 
-        jQuery('.machine-status').html(html);
+        // Update totals in filters
+
+        $('.controls.filter').each(function() {
+            var filter = $(this).data('filter');
+            var count = $('.machine__wrapper').filter('.' + filter).length;
+            $(this).find('.controls__label').each(function () {
+                $(this).html(count);
+            });
+            console.log(filter, count);
+        });
 
         bindEvents();
 
@@ -298,7 +308,21 @@ FF.Hud = (function($){
         $('.controls.filter').on('click', function() {
             var filter = $(this).data('filter');
             $(this).toggleClass('hide');
-            $('.machine__wrapper.' + filter).parent().toggleClass('hide');
+
+            var myfilter = [];
+            $('.controls.filter.hide').each(function() {
+                myfilter.push('.' + $(this).data('filter'));
+            });
+
+            //var selector = '.machine__wrapper:not(' + myfilter.toString() + ')';
+
+            //console.log(selector);
+
+            // Remove the hide class
+            $('.machine').removeClass('hide');
+            // Add the hide class back;
+            $('.machine__wrapper').filter(myfilter.toString())
+                .parent().addClass('hide');
         });
 
         // Change Display
@@ -335,6 +359,19 @@ FF.Hud = (function($){
             $('body').toggleClass('full-screen');
             $(this).toggleClass('active');
         })
+    }
+
+    function screenChangeHandler(){
+        //NB the following line requrires the libary from John Dyer
+        var fs = window.fullScreenApi.isFullScreen();
+        console.log("f" + (fs ? 'yes' : 'no' ));
+        if (fs) {
+            $('body').addClass('full-screen');
+        }
+        else {
+            $('body').removeClass('full-screen');
+            $('.controls.full-screen').removeClass('active');
+        }
     }
 
     function updateCountdown() {
@@ -470,6 +507,11 @@ FF.Hud = (function($){
         $('html').css('padding-bottom', '0');
 
         $('body').addClass('display-icon');
+
+        // Add event listener to screenchange
+        document.addEventListener("fullscreenchange", screenChangeHandler, false);
+        document.addEventListener("webkitfullscreenchange", screenChangeHandler, false);
+        document.addEventListener("mozfullscreenchange", screenChangeHandler, false);
 
     }
 

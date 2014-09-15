@@ -20,6 +20,7 @@ function status_board() {
 
   drupal_add_js($module_path . '/js/moment-with-locales.js');
 //  drupal_add_js($module_path . '/js/handlebars.js');
+  drupal_add_js($module_path . '/js/fullscreenAPI.js');
   drupal_add_js($module_path . '/js/jquery.countdown/jquery.plugin.min.js');
   drupal_add_js($module_path . '/js/jquery.countdown/jquery.countdown.min.js');
   drupal_add_js($module_path . '/js/ff-utils.js');
@@ -29,7 +30,6 @@ function status_board() {
   $services['status'] = variable_get('ops_service_status');
   $services['history'] = variable_get('ops_service_history');
 
-  $json_services =
   drupal_add_js('Drupal.settings.services = ' . json_encode($services), 'inline');
 
   $output = "";

@@ -119,16 +119,17 @@
     //@include animation(fontbulger 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));
   }
   .machine .red {
-    &:before {
-      font-family: FontAwesome;
-      font-size: 12px;
-      content: '\f1f7';
-      position: absolute;
-      left: -6px;
-      top: -6px;
-      z-index: 999;
-      color: rgba(255,0,0,.5);
-    }
+    // TODO: Re-enable this style when alerts are configured
+//    &:before {
+//      font-family: FontAwesome;
+//      font-size: 12px;
+//      content: '\f1f7';
+//      position: absolute;
+//      left: -6px;
+//      top: -6px;
+//      z-index: 999;
+//      color: rgba(255,0,0,.5);
+//    }
   }
   .machine .alert {
     //@include animation(shake 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1.000));

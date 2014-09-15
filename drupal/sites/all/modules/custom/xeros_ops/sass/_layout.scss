@@ -8,6 +8,7 @@ $color-inactive: grey;
   //background-color: blue;
   #content {
     padding: 30px;
+    position: relative;
   }
   color: black;
 
@@ -23,7 +24,6 @@ $color-inactive: grey;
 
   .page-wrapper {
     width: auto !important;
-
   }
   .page__title {
     //background-color: black !important;

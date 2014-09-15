@@ -118,7 +118,7 @@
 
   .red {
     .icon-Washer {
-      color: red;
+      color: $color-red;
     }
     .status {
 //      border: 1px solid red;
@@ -126,7 +126,7 @@
   }
   .green {
     .icon-Washer {
-      color: green;
+      color: $color-green;
     }
     .status {
 //      border: 1px solid green;
@@ -134,7 +134,7 @@
   }
   .yellow {
     .icon-Washer {
-      color: yellow;
+      color: $color-yellow;
     }
     .status {
 //      border: 1px solid yellow;

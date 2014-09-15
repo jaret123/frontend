@@ -8,7 +8,7 @@
 .controls {
   border: 1px solid #444;
   padding: 3px 6px;
-  border-radius: 2px;
+  border-radius: 5px;
   //.filter {
     opacity: 1;
     &.hide,
@@ -20,6 +20,11 @@
   margin: 0 2px;
   display: inline-block;
   //min-width: 30px;
+
+}
+
+.controls__label {
+  display: inline-block;
 }
 
 .machine {
@@ -86,12 +91,22 @@
   display: inline-block;
 }
 
+.countdown-timer {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 100px);
+  width: 200px;
+  text-align: center;
+  background-color: rgba(255,255,255,.7);
+  font-size: .8em;
+}
+
 @media all and (min-width: 1200px) {
 
   .controls__display {
     position: absolute;
     right: 0;
-    top: 10px;
+    bottom: 5px;
   }
 
 }
