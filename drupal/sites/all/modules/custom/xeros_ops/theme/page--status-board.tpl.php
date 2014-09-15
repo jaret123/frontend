@@ -79,14 +79,14 @@
 
       </div>
       <div class="controls__details">
-        <span>Status Filter: </span>
+        <span>Filter by Status: </span>
         <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
 <!--        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>-->
       </div>
       <div class="controls__model">
-        <span>Model Filter: </span>
+        <span>Model: </span>
         <span class="controls filter xeros" data-filter="xeros"><i class="fa model-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter non-xeros" data-filter="non-xeros"><i class="fa model-icon"></i><div class="controls__label">0</div></span>
       </div>
