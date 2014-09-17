@@ -3642,7 +3642,10 @@ a:hover, a:active {
 /* line 62, ../sass/components/_news.scss */
 .news .view-recent-news {
   height: 672px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -ms-overflow-y: scroll;
 }
 
 /* line 1, ../sass/components/_alerts.scss */
