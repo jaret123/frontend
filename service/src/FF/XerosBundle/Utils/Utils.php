@@ -188,7 +188,7 @@ SQL;
 
       $sqlParsed = $this->replaceFilters($sql, array("entity_id" => $locationId));
 
-      $value = $conn->fetchAll($sqlParsed, array(1), 0);
+      $value = $conn->fetchAll($sqlParsed);
 
       $machineTypes = array();
 
