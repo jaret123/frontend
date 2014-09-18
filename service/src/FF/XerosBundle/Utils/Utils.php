@@ -2,6 +2,8 @@
 
 namespace FF\XerosBundle\Utils;
 
+use Doctrine\DBAL\Sharding\SQLAzure\SQLAzureFederationsSynchronizer;
+
 class Utils {
 
     /**
@@ -69,7 +71,8 @@ SQL;
                     }
                 }
 
-                $userRole = array ("uid" => $user[0]['uid'], "role" => 'role', "location" => 'location');
+              // BUG: Role should return all roles.  Look for how this is used elsewhere.
+                $userRole = array ("uid" => $user[0]['uid'], "role" => $role['name'], "location" => $locationId);
 
                 // If user is xerosAdmin and if they passed a location id
                 if ( $xerosAdmin && $locationId != null ) {
@@ -171,6 +174,33 @@ SQL;
         return $userRole;
     }
 
+  /**
+   * @param $conn
+   * @param $locationId
+   *
+   * Function to the the Location Object and configuration we need for the reports.
+   * This would be much easier if ported to Drupal and used Entity_Load.
+   */
+    public function getLocationMachineTypes($conn, $locationId) {
+      $sql = <<<SQL
+            select field_machine_types_value from field_data_field_machine_types where entity_id = :entity_id
+SQL;
+
+      $sqlParsed = $this->replaceFilters($sql, array("entity_id" => $locationId));
+
+      $value = $conn->fetchAll($sqlParsed, array(1), 0);
+
+      $machineTypes = array();
+
+      foreach ($value as $k => $v) {
+        array_push($machineTypes, $v['field_machine_types_value']);
+      }
+
+      // HACK: We are only going to return one machine type for now.  Later we need to figure out the best
+      // way to control this.
+      return $machineTypes[0];
+
+    }
     /**
      * @param $string
      * @param $filters

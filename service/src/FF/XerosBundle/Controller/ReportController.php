@@ -57,7 +57,8 @@ class ReportController extends Controller {
 
             switch ($reportName) {
                 case "kpis":
-                    $ar = $this->reportKPIs($filters);
+                    $machine_type = $this->u->getLocationMachineTypes($conn, $userRole['location']);
+                    $ar = $this->reportKPIs($filters, $machine_type);
                     break;
                 case "consumption":
                     $ar = $this->reportConsumption($filters);
@@ -78,6 +79,7 @@ class ReportController extends Controller {
 
     /**
      * @param $filters
+     * @param $machine_type
      *
      * @return array
      *
@@ -85,11 +87,27 @@ class ReportController extends Controller {
      * It returns a JSON formatted feed of summary data for each metric
      * and arrays of point data for the charts
      */
-    private function reportKPIs($filters) {
+    private function reportKPIs($filters, $machine_type) {
 
         $kpis = array();
         $metrics = array();
 
+        // HACK: This is to filter out Xeros data if comparing non-xeros machines and vice-versa
+        // Default is only non-xeros machines
+        switch ($machine_type) {
+          case "xeros":
+            $filters['machine_type_filter'] = "and xc.manufacturer = 'xeros'";
+            break;
+          case "non-xeros":
+            $filters['machine_type_filter'] = "and xc.manufacturer <> 'xeros'";
+            break;
+          case "both":
+            $filters['machine_type_filter'] = "";
+            break;
+          default:
+            $filters['machine_type_filter'] = "and xc.manufacturer <> 'xeros'";
+            break;
+        }
         // Date points for the charts
         $dataPointSql = <<<SQL
 select
@@ -110,7 +128,7 @@ from
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
 	      and xc.machine_id in ( :machineIds )
-	      and xc.manufacturer <> 'xeros'
+	      :machine_type_filter
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
@@ -140,7 +158,7 @@ from
 	    left join xeros_cycle as xc
 	      on xd.date = xc.reading_date
 	      and xc.machine_id in ( :machineIds )
-	      and xc.manufacturer <> 'xeros'
+	      :machine_type_filter
 	where
 	    1 = 1
 	    and xd.date >= ':fromDate' and xd.date <= ':toDate'
