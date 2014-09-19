@@ -73,8 +73,8 @@ var view = {
                 cssClass : 'non-xeros'
             },
             xeros : {
-                lineA : 'Industry Cost',
-                lineB : 'Xeros Cost',
+                lineA : 'Industry Avg Cost',
+                lineB : 'Xeros Actual Cost',
                 'lineA-key' : 'Current Consumption',
                 'lineB-key' : 'Industry Benchmark',
                 savings : 'Current Savings',
