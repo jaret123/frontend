@@ -152,6 +152,12 @@ var controls = {
         }
         self.updateLocationSelect(locations, app.sessionLocation);
     },
+
+    /**
+     * Create the Location Select Dropdown
+     *
+     * Update the Session Location and route
+     */
     createLocationSelect : function() {
         var self = this;
         self.createDropDown("#location-select", function (event) {

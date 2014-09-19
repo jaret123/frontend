@@ -1,0 +1,6 @@
+name = Xeros Base Application
+description = This module contains the base libraries, classes and services for the Xeros Modules and themes.
+package = Xeros
+core = 7.x
+
+configure = admin/config/administration/xeros/base

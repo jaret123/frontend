@@ -757,25 +757,41 @@ table {
   height: 150px;
   text-align: center;
 }
-/* line 47, ../sass/components/_chartKpi.scss */
+/* line 26, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a, .kpi-chart .line-b {
   fill: none;
 }
-/* line 52, ../sass/components/_chartKpi.scss */
+/* line 30, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-a {
   stroke: white;
 }
-/* line 56, ../sass/components/_chartKpi.scss */
+/* line 34, ../sass/components/_chartKpi.scss */
 .kpi-chart .line-b {
   stroke: #0086bd;
 }
-/* line 59, ../sass/components/_chartKpi.scss */
+/* line 37, ../sass/components/_chartKpi.scss */
 .kpi-chart circle.circle-a {
   fill: white;
 }
-/* line 62, ../sass/components/_chartKpi.scss */
+/* line 40, ../sass/components/_chartKpi.scss */
 .kpi-chart circle.circle-b {
   fill: #0086bd;
+}
+/* line 44, ../sass/components/_chartKpi.scss */
+.kpi-chart.xeros .line-a {
+  stroke: #0086bd;
+}
+/* line 47, ../sass/components/_chartKpi.scss */
+.kpi-chart.xeros .line-b {
+  stroke: lightgray;
+}
+/* line 50, ../sass/components/_chartKpi.scss */
+.kpi-chart.xeros circle.circle-a {
+  fill: #0086bd;
+}
+/* line 53, ../sass/components/_chartKpi.scss */
+.kpi-chart.xeros circle.circle-b {
+  fill: lightgray;
 }
 
 /* line 10, ../sass/components/_dropdown.scss */

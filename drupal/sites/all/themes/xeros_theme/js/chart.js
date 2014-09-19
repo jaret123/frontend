@@ -56,9 +56,10 @@ var chart = {
             xAxis.tickFormat(d3.time.format("%b %-d"), 2);
             xAxis.ticks(d3.time.weeks, 1)
         }
+        // TODO: This is still wonky in the range of about 20 data points.  The labels still overlap.
         if ( data.length < 30 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"));
-            xAxis.ticks(6);
+            xAxis.ticks(4);
         }
         if ( data.length < 8 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"));
@@ -163,22 +164,24 @@ var chart = {
 
         if (data.length > 1) {
 
+            svg.append("path")
+                .datum(data)
+                .attr("class", "line-b")
+                .attr("d", lineA)
+                .attr("stroke", "#0086bd")
+                .attr("fill", "none")
+                .transition()
+                .delay(500)
+                .duration(1500)
+                .attr("d", lineB)
+                .attr("fill", "none")
+                .style({
+                    'stroke-width' : '3px',
+                    'shape-rendering' : 'smoothEdges'
+                });
 
         // append the line itself
-        svg.append("path")
-            .datum(data)
-            .attr("d", lineA)
-            .attr("stroke", "#0086bd")
-            .attr("fill", "none")
-            .transition()
-            .delay(500)
-            .duration(1500)
-            .attr("d", lineB)
-            .attr("fill", "none")
-
-            .style({
-                'stroke-width' : '3px'
-            });
+        // Draw the xeros line, starting at LineA and animating to LineB
 
         svg.append("path")
             .datum(data)
@@ -193,7 +196,10 @@ var chart = {
         ;
 
 
+
+
             if (data.length < 8) {
+                // Actual data rendered at the reference data then animated
                 svg.selectAll("dot")
                     .data(data)
                     .enter().append("circle")
@@ -222,6 +228,8 @@ var chart = {
                         }
                         return y(0);
                     });
+
+                // Reference data
                 svg.selectAll("dot")
                     .data(data)
                     .enter().append("circle")

@@ -1,0 +1,872 @@
+[2014-02-28 21:24:39] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-1-29", "toDate": "2014-2-28", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-02-28 21:26:13] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-1-29", "toDate": "2014-2-28", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-02-28 21:26:32] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-1-29", "toDate": "2014-2-28", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-02-28 22:06:27] emergency.EMERGENCY: syntax error, unexpected end of file, expecting variable (T_VARIABLE) or heredoc end (T_END_HEREDOC) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) {"type":4,"file":"xdebug://debug-eval","line":53} []
+[2014-02-28 22:07:18] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-29", "toDate": "2014-2-28", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-02-28 22:07:27] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                        xeros_machine as xm
+                        left join field_data_field_company as fc
+                          on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                        left join field_data_field_location as fl
+                          on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                        xeros_machine as xm\n                        left join field_data_field_company as fc\n                          on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                        left join field_data_field_location as fl\n                          on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-01 22:49:24] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumptionDetails", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-01 22:49:24] app.INFO: I just got the logger [] []
+[2014-03-01 22:49:24] app.INFO: Started reportConsumptionDetails [] []
+[2014-03-01 22:49:24] app.INFO: get machines              select
+                machine_id,
+                manufacturer as name,
+                serial_number,
+                size,
+                fuel_type
+            from
+                xeros_machine
+            where machine_id in ( :machineIds ) [] []
+[2014-03-01 22:49:24] app.INFO: get classifications   [] []
+[2014-03-01 22:49:24] app.INFO: metric idcold_water [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 101 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 102 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 103 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 104 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 105 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 99 [] []
+[2014-03-01 22:49:24] app.INFO: metric idhot_water [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 101 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 102 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 103 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 104 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 105 [] []
+[2014-03-01 22:49:24] app.INFO: get classification data 99 [] []
+[2014-03-01 22:49:24] app.INFO: metric idtotal_water [] []
+[2014-03-01 22:49:24] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '            select
+                xm.machine_id as id,
+                xm.manufacturer as machine_name,
+                xm.size,
+                b.*
+            from
+                xeros_machine as xm
+                inner join
+                ( -- metrics
+                select
+                    xc.machine_id,
+                    xc.classification_id,
+                    count(*) as cycles,
+                    
+                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
+                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
+
+                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,
+                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
+
+                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,
+                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
+
+                from
+                    xeros_cycle as xc
+                where
+                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'
+                    and xc.machine_id = 6
+                    and xc.classification_id = 101
+                ) as b
+                   on b.machine_id = xm.machine_id':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '            select\n                xm.machine_id as id,\n                xm.manufacturer as machine_name,\n                xm.size,\n                b.*\n            from\n                xeros_machine as xm\n                inner join\n                ( -- metrics\n                select\n                    xc.machine_id,\n                    xc.classification_id,\n                    count(*) as cycles,\n                    \n                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,\n                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,\n\n                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,\n                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,\n\n                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,\n                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four\n\n                from\n                    xeros_cycle as xc\n                where\n                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'\n                    and xc.machine_id = 6\n                    and xc.classification_id = 101\n                ) as b\n                   on b.machine_id = xm.machine_id':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-01 23:00:44] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumptionDetails", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-01 23:00:44] app.INFO: I just got the logger [] []
+[2014-03-01 23:00:44] app.INFO: Started reportConsumptionDetails [] []
+[2014-03-01 23:00:44] app.INFO: get machines              select
+                machine_id,
+                manufacturer as name,
+                serial_number,
+                size,
+                fuel_type
+            from
+                xeros_machine
+            where machine_id in ( :machineIds ) [] []
+[2014-03-01 23:00:44] app.INFO: get classifications   [] []
+[2014-03-01 23:00:44] app.INFO: metric idcold_water [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 101 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 102 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 103 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 104 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 105 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 99 [] []
+[2014-03-01 23:00:44] app.INFO: metric idhot_water [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 101 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 102 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 103 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 104 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 105 [] []
+[2014-03-01 23:00:44] app.INFO: get classification data 99 [] []
+[2014-03-01 23:00:44] app.INFO: metric idtotal_water [] []
+[2014-03-01 23:00:44] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '            select
+                xm.machine_id as id,
+                xm.manufacturer as machine_name,
+                xm.size,
+                b.*
+            from
+                xeros_machine as xm
+                inner join
+                ( -- metrics
+                select
+                    xc.machine_id,
+                    xc.classification_id,
+                    count(*) as cycles,
+                    
+                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
+                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
+
+                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,
+                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
+
+                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,
+                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
+
+                from
+                    xeros_cycle as xc
+                where
+                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'
+                    and xc.machine_id = 6
+                    and xc.classification_id = 101
+                ) as b
+                   on b.machine_id = xm.machine_id':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '            select\n                xm.machine_id as id,\n                xm.manufacturer as machine_name,\n                xm.size,\n                b.*\n            from\n                xeros_machine as xm\n                inner join\n                ( -- metrics\n                select\n                    xc.machine_id,\n                    xc.classification_id,\n                    count(*) as cycles,\n                    \n                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,\n                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,\n\n                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,\n                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,\n\n                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,\n                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four\n\n                from\n                    xeros_cycle as xc\n                where\n                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'\n                    and xc.machine_id = 6\n                    and xc.classification_id = 101\n                ) as b\n                   on b.machine_id = xm.machine_id':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_volume_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-01 23:02:48] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumptionDetails", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-01 23:02:48] app.INFO: I just got the logger [] []
+[2014-03-01 23:02:48] app.INFO: Started reportConsumptionDetails [] []
+[2014-03-01 23:02:48] app.INFO: get machines              select
+                machine_id,
+                manufacturer as name,
+                serial_number,
+                size,
+                fuel_type
+            from
+                xeros_machine
+            where machine_id in ( :machineIds ) [] []
+[2014-03-01 23:02:48] app.INFO: get classifications   [] []
+[2014-03-01 23:02:48] app.INFO: metric idcold_water [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 101 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 102 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 103 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 104 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 105 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 99 [] []
+[2014-03-01 23:02:48] app.INFO: metric idhot_water [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 101 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 102 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 103 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 104 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 105 [] []
+[2014-03-01 23:02:48] app.INFO: get classification data 99 [] []
+[2014-03-01 23:02:48] app.INFO: metric idtotal_water [] []
+[2014-03-01 23:02:48] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '            select
+                xm.machine_id as id,
+                xm.manufacturer as machine_name,
+                xm.size,
+                b.*
+            from
+                xeros_machine as xm
+                inner join
+                ( -- metrics
+                select
+                    xc.machine_id,
+                    xc.classification_id,
+                    count(*) as cycles,
+                    
+                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,
+                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,
+
+                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,
+                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,
+
+                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,
+                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four
+
+                from
+                    xeros_cycle as xc
+                where
+                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'
+                    and xc.machine_id = 6
+                    and xc.classification_id = 101
+                ) as b
+                   on b.machine_id = xm.machine_id':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_cost_per_pound' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '            select\n                xm.machine_id as id,\n                xm.manufacturer as machine_name,\n                xm.size,\n                b.*\n            from\n                xeros_machine as xm\n                inner join\n                ( -- metrics\n                select\n                    xc.machine_id,\n                    xc.classification_id,\n                    count(*) as cycles,\n                    \n                 sum(xc.cycle_hot_water_volume) + sum(xc.cycle_cold_water_volume) as value_one,\n                 sum(xc.cycle_hot_water_xeros_volume) + sum(xc.cycle_cold_water_xeros_volume) as xeros_value_one,\n\n                 avg(xc.cycle_hot_water_volume_per_pound + xc.cycle_cold_water_volume_per_pound) as value_three,\n                 avg(xc.cycle_hot_water_xeros_volume_per_pound + xc.cycle_cold_water_xeros_volume_per_pound) as xeros_value_three,\n\n                 avg(xc.cycle_hot_water_cost_per_pound + xc.cycle_cold_water_cost_per_pound) as value_four,\n                 avg(xc.cycle_hot_water_xeros_cost_per_pound + xc.cycle_cold_water_xeros_cost_per_pound) as xeros_value_four\n\n                from\n                    xeros_cycle as xc\n                where\n                    reading_date >= '2014-1-30' and reading_date <= '2014-3-1'\n                    and xc.machine_id = 6\n                    and xc.classification_id = 101\n                ) as b\n                   on b.machine_id = xm.machine_id':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_cost_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_hot_water_cost_per_pound' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-01 23:07:02] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumptionDetails", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-01 23:07:02] app.INFO: I just got the logger [] []
+[2014-03-01 23:07:02] app.INFO: Started reportConsumptionDetails [] []
+[2014-03-01 23:07:02] app.INFO: get machines              select
+                machine_id,
+                manufacturer as name,
+                serial_number,
+                size,
+                fuel_type
+            from
+                xeros_machine
+            where machine_id in ( :machineIds ) [] []
+[2014-03-01 23:07:02] app.INFO: get classifications   [] []
+[2014-03-01 23:07:02] app.INFO: metric idcold_water [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 101 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 102 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 103 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 104 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 105 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:02] app.INFO: metric idhot_water [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 101 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 102 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 103 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 104 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 105 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:02] app.INFO: metric idtotal_water [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 101 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 102 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 103 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 104 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 105 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:02] app.INFO: metric idcycle_time [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 101 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 102 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 103 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 104 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 105 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:02] app.INFO: metric idchemical [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 101 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 102 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 103 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 104 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 105 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:02] app.INFO: get classifications   [] []
+[2014-03-01 23:07:02] app.INFO: metric idcold_water [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 2 [] []
+[2014-03-01 23:07:02] app.INFO: get classification data 9 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:03] app.INFO: metric idhot_water [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 2 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 9 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:03] app.INFO: metric idtotal_water [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 2 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 9 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:03] app.INFO: metric idcycle_time [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 2 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 9 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 99 [] []
+[2014-03-01 23:07:03] app.INFO: metric idchemical [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 2 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 9 [] []
+[2014-03-01 23:07:03] app.INFO: get classification data 99 [] []
+[2014-03-01 23:58:58] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-01 23:58:58] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'SELECT
+  xm.machine_id   AS id,
+  xm.manufacturer AS machine_name,
+  xm.serial_number,
+  xm.size,
+  truncate(b.cold_water_volume, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_volume, 0) as cold_water_xeros_value,
+
+  truncate(b.hot_water_volume, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_volume, 0) as hot_water_xeros_value,
+  
+  truncate(b.total_water_volume, 0) as total_water_value,
+  truncate(b.total_water_xeros_volume, 0) as total_water_xeros_value,
+  
+  truncate(b.time_run_time, 0) as time_value,
+  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  
+  truncate(b.chemical_strength, 0) as chemical_value,
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
+
+FROM
+    xeros_machine AS xm
+    INNER JOIN
+    (-- metrics
+     SELECT
+       machine_id,
+       count(*) as cycles,
+       sum(cycle_cold_water_volume)             AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,
+
+       sum(cycle_hot_water_volume)              AS hot_water_value,
+       sum(cycle_hot_water_volume)        AS hot_water_xeros_value,
+
+       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,
+       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,
+
+       sum(cycle_time_run_time)           AS time_run_time,
+       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
+
+       sum(cycle_chemical_strength)       AS chemical_strength,
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
+
+     FROM
+       xeros_cycle
+     WHERE
+       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'
+       and machine_id in ( 6, 7 )
+     GROUP BY
+       machine_id
+    ) AS b
+      ON xm.machine_id = b.machine_id
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.cold_water_volume' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'SELECT\n  xm.machine_id   AS id,\n  xm.manufacturer AS machine_name,\n  xm.serial_number,\n  xm.size,\n  truncate(b.cold_water_volume, 0) as cold_water_value,\n  truncate(b.cold_water_xeros_volume, 0) as cold_water_xeros_value,\n\n  truncate(b.hot_water_volume, 0) as hot_water_value,\n  truncate(b.hot_water_xeros_volume, 0) as hot_water_xeros_value,\n  \n  truncate(b.total_water_volume, 0) as total_water_value,\n  truncate(b.total_water_xeros_volume, 0) as total_water_xeros_value,\n  \n  truncate(b.time_run_time, 0) as time_value,\n  truncate(b.time_xeros_run_time, 0) as time_xeros_value,\n  \n  truncate(b.chemical_strength, 0) as chemical_value,\n  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value\n\nFROM\n    xeros_machine AS xm\n    INNER JOIN\n    (-- metrics\n     SELECT\n       machine_id,\n       count(*) as cycles,\n       sum(cycle_cold_water_volume)             AS cold_water_value,\n       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,\n\n       sum(cycle_hot_water_volume)              AS hot_water_value,\n       sum(cycle_hot_water_volume)        AS hot_water_xeros_value,\n\n       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,\n       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,\n\n       sum(cycle_time_run_time)           AS time_run_time,\n       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,\n\n       sum(cycle_chemical_strength)       AS chemical_strength,\n       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength\n\n     FROM\n       xeros_cycle\n     WHERE\n       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'\n       and machine_id in ( 6, 7 )\n     GROUP BY\n       machine_id\n    ) AS b\n      ON xm.machine_id = b.machine_id\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.cold_water_volume' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.cold_water_volume' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-01 23:59:58] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-02 00:04:11] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-02 00:04:12] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'SELECT
+  xm.machine_id   AS id,
+  xm.manufacturer AS machine_name,
+  xm.serial_number,
+  xm.size,
+  truncate(b.cold_water_value, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,
+
+  truncate(b.hot_water_value, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
+  
+  truncate(b.total_water_value, 0) as total_water_value,
+  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,
+  
+  truncate(b.time_run_time, 0) as time_value,
+  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  
+  truncate(b.chemical_strength, 0) as chemical_value,
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
+
+FROM
+    xeros_machine AS xm
+    INNER JOIN
+    (-- metrics
+     SELECT
+       machine_id,
+       count(*) as cycles,
+       sum(cycle_cold_water_volume)             AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,
+
+       sum(cycle_therms)              AS hot_water_value,
+       sum(cycle_xeros_therms)        AS hot_water_xeros_value,
+
+       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,
+       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,
+
+       sum(cycle_time_run_time)           AS time_run_time,
+       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
+
+       sum(cycle_chemical_strength)       AS chemical_strength,
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
+
+     FROM
+       xeros_cycle
+     WHERE
+       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'
+       and machine_id in ( 6, 7 )
+     GROUP BY
+       machine_id
+    ) AS b
+      ON xm.machine_id = b.machine_id
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'SELECT\n  xm.machine_id   AS id,\n  xm.manufacturer AS machine_name,\n  xm.serial_number,\n  xm.size,\n  truncate(b.cold_water_value, 0) as cold_water_value,\n  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,\n\n  truncate(b.hot_water_value, 0) as hot_water_value,\n  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,\n  \n  truncate(b.total_water_value, 0) as total_water_value,\n  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,\n  \n  truncate(b.time_run_time, 0) as time_value,\n  truncate(b.time_xeros_run_time, 0) as time_xeros_value,\n  \n  truncate(b.chemical_strength, 0) as chemical_value,\n  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value\n\nFROM\n    xeros_machine AS xm\n    INNER JOIN\n    (-- metrics\n     SELECT\n       machine_id,\n       count(*) as cycles,\n       sum(cycle_cold_water_volume)             AS cold_water_value,\n       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,\n\n       sum(cycle_therms)              AS hot_water_value,\n       sum(cycle_xeros_therms)        AS hot_water_xeros_value,\n\n       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,\n       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,\n\n       sum(cycle_time_run_time)           AS time_run_time,\n       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,\n\n       sum(cycle_chemical_strength)       AS chemical_strength,\n       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength\n\n     FROM\n       xeros_cycle\n     WHERE\n       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'\n       and machine_id in ( 6, 7 )\n     GROUP BY\n       machine_id\n    ) AS b\n      ON xm.machine_id = b.machine_id\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-02 00:05:42] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-02 00:05:42] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'SELECT
+  xm.machine_id   AS id,
+  xm.manufacturer AS machine_name,
+  xm.serial_number,
+  xm.size,
+  truncate(b.cold_water_value, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,
+
+  truncate(b.hot_water_value, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
+  
+  truncate(b.total_water_value, 0) as total_water_value,
+  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,
+  
+  truncate(b.time_run_time, 0) as time_value,
+  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  
+  truncate(b.chemical_strength, 0) as chemical_value,
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
+
+FROM
+    xeros_machine AS xm
+    INNER JOIN
+    (-- metrics
+     SELECT
+       machine_id,
+       count(*) as cycles,
+       sum(cycle_cold_water_volume)             AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,
+
+       sum(cycle_therms)              AS hot_water_value,
+       sum(cycle_xeros_therms)        AS hot_water_xeros_value,
+
+       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,
+       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,
+
+       sum(cycle_time_run_time)           AS time_run_time,
+       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,
+
+       sum(cycle_chemical_strength)       AS chemical_strength,
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
+
+     FROM
+       xeros_cycle
+     WHERE
+       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'
+       and machine_id in ( 6, 7 )
+     GROUP BY
+       machine_id
+    ) AS b
+      ON xm.machine_id = b.machine_id
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'SELECT\n  xm.machine_id   AS id,\n  xm.manufacturer AS machine_name,\n  xm.serial_number,\n  xm.size,\n  truncate(b.cold_water_value, 0) as cold_water_value,\n  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,\n\n  truncate(b.hot_water_value, 0) as hot_water_value,\n  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,\n  \n  truncate(b.total_water_value, 0) as total_water_value,\n  truncate(b.total_water_xeros_value, 0) as total_water_xeros_value,\n  \n  truncate(b.time_run_time, 0) as time_value,\n  truncate(b.time_xeros_run_time, 0) as time_xeros_value,\n  \n  truncate(b.chemical_strength, 0) as chemical_value,\n  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value\n\nFROM\n    xeros_machine AS xm\n    INNER JOIN\n    (-- metrics\n     SELECT\n       machine_id,\n       count(*) as cycles,\n       sum(cycle_cold_water_volume)             AS cold_water_value,\n       sum(cycle_cold_water_xeros_volume)       AS cold_water_xeros_value,\n\n       sum(cycle_therms)              AS hot_water_value,\n       sum(cycle_xeros_therms)        AS hot_water_xeros_value,\n\n       sum(cycle_cold_water_cost + (cycle_hot_water_pounds * cycle_hot_water_cost_per_pound)) AS total_water_value,\n       sum(cycle_cold_water_xeros_cost) + (cycle_hot_water_xeros_pounds * cycle_hot_water_xeros_cost_per_pound) as total_water_xeros_value,\n\n       sum(cycle_time_run_time)           AS time_run_time,\n       sum(cycle_time_xeros_run_time)     AS time_xeros_run_time,\n\n       sum(cycle_chemical_strength)       AS chemical_strength,\n       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength\n\n     FROM\n       xeros_cycle\n     WHERE\n       reading_date >= '2014-1-30' AND reading_date <= '2014-3-1'\n       and machine_id in ( 6, 7 )\n     GROUP BY\n       machine_id\n    ) AS b\n      ON xm.machine_id = b.machine_id\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cycle_xeros_therms' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-02 00:06:04] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-02 00:08:13] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-30", "toDate": "2014-3-1", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-03 22:47:48] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-08", "toDate": "2014-03-03", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-03 22:47:49] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'select
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
+from
+	(
+	select
+	    xd.date,
+           		sum(xc.cycle_therms) as value,
+   		sum(xc.cycle_therms_xeros) as value_xeros,
+   		sum(xc.cycle_therms_cost) as cost,
+   		sum(xc.cycle_therms_xeros_cost) as cost_xeros
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( 6, 7 )
+	where
+	    1 = 1
+	    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'
+
+	) as b
+where
+   1 = 1
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_cost' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'select\n  b.date,\n  coalesce( truncate(b.value, 0), 0) as value,\n  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,\n  coalesce(truncate(b.cost, 0), 0) as cost,\n  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros\nfrom\n\t(\n\tselect\n\t    xd.date,\n           \t\tsum(xc.cycle_therms) as value,\n   \t\tsum(xc.cycle_therms_xeros) as value_xeros,\n   \t\tsum(xc.cycle_therms_cost) as cost,\n   \t\tsum(xc.cycle_therms_xeros_cost) as cost_xeros\n\tfrom\n\t    xeros_dates as xd\n\t    left join xeros_cycle as xc\n\t      on xd.date = xc.reading_date\n\t      \t    and xc.machine_id in ( 6, 7 )\n\twhere\n\t    1 = 1\n\t    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'\n\n\t) as b\nwhere\n   1 = 1\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-03 22:50:23] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-08", "toDate": "2014-03-03", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-03 22:50:23] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'select
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
+from
+	(
+	select
+	    xd.date,
+           		sum(xc.cycle_therms) as value,
+   		sum(xc.cycle_therms_xeros) as value_xeros,
+   		sum(xc.cycle_therms_cost) as cost,
+   		sum(xc.cycle_therms_xeros_cost) as cost_xeros
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( 6, 7 )
+	where
+	    1 = 1
+	    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'
+
+	) as b
+where
+   1 = 1
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'select\n  b.date,\n  coalesce( truncate(b.value, 0), 0) as value,\n  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,\n  coalesce(truncate(b.cost, 0), 0) as cost,\n  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros\nfrom\n\t(\n\tselect\n\t    xd.date,\n           \t\tsum(xc.cycle_therms) as value,\n   \t\tsum(xc.cycle_therms_xeros) as value_xeros,\n   \t\tsum(xc.cycle_therms_cost) as cost,\n   \t\tsum(xc.cycle_therms_xeros_cost) as cost_xeros\n\tfrom\n\t    xeros_dates as xd\n\t    left join xeros_cycle as xc\n\t      on xd.date = xc.reading_date\n\t      \t    and xc.machine_id in ( 6, 7 )\n\twhere\n\t    1 = 1\n\t    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'\n\n\t) as b\nwhere\n   1 = 1\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-03 22:50:27] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-08", "toDate": "2014-03-03", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-03 22:50:27] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'select
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
+from
+	(
+	select
+	    xd.date,
+           		sum(xc.cycle_therms) as value,
+   		sum(xc.cycle_therms_xeros) as value_xeros,
+   		sum(xc.cycle_therms_cost) as cost,
+   		sum(xc.cycle_therms_xeros_cost) as cost_xeros
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( 6, 7 )
+	where
+	    1 = 1
+	    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'
+
+	) as b
+where
+   1 = 1
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'select\n  b.date,\n  coalesce( truncate(b.value, 0), 0) as value,\n  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,\n  coalesce(truncate(b.cost, 0), 0) as cost,\n  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros\nfrom\n\t(\n\tselect\n\t    xd.date,\n           \t\tsum(xc.cycle_therms) as value,\n   \t\tsum(xc.cycle_therms_xeros) as value_xeros,\n   \t\tsum(xc.cycle_therms_cost) as cost,\n   \t\tsum(xc.cycle_therms_xeros_cost) as cost_xeros\n\tfrom\n\t    xeros_dates as xd\n\t    left join xeros_cycle as xc\n\t      on xd.date = xc.reading_date\n\t      \t    and xc.machine_id in ( 6, 7 )\n\twhere\n\t    1 = 1\n\t    and xd.date >= '2014-01-08' and xd.date <= '2014-03-03'\n\n\t) as b\nwhere\n   1 = 1\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'xc.cycle_therms_xeros_cost' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-03 22:51:00] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-08", "toDate": "2014-03-03", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-05 21:50:17] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-3", "toDate": "2014-3-5", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-05 21:50:17] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-05 21:52:29] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-3", "toDate": "2014-3-5", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-06 06:02:32] request.INFO: Matched route "ff_xeros_report_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-1-1", "toDate": "2014-3-5", "_format": "json", "_route": "ff_xeros_report_report") [] []
+[2014-03-17 23:35:14] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /report/consumptionDetails/2013-12-1/2014-02-28.json"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /report/consumptionDetails/2013-12-1/2014-02-28.json\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:253)"} []
+[2014-03-17 23:35:15] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "f9765c", "_route": "_wdt") [] []
+[2014-03-17 23:35:32] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /report/kpis/2013-12-1/2014-02-28.json"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /report/kpis/2013-12-1/2014-02-28.json\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:253)"} []
+[2014-03-17 23:35:33] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "2e6437", "_route": "_wdt") [] []
+[2014-03-17 23:35:59] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /report/kpis/2013-12-1/2014-02-28.json"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /report/kpis/2013-12-1/2014-02-28.json\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:253)"} []
+[2014-03-17 23:36:00] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "6e3e35", "_route": "_wdt") [] []
+[2014-03-17 23:41:17] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /report/kpis/2014-01-01/2014-02-28.json"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /report/kpis/2014-01-01/2014-02-28.json\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:253)"} []
+[2014-03-17 23:41:17] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "bf5da5", "_route": "_wdt") [] []
+[2014-03-17 23:49:27] request.INFO: Matched route "ff_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:49:27] request.CRITICAL: Uncaught PHP Exception RuntimeException: "Controller "FF\XerosBundle\Controller\ReportController::reportAction()" requires that you provide a value for the "$locationId" argument (because there is no default value or because there is a non optional argument after this one)." at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Controller/ControllerResolver.php line 120 {"exception":"[object] (RuntimeException: Controller \"FF\\XerosBundle\\Controller\\ReportController::reportAction()\" requires that you provide a value for the \"$locationId\" argument (because there is no default value or because there is a non optional argument after this one). at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Controller/ControllerResolver.php:120)"} []
+[2014-03-17 23:50:22] request.INFO: Matched route "ff_report" (parameters: "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:50:22] request.CRITICAL: Uncaught PHP Exception RuntimeException: "Controller "FF\XerosBundle\Controller\ReportController::reportAction()" requires that you provide a value for the "$locationId" argument (because there is no default value or because there is a non optional argument after this one)." at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Controller/ControllerResolver.php line 120 {"exception":"[object] (RuntimeException: Controller \"FF\\XerosBundle\\Controller\\ReportController::reportAction()\" requires that you provide a value for the \"$locationId\" argument (because there is no default value or because there is a non optional argument after this one). at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Controller/ControllerResolver.php:120)"} []
+[2014-03-17 23:50:48] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:50:48] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:51:11] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:51:58] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:51:59] emergency.EMERGENCY: syntax error, unexpected $end, expecting T_VARIABLE or T_END_HEREDOC or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN {"type":4,"file":"xdebug://debug-eval","line":11} []
+[2014-03-17 23:52:07] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "location_id": "5", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:52:28] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:52:33] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "location_id": "5", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:52:57] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:53:01] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "5", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:53:08] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:53:14] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:53:17] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:53:22] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-17 23:53:37] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:53:38] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:56:09] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:56:09] emergency.EMERGENCY: syntax error, unexpected $end, expecting T_VARIABLE or T_END_HEREDOC or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN {"type":4,"file":"xdebug://debug-eval","line":10} []
+[2014-03-17 23:56:10] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:56:13] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:56:16] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:56:19] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-03-17 23:57:46] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:58:31] emergency.EMERGENCY: syntax error, unexpected $end, expecting T_VARIABLE or T_END_HEREDOC or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN {"type":4,"file":"xdebug://debug-eval","line":10} []
+[2014-03-17 23:59:19] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-17 23:59:40] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report") [] []
+[2014-03-18 00:47:49] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-18 02:14:13] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "10", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-01-01", "toDate": "2014-02-28", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:06:29] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:07:43] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:07:49] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:07:56] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:08:06] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:08:11] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-22 18:22:43] emergency.EMERGENCY: syntax error, unexpected T_DOUBLE_ARROW {"type":4,"file":"xdebug://debug-eval","line":1} []
+[2014-03-22 18:22:46] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-2-20", "toDate": "2014-3-22", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 12:22:09] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-2-22", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report") [] []
+[2014-03-24 12:22:09] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'SELECT
+  xm.machine_id   AS id,
+  xm.manufacturer AS machine_name,
+  xm.serial_number,
+  xm.size,
+  b.cycles,
+  truncate(b.cold_water_value, 0) as cold_water_value,
+  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,
+
+  truncate(b.hot_water_value, 0) as hot_water_value,
+  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,
+  
+  truncate(b.time_run_time, 0) as time_value,
+  truncate(b.time_xeros_run_time, 0) as time_xeros_value,
+  
+  truncate(b.chemical_strength, 0) as chemical_value,
+  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value
+
+FROM
+    xeros_machine AS xm
+    INNER JOIN
+    (-- metrics
+     SELECT
+       machine_id,
+       count(*) as cycles,
+       sum(cycle_cold_water_volume) AS cold_water_value,
+       sum(cycle_cold_water_xeros_volume) as cold_water_xeros_value,
+
+       sum(cycle_therms)              AS hot_water_value,
+       sum(cycle_therms_xeros)        AS hot_water_xeros_value,
+
+       sum(cycle_time_total_time)           AS time_total_time,
+       sum(cycle_time_xeros_total_time)     AS time_xeros_total_time,
+
+       sum(cycle_chemical_strength)       AS chemical_strength,
+       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength
+
+     FROM
+       xeros_cycle
+     WHERE
+       reading_date >= '2014-2-22' AND reading_date <= '2014-3-24'
+       and machine_id in ( 1, 2 )
+     GROUP BY
+       machine_id
+    ) AS b
+      ON xm.machine_id = b.machine_id
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.time_run_time' in 'field list'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'SELECT\n  xm.machine_id   AS id,\n  xm.manufacturer AS machine_name,\n  xm.serial_number,\n  xm.size,\n  b.cycles,\n  truncate(b.cold_water_value, 0) as cold_water_value,\n  truncate(b.cold_water_xeros_value, 0) as cold_water_xeros_value,\n\n  truncate(b.hot_water_value, 0) as hot_water_value,\n  truncate(b.hot_water_xeros_value, 0) as hot_water_xeros_value,\n  \n  truncate(b.time_run_time, 0) as time_value,\n  truncate(b.time_xeros_run_time, 0) as time_xeros_value,\n  \n  truncate(b.chemical_strength, 0) as chemical_value,\n  truncate(b.chemical_xeros_strength, 0) as chemical_xeros_value\n\nFROM\n    xeros_machine AS xm\n    INNER JOIN\n    (-- metrics\n     SELECT\n       machine_id,\n       count(*) as cycles,\n       sum(cycle_cold_water_volume) AS cold_water_value,\n       sum(cycle_cold_water_xeros_volume) as cold_water_xeros_value,\n\n       sum(cycle_therms)              AS hot_water_value,\n       sum(cycle_therms_xeros)        AS hot_water_xeros_value,\n\n       sum(cycle_time_total_time)           AS time_total_time,\n       sum(cycle_time_xeros_total_time)     AS time_xeros_total_time,\n\n       sum(cycle_chemical_strength)       AS chemical_strength,\n       sum(cycle_chemical_xeros_strength) AS chemical_xeros_strength\n\n     FROM\n       xeros_cycle\n     WHERE\n       reading_date >= '2014-2-22' AND reading_date <= '2014-3-24'\n       and machine_id in ( 1, 2 )\n     GROUP BY\n       machine_id\n    ) AS b\n      ON xm.machine_id = b.machine_id\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.time_run_time' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.time_run_time' in 'field list' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-24 12:26:44] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-2-22", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report") [] []
+[2014-03-24 17:02:48] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:03:01] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:06:08] emergency.EMERGENCY: syntax error, unexpected T_DOUBLE_ARROW {"type":4,"file":"xdebug://debug-eval","line":1} []
+[2014-03-24 17:06:15] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:06:17] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'select
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
+from
+	(
+	select
+	    xd.date,
+           		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( 1, 2 )
+	where
+	    1 = 1
+	    and xd.date >= '2014-3-1' and xd.date <= '2014-3-24'
+	) as b
+where
+   1 = 1
+   and b.manufacturer <> 'xeros'
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'select\n  b.date,\n  coalesce( truncate(b.value, 0), 0) as value,\n  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,\n  coalesce(truncate(b.cost, 0), 0) as cost,\n  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros\nfrom\n\t(\n\tselect\n\t    xd.date,\n           \t\tsum(xc.cycle_cold_water_volume) as value,\n   \t\tsum(xc.cycle_cold_water_xeros_volume) as value_xeros,\n   \t\tsum(xc.cycle_cold_water_cost) as cost,\n   \t\tsum(xc.cycle_cold_water_xeros_cost) as cost_xeros\n\tfrom\n\t    xeros_dates as xd\n\t    left join xeros_cycle as xc\n\t      on xd.date = xc.reading_date\n\t      \t    and xc.machine_id in ( 1, 2 )\n\twhere\n\t    1 = 1\n\t    and xd.date >= '2014-3-1' and xd.date <= '2014-3-24'\n\t) as b\nwhere\n   1 = 1\n   and b.manufacturer <> 'xeros'\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-24 17:06:25] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:06:25] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing 'select
+  b.date,
+  coalesce( truncate(b.value, 0), 0) as value,
+  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,
+  coalesce(truncate(b.cost, 0), 0) as cost,
+  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros
+from
+	(
+	select
+	    xd.date,
+           		sum(xc.cycle_cold_water_volume) as value,
+   		sum(xc.cycle_cold_water_xeros_volume) as value_xeros,
+   		sum(xc.cycle_cold_water_cost) as cost,
+   		sum(xc.cycle_cold_water_xeros_cost) as cost_xeros
+	from
+	    xeros_dates as xd
+	    left join xeros_cycle as xc
+	      on xd.date = xc.reading_date
+	      	    and xc.machine_id in ( 1, 2 )
+	where
+	    1 = 1
+	    and xd.date >= '2014-3-1' and xd.date <= '2014-3-24'
+	) as b
+where
+   1 = 1
+   and b.manufacturer <> 'xeros'
+':
+
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause'" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing 'select\n  b.date,\n  coalesce( truncate(b.value, 0), 0) as value,\n  coalesce(truncate(b.value_xeros, 0), 0) as value_xeros,\n  coalesce(truncate(b.cost, 0), 0) as cost,\n  coalesce(truncate(b.cost_xeros, 0), 0) as cost_xeros\nfrom\n\t(\n\tselect\n\t    xd.date,\n           \t\tsum(xc.cycle_cold_water_volume) as value,\n   \t\tsum(xc.cycle_cold_water_xeros_volume) as value_xeros,\n   \t\tsum(xc.cycle_cold_water_cost) as cost,\n   \t\tsum(xc.cycle_cold_water_xeros_cost) as cost_xeros\n\tfrom\n\t    xeros_dates as xd\n\t    left join xeros_cycle as xc\n\t      on xd.date = xc.reading_date\n\t      \t    and xc.machine_id in ( 1, 2 )\n\twhere\n\t    1 = 1\n\t    and xd.date >= '2014-3-1' and xd.date <= '2014-3-24'\n\t) as b\nwhere\n   1 = 1\n   and b.manufacturer <> 'xeros'\n':\n\nSQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'b.manufacturer' in 'where clause' at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-24 17:07:22] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:07:27] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:08:32] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:08:40] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "kpis", "fromDate": "2014-3-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-03-24 17:27:18] request.INFO: Matched route "ff_report" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report") [] []
+[2014-03-24 17:27:19] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-03-24 17:27:41] request.INFO: Matched route "ff_report_location" (parameters: "locationId": "14", "_controller": "FF\XerosBundle\Controller\ReportController::reportAction", "reportName": "consumption", "fromDate": "2014-1-1", "toDate": "2014-3-24", "_format": "json", "_route": "ff_report_location") [] []
+[2014-04-23 12:35:06] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:35:06] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:35:09] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "acf8b1", "_route": "_wdt") [] []
+[2014-04-23 12:35:45] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:35:45] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:35:46] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "1bc28a", "_route": "_wdt") [] []
+[2014-04-23 12:35:52] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:35:53] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:35:53] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "64eaab", "_route": "_wdt") [] []
+[2014-04-23 12:36:04] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:36:35] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:36:51] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "c4993a", "_route": "_wdt") [] []
+[2014-04-23 12:36:55] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:37:06] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:37:07] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "694222", "_route": "_wdt") [] []
+[2014-04-23 12:37:13] request.INFO: Matched route "ff_csv" (parameters: "locationId": "null", "_controller": "FF\XerosBundle\Controller\CSVController::CSVAction", "fromDate": "2014-1-1", "toDate": "2014-4-23", "_route": "ff_csv") [] []
+[2014-04-23 12:52:11] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-04-23 12:52:11] emergency.EMERGENCY: syntax error, unexpected $end, expecting T_VARIABLE or T_END_HEREDOC or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN {"type":4,"file":"xdebug://debug-eval","line":10} []
+[2014-04-23 12:52:12] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "733e9e", "_route": "_wdt") [] []
+[2014-05-21 14:32:19] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /analyst/reportOne/2014-1-1/2014-5-21"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /analyst/reportOne/2014-1-1/2014-5-21\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:209)"} []
+[2014-05-21 14:32:20] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "28ecd7", "_route": "_wdt") [] []
+[2014-05-21 14:33:37] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /analyst/reportOne/2014-1-1/2014-5-21"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /analyst/reportOne/2014-1-1/2014-5-21\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:209)"} []
+[2014-05-21 14:33:38] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "f6eb26", "_route": "_wdt") [] []
+[2014-05-21 14:33:42] request.ERROR: Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET /analyst/reportOne/2014-1-1/2014-5-21"" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php line 144 {"exception":"[object] (Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException: No route found for \"GET /analyst/reportOne/2014-1-1/2014-5-21\" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/EventListener/RouterListener.php:144, Symfony\\Component\\Routing\\Exception\\ResourceNotFoundException:  at /Users/jason/dev/ELYXOR/xeros/service/app/cache/dev/appDevUrlMatcher.php:209)"} []
+[2014-05-21 14:33:43] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "ea8aed", "_route": "_wdt") [] []
+[2014-05-21 14:34:21] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:34:24] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:34:25] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "f92e1d", "_route": "_wdt") [] []
+[2014-05-21 14:34:45] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:34:49] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:34:50] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "ba8e60", "_route": "_wdt") [] []
+[2014-05-21 14:35:01] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:35:02] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:35:03] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "886bcb", "_route": "_wdt") [] []
+[2014-05-21 14:35:19] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:35:19] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:35:20] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "32f590", "_route": "_wdt") [] []
+[2014-05-21 14:35:32] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:35:39] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:35:41] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "529d31", "_route": "_wdt") [] []
+[2014-05-21 14:36:05] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:40:01] request.CRITICAL: Uncaught PHP Exception Doctrine\DBAL\DBALException: "An exception occurred while executing '
+                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
+                            xeros_machine as xm
+                            left join field_data_field_company as fc
+                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'
+                            left join field_data_field_location as fl
+                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'
+                    where fc.field_company_target_id = ':
+
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7" at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php line 91 {"exception":"[object] (Doctrine\\DBAL\\DBALException: An exception occurred while executing '\n                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from\n                            xeros_machine as xm\n                            left join field_data_field_company as fc\n                              on xm.machine_id = fc.entity_id and fc.entity_type = 'data_xeros_machine'\n                            left join field_data_field_location as fl\n                              on xm.machine_id = fl.entity_id and fl.entity_type = 'data_xeros_machine'\n                    where fc.field_company_target_id = ':\n\nSQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php:91, PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7 at /Users/jason/dev/ELYXOR/xeros/service/vendor/doctrine/dbal/lib/Doctrine/DBAL/Connection.php:699)"} []
+[2014-05-21 14:40:02] emergency.EMERGENCY: syntax error, unexpected $end, expecting T_VARIABLE or T_END_HEREDOC or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN {"type":4,"file":"xdebug://debug-eval","line":12} []
+[2014-05-21 14:40:02] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "7b025f", "_route": "_wdt") [] []
+[2014-05-21 14:43:33] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:45:17] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 14:53:23] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterActual", "_route": "ff_analyst") [] []
+[2014-05-21 15:10:11] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterCollection", "_route": "ff_analyst") [] []
+[2014-05-21 15:10:29] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterCollectionDetail", "_route": "ff_analyst") [] []
+[2014-05-21 15:10:59] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-1-1", "toDate": "2014-5-21", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportOne", "_route": "ff_analyst") [] []
+[2014-05-21 15:10:59] request.CRITICAL: Uncaught PHP Exception Symfony\Component\Debug\Exception\DummyException: "" at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php line 174 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\DummyException:  at /Users/jason/dev/ELYXOR/xeros/service/vendor/symfony/symfony/src/Symfony/Component/Debug/ErrorHandler.php:174)"} []
+[2014-05-21 15:11:00] request.INFO: Matched route "_wdt" (parameters: "_controller": "web_profiler.controller.profiler:toolbarAction", "token": "84d8cf", "_route": "_wdt") [] []
+[2014-05-21 15:11:22] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-01-01", "toDate": "2014-05-01", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterCollection", "_route": "ff_analyst") [] []
+[2014-05-21 15:13:47] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-01-01", "toDate": "2014-05-01", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterCollection", "_route": "ff_analyst") [] []
+[2014-05-21 15:14:01] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-01-01", "toDate": "2014-05-01", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterCollectionDetail", "_route": "ff_analyst") [] []
+[2014-05-21 15:19:51] request.INFO: Matched route "ff_analyst" (parameters: "fromDate": "2014-01-01", "toDate": "2014-05-01", "locationId": "null", "_controller": "FF\XerosBundle\Controller\AnalystController::AnalystAction", "reportName": "reportDAIMeterActual", "_route": "ff_analyst") [] []

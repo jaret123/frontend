@@ -116,13 +116,8 @@ var app = {
         var hash = window.location.hash;
         var hashArray = hash.substr(1).split("+");
 
-        console.log("app.route");
-        console.log(app.dateRanges.yearToDate);
         // Remove any error messages from the page
         jQuery(app.err).removeClass("active");
-
-        console.log("One");
-        console.log(app.dateRanges.yearToDate);
 
         // If no hash
         if (!hash) {
@@ -137,8 +132,7 @@ var app = {
         // If there is a hash
         } else {
             hashArray = hash.substr(1).split("+");
-            console.log("app.route.hasharray");
-            console.log(app.dateRanges.yearToDate);
+
             if (hashArray.length > 1) {
                 self.machine = hashArray[0];
                 if ( hashArray[1].length > 1 ) {
@@ -165,11 +159,11 @@ var app = {
                 }
                 if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 1 )  {
                     self.location = hashArray[3];
+                    // TODO: This is going to trigger an ajax call -- watch out for race conditions
+                    FF.Location.getLocation(hashArray[3]);
                 }
             }
         }
-        console.log("Two");
-        console.log(app.dateRanges.yearToDate);
         controls.setCsvLink();
         controls.setDateRangeDisplay();
         // This is a little funky, but we are going to let the view inherit our showReport method

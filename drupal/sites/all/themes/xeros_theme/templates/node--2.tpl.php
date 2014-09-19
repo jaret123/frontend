@@ -12,13 +12,14 @@
     <div class="page-container">
         <div class="container">
             <div class="kpis">
-
+<!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
                 <div class="legend">
                     <span class="swatch current"></span>
                     <span class="label">Current Consumption</span>
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
+<!-- End template -->
                 <div id="kpis__select" class="time__select kpis__select select">
                     <span>
                         <span>Timeframe</span>
@@ -62,7 +63,7 @@
                         </div>
                         <div class="col col-3">
                             <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost}}</div>
-                            <div class="col saved">Actual Cost</div>
+                            <div class="col saved">Actual Cost</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
                             <div class="col border"></div>
                             <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost_xeros}}</div>
                             <div class="col saved">Potential Cost</div>

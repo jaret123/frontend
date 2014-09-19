@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_app_menu() {
+  $items['ws/location'] = array(
+    'title' => 'Location Web Service',
+    'page callback' => 'ws_location',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_location.inc'
+  );
+  return $items;
+}
+
+function xeros_app_permission() {
+  return array(
+    'xeros app' => array(
+      'title' => t('Xeros App Access'),
+      'description' => t('Roles with this permission have the ability to access the Xeros App'),
+    )
+  );
+}
+
+function xeros_app_preprocess_html(&$variables, $hook) {
+
+    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Location.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+}

@@ -9,6 +9,9 @@
   > i {
     display: inline-block;
   }
+  .machine__data {
+    display: none;
+  }
   .right {
     float: right;
     padding: 3px;
@@ -144,9 +147,13 @@
 
 }
 
+
 .show-details {
   .machine__wrapper {
     width: 200px !important;
+  }
+  .machine__data {
+    display: inline-block;
   }
   .annotation {
     display: inline;

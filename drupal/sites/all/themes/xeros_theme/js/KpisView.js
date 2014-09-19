@@ -8,7 +8,6 @@ var view = {
         var self = this;
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
-
         var ar;
         ar = [
             {
