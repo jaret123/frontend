@@ -198,7 +198,13 @@ SQL;
 
       // HACK: We are only going to return one machine type for now.  Later we need to figure out the best
       // way to control this.
-      return $machineTypes[0];
+
+      if (isset($machineTypes[0])) {
+        return $machineTypes[0];
+      } else {
+        return 'non-xeros';
+      }
+
 
     }
     /**
