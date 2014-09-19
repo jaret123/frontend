@@ -52,17 +52,16 @@ var chart = {
             ;
 
         // If we are dealing with less than 3 months data, put days on the ticks
-        if ( data.length < 90 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"), 2);
-            xAxis.ticks(d3.time.weeks, 1)
-        }
-        // TODO: This is still wonky in the range of about 20 data points.  The labels still overlap.
+//        if ( data.length < 90 ) {
+//            xAxis.tickFormat(d3.time.format("%b %-d"), 2);
+//            xAxis.ticks(d3.time.weeks, 1)
+//        }
         if ( data.length < 30 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"));
-            xAxis.ticks(4);
+            xAxis.tickFormat(d3.time.format("%-d"));
+            xAxis.ticks(5);
         }
         if ( data.length < 8 ) {
-            xAxis.tickFormat(d3.time.format("%b %-d"));
+            xAxis.tickFormat(d3.time.format("%-d"));
             xAxis.ticks(data.length - 1);
         }
         if ( data.length == 1 ) {
