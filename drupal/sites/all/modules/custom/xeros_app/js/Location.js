@@ -23,6 +23,7 @@ FF.Location = (function ($) {
             url: 'ws/location/' + locationId,
             success: function(d) {
                 pub.location = d;
+                console.log('pub.location: ', pub.location.nid);
                 if ( typeof(callback) == 'function') {
                     callback();
                 }

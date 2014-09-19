@@ -114,6 +114,11 @@ var app = {
     route: function () {
         var self = this;
         var hash = window.location.hash;
+        // hashArray =
+        //  0 - Machine
+        //  1 - Metric
+        //  2 - Date Range (comma delimited)
+        //  3 - Location ID
         var hashArray = hash.substr(1).split("+");
 
         // Remove any error messages from the page
@@ -127,6 +132,7 @@ var app = {
                 self.sessionDateRange = self.dateRanges[self.defaults.timeSelect].slice(0);
                 self.sessionTimeSelect = new String(self.defaults.timeSelect);
             }
+            //FF.Location.getLocation('', self.routeCallback());
             // Build the apiUrl
             self.setApiUrl();
         // If there is a hash
@@ -160,21 +166,27 @@ var app = {
                 if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 1 )  {
                     self.location = hashArray[3];
                     // TODO: This is going to trigger an ajax call -- watch out for race conditions
-                    FF.Location.getLocation(hashArray[3]);
+                    console.log(hashArray[3]);
+                    FF.Location.getLocation(hashArray[3], self.routeCallback);
+                    return; // Break here because we just called the rest of this in a callback.
                 }
             }
         }
+        self.routeCallback();
+    },
+    routeCallback: function() {
+        console.log(FF.Location.machineTypes(), FF.Location.location.nid, FF.Location.location.title);
         controls.setCsvLink();
         controls.setDateRangeDisplay();
         // This is a little funky, but we are going to let the view inherit our showReport method
-        self.saveCookie();
+        app.saveCookie();
         // if dataRefresh equals 1, then go to the web service again and get new data
         if ( app.dataRefresh == 1 ) {
-            self.setApiUrl();
+            app.setApiUrl();
             app.fadeReport();
             app.getData();
         } else {
-            view.parseData(self.showReport);
+            view.parseData(app.showReport);
         }
     },
 
@@ -278,16 +290,7 @@ var app = {
         self.fromDate = self.sessionDateRange[0];
         self.toDate = self.sessionDateRange[1];
 
-//        if (self.sessionCompany == "") {
-//            self.sessionCompany = self.user.field_company['und'][0].target_id;
-//        }
-//        if (self.sessionLocation == "") {
-//            self.sessionLocation = self.user.field_location['und'][0].target_id;
-//        }
-
         self.route();
 
     }
 }
-
-//app.initialize();

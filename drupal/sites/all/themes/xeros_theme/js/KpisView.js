@@ -191,13 +191,10 @@ var view = {
             }
         }
     },
-    showNews: function() {
-      var self = this;
-
-    },
     initialize : function() {
+
         // Do any initialization unique to this view.
-        app.initialize();
+
         controls.createTimeSelect();
         controls.createExport();
 
@@ -205,25 +202,17 @@ var view = {
             app.sessionCompany = app.user.field_company['und'][0].target_id;
         }
         if (app.sessionLocation == "") {
-            app.sessionLocation = app.user.field_location['und'][0].target_id;
+            FF.Location.getLocation(app.user.field_location['und'][0].target_id, function() {
+                app.sessionLocation = FF.Location.location.nid;
+            });
         }
-
         if (typeof(app.companies) !== 'undefined') {
             controls.adminMenuControls();
             controls.createCompanySelect();
-            //controls.createLocationSelect();
         }
 
-        // Demo of the alerts functionality;
-//        var alertDelay = 1000;
-//        window.setTimeout(
-//            function() {
-//                jQuery(".alerts").delay(alertDelay).toggleClass("alerts__active");
-//            },
-//            2000);
-//        jQuery(".alerts").click(function() {
-//            jQuery(this).toggleClass("alerts__active");
-//        });
+        app.initialize();
+
     },
     bindNav : function() {
         // Bind any navigation that is on an item in a template.
