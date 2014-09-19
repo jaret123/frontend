@@ -36,7 +36,7 @@ FF.Location = (function ($) {
 
     function machineTypes() {
         // TODO: This needs to test for BOTH, not just the first element.
-        if ( typeof(pub.location.field_machine_types['und'][0]) !== 'undefined' ) {
+        if ( checkNested(pub.location, 'field_machine_types', 'und', 0) ) {
             return pub.location.field_machine_types['und'][0].value;
         } else {
             return 'non-xeros';

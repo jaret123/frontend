@@ -63,6 +63,25 @@ var view = {
 
         ];
 
+        var labels = {
+            'non-xeros' : {
+                lineA : 'Actual Cost',
+                lineB : 'Potential Cost',
+                'lineA-key' : 'Current Consumption',
+                'lineB-key' : 'Potential Consumption with Xeros',
+                savings : 'Potential Savings',
+                cssClass : 'non-xeros'
+            },
+            xeros : {
+                lineA : 'Industry Cost',
+                lineB : 'Xeros Cost',
+                'lineA-key' : 'Current Consumption',
+                'lineB-key' : 'Industry Benchmark',
+                savings : 'Current Savings',
+                cssClass : 'xeros'
+            }
+        };
+
         app.reportData = ar;
 
         for ( var m in app.data.data ) {
@@ -110,8 +129,9 @@ var view = {
         for ( i in app.reportData ) {
             s = app.reportData[i].summaryData;
             app.reportData[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
+            // Add custom labels for Xeros versus non-xeros machines
+            app.reportData[i].labels = labels[FF.Location.machineTypes()];
         }
-
         draw(); // This does the html template draw
         self.drawCharts();
         self.bindNav();

@@ -13,12 +13,14 @@
         <div class="container">
             <div class="kpis">
 <!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
+              <script id="legend-tpl" type="text/x-handlebars-template">
                 <div class="legend">
                     <span class="swatch current"></span>
                     <span class="label">Current Consumption</span>
                     <span class="swatch xeros"></span>
                     <span class="label">Potential Consumption with Xeros</span>
                 </div>
+              </script>
 <!-- End template -->
                 <div id="kpis__select" class="time__select kpis__select select">
                     <span>
@@ -53,7 +55,7 @@
                 <div id="spinner"></div>
                 <script id="page-tpl" type="text/x-handlebars-template">
                     {{#each this}}
-                    <div class="kpis-{{meta.cssClass}} row">
+                    <div class="kpis-{{meta.cssClass}} {{labels.cssClass}} row">
                         <div class="col col-1">
                             <div class="icon icon-{{meta.icon}}"></div>
                             <div class="col title">{{meta.title}}</div>
@@ -63,13 +65,13 @@
                         </div>
                         <div class="col col-3">
                             <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost}}</div>
-                            <div class="col saved">Actual Cost</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
+                            <div class="col saved">{{labels.lineA}}</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
                             <div class="col border"></div>
                             <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost_xeros}}</div>
-                            <div class="col saved">Potential Cost</div>
+                            <div class="col saved">{{labels.lineB}}</div>
                             <div class="col border"></div>
                             <div class="col percent">{{toLocaleString summaryData.savings}}%</div>
-                            <div class="col saved">Potential Savings</div>
+                            <div class="col saved">{{labels.savings}}</div>
                         </div>
                     </div>
                     {{/each}}

@@ -330,16 +330,38 @@ body.full-screen .controls.full-screen {
 /* line 19, ../sass/_machine-block.scss */
 .machine__wrapper .machine__label {
   display: none;
-}
-
-/* line 27, ../sass/_machine-block.scss */
-.show-label .machine__wrapper .machine__label {
-  display: block;
   font-size: .9em;
   padding-left: 5px;
 }
 
-/* line 37, ../sass/_machine-block.scss */
+/* line 29, ../sass/_machine-block.scss */
+.show-label .machine__wrapper .machine__label {
+  display: block;
+}
+
+/* line 34, ../sass/_machine-block.scss */
+.controls.show-label {
+  display: none !important;
+}
+
+/* line 39, ../sass/_machine-block.scss */
+.show-details .machine__wrapper {
+  width: 200px !important;
+}
+/* line 41, ../sass/_machine-block.scss */
+.show-details .machine__wrapper .machine__label {
+  display: block;
+}
+/* line 44, ../sass/_machine-block.scss */
+.show-details .machine__wrapper .machine__data {
+  display: inline-block;
+}
+/* line 48, ../sass/_machine-block.scss */
+.show-details .annotation {
+  display: inline;
+}
+
+/* line 54, ../sass/_machine-block.scss */
 .display-block .machine__wrapper {
   border: 1px solid grey;
   background-color: #fff;
@@ -348,66 +370,66 @@ body.full-screen .controls.full-screen {
   -moz-box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
   box-shadow: 0px 1px 1px 1px rgba(50, 50, 50, 0.5);
 }
-/* line 42, ../sass/_machine-block.scss */
+/* line 59, ../sass/_machine-block.scss */
 .display-block .machine__wrapper:hover {
   -webkit-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
   -moz-box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
   box-shadow: 2px 2px 5px 1px rgba(50, 50, 50, 0.75);
 }
-/* line 45, ../sass/_machine-block.scss */
+/* line 62, ../sass/_machine-block.scss */
 .display-block .machine__wrapper .machine__icons {
   text-align: center;
 }
-/* line 47, ../sass/_machine-block.scss */
+/* line 64, ../sass/_machine-block.scss */
 .display-block .machine__wrapper .machine__icons > i {
   display: block;
 }
-/* line 49, ../sass/_machine-block.scss */
+/* line 66, ../sass/_machine-block.scss */
 .display-block .machine__wrapper .machine__icons > i.fa {
   font-size: 25px;
   padding-top: 5px;
 }
-/* line 56, ../sass/_machine-block.scss */
+/* line 73, ../sass/_machine-block.scss */
 .display-block .machine__wrapper.Xeros {
   background-color: #e5f4fa;
 }
-/* line 61, ../sass/_machine-block.scss */
+/* line 78, ../sass/_machine-block.scss */
 .display-block .green {
   border: 1px solid green;
   color: green;
 }
-/* line 64, ../sass/_machine-block.scss */
+/* line 81, ../sass/_machine-block.scss */
 .display-block .green .status-icon:before {
   content: "\f00c";
 }
-/* line 68, ../sass/_machine-block.scss */
+/* line 85, ../sass/_machine-block.scss */
 .display-block .red {
   border: 1px solid red;
   color: red;
 }
-/* line 71, ../sass/_machine-block.scss */
+/* line 88, ../sass/_machine-block.scss */
 .display-block .red .status-icon:before {
   content: "\f12a";
 }
-/* line 75, ../sass/_machine-block.scss */
+/* line 92, ../sass/_machine-block.scss */
 .display-block .yellow {
   border: 1px solid orange;
   color: orange;
 }
-/* line 78, ../sass/_machine-block.scss */
+/* line 95, ../sass/_machine-block.scss */
 .display-block .yellow .status-icon:before {
   content: "\f1ce";
 }
-/* line 82, ../sass/_machine-block.scss */
+/* line 99, ../sass/_machine-block.scss */
 .display-block .blue {
   border: 1px solid blue;
   color: blue;
 }
-/* line 85, ../sass/_machine-block.scss */
+/* line 102, ../sass/_machine-block.scss */
 .display-block .blue .status-icon:before {
   content: "\f0e7";
 }
-/* line 90, ../sass/_machine-block.scss */
+/* line 107, ../sass/_machine-block.scss */
 .display-block .machine .red.alert {
   -webkit-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
   -moz-animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -416,31 +438,31 @@ body.full-screen .controls.full-screen {
   animation: pulse 1s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-/* line 96, ../sass/_machine-block.scss */
+/* line 113, ../sass/_machine-block.scss */
 .display-icon .machine__wrapper {
   position: relative;
   height: auto;
   width: auto;
 }
-/* line 100, ../sass/_machine-block.scss */
+/* line 117, ../sass/_machine-block.scss */
 .display-icon .machine__wrapper:hover {
   -webkit-box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
   -moz-box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
   box-shadow: 1px 1px 3px 1px rgba(25, 25, 25, 0.5);
 }
-/* line 104, ../sass/_machine-block.scss */
+/* line 121, ../sass/_machine-block.scss */
 .display-icon .machine__wrapper.green i {
   color: green;
 }
-/* line 109, ../sass/_machine-block.scss */
+/* line 126, ../sass/_machine-block.scss */
 .display-icon .machine__wrapper.red i {
   color: red;
 }
-/* line 114, ../sass/_machine-block.scss */
+/* line 131, ../sass/_machine-block.scss */
 .display-icon .machine__wrapper.yellow i {
   color: orange;
 }
-/* line 139, ../sass/_machine-block.scss */
+/* line 156, ../sass/_machine-block.scss */
 .display-icon .machine .alert:before {
   content: '\f0f3';
   display: block;
@@ -452,38 +474,25 @@ body.full-screen .controls.full-screen {
   color: red;
 }
 
-/* line 152, ../sass/_machine-block.scss */
-.show-details .machine__wrapper {
-  width: 200px !important;
-}
-/* line 155, ../sass/_machine-block.scss */
-.show-details .machine__data {
-  display: inline-block;
-}
-/* line 158, ../sass/_machine-block.scss */
-.show-details .annotation {
-  display: inline;
-}
-
-/* line 163, ../sass/_machine-block.scss */
+/* line 170, ../sass/_machine-block.scss */
 .machine-status {
   background-color: rgba(245, 245, 245, 0.9);
 }
 
 @-moz-keyframes shake {
-  /* line 169, ../sass/_machine-block.scss */
+  /* line 176, ../sass/_machine-block.scss */
   0% {
     -moz-transform: rotate(-10deg);
     transform: rotate(-10deg);
   }
 
-  /* line 172, ../sass/_machine-block.scss */
+  /* line 179, ../sass/_machine-block.scss */
   50% {
     -moz-transform: rotate(10deg);
     transform: rotate(10deg);
   }
 
-  /* line 175, ../sass/_machine-block.scss */
+  /* line 182, ../sass/_machine-block.scss */
   100% {
     -moz-transform: rotate(-10deg);
     transform: rotate(-10deg);
@@ -491,19 +500,19 @@ body.full-screen .controls.full-screen {
 }
 
 @-webkit-keyframes shake {
-  /* line 169, ../sass/_machine-block.scss */
+  /* line 176, ../sass/_machine-block.scss */
   0% {
     -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
   }
 
-  /* line 172, ../sass/_machine-block.scss */
+  /* line 179, ../sass/_machine-block.scss */
   50% {
     -webkit-transform: rotate(10deg);
     transform: rotate(10deg);
   }
 
-  /* line 175, ../sass/_machine-block.scss */
+  /* line 182, ../sass/_machine-block.scss */
   100% {
     -webkit-transform: rotate(-10deg);
     transform: rotate(-10deg);
@@ -511,19 +520,19 @@ body.full-screen .controls.full-screen {
 }
 
 @-o-keyframes shake {
-  /* line 169, ../sass/_machine-block.scss */
+  /* line 176, ../sass/_machine-block.scss */
   0% {
     -o-transform: rotate(-10deg);
     transform: rotate(-10deg);
   }
 
-  /* line 172, ../sass/_machine-block.scss */
+  /* line 179, ../sass/_machine-block.scss */
   50% {
     -o-transform: rotate(10deg);
     transform: rotate(10deg);
   }
 
-  /* line 175, ../sass/_machine-block.scss */
+  /* line 182, ../sass/_machine-block.scss */
   100% {
     -o-transform: rotate(-10deg);
     transform: rotate(-10deg);
@@ -531,19 +540,19 @@ body.full-screen .controls.full-screen {
 }
 
 @-ms-keyframes shake {
-  /* line 169, ../sass/_machine-block.scss */
+  /* line 176, ../sass/_machine-block.scss */
   0% {
     -ms-transform: rotate(-10deg);
     transform: rotate(-10deg);
   }
 
-  /* line 172, ../sass/_machine-block.scss */
+  /* line 179, ../sass/_machine-block.scss */
   50% {
     -ms-transform: rotate(10deg);
     transform: rotate(10deg);
   }
 
-  /* line 175, ../sass/_machine-block.scss */
+  /* line 182, ../sass/_machine-block.scss */
   100% {
     -ms-transform: rotate(-10deg);
     transform: rotate(-10deg);
@@ -551,150 +560,150 @@ body.full-screen .controls.full-screen {
 }
 
 @keyframes shake {
-  /* line 169, ../sass/_machine-block.scss */
+  /* line 176, ../sass/_machine-block.scss */
   0% {
     transform: rotate(-10deg);
   }
 
-  /* line 172, ../sass/_machine-block.scss */
+  /* line 179, ../sass/_machine-block.scss */
   50% {
     transform: rotate(10deg);
   }
 
-  /* line 175, ../sass/_machine-block.scss */
+  /* line 182, ../sass/_machine-block.scss */
   100% {
     transform: rotate(-10deg);
   }
 }
 
 @-moz-keyframes fontbulger {
-  /* line 181, ../sass/_machine-block.scss */
+  /* line 188, ../sass/_machine-block.scss */
   0%, 100% {
     font-size: 1em;
   }
 
-  /* line 184, ../sass/_machine-block.scss */
+  /* line 191, ../sass/_machine-block.scss */
   50% {
     font-size: 1.3em;
   }
 }
 
 @-webkit-keyframes fontbulger {
-  /* line 181, ../sass/_machine-block.scss */
+  /* line 188, ../sass/_machine-block.scss */
   0%, 100% {
     font-size: 1em;
   }
 
-  /* line 184, ../sass/_machine-block.scss */
+  /* line 191, ../sass/_machine-block.scss */
   50% {
     font-size: 1.3em;
   }
 }
 
 @-o-keyframes fontbulger {
-  /* line 181, ../sass/_machine-block.scss */
+  /* line 188, ../sass/_machine-block.scss */
   0%, 100% {
     font-size: 1em;
   }
 
-  /* line 184, ../sass/_machine-block.scss */
+  /* line 191, ../sass/_machine-block.scss */
   50% {
     font-size: 1.3em;
   }
 }
 
 @-ms-keyframes fontbulger {
-  /* line 181, ../sass/_machine-block.scss */
+  /* line 188, ../sass/_machine-block.scss */
   0%, 100% {
     font-size: 1em;
   }
 
-  /* line 184, ../sass/_machine-block.scss */
+  /* line 191, ../sass/_machine-block.scss */
   50% {
     font-size: 1.3em;
   }
 }
 
 @keyframes fontbulger {
-  /* line 181, ../sass/_machine-block.scss */
+  /* line 188, ../sass/_machine-block.scss */
   0%, 100% {
     font-size: 1em;
   }
 
-  /* line 184, ../sass/_machine-block.scss */
+  /* line 191, ../sass/_machine-block.scss */
   50% {
     font-size: 1.3em;
   }
 }
 
 @-moz-keyframes pulse-icon {
-  /* line 190, ../sass/_machine-block.scss */
+  /* line 197, ../sass/_machine-block.scss */
   0%, 100% {
     color: rgba(255, 0, 0, 0.3);
   }
 
-  /* line 194, ../sass/_machine-block.scss */
+  /* line 201, ../sass/_machine-block.scss */
   50% {
     color: red;
   }
 }
 
 @-webkit-keyframes pulse-icon {
-  /* line 190, ../sass/_machine-block.scss */
+  /* line 197, ../sass/_machine-block.scss */
   0%, 100% {
     color: rgba(255, 0, 0, 0.3);
   }
 
-  /* line 194, ../sass/_machine-block.scss */
+  /* line 201, ../sass/_machine-block.scss */
   50% {
     color: red;
   }
 }
 
 @-o-keyframes pulse-icon {
-  /* line 190, ../sass/_machine-block.scss */
+  /* line 197, ../sass/_machine-block.scss */
   0%, 100% {
     color: rgba(255, 0, 0, 0.3);
   }
 
-  /* line 194, ../sass/_machine-block.scss */
+  /* line 201, ../sass/_machine-block.scss */
   50% {
     color: red;
   }
 }
 
 @-ms-keyframes pulse-icon {
-  /* line 190, ../sass/_machine-block.scss */
+  /* line 197, ../sass/_machine-block.scss */
   0%, 100% {
     color: rgba(255, 0, 0, 0.3);
   }
 
-  /* line 194, ../sass/_machine-block.scss */
+  /* line 201, ../sass/_machine-block.scss */
   50% {
     color: red;
   }
 }
 
 @keyframes pulse-icon {
-  /* line 190, ../sass/_machine-block.scss */
+  /* line 197, ../sass/_machine-block.scss */
   0%, 100% {
     color: rgba(255, 0, 0, 0.3);
   }
 
-  /* line 194, ../sass/_machine-block.scss */
+  /* line 201, ../sass/_machine-block.scss */
   50% {
     color: red;
   }
 }
 
 @-moz-keyframes pulse {
-  /* line 201, ../sass/_machine-block.scss */
+  /* line 208, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
-  /* line 205, ../sass/_machine-block.scss */
+  /* line 212, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
@@ -702,13 +711,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-webkit-keyframes pulse {
-  /* line 201, ../sass/_machine-block.scss */
+  /* line 208, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
-  /* line 205, ../sass/_machine-block.scss */
+  /* line 212, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
@@ -716,13 +725,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-o-keyframes pulse {
-  /* line 201, ../sass/_machine-block.scss */
+  /* line 208, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
-  /* line 205, ../sass/_machine-block.scss */
+  /* line 212, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
@@ -730,13 +739,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-ms-keyframes pulse {
-  /* line 201, ../sass/_machine-block.scss */
+  /* line 208, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
-  /* line 205, ../sass/_machine-block.scss */
+  /* line 212, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
@@ -744,13 +753,13 @@ body.full-screen .controls.full-screen {
 }
 
 @keyframes pulse {
-  /* line 201, ../sass/_machine-block.scss */
+  /* line 208, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.1);
   }
 
-  /* line 205, ../sass/_machine-block.scss */
+  /* line 212, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(255, 0, 0, 0.5);
@@ -758,13 +767,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-moz-keyframes pulse-blue {
-  /* line 212, ../sass/_machine-block.scss */
+  /* line 219, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
-  /* line 216, ../sass/_machine-block.scss */
+  /* line 223, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(0, 0, 255, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
@@ -772,13 +781,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-webkit-keyframes pulse-blue {
-  /* line 212, ../sass/_machine-block.scss */
+  /* line 219, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
-  /* line 216, ../sass/_machine-block.scss */
+  /* line 223, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(0, 0, 255, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
@@ -786,13 +795,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-o-keyframes pulse-blue {
-  /* line 212, ../sass/_machine-block.scss */
+  /* line 219, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
-  /* line 216, ../sass/_machine-block.scss */
+  /* line 223, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(0, 0, 255, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
@@ -800,13 +809,13 @@ body.full-screen .controls.full-screen {
 }
 
 @-ms-keyframes pulse-blue {
-  /* line 212, ../sass/_machine-block.scss */
+  /* line 219, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
-  /* line 216, ../sass/_machine-block.scss */
+  /* line 223, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(0, 0, 255, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);
@@ -814,13 +823,13 @@ body.full-screen .controls.full-screen {
 }
 
 @keyframes pulse-blue {
-  /* line 212, ../sass/_machine-block.scss */
+  /* line 219, ../sass/_machine-block.scss */
   0%, 100% {
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 155, 0.1);
   }
 
-  /* line 216, ../sass/_machine-block.scss */
+  /* line 223, ../sass/_machine-block.scss */
   50% {
     background-color: rgba(0, 0, 255, 0.2);
     box-shadow: 2px 2px 1px 1px rgba(0, 0, 255, 0.5);

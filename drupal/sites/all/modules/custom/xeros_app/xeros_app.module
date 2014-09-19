@@ -26,6 +26,7 @@ function xeros_app_permission() {
 }
 
 function xeros_app_preprocess_html(&$variables, $hook) {
+    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 
     drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Location.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 }

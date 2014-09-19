@@ -18,6 +18,8 @@
   }
   .machine__label {
     display: none;
+    font-size: .9em;
+    padding-left: 5px;
   }
 }
 
@@ -26,10 +28,25 @@
   .machine__wrapper {
     .machine__label {
       display: block;
-      font-size: .9em;
-      //text-align: center;
-      padding-left: 5px;
     }
+  }
+}
+.controls.show-label {
+  display: none !important; // Disabled
+}
+// Hide or show details
+.show-details {
+  .machine__wrapper {
+    width: 200px !important;
+    .machine__label {
+      display: block;
+    }
+    .machine__data {
+      display: inline-block;
+    }
+  }
+  .annotation {
+    display: inline;
   }
 }
 
@@ -148,17 +165,7 @@
 }
 
 
-.show-details {
-  .machine__wrapper {
-    width: 200px !important;
-  }
-  .machine__data {
-    display: inline-block;
-  }
-  .annotation {
-    display: inline;
-  }
-}
+
 
 .machine-status {
   background-color: rgba(245,245,245, .9);
