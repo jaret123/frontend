@@ -22,8 +22,8 @@ BEGIN
 		a.status_id,
 		a.status_message,
 		case 
-			when a.status_code = 0 and b.idle_count <= ', record_count, ' then 1
-			when a.status_code = 0 and b.idle_count > ', record_count, ' then 0
+			when a.status_code = 0 and b.idle_count < ', record_count, ' then 1
+			when a.status_code = 0 and b.idle_count >= ', record_count, ' then 0
 			else a.status_code
 		end as status_code,
 		a.time_stamp

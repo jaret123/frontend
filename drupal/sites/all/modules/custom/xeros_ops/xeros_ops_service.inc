@@ -45,7 +45,14 @@ function get_status($record_count, $machineIds) {
   }
 
   $result = db_query($query, array());
-  $r = $result->fetchAll();
+
+  //while($result->nextRowSet())
+  //{
+    $r = $result->fetchAll();
+  //}
+  $result->closeCursor();
+
+  //$r = $result->fetchAll();
 
   $a = array();
 
