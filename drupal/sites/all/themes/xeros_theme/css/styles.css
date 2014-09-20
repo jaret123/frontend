@@ -2680,15 +2680,15 @@ h1 {
   font-weight: 300;
   font-size: 12px;
   left: 0px;
-  top: 10px;
+  top: 00px;
   position: absolute;
   line-height: 20px;
 }
-/* line 8, ../sass/components/_legend.scss */
+/* line 9, ../sass/components/_legend.scss */
 .legend .label {
   margin-left: 5px;
 }
-/* line 11, ../sass/components/_legend.scss */
+/* line 12, ../sass/components/_legend.scss */
 .legend .swatch {
   width: 20px;
   height: 12px;
@@ -2696,12 +2696,12 @@ h1 {
   margin-left: 3px;
   margin-bottom: -1px;
 }
-/* line 17, ../sass/components/_legend.scss */
+/* line 18, ../sass/components/_legend.scss */
 .legend .swatch.current {
   background-color: gray;
   border: 1px solid gray;
 }
-/* line 21, ../sass/components/_legend.scss */
+/* line 22, ../sass/components/_legend.scss */
 .legend .swatch.xeros {
   background-color: #0087be;
   border: 1px solid #0087be;

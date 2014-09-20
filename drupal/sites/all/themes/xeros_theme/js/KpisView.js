@@ -3,6 +3,7 @@
  */
 var view = {
 
+    legendTpl : '',
     // Each report view has a slightly different data structure
     parseData : function(draw) {
         var self = this;
@@ -164,6 +165,7 @@ var view = {
         }
 
         draw(); // This does the html template draw
+        self.drawLegend();
         self.drawCharts();
         self.bindNav();
         //exportPDF.init();
@@ -222,6 +224,12 @@ var view = {
             }
         }
     },
+    drawLegend : function() {
+
+        var legendTpl = Handlebars.compile(jQuery("#legend-tpl").html());
+        var html = legendTpl({xeros : app.reportData[0].xeros});
+        jQuery('.legend').html(html);
+    },
     initialize : function() {
 
         // Do any initialization unique to this view.
@@ -241,7 +249,6 @@ var view = {
             controls.adminMenuControls();
             controls.createCompanySelect();
         }
-
         app.initialize();
 
     },

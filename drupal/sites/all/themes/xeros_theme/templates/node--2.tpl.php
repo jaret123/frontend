@@ -13,13 +13,22 @@
         <div class="container">
             <div class="kpis">
 <!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
+              <div class="legend">
+
+              </div>
               <script id="legend-tpl" type="text/x-handlebars-template">
-                <div class="legend">
-                    <span class="swatch current"></span>
-                    <span class="label">Current Consumption</span>
-                    <span class="swatch xeros"></span>
-                    <span class="label">Potential Consumption with Xeros</span>
-                </div>
+                {{#if xeros }}
+                  <span class="swatch current actual"></span>
+                  <span class="label">Current Consumption (Xeros)</span><br/>
+                  <span class="swatch xeros model"></span>
+                  <span class="label">Industry Average Consumption (Non Xeros)</span>
+                {{else}}
+                  <span class="swatch current"></span>
+                  <span class="label">Current Consumption (Non Xeros)</span><br/>
+                  <span class="swatch xeros model"></span>
+                  <span class="label">Potential Consumption with Xeros</span>
+                {{/if}}
+
               </script>
 <!-- End template -->
                 <div id="kpis__select" class="time__select kpis__select select">
