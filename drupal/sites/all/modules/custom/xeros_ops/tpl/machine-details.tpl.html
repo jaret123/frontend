@@ -71,10 +71,10 @@
             <div class="cycle__status"><em>{{classification_name}}</em></div>
             <div class="cycle__timestamp"><span class="label">Start Time:</span>{{cycle_start_time}}</div>
             <div class="cycle__timestamp"><span class="label">End Time:</span>{{cycle_end_time}}</div>
-            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{round cycle_cold_water_volume 2}} gallons</div>
-            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{round cycle_hot_water_volume 2}} gallons</div>
+            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{round cycle_cold_water_volume 1}} gallons</div>
+            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{round cycle_hot_water_volume 1}} gallons</div>
             <div class="cycle__detail"><span class="label">Therms:</span>{{round cycle_therms 2}}</div>
-            <div class="cycle__detail"><span class="label">Chemicals:</span>{{round cycle_chemical_strength 2}} ounces</div>
+            <div class="cycle__detail"><span class="label">Chemicals:</span>{{round cycle_chemical_strength 1}} ounces</div>
         </div>
         <br/>
         {{/each}}
