@@ -31,15 +31,18 @@ function service($service_name, $machineIds) {
   //echo $result;
 }
 
+// TODO: Refactor this into two seperate calls
 function get_status($record_count, $machineIds) {
 
   $status = false;
   if ($record_count == 'current') {
     $status = true;
-    $record_count = 1;
+    // Configure the idle count
+    $record_count = 2;
+    $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ")";
+  } else {
+    $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";
   }
-
-  $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";
 
   $result = db_query($query, array());
   $r = $result->fetchAll();
