@@ -56,17 +56,6 @@ FF.Hud = (function($){
         //var j = 0;
         var alert = 0;
 
-//        for (i = 0; i < xerosMachines.length; i++) {
-//            var m = xerosMachines[i];
-//
-//            data.machineSource[m.machine_id] = m;
-//
-//            machineIds.push(parseInt(m.machine_id));
-//        }
-
-        // Temp
-        //machineIds = [6,7];
-
         //for (i = 0; i < data.machineSource.length; i++) {
         for (var i in data.machineSource) {
             if (data.machineSource.hasOwnProperty(i)) {
@@ -78,7 +67,9 @@ FF.Hud = (function($){
                 if ( typeof data.machine.companies[m.company_title] == 'undefined') {
                     data.machine.companies[m.company_title] = {
                         'locations' : {},
-                        'company_title' : m.company_title
+                        'company_title' : m.company_title,
+                        faultCount: 0,
+                        monitoredMachineCount: 0
                     };
                 }
                 // If the location is not on the object yet, initialize it
@@ -96,9 +87,34 @@ FF.Hud = (function($){
                     m.modelFilter = 'non-xeros';
                 }
 
+                // If the machine is not offline, add to the list of monitored servers and check fault count
+                if (m.machine_status !== "offline") {
+                    data.machine.companies[m.company_title].monitoredMachineCount += 1;
+                    if ( !checkNested(m, 'status', 'status_code') ||  m.status.status_code <= 0) {
+                       data.machine.companies[m.company_title].faultCount += 1;
+                    }
+                }
+
                 data.machine.companies[m.company_title].locations[m.location_title].machines[i] = m;
             }
         }
+
+        // Sort the companies
+        // TODO: We should probably reformat the whole data object as nested arrays instead of objects to allow
+        // easier sorting
+
+        var s = _.pairs(data.machine.companies);
+
+        // Put sites with the fewest monitored machines at the bottom
+        s = _.sortBy(s, function(obj) { return -(obj[1].monitoredMachineCount) } );
+
+        // Put machines with the most faults at the top
+        s = _.sortBy(s, function(obj) { return -(obj[1].faultCount) } );
+
+        data.machine.companies = _.object(s);
+
+        console.log(s);
+
         console.log (data.machine);
     };
 
