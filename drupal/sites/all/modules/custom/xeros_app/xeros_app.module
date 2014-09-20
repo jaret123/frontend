@@ -13,6 +13,13 @@ function xeros_app_menu() {
     'access arguments' => array('access content'),
     'file' => 'ws_location.inc'
   );
+  $items['ws/industry/averages'] = array(
+    'title' => 'Industry Averages Web Service',
+    'page callback' => 'ws_industry_averages',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_industry_averages.inc'
+  );
   return $items;
 }
 

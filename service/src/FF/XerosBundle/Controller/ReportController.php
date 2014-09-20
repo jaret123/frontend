@@ -108,8 +108,13 @@ class ReportController extends Controller {
             $filters['machine_type_filter'] = "and xc.manufacturer <> 'xeros'";
             break;
         }
-        // Date points for the charts
-        $dataPointSql = <<<SQL
+      /**
+       * Calculate the data points for the charts
+       *
+       * :metric will have the actual calculations
+       */
+
+      $dataPointSql = <<<SQL
 select
     b.date,
     b.cycles,
@@ -141,7 +146,12 @@ order by
 	b.date
 SQL;
 
-        $summarySql = <<<SQL
+      /**
+       * Calculate the summary data for the dashboard charts
+       *
+       * :metric will have the actual calculations
+       */
+      $summarySql = <<<SQL
 select
   b.date,
   coalesce(truncate(b.value, 0), 0) as value,
@@ -167,9 +177,78 @@ where
    1 = 1
 
 SQL;
-        array_push($metrics, array(
-                                  "name" => "cold-water",
-                                  "query" => <<<METRIC
+
+      /**
+       * METRICS
+       *
+       * Generate the metrics calculations.  Store them in an array and iterate over them
+       *
+       *
+       * Hard coding the multipliers for now
+       *
+       * From ws/industry/averages
+       * {
+          avg_cold_water_volume: "121.64078133",
+          avg_cold_water_cost: "1.20101627",
+          avg_hot_water_volume: "51.41446880",
+          avg_therms: "0.37381793",
+          avg_therm_cost: "0.34448701",
+          avg_chemical_strength: "17.38840517",
+          avg_chemical_cost: "1.18185205"
+          }
+       */
+
+
+      switch ($machine_type) {
+        case "xeros":
+          // Cold Water
+          array_push($metrics, array(
+              "name" => "cold-water",
+              "query" => <<<METRIC
+   		sum(truncate(xc.cycle_cold_water_volume, 0)) as value,
+   		sum(truncate(xc.cycle_cold_water_volume, 0) * 4) as value_xeros, -- Model data
+   		sum(coalesce(xc.cycle_cold_water_cost, 0)) as cost,
+   		sum(coalesce(xc.cycle_cold_water_cost, 0) * 4) as cost_xeros -- Model data
+METRIC
+            ));
+          // Hot Water (Therms)
+          array_push($metrics, array(
+              "name" => "hot-water",
+              "query" => <<<METRIC
+   		sum(coalesce(xc.cycle_therms, 0)) as value,
+   		count(*) * 0.37381793 as value_xeros, -- Model data
+   		sum(coalesce(xc.cycle_therms_cost, 0)) as cost,
+   		count(*) * 0.34448 as cost_xeros -- Model data
+METRIC
+          // Cycle Time (not in use)
+            ));
+//        array_push($metrics, array(
+//            "name" => "cycle-time",
+//            "query" => <<<METRIC
+//   		sum(xc.cycle_time_total_time) as value,
+//   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
+//   		sum(xc.cycle_time_labor_cost) as cost,
+//   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
+//METRIC
+//        ));
+          // Chemical
+          array_push($metrics, array(
+              "name" => "chemical",
+              "query" => <<<METRIC
+   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
+   		count(*) * 17.3884 as value_xeros, -- Model data
+   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
+   		count(*) * 1.18185 as cost_xeros -- Model data
+METRIC
+            ));
+
+          break;
+
+        case "non-xeros":
+          // Cold Water
+          array_push($metrics, array(
+              "name" => "cold-water",
+              "query" => <<<METRIC
    		sum(truncate(xc.cycle_cold_water_volume, 0)) as value,
    		sum(
           case xc.water_only
@@ -189,16 +268,18 @@ SQL;
           end
    		) as cost_xeros
 METRIC
-                             ));
-        array_push($metrics, array(
-            "name" => "hot-water",
-            "query" => <<<METRIC
+            ));
+          // Hot Water (Therms)
+          array_push($metrics, array(
+              "name" => "hot-water",
+              "query" => <<<METRIC
    		sum(coalesce(xc.cycle_therms, 0)) as value,
    		sum(coalesce(xc.cycle_therms_xeros, 0)) as value_xeros,
    		sum(coalesce(xc.cycle_therms_cost, 0)) as cost,
    		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) as cost_xeros
 METRIC
-        ));
+            ));
+          // Cycle Time -- not in use
 //        array_push($metrics, array(
 //            "name" => "cycle-time",
 //            "query" => <<<METRIC
@@ -208,18 +289,26 @@ METRIC
 //   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
 //METRIC
 //        ));
-        array_push($metrics, array(
-            "name" => "chemical",
-            "query" => <<<METRIC
+          // Chemical Strength
+          array_push($metrics, array(
+              "name" => "chemical",
+              "query" => <<<METRIC
    		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
    		sum(coalesce(xc.cycle_chemical_xeros_strength, 0)) as value_xeros,
    		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
    		sum(coalesce(xc.cycle_chemical_xeros_cost, 0)) as cost_xeros
 METRIC
-        ));
+            ));
+          break;
+      }
 
 
-        foreach ( $metrics as $k => $v) {
+      /**
+       * Calculate the metrics
+       *
+       * Iterate over the metrics array and build the SQL for the calculations
+       */
+      foreach ( $metrics as $k => $v) {
             $ar = array (
                 'name' => $v["name"],
                 'summaryData' => array(),

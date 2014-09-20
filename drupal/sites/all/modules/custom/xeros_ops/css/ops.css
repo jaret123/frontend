@@ -126,7 +126,7 @@ body.full-screen .footer {
 }
 /* line 10, ../sass/_display-full-screen.scss */
 body.full-screen #content {
-  padding: 10px !important;
+  padding: 10px 10px 25px 10px !important;
 }
 /* line 13, ../sass/_display-full-screen.scss */
 body.full-screen h2, body.full-screen h3 {
@@ -137,7 +137,7 @@ body.full-screen .machine {
   padding: 0 10px;
   margin: 0 10px;
 }
-/* line 21, ../sass/_display-full-screen.scss */
+/* line 20, ../sass/_display-full-screen.scss */
 body.full-screen .controls.full-screen {
   display: none;
 }

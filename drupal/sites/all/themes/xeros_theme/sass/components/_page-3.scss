@@ -7,7 +7,7 @@
   margin-right: auto;
 
   $col-width: 90px;
-  $col-gutter: (.31 * $col-width);
+  $col-gutter: (.25 * $col-width);
   $row-height: .8 * $col-width;
 
   &.active {
@@ -46,7 +46,10 @@
       }
       margin-top: 25px;
       max-height: 800px;
-      overflow: scroll;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      -ms-overflow-y: scroll;
       .machine {
         position: absolute;
         text-align: center;

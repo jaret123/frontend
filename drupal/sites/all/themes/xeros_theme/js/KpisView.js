@@ -8,6 +8,17 @@ var view = {
         var self = this;
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
+        // Industry Averages per cycle
+        var industryAverages = {
+            avg_cold_water_volume: "121.64078133",
+            avg_cold_water_cost: "1.20101627",
+            avg_hot_water_volume: "51.41446880",
+            avg_therms: "0.37381793",
+            avg_therm_cost: "0.34448701",
+            avg_chemical_strength: "17.38840517",
+            avg_chemical_cost: "1.18185205"
+        };
+
         var ar;
         ar = [
             {
@@ -90,6 +101,13 @@ var view = {
             app.reportData[mi + 1].chartData = app.data.data[mi].chartData;
         }
 
+
+        /**
+         * Compute the Summary Data for the top chart.  We have to do this on the front end because
+         * it is calculated differently based on context.
+         *
+         */
+        // Set up the sums the sums we will calculate.  This array lists which sub arrays to add to the totals ie: [1,2,3]
         var sums = app.reportData[0].total;
 
         // For each of the values in the summary.total add them.
@@ -126,12 +144,25 @@ var view = {
 
             }
         }
+
         for ( i in app.reportData ) {
             s = app.reportData[i].summaryData;
+
+            // Pass to template for use in conditional templates
+            app.reportData[i].xeros = FF.Location.xeros();
+
+            // Calculate savings
             app.reportData[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
+
+            // Invert the savings if this is a xeros machine
+            if ( FF.Location.xeros() ) {
+                app.reportData[i].summaryData.savings = -app.reportData[i].summaryData.savings
+            }
+
             // Add custom labels for Xeros versus non-xeros machines
             app.reportData[i].labels = labels[FF.Location.machineTypes()];
         }
+
         draw(); // This does the html template draw
         self.drawCharts();
         self.bindNav();

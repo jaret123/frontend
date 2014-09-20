@@ -17,6 +17,7 @@ FF.Location = (function ($) {
     pub.location = {};
     pub.getLocation = getLocation;
     pub.machineTypes = machineTypes;
+    pub.xeros = xeros;
 
     function getLocation(locationId, callback) {
         jQuery.ajax({
@@ -43,6 +44,18 @@ FF.Location = (function ($) {
             return 'non-xeros';
         }
 
+    }
+
+    function xeros() {
+        if ( checkNested(pub.location, 'field_machine_types', 'und', 0) ) {
+            if ( pub.location.field_machine_types['und'][0].value = 'xeros' ) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     function init() {
