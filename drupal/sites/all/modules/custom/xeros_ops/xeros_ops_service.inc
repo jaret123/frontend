@@ -92,6 +92,7 @@ function get_machines($machineIds) {
 	m.machine_name,
 	m.notes,
 	m.location_id,
+	m.status as machine_status,
 	coalesce(l.title, 'Unknown Location') as location_title,
 	coalesce(c.title, 'Unknown Company') as company_title
 from
@@ -104,11 +105,14 @@ left join field_data_field_company as lc
 	and lc.bundle = 'location'
 left join node as c
 	on lc.field_company_target_id = c.nid
-	and c.type = 'company';
+	and c.type = 'company'
+where
+    m.status not in ('inactive');
+
 SQL;
 
+  // Machines
   $result = db_query($query, array());
-
   $r = $result->fetchAll();
 
   $machines = array();
@@ -119,6 +123,7 @@ SQL;
   // Append the usage
   $usage = get_usage();
 
+  // Merge usage and status with machines
   foreach ($r as $key => $value) {
     $machine_id = $value->machine_id;
     unset($value->machine_id);

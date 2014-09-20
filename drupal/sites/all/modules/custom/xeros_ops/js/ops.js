@@ -407,17 +407,22 @@ FF.Hud = (function($){
             };
         });
 
-        Handlebars.registerHelper('statusFormat', function(statusCode, format) {
+        Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, format) {
             if (format == 'color') {
-                if (statusCode > 0) {
-                    return 'green';
-                } else if (statusCode == 0) {
-                    return 'yellow';
-                } else if (statusCode < 0 ) {
-                    return 'red';
+                if (machineStatus == 'offline') {
+                    return 'grey';
                 } else {
-                    return 'red';
+                    if (statusCode > 0) {
+                        return 'green';
+                    } else if (statusCode == 0) {
+                        return 'yellow';
+                    } else if (statusCode < 0 ) {
+                        return 'red';
+                    } else {
+                        return 'red';
+                    }
                 }
+
             } else if (format == 'code') {
                 if (statusCode > 0) {
                     return 'OK';
