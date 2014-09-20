@@ -63,7 +63,7 @@
         <h5>Summary</h5>
         <span class="label">Last Cycle Ended:</span>{{cycles.0.cycle_end_time}}<br/>
         <span class="label">Cycles Today:</span>{{machine.usage.cycles}}<br/>
-        <span class="label">Total Run Time Today:</span>{{machine.usage.run_time}}<br/>
+        <span class="label">Total Run Time Today:</span>{{runTimeFormat machine.usage.run_time}}<br/>
 
         <h5>Details</h5>
         {{#each cycles}}
@@ -71,10 +71,10 @@
             <div class="cycle__status"><em>{{classification_name}}</em></div>
             <div class="cycle__timestamp"><span class="label">Start Time:</span>{{cycle_start_time}}</div>
             <div class="cycle__timestamp"><span class="label">End Time:</span>{{cycle_end_time}}</div>
-            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{cycle_cold_water_volume}} gallons</div>
-            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{cycle_hot_water_volume}} gallons</div>
-            <div class="cycle__detail"><span class="label">Therms:</span>{{cycle_therms}}</div>
-            <div class="cycle__detail"><span class="label">Chemicals:</span>{{cycle_chemical_strength}} ounces</div>
+            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{round cycle_cold_water_volume 2}} gallons</div>
+            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{round cycle_hot_water_volume 2}} gallons</div>
+            <div class="cycle__detail"><span class="label">Therms:</span>{{round cycle_therms 2}}</div>
+            <div class="cycle__detail"><span class="label">Chemicals:</span>{{round cycle_chemical_strength 2}} ounces</div>
         </div>
         <br/>
         {{/each}}

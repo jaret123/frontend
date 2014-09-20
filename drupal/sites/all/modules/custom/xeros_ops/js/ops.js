@@ -463,6 +463,10 @@ FF.Hud = (function($){
             }
             return time;
         });
+
+        Handlebars.registerHelper('round', function(number, decimalPlaces) {
+            return Math.round(number * Math.pow(10, decimalPlaces)) / Math.pow(10,decimalPlaces);
+        })
     }
 
     function refreshDisplay() {
