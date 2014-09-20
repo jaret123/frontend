@@ -43,9 +43,9 @@
     <div class="log">
         {{#each history}}
         <div class="log__row">
-            <div class="log__timestamp">{{dateFormat time_stamp format="h:mm:ss a"}} - </div>
-            <div class="log__status">{{statusFormat status_code "code"}} - </div>
-            <div class="log__message">{{status_message}}</div>
+            <div class="log__timestamp">{{dateFormat 1.time_stamp format="h:mm:ss a"}} - </div>
+            <div class="log__status">{{statusFormat 1.status_code "code"}} - </div>
+            <div class="log__message">{{1.status_message}}</div>
         </div>
         {{/each}}
     </div>

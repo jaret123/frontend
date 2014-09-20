@@ -132,22 +132,13 @@ FF.Hud = (function($){
     };
 
     formatHistory = function(data) {
-        var _status = {};
-        for (i=0; i < data.length; i++) {
-            var _machineStatus = data[i];
-            var _machineId = _machineStatus.machineId;
-            var _statusId = _machineStatus.id;
-
-            delete _machineStatus.machineId;
-            delete _machineStatus.id;
-
-            if ( typeof _status[_machineId] === 'undefined' ) {
-                _status[_machineId] = {} ;
-            } else {
-                _status[_machineId][_statusId] = _machineStatus;
-            }
-
-        };
+        var _status = [];
+        if ( typeof data !== "undefined" ) {
+            _status = _.pairs(data);
+            // Invert the order
+            _status = _.sortBy(_status, function(obj) { return -(obj[0]) });
+        }
+        console.log('history', _status);
         return _status;
     };
 
@@ -170,8 +161,8 @@ FF.Hud = (function($){
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 for (var first in d) break;
-                data.details.history = d[first];
-                //history = formatHistory(d[first]);
+                //data.details.history = d[first];
+                data.details.history= formatHistory(d[first]);
                 callback(machineId);
             },
             dataType: 'json',
