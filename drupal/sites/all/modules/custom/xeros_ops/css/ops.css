@@ -1,101 +1,101 @@
-/* line 7, ../sass/_layout.scss */
+/* line 8, ../sass/_layout.scss */
 .page-ops {
   color: black;
 }
-/* line 9, ../sass/_layout.scss */
+/* line 10, ../sass/_layout.scss */
 .page-ops #content {
   padding: 30px;
   position: relative;
 }
-/* line 16, ../sass/_layout.scss */
+/* line 17, ../sass/_layout.scss */
 .page-ops h2,
 .page-ops h3 {
   margin: 0;
   line-height: 1.5em;
 }
-/* line 21, ../sass/_layout.scss */
+/* line 22, ../sass/_layout.scss */
 .page-ops h2 {
   font-weight: 300;
 }
-/* line 25, ../sass/_layout.scss */
+/* line 26, ../sass/_layout.scss */
 .page-ops .page-wrapper {
   width: auto !important;
 }
-/* line 37, ../sass/_layout.scss */
+/* line 38, ../sass/_layout.scss */
 .page-ops .location {
   padding-left: 20px;
   background-color: #ddd;
 }
-/* line 42, ../sass/_layout.scss */
+/* line 43, ../sass/_layout.scss */
 .page-ops .location .location__wrapper {
   background-color: #eee;
   margin: 0;
 }
-/* line 47, ../sass/_layout.scss */
+/* line 48, ../sass/_layout.scss */
 .page-ops .machine-list {
   padding-left: 20px;
   background-color: #ddd;
 }
-/* line 50, ../sass/_layout.scss */
+/* line 51, ../sass/_layout.scss */
 .page-ops .machine-list .machine-list__wrapper {
   background-color: #eee;
   margin: 0;
 }
-/* line 55, ../sass/_layout.scss */
+/* line 56, ../sass/_layout.scss */
 .page-ops .machine {
   background-color: #eee;
 }
-/* line 66, ../sass/_layout.scss */
+/* line 67, ../sass/_layout.scss */
 .page-ops .footer {
   position: relative;
 }
-/* line 70, ../sass/_layout.scss */
+/* line 71, ../sass/_layout.scss */
 .page-ops .icon-Washer {
   font-size: 40px;
 }
-/* line 73, ../sass/_layout.scss */
+/* line 74, ../sass/_layout.scss */
 .page-ops .Xeros .icon-Washer {
   font-size: 40px;
 }
-/* line 77, ../sass/_layout.scss */
+/* line 78, ../sass/_layout.scss */
 .page-ops .company {
   margin-top: 5px;
   background-color: rgba(245, 245, 245, 0.9);
 }
-/* line 80, ../sass/_layout.scss */
+/* line 81, ../sass/_layout.scss */
 .page-ops .company .company__details-wrapper {
   background-color: rgba(200, 200, 200, 0.8);
   padding-left: 30px;
 }
-/* line 85, ../sass/_layout.scss */
+/* line 86, ../sass/_layout.scss */
 .page-ops .company .company__details {
   background-color: rgba(245, 245, 245, 0.9);
 }
-/* line 89, ../sass/_layout.scss */
+/* line 90, ../sass/_layout.scss */
 .page-ops .company__container {
   background-color: rgba(245, 245, 245, 0.9);
   border-top: 2px solid white;
 }
 
-/* line 96, ../sass/_layout.scss */
+/* line 97, ../sass/_layout.scss */
 .annotation {
   display: none;
 }
 
-/* line 100, ../sass/_layout.scss */
+/* line 101, ../sass/_layout.scss */
 .company__container {
   display: block;
   vertical-align: top;
   width: 100%;
 }
 
-/* line 105, ../sass/_layout.scss */
+/* line 106, ../sass/_layout.scss */
 .location__container {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 110, ../sass/_layout.scss */
+/* line 111, ../sass/_layout.scss */
 .machine {
   padding: 3px;
   margin: 0px;
@@ -103,13 +103,13 @@
 }
 
 @media all and (min-width: 500px) {
-  /* line 117, ../sass/_layout.scss */
+  /* line 118, ../sass/_layout.scss */
   .title {
     display: block;
   }
 }
 @media all and (min-width: 1000px) {
-  /* line 129, ../sass/_layout.scss */
+  /* line 130, ../sass/_layout.scss */
   .company__container {
     display: inline-block;
     vertical-align: top;
@@ -297,6 +297,20 @@ body.full-screen .controls.full-screen {
 /* line 163, ../sass/_machine-detail.scss */
 .machine-detail .yellow .status-icon:before {
   content: "\f1ce";
+}
+/* line 168, ../sass/_machine-detail.scss */
+.machine-detail .status-not-monitored {
+  display: none;
+}
+/* line 174, ../sass/_machine-detail.scss */
+.machine-detail .grey .status-monitored,
+.machine-detail .grey .log,
+.machine-detail .grey .log__title {
+  display: none;
+}
+/* line 177, ../sass/_machine-detail.scss */
+.machine-detail .grey .status-not-monitored {
+  display: block;
 }
 @media screen and (min-width: 800px) {
   /* line 2, ../sass/_machine-detail.scss */
@@ -856,6 +870,10 @@ body.full-screen .controls.full-screen {
   display: none;
 }
 /* line 23, ../sass/_key.scss */
+.page-ops__key .key__details .title {
+  font-weight: 600;
+}
+/* line 26, ../sass/_key.scss */
 .page-ops__key .key__details .key__item {
   margin: 3px auto;
   position: relative;
@@ -865,25 +883,37 @@ body.full-screen .controls.full-screen {
   display: inline-block;
   padding-right: 10px;
 }
-/* line 32, ../sass/_key.scss */
+/* line 35, ../sass/_key.scss */
 .page-ops__key .key__details .key__item:before {
   position: absolute;
   top: 15px;
   left: 0;
 }
-/* line 38, ../sass/_key.scss */
+/* line 41, ../sass/_key.scss */
 .page-ops__key .key__details .green:before {
   color: green;
 }
-/* line 43, ../sass/_key.scss */
+/* line 46, ../sass/_key.scss */
 .page-ops__key .key__details .red:before {
   color: red;
 }
-/* line 48, ../sass/_key.scss */
+/* line 51, ../sass/_key.scss */
 .page-ops__key .key__details .yellow:before {
   color: orange;
 }
 /* line 56, ../sass/_key.scss */
+.page-ops__key .key__details .grey:before {
+  color: #646464;
+}
+/* line 61, ../sass/_key.scss */
+.page-ops__key .key__details .xeros:before {
+  color: #646464;
+}
+/* line 66, ../sass/_key.scss */
+.page-ops__key .key__details .non-xeros:before {
+  color: #646464;
+}
+/* line 74, ../sass/_key.scss */
 .page-ops__key.show .key__details {
   display: block;
   border: 1px solid rgba(0, 0, 0, 0.7);
@@ -892,7 +922,7 @@ body.full-screen .controls.full-screen {
   background-color: white;
   width: 300px;
 }
-/* line 65, ../sass/_key.scss */
+/* line 83, ../sass/_key.scss */
 .page-ops__key.show .key__open-close {
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
@@ -900,33 +930,41 @@ body.full-screen .controls.full-screen {
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-/* line 73, ../sass/_key.scss */
+/* line 91, ../sass/_key.scss */
 .display-block .page-ops__key .key__details .key__item:before {
   left: 10px;
   font-family: 'FontAwesome';
   font-size: 25px;
 }
-/* line 79, ../sass/_key.scss */
+/* line 97, ../sass/_key.scss */
 .display-block .page-ops__key .key__details .green:before {
   content: '\f00c';
   color: green;
 }
-/* line 85, ../sass/_key.scss */
+/* line 103, ../sass/_key.scss */
 .display-block .page-ops__key .key__details .red:before {
   left: 19px;
   content: '\f12a';
   color: red;
 }
-/* line 92, ../sass/_key.scss */
+/* line 110, ../sass/_key.scss */
 .display-block .page-ops__key .key__details .yellow:before {
   content: '\f1ce';
   color: orange;
 }
-/* line 102, ../sass/_key.scss */
+/* line 120, ../sass/_key.scss */
 .display-icon .page-ops__key .key__details .key__item:before {
   font-family: 'xeros-icon';
   content: "\e60c";
   font-size: 40px;
+}
+/* line 125, ../sass/_key.scss */
+.display-icon .page-ops__key .key__details .xeros.key__item:before {
+  color: #0086bd;
+}
+/* line 128, ../sass/_key.scss */
+.display-icon .page-ops__key .key__details .non-xeros.key__item:before {
+  content: "\e605";
 }
 
 /* line 1, ../sass/_controls.scss */
@@ -989,42 +1027,37 @@ body.full-screen .controls.full-screen {
 }
 
 /* line 63, ../sass/_controls.scss */
+.display-icon .controls__details .controls .status-icon:before {
+  font-family: xeros-icon;
+  content: "\e60c";
+}
+/* line 67, ../sass/_controls.scss */
 .display-icon .controls__details .controls.green {
   border: 1px solid green;
   color: green;
 }
-/* line 66, ../sass/_controls.scss */
-.display-icon .controls__details .controls.green .status-icon:before {
-  font-family: xeros-icon;
-  content: "\e60c";
-}
-/* line 71, ../sass/_controls.scss */
+/* line 72, ../sass/_controls.scss */
 .display-icon .controls__details .controls.red {
   border: 1px solid red;
   color: red;
 }
-/* line 74, ../sass/_controls.scss */
-.display-icon .controls__details .controls.red .status-icon:before {
-  font-family: xeros-icon;
-  content: "\e60c";
-}
-/* line 79, ../sass/_controls.scss */
+/* line 76, ../sass/_controls.scss */
 .display-icon .controls__details .controls.yellow {
   border: 1px solid orange;
   color: orange;
 }
-/* line 82, ../sass/_controls.scss */
-.display-icon .controls__details .controls.yellow .status-icon:before {
-  font-family: xeros-icon;
-  content: "\e60c";
+/* line 80, ../sass/_controls.scss */
+.display-icon .controls__details .controls.grey {
+  border: 1px solid #646464;
+  color: #646464;
 }
 
-/* line 90, ../sass/_controls.scss */
+/* line 87, ../sass/_controls.scss */
 .page-ops__key {
   display: inline-block;
 }
 
-/* line 94, ../sass/_controls.scss */
+/* line 91, ../sass/_controls.scss */
 .countdown-timer {
   position: absolute;
   bottom: 0;
@@ -1036,7 +1069,7 @@ body.full-screen .controls.full-screen {
 }
 
 @media all and (min-width: 1200px) {
-  /* line 106, ../sass/_controls.scss */
+  /* line 103, ../sass/_controls.scss */
   .controls__display {
     position: absolute;
     right: 0;

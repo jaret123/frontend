@@ -60,29 +60,26 @@
 .display-icon {
   .controls__details {
     .controls {
+      .status-icon:before {
+        font-family: xeros-icon;
+        content: "\e60c";
+      }
       &.green {
         border: 1px solid $color-green;
         color: $color-green;
-        .status-icon:before {
-          font-family: xeros-icon;
-          content: "\e60c";
-        }
+
       }
       &.red {
         border: 1px solid $color-red;
         color: $color-red;
-        .status-icon:before {
-          font-family: xeros-icon;
-          content: "\e60c";
-        }
       }
       &.yellow {
         border: 1px solid $color-yellow;
         color: $color-yellow;
-        .status-icon:before {
-          font-family: xeros-icon;
-          content: "\e60c";
-        }
+      }
+      &.grey {
+        border: 1px solid $color-grey;
+        color: $color-grey;
       }
     }
   }

@@ -20,6 +20,9 @@
     z-index: 2000;
     max-width: 300px;
     display: none;
+    .title {
+      font-weight: 600;
+    }
     .key__item {
       margin: 3px auto;
       position: relative;
@@ -47,6 +50,21 @@
     .yellow {
       &:before {
         color: $color-yellow;
+      }
+    }
+    .grey {
+      &:before {
+        color: $color-grey;
+      }
+    }
+    .xeros {
+      &:before {
+        color: $color-grey;
+      }
+    }
+    .non-xeros {
+      &:before {
+        color: $color-grey;
       }
     }
   }
@@ -103,6 +121,12 @@
         font-family: 'xeros-icon';
         content: "\e60c";
         font-size: 40px;
+      }
+      .xeros.key__item:before {
+        color: #0086bd;
+      }
+      .non-xeros.key__item:before {
+        content: "\e605";
       }
     }
   }

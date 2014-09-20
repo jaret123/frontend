@@ -83,7 +83,8 @@
         <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
-<!--        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>-->
+        <span class="controls filter grey" data-filter="grey"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
+        <!--        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>-->
       </div>
       <div class="controls__model">
         <span>Model: </span>
@@ -96,6 +97,9 @@
           <i class="fa fa-chevron-down key__open-close"></i>
         </div>
         <div class="key__details">
+          <div class="title">
+            Status
+          </div>
           <div class="green key__item">
             Machine is active.
           </div>
@@ -104,6 +108,18 @@
           </div>
           <div class="red key__item">
             Alert.  See status message for details.
+          </div>
+          <div class="grey key__item">
+            Machine is not currently being monitored.
+          </div>
+          <div class="title">
+            Machine Type
+          </div>
+          <div class="xeros key__item">
+            Xeros Machine.
+          </div>
+          <div class="non-xeros key__item">
+            Non Xeros Machine.
           </div>
 <!--          <div class="blue key__item">-->
 <!--            <i class="fa fa-bolt"></i>-->

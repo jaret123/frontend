@@ -93,20 +93,20 @@
       display: block;
     }
   }
-    .log__row {
-      > div {
-        display: inline-block;
-        //padding-right: 5px;
-      }
+  .log__row {
+    > div {
+      display: inline-block;
+      //padding-right: 5px;
     }
-    .log__timestamp {
-      font-style: italic;
-    }
-    .log__status {
-    }
-    .log__message {
+  }
+  .log__timestamp {
+    font-style: italic;
+  }
+  .log__status {
+  }
+  .log__message {
 
-    }
+  }
 
   .label {
     display: inline-block;
@@ -121,7 +121,7 @@
       color: $color-red;
     }
     .status {
-//      border: 1px solid red;
+      //      border: 1px solid red;
     }
   }
   .green {
@@ -129,7 +129,7 @@
       color: $color-green;
     }
     .status {
-//      border: 1px solid green;
+      //      border: 1px solid green;
     }
   }
   .yellow {
@@ -137,7 +137,7 @@
       color: $color-yellow;
     }
     .status {
-//      border: 1px solid yellow;
+      //      border: 1px solid yellow;
     }
   }
   .green {
@@ -162,6 +162,20 @@
     }
     .status-icon:before {
       content: "\f1ce";
+    }
+  }
+
+  .status-not-monitored {
+    display: none;
+  }
+  .grey {
+    .status-monitored,
+    .log,
+    .log__title {
+      display: none;
+    }
+    .status-not-monitored {
+      display: block;
     }
   }
 
