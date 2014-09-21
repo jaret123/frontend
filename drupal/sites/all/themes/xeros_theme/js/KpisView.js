@@ -157,7 +157,11 @@ var view = {
 
             // Invert the savings if this is a xeros machine
             if ( FF.Location.xeros() ) {
-                app.reportData[i].summaryData.savings = -app.reportData[i].summaryData.savings
+                // Calculate savings
+                app.reportData[i].summaryData.savings = self.delta(s.cost_xeros, s.cost);
+            } else {
+                // Calculate savings
+                app.reportData[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
             }
 
             // Add custom labels for Xeros versus non-xeros machines
