@@ -294,25 +294,15 @@ FF.Hud = (function($){
         });
     };
 
-    bindEvents = function() {
-
-        els.alerts =      $('.machine');
-
-        // Show machine details
-        els.alerts.on('click', function() {
-            // Rerender with new data
-           showMachine($(this).data('machine-id'));
-        });
-
-
-
+    // Only bind once per page view
+    bindPageEvents = function() {
         // Toggle key display
-        $('.page-ops__key').on('click', function() {
+        $('.page-ops__key').unbind().on('click', function() {
             $(this).toggleClass('show');
         });
 
         // Filter results
-        $('.controls.filter').on('click', function() {
+        $('.controls.filter').unbind().on('click', function() {
             var filter = $(this).data('filter');
             $(this).toggleClass('hide');
 
@@ -333,7 +323,7 @@ FF.Hud = (function($){
         });
 
         // Change Display
-        $('.controls.display-type').on('click', function() {
+        $('.controls.display-type').unbind().on('click', function() {
             var display = $(this).data('display-type');
             $('body')
                 .removeClass(function(index, css) {
@@ -343,19 +333,19 @@ FF.Hud = (function($){
         });
 
         // Show Detail
-        $('.controls.show-details').on('click', function() {
+        $('.controls.show-details').unbind().on('click', function() {
             $('body').toggleClass('show-details');
             $(this).toggleClass('active');
         });
 
         // Show Detail
-        $('.controls.show-label').on('click', function() {
+        $('.controls.show-label').unbind().on('click', function() {
             $('body').toggleClass('show-label');
             $(this).toggleClass('active');
         });
 
         // Toggle Full Screen
-        $('.controls.full-screen').on('click', function() {
+        $('.controls.full-screen').unbind().on('click', function() {
 
             if (FF.Utils.fullscreenElement() !== null) {
                 FF.Utils.exitFullscreen();
@@ -366,6 +356,20 @@ FF.Hud = (function($){
             $('body').toggleClass('full-screen');
             $(this).toggleClass('active');
         })
+    }
+
+    // Bind events on the machines
+    bindEvents = function() {
+
+        els.alerts =      $('.machine');
+
+        // Show machine details
+        els.alerts.unbind().on('click', function() {
+            // Rerender with new data
+           showMachine($(this).data('machine-id'));
+        });
+
+
     }
 
     function screenChangeHandler(){
@@ -519,6 +523,8 @@ FF.Hud = (function($){
                 refreshDisplay();
             }, refreshInterval * 1000);
         }
+
+        bindPageEvents();
 
         $('html').css('padding-bottom', '0');
 
