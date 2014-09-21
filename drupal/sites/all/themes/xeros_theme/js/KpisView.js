@@ -241,14 +241,14 @@ var view = {
         controls.createTimeSelect();
         controls.createExport();
 
-        if (app.sessionCompany == "") {
-            app.sessionCompany = app.user.field_company['und'][0].target_id;
-        }
-        if (app.sessionLocation == "") {
-            FF.Location.getLocation(app.user.field_location['und'][0].target_id, function() {
-                app.sessionLocation = FF.Location.location.nid;
-            });
-        }
+//        if (app.sessionCompany == "") {
+//            app.sessionCompany = app.user.field_company['und'][0].target_id;
+//        }
+//        if (app.sessionLocation == "") {
+//            FF.Location.getLocation(app.user.field_location['und'][0].target_id, function() {
+//                app.sessionLocation = FF.Location.location.nid;
+//            });
+//        }
         if (typeof(app.companies) !== 'undefined') {
             controls.adminMenuControls();
             controls.createCompanySelect();
@@ -262,4 +262,4 @@ var view = {
 }
 
 // Initialize
-view.initialize();
+//view.initialize();

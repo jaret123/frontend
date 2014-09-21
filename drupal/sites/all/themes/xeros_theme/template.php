@@ -52,6 +52,12 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
     drupal_add_js($path . '/js/d3.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/app.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/chart.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+
+  drupal_add_js('jQuery(document).ready(function () {
+
+    });',
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
+  );
 }
 
 

@@ -139,22 +139,13 @@ var view = {
             }
 
         });
-        //        var data = [1000, 12];
-//        var pct = "15%";
-//        //var colors = ["#999", "#0086bd"];
+
     },
     initialize : function() {
         //createDropDown();
         app.initialize();
         controls.createTimeSelect();
         controls.createExport();
-
-        if (app.sessionCompany == "") {
-            app.sessionCompany = app.user.field_company['und'][0].target_id;
-        }
-        if (app.sessionLocation == "") {
-            app.sessionLocation = app.user.field_location['und'][0].target_id;
-        }
 
         if (typeof(app.companies) !== 'undefined') {
             controls.adminMenuControls();
@@ -163,26 +154,21 @@ var view = {
         }
     },
     bindNav : function() {
-        jQuery('.water-only-0 .link').click(function (event) {
+        console.log('bindNav', FF.User.reportSettings);
+        jQuery('.water-only-0 .link').unbind().click(function (event) {
             event.preventDefault();
             var classification,
-                machine_id,
-                date_range;
+                machine_id;
 
             classification = jQuery(this).attr("classification");
             machine_id = jQuery(this).attr("machine");
-            app.sessionMetric = classification;
+            // TODO: Move to user settings
+            FF.User.setReportMetric(classification);
 
-            if ( app.sessionTimeSelect == "custom" ) {
-                date_range = app.sessionTimeSelect + "," + app.sessionDateRange;
-            } else {
-                date_range = app.sessionTimeSelect;
-            }
-            app.saveCookie();
-            document.location.href = 'consumption-details#' + machine_id + "+" + classification + "+" + date_range;
+            document.location.href = 'consumption-details#' + machine_id + "+" + FF.User.reportSettings.metric + "+" + FF.User.reportSettings.timeSelect + ',' + FF.User.reportSettings.dates.toString();
         });
     }
 }
 
 // Initialize
-view.initialize();
+//view.initialize();

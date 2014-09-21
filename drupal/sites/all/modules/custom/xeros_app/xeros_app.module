@@ -13,6 +13,13 @@ function xeros_app_menu() {
     'access arguments' => array('access content'),
     'file' => 'ws_location.inc'
   );
+  $items['ws/company'] = array(
+    'title' => 'Company Web Service',
+    'page callback' => 'ws_company',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_company.inc'
+  );
   $items['ws/industry/averages'] = array(
     'title' => 'Industry Averages Web Service',
     'page callback' => 'ws_industry_averages',
@@ -34,6 +41,37 @@ function xeros_app_permission() {
 
 function xeros_app_preprocess_html(&$variables, $hook) {
     drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-
     drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Location.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Company.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/User.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
+
+  // If logged in (0 is anonymous)
+  if ( $variables['user']->uid > 0 ) {
+    $u = user_load($variables['user']->uid);
+
+    $variables['user']->company = "No company assigned";
+    $variables['user']->location = "No location assigned";
+
+    if (isset($u->field_company['und'][0]['target_id'])) {
+      $company = node_load($u->field_company['und'][0]['target_id']);
+      $variables['user']->company = $company->title;
+    }
+    if (isset($u->field_location['und'][0]['target_id'])) {
+      $location = node_load($u->field_location['und'][0]['target_id']);
+      $variables['user']->location = $location->title;
+    }
+  }
+
+  drupal_add_js('jQuery(document).ready(function () {
+        FF.User.company.id = ' . $company->nid . ';
+        FF.User.company.title = "' . $company->title . '";
+        FF.User.location.id =  ' . $location->nid . ';
+        FF.User.location.title =  "' . $location->title . '";
+        FF.User.init(view.initialize);
+        controls.initialize();
+    });',
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
+  );
 }
+

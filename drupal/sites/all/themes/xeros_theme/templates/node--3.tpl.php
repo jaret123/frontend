@@ -73,7 +73,7 @@
                     <div class="template-container">
                         <script id="page-tpl" type="text/x-handlebars-template">
                             {{#data}}
-                            <div class="row {{meta.cssClass}} {{machine_name}} water-only-{{water_only}}" machineId={{id}}>
+                            <div class="row {{meta.cssClass}} {{manufacturer}} water-only-{{water_only}}" machineId={{id}}>
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer"></div>

@@ -88,7 +88,7 @@ var controls = {
     },
     createTimeSelect : function() {
         var self = this;
-        jQuery("#time-select").val(app.sessionTimeSelect.toString());
+        jQuery("#time-select").val(FF.User.reportSettings.timeSelect.toString());
         controls.createDropDown("#time-select", function (event) {
 
             var click_value = jQuery(event.target).find("span.value").html();
@@ -100,10 +100,9 @@ var controls = {
             } else {
                 // Go do something
                 jQuery("#cal").removeClass("show");
-                app.dateRange = jQuery(event.target).find("span.value").html();
                 // Refresh data
                 app.dataRefresh = 1;
-                window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+                window.location.hash = app.machine + "+" + app.metric + "+" + click_value + "," + app.dateRanges[click_value];
             }
         });
 
@@ -118,15 +117,12 @@ var controls = {
 
         jQuery(".cal__button-submit").unbind().click(function (e) {
             jQuery("#cal").removeClass("show");
-            console.log("Kalandae Submit");
-            console.log(app.dateRanges.yearToDate);
             // Set date range
-            app.dateRange = 'custom,' + k.getSelectedAsText();
+            var click_value = 'custom,' + k.getSelectedAsText();
             // Refresh data
             app.dataRefresh = 1;
             // Set the dates to custom
-            // TODO: Figure out how this affects routing
-            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange;
+            window.location.hash = app.machine + "+" + app.metric + "+" + click_value;
         });
 
         jQuery(".cal__button-cancel").unbind().click(function (e) {
@@ -139,18 +135,15 @@ var controls = {
         var self = this;
         var opts = app.options_tpl( {'data' : app.companies } );
         jQuery("#company-select").html(opts);
-        if ( app.sessionCompany != "") {
-            jQuery("#company-select").val(app.sessionCompany);
-        }
+        jQuery("#company-select").val(FF.User.reportSettings.company.id);
+
         self.createDropDown("#company-select", function (event) {
-            app.sessionCompany = jQuery(event.target).find("span.value").html();
-            self.updateLocationSelect({'data' : app.companies[app.sessionCompany].location });
+            FF.User.setReportCompany(parseInt(jQuery(event.target).find("span.value").html(), 0));
+            self.updateLocationSelect({'data' : app.companies[FF.User.reportSettings.company.id].location });
         });
         var locations = {data : ""};
-        if ( app.sessionCompany != "" ) {
-            locations.data = app.companies[app.sessionCompany].location;
-        }
-        self.updateLocationSelect(locations, app.sessionLocation);
+        locations.data = app.companies[FF.User.reportSettings.company.id].location;
+        self.updateLocationSelect(locations, FF.User.reportSettings.location.id);
     },
 
     /**
@@ -161,9 +154,11 @@ var controls = {
     createLocationSelect : function() {
         var self = this;
         self.createDropDown("#location-select", function (event) {
-            app.sessionLocation = jQuery(event.target).find("span.value").html();
+            var locationId = parseInt(jQuery(event.target).find("span.value").html(), 10);
             app.dataRefresh = 1;
-            window.location.hash = app.machine + "+" + app.metric + "+" + app.dateRange + "+" + app.sessionLocation;
+            FF.User.setReportLocation(locationId, self.setHeaderDisplay);
+
+            window.location.hash = app.machine + "+" + app.metric + "+" + FF.User.reportSettings.dateRange.toString() + "+" + locationId;
         });
     },
     updateLocationSelect : function(locations, selected) {
@@ -206,7 +201,7 @@ var controls = {
                 title : jQuery("#page-title").html(),
                 reportData : app.reportData,
                 charts : charts,
-                dateRange : app.sessionDateRange
+                dateRange : FF.User.reportSettings.dateRange,
             }));
             console.log(form);
 
@@ -216,15 +211,19 @@ var controls = {
         });
     },
     setCsvLink : function() {
-        var href = "/api/csv/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1] ;
+        var href = "/api/csv/" + FF.User.reportSettings.dates[0] + "/" + FF.User.reportSettings.dates[1] ;
 
-        href += "/" + app.sessionLocation;
+        href += "/" + FF.User.reportSettings.location.id;
 
         jQuery("#download__csv").attr("href", href ) ;
     },
     setDateRangeDisplay : function() {
-        jQuery(".date-range__from").html(app.sessionDateRange[0]);
-        jQuery(".date-range__to").html(app.sessionDateRange[1]);
+        jQuery(".date-range__from").html(FF.User.reportSettings.dates[0]);
+        jQuery(".date-range__to").html(FF.User.reportSettings.dates[1]);
+    },
+    setHeaderDisplay : function() {
+        jQuery(".header__company").html(FF.User.reportSettings.company.title);
+        jQuery(".header__location").html(FF.User.reportSettings.location.title);
     },
     createMachineNav : function() {
         // Machine navigation
@@ -284,9 +283,10 @@ var controls = {
     initialize : function() {
         // We can call all of these because the jQuery selectors will just return an empty result if the element
         // is not on the page.
+        self = this;
+        self.setHeaderDisplay();
     }
 }
 
-// Initialize
-controls.initialize();
+
 

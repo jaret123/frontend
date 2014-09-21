@@ -51,7 +51,7 @@ var view = {
             ]
     };
 
-        app.reportData = app.data.data[app.machine].metrics[app.metric];
+        app.reportData = app.data.data[app.machine].metrics[FF.User.reportSettings.metric];
         app.reportData.labels = reportLabels[app.reportData.id];
 
         app.reportData.machine_name = app.data.data[app.machine].machine_name;
@@ -122,19 +122,19 @@ var view = {
         controls.createTimeSelect();
         controls.createExport();
 
-        if (app.sessionCompany == "") {
-            app.sessionCompany = app.user.field_company['und'][0].target_id;
-        }
-        if (app.sessionLocation == "") {
-            app.sessionLocation = app.user.field_location['und'][0].target_id;
-        }
+//        if (app.sessionCompany == "") {
+//            app.sessionCompany = app.user.field_company['und'][0].target_id;
+//        }
+//        if (app.sessionLocation == "") {
+//            app.sessionLocation = app.user.field_location['und'][0].target_id;
+//        }
 
-        if (typeof(app.companies) !== 'undefined') {
-            controls.adminMenuControls();
-            controls.createCompanySelect();
-        }
+//        if (typeof(app.companies) !== 'undefined') {
+//            controls.adminMenuControls();
+//            controls.createCompanySelect();
+//        }
 
     }
 }
 
-view.initialize();
+//view.initialize();

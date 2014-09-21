@@ -61,39 +61,11 @@ var app = {
 
         // Week to date
         fromDate = new Date();
-        fromDate.setDate(toDate.getDate() - (toDate.getDay() - 1))
+        fromDate.setDate(toDate.getDate() - toDate.getDay());
         app.dateRanges.weekToDate = [
             app.sqlDate(fromDate),
             app.sqlDate(toDate)
         ]
-    },
-
-    saveCookie : function() {
-        self = this;
-        document.cookie = 'sessionDateRange=' + self.sessionDateRange;
-        document.cookie = 'sessionTimeSelect=' + self.sessionTimeSelect;
-        document.cookie = 'sessionCompany=' + self.sessionCompany;
-        document.cookie = 'sessionLocation=' + self.sessionLocation;
-    },
-
-    getCookie : function() {
-        self = this;
-        var c = document.cookie.split(";");
-        for ( i in c ) {
-            var kv = c[i].trim().split("=");
-            if ( kv[0] == "sessionDateRange" ) {
-                self.sessionDateRange = kv[1].split(",");
-            }
-            if (kv[0] == "sessionTimeSelect") {
-                self.sessionTimeSelect = kv[1];
-            }
-            if (kv[0] == "sessionCompany") {
-                self.sessionCompany = kv[1];
-            }
-            if (kv[0] == "sessionLocation") {
-                self.sessionLocation = kv[1];
-            }
-        };
     },
 
     registerEvents: function () {
@@ -103,12 +75,21 @@ var app = {
     },
 
     setApiUrl: function () {
-        self = this;
-        app.apiUrl = "/api/report/" + app.reportName + "/" + app.sessionDateRange[0] + "/" + app.sessionDateRange[1];
-        if ( app.sessionLocation !== "" ) {
-            app.apiUrl += "/" + app.sessionLocation;
+        var fromDate,
+            toDate;
+        if (FF.User.reportSettings.timeSelect == "custom") {
+                fromDate = FF.User.reportSettings.dates[0];
+                toDate = FF.User.reportSettings.dates[1];
+        } else {
+            fromDate = app.dateRanges[FF.User.reportSettings.timeSelect][0];
+            toDate = app.dateRanges[FF.User.reportSettings.timeSelect][1];
         }
-        app.apiUrl += ".json";
+        app.apiUrl = '/api/report/' +
+            app.reportName + '/' +
+            fromDate + '/' +
+            toDate + '/' +
+            FF.User.reportSettings.location.id + '.json'
+        ;
     },
 
     route: function () {
@@ -128,45 +109,34 @@ var app = {
         if (!hash) {
 
             // If there is no value in the session, then use the app default.
-            if ( self.sessionDateRange.length === 0 ) {
-                self.sessionDateRange = self.dateRanges[self.defaults.timeSelect].slice(0);
-                self.sessionTimeSelect = new String(self.defaults.timeSelect);
+            if ( FF.User.reportSettings.dateRange.length === 0 ) {
+                FF.User.setReportDateRange(self.defaults.timeSelect + ',' + self.dateRanges[self.defaults.timeSelect].toString());
             }
-            //FF.Location.getLocation('', self.routeCallback());
             // Build the apiUrl
             self.setApiUrl();
         // If there is a hash
         } else {
+            /**
+             *
+             * Hash is #<machineid>+<metricname>+<custom,fromdate,todate||timeselect>+<locationId>
+             */
             hashArray = hash.substr(1).split("+");
-
             if (hashArray.length > 1) {
-                self.machine = hashArray[0];
+//              FF.User.setReportCompany(hashArray[0]);
+                app.machine = hashArray[0];
+                // Metric
                 if ( hashArray[1].length > 1 ) {
-                    self.metric = hashArray[1];
-                    self.sessionMetric = hashArray[1];
+                    FF.User.setReportMetric(hashArray[1]);
                 }
+                // Date Range
+                // fromdate,todate,custom||timeselect
                 if ( hashArray[2].length > 1 ) {
-                    // If this is a custom date range, then we take the date range out of the URL and store
-                    // sessionTimeSelect as custom
-                    if ( hashArray[2].substr(0,6) === "custom" ) {
-                        var dr = hashArray[2].split(",");
-                        self.sessionDateRange[0] = dr[1];
-                        // If we only selected one value in the date range selector, then set the second param to the first
-                        if ( typeof(dr[2]) == "undefined" ) {
-                            self.sessionDateRange[1] = dr[1];
-                        } else {
-                            self.sessionDateRange[1] = dr[2];
-                        }
-                        self.sessionTimeSelect = dr[0];
-                    } else {
-                        self.sessionDateRange = self.dateRanges[hashArray[2]].slice(0);
-                        self.sessionTimeSelect = hashArray[2];
-                    }
+                    FF.User.setReportDateRange(hashArray[2]);
                 }
+                // Location Id
                 if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 1 )  {
-                    self.location = hashArray[3];
-                    // TODO: This is going to trigger an ajax call -- watch out for race conditions
-                    console.log(hashArray[3]);
+                    var locationId = hashArray[3];
+                    FF.User.setReportLocation(parseInt(locationId, 10));
                     FF.Location.getLocation(hashArray[3], self.routeCallback);
                     return; // Break here because we just called the rest of this in a callback.
                 }
@@ -178,8 +148,7 @@ var app = {
         console.log(FF.Location.machineTypes(), FF.Location.location.nid, FF.Location.location.title);
         controls.setCsvLink();
         controls.setDateRangeDisplay();
-        // This is a little funky, but we are going to let the view inherit our showReport method
-        app.saveCookie();
+
         // if dataRefresh equals 1, then go to the web service again and get new data
         if ( app.dataRefresh == 1 ) {
             app.setApiUrl();
@@ -229,9 +198,6 @@ var app = {
     },
     initialize: function () {
         var self = this;
-
-        // See if there are setting in the session cookie.
-        self.getCookie();
 
         self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.
@@ -283,13 +249,12 @@ var app = {
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 
         self.createDateRanges();
-
         self.registerEvents();
         // Do the things that get values from the template (window)
         self.apiUrlBase = window.apiUrlBase;
-        self.fromDate = self.sessionDateRange[0];
-        self.toDate = self.sessionDateRange[1];
 
+
+        controls.initialize();
         self.route();
 
     }
