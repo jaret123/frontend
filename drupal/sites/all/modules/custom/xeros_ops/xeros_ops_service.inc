@@ -209,7 +209,9 @@ from
 		on x.classification_id = xc.classification_id
 where
 	x.reading_timestamp > date(now())
-	and x.machine_id in ({{machineIds}});
+	and x.machine_id in ({{machineIds}})
+order by
+    x.reading_timestamp desc
 SQL;
 
   $query = str_replace('{{machineIds}}', $machineIds, $query);
