@@ -154,5 +154,13 @@
 <?php
     $path = drupal_get_path('theme', 'xeros_theme');
     drupal_add_js($path . '/js/ConsumptionView.js', array('scope' => 'footer', 'weight' => 1, 'preprocess' => TRUE));
+
+
+drupal_add_js('jQuery(document).ready(function () {
+        FF.User.init(view.initialize);
+        controls.initialize();
+    });',
+  array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
+);
 ?>
 

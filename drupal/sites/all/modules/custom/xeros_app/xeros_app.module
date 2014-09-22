@@ -61,17 +61,16 @@ function xeros_app_preprocess_html(&$variables, $hook) {
       $location = node_load($u->field_location['und'][0]['target_id']);
       $variables['user']->location = $location->title;
     }
-  }
-
-  drupal_add_js('jQuery(document).ready(function () {
+    drupal_add_js('jQuery(document).ready(function () {
         FF.User.company.id = ' . $company->nid . ';
         FF.User.company.title = "' . $company->title . '";
         FF.User.location.id =  ' . $location->nid . ';
         FF.User.location.title =  "' . $location->title . '";
-        FF.User.init(view.initialize);
-        controls.initialize();
     });',
-    array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
-  );
+      array('type' => 'inline', 'scope' => 'footer', 'weight' => 14)
+    );
+  }
+
+
 }
 
