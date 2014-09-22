@@ -43,9 +43,9 @@ function get_status($record_count, $machineIds) {
     $status = true;
     // Configure the idle count
     $record_count = $idle_count;
-    $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ")";
+    $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ", '-06:00')";
   } else {
-    $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";
+    $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ", '-06:00')";
   }
 
   $result = db_query($query, array());
@@ -167,7 +167,7 @@ function get_usage() {
     FROM
       xeros_cycle
     WHERE
-      reading_timestamp > date(now())
+      reading_timestamp > date(CONVERT_TZ(NOW(), @@session.time_zone, '-06:00'))
     GROUP BY
      machine_id;
 SQL;
@@ -197,7 +197,7 @@ select
 	x.cycle_hot_water_volume,
     x.cycle_therms,
 	x.cycle_chemical_strength,
-	x.reading_timestamp as cycle_end_time,
+	CONVERT_TZ(x.reading_timestamp, @@session.time_zone, '-06:00') as cycle_end_time,
 	date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute) as cycle_start_time,
 	x.cycle_time_run_time,
 	x.classification_id,
@@ -208,7 +208,7 @@ from
 	left join xeros_classification as xc
 		on x.classification_id = xc.classification_id
 where
-	x.reading_timestamp > date(now())
+	x.reading_timestamp > date(CONVERT_TZ(NOW(), @@session.time_zone, '-06:00'))
 	and x.machine_id in ({{machineIds}})
 order by
     x.reading_timestamp desc

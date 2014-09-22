@@ -1,7 +1,7 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_get_status $$
 
-CREATE PROCEDURE sp_get_status (IN machine_ids varchar(255), IN record_count INT)
+CREATE PROCEDURE sp_get_status (IN machine_ids varchar(255), IN record_count INT, IN timezone varchar(255))
 BEGIN
 
 	set @num := 0, 
@@ -24,14 +24,15 @@ BEGIN
 			when a.status_code = 0 and b.idle_count >= ', record_count, ' then 0
 			else a.status_code
 		end as status_code,
-		a.time_stamp
+		CONVERT_TZ(a.time_stamp, @@session.time_zone, ''', timezone, ''') as time_stamp
 	from
 		(
 			select 
 				machine_id, 
 				status_id, 
 				status_message, 
-				status_code, time_stamp
+				status_code,
+				time_stamp
 			from (
 			   select machine_id, status_id, time_stamp, status_code, status_message,
 				  @num := if(@machine_id = machine_id, @num + 1, 1) as row_number,
@@ -65,19 +66,19 @@ BEGIN
     );
 
 --   select @query;
-
+-- 
     	PREPARE stmt FROM @query;
        EXECUTE stmt;
      DEALLOCATE PREPARE stmt;
 
 END$$
 
-call sp_get_status('14,15', 3)$$
-call sp_get_status(NULL, 3) $$
+call sp_get_status('14,15', 3, '-06:00')$$
+call sp_get_status(NULL, 3, '-06:00') $$
 
 DROP PROCEDURE IF EXISTS sp_get_status_history$$
 
-CREATE PROCEDURE `sp_get_status_history`(IN machine_ids varchar(2048), IN record_count int)
+CREATE PROCEDURE `sp_get_status_history`(IN machine_ids varchar(2048), IN record_count int, IN timezone varchar(255))
 BEGIN
 
 	set @num := 0, 
@@ -90,7 +91,12 @@ BEGIN
 	end if;
 
 	set @query = CONCAT('
-		select machine_id, status_id, status_message, status_code, time_stamp
+		select 
+			machine_id, 
+			status_id, 
+			status_message, 
+			status_code, 
+			CONVERT_TZ(time_stamp, @@session.time_zone, ''', timezone, ''') as time_stamp
 		from (
 		   select machine_id, status_id, time_stamp, status_code, status_message,
 			  @num := if(@machine_id = machine_id, @num + 1, 1) as row_number,
@@ -110,8 +116,6 @@ BEGIN
 END$$
 
 
-call sp_get_status('14', 1) $$
+call sp_get_status_history('14', 5, '-06:00') $$
 
-call sp_get_status_history('14', 5) $$
-
-call sp_get_status_history(NULL, 5) $$
+call sp_get_status_history(NULL, 5, '-06:00') $$
