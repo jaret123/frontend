@@ -1,6 +1,6 @@
 <?php
 
-$record_count = 4;
+
 
 function service($service_name, $machineIds) {
 
@@ -36,10 +36,13 @@ function service($service_name, $machineIds) {
 // TODO: Refactor this into two seperate calls
 function get_status($record_count, $machineIds) {
 
+  $idle_count = 4;
+
   $status = false;
   if ($record_count == 'current') {
     $status = true;
     // Configure the idle count
+    $record_count = $idle_count;
     $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ")";
   } else {
     $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";
