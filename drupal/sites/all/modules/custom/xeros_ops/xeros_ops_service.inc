@@ -198,7 +198,7 @@ select
     x.cycle_therms,
 	x.cycle_chemical_strength,
 	CONVERT_TZ(x.reading_timestamp, @@session.time_zone, '-06:00') as cycle_end_time,
-	date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute) as cycle_start_time,
+	CONVERT_TZ(date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute), @@session.time_zone, '-06:00') as cycle_start_time,
 	x.cycle_time_run_time,
 	x.classification_id,
 	x.machine_id,
