@@ -1,5 +1,7 @@
 <?php
 
+$record_count = 4;
+
 function service($service_name, $machineIds) {
 
   error_reporting(E_ALL);
@@ -38,7 +40,6 @@ function get_status($record_count, $machineIds) {
   if ($record_count == 'current') {
     $status = true;
     // Configure the idle count
-    $record_count = 2;
     $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ")";
   } else {
     $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ")";

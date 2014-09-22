@@ -42,7 +42,7 @@ FF.Hud = (function($){
     // Turn refresh on
     var refresh = true;
 
-    var refreshInterval = .2 * 60; // 5 minutes
+    var refreshInterval = 5 * 60; // 5 minutes
 
 
     formatData = function() {
