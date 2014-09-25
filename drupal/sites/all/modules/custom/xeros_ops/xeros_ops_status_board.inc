@@ -31,6 +31,11 @@ function status_board() {
 
   drupal_add_js('Drupal.settings.services = ' . json_encode($services), 'inline');
 
+  drupal_add_js('jQuery(document).ready(function () {
+        FF.User.init(controls.setHeaderDisplay);
+    });',
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 14)
+  );
   $output = "";
 
   return $output;
