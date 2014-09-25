@@ -27,7 +27,6 @@
 
   <?php print $styles; ?>
   <?php print $scripts; ?>
-    <script src="<?php print $base_path . $path_to_xeros_theme; ?>/js/handlebars-v1.3.0.js"></script>
 
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <!--[if lt IE 9]>

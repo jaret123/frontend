@@ -40,14 +40,28 @@ function xeros_app_permission() {
 }
 
 function xeros_app_preprocess_html(&$variables, $hook) {
-    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Location.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Company.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  $path = drupal_get_path('module', 'xeros_app');
 
-  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/User.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
+  // Libraries common to all modules
+  drupal_add_js($path . '/libs/alertFallback.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js($path . '/libs/handlebars.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js($path . '/libs/underscore-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js($path . '/libs/handlebars.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 
-  // If logged in (0 is anonymous)
+  // Utility modules common to all drupal modules
+  drupal_add_js($path . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js($path . '/js/Error.js', array('scope' => 'footer', 'weight' => 100, 'preprocess' => TRUE));
+
+  // Custom app code for logged in users only
+  $company = (object) array('nid' => '""', 'title' => '');
+  $location = (object) array('nid' => '""', 'title' => '');
+
+  // If user is logged in (0 is anonymous)
   if ( $variables['user']->uid > 0 ) {
+    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Location.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Company.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/User.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
+
     $u = user_load($variables['user']->uid);
 
     $variables['user']->company = "No company assigned";
@@ -61,6 +75,8 @@ function xeros_app_preprocess_html(&$variables, $hook) {
       $location = node_load($u->field_location['und'][0]['target_id']);
       $variables['user']->location = $location->title;
     }
+
+    // This is always the user's company and location.  This can only be overridden in the User's account settings.
     drupal_add_js('jQuery(document).ready(function () {
         FF.User.company.id = ' . $company->nid . ';
         FF.User.company.title = "' . $company->title . '";
@@ -69,6 +85,7 @@ function xeros_app_preprocess_html(&$variables, $hook) {
     });',
       array('type' => 'inline', 'scope' => 'footer', 'weight' => 14)
     );
+  } else {
   }
 
 

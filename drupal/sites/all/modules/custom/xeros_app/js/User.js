@@ -53,6 +53,7 @@ FF.User = (function ($) {
         if ( typeof companyId == "number" ) {
             pub.reportSettings.company.id = companyId;
             pub.reportSettings.company.title = app.companies[companyId].name;
+            //$('.header__company').html(pub.reportSettings.company.title);
 //            FF.Company.getCompany(companyId, function() {
 //                pub.reportSettings.company.title = FF.Company.company.title;
 //                saveCookie();
@@ -131,9 +132,6 @@ FF.User = (function ($) {
     }
 
     function saveCookie() {
-        if ( pub.reportSettings.dateRange.length > 0 ) {
-            document.cookie = 'sessionDateRange=' + pub.reportSettings.dateRange.toString();
-        }
         if ( pub.reportSettings.timeSelect !== '' ) {
             document.cookie = 'sessionTimeSelect=' + pub.reportSettings.timeSelect;
         }
@@ -153,12 +151,12 @@ FF.User = (function ($) {
 
     function getCookie() {
         var c = document.cookie.split(";");
-        for ( i in c ) {
+        for ( var i in c ) {
             var kv = c[i].trim().split("=");
-            if ( kv[0] == "sessionDateRange" ) {
+            if ( kv[0] == "sessionDates" ) {
                 var daterange = kv[1].split(",");
                 if (typeof daterange == "object") {
-                    pub.reportSettings.dateRange = daterange;
+                    pub.setReportDateRange(daterange);
                 }
             }
             if (kv[0] == "sessionTimeSelect") {
@@ -170,20 +168,14 @@ FF.User = (function ($) {
             if (kv[0] == "sessionCompany") {
                 var companyId = parseInt(kv[1], 10);
                 if ( typeof companyId == "number") {
-                    pub.reportSettings.company.id = companyId;
+                    pub.setReportCompany(companyId);
                 }
 
             }
             if (kv[0] == "sessionLocation") {
                 var locationId = parseInt(kv[1], 10)
                 if ( typeof locationId == "number") {
-                    pub.reportSettings.location.id = locationId;
-                }
-            }
-            if (kv[0] == "sessionDates") {
-                var dates = kv[1];
-                if ( typeof dates == "string") {
-                    pub.reportSettings.dates = dates.split(',');
+                    pub.setReportLocation(locationId);
                 }
             }
         };
@@ -200,13 +192,12 @@ FF.User = (function ($) {
         if (pub.reportSettings.location.id == "" || typeof pub.reportSettings.location == "undefined" ) {
             pub.setReportLocation(pub.location.id);
         }
-//
-//        if (typeof(app.companies) !== 'undefined') {
-//            controls.adminMenuControls();
-//            controls.createCompanySelect();
-//            //controls.createLocationSelect();
-//        }
-        callback();
+        if (typeof callback == 'function') {
+            callback();
+        } else {
+            console.log('Callback not a function');
+        }
+
     }
 
     return pub;

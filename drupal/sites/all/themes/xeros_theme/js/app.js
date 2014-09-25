@@ -150,13 +150,19 @@ var app = {
         controls.setDateRangeDisplay();
 
         // if dataRefresh equals 1, then go to the web service again and get new data
-        if ( app.dataRefresh == 1 ) {
-            app.setApiUrl();
-            app.fadeReport();
-            app.getData();
+        if ( FF.User.reportSettings.location.id !== 0 && FF.User.reportSettings.company.id !== 0 ) {
+            if ( app.dataRefresh == 1 ) {
+                app.setApiUrl();
+                app.fadeReport();
+                app.getData();
+            } else {
+                view.parseData(app.showReport);
+            }
         } else {
-            view.parseData(app.showReport);
+            jQuery(app.err).addClass("active");
+            jQuery(app.err).html("This user has not been assigned a company or a location.");
         }
+
     },
 
     // This is going to be passed as a function to the view

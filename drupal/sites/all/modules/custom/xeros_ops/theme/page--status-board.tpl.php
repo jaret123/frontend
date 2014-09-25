@@ -158,18 +158,9 @@
 
 <footer class="footer">
   <div class="footer-wrapper">
-
     <div class="footer__logo">
     </div>
-    <div class="footer__left">
-    </div>
-
-    <div class="footer__middle">
-    </div>
-
-    <div class="footer__right">
-    </div>
-
+    <?php print render($page['footer']); ?>
   </div>
 </footer>
 <div class="machine-detail">...</div>

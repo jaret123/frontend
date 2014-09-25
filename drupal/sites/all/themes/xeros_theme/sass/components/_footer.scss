@@ -1,5 +1,5 @@
 
-.footer {
+.region-footer {
   margin-top: 60px;
   background-color: #333;
   color: white;
@@ -73,7 +73,7 @@
 (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  .footer .footer-wrappper .footer__logo {
+  .region-footer .footer-wrappper .footer__logo {
     background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo_@2x.png");
     background-size: 51px 69px;
   }

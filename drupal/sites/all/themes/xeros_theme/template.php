@@ -42,34 +42,33 @@ function xeros_theme_preprocess_html(&$variables, $hook) {
   //$variables['classes_array'] = array_diff($variables['classes_array'], array('class-to-remove'));
 
     $path = drupal_get_path('theme', 'xeros_theme');
-    drupal_add_js($path . '/js/underscore-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js($path . '/js/spin.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+
+  // Libraries
+    drupal_add_js($path . '/lib/spin.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/kalendae/kalendae.standalone.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js($path . '/js/controls.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/canvg-1.3/rgbcolor.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/canvg-1.3/StackBlur.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/lib/canvg-1.3/canvg.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js($path . '/js/d3.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+    drupal_add_js($path . '/lib/d3.min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+
+  // Custom theme code
+    drupal_add_js($path . '/js/controls.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/app.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/chart.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 
-  drupal_add_js('jQuery(document).ready(function () {
-
-    });',
-    array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
-  );
 }
 
 
-// */
 
 /**
  * Override or insert variables into the page templates.
  *
- * @param $variables
  *   An array of variables to pass to the theme template.
+ *
+ * @param $vars
  * @param $hook
- *   The name of the template being rendered ("page" in this case.)
+ *
+ * The name of the template being rendered ("page" in this case.)
  */
 function xeros_theme_preprocess_page(&$vars, $hook) {
 

@@ -19,7 +19,6 @@ function status_board() {
   drupal_add_css($module_path . '/css/ops.css', array( 'group' => CSS_THEME, 'weight' => 1) );
 
   drupal_add_js($module_path . '/libs/moment-with-locales.js');
-//  drupal_add_js($module_path . '/js/handlebars.js');
   drupal_add_js($module_path . '/js/fullscreenAPI.js');
   drupal_add_js($module_path . '/libs/jquery.countdown/jquery.plugin.min.js');
   drupal_add_js($module_path . '/libs/jquery.countdown/jquery.countdown.min.js');

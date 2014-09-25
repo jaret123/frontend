@@ -69,7 +69,6 @@ stylesheets[all][] = fonts/font-awesome-4.2.0/css/font-awesome.min.css
 
 ; Optionally add some JavaScripts to your theme.
 
-scripts[] = js/alertFallback.js
 ;scripts[] = js/script.js
 
 

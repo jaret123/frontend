@@ -142,8 +142,10 @@ var controls = {
             self.updateLocationSelect({'data' : app.companies[FF.User.reportSettings.company.id].location });
         });
         var locations = {data : ""};
-        locations.data = app.companies[FF.User.reportSettings.company.id].location;
-        self.updateLocationSelect(locations, FF.User.reportSettings.location.id);
+        if ( FF.User.reportSettings.company.id !== 0 ) {
+            locations.data = app.companies[FF.User.reportSettings.company.id].location;
+            self.updateLocationSelect(locations, FF.User.reportSettings.location.id);
+        }
     },
 
     /**

@@ -2272,14 +2272,14 @@ tr.selected td {
 }
 
 /* line 2, ../sass/components/_footer.scss */
-.footer {
+.region-footer {
   margin-top: 60px;
   background-color: #333;
   color: white;
   height: 110px;
 }
 /* line 8, ../sass/components/_footer.scss */
-.footer .footer-wrapper {
+.region-footer .footer-wrapper {
   width: 980px;
   margin-left: auto;
   margin-right: auto;
@@ -2289,11 +2289,11 @@ tr.selected td {
   letter-spacing: 0.08em;
 }
 /* line 17, ../sass/components/_footer.scss */
-.footer .footer-wrapper > div {
+.region-footer .footer-wrapper > div {
   display: inline-block;
 }
 /* line 20, ../sass/components/_footer.scss */
-.footer .footer-wrapper a {
+.region-footer .footer-wrapper a {
   -webkit-transition: color 0.3s ease;
   -webkit-transition-delay: 0;
   -moz-transition: color 0.3s ease 0;
@@ -2303,12 +2303,12 @@ tr.selected td {
   color: white;
 }
 /* line 25, ../sass/components/_footer.scss */
-.footer .footer-wrapper a:hover {
+.region-footer .footer-wrapper a:hover {
   border: 0;
   color: #00A5E2;
 }
 /* line 29, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__logo {
+.region-footer .footer-wrapper .footer__logo {
   position: absolute;
   top: -40px;
   background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo.png");
@@ -2316,44 +2316,44 @@ tr.selected td {
   height: 69px;
 }
 /* line 36, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__left {
+.region-footer .footer-wrapper .footer__left {
   margin-left: 70px;
   height: 100px;
   vertical-align: top;
 }
 /* line 41, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__middle {
+.region-footer .footer-wrapper .footer__middle {
   margin-left: 40px;
   color: white;
 }
 /* line 45, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__middle .icon-Phone, .footer .footer-wrapper .footer__middle .icon-Email {
+.region-footer .footer-wrapper .footer__middle .icon-Phone, .region-footer .footer-wrapper .footer__middle .icon-Email {
   font-size: 24px;
   margin-right: 5px;
   position: relative;
   top: 4px;
 }
 /* line 52, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right {
+.region-footer .footer-wrapper .footer__right {
   float: right;
   color: white;
 }
 /* line 55, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right [class^="icon-"] {
+.region-footer .footer-wrapper .footer__right [class^="icon-"] {
   font-size: 30px;
 }
 /* line 58, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right .icon-Twitter {
+.region-footer .footer-wrapper .footer__right .icon-Twitter {
   text-decoration: none;
   color: white;
 }
 /* line 61, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right .icon-Facebook {
+.region-footer .footer-wrapper .footer__right .icon-Facebook {
   text-decoration: none;
   color: white;
 }
 /* line 64, ../sass/components/_footer.scss */
-.footer .footer-wrapper .footer__right .icon-LinkedIn {
+.region-footer .footer-wrapper .footer__right .icon-LinkedIn {
   text-decoration: none;
   color: white;
 }
@@ -2361,7 +2361,7 @@ tr.selected td {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
   /* line 76, ../sass/components/_footer.scss */
-  .footer .footer-wrappper .footer__logo {
+  .region-footer .footer-wrappper .footer__logo {
     background-image: url("/sites/all/themes/xeros_theme/images/xeros_logo_@2x.png");
     background-size: 51px 69px;
   }

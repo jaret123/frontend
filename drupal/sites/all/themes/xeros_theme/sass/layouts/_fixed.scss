@@ -72,6 +72,10 @@ $zen-auto-include-item-base: false;
   height: $nav-height;
   width: $zen-grid-width - $zen-gutter-width;
 }
+.region-bottom {
+  .block { margin-bottom: 0;}
+
+}
 
 } // End of @if $zen-reverse-all-floats == true
 
