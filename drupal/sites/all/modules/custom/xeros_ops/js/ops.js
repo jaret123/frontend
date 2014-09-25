@@ -178,6 +178,11 @@ FF.Hud = (function($){
             success: function(d) {
                 for (var first in d) break;
                 data.details.cycles = d[first];
+                if (d.length > 0) {
+                    data.details.last_cycle_end_time = d[first][d[first].length - 1].cycle_end_time;
+                } else {
+                    data.details.last_cycle_end_time = '0';
+                }
                 callback();
             },
             dataType: 'json',
