@@ -65,7 +65,7 @@ h1 {
       display: inline-block;
       @include horizontal-list;
       margin-left: 250px;
-	  margin-top: -10px;
+	  margin-top: -12px;
       li {
         text-transform: uppercase;
         background-color: $navbutton-base;
@@ -73,12 +73,10 @@ h1 {
         @include background(linear-gradient(top, $navbutton-highlight, $navbutton-base));
 		@include border-radius(0px 0px 7px 7px);
 		margin-right: 10px;
-		padding: 0 10px !important;
         color: #fff;
         font-size:90%;
+        padding: 0;
         &.active {
-          //color: $font-accent-color;
-          //background-color: $navbutton-hightlight;
           background-color: #0086bd;//lighten($navbutton-base, 10%);
         }
 		&:hover {
@@ -86,8 +84,10 @@ h1 {
 		  background: lighten($navbutton-base, 10%);
 		}
         a {
+          display: block;
           text-decoration: none;
           color: inherit;
+          padding: 0 10px !important;
         }
       }
 
