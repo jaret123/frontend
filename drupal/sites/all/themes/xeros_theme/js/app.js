@@ -146,7 +146,6 @@ var app = {
     },
     initialize: function () {
         var self = this;
-        debugger;
         self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.
 
