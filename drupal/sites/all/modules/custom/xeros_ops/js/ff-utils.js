@@ -4,9 +4,11 @@
  */
 var FF = FF || {};
 
+FF.Utils = FF.Utils || {};
+
 /**
- * Class: FF.Hud
- *   Encapsulates functionality related to the header
+ * Class: FF.Utils
+ *   Encapsulates some utility functions
  */
 FF.Utils = (function($){
 
