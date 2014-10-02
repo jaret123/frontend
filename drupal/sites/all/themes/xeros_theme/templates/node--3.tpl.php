@@ -76,14 +76,18 @@
                             <div class="row {{meta.cssClass}} {{manufacturer}} water-only-{{water_only}}" machineId={{id}}>
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
-                                        <div class="icon-Washer"></div>
+                                        <div class="icon-Washer">
+                                          <div class="icon-washer-label">
+                                            {{cycles}}
+                                            </div>
+                                        </div>
                                         <div class="machine-label">
                                             {{machine_name}} <br/>
                                             {{manufacturer}} <br/>
                                             {{#if water_only}}
                                             <span>Water Only</span> <br/>
                                             {{else}}
-                                            <span>cycles: {{cycles}}</span> <br/>
+                                            <!--<span>cycles: {{cycles}}</span> <br/>-->
                                             {{/if}}
                                             <span>({{size}}) </span><br/>
                                             <!-- Serial Number: {{serial_number}} -->

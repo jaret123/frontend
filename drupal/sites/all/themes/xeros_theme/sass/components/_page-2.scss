@@ -93,6 +93,18 @@
         .icon-Washer {
           font-size: 80px;
           display: inline-block;
+          position: relative;
+        }
+        .icon-washer-label {
+          position: absolute;
+          top: 38px;
+          left: 0;
+          right: 0;
+          font-size: 18px;
+          text-align: center;
+        }
+        .Xeros .icon-washer-label {
+          top: 44px;
         }
         .machine-label {
           display: inline-block;

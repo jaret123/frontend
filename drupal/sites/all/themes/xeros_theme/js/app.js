@@ -65,7 +65,6 @@ var app = {
                 }
                 // Date Range
                 // custom,fromdate,todate||timeselect
-                debugger;
                 if ( hashArray[2].length > 1 ) {
                     FF.User.setReportDateRange(hashArray[2]);
                 }
