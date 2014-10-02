@@ -403,81 +403,6 @@ FF.Hud = (function($){
         });
     }
 
-    function pad(n, width, z) {
-        z = z || '0';
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-    }
-
-    function registerHelpers() {
-        Handlebars.registerHelper('dateFormat', function(context, block) {
-            console.log(context);
-            var d = new Date(context);
-            console.log(d);
-            if (window.moment) {
-                var f = block.hash.format || "MMM Do, YYYY";
-
-                return moment(d).format(f);
-            }else{
-                return context;   //  moment plugin not available. return data as is.
-            };
-        });
-
-        Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, format) {
-            if (format == 'color') {
-                if (machineStatus == 'offline') {
-                    return 'grey';
-                } else {
-                    if (statusCode > 0) {
-                        return 'green';
-                    } else if (statusCode == 0) {
-                        return 'yellow';
-                    } else if (statusCode < 0 ) {
-                        return 'red';
-                    } else {
-                        return 'red';
-                    }
-                }
-
-            } else if (format == 'code') {
-                if (statusCode > 0) {
-                    return 'OK';
-                } else if (statusCode == 0) {
-                    return 'idle';
-                } else if (statusCode < 0 ) {
-                    return 'fault';
-                } else {
-                    return 'fault';
-                }
-            } else {
-                return statusCode;
-            }
-        });
-
-        Handlebars.registerHelper('runTimeFormat', function(seconds) {
-
-            seconds = Math.round(seconds);
-
-            var hours = Math.floor(seconds / 3600);
-            seconds = seconds - hours * 3600;
-
-            var minutes = Math.floor(seconds / 60);
-            var seconds = seconds - minutes * 60;
-
-            var time = "";
-            if (hours > 0) {
-                time = hours.toString() + ":" + minutes.toString() + ":" + pad(seconds.toString(),2);
-            } else {
-                time = minutes.toString() + ":" + pad(seconds.toString(),2);
-            }
-            return time;
-        });
-
-        Handlebars.registerHelper('round', function(number, decimalPlaces) {
-            return Math.round(number * Math.pow(10, decimalPlaces)) / Math.pow(10,decimalPlaces);
-        })
-    }
-
     function refreshDisplay() {
 
         //  format an ISO date using Moment.js
@@ -510,9 +435,6 @@ FF.Hud = (function($){
         body = $('body');
 
         //services = Drupal.settings.services;
-
-
-        registerHelpers();
 
         loadMachineDetailTemplate();
 
@@ -549,8 +471,6 @@ FF.Hud = (function($){
 var windowStatus = {};
 
 var windowHistory = {};
-
-
 
 jQuery(document).ready(FF.Hud.init);
 

@@ -118,23 +118,8 @@ var view = {
     },
     initialize : function() {
         app.initialize();
-        controls.createReportSelect();
-        controls.createTimeSelect();
-        controls.createExport();
-
-//        if (app.sessionCompany == "") {
-//            app.sessionCompany = app.user.field_company['und'][0].target_id;
-//        }
-//        if (app.sessionLocation == "") {
-//            app.sessionLocation = app.user.field_location['und'][0].target_id;
-//        }
-
-//        if (typeof(app.companies) !== 'undefined') {
-//            controls.adminMenuControls();
-//            controls.createCompanySelect();
-//        }
-
+        // Initialize the controls on the page
+        FF.Controls.ReportSelect.create();
+        FF.Controls.TimeSelect.create();
     }
 }
-
-//view.initialize();

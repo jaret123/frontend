@@ -144,17 +144,9 @@ var view = {
     initialize : function() {
         //createDropDown();
         app.initialize();
-        controls.createTimeSelect();
-        controls.createExport();
-
-        if (typeof(app.companies) !== 'undefined') {
-            controls.adminMenuControls();
-            controls.createCompanySelect();
-            //controls.createLocationSelect();
-        }
+        FF.Controls.TimeSelect.create();
     },
     bindNav : function() {
-        console.log('bindNav', FF.User.reportSettings);
         jQuery('.water-only-0 .link').unbind().click(function (event) {
             event.preventDefault();
             var classification,
@@ -169,6 +161,3 @@ var view = {
         });
     }
 }
-
-// Initialize
-//view.initialize();

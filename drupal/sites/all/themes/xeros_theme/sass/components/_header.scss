@@ -32,6 +32,9 @@ h1 {
       display: block;
       height: 76px;
       width: 177px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
       background-image:url("/sites/all/themes/xeros_theme/images/sbeadycare_logo.png");
     }
   }

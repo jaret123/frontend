@@ -1,3 +1,8 @@
+/**
+ * Failed attempt at using jsPDF
+ *
+ * @type {{l: number, init: init}}
+ */
 var exportPDF = {
 
     l : 0, // Line number

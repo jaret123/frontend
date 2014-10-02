@@ -229,7 +229,6 @@ var view = {
         }
     },
     drawLegend : function() {
-
         var legendTpl = Handlebars.compile(jQuery("#legend-tpl").html());
         var html = legendTpl({xeros : app.reportData[0].xeros});
         jQuery('.legend').html(html);
@@ -238,21 +237,9 @@ var view = {
 
         // Do any initialization unique to this view.
 
-        controls.createTimeSelect();
-        controls.createExport();
+        FF.Controls.TimeSelect.create();
+        FF.Controls.Pdf.create();
 
-//        if (app.sessionCompany == "") {
-//            app.sessionCompany = app.user.field_company['und'][0].target_id;
-//        }
-//        if (app.sessionLocation == "") {
-//            FF.Location.getLocation(app.user.field_location['und'][0].target_id, function() {
-//                app.sessionLocation = FF.Location.location.nid;
-//            });
-//        }
-        if (typeof(app.companies) !== 'undefined') {
-            controls.adminMenuControls();
-            controls.createCompanySelect();
-        }
         app.initialize();
 
     },
@@ -260,6 +247,3 @@ var view = {
         // Bind any navigation that is on an item in a template.
     }
 }
-
-// Initialize
-//view.initialize();

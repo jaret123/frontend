@@ -70,6 +70,9 @@ FF.Utils = (function($){
     pub.fullscreenEnabled = function() {
         return document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled;
     }
+
+
+
     /**
      * Function: CC.Form.init
      *   Initializes header functionality

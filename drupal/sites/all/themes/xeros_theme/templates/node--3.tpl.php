@@ -157,8 +157,7 @@
 
 
 drupal_add_js('jQuery(document).ready(function () {
-        FF.User.init(view.initialize);
-        controls.initialize();
+        view.initialize();
     });',
   array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
 );

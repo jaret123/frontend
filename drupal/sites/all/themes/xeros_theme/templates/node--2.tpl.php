@@ -121,11 +121,10 @@
     drupal_add_js($path . '/js/KpisView.js', array('scope' => 'footer', 'weight' => 5, 'preprocess' => FALSE));
 
 
-drupal_add_js('jQuery(document).ready(function () {
-        FF.User.init(view.initialize);
-        controls.initialize();
-    });',
-  array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
-);
+  drupal_add_js('jQuery(document).ready(function () {
+          view.initialize();
+      });',
+    array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
+  );
 
 ?>

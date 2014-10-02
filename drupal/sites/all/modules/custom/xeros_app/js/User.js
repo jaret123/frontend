@@ -23,9 +23,8 @@ FF.User = (function ($) {
 
     // These settings are set by the user and saved in cookies
     pub.reportSettings = {
-        dateRange : '', // monthToDate||custom,fromdate,todate
-        dates: ['', ''],
-        timeSelect : 'monthToDate',
+        dates: [], // From date and to date
+        timeSelect : 'monthToDate', // Default
         company : {
             id: 0,
             title: ''
@@ -48,42 +47,29 @@ FF.User = (function ($) {
         title: 'No company assigned'
     };
 
+    // Create an event and dispatch it any time we successfully run a setter.
+    // Create the event.
+    var event = document.createEvent('Event');
+
+    // Define that the event name.
+    event.initEvent('CustomEventUserChange', true, true);
 
     function setReportCompany(companyId, callback) {
-        if ( typeof companyId == "number" ) {
+        if ( typeof companyId == "number" && companyId !== 0 ) {
             pub.reportSettings.company.id = companyId;
             pub.reportSettings.company.title = app.companies[companyId].name;
-            //$('.header__company').html(pub.reportSettings.company.title);
-//            FF.Company.getCompany(companyId, function() {
-//                pub.reportSettings.company.title = FF.Company.company.title;
-//                saveCookie();
-//                if (typeof callback == "function") {
-//                    callback();
-//                }
-//            });
-            saveCookie();
-            if (typeof callback == "function") {
-                callback();
-            };
+            document.cookie = 'sessionCompany=' + pub.reportSettings.company.id;
+            updateFinish(callback);
         } else {
             console.log('Invalid companyID passed to setReportCompany');
         }
     }
     function setReportLocation(locationId, callback) {
-        if ( typeof locationId == "number" ) {
+        if ( typeof locationId == "number" && locationId !== 0 ) {
             pub.reportSettings.location.id = locationId;
             pub.reportSettings.location.title = app.companies[pub.reportSettings.company.id].location[locationId].name;
-//            FF.Location.getLocation(locationId, function() {
-//                pub.reportSettings.location.title = FF.Location.location.title;
-//                saveCookie();
-//                if ( typeof callback == "function") {
-//                    callback();
-//                }
-//            });
-            saveCookie();
-            if ( typeof callback == "function") {
-                callback();
-            }
+            document.cookie = 'sessionLocation=' + pub.reportSettings.location.id;
+            updateFinish(callback);
         } else {
             console.log('Invalid locationId passed to setReportLocation');
         }
@@ -97,7 +83,7 @@ FF.User = (function ($) {
      *
      * @param dateRange
      */
-    function setReportDateRange(dateRange) {
+    function setReportDateRange(dateRange, callback) {
         if ( typeof dateRange == 'string') {
             var dr = dateRange.split(",");
             var dateRange = [];
@@ -113,41 +99,28 @@ FF.User = (function ($) {
                 }
                 // Time Select
             } else {
-                dateRange = [ dr[1], dr[2] ];
+                // Bug, app.dateRanges is not initialized at the beginning
+                dateRange = FF.Controls.TimeSelect.dateRanges[dr[0]];
             }
             pub.reportSettings.dates = dateRange;
-            saveCookie();
+            // Save to cookies
+            document.cookie = 'sessionTimeSelect=' + pub.reportSettings.timeSelect;
+            document.cookie = 'sessionDates=' + pub.reportSettings.dates.toString();
+            updateFinish(callback);
         } else {
             console.log('Invalid dates passed to report date range', dateRange);
         }
     }
-    function setReportMetric(metric) {
+    function setReportMetric(metric, callback) {
         if ( typeof metric == "string" ) {
             pub.reportSettings.metric = metric;
-            saveCookie();
+            document.cookie = 'sessionMetric=' + pub.reportSettings.metric;
+            updateFinish(callback);
         } else {
             console.log('Invalid metric passed to metric.')
         }
 
     }
-
-    function saveCookie() {
-        if ( pub.reportSettings.timeSelect !== '' ) {
-            document.cookie = 'sessionTimeSelect=' + pub.reportSettings.timeSelect;
-        }
-        if ( pub.reportSettings.company.id !== 0 ) {
-            document.cookie = 'sessionCompany=' + pub.reportSettings.company.id;
-        }
-        if ( pub.reportSettings.location.id !== 0 ) {
-            document.cookie = 'sessionLocation=' + pub.reportSettings.location.id;
-        }
-        if ( pub.reportSettings.metric !== '' ) {
-            document.cookie = 'sessionMetric=' + pub.reportSettings.metric;
-        }
-        if ( pub.reportSettings.dates[0] !== "" && pub.reportSettings.dates[1] !== "") {
-            document.cookie = 'sessionDates=' + pub.reportSettings.dates.toString();
-        }
-    };
 
     function getCookie() {
         var c = document.cookie.split(";");
@@ -167,23 +140,37 @@ FF.User = (function ($) {
             }
             if (kv[0] == "sessionCompany") {
                 var companyId = parseInt(kv[1], 10);
-                if ( typeof companyId == "number") {
-                    pub.setReportCompany(companyId);
-                }
 
             }
             if (kv[0] == "sessionLocation") {
                 var locationId = parseInt(kv[1], 10)
-                if ( typeof locationId == "number") {
-                    pub.setReportLocation(locationId);
-                }
+
             }
+
         };
+        // Company ID needs to be set before locationId
+        if ( typeof companyId == "number") {
+            pub.setReportCompany(companyId);
+            if ( typeof locationId == "number") {
+                pub.setReportLocation(locationId);
+            };
+        };
+
+    };
+
+    function updateFinish(callback) {
+        //saveCookie();
+        console.log('Custom event dispatched');
+        document.dispatchEvent(event);
+        if ( typeof callback == "function") {
+            callback();
+        }
     };
 
     function init(callback) {
         // See if there is anything in the user's cookies
         getCookie();
+        console.log(document.cookie);
 
         // If the settings in the cookies are blank, then load from the user's settings.
         if (pub.reportSettings.company.id == "" || typeof pub.reportSettings.company == "undefined") {
@@ -192,11 +179,13 @@ FF.User = (function ($) {
         if (pub.reportSettings.location.id == "" || typeof pub.reportSettings.location == "undefined" ) {
             pub.setReportLocation(pub.location.id);
         }
-        if (typeof callback == 'function') {
-            callback();
-        } else {
-            console.log('Callback not a function');
+        // If the dates did not get updated by the cookies, then fire off an update based on defaults
+        //debugger;
+        if (pub.reportSettings.dates.length == 0) {
+
+            pub.setReportDateRange(pub.reportSettings.timeSelect);
         }
+        updateFinish(callback);
 
     }
 
