@@ -114,7 +114,16 @@ function xeros_app_preprocess_html(&$variables, $hook) {
     );
   } else {
   }
+}
+
+
+function xeros_app_user_logout($account) {
+  // Clear all the application cookies so we don't pass the cookies on to another user.
+  foreach ( $_COOKIE as $key => $value) {
+    if ( preg_match('/^session/', $key) == 1 ) {
+      setcookie($key, '', 1, '/');
+    }
+  }
 
 
 }
-

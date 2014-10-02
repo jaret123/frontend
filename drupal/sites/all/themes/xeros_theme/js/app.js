@@ -133,10 +133,20 @@ var app = {
      * Listen for a change to user and update the hash when it changes
      */
     updateHash: function() {
-        window.location.hash = app.machine + "+" + FF.User.reportSettings.metric + "+" + FF.User.reportSettings.timeSelect + "," + FF.User.reportSettings.dates.toString();
+        var hash = app.machine + "+" +
+            FF.User.reportSettings.metric + "+" +
+            FF.User.reportSettings.timeSelect + "," + FF.User.reportSettings.dates.toString() + "+" +
+            FF.User.reportSettings.location.id;
+
+        // If the newly created hash has changed, then update the hash
+        // Protect us from an infinite loop.
+        if (window.location.hash !== hash) {
+            window.location.hash = hash;
+        }
     },
     initialize: function () {
         var self = this;
+        debugger;
         self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.
 

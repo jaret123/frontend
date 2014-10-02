@@ -92,7 +92,8 @@
         .small { font-size: 9px; }
         .icon-Washer {
           font-size: 80px;
-          display: inline-block;
+          float: left;
+          width: 80px;
           position: relative;
         }
         .icon-washer-label {
@@ -107,11 +108,14 @@
           top: 44px;
         }
         .machine-label {
-          display: inline-block;
+          float: left;
+          width: 80px; // Leave for backward compatibility
+          width: calc(100% - 80px);
 		  font-size: 0.8em;
 		  line-height: 1.5em;
           vertical-align: top;
           margin-top: 12px;
+          //text-align: left;
         }
       }
       .col-2 {
