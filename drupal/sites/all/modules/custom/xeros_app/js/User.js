@@ -56,20 +56,25 @@ FF.User = (function ($) {
 
     function setReportCompany(companyId, callback) {
         if ( typeof companyId == "number" && companyId !== 0 ) {
-            pub.reportSettings.company.id = companyId;
-            pub.reportSettings.company.title = app.companies[companyId].name;
-            document.cookie = 'sessionCompany=' + pub.reportSettings.company.id;
-            updateFinish(callback);
+            if (checkNested(app.companies, companyId)) {
+                // Get it from app.companies if it exists - Admin users
+                pub.reportSettings.company.id = companyId;
+                pub.reportSettings.company.title = app.companies[companyId].name;
+                document.cookie = 'sessionCompany=' + pub.reportSettings.company.id;
+                updateFinish(callback);
+            }
         } else {
             console.log('Invalid companyID passed to setReportCompany');
         }
     }
     function setReportLocation(locationId, callback) {
         if ( typeof locationId == "number" && locationId !== 0 ) {
-            pub.reportSettings.location.id = locationId;
-            pub.reportSettings.location.title = app.companies[pub.reportSettings.company.id].location[locationId].name;
-            document.cookie = 'sessionLocation=' + pub.reportSettings.location.id;
-            updateFinish(callback);
+            if (checkNested(app.companies, pub.reportSettings.company.id, 'location', locationId, 'name')) {
+                pub.reportSettings.location.id = locationId;
+                pub.reportSettings.location.title = app.companies[pub.reportSettings.company.id].location[locationId].name;
+                document.cookie = 'sessionLocation=' + pub.reportSettings.location.id;
+                updateFinish(callback);
+            }
         } else {
             console.log('Invalid locationId passed to setReportLocation');
         }
@@ -174,19 +179,17 @@ FF.User = (function ($) {
 
         // If the settings in the cookies are blank, then load from the user's settings.
         if (pub.reportSettings.company.id == "" || typeof pub.reportSettings.company == "undefined") {
-            pub.setReportCompany(pub.company.id);
+            pub.reportSettings.company = pub.company;
         }
         if (pub.reportSettings.location.id == "" || typeof pub.reportSettings.location == "undefined" ) {
-            pub.setReportLocation(pub.location.id);
+            pub.reportSettings.location = pub.location;
         }
         // If the dates did not get updated by the cookies, then fire off an update based on defaults
         //debugger;
         if (pub.reportSettings.dates.length == 0) {
-
             pub.setReportDateRange(pub.reportSettings.timeSelect);
         }
         updateFinish(callback);
-
     }
 
     return pub;
