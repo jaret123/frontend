@@ -35,8 +35,6 @@
       margin-top: 20px;
       position: relative;
       min-height: 400px;
-
-
     }
     .template-container {
       @include single-transition(opacity, .3s, ease-in, 0);

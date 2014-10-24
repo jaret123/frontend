@@ -11,10 +11,10 @@ var view = {
         app.reportData = app.data;
 
         for ( i in app.reportData.data) {
-            app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
-            app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
-            app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
-            app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
+//            app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
+//            app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
+//            app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
+//            app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
             app.reportData.data[i].water_only = parseInt(app.reportData.data[i].water_only, 10);
 
             if ( app.reportData.data[i].water_only === 1 ) {
@@ -25,18 +25,6 @@ var view = {
 
         self.drawCharts();
         self.bindNav();
-    },
-    delta : function(base, change) {
-
-        var delta = 0;
-        // BUG - Divide by zero throws NaN
-
-        if ( parseInt(base, 10)  === 0 ) {
-            delta = ' - ';
-        } else {
-            delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
-        }
-        return delta;
     },
     isValid : function(arr) {
         var isValid = true;
@@ -122,21 +110,21 @@ var view = {
 
 
         jQuery(".metric").each(function() {
-            var d =  jQuery(this).find(".delta").attr("data");
-            // Hide charts with errors
-            if (typeof d == "undefined" || d == "" )
-            {
-                jQuery(this).find(".chart, .delta").hide();
-                jQuery(this).find(".metric__message").html("No Readings<br/> Found");
-                jQuery(this).removeClass("link");
-            } else { // Perform some other decorations
-                var d = parseInt(jQuery(this).find(".delta").attr("data"));
-                if ( d < 0 ) {
-                    jQuery(this).find(".arrow").addClass("up");
-                } else {
-                    jQuery(this).find(".arrow").addClass("down")
-                }
-            }
+//            var d =  jQuery(this).find(".delta").attr("data");
+//            // Hide charts with errors
+//            if (typeof d == "undefined" || d == "" )
+//            {
+//                jQuery(this).find(".chart, .delta").hide();
+//                jQuery(this).find(".metric__message").html("No Readings<br/> Found");
+//                jQuery(this).removeClass("link");
+//            } else { // Perform some other decorations
+//                var d = parseInt(jQuery(this).find(".delta").attr("data"));
+//                if ( d < 0 ) {
+//                    jQuery(this).find(".arrow").addClass("up");
+//                } else {
+//                    jQuery(this).find(".arrow").addClass("down")
+//                }
+//            }
 
         });
 

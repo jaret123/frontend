@@ -95,21 +95,21 @@
                                         <div class="metric__message"></div>
                                     </span>
                                 </div>
-                                <div class="col col-2 link metric" classification="cold_water" machine="{{id}}"
+                                <div class="col col-2 link metric {{formatDelta cold_water_xeros_value cold_water_value}}" classification="cold_water" machine="{{id}}"
                                      chart="cold_water-{{id}}">
 
                                     <div class="chart" name="{{id}}-cold_water"></div>
-                                    <div class="delta" data="{{cold_water_delta_value}}">{{cold_water_delta_value}}%
+                                    <div class="delta" data="{{cold_water_delta_value}}">{{formatDeltaValue cold_water_xeros_value cold_water_value}}
                                     </div>
                                     <div class="arrow {{cold-water-up-or-down}}"></div>
                                     <div class="metric__message"></div>
                                 </div>
 
-                                <div class="col col-3 link metric" classification="hot_water" machine="{{id}}"
+                                <div class="col col-3 link metric {{formatDelta hot_water_xeros_value hot_water_value}}" classification="hot_water" machine="{{id}}"
                                      chart="hot_water-{{id}}">
                                     <div class="chart" name="{{id}}-hot_water"></div>
-                                    <div class="delta" data="{{hot_water_delta_value}}">{{hot_water_delta_value}}%</div>
-                                    <div class="arrow {{hot-water-up-or-down}}"></div>
+                                    <div class="delta" data="{{hot_water_delta_value}}">{{formatDeltaValue hot_water_xeros_value hot_water_value}}</div>
+                                    <div class="arrow"></div>
                                     <div class="metric__message"></div>
                                 </div>
 
@@ -125,18 +125,18 @@
                                   </div>
                                 </div>
                               {{else}}
-                              <div class="col col-4 link metric" classification="cycle_time" machine="{{id}}"
+                              <div class="col col-4 link metric {{formatDelta time_xeros_value time_value}}" classification="cycle_time" machine="{{id}}"
                                    chart="cycle_time-{{id}}">
                                 <div class="chart" name="{{id}}-cycle_time""></div>
-                              <div class="delta" data="{{time_delta_value}}">{{time_delta_value}}%</div>
+                              <div class="delta" data="{{time_delta_value}}">{{formatDeltaValue time_xeros_value time_value}}</div>
                               <div class="arrow {{cold-water-up-or-down}}"></div>
                               <div class="metric__message"></div>
                             </div>
-                                <div class="col col-5 link metric" classification="chemical" machine="{{id}}"
+                                <div class="col col-5 link metric {{formatDelta chemical_xeros_value chemical_value}}" classification="chemical" machine="{{id}}"
                                      chart="chemical-{{id}}">
                                   <div class="chart" name="{{id}}-chemical""></div>
-                                  <div class="delta" data="{{chemical_delta_value}}">{{chemical_delta_value}}%</div>
-                                  <div class="arrow {{cold-water-up-or-down}}"></div>
+                                  <div class="delta" data="{{chemical_delta_value}}">{{formatDeltaValue chemical_xeros_value chemical_value}}</div>
+                                  <div class="arrow up"></div>
                                   <div class="metric__message"></div>
                                 </div>
                               {{/if}}

@@ -110,3 +110,47 @@ Handlebars.registerHelper('runTimeFormat', function(seconds) {
 Handlebars.registerHelper('round', function(number, decimalPlaces) {
     return Math.round(number * Math.pow(10, decimalPlaces)) / Math.pow(10,decimalPlaces);
 })
+
+Handlebars.registerHelper('formatDelta', function(numerator, denominator) {
+
+    var value = Handlebars.helpers.deltaValue(numerator, denominator);
+    if ( value === '-'  ) {
+        return 'delta-none';
+    } else if ( value > 0 ) {
+        return 'delta-down';
+    } else if ( value < 0 ) {
+        return 'delta-up';
+    } else {
+        return 'delta-none'
+    }
+})
+
+Handlebars.registerHelper('formatDeltaValue', function(numerator, denominator) {
+    var value = Handlebars.helpers.deltaValue(numerator, denominator);
+    if (value === '-') {
+        value = '';
+    } else {
+        value = value.toString() + ' %';
+    }
+    return value;
+})
+
+Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
+    numerator = parseInt(numerator, 10);
+    denominator = parseInt(denominator, 10);
+
+    var delta = 0;
+    // BUG - Divide by zero throws NaN
+
+    // Divide by 0
+    if ( denominator === 0 ) {
+        if ( numerator === 0 ) {
+            delta = '-';
+        } else {
+            delta = 100;
+        }
+    } else {
+        delta = parseInt(((denominator - numerator) / denominator) * 100);
+    }
+    return delta;
+})

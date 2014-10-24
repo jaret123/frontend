@@ -8,23 +8,37 @@
   .arrow {
     display: inline-block;
     width: inherit;
-    height: 15px;
     background: no-repeat left bottom;
     background-size: contain;
-  }
-  .arrow.up {
-    background-image: url("/sites/all/themes/xeros_theme/images/18px_up-red.png");
-  }
-  .arrow.down {
-    background-image: url("/sites/all/themes/xeros_theme/images/18px_down-green.png");
-  }
-  .arrow.up.inverse {
-    background-image: url("/sites/all/themes/xeros_theme/images/18px_up-green.png");
-  }
-  .arrow.down.inverse {
-    background-image: url("/sites/all/themes/xeros_theme/images/18px_down-red.png");
+    &:after {
+      font-family: FontAwesome;
+    }
   }
   .delta {
     display: inline-block;
+  }
+  // If the difference between actual and model is positive
+  &.delta-up {
+    .arrow {
+      &:after {
+        color: #ff0000;
+        content: "\f062";
+      }
+    }
+  }
+  // If the difference between actual and model is negative
+  &.delta-down {
+    .arrow {
+      &:after {
+        color: #00c900;
+        content: "\f063";
+      }
+    }
+  }
+  // If actual and model are equal
+  &.delta-none {
+    .arrow {
+      opacity: 0;
+    }
   }
 }
