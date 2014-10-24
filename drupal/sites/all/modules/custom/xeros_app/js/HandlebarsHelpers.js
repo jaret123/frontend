@@ -114,7 +114,7 @@ Handlebars.registerHelper('round', function(number, decimalPlaces) {
 Handlebars.registerHelper('formatDelta', function(numerator, denominator) {
 
     var value = Handlebars.helpers.deltaValue(numerator, denominator);
-    if ( value === '-'  ) {
+    if ( value === '-' || value === 0  ) {
         return 'delta-none';
     } else if ( value > 0 ) {
         return 'delta-down';
@@ -145,7 +145,7 @@ Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
     // Divide by 0
     if ( denominator === 0 ) {
         if ( numerator === 0 ) {
-            delta = '-';
+            delta = 0;
         } else {
             delta = 100;
         }
