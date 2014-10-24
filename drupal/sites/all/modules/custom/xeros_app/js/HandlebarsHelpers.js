@@ -154,3 +154,7 @@ Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
     }
     return delta;
 })
+
+Handlebars.registerHelper('digits', function(cycles) {
+    return 'digits-' + cycles.toString().length;
+});

@@ -3154,14 +3154,26 @@ a:hover, a:active {
   top: 38px;
   left: 0;
   right: 0;
-  font-size: 18px;
+  font-size: 17px;
   text-align: center;
 }
-/* line 105, ../sass/components/_page-2.scss */
+/* line 104, ../sass/components/_page-2.scss */
+#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-4 {
+  font-size: 16px;
+}
+/* line 107, ../sass/components/_page-2.scss */
+#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-5 {
+  font-size: 14px;
+}
+/* line 110, ../sass/components/_page-2.scss */
+#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-6 {
+  font-size: 10px;
+}
+/* line 114, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .Xeros .icon-washer-label {
   top: 44px;
 }
-/* line 108, ../sass/components/_page-2.scss */
+/* line 117, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .machine-label {
   float: left;
   width: 80px;
@@ -3171,7 +3183,7 @@ a:hover, a:active {
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 119, ../sass/components/_page-2.scss */
+/* line 128, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 {
   float: left;
   width: 20%;
@@ -3185,7 +3197,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 122, ../sass/components/_page-2.scss */
+/* line 131, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-3 {
   float: left;
   width: 20%;
@@ -3199,7 +3211,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 125, ../sass/components/_page-2.scss */
+/* line 134, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 {
   float: left;
   width: 20%;
@@ -3213,7 +3225,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 128, ../sass/components/_page-2.scss */
+/* line 137, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 {
   float: left;
   width: 20%;
@@ -3227,7 +3239,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 133, ../sass/components/_page-2.scss */
+/* line 142, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -3238,7 +3250,7 @@ a:hover, a:active {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 139, ../sass/components/_page-2.scss */
+/* line 148, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels {
   position: relative;
   display: inline-block;
@@ -3246,35 +3258,35 @@ a:hover, a:active {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 148, ../sass/components/_page-2.scss */
+/* line 157, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 156, ../sass/components/_page-2.scss */
+/* line 165, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 img {
   display: inline-block;
 }
-/* line 159, ../sass/components/_page-2.scss */
+/* line 168, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 162, ../sass/components/_page-2.scss */
+/* line 171, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 167, ../sass/components/_page-2.scss */
+/* line 176, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 176, ../sass/components/_page-2.scss */
+/* line 185, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -3282,19 +3294,19 @@ a:hover, a:active {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 180, ../sass/components/_page-2.scss */
+/* line 189, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 185, ../sass/components/_page-2.scss */
+/* line 194, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
 }
-/* line 193, ../sass/components/_page-2.scss */
+/* line 202, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.Xeros {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
   background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);

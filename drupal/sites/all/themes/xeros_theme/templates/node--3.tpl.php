@@ -77,7 +77,7 @@
                                 <div class="col col-1">
                                     <span class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer">
-                                          <div class="icon-washer-label">
+                                          <div class="icon-washer-label {{digits cycles}}">
                                             {{cycles}}
                                             </div>
                                         </div>
