@@ -132,7 +132,7 @@ function xeros_app_user_logout($account) {
 function xeros_app_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['#form_id']) && $form['#form_id'] == 'user_profile_form') {
     // TODO: Change to checking for a permission instead of a role
-    if ( !in_array('administrator', $form['#user']->roles ) ) {
+    if ( !in_array('administrator', $GLOBALS['user']->roles ) ) {
       $form['field_company']['#access'] = false;
       $form['field_location']['#access'] = false;
       $form['picture']['#access'] = false;
