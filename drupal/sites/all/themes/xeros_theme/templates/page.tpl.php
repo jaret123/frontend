@@ -21,10 +21,12 @@
     </div>
     <div class="header__row-2">
         <?php print render($page['navigation']); ?>
+        <?php if (user_is_logged_in()) : ?>
           <span class="header__welcome">Welcome <?php print $user->name ; ?><br/>
             Company: <span class="header__company"></span><br/>
             Location: <span class="header__location"></span>
           </span>
+        <?php endif; ?>
     </div>
 </header>
 
