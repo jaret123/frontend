@@ -1,0 +1,167 @@
+<?php
+
+/**
+ * Implements hook_menu_alter().
+ */
+function simple_pass_reset_menu_alter(&$items) {
+  // Drupal's default behavior is to show the user a log-in form before
+  // their user profile.  We replace this item to skip the uneccesary step.
+  $items['user/reset/%/%/%'] = array(
+    'title' => 'Account settings',
+    'access callback' => 'simple_pass_reset_pass_reset_access',
+    'access arguments' => array(2, 3, 4),
+    'page callback' => 'simple_pass_reset_pass_reset_page',
+    'page arguments' => array(2, 3, 4),
+    'type' => MENU_CALLBACK,
+  );
+
+  // Better title on user pages.
+  $items['user']['title callback'] = 'simple_pass_reset_menu_title_user';
+}
+
+/**
+ * Access callback for use with Drupal's menu API.
+ */
+function simple_pass_reset_pass_reset_access($uid, $timestamp, $hashed_pass) {
+  if (user_is_logged_in()) {
+    return FALSE;
+  }
+
+  // Following logic copied from user_pass_reset().
+  // Time out, in seconds, until login URL expires. Defaults to 24 hours =
+  // 86400 seconds.
+  $timeout = variable_get('user_password_reset_timeout', 86400);
+  $current = REQUEST_TIME;
+  // Some redundant checks for extra security ?
+  $users = user_load_multiple(array($uid), array('status' => '1'));
+  if ($timestamp <= $current && $account = reset($users)) {
+    // No time out for first time login.
+    if ($account->login && $current - $timestamp > $timeout) {
+      drupal_set_message(t('You have tried to use a one-time login link that has expired. Please request a new one using the form below.'));
+      drupal_goto('user/password');
+    }
+    elseif ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Page callback for use with Drupal's menu API.
+ *
+ * This page replaces core one-time login form provided by user_pass_reset().
+ */
+function simple_pass_reset_pass_reset_page($uid, $timestamp, $hashed_pass, $option = NULL) {
+  module_load_include('inc', 'user', 'user.pages');
+  // When $option is original or login, preserve original behavior.
+  if ($option == 'original') {
+    return drupal_get_form('user_pass_reset', $uid, $timestamp, $hashed_pass);
+  }
+  elseif ($option == 'login') {
+    return drupal_get_form('user_pass_reset', $uid, $timestamp, $hashed_pass, $option);
+  }
+  else {
+    // Show the user edit form instead of silly one-time login form.
+    $account = user_load($uid);
+    $form = drupal_get_form('user_profile_form', $account);
+    return $form;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function simple_pass_reset_form_user_profile_form_alter(&$form, &$form_state) {
+
+  // Don't alter the normal profile edit form, but only the password reset form.
+  if (arg(0) == 'user' && arg(1) == 'reset' && !user_is_logged_in()) {
+
+    // Our submit handler will log the use in after form submit.
+    $form['#submit'][] = 'simple_pass_reset_pass_reset_submit';
+
+    $form['actions']['submit']['#value'] = t('Save and log in as !username', array(
+                                               '!username' => format_username($form['#user']),
+                                             ));
+
+    // Links provided by bakery.module will not work because we are not yet logged in.
+    if (!empty($form['bakery'])) {
+      $form['bakery']['#access'] = FALSE;
+
+      // Normally bakery.module would make the following change to the user_pass_reset form.
+      if (!variable_get('bakery_is_master', FALSE)) {
+        // Set a submit handler for the psuedo-reset form.
+        $form['#submit'] = array('_bakery_reset_submit');
+      }
+    }
+
+    // Some third-party modules (like bakery) might hide account elements.
+    if (!isset($form['account']['#access']) || $form['account']['#access']) {
+      // Require a new password.
+      $form['account']['pass']['#required'] = TRUE;
+
+
+      if (arg(5) == 'brief') {
+        drupal_set_title(t('Reset password'));
+        // The user is most interested in getting a working password, don't show their picture, timezone, etc.
+        foreach (element_children($form) as $key) {
+          if (in_array($form[$key]['#type'], array('hidden', 'actions'))) {
+            // Do not alter these elements.
+          }
+          else {
+            // Hide other elements.
+            $form[$key]['#access'] = FALSE;
+          }
+        }
+        // Except don't hide these.
+        $form['account']['#access'] = TRUE;
+        $form['actions']['#access'] = TRUE;
+
+        // But seriously do hide these.
+        $form['account']['mail']['#access'] = FALSE;
+      }
+    }
+
+    // This is to avoid a PHP Notice in user_profile_form_submit().
+    if (!isset($_SESSION)) {
+      $_SESSION = array();
+    }
+  }
+}
+
+/**
+ * Submit callback for Drupal form API.
+ */
+function simple_pass_reset_pass_reset_submit($form, &$form_state) {
+  if (!user_is_logged_in()) { // Sanity check.
+    // Remove roles that were disabled in the form. Normally user_module will array_filter() these out for us.  But remember_me and possibly other modules have bugs that might prevent user.module from doing that.
+    if (!empty($form_state['user']->roles)) {
+      $form_state['user']->roles = array_filter($form_state['user']->roles);
+    }
+
+    // This logic copied from user_pass_reset().
+    $account = $form_state['user'];
+    $GLOBALS['user'] = $form_state['user'];
+    user_login_finalize();
+
+    watchdog('user', 'User %name used one-time login link.', array('%name' => $account->name));
+
+    $form_state['redirect'] = 'user';
+  }
+}
+
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Asks Drupal to run our form_alter hooks after other modules.
+ */
+function simple_pass_reset_module_implements_alter(&$implementations, $hook) {
+  // The hook we're interested in is hook_form_FORM_ID_alter().  Yet, in this function we have to manipulate 'form_alter'.  Because Drupal is tricky like that.
+  if ($hook == 'form_alter' && isset($implementations['simple_pass_reset'])) {
+    // Make our form alters come last (so we act after other modules have already altered).
+    $group = $implementations['simple_pass_reset'];
+    unset($implementations['simple_pass_reset']);
+    $implementations['simple_pass_reset'] = $group;
+  }
+}

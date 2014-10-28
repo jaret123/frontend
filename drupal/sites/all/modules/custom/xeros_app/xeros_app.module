@@ -1,5 +1,7 @@
 <?php
 
+require_once(drupal_get_path('module', 'xeros_app') . '/user_profile_form.inc');
+
 /**
  * Implements hook_menu()
  *
@@ -124,6 +126,17 @@ function xeros_app_user_logout($account) {
       setcookie($key, '', 1, '/');
     }
   }
+}
 
 
+function xeros_app_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#form_id']) && $form['#form_id'] == 'user_profile_form') {
+    // TODO: Change to checking for a permission instead of a role
+    if ( !in_array('administrator', $form['#user']->roles ) ) {
+      $form['field_company']['#access'] = false;
+      $form['field_location']['#access'] = false;
+      $form['picture']['#access'] = false;
+      $form['timezone']['#access'] = false;
+    }
+  }
 }
