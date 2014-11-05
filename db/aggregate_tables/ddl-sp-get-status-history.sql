@@ -7,11 +7,11 @@ BEGIN
 	set @num := 0, 
 		@machine_id := '';
 
-	if ( machine_ids IS NOT NULL ) then
-		set @where_clause = CONCAT(' where machine_id in (', machine_ids , ') ');
-	else 
-		set @where_clause = CONCAT(' where 1 = 1 ');
-	end if;
+  if ( machine_ids IS NOT NULL ) then
+    set @where_clause = CONCAT(' where machine_id in (', machine_ids , ') and time_stamp > date_add(now(), interval -5 day)  ');
+  else
+    set @where_clause = CONCAT(' where 1 = 1 and time_stamp > date_add(now(), interval -5 day)  ');
+  end if;
 
 	set @query = CONCAT('
 -- Current Status
@@ -84,11 +84,11 @@ BEGIN
 	set @num := 0, 
 		@machine_id := '';
 
-	if ( machine_ids IS NOT NULL ) then
-		set @where_clause = CONCAT(' where machine_id in (', machine_ids , ') ');
-	else 
-		set @where_clause = CONCAT(' where 1 = 1 ');
-	end if;
+  if ( machine_ids IS NOT NULL ) then
+    set @where_clause = CONCAT(' where machine_id in (', machine_ids , ') and time_stamp > date_add(now(), interval -5 day)  ');
+  else
+    set @where_clause = CONCAT(' where 1 = 1 and time_stamp > date_add(now(), interval -5 day)  ');
+  end if;
 
 	set @query = CONCAT('
 		select 
