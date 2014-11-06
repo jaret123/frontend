@@ -15,8 +15,8 @@
     margin-left: 3px;
     margin-bottom: -1px;
     &.current {
-      background-color: $font-color;
-      border: 1px solid $font-color;
+      background-color: rgb(153, 153, 153);
+      border: 1px solid rgb(153, 153, 153);
     }
     &.xeros {
       background-color: $font-accent-color;

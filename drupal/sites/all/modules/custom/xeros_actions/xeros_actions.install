@@ -1,0 +1,209 @@
+<?php
+
+function xeros_actions_install() {
+
+  $type_name = 'action';
+
+  //  Verify the content type does not already exist. To instead get the node types
+  //  as objects, use node_type_get_types().
+  if ( in_array( $type_name, node_type_get_names() ) ) {
+    return;
+  }
+
+  $types = array(
+    array(
+      'type' =>  $type_name,
+      'name' => st('Machine Action'),
+      'base' => 'node_content',
+      'description' => st("Use Machine Actions for storing service messages"),
+      'has_title' => 1,
+      'title_label' => 'Action',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'promote' => 0,
+      'comment' => 0
+    )
+  );
+
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type, $label = 'Action Notes');
+    // Turn off comments
+    variable_set('comment_' . $type_name, 0);
+  }
+
+
+  $field_name = 'field_machine_entity_reference';
+
+  if (field_info_field( $field_name )) {
+    return;
+  }
+
+  $field = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_machine_entity_reference',
+    'foreign keys' => array(
+      'xeros_machine' => array(
+        'columns' => array(
+          'target_id' => 'machine_id',
+        ),
+        'table' => 'xeros_machine',
+      ),
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(),
+      ),
+      'target_type' => 'machine_entity',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  $field = field_create_field($field);
+
+  $instance = array(
+    'bundle' => 'action',
+    'field_name' => 'field_machine_entity_reference',
+    'entity_type' => 'node',
+    'description' => 'A field for testing the programmatic creation of new fields.',
+    'label' => 'Machine ID',
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => -3,
+    ),
+    'settings' => array(
+      'user_register_form' => FALSE,
+//      'target_type' => 'machine',
+//      'handler_settings' => array('target_bundles' => NULL),
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+      ),
+    ),
+  );
+  field_create_instance($instance);
+
+  $field_name = 'field_status';
+
+  if (field_info_field( $field_name )) {
+    return;
+  }
+
+  $field = array(
+      'active' => 1,
+      'cardinality' => 1,
+      'deleted' => 0,
+      'entity_types' => array(),
+      'field_name' => 'field_status',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => 0,
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'Green',
+          1 => 'Yellow',
+          2 => 'Red',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => 0,
+      'type' => 'list_integer',
+  );
+
+  $field = field_create_field($field);
+
+  $instance = array(
+    'bundle' => 'action',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_status',
+    'label' => 'Status',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => -2,
+    ),
+  );
+  field_create_instance($instance);
+  /**
+   * Create first status for each action
+   */
+}
+
+
+function xeros_actions_uninstall() {
+//  $type_name = 'action';
+//
+//
+//  //  If the content exists, delete it. To instead get the node types
+//  //  as objects, use node_type_get_types().
+//  if ( in_array( $type_name, node_type_get_names() ) ) {
+//    node_type_delete($type_name);
+//  }
+}
+//
+//ALTER TABLE `xeros-prod`.`xeros_machine`
+//CHANGE COLUMN `machine_name` `machine_name` VARCHAR(150) NULL DEFAULT '<machine name>' AFTER `machine_id`;

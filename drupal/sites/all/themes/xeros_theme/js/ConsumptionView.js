@@ -10,21 +10,48 @@ var view = {
 
         app.reportData = app.data;
 
-        for ( i in app.reportData.data) {
-//            app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
-//            app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
-//            app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
-//            app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
-            app.reportData.data[i].water_only = parseInt(app.reportData.data[i].water_only, 10);
+        self.getActionData(function(actionData) {
 
-            if ( app.reportData.data[i].water_only === 1 ) {
-                app.reportData.data[i].cycles = 'water only';
+            for ( i in app.reportData.data) {
+                var machineId = parseInt(app.reportData.data[i].id, 10);
+
+    //            app.reportData.data[i].chemical_delta_value = self.delta(app.reportData.data[i].chemical_value, app.reportData.data[i].chemical_xeros_value);
+    //            app.reportData.data[i].cold_water_delta_value = self.delta(app.reportData.data[i].cold_water_value, app.reportData.data[i].cold_water_xeros_value);
+    //            app.reportData.data[i].hot_water_delta_value = self.delta(app.reportData.data[i].hot_water_value, app.reportData.data[i].hot_water_xeros_value);
+    //            app.reportData.data[i].time_delta_value = self.delta(app.reportData.data[i].time_value, app.reportData.data[i].time_xeros_value);
+                app.reportData.data[i].water_only = parseInt(app.reportData.data[i].water_only, 10);
+
+                if ( app.reportData.data[i].water_only === 1 ) {
+                    app.reportData.data[i].cycles = 'water only';
+                }
+                app.reportData.data[i].actionData = actionData[machineId];
             }
-        }
-        draw(); // This does the html template draw
 
-        self.drawCharts();
-        self.bindNav();
+
+            draw(); // This does the html template draw
+
+            self.drawCharts();
+            self.bindNav();
+        })
+    },
+    getActionData : function(callback) {
+        // Get the action data
+        jQuery.ajax({
+            url: 'actions/json',
+            dataType: 'json',
+            success: function (data) {
+                console.log("data retrieved: " + 'actions/json');
+                // Append the data and finish this function
+                if (typeof callback == "function") {
+                    callback(data);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
+                jQuery(app.err).addClass("active");
+                jQuery(app.err).html("Oops, something happened with the actions service.  Please contact your system administrator.");
+            }
+        });
     },
     isValid : function(arr) {
         var isValid = true;
@@ -135,17 +162,17 @@ var view = {
         FF.Controls.TimeSelect.create();
     },
     bindNav : function() {
-        jQuery('.water-only-0 .link').unbind().click(function (event) {
-            event.preventDefault();
-            var classification,
-                machine_id;
-
-            classification = jQuery(this).attr("classification");
-            machine_id = jQuery(this).attr("machine");
-            // TODO: Move to user settings
-            FF.User.setReportMetric(classification);
-
-            document.location.href = 'consumption-details#' + machine_id + "+" + FF.User.reportSettings.metric + "+" + FF.User.reportSettings.timeSelect + ',' + FF.User.reportSettings.dates.toString();
-        });
+//        jQuery('.water-only-0 .link').unbind().click(function (event) {
+//            event.preventDefault();
+//            var classification,
+//                machine_id;
+//
+//            classification = jQuery(this).attr("classification");
+//            machine_id = jQuery(this).attr("machine");
+//            // TODO: Move to user settings
+//            FF.User.setReportMetric(classification);
+//
+//            document.location.href = 'consumption-details#' + machine_id + "+" + FF.User.reportSettings.metric + "+" + FF.User.reportSettings.timeSelect + ',' + FF.User.reportSettings.dates.toString();
+//        });
     }
 }

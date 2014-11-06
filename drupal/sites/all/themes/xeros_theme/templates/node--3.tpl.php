@@ -12,7 +12,9 @@
     <div class="page-container">
         <div id="consumption">
             <div class="consumption-container">
-                <div class="legend">
+              <div class="chart-header">
+
+              <div class="legend">
                     <span class="swatch current"></span>
                     <span class="label">Current Consumption</span>
                     <span class="swatch xeros"></span>
@@ -45,7 +47,7 @@
                 <div class="data-range">
                     Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
                 </div>
-
+              </div>
 
                 <div class="consumption__grid-container">
                     <div class="row first">
@@ -53,20 +55,24 @@
                             <div class="label">Machine</div>
                         </div>
                         <div class="col col-2">
-                            <div class="label">Cold Water</div>
-                            <div class="sub-label">(Gallons)</div>
+                            <div class="label">Water Sewer</div>
                         </div>
                         <div class="col col-3">
-                            <div class="label">Hot Water</div>
-                            <div class="sub-label">(Therms)</div>
+                            <div class="label">Therms</div>
                         </div>
+<!--                        <div class="col col-4">-->
+<!--                            <div class="label">Cycle Time</div>-->
+<!--                            <div class="sub-label">(Minutes)</div>-->
+<!--                        </div>-->
+<!--                        <div class="col col-5">-->
+<!--                            <div class="label">Chemical</div>-->
+<!--                            <div class="sub-label">(Ounces)</div>-->
+<!--                        </div>-->
                         <div class="col col-4">
-                            <div class="label">Cycle Time</div>
-                            <div class="sub-label">(Minutes)</div>
+                          <div class="label">Health</div>
                         </div>
                         <div class="col col-5">
-                            <div class="label">Chemical</div>
-                            <div class="sub-label">(Ounces)</div>
+                          <div class="label">Action</div>
                         </div>
                     </div>
 
@@ -78,7 +84,10 @@
                                     <span class="consumption__machine {{machine_name}}">
                                         <div class="icon-Washer">
                                           <div class="icon-washer-label {{digits cycles}}">
-                                            {{cycles}}
+                                            {{#if water_only}}
+                                            {{else}}
+                                                {{cycles}}
+                                            {{/if}}
                                             </div>
                                         </div>
                                         <div class="machine-label">
@@ -95,7 +104,7 @@
                                         <div class="metric__message"></div>
                                     </span>
                                 </div>
-                                <div class="col col-2 link metric {{formatDelta cold_water_xeros_value cold_water_value}}" classification="cold_water" machine="{{id}}"
+                                <div class="col col-2 metric {{formatDelta cold_water_xeros_value cold_water_value}}" classification="cold_water" machine="{{id}}"
                                      chart="cold_water-{{id}}">
 
                                     <div class="chart" name="{{id}}-cold_water"></div>
@@ -105,41 +114,21 @@
                                     <div class="metric__message"></div>
                                 </div>
 
-                                <div class="col col-3 link metric {{formatDelta hot_water_xeros_value hot_water_value}}" classification="hot_water" machine="{{id}}"
+                                <div class="col col-3 metric {{formatDelta hot_water_xeros_value hot_water_value}}" classification="hot_water" machine="{{id}}"
                                      chart="hot_water-{{id}}">
                                     <div class="chart" name="{{id}}-hot_water"></div>
                                     <div class="delta" data="{{hot_water_delta_value}}">{{formatDeltaValue hot_water_xeros_value hot_water_value}}</div>
                                     <div class="arrow"></div>
                                     <div class="metric__message"></div>
                                 </div>
-
-                              {{#if water_only}}
-                            <div class="col col-4 metric">
-                              <div>
-                                Water<br/>Only<br/>&nbsp;
-                              </div>
-                            </div>
-                                <div class="col col-5 metric">
-                                  <div>
-                                    Water<br/>Only<br/>&nbsp;
-                                  </div>
+                                <div class="col col-4 health">
+                                  <div class="{{actionData.action_status.class}}"></div>
                                 </div>
-                              {{else}}
-                              <div class="col col-4 link metric {{formatDelta time_xeros_value time_value}}" classification="cycle_time" machine="{{id}}"
-                                   chart="cycle_time-{{id}}">
-                                <div class="chart" name="{{id}}-cycle_time""></div>
-                              <div class="delta" data="{{time_delta_value}}">{{formatDeltaValue time_xeros_value time_value}}</div>
-                              <div class="arrow {{cold-water-up-or-down}}"></div>
-                              <div class="metric__message"></div>
-                            </div>
-                                <div class="col col-5 link metric {{formatDelta chemical_xeros_value chemical_value}}" classification="chemical" machine="{{id}}"
-                                     chart="chemical-{{id}}">
-                                  <div class="chart" name="{{id}}-chemical""></div>
-                                  <div class="delta" data="{{chemical_delta_value}}">{{formatDeltaValue chemical_xeros_value chemical_value}}</div>
-                                  <div class="arrow up"></div>
-                                  <div class="metric__message"></div>
+                                <div class="col col-5 action">
+                                  {{#if actionData.action_title.data}}
+                                    <div><strong>{{actionData.action_created}}:</strong><br/> {{actionData.action_title.data}}</div>
+                                  {{/if}}
                                 </div>
-                              {{/if}}
                             </div>
                             {{/data}}
                         </script>

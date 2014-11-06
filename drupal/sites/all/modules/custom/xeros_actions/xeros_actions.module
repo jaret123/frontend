@@ -1,0 +1,68 @@
+<?php
+
+function xeros_actions_menu() {
+  $items['actions'] = array(
+    'title' => 'Current Health and Actions',
+    'page callback' => 'action_listing',
+    'page arguments' => array(1),
+    'access arguments' => array('xeros actions view'),
+    'file' => 'xeros_actions.listing.inc'
+  );
+
+  return $items;
+}
+
+function xeros_actions_permission() {
+  return array(
+    'xeros actions view' => array(
+      'title' => t('View Actions'),
+      'description' => t('Roles with this permission have the ability to view the Xeros Actions'),
+    ),
+    'xeros actions edit' => array(
+      'title' => t('Edit Actions'),
+      'description' => t('Roles with this permission have the ability to edit Xeros Actions'),
+    ),
+  );
+}
+
+function xeros_actions_entity_info() {
+  return array(
+    'machine_entity' => array(
+      'label' => t('Machine'),
+      'label callback' => 'machine_label_callback',
+      'description' => t('Machines'),
+      'base table' => 'xeros_machine',
+      'entity class' => 'Entity',
+      'controller class' => 'EntityAPIController',
+      'entity keys' => array(
+        'id' => 'machine_id',
+      ),
+      'admin ui' => array(
+        'path' => 'admin/content/machines',
+        'controller class' => 'EntityDefaultUIController',
+      ),
+      'access callback' => 'xeros_actions_access_callback',
+    ),
+  );
+}
+
+function xeros_actions_access_callback() {
+  return TRUE;
+}
+function machine_label_callback($machine, $type) {
+  return empty($machine->machine_id) ? 'Untitled Machine' : $machine->machine_id;
+}
+
+function xeros_actions_form_action_node_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['#form_id']) && $form['#form_id'] == 'action_node_form' ) {
+    $form['some_element']['#after_build'] = array('_load_my_javascript');
+    if ( $form['nid']['#value'] !== null ) {
+      $form['field_machine_entity_reference']['#access'] = FALSE;
+    }
+  }
+}
+
+function _load_my_javascript($element){
+    drupal_add_js(drupal_get_path('module', 'xeros_actions')  . '/js/xeros_actions.js');
+    return($element);
+}

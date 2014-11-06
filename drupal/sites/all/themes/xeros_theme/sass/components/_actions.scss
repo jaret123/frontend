@@ -1,0 +1,58 @@
+$color-red: red;
+$color-yellow: rgb(255,210,0);
+$color-green: green;
+
+.status {
+  &:before {
+    font-family: FontAwesome;
+    font-size: 22px;
+  }
+  &.status-0 {
+    color: $color-green;
+    &:before {
+      content: "\f058";
+    }
+  }
+  &.status-1 {
+    color: $color-yellow;
+    &:before {
+      content: "\f06a";
+    }
+  }
+  &.status-2 {
+    color: $color-red;
+    &:before {
+      content: "\f057";
+    }
+  }
+  #consumption & {
+    &:before {
+      font-size: 40px;
+    }
+  }
+}
+
+.page-ops {
+  td {
+    padding: 2px 3px;
+  }
+  .page-wrapper {
+    width: auto;
+    max-width: 1100px;
+  }
+  .status {
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 2px;
+    }
+  }
+
+}
+
+.node-action-form {
+  .vertical-tabs,
+  #edit-preview {
+    display: none;
+  }
+}

@@ -1,0 +1,9 @@
+name = Xeros Actions Module
+description = Defines Actions and Action history for machine service
+package = Xeros
+core = 7.x
+
+files[] = xeros_actions.install
+files[] = xeros_actions.module
+
+dependencies[] = entity

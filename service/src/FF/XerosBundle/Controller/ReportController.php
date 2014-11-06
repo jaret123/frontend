@@ -232,15 +232,16 @@ METRIC
 //METRIC
 //        ));
           // Chemical
-          array_push($metrics, array(
-              "name" => "chemical",
-              "query" => <<<METRIC
-   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
-   		count(*) * 17.3884 as value_xeros, -- Model data
-   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
-   		count(*) * 1.18185 as cost_xeros -- Model data
-METRIC
-            ));
+          // (not in use)
+//          array_push($metrics, array(
+//              "name" => "chemical",
+//              "query" => <<<METRIC
+//   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
+//   		count(*) * 17.3884 as value_xeros, -- Model data
+//   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
+//   		count(*) * 1.18185 as cost_xeros -- Model data
+//METRIC
+//            ));
 
           break;
 
@@ -290,15 +291,15 @@ METRIC
 //METRIC
 //        ));
           // Chemical Strength
-          array_push($metrics, array(
-              "name" => "chemical",
-              "query" => <<<METRIC
-   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
-   		sum(coalesce(xc.cycle_chemical_xeros_strength, 0)) as value_xeros,
-   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
-   		sum(coalesce(xc.cycle_chemical_xeros_cost, 0)) as cost_xeros
-METRIC
-            ));
+//          array_push($metrics, array(
+//              "name" => "chemical",
+//              "query" => <<<METRIC
+//   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
+//   		sum(coalesce(xc.cycle_chemical_xeros_strength, 0)) as value_xeros,
+//   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
+//   		sum(coalesce(xc.cycle_chemical_xeros_cost, 0)) as cost_xeros
+//METRIC
+//            ));
           break;
       }
 

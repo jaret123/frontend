@@ -32,7 +32,7 @@
     @include zen-grid-container;
 
     .consumption__grid-container{
-      margin-top: 20px;
+      margin-top: 3px;
       position: relative;
       min-height: 400px;
     }
@@ -50,27 +50,36 @@
       padding-bottom: 25px;
       text-align: center;
       position: relative;
-      height: 75px;
-
-      .col {
+      .metric {
         position: absolute;
         bottom: 20px;
       }
+      .health {
+        padding-top: 20px;
+      }
+      .action {
+        font-size: 14px;
+        text-align: left;
+        strong {
+          font-weight: normal;
+          color: black;
+        }
+      }
+
       &.first {
         padding-top: 10px;
         padding-bottom: 10px;
-        height: 50px;
         .label, .sub-label {
           text-align: center;
         }
         .label {
           font-weight: 400;
         }
-        .sub-label {
-          font-weight: 100;
-          font-size: .83em;
-		  line-height:1em;
-        }
+//        .sub-label {
+//          font-weight: 100;
+//          font-size: .83em;
+//		  line-height:1em;
+//        }
       }
       &.last {
         border-bottom: 1px dashed $font-color;

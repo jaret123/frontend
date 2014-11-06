@@ -37,7 +37,7 @@ var view = {
                     'value_xeros': 0
                 },
                 chartData : [],
-                total : [1, 2, 3]
+                total : [1, 2]
             },
             {
                 name : 'cold-water',
@@ -61,17 +61,17 @@ var view = {
                 summaryData: {},
                 chartData : []
             },
-            {
-                name : 'chemical',
-                meta : {
-                    cssClass : "chemicals",
-                    icon : "Atom",
-                    label : "Chemical Strength",
-                    title : "Usage"
-                },
-                summaryData: {},
-                chartData : []
-            }
+//            {
+//                name : 'chemical',
+//                meta : {
+//                    cssClass : "chemicals",
+//                    icon : "Atom",
+//                    label : "Chemical Strength",
+//                    title : "Usage"
+//                },
+//                summaryData: {},
+//                chartData : []
+//            }
 
         ];
 

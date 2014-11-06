@@ -73,18 +73,21 @@
 }
 
 .icon-Washer {
-  color: $font-color;
   font-size: 80px;
   display: inline-block;
+  &:before {
+    color: rgb(150,150,150);
+  }
 }
 
 .Xeros {
   .icon-Washer {
-    color: #0086bd;
     font-size: 80px;
     display: inline-block;
+    color: rgb(0, 100, 200);
   }
   .icon-Washer:before {
+    color: #0086bd;
     content: "\e60c";
   }
 }
