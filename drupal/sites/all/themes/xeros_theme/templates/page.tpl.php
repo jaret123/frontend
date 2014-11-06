@@ -7,7 +7,6 @@
  * @see https://drupal.org/node/1728148
  */
 ?>
-
 <div class="top-border"></div>
 <header class="header">
     <div class="header__logo">
@@ -106,4 +105,3 @@
 <?php print render($page['footer']); ?>
 <?php print render($page['bottom']); ?>
 <canvas id="drawingArea" style="display:none;position: fixed; top: 100px; left: 150px; background-color: antiquewhite;"></canvas>
-

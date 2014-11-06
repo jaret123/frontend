@@ -3822,7 +3822,12 @@ a:hover, a:active {
  * We use example breakpoints of 444px, 666px, 777px, 999px and 1111px. The
  * right breakpoints to use for your site depend on your content.
  */
-/* line 11, ../sass/layouts/_layout.scss */
+/* line 9, ../sass/layouts/_layout.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 12, ../sass/layouts/_layout.scss */
 .centered, .device-layout {
   padding-top: 1.5em;
   padding-bottom: 1.5em;
@@ -3832,7 +3837,7 @@ a:hover, a:active {
 }
 
 /* Set the shared properties for all grid items. */
-/* line 26, ../sass/layouts/_layout.scss */
+/* line 27, ../sass/layouts/_layout.scss */
 .grid-item {
   padding-left: 2px;
   padding-right: 3px;
@@ -3854,17 +3859,25 @@ a:hover, a:active {
   clear: both;
 }
 
-/* line 35, ../sass/layouts/_layout.scss */
+/* line 36, ../sass/layouts/_layout.scss */
 .page-wrapper {
   z-index: 0;
   width: 980px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  min-height: calc(100% - 124px);
+  margin-bottom: -170px;
+}
+/* line 47, ../sass/layouts/_layout.scss */
+.page-wrapper:after {
+  content: '';
+  display: block;
+  height: 170px;
 }
 
 @media all and (min-width: 320px) {
-  /* line 54, ../sass/layouts/_layout.scss */
+  /* line 64, ../sass/layouts/_layout.scss */
   .grid-item__content {
     float: left;
     width: 60%;
@@ -3879,7 +3892,7 @@ a:hover, a:active {
     word-wrap: break-word;
   }
 
-  /* line 57, ../sass/layouts/_layout.scss */
+  /* line 67, ../sass/layouts/_layout.scss */
   .grid-item__aside1 {
     float: left;
     width: 20%;
@@ -3894,7 +3907,7 @@ a:hover, a:active {
     word-wrap: break-word;
   }
 
-  /* line 60, ../sass/layouts/_layout.scss */
+  /* line 70, ../sass/layouts/_layout.scss */
   .grid-item__aside2 {
     float: left;
     width: 20%;

@@ -6,7 +6,8 @@
  * right breakpoints to use for your site depend on your content.
  */
 
-html {
+html, body {
+  height: 100%;
 }
 .centered, .device-layout {
   //@include zen-grid-background();
@@ -38,12 +39,21 @@ html {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-
+  min-height: calc(100% - 124px);
+  margin-bottom: -170px;  // 124 + 170
   > div {
     //position: absolute;
   }
+  &:after {
+    content: '';
+    display: block;
+    height: 170px;
+  }
 }
 
+.footer {
+
+}
 
 @media all and (min-width: 320px) {
   $zen-column-count: 5;
