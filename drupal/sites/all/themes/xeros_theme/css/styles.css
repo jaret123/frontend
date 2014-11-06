@@ -3173,24 +3173,25 @@ a:hover, a:active {
   right: 0;
   font-size: 17px;
   text-align: center;
+  font-family: "Lato", Helvetica, "Nimbus Sans L", sans-serif;
 }
-/* line 113, ../sass/components/_page-2.scss */
+/* line 114, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-washer-label.digits-4 {
   font-size: 14px;
 }
-/* line 116, ../sass/components/_page-2.scss */
+/* line 117, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-washer-label.digits-5 {
   font-size: 13px;
 }
-/* line 119, ../sass/components/_page-2.scss */
+/* line 120, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .icon-washer-label.digits-6 {
   font-size: 12px;
 }
-/* line 123, ../sass/components/_page-2.scss */
+/* line 124, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .Xeros .icon-washer-label {
   top: 44px;
 }
-/* line 126, ../sass/components/_page-2.scss */
+/* line 127, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-1 .machine-label {
   float: left;
   width: 80px;
@@ -3200,7 +3201,7 @@ a:hover, a:active {
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 137, ../sass/components/_page-2.scss */
+/* line 138, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 {
   float: left;
   width: 20%;
@@ -3214,7 +3215,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 140, ../sass/components/_page-2.scss */
+/* line 141, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-3 {
   float: left;
   width: 20%;
@@ -3228,7 +3229,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 143, ../sass/components/_page-2.scss */
+/* line 144, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 {
   float: left;
   width: 20%;
@@ -3242,7 +3243,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 146, ../sass/components/_page-2.scss */
+/* line 147, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 {
   float: left;
   width: 20%;
@@ -3256,7 +3257,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 151, ../sass/components/_page-2.scss */
+/* line 152, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -3267,7 +3268,7 @@ a:hover, a:active {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 157, ../sass/components/_page-2.scss */
+/* line 158, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels {
   position: relative;
   display: inline-block;
@@ -3275,35 +3276,35 @@ a:hover, a:active {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 166, ../sass/components/_page-2.scss */
+/* line 167, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 174, ../sass/components/_page-2.scss */
+/* line 175, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 img {
   display: inline-block;
 }
-/* line 177, ../sass/components/_page-2.scss */
+/* line 178, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 180, ../sass/components/_page-2.scss */
+/* line 181, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 185, ../sass/components/_page-2.scss */
+/* line 186, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-4 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 194, ../sass/components/_page-2.scss */
+/* line 195, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -3311,19 +3312,19 @@ a:hover, a:active {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 198, ../sass/components/_page-2.scss */
+/* line 199, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 203, ../sass/components/_page-2.scss */
+/* line 204, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row .col-5 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
 }
-/* line 211, ../sass/components/_page-2.scss */
+/* line 212, ../sass/components/_page-2.scss */
 #page-2 .consumption-container .row.Xeros {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
   background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
