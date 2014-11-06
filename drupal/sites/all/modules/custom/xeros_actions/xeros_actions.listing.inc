@@ -26,7 +26,8 @@ function action_listing_table() {
     $add_link = l('Add', 'node/add/action', array('query' => array(drupal_get_destination(), 'machine_id' => $eid)));
 
     if ( isset($entity['action_items']) ) {
-      $most_recent_action = array_shift(array_values($entity['action_items']));
+      $arv = array_values($entity['action_items']);
+      $most_recent_action = array_shift($arv);
 
       $edit_link = l('Edit', 'node/' . $most_recent_action->nid . '/edit', array('query' => drupal_get_destination()));
 
