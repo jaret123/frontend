@@ -3789,20 +3789,20 @@ a:hover, a:active {
 }
 
 /* line 36, ../sass/components/_actions.scss */
-.page-ops td {
+.page-actions td {
   padding: 2px 3px;
 }
 /* line 39, ../sass/components/_actions.scss */
-.page-ops .page-wrapper {
+.page-actions .page-wrapper {
   width: auto;
   max-width: 1100px;
 }
 /* line 43, ../sass/components/_actions.scss */
-.page-ops .status {
+.page-actions .status {
   position: relative;
 }
 /* line 45, ../sass/components/_actions.scss */
-.page-ops .status:before {
+.page-actions .status:before {
   position: absolute;
   top: 2px;
 }
