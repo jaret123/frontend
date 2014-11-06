@@ -1,11 +1,18 @@
 <?php
 
 function xeros_actions_menu() {
-  $items['actions'] = array(
+  $items['actions/json'] = array(
     'title' => 'Current Health and Actions',
     'page callback' => 'action_listing',
     'page arguments' => array(1),
     'access arguments' => array('xeros actions view'),
+    'file' => 'xeros_actions.listing.inc'
+  );
+  $items['actions'] = array(
+    'title' => 'Current Health and Actions',
+    'page callback' => 'action_listing',
+    'page arguments' => array(1),
+    'access arguments' => array('xeros actions edit'),
     'file' => 'xeros_actions.listing.inc'
   );
 
