@@ -24,7 +24,7 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
   $machine = new machine();
 
   $machine->fields = array(
-                      'machine_id', 'machine_name', 'serial_number', 'manufacturer', 'location_id'
+                      'machine_id', 'machine_name', 'serial_number', 'manufacturer', 'location_id', 'active', 'status'
                    );
   $rows = $machine->select($location_id, $machine_id);
 
@@ -40,6 +40,8 @@ function machine_listing($location_id = NULL, $machine_id = NULL) {
       t('Serial Number'),
       t('Manufacturer'),
       t('Location ID'),
+      t('Active'),
+      t('Status'),
       t('Edit')
     );
     //$output .= theme('table', array('header' => $header, 'rows' => $rows));
@@ -327,6 +329,12 @@ function machine_form($form, &$form_state, $vars) {
     '#type' => 'checkbox',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['water_only']) ? (int)$form_state['values']['machine_settings']['machine']['water_only'] : 0,
   );
+  $form['machine_settings']['active'] = array(
+    '#title' => 'Active',
+    '#description' => 'Check this field if this machine is currently active.  Active machines show up in reports by default.',
+    '#type' => 'checkbox',
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['active']) ? (int)$form_state['values']['machine_settings']['machine']['active'] : 0,
+  );
   $form['machine_settings']['water_meter_rate'] = array(
     '#title' => 'Water Meter Rate',
     '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
@@ -396,6 +404,7 @@ function machine_form_submit($form, &$form_state) {
     'unknown_class',
     'use_start_time',
     'water_only',
+    'active',
     'water_meter_rate',
     'machine_name',
     'notes'

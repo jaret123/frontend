@@ -13,7 +13,6 @@ class Utils {
      * an authenticated Drupal session.   If it does, then the user can access the web services
      */
 
-    // TODO: filter machine IDs by the requested company and location
     public function getUserRole($conn, $locationId)
     {
         $sid = NULL;
@@ -92,7 +91,7 @@ SQL;
                               on fl.nid = flc.entity_id and flc.entity_type = 'node' and flc.bundle = 'location' and flc.delta = 0
                             left join node as fc
                               on flc.field_company_target_id = fc.nid and fc.type = 'company'
-                    where fl.nid = :location_id
+                    where fl.nid = :location_id and xm.active = 1
 SQL;
 //                    select machine_id, serial_number, fc.field_company_target_id as company_id, fl.field_location_target_id as location_id from
 //                            xeros_machine as xm
@@ -145,7 +144,7 @@ SQL;
                               on fl.nid = flc.entity_id and flc.entity_type = 'node' and flc.bundle = 'location' and flc.delta = 0
                             left join node as fc
                               on flc.field_company_target_id = fc.nid and fc.type = 'company'
-                    where fc.nid = :company_id
+                    where fc.nid = :company_id and xm.active = 1
 
 SQL;
 
