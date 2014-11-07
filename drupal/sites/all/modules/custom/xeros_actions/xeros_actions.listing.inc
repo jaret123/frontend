@@ -23,7 +23,7 @@ function action_listing_table() {
   $rows = array();
 
   foreach ($entity_items as $eid => $entity) {
-    $add_link = l('Add', 'node/add/action', array('query' => array(drupal_get_destination(), 'machine_id' => $eid)));
+    $add_link = l('New', 'node/add/action', array('query' => array(drupal_get_destination(), 'machine_id' => $eid)));
 
     if ( isset($entity['action_items']) ) {
       $arv = array_values($entity['action_items']);
