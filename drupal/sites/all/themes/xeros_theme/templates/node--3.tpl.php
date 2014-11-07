@@ -72,7 +72,7 @@
                           <div class="label">Health</div>
                         </div>
                         <div class="col col-5">
-                          <div class="label">Action</div>
+                          <div class="label">Action/Update</div>
                         </div>
                     </div>
 

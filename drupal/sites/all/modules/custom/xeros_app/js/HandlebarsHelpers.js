@@ -126,13 +126,17 @@ Handlebars.registerHelper('formatDelta', function(numerator, denominator) {
 })
 
 Handlebars.registerHelper('formatDeltaValue', function(numerator, denominator) {
-    var value = Handlebars.helpers.deltaValue(numerator, denominator);
-    if (value === '-') {
-        value = '';
+    if ( typeof denominator == "undefined" || typeof numerator == "undefined") {
+        return 'No Readings';
     } else {
-        value = value.toString() + ' %';
+        var value = Handlebars.helpers.deltaValue(numerator, denominator);
+        if (value === '-') {
+            value = '';
+        } else {
+            value = value.toString() + ' %';
+        }
+        return value;
     }
-    return value;
 })
 
 Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
@@ -156,5 +160,9 @@ Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
 })
 
 Handlebars.registerHelper('digits', function(cycles) {
-    return 'digits-' + cycles.toString().length;
+    if (typeof cycles !== "undefined") {
+        return 'digits-' + cycles.toString().length;
+    } else {
+        return '';
+    }
 });
