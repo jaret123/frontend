@@ -45,7 +45,7 @@ var view = {
                     cssClass : "gallons",
                     icon : "Drop",
                     label : "Gallons",
-                    title : "Cold Water"
+                    title : "Water Sewer"
                 },
                 summaryData: {},
                 chartData : []
@@ -56,7 +56,7 @@ var view = {
                     cssClass : "efficiency",
                     icon : "Thermometer",
                     label : "Efficiency",
-                    title : "Hot Water"
+                    title : "Therms"
                 },
                 summaryData: {},
                 chartData : []

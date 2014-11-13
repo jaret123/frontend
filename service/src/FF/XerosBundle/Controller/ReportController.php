@@ -485,7 +485,7 @@ SQL;
 
         // TODO: Make all these field names the same
         array_push($metrics, array(
-            "name" => "Cold Water",
+            "name" => "Water Sewer",
             "id" => "cold_water",
             "query" => <<<METRIC
 
@@ -501,7 +501,7 @@ METRIC
         ));
 
         array_push($metrics, array(
-            "name" => "Hot Water",
+            "name" => "Therms",
             "id" => "hot_water",
             "query" => <<<METRIC
                 sum(xc.cycle_hot_water_volume) as value_one,
