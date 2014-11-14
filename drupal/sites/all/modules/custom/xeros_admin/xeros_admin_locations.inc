@@ -265,6 +265,12 @@ function location_form_submit($form, &$form_state) {
     $l->body = '';
     $l->field_company['und'][0]['target_id'] = $company_id;
 
+    $machine_types = array();
+    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
+      array_push($machine_types, array('value' => $value));
+    }
+    $l->field_machine_types['und'] = $machine_types;
+
     node_save($l);
 
     // Get the returned ID
