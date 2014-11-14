@@ -180,6 +180,22 @@ function location_form($form, &$form_state, $vars) {
 
   $form['location_profile'] = location_profile($form_state['values']['location_profile']);
 
+  $options = field_info_field('field_machine_types');
+
+  $o = array();
+  foreach ( $vars['location']->field_machine_types['und'] as $key => $value ) {
+    array_push($o, $value['value']);
+  }
+
+  // Machine types is a field on location node type, but we want it to appear in the location profile section.
+  $form['location_profile']['machine_types'] = array(
+    '#title' => 'Machine Types',
+    '#description' => 'Indicate which machine types you would like to present in the location reports.  Note: the location should have some of these machines live.',
+    '#type' => 'checkboxes',
+    '#options' => $options['settings']['allowed_values'],
+    '#default_value' => !empty($vars['location']->field_machine_types) ?  $o : array(),
+  );
+
   $form['labor_profile'] = labor_profile($vars['labor_profile']);
 
   if ( $form_state['#vars']['#function_call'] == 'edit' ) {
@@ -307,8 +323,15 @@ function location_form_submit($form, &$form_state) {
     $l->title = $form_state['values']['location_name'];
     $l->body = '';
 
+    $machine_types = array();
+    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
+      array_push($machine_types, array('value' => $value));
+    }
+    $l->field_machine_types['und'] = $machine_types;
+
     node_save($l);
 
+    //unset($form_state['values']['location_profile']['machine_types']);
     // Update Location Profile Values
 
     $lp = new location_profile();
@@ -316,6 +339,7 @@ function location_form_submit($form, &$form_state) {
 
     $f = array(
       'water_volume_unit',
+      'machine_types',
       'chemical_volume_unit',
       'temperature_rise_spring',
       'temperature_rise_summer',
