@@ -295,7 +295,10 @@ switch ($host) {
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
 }
-
+$local_settings = dirname(__FILE__) . '/settings.local.php';
+if (file_exists($local_settings)) {
+  include $local_settings;
+}
 /**
  * Access control for update.php script.
  *
