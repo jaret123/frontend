@@ -2,6 +2,7 @@
 .idea/*
 .sass-cache
 service/app/config/parameters.yml
-
 *.mtx.php
 *.cw.dat
+xeros-sbeady.iml
+settings.local.php
