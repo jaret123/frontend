@@ -158,17 +158,10 @@ var app = {
         FF.User.setReportLocation(FF.User.location.id);
         // Build the apiUrl
         FF.Location.getLocation(FF.User.location.id, function() {
-
+            self.registerEvents();
+            // Do the things that get values from the template (window)
+            self.apiUrlBase = window.apiUrlBase;
+            self.route();
         });
-
-
-        self.registerEvents();
-
-
-        // Do the things that get values from the template (window)
-        self.apiUrlBase = window.apiUrlBase;
-
-        self.route();
-
     }
 }
