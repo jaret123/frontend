@@ -199,6 +199,12 @@ SQL;
        */
 
 
+      /**
+       *
+       * If it's a xeros machine, then the actual data is the actual data (ie - water measured from a xeros machine)
+       * the "value_xeros" value is the industry average model data.
+       */
+
       switch ($machine_type) {
         case "xeros":
           // Cold Water
