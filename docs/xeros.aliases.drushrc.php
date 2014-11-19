@@ -1,13 +1,14 @@
 <?php
 
 $aliases['xeros.dev'] = array (
-  'root' => '/var/www/ELYXOR/dev/www/drupal-7.25',
+  'root' => '/var/www/ELYXOR/dev/www/drupal',
   'uri' => 'http://xeros-dev.d.ffinno.com',
   'remote-host' => 'ffinno',
   'path-aliases' => 
   array (
     '%drush' => '/usr/bin',
     '%site' => 'sites/default/',
+    '%files' => 'sites/default/files'
   ),
   'databases' => 
   array (
@@ -27,13 +28,14 @@ $aliases['xeros.dev'] = array (
   ),
 );
 $aliases['xeros.qa'] = array (
-    'root' => '/var/www/xeros/www/drual',
-    'uri' => 'http://sbeadycare-qa.xeroscleaning.com',,
-    'remote-host' => 'xeros',
+    'root' => '/var/www/xeros/www/drupal',
+    'uri' => 'http://sbeadycare-qa.xeroscleaning.com',
+    'remote-host' => 'xeros-qa',
     'path-aliases' =>
         array (
             '%drush' => '/usr/bin',
             '%site' => 'sites/default/',
+	    '%files' => 'sites/default/files'
         ),
     'databases' =>
         array (
@@ -53,13 +55,14 @@ $aliases['xeros.qa'] = array (
         ),
 );
 $aliases['xeros.prod'] = array (
-    'root' => '/var/www/ELYXOR/prod/www/drupal-7.25',
-    'uri' => 'http://xeros-prod.d.ffinno.com',
-    'remote-host' => 'ffinno',
+    'root' => '/var/www/xeros/www/drupal',
+    'uri' => 'http://sbeadycare.xeroscleaning.com',
+    'remote-host' => 'xeros-prod',
     'path-aliases' =>
         array (
             '%drush' => '/usr/bin',
             '%site' => 'sites/default/',
+	    '%files' => 'sites/default/files'
         ),
     'databases' =>
         array (
@@ -67,9 +70,9 @@ $aliases['xeros.prod'] = array (
                 array (
                     'default' =>
                         array (
-                            'database' => 'xeros_prod',
-                            'username' => 'root',
-                            'password' => 'root',
+                            'database' => 'xeros-prod',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
                             'host' => 'localhost',
                             'port' => '',
                             'driver' => 'mysql',
@@ -79,7 +82,7 @@ $aliases['xeros.prod'] = array (
         ),
 );
 $aliases['xeros.local'] = array (
-  'root' => '/Users/jason/dev/ELYXOR/xeros/drupal-7.25',
+  'root' => '/Users/jason/dev/ELYXOR/xeros/drupal',
   'uri' => 'http://xeros.local',
   'path-aliases' => 
   array (
