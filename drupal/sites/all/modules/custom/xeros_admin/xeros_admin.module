@@ -72,6 +72,10 @@ function xeros_admin_permission() {
     'xeros admin' => array(
       'title' => t('Administer Xeros Machines and Configurations'),
       'description' => t('Roles with this permission have the ability to access the xeros configuration'),
-    )
+    ),
+    'xeros change location' => array(
+      'title' => t('Change the location viewed in the reports'),
+      'description' => t('Roles with this permission will be able to access reports for ALL sites and will have the location picker widget')
+    ),
   );
 }
