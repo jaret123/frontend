@@ -183,17 +183,21 @@ function location_form($form, &$form_state, $vars) {
   $options = field_info_field('field_machine_types');
 
   $o = array();
-  foreach ( $vars['location']->field_machine_types['und'] as $key => $value ) {
-    array_push($o, $value['value']);
+  if (!empty($vars['location']->field_machine_types)) {
+    foreach ( $vars['location']->field_machine_types['und'] as $key => $value ) {
+      array_push($o, $value['value']);
+    }
   }
 
   // Machine types is a field on location node type, but we want it to appear in the location profile section.
   $form['location_profile']['machine_types'] = array(
     '#title' => 'Machine Types',
     '#description' => 'Indicate which machine types you would like to present in the location reports.  Note: the location should have some of these machines live.',
-    '#type' => 'checkboxes',
+    '#type' => 'radios',
     '#options' => $options['settings']['allowed_values'],
-    '#default_value' => !empty($vars['location']->field_machine_types) ?  $o : array(),
+    // '#default_value' => !empty($vars['location']->field_machine_types) ?  $o : array(), // Checkboxes
+    '#default_value' => !empty($o[0]) ?  $o[0] : null, // Radios
+    '#required' => TRUE
   );
 
   $form['labor_profile'] = labor_profile($vars['labor_profile']);
@@ -265,11 +269,13 @@ function location_form_submit($form, &$form_state) {
     $l->body = '';
     $l->field_company['und'][0]['target_id'] = $company_id;
 
-    $machine_types = array();
-    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
-      array_push($machine_types, array('value' => $value));
-    }
-    $l->field_machine_types['und'] = $machine_types;
+    $machine_types = $form_state['values']['location_profile']['machine_types'];
+
+//    $machine_types = array();
+//    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
+//      array_push($machine_types, array('value' => $value));
+//    }
+    $l->field_machine_types['und'][0] = $machine_types;
 
     node_save($l);
 
@@ -329,11 +335,13 @@ function location_form_submit($form, &$form_state) {
     $l->title = $form_state['values']['location_name'];
     $l->body = '';
 
-    $machine_types = array();
-    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
-      array_push($machine_types, array('value' => $value));
-    }
-    $l->field_machine_types['und'] = $machine_types;
+    $machine_types = $form_state['values']['location_profile']['machine_types'];
+
+//    $machine_types = array();
+//    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
+//      array_push($machine_types, array('value' => $value));
+//    }
+    $l->field_machine_types['und'][0]['value'] = $machine_types;
 
     node_save($l);
 
