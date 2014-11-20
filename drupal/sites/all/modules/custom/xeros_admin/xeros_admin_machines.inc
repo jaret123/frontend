@@ -342,7 +342,7 @@ function machine_form($form, &$form_state, $vars) {
     '#options' => array(
       'inactive' => 'Inactive -- hidden from status board.',
       'online' => 'Online -- online, machine is in use and monitored.',
-      'offline' => 'Offline -- offline, machine is not in use and is not shown on the status board.'
+      'offline' => 'Offline -- offline, machine does not report status to the Status Board.  Machine will appear on Status Board but colored gray.'
     ),
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['status']) ? $form_state['values']['machine_settings']['machine']['status'] : 'online',
   );
