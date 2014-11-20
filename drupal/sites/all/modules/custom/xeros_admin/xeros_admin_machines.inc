@@ -335,6 +335,17 @@ function machine_form($form, &$form_state, $vars) {
     '#type' => 'checkbox',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['active']) ? (int)$form_state['values']['machine_settings']['machine']['active'] : 0,
   );
+  $form['machine_settings']['status'] = array(
+    '#title' => 'Status',
+    '#description' => 'What is the current status of the machine.  This value affects the status-board monitoring.',
+    '#type' => 'select',
+    '#options' => array(
+      'inactive' => 'Inactive -- hidden from status board.',
+      'online' => 'Online -- online, machine is in use and monitored.',
+      'offline' => 'Offline -- offline, machine is not in use and is not shown on the status board.'
+    ),
+    '#default_value' => !empty($form_state['values']['machine_settings']['machine']['status']) ? $form_state['values']['machine_settings']['machine']['status'] : 'online',
+  );
   $form['machine_settings']['water_meter_rate'] = array(
     '#title' => 'Water Meter Rate',
     '#description' => "Rate the water meter detects a pulse.  Currently .1 for all installed water meters",
@@ -407,7 +418,8 @@ function machine_form_submit($form, &$form_state) {
     'active',
     'water_meter_rate',
     'machine_name',
-    'notes'
+    'notes',
+    'status'
   );
 
   foreach ($f as $field) {
