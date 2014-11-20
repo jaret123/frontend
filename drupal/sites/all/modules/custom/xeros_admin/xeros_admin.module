@@ -66,6 +66,12 @@ function xeros_admin_menu() {
   return $items;
 }
 
+/**
+ *
+ * Implements hook_permission()
+ *
+ * @return array
+ */
 
 function xeros_admin_permission() {
   return array(

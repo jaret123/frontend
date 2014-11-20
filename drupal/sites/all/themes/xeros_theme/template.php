@@ -63,9 +63,7 @@ function xeros_theme_preprocess_page(&$vars, $hook) {
 
   if ( user_access('xeros change location') ) {
       $s = xeros_get_companies($vars);
-      if ( array_search('xeros admin', $vars['user']->roles) <> null  ) {
-          drupal_add_js('app.companies = ' . json_encode($s), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
-      }
+      drupal_add_js('app.companies = ' . json_encode($s), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
       $vars['user']->show_admin_bar = 1;
   } else {
       $vars['user']->show_admin_bar = 0;
