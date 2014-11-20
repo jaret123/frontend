@@ -30,7 +30,7 @@ $aliases['xeros.dev'] = array (
 $aliases['xeros.qa'] = array (
     'root' => '/var/www/xeros/www/drupal',
     'uri' => 'http://sbeadycare-qa.xeroscleaning.com',
-    'remote-host' => 'xeros',
+    'remote-host' => 'xeros-qa',
     'path-aliases' =>
         array (
             '%drush' => '/usr/bin',

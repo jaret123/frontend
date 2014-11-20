@@ -48,7 +48,7 @@ FF.Location = (function ($) {
 
     function xeros() {
         if ( checkNested(pub.location, 'field_machine_types', 'und', 0) ) {
-            if ( pub.location.field_machine_types['und'][0].value = 'xeros' ) {
+            if ( pub.location.field_machine_types['und'][0].value == 'xeros' ) {
                 return true;
             } else {
                 return false;
