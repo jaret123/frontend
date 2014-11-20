@@ -148,6 +148,45 @@ Host xeros-prod
         I. drush sql-sync @xeros.qa @xeros.local
 
         Note: This should run and make sync all the tables, etc you will need for xeros.
-        Once this has completed with out errors test xeros.local in your browser
 
-6. Login and Test .
+6. Run Composer : You need to run composer to make sure you have all the dependencies for this project
+    A. Using terminal navicate to the xeros-sbeady folder
+    B. Run sudo composer install
+    C. Then Run php app/console cache:clear --env=prod
+    D. You will have to then edit the parameters.yml file for your database connectivity this is located in the service/app/config folder
+    It should look like this
+    # This file is auto-generated during the composer install
+    parameters:
+        database_driver: pdo_mysql
+        database_host: 127.0.0.1
+        database_port: null
+        database_name: xeros
+        database_user: xeros
+        database_password: xeros
+        mailer_transport: smtp
+        mailer_host: 127.0.0.1
+        mailer_user: null
+        mailer_password: null
+        locale: en
+        secret: ThisTokenIsNotSoSecretChangeIt
+
+        I. Make the changes that reflect you database connectivity : database_name, user, password.
+
+        II. Once you have done this save the file and run php app/console cache:clear --env=prod again
+
+
+7. Login and Test: Once the above has been completed with out errors test xeros.local in your browser
+    A. Go to xeros.local
+    B. Login using username xerosadmin password sorex39
+    c. Check to see that everything is running correctly .
+
+    Note: We had a few permission issues that had to be address for instance
+    chmod -R 777 app folder . However this create issues with the repo . TODO:// Make sure we figure out best way to do this? WILL?
+
+
+Git Revision Control :
+
+Elyxor has moved to a Feature Branch WorkFlow
+https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow/
+
+The core idea behind the Feature Branch Workflow is that all feature development should take place in a dedicated branch instead of the master branch. This encapsulation makes it easy for multiple developers to work on a particular feature without disturbing the main codebase. It also means the master branch will never contain broken code, which is a huge advantage for continuous integration environments.
