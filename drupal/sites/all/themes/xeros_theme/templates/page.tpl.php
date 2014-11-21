@@ -73,7 +73,7 @@
 // by machine instead of location.
 ?>
 <?php if (isset($node->nid)): ?>
-    <?php if ( (user_access('xeros change location') && ($node->nid == 2 || $node->nid == 3): ?>
+    <?php if ( user_access('xeros change location') && ($node->nid == 2 || $node->nid == 3) ): ?>
         <div class="xeros-admin-menu">
             <div class="xeros-admin-menu__menu-wrapper">
                 <a href="#" class="xeros-admin-menu__button">Menu</a>
