@@ -186,10 +186,10 @@ FF.User = (function ($) {
         getCookie();
 
         // If the settings in the cookies are blank, then load from the user's settings.
-        if (pub.reportSettings.company.id === "" || typeof pub.reportSettings.company == "undefined") {
+        if (pub.reportSettings.company.id === 0 || pub.reportSettings.company.id === "" || typeof pub.reportSettings.company == "undefined") {
             pub.reportSettings.company = pub.company;
         }
-        if (pub.reportSettings.location.id === "" || typeof pub.reportSettings.location == "undefined" ) {
+        if (pub.reportSettings.location.id === 0 || pub.reportSettings.location.id === "" ||typeof pub.reportSettings.location == "undefined" ) {
             pub.reportSettings.location = pub.location;
         }
         // If the dates did not get updated by the cookies, then fire off an update based on defaults
