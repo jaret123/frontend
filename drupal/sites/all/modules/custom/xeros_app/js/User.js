@@ -60,7 +60,8 @@ FF.User = (function ($) {
                 // Get it from app.companies if it exists - Admin users
                 pub.reportSettings.company.id = companyId;
                 pub.reportSettings.company.title = app.companies[companyId].name;
-                document.cookie = 'sessionCompany=' + pub.reportSettings.company.id;
+                //debugger;
+                setCookie('sessionCompany', pub.reportSettings.company.id);
                 updateFinish(callback);
             }
         } else {
@@ -72,7 +73,7 @@ FF.User = (function ($) {
             if (checkNested(app.companies, pub.reportSettings.company.id, 'location', locationId, 'name')) {
                 pub.reportSettings.location.id = locationId;
                 pub.reportSettings.location.title = app.companies[pub.reportSettings.company.id].location[locationId].name;
-                document.cookie = 'sessionLocation=' + pub.reportSettings.location.id;
+                setCookie('sessionLocation',pub.reportSettings.location.id);
                 updateFinish(callback);
             }
         } else {
@@ -109,8 +110,8 @@ FF.User = (function ($) {
             }
             pub.reportSettings.dates = dateRange;
             // Save to cookies
-            document.cookie = 'sessionTimeSelect=' + pub.reportSettings.timeSelect;
-            document.cookie = 'sessionDates=' + pub.reportSettings.dates.toString();
+            setCookie('sessionTimeSelect', pub.reportSettings.timeSelect);
+            setCookie('sessionDates', pub.reportSettings.dates.toString());
             updateFinish(callback);
         } else {
             console.log('Invalid dates passed to report date range', dateRange);
@@ -119,7 +120,7 @@ FF.User = (function ($) {
     function setReportMetric(metric, callback) {
         if ( typeof metric == "string" ) {
             pub.reportSettings.metric = metric;
-            document.cookie = 'sessionMetric=' + pub.reportSettings.metric;
+            setCookie('sessionMetric', pub.reportSettings.metric);
             updateFinish(callback);
         } else {
             console.log('Invalid metric passed to metric.')
@@ -163,6 +164,14 @@ FF.User = (function ($) {
 
     };
 
+    function setCookie(name, value, expires, path, domain, secure){
+        document.cookie= name + "=" + value +
+            ((expires) ? "; expires=" + expires.toGMTString() : "") +
+            ("; path=/") +
+            ((domain) ? "; domain=" + domain : "") +
+            ((secure) ? "; secure" : "");
+    }
+
     function updateFinish(callback) {
         //saveCookie();
         console.log('Custom event dispatched');
@@ -175,13 +184,12 @@ FF.User = (function ($) {
     function init(callback) {
         // See if there is anything in the user's cookies
         getCookie();
-        console.log(document.cookie);
 
         // If the settings in the cookies are blank, then load from the user's settings.
-        if (pub.reportSettings.company.id == "" || typeof pub.reportSettings.company == "undefined") {
+        if (pub.reportSettings.company.id === "" || typeof pub.reportSettings.company == "undefined") {
             pub.reportSettings.company = pub.company;
         }
-        if (pub.reportSettings.location.id == "" || typeof pub.reportSettings.location == "undefined" ) {
+        if (pub.reportSettings.location.id === "" || typeof pub.reportSettings.location == "undefined" ) {
             pub.reportSettings.location = pub.location;
         }
         // If the dates did not get updated by the cookies, then fire off an update based on defaults

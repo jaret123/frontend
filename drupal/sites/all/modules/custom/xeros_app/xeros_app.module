@@ -70,7 +70,7 @@ function xeros_app_preprocess_html(&$variables, $hook) {
 
   // Utility modules common to all drupal modules
   drupal_add_js($path . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-  drupal_add_js($path . '/js/Error.js', array('scope' => 'footer', 'weight' => 100, 'preprocess' => TRUE));
+//  drupal_add_js($path . '/js/Error.js', array('scope' => 'footer', 'weight' => 100, 'preprocess' => TRUE));
 
   // Custom app code for logged in users only
   $company = (object) array('nid' => '""', 'title' => '');
@@ -123,7 +123,8 @@ function xeros_app_user_logout($account) {
   // Clear all the application cookies so we don't pass the cookies on to another user.
   foreach ( $_COOKIE as $key => $value) {
     if ( preg_match('/^session/', $key) == 1 ) {
-      setcookie($key, '', 1, '/');
+      setcookie($key, '', time()-1000);
+      setcookie($key, '', time()-1000 , '/');
     }
   }
 }
