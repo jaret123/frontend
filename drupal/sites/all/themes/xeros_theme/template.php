@@ -61,7 +61,7 @@ function xeros_theme_preprocess_page(&$vars, $hook) {
 
   drupal_add_js('app.user = ' . json_encode($user), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
 
-  if ( user_access('xeros change location') ) {
+  if ( user_is_logged_in() ) {
       $s = xeros_get_companies($vars);
       drupal_add_js('app.companies = ' . json_encode($s), array('type' => 'inline', 'scope' => 'footer', 'weight' => 1));
       $vars['user']->show_admin_bar = 1;
