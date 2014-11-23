@@ -29,6 +29,20 @@ function xeros_app_menu() {
     'access arguments' => array('access content'),
     'file' => 'ws_industry_averages.inc'
   );
+  $items['ws/kpi'] = array(
+    'title' => '',
+    'page callback' => 'ws_kpi',
+    'page arguments' => array(2,3,4),
+    'access arguments' => array('access content'),
+    'file' => 'ws_report_kpi.inc'
+  );
+  $items['ws/health-detail'] = array(
+    'title' => '',
+    'page callback' => 'ws_health',
+    'page arguments' => array(2,3,4),
+    'access arguments' => array('access content'),
+    'file' => 'ws_report_health.inc'
+  );
   return $items;
 }
 
@@ -37,6 +51,10 @@ function xeros_app_permission() {
     'xeros app' => array(
       'title' => t('Xeros App Access'),
       'description' => t('Roles with this permission have the ability to access the Xeros App'),
+    ),
+    'xeros view all locations' => array(
+      'title' => t('Xeros View All Locations'),
+      'description' => t('Roles with this permission can see all the locations and their data.  Other users can only see data at locations they are assigned to.')
     )
   );
 }
