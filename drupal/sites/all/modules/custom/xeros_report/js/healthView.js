@@ -13,26 +13,51 @@ var view = {
         self.getActionData(function(actionData) {
 
             for ( i in app.reportData) {
+
+                var cssClass = [];
+
+
                 var machineId = parseInt(app.reportData[i].info.machine_id, 10);
 
-                 app.reportData[i].water_only = parseInt(app.reportData[i].info.water_only, 10);
+                app.reportData[i].water_only = parseInt(app.reportData[i].info.water_only, 10);
 
-                // TODO: Double check this logic is lined up correctly
 
-                if ( app.reportData[i].water_only === 1 ) {
-                    app.reportData[i].cycles = 'water only';
-                    if (app.reportData[i].info.machine_type == 'xeros') {
-                        app.reportData[i].model = app.reportData[i].model_non_xeros_simple;
-                    } else {
-                        app.reportData[i].model = app.reportData[i].model_xeros_simple;
-                    }
+                /**
+                 * This is the logic to pick the default comparison and to list what comparisons are available.
+                 */
+
+                if (app.reportData[i].info.machine_type == 'xeros') {
+                    cssClass.push("xeros");
+                    cssClass.push("model-non-xeros");
+                    cssClass.push("model-non-xeros-simple");
+                    // Compare Xeros machine to non-xeros calculations
+                    app.reportData[i].model = app.reportData[i].model_non_xeros_simple;
                 } else {
-                    if (app.reportData[i].info.machine_type == 'xeros') {
+                    cssClass.push("non-xeros");
+                    // Comparison for Non Xeros machines
+                    if (app.reportData[i].water_only == 1) {
+                        cssClass.push("model-xeros");
+                        cssClass.push("model-xeros-simple");
+                        // If water only, then use the model_xeros_simple calculations
                         app.reportData[i].model = app.reportData[i].model_xeros_simple;
                     } else {
+                        // If we have cycle data, then use the full Xeros model that is based on classifications
                         app.reportData[i].model = app.reportData[i].model_xeros;
+                        cssClass.push("model-xeros");
                     }
                 }
+
+
+                if ( app.reportData[i].water_only === 1 ) {
+                    cssClass.push("water-only");
+                    app.reportData[i].cycles = 'water only';
+                } else {
+
+                }
+
+                app.reportData[i].info.cssClass = cssClass.join(" ");
+
+                // Append the actionData
                 app.reportData[i].actionData = actionData[machineId];
             }
 
