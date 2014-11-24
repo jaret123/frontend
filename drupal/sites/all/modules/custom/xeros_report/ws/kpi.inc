@@ -46,7 +46,7 @@ function ws_kpi($location_ids = '', $from_date, $to_date ) {
     ':fromDate' => $from_date,
     ':toDate' => $to_date . ' 12:59:59',
     ':machineIds' => implode(",", $machine_ids),
-    ':water_only_diff' => '3.2'
+    ':water_only_diff' => '3.2' //todo Pull this from DB
   );
 
   // Get the machine types at this location and return all the correct data and models
