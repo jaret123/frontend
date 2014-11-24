@@ -106,7 +106,7 @@
                                     </span>
                                 </div>
                                 <div class="col col-2 metric {{formatDelta model.cold_water actual.cold_water}}" classification="cold_water" machine="{{id}}"
-                                     chart="cold_water-{{id}}">
+                                     chart="cold_water-{{info.machine_id}}">
 
                                     <div class="chart" name="{{info.machine_id}}-cold_water"></div>
                                     <div class="delta" data="{{cold_water_delta_value}}">{{formatDeltaValue model.cold_water actual.cold_water}}
@@ -116,7 +116,7 @@
                                 </div>
 
                                 <div class="col col-3 metric {{formatDelta model.therms actual.therms}}" classification="hot_water" machine="{{id}}"
-                                     chart="hot_water-{{id}}">
+                                     chart="hot_water-{{info.machine_id}}">
                                     <div class="chart" name="{{info.machine_id}}-hot_water"></div>
                                     <div class="delta" data="{{hot_water_delta_value}}">{{formatDeltaValue model.therms actual.therms}}</div>
                                     <div class="arrow"></div>

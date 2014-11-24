@@ -11,6 +11,7 @@ class WsUtils {
    * replaceFilters is a private function to help build the report SQL used below
    */
   function replaceFilters($string, $filters) {
+    // TODO: Check for SQL injection
     foreach ($filters as $k => $v) {
       $string = str_replace($k, $v, $string);
     }

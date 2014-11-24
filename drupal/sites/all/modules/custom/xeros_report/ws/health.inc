@@ -79,6 +79,8 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
       xm.size,
       xm.water_only,
       b.cycles,
+      xm.status,
+      xm.active,
       truncate(b.cold_water_actual, 0) as cold_water_actual,
       case xm.water_only
         when 1 then
@@ -177,79 +179,81 @@ SQL;
     // Restructure the data coming out of the database and do the model calculations
     $data = new StdClass();
     $data->info = new StdClass();
+
     $data->actual = new StdClass();
+    $data->actual->description = 'The actual metered data from the machine.';
+    $data->actual->active = true;
+
     $data->model_xeros = new StdClass();
+    $data->model_xeros->description = 'The expected data of a xeros machine based on the classifications of laundry.';
+    $data->model_xeros->notes = 'This data is only valid if we know the classifications of the laundry for each cycle.';
+
     $data->model_xeros_simple = new StdClass();
-    $data->model_non_xeross_simple = new StdClass();
+    $data->model_xeros_simple->description = 'The expected data of a xeros machine based on simple calculations of aggregate data.';
+    $data->model_xeros_simple->notes = 'This model only makes sense when compared to a non-xeros machine.';
 
-    $data->actual->cold_water = $d->cold_water_actual;
-    $data->actual->therms = $d->therms_actual;
-    $data->actual->time = $d->time_actual;
-    $data->actual->chemical = $d->chemical_actual;
+    $data->model_non_xeros_simple = new StdClass();
+    $data->model_non_xeros_simple->description = 'The expected data of a non-xeros machine based on simple calculations of aggregate data';
+    $data->model_non_xeros_simple->notes = 'This model only makes sense when compared to a xeros machine.';
 
-    $data->model_xeros->cold_water = $d->cold_water_model_xeros;
-    $data->model_xeros->therms = $d->therms_model_xeros;
-    $data->model_xeros->time = $d->time_model_xeros;
-    $data->model_xeros->chemical = $d->chemical_model_xeros;
+    $data->actual->cold_water = floatval($d->cold_water_actual);
+    $data->actual->therms = floatval($d->therms_actual);
+    $data->actual->time = floatval($d->time_actual);
+    $data->actual->chemical = floatval($d->chemical_actual);
 
-    $data->info->machine_id = $d->id;
+    $data->model_xeros->cold_water = floatval($d->cold_water_model_xeros);
+    $data->model_xeros->therms = floatval($d->therms_model_xeros);
+    $data->model_xeros->time = floatval($d->time_model_xeros);
+    $data->model_xeros->chemical = floatval($d->chemical_model_xeros);
+    $data->model_xeros->active = true;
+
+    $data->info->machine_id = (int)$d->id;
     $data->info->machine_name = $d->machine_name;
     $data->info->manufacturer = $d->manufacturer;
     $data->info->machine_type = $d->machine_type;
     $data->info->serial_number = $d->serial_number;
     $data->info->size = $d->size;
-    $data->info->water_only = $d->water_only;
+    $data->info->water_only = (int)$d->water_only;
     $data->info->cycles = $d->cycles;
+    $data->info->status = $d->status;
+    $data->info->active = (int)$d->active;
 
 
-    switch ($data->info->machine_type) {
-        case 'xeros':
+    switch($data->info->machine_type) {
+      case 'xeros':
+        $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * 4;
+        $data->model_non_xeros_simple->therms = $data->actual->cold_water * .5 * 3.2;
+        $data->model_non_xeros_simple->active = true;
 
-          $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * 4;
-          $data->model_non_xeros_simple->therms = $data->actual->cold_water * .5 * 3.2;
+        $data->model_xeros_simple->notes = 'Because this machine is a xeros machine the xeros_simple model is not available.';
+        $data->model_xeros_simple->active = false;
+        break;
+      case 'non-xeros':
+        $data->model_xeros_simple->cold_water = $data->actual->cold_water * .25;
+        $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
+        $data->model_xeros_simple->active = true;
 
-          switch ($data->info->water_only) {
-            case "1":
-              $data->info->cycles = 'na';
-              $data->model_xeros = new StdClass();
-              break;
-            case 0:
+        $data->model_non_xeros_simple->notes = 'Because this machine is a nonxeros machine the non_xeros_simple model is not available.';
+        $data->model_non_xeros_simple->active = false;
 
-              break;
-            default:
-            default:
-              $error = 'Error: Water only not identifiable';
-              break;
-          }
-          break;
-        case 'non-xeros':
+        break;
+    }
 
-          $data->model_xeros_simple->cold_water = $data->actual->cold_water * .25;
-          $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
-          switch ($data->info->water_only) {
-            case 1:
-              $data->model_xeros = new StdClass();
-              $data->info->cycles = 'na';
+    switch($data->info->water_only) {
+      case '1':
+        // Remove cycle counts
+        $data->info->cycles = 'na';
+        // Removed the standard model because it is not relevant
+        $data->model_xeros = new StdClass();
+        $data->model_xeros->description = 'The expected data of a xeros machine based on the classifications of laundry.';
+        $data->model_xeros->notes = 'Because this is a water only machine, this data is not available.';
+        $data->model_xeros->active = false;
+    }
 
-              break;
-            case 0:
-
-              break;
-            default:
-              $error = 'Error: Water only not identifiable';
-              break;
-          }
-          break;
-        default:
-          $error = 'Error: Machine type not identifiable';
-          break;
-      }
-    $results[] = $data;
+    // Push this onto the array
+    $results[$data->info->machine_id] = $data;
   }
   print json_encode($results);
-
-//  print json_encode($output);
-  //print "Hello World";
 
 }
 
