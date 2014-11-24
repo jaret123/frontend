@@ -174,6 +174,7 @@ SQL;
   $results = array();
   foreach ($ar as $machine_id => $d) {
 
+    // Restructure the data coming out of the database and do the model calculations
     $data = new StdClass();
     $data->info = new StdClass();
     $data->actual = new StdClass();
@@ -191,6 +192,7 @@ SQL;
     $data->model_xeros->time = $d->time_model_xeros;
     $data->model_xeros->chemical = $d->chemical_model_xeros;
 
+    $data->info->machine_id = $d->id;
     $data->info->machine_name = $d->machine_name;
     $data->info->manufacturer = $d->manufacturer;
     $data->info->machine_type = $d->machine_type;
@@ -199,17 +201,19 @@ SQL;
     $data->info->water_only = $d->water_only;
     $data->info->cycles = $d->cycles;
 
+
     switch ($data->info->machine_type) {
         case 'xeros':
+
+          $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * 4;
+          $data->model_non_xeros_simple->therms = $data->actual->cold_water * .5 * 3.2;
+
           switch ($data->info->water_only) {
             case "1":
+              $data->info->cycles = 'na';
               $data->model_xeros = new StdClass();
-
-              $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * 4;
-              $data->model_non_xeros_simple->therms = $data->actual->cold_water * .5 * 3.2;
               break;
             case 0:
-
 
               break;
             default:
@@ -219,12 +223,14 @@ SQL;
           }
           break;
         case 'non-xeros':
+
+          $data->model_xeros_simple->cold_water = $data->actual->cold_water * .25;
+          $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
           switch ($data->info->water_only) {
             case 1:
               $data->model_xeros = new StdClass();
+              $data->info->cycles = 'na';
 
-              $data->model_xeros_simple->cold_water = $data->actual->cold_water * .25;
-              $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
               break;
             case 0:
 

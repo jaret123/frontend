@@ -16,13 +16,13 @@
  *   The name of the template being rendered ("html" in this case.)
  */
 function xeros_theme_preprocess_html(&$variables, $hook) {
-  $variables['path_to_xeros_theme'] = drupal_get_path('theme', 'xeros_theme');
-
-  $path = drupal_get_path('theme', 'xeros_theme');
-
-  // Custom theme code
-    drupal_add_js($path . '/js/app.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-    drupal_add_js($path . '/js/chart.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+//  $variables['path_to_xeros_theme'] = drupal_get_path('theme', 'xeros_theme');
+//
+//  $path = drupal_get_path('theme', 'xeros_theme');
+//
+//  // Custom theme code
+//    drupal_add_js($path . '/js/app.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+//    drupal_add_js($path . '/js/chart.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 }
 
 /**

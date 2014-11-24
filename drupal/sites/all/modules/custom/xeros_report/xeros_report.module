@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ * @return array
+ */
+function xeros_report_menu() {
+
+  $items = array();
+
+  $items['ws/kpi'] = array(
+    'title' => '',
+    'page callback' => 'ws_kpi',
+    'page arguments' => array(2,3,4),
+    'access arguments' => array('access content'),
+    'file' => 'ws/kpi.inc'
+  );
+  $items['report/dashboard'] = array(
+    'title' => 'Operational Dashboard',
+    'page callback' => 'report_dashboard',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'report/dashboard.inc'
+  );
+  $items['ws/health-detail'] = array(
+    'title' => '',
+    'page callback' => 'ws_health',
+    'page arguments' => array(2,3,4),
+    'access arguments' => array('access content'),
+    'file' => 'ws/health.inc'
+  );
+  $items['report/health'] = array(
+    'title' => 'Health Detail',
+    'page callback' => 'report_health',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'report/health.inc'
+  );
+  $items['config/static-values'] = array(
+    'title' => 'Static Values',
+    'page callback' => 'config_static_values',
+    'page arguments' => array(),
+    'access arguments' => array('xeros admin'),
+    'file' => 'config.inc'
+  );
+
+  return $items;
+}
+/**
+ *
+ * Implements hook_entity_info().
+ */
+function xeros_report_entity_info() {
+  $info = array();
+
+  $info['xeros_static_values'] = array(
+    'label' => t('Static Values'),
+    'base table' => 'xeros_static_values',
+    'entity keys' => array(
+      'bundle' => 'bundle',
+      'name' => 'name'
+    )
+  );
+  return $info;
+}
+
+/**
+ * Implements hook_theme
+ *
+ * Define some custom report templates
+ * @return array
+ */
+function xeros_report_theme() {
+  $themes = array (
+    'xeros_report_dashboard_template' => array(
+      'template' => 'templates/node--dashboard',
+      'arguments' => array(),
+    ),
+    'xeros_report_health_template' => array(
+      'template' => 'templates/node--health',
+      'arguments' => array(),
+    ),
+  );
+  return $themes;
+}

@@ -21,7 +21,7 @@ FF.Location = (function ($) {
 
     function getLocation(locationId, callback) {
         jQuery.ajax({
-            url: 'ws/location/' + locationId,
+            url: '/ws/location/' + locationId,
             success: function(d) {
                 pub.location = d;
                 console.log('pub.location: ', pub.location.nid);
@@ -33,7 +33,6 @@ FF.Location = (function ($) {
             type: 'GET',
             contentType: 'application/json'
         });
-
     }
 
     function machineTypes() {
