@@ -6,3 +6,4 @@ service/app/config/parameters.yml
 *.cw.dat
 xeros-sbeady.iml
 settings.local.php
+drupal/sites/all/themes/xeros_theme/node_modules/qunitjs/package.json
