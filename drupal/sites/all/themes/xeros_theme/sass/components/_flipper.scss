@@ -1,0 +1,50 @@
+/* entire container, keeps perspective */
+.flip-container {
+  $speed:0.6s;
+  $backBackgroundColor:white;
+  $backFontSize:12px;
+  perspective: 1000;
+  position:relative;
+  cursor: pointer;
+
+  /* flip speed goes here */
+  .flipper {
+    transition: $speed;
+    transform-style: preserve-3d;
+  }
+
+  .front, .back {
+    backface-visibility: hidden;
+
+  }
+
+  /* front pane, placed above back */
+  .front {
+   z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+    position: relative;
+    top:0px;
+  }
+  /* back, initially hidden pane */
+  .back {
+    font-size: $backFontSize;
+    top: 0;
+    left: 0;
+    background-color: $backBackgroundColor;
+    transform: rotateY(180deg);
+    position:absolute;
+    height: 480px;
+    width: 200px;
+  }
+}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+
+}
+
