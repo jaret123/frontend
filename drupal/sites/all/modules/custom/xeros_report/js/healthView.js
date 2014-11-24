@@ -5,13 +5,13 @@ var view = {
 
     barColor : {
        xeros : {
-           actual : "blue",
-           model : "lightblue",
-           modelSimple : "green"
+           actual : "rgba(35,64,94,1)",
+           model : "rgba(0,100,200,1)",
+           modelSimple : "rgba(0,100,200,1)"
        },
         nonXeros : {
-            actual : "gray",
-            model : "lightgray"
+            actual : "rgba(178,116,11,1)",
+            model : "rgba(255,185,67,1)"
         }
     },
     // Each report view has a slightly different data structure
@@ -130,8 +130,10 @@ var view = {
             ch = [],
             domainMultiple = 1.1; // Use this value to keep the values from maxing out
 
+        // Calculate the domains
         for ( i in app.reportData ) {
             var row = app.reportData[i];
+
 
             c.push(parseInt(row.actual.cold_water));
             c.push(parseInt(row.model.cold_water));
@@ -149,23 +151,49 @@ var view = {
 
         for ( i in app.reportData ) {
             var row = app.reportData[i];
+
             chart.data = [];
             chart.selector = "";
-            chart.colors = [app.reportData[i].actual.barColor, app.reportData[i].model.barColor];
-            chart.classes = ["base", "xeros"];
 
-            // Cold Water
-            chart.selector = "[chart=cold_water-" + row.info.machine_id + "] .chart";
-            chart.data = [parseInt(row.actual.cold_water), parseInt(row.model.cold_water), d3.max(c) * domainMultiple];
-            if ( self.isValid(chart.data) ) {
-                chart.drawBar();
-            }
+            if (row.info.machine_type == 'xeros') {
 
-            // Hot Water
-            chart.selector = "[chart=hot_water-" + row.info.machine_id + "] .chart";
-            chart.data = [parseInt(row.actual.therms), parseInt(row.model.therms), d3.max(h) * domainMultiple];
-            if ( self.isValid(chart.data) ) {
-                chart.drawBar();
+                chart.colors = [row.model.barColor, row.actual.barColor];
+                chart.classes = ["base", "xeros"];
+
+                // Cold Water
+                chart.selector = "[chart=cold_water-" + row.info.machine_id + "] .chart";
+
+                chart.data = [parseInt(row.model.cold_water), parseInt(row.actual.cold_water), d3.max(c) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
+
+                // Hot Water
+                chart.selector = "[chart=hot_water-" + row.info.machine_id + "] .chart";
+                chart.data = [parseInt(row.model.therms), parseInt(row.actual.therms), d3.max(h) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
+
+            } else {
+
+                chart.colors = [row.actual.barColor, row.model.barColor];
+                chart.classes = ["base", "xeros"];
+
+                // Cold Water
+                chart.selector = "[chart=cold_water-" + row.info.machine_id + "] .chart";
+
+                chart.data = [parseInt(row.actual.cold_water), parseInt(row.model.cold_water), d3.max(c) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
+
+                // Hot Water
+                chart.selector = "[chart=hot_water-" + row.info.machine_id + "] .chart";
+                chart.data = [parseInt(row.actual.therms), parseInt(row.model.therms), d3.max(h) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
             }
         }
 
