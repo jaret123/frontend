@@ -8,7 +8,7 @@
  */
 ?>
 
-<div id="page-2" class="main page">
+<div id="report-health" class="main page">
     <div class="page-container">
         <div id="consumption">
             <div class="consumption-container">
