@@ -3,6 +3,17 @@
  */
 var view = {
 
+    barColor : {
+       xeros : {
+           actual : "blue",
+           model : "lightblue",
+           modelSimple : "green"
+       },
+        nonXeros : {
+            actual : "gray",
+            model : "lightgray"
+        }
+    },
     // Each report view has a slightly different data structure
     parseData : function(draw) {
         var self = this;
@@ -27,12 +38,15 @@ var view = {
                  */
 
                 if (app.reportData[i].info.machine_type == 'xeros') {
+                    app.reportData[i].actual.barColor = self.barColor.xeros.actual;
                     cssClass.push("xeros");
                     cssClass.push("model-non-xeros");
                     cssClass.push("model-non-xeros-simple");
                     // Compare Xeros machine to non-xeros calculations
                     app.reportData[i].model = app.reportData[i].model_non_xeros_simple;
+                    app.reportData[i].model.barColor = self.barColor.nonXeros.model;
                 } else {
+                    app.reportData[i].actual.barColor = self.barColor.nonXeros.actual;
                     cssClass.push("non-xeros");
                     // Comparison for Non Xeros machines
                     if (app.reportData[i].water_only == 1) {
@@ -40,13 +54,14 @@ var view = {
                         cssClass.push("model-xeros-simple");
                         // If water only, then use the model_xeros_simple calculations
                         app.reportData[i].model = app.reportData[i].model_xeros_simple;
+                        app.reportData[i].model.barColor = self.barColor.xeros.modelSimple;
                     } else {
                         // If we have cycle data, then use the full Xeros model that is based on classifications
                         app.reportData[i].model = app.reportData[i].model_xeros;
+                        app.reportData[i].model.barColor = self.barColor.xeros.model;
                         cssClass.push("model-xeros");
                     }
                 }
-
 
                 if ( app.reportData[i].water_only === 1 ) {
                     cssClass.push("water-only");
@@ -136,7 +151,7 @@ var view = {
             var row = app.reportData[i];
             chart.data = [];
             chart.selector = "";
-            chart.colors = ["#999", "#0086bd"];
+            chart.colors = [app.reportData[i].actual.barColor, app.reportData[i].model.barColor];
             chart.classes = ["base", "xeros"];
 
             // Cold Water
