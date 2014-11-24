@@ -15,10 +15,18 @@
               <div class="chart-header">
 
               <div class="legend">
-                    <span class="swatch current"></span>
-                    <span class="label">Current Consumption</span>
-                    <span class="swatch xeros"></span>
-                    <span class="label">Potential Consumption with Xeros</span>
+                <div class="column">
+                  <span class="swatch" style="background-color: {{nonXeros.actual}}"></span>
+                  <span class="label">Non-Xeros - Actual Data</span><br/>
+                  <span class="swatch" style="background-color: {{xeros.model}}"></span>
+                  <span class="label">Xeros - Theoretical Data</span>
+                </div>
+                <div class="column">
+                  <span class="swatch" style="background-color: {{nonXeros.model}}"></span>
+                  <span class="label">Non-Xeros - Theoretical Data</span><br/>
+                  <span class="swatch" style="background-color: {{xeros.actual}}"></span>
+                  <span class="label">Xeros - Actual Data</span>
+                </div>
                 </div>
                 <div class="kpis__select time__select">
                     <span>
@@ -79,7 +87,6 @@
                     <div class="template-container">
                         <script id="page-tpl" type="text/x-handlebars-template">
                             {{#each this}}
-                              {{actual.cold_water}}{{model_xeros_simple.cold_water}}
                             <div class="row {{info.cssClass}} {{info.machine_type}} water-only-{{info.water_only}}" machineId={{id}}>
                                 <div class="col col-1">
                                     <span class="consumption__machine {{info.machine_name}}">
@@ -105,12 +112,12 @@
                                         <div class="metric__message"></div>
                                     </span>
                                 </div>
-                                <div class="col col-2 metric flip-container {{formatDelta model.cold_water actual.cold_water}}" classification="cold_water" machine="{{id}}" chart="cold_water-{{info.machine_id}}">
+                                <div class="col col-2 metric flip-container {{delta.cold_water.cssClass}}" classification="cold_water" machine="{{id}}" chart="cold_water-{{info.machine_id}}">
                                     <div class="flipper">
                                         <div class="front">
                                              <div class="chart" name="{{info.machine_id}}-cold_water"></div>
-                                             <div class="delta" data="{{cold_water_delta_value}}">{{formatDeltaValue model.cold_water actual.cold_water}}</div>
-                                             <div class="arrow {{cold-water-up-or-down}}"></div>
+                                             <div class="delta" data="{{delta.cold_water.value}}">{{formatDeltaValue delta.cold_water.value}}</div>
+                                             <div class="arrow"></div>
                                             <div class="metric__message"></div>
                                         </div>
                                         <div class="back">
@@ -120,11 +127,11 @@
 
                                 </div>
 
-                                <div class="col col-3 metric flip-container {{formatDelta model.therms actual.therms}}" classification="hot_water" machine="{{id}}" chart="hot_water-{{info.machine_id}}">
+                                <div class="col col-3 metric flip-container {{delta.therms.cssClass}}" classification="hot_water" machine="{{id}}" chart="hot_water-{{info.machine_id}}">
                                   <div class="flipper">
                                     <div class="front">
                                          <div class="chart" name="{{info.machine_id}}-hot_water"></div>
-                                         <div class="delta" data="{{hot_water_delta_value}}">{{formatDeltaValue model.therms actual.therms}}</div>
+                                         <div class="delta" data="{{delta.therms.value}}">{{formatDeltaValue delta.therms.value}}</div>
                                          <div class="arrow"></div>
                                          <div class="metric__message"></div>
                                     </div>

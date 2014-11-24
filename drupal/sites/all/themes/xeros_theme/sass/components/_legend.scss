@@ -5,6 +5,10 @@
   top: 00px;
   position: absolute;
   line-height: 20px;
+  .column {
+    float: left;
+    margin-right: 20px;
+  }
   .label {
     margin-left: 5px;
   }
