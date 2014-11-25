@@ -119,7 +119,8 @@
 </div>
 
 <script>
-    window.reportName = 'kpis';
+  // url of the webservice
+    window.reportName = 'dashboard';
 </script>
 <?php
     $path = drupal_get_path('module', 'xeros_report');
