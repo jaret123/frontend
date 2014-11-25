@@ -9,7 +9,7 @@
   perspective: 1000;
   position:relative;
 
-
+  width:185px;
   /* flip speed goes here */
   .flipper {
     transition: $speed;
@@ -18,20 +18,20 @@
   }
 
   .flipper-navbar {
-    width:189px;
+    width:185px;
     height:24px;
     //border-bottom: 1px dotted grey;
     background-color:$navBarColor;
     opacity:0.8;
     overflow: hidden;
     .flipper-navbtn {
+
       padding-top: 2px;
       position: relative;
       float:right;
       padding-right:2px;
       font-size: 20px;
       text-align: right;
-      width:inherit;
       height:24px;
       cursor: pointer;
       opacity: .75;
@@ -43,7 +43,7 @@
 
   .front, .back {
     backface-visibility: hidden;
-    width: 200px;
+
   }
 
   /* front pane, placed above back */
@@ -53,6 +53,11 @@
     transform: rotateY(0deg);
     position: relative;
     top:0px;
+    width:185px;
+    .flipper-navbtn {
+      width:190px;
+      margin-right:-1px;
+    }
   }
   /* back, initially hidden pane */
   .back {
@@ -62,27 +67,31 @@
     background-color: $backBackgroundColor;
     transform: rotateY(180deg);
     position:absolute;
-    height: 100px;
+    height: 80px;
     padding: 0px;
     margin: 0px;
-    left: -19px;
+    //left: -25px;
+    //margin-left:13px;
+    text-align: left;
+    width:185px;
+    .flipper-closebtn {
+    padding-right: 2px;
   }
-  .flipback-container{
+
+  }
+  .flipback-backcontainer{
     overflow: hidden;
     height:auto;
+    width:auto;
+    margin-left:25px;
   }
 }
 
-.flip {
-  transform: rotateY(180deg);
-}
+
 /* flip the pane when hovered */
 //.flip-container:hover .flipper,
 .flip-container.hover .flipper {
   transform: rotateY(180deg);
 }
 
-.flip-container, .front, .back {
-
-}
 

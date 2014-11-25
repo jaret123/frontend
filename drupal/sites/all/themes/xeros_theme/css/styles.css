@@ -3525,6 +3525,7 @@ a:hover, a:active {
 .flip-container {
   perspective: 1000;
   position: relative;
+  width: 185px;
   /* flip speed goes here */
   /* front pane, placed above back */
   /* back, initially hidden pane */
@@ -3537,7 +3538,7 @@ a:hover, a:active {
 }
 /* line 20, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar {
-  width: 189px;
+  width: 185px;
   height: 24px;
   background-color: white;
   opacity: 0.8;
@@ -3551,7 +3552,6 @@ a:hover, a:active {
   padding-right: 2px;
   font-size: 20px;
   text-align: right;
-  width: inherit;
   height: 24px;
   cursor: pointer;
   opacity: .75;
@@ -3563,7 +3563,6 @@ a:hover, a:active {
 /* line 44, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
   backface-visibility: hidden;
-  width: 200px;
 }
 /* line 50, ../sass/components/_flipper.scss */
 .flip-container .front {
@@ -3572,8 +3571,14 @@ a:hover, a:active {
   transform: rotateY(0deg);
   position: relative;
   top: 0px;
+  width: 185px;
 }
-/* line 58, ../sass/components/_flipper.scss */
+/* line 57, ../sass/components/_flipper.scss */
+.flip-container .front .flipper-navbtn {
+  width: 190px;
+  margin-right: -1px;
+}
+/* line 63, ../sass/components/_flipper.scss */
 .flip-container .back {
   font-size: 12px;
   top: 0;
@@ -3581,24 +3586,26 @@ a:hover, a:active {
   background-color: white;
   transform: rotateY(180deg);
   position: absolute;
-  height: 100px;
+  height: 80px;
   padding: 0px;
   margin: 0px;
-  left: -19px;
+  text-align: left;
+  width: 185px;
 }
-/* line 70, ../sass/components/_flipper.scss */
-.flip-container .flipback-container {
+/* line 77, ../sass/components/_flipper.scss */
+.flip-container .back .flipper-closebtn {
+  padding-right: 2px;
+}
+/* line 82, ../sass/components/_flipper.scss */
+.flip-container .flipback-backcontainer {
   overflow: hidden;
   height: auto;
-}
-
-/* line 76, ../sass/components/_flipper.scss */
-.flip {
-  transform: rotateY(180deg);
+  width: auto;
+  margin-left: 25px;
 }
 
 /* flip the pane when hovered */
-/* line 81, ../sass/components/_flipper.scss */
+/* line 93, ../sass/components/_flipper.scss */
 .flip-container.hover .flipper {
   transform: rotateY(180deg);
 }

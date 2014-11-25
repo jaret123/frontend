@@ -272,13 +272,14 @@ this.bindEvents();
         view.updateLegend();
     },
     bindEvents : function() {
-
+        /*
+        Controls for the Flipping action for Water Sewer and Therms
+        @author Ron Kozlowski
+         */
         jQuery( ".flipper-openbtn" ).click(function() {
-            console.log("opening");
             jQuery(this).parents('.flip-container').addClass("hover");
         });
         jQuery( ".flipper-closebtn" ).click(function() {
-            console.log("closing");
             jQuery(this).parents('.flip-container').removeClass("hover");
         });
 //        jQuery('.water-only-0 .link').unbind().click(function (event) {
