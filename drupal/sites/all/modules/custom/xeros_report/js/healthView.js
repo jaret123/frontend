@@ -36,6 +36,10 @@ var view = {
                 /**
                  * This is the logic to pick the default comparison and to list what comparisons are available.
                  */
+                app.reportData[i].delta = {
+                    cold_water : {},
+                    therms : {}
+                }
 
                 if (app.reportData[i].info.machine_type == 'xeros') {
                     app.reportData[i].actual.barColor = self.barColor.xeros.actual;
@@ -69,6 +73,9 @@ var view = {
                 } else {
 
                 }
+
+                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type);
+                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type);
 
                 app.reportData[i].info.cssClass = cssClass.join(" ");
 
@@ -113,6 +120,46 @@ var view = {
             }
         }
         return isValid;
+    },
+    updateLegend : function() {
+        var self = this;
+
+        var legendTemplate = Handlebars.compile(jQuery("#report-health .legend").html());
+        var html = legendTemplate(view.barColor);
+        jQuery('#report-health .legend').html(html).removeClass("fade");
+    },
+    calculateDelta : function(actual, model, machineType) {
+        if ( machineType == 'xeros') {
+            numerator = parseInt(actual, 10);
+            denominator = parseInt(model, 10);
+        } else {
+            numerator = parseInt(model, 10);
+            denominator = parseInt(actual, 10);
+        }
+
+        var delta = 0;
+        // BUG - Divide by zero throws NaN
+
+        // Divide by 0
+        if ( denominator === 0 ) {
+            if ( numerator === 0 ) {
+                delta = 0;
+            } else {
+                delta = 100;
+            }
+        } else {
+            delta = parseInt(((denominator - numerator) / denominator) * 100);
+        }
+        var cssClass = '';
+        if ( delta >= 0 ) {
+            cssClass = 'positive'
+        } else {
+            cssClass = 'negative'
+        }
+        return {
+            value : delta,
+            cssClass : cssClass
+        }
     },
     drawCharts : function() {
         var self = this;
@@ -222,6 +269,7 @@ var view = {
         //createDropDown();
         app.initialize();
         FF.Controls.TimeSelect.create();
+        view.updateLegend();
     },
     bindNav : function() {
 //        jQuery('.water-only-0 .link').unbind().click(function (event) {

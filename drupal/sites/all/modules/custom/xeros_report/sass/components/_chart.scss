@@ -18,7 +18,7 @@
     display: inline-block;
   }
   // If the difference between actual and model is positive
-  &.delta-up {
+  &.negative {
     .arrow {
       &:after {
         color: #ff0000;
@@ -26,8 +26,9 @@
       }
     }
   }
+
   // If the difference between actual and model is negative
-  &.delta-down {
+  &.positive {
     .arrow {
       &:after {
         color: #00c900;
@@ -39,6 +40,24 @@
   &.delta-none {
     .arrow {
       opacity: 0;
+    }
+  }
+}
+
+// Flip the color but not the arrow for non-xeros (if we could be saving money, then RED)
+.non-xeros {
+  .negative {
+    .arrow {
+      &:after {
+        color: #00c900;
+      }
+    }
+  }
+  .positive {
+    .arrow {
+      &:after {
+        color: #ff0000;
+      }
     }
   }
 }
