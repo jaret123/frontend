@@ -269,6 +269,7 @@ var view = {
 
     },
     bindNav : function() {
+
         // Bind any navigation that is on an item in a template.
     }
 }

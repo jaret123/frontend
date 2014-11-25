@@ -129,7 +129,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col col-3 metric flip-container {{delta.therms.cssClass}}" classification="hot_water" machine="{{id}}" chart="hot_water-{{info.machine_id}}">
                                   <div class="flipper">
                                         <div class="front">
@@ -141,7 +140,6 @@
                                                  <div class="metric__message"></div>
                                              </div>
                                         </div>
-
                                       <div class="back">
                                           <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close"></div></div>
                                           <div class="flipper-backcontainer">{{model.description}}</div>

@@ -87,7 +87,7 @@ var view = {
             draw(); // This does the html template draw
 
             self.drawCharts();
-            self.bindNav();
+            self.bindEvents();
         })
     },
     getActionData : function(callback) {
@@ -263,7 +263,7 @@ var view = {
 //            }
 
         });
-this.bindEvents();
+
     },
     initialize : function() {
         //createDropDown();
