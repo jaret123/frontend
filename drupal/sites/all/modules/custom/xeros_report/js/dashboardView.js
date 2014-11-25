@@ -3,6 +3,9 @@
  */
 var view = {
 
+    machineType : 'non-xeros',
+    model : 'model_xeros',
+
     legendTpl : '',
     // Each report view has a slightly different data structure
     parseData : function(draw) {
@@ -20,60 +23,66 @@ var view = {
             avg_chemical_cost: "1.18185205"
         };
 
-        var ar;
-        ar = [
-            {
-                name : 'Summary',
-                meta : {
-                    cssClass : "overall",
-                    icon : "Globe",
-                    label : "Overall Expense",
-                    title : "Total Savings"
+
+
+        ar = app.data[self.machineType];
+
+        var ar = [
+                {
+                    name : 'Summary',
+                    meta : {
+                        cssClass : "overall",
+                        icon : "Globe",
+                        label : "Overall Expense",
+                        title : "Total Savings"
+                    },
+                    actual: {
+                        summary : {
+                            cost : 0,
+                            value : 0
+                        },
+                        chart : []
+                    },
+                    model_xeros : {
+                        summary : {
+                            cost : 0,
+                            value : 0
+                        },
+                        chart : []
+                    },
+                    model_xeros_simple : {
+                        summary : {
+                            cost : 0,
+                            value : 0
+                        },
+                        chart : []
+                    },
+                    model_non_xeros_simple : {
+                        summary : {
+                            cost : 0,
+                            value : 0
+                        },
+                        chart : []
+                    },
+                    total : [1, 2]
                 },
-                summaryData: {
-                    'cost': 0,
-                    'cost_xeros': 0,
-                    'value': 0,
-                    'value_xeros': 0
-                },
-                chartData : [],
-                total : [1, 2]
-            },
-            {
-                name : 'cold-water',
-                meta : {
-                    cssClass : "gallons",
-                    icon : "Drop",
-                    label : "Gallons",
-                    title : "Water Sewer"
-                },
-                summaryData: {},
-                chartData : []
-            },
-            {
-                name : 'hot-water',
-                meta : {
+                app.data[self.machineType]['cold-water'],
+                app.data[self.machineType]['therms']
+            ];
+
+
+            ar[1]['meta'] = {
                     cssClass : "efficiency",
                     icon : "Thermometer",
                     label : "Efficiency",
                     title : "Therms"
-                },
-                summaryData: {},
-                chartData : []
-            },
-//            {
-//                name : 'chemical',
-//                meta : {
-//                    cssClass : "chemicals",
-//                    icon : "Atom",
-//                    label : "Chemical Strength",
-//                    title : "Usage"
-//                },
-//                summaryData: {},
-//                chartData : []
-//            }
-
-        ];
+                };
+            ar[2]['meta'] = {
+                cssClass : "chemicals",
+                icon : "Atom",
+                label : "Chemical Strength",
+                title : "Usage"
+            };
 
         var labels = {
             'non-xeros' : {
@@ -96,18 +105,15 @@ var view = {
 
         app.reportData = ar;
 
-        for ( var m in app.data.data ) {
-            var mi = parseInt(m);
-            app.reportData[mi + 1].summaryData = app.data.data[mi].summaryData;
-            app.reportData[mi + 1].chartData = app.data.data[mi].chartData;
-        }
-
 
         /**
          * Compute the Summary Data for the top chart.  We have to do this on the front end because
          * it is calculated differently based on context.
          *
          */
+
+        var d = app.data[this.machineType];
+
         // Set up the sums the sums we will calculate.  This array lists which sub arrays to add to the totals ie: [1,2,3]
         var sums = app.reportData[0].total;
 
@@ -115,56 +121,63 @@ var view = {
         for (var i in sums ) {
 
             var ij = sums[i];
-            if ( self.isValidSummaryData(app.reportData[ij].summaryData) ) {
-                app.reportData[0].summaryData.cost += parseInt(app.reportData[ij].summaryData.cost, 10) ;
-                app.reportData[0].summaryData.cost_xeros += parseInt(app.reportData[ij].summaryData.cost_xeros, 10);
-                app.reportData[0].summaryData.value += parseInt(app.reportData[ij].summaryData.value, 10) ;
-                app.reportData[0].summaryData.value_xeros += parseInt(app.reportData[ij].summaryData.value_xeros, 10) ;
+            if ( self.isValidSummaryData(app.reportData[ij].actual.summary) ) {
+                app.reportData[0].actual.summary.cost += app.reportData[ij].actual.summary.cost ;
+                app.reportData[0].actual.summary.value += app.reportData[ij].actual.summary.value ;
 
-                var l = app.reportData[ij].chartData.length,
+                // TODO: Test what model to use for this calc
+                app.reportData[0][this.model].cost += app.reportData[ij][this.model].cost;
+                app.reportData[0][this.model].value += app.reportData[ij][this.model].value ;
+
+                var l = app.reportData[ij].actual.chart.length,
                     d = 0;
 
                 for (d; d < l; d++ ) {
                     if ( i == 0 ) {
-                        app.reportData[0].chartData[d] = {
+                        app.reportData[0].actual.chart[d] = {
                             cost: 0,
-                            cost_xeros: 0,
                             date : '',
                             value: 0,
-                            value_xeros: 0
+                        };
+                        app.reportData[0][this.model].chart[d] = {
+                            cost: 0,
+                            date : '',
+                            value: 0,
                         };
                     }
-                    var x = app.reportData[ij].chartData[d];
-                    app.reportData[0].chartData[d].cost += self.pInt(x.cost);
-                    app.reportData[0].chartData[d].cost_xeros += self.pInt(x.cost_xeros);
-                    app.reportData[0].chartData[d].value += self.pInt(x.value);
-                    app.reportData[0].chartData[d].value_xeros += self.pInt(x.value_xeros);
-                    app.reportData[0].chartData[d]["date"] = x["date"];
+                    var x = app.reportData[ij].actual.chart[d];
 
+                    // TODO: Test what model to use
+                    var y = app.reportData[ij][this.model].chart[d];
+
+                    // TODO: We can take either cost or value out of the chart (review what is being charted)
+                    app.reportData[0].actual.chart[d].cost += self.pInt(x.cost);
+                    app.reportData[0][this.model].chart[d].cost += self.pInt(y.cost);
+                    app.reportData[0].actual.chart[d].value += self.pInt(x.value);
+                    app.reportData[0][this.model].chart[d].value += self.pInt(y.value);
+                    app.reportData[0].actual.chart[d]["date"] = x["date"];
+                    app.reportData[0][this.model].chart[d]["date"] = y["date"];
                 }
 
             }
         }
 
         for ( i in app.reportData ) {
-            s = app.reportData[i].summaryData;
 
             // Pass to template for use in conditional templates
-            app.reportData[i].xeros = FF.Location.xeros();
+            //app.reportData[i].xeros = FF.Location.xeros();
 
             // Calculate savings
-            app.reportData[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
+            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.cost, app.reportData[i][this.model].cost);
 
             // Invert the savings if this is a xeros machine
             if ( FF.Location.xeros() ) {
                 // Calculate savings
-                app.reportData[i].summaryData.savings = self.delta(s.cost_xeros, s.cost);
-            } else {
-                // Calculate savings
-                app.reportData[i].summaryData.savings = self.delta(s.cost, s.cost_xeros);
+                app.reportData[i].actual.savings = -app.reportData[i].actual.savings;
             }
 
             // Add custom labels for Xeros versus non-xeros machines
+            // TODO - make the labels a bit more descriptive
             app.reportData[i].labels = labels[FF.Location.machineTypes()];
         }
 
@@ -196,9 +209,7 @@ var view = {
        isValid = true;
 
         if ( typeof(summaryData.cost) === "undefined" ||
-             typeof(summaryData.cost_xeros) === "undefined" ||
-             typeof(summaryData.value) === "undefined" ||
-             typeof(summaryData.value_xeros) === "undefined" ) {
+             typeof(summaryData.value) === "undefined"  ) {
             isValid = false;
             return isValid;
         }
@@ -220,8 +231,14 @@ var view = {
         var self = this;
         chart.data = [];
         for ( i in app.reportData ) {
-            chart.data = app.reportData[i];
-            if (self.isValid(chart.data.chartData)) {
+            // TODO - Put in the actual data and the model we want to use then draw
+            chart.data = {
+                labels : app.reportData[i].labels,
+                actual : app.reportData[i].actual,
+                model : app.reportData[i][this.model],
+                machineType : this.machineType
+            }
+            if (self.isValid(chart.data.actual.chart)) {
                 chart.drawKPI();
             } else {
                 jQuery(".kpi-chart." + app.reportData[i].name).html("No readings");

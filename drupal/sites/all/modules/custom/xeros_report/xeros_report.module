@@ -8,12 +8,12 @@ function xeros_report_menu() {
 
   $items = array();
 
-  $items['ws/kpi'] = array(
+  $items['ws/dashboard'] = array(
     'title' => '',
-    'page callback' => 'ws_kpi',
+    'page callback' => 'ws_dashboard',
     'page arguments' => array(2,3,4),
     'access arguments' => array('access content'),
-    'file' => 'ws/kpi.inc'
+    'file' => 'ws/dashboard.inc'
   );
   $items['report/dashboard'] = array(
     'title' => 'Operational Dashboard',
