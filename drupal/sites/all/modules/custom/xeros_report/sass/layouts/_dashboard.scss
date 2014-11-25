@@ -1,0 +1,171 @@
+
+#report-dashboard {
+
+  opacity: 1;
+  z-index: 0;
+  $zen-column-count: 12;
+  $zen-gutter-width: 0px;
+
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+
+  //#kpis, #news { border: 1px solid blue;}
+  //.col-1, .col-2, .col-3 { border: 1px solid red;}
+  &.active {
+    z-index: 10;
+  }
+
+  .legend .swatch.current {
+    background-color: white;
+    border: 1px solid gray;
+  }
+  // select
+  .kpis__select {
+    @include zen-clear(both);
+    overflow: hidden;
+    margin:0;
+    > span {
+      float: right;
+    }
+    dl {
+      margin:0 0 10px 0;
+    }
+  }
+
+  .container {
+    .template-container {
+      @include single-transition(height, .3s, ease, 0);
+      @include single-transition(opacity, .3s, ease-in, 0);
+      min-height: 600px;
+      &.fade {
+        opacity: .5;
+      }
+    }
+    width: 980px;
+    @include zen-grid-container();
+
+    .kpis {
+      position: relative;
+
+      @include zen-grid-item(8, 1);
+      .row {
+        @include zen-nested-container();
+        @include zen-clear();
+        display: block;
+        border-top: 1px dashed $font-color;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        overflow: hidden;
+        .col-1 {
+          @include zen-grid-item(3,1);
+          text-align: center;
+          //height: 124px;
+          .icon {
+            margin-top: 34px;
+            font-size: 60px;
+          }
+          font-weight: 300;
+        }
+        .col-2 {
+          @include zen-grid-item(6,4);
+        }
+        .col-3 {
+          @include zen-grid-item(3,10);
+          text-align: center;
+          height: 150px;
+          position: relative;
+          .unit {
+            text-transform: uppercase;
+            font-weight: 300;
+            font-size: .7em;
+          }
+          .dollars {
+            margin-top: 3px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+            font-weight: 300;
+            .dollar-sign {
+              font-size: .6em;
+              vertical-align: top;
+            }
+            &.actual-dollars {
+              //color: red;
+            }
+            &.potential-dollars {
+              //font-weight: 300;
+              //color: $font-accent-color;
+            }
+          }
+          .saved {
+            font-weight: 300;
+            font-size: .8em;
+            padding: 0 20px;
+            line-height: 130%;
+            margin-top: 2px;
+          }
+          .percent {
+            font-weight: 300;
+            font-size: 1.1em;
+            margin-top: 4px;
+          }
+          .border {
+            height: 1px;
+            border-top: 1px dashed $font-color;
+            width: 60%;
+            margin-left: 20%;
+            margin-top: 4px;
+            margin-bottom: -1px;
+          }
+          .info {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            &:hover {
+              color: $font-accent-color;
+            }
+          }
+        }
+      }
+    }
+    .kpis-total {
+      .icon { color: $chart-color-1;}
+      .kpi-chart {background-color: $chart-color-1;}
+      .col-3 {border: 1px solid $chart-color-1;}
+    }
+    .kpis-cold-water {
+      .icon { color: $chart-color-2;}
+      .kpi-chart {background-color: $chart-color-2;}
+      .col-3 {border: 1px solid $chart-color-2;}
+    }
+    .kpis-therms {
+      .icon { color: $chart-color-3;}
+      .kpi-chart {background-color: $chart-color-3;}
+      .col-3 {border: 1px solid $chart-color-3;}
+    }
+//    .kpis-efficiency {
+//      .icon { color: $chart-color-3;}
+//      .kpi-chart {background-color: $chart-color-3;}
+//      .col-3 {border: 1px solid $chart-color-3;}
+//    }
+//    .kpis-labor {
+//      .icon { color: $chart-color-4;}
+//      .kpi-chart {background-color: $chart-color-4;}
+//      .col-3 {border: 1px solid $chart-color-4;}
+//    }
+//    .kpis-chemicals {
+//      .icon { color: $chart-color-5;}
+//      .kpi-chart {background-color: $chart-color-5;}
+//      .col-3 {border: 1px solid $chart-color-5;}
+//    }
+  }
+
+  .news {
+    @include zen-grid-item(4,9);
+    margin-top: 22px;
+    padding-left: 30px;
+  }
+}
+
+a:link, a:visited {text-decoration: none;}
+a:hover, a:active {text-decoration: underline;}

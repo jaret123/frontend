@@ -3,6 +3,8 @@
  */
 var view = {
 
+    // change these values to change which data we display.
+    // The Web service returns all the data.
     machineType : 'non-xeros',
     model : 'model_xeros',
 
@@ -29,9 +31,11 @@ var view = {
 
         var ar = [
                 {
-                    name : 'Summary',
+                    name : 'total',
+                    //modelName : this.model,
+                    machineType : this.machineType,
                     meta : {
-                        cssClass : "overall",
+                        cssClass : "total",
                         icon : "Globe",
                         label : "Overall Expense",
                         title : "Total Savings"
@@ -70,18 +74,17 @@ var view = {
                 app.data[self.machineType]['therms']
             ];
 
-
             ar[1]['meta'] = {
-                    cssClass : "efficiency",
-                    icon : "Thermometer",
-                    label : "Efficiency",
-                    title : "Therms"
+                    cssClass : "cold-water",
+                    icon : "Drop",
+                    label : "Water Sewer",
+                    title : "Water Sewer"
                 };
             ar[2]['meta'] = {
-                cssClass : "chemicals",
-                icon : "Atom",
-                label : "Chemical Strength",
-                title : "Usage"
+                cssClass : "therms",
+                icon : "Thermometer",
+                label : "Therms",
+                title : "Therms"
             };
 
         var labels = {
@@ -105,6 +108,9 @@ var view = {
 
         app.reportData = ar;
 
+        for ( i in app.reportData ) {
+            app.reportData[i].model = app.reportData[i][this.model];
+        }
 
         /**
          * Compute the Summary Data for the top chart.  We have to do this on the front end because
@@ -126,8 +132,8 @@ var view = {
                 app.reportData[0].actual.summary.value += app.reportData[ij].actual.summary.value ;
 
                 // TODO: Test what model to use for this calc
-                app.reportData[0][this.model].cost += app.reportData[ij][this.model].cost;
-                app.reportData[0][this.model].value += app.reportData[ij][this.model].value ;
+                app.reportData[0].model.cost += app.reportData[ij].model.cost;
+                app.reportData[0].model.value += app.reportData[ij].model.value;
 
                 var l = app.reportData[ij].actual.chart.length,
                     d = 0;
@@ -139,7 +145,7 @@ var view = {
                             date : '',
                             value: 0,
                         };
-                        app.reportData[0][this.model].chart[d] = {
+                        app.reportData[0].model.chart[d] = {
                             cost: 0,
                             date : '',
                             value: 0,
@@ -148,15 +154,15 @@ var view = {
                     var x = app.reportData[ij].actual.chart[d];
 
                     // TODO: Test what model to use
-                    var y = app.reportData[ij][this.model].chart[d];
+                    var y = app.reportData[ij].model.chart[d];
 
                     // TODO: We can take either cost or value out of the chart (review what is being charted)
                     app.reportData[0].actual.chart[d].cost += self.pInt(x.cost);
-                    app.reportData[0][this.model].chart[d].cost += self.pInt(y.cost);
+                    app.reportData[0].model.chart[d].cost += self.pInt(y.cost);
                     app.reportData[0].actual.chart[d].value += self.pInt(x.value);
-                    app.reportData[0][this.model].chart[d].value += self.pInt(y.value);
+                    app.reportData[0].model.chart[d].value += self.pInt(y.value);
                     app.reportData[0].actual.chart[d]["date"] = x["date"];
-                    app.reportData[0][this.model].chart[d]["date"] = y["date"];
+                    app.reportData[0].model.chart[d]["date"] = y["date"];
                 }
 
             }
@@ -168,7 +174,7 @@ var view = {
             //app.reportData[i].xeros = FF.Location.xeros();
 
             // Calculate savings
-            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.cost, app.reportData[i][this.model].cost);
+            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.cost, app.reportData[i].model.cost);
 
             // Invert the savings if this is a xeros machine
             if ( FF.Location.xeros() ) {
@@ -179,6 +185,7 @@ var view = {
             // Add custom labels for Xeros versus non-xeros machines
             // TODO - make the labels a bit more descriptive
             app.reportData[i].labels = labels[FF.Location.machineTypes()];
+
         }
 
         draw(); // This does the html template draw
@@ -233,6 +240,7 @@ var view = {
         for ( i in app.reportData ) {
             // TODO - Put in the actual data and the model we want to use then draw
             chart.data = {
+                meta : app.reportData[i].meta,
                 labels : app.reportData[i].labels,
                 actual : app.reportData[i].actual,
                 model : app.reportData[i][this.model],

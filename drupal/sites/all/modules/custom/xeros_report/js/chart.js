@@ -5,12 +5,16 @@ var chart = {
     selector : "", // Where to draw the chart
     colors : [], // Array of colors to use,
     classes : [],
+    minExtent : 20,
     drawKPI : function () {
         self = this;
 //        var data = chart.data;
         var parseDate = d3.time.format("%Y-%m-%d").parse;
-        var name = chart.data["name"];
-        var data = chart.data["chartData"];
+        var name = chart.data.meta.cssClass;
+        var data = {
+            actual : chart.data.actual,
+            model : chart.data.model
+        };
 
         function replaceNull(value) {
             if (value !== "") {
@@ -56,15 +60,15 @@ var chart = {
 //            xAxis.tickFormat(d3.time.format("%b %-d"), 2);
 //            xAxis.ticks(d3.time.weeks, 1)
 //        }
-        if ( data.length < 30 ) {
+        if ( data.actual.chart.length < 30 ) {
             xAxis.tickFormat(d3.time.format("%-d"));
             xAxis.ticks(5);
         }
-        if ( data.length < 8 ) {
+        if ( data.actual.chart.length < 8 ) {
             xAxis.tickFormat(d3.time.format("%-d"));
             xAxis.ticks(data.length - 1);
         }
-        if ( data.length == 1 ) {
+        if ( data.actual.chart.length == 1 ) {
             xAxis.tickFormat(d3.time.format("%b %-d"));
             xAxis.ticks(1);
         }
@@ -72,10 +76,10 @@ var chart = {
         // create the individual points for the line
         var lineA = d3.svg.line()
             .x(function (d) {
-                return x(parseDate(d["date"]));// date
+                return x(parseDate(d.date));// date
             })
             .y(function (d) {
-                var value = d["cost"];
+                var value = d.cost;
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
@@ -86,10 +90,10 @@ var chart = {
 
         var lineB = d3.svg.line()
             .x(function (d) {
-                return x(parseDate(d["date"]));// date
+                return x(parseDate(d.date));// date
             })
             .y(function (d) {
-                var value = d["cost_xeros"];
+                var value = d.cost;
                 if (value !== "") {
                     return y(parseInt(value, 10)); // value 1
                 }
@@ -119,10 +123,10 @@ var chart = {
 //        ;
 
         // find the extent (min / max) of the values
-        x.domain(d3.extent(data, function (d) {
+        x.domain(d3.extent(data.actual.chart, function (d) {
             return parseDate(d["date"]); // date
         }));
-        var extentA = d3.extent(data, function (d) {
+        var extentA = d3.extent(data.actual.chart, function (d) {
             var value = d["cost"];
             if (value !== "") {
                 return parseInt(value, 10); // value 1
@@ -130,8 +134,8 @@ var chart = {
             return 0;
             //return replaceNull(d["value"]);
         });
-        var extentB = d3.extent(data, function (d) {
-            var value = d["cost_xeros"];
+        var extentB = d3.extent(data.model.chart, function (d) {
+            var value = d.cost;
             if (value !== "") {
                 return parseInt(value, 10); // value 1
             }
@@ -139,9 +143,9 @@ var chart = {
         //        return replaceNull(d["value_value"]);
         });
         var min = d3.min([extentA[0], extentB[0], 0]);
-        var max = d3.max([extentA[1], extentB[1], 100]); // Added 1000 to deal with no records found
+        var max = d3.max([extentA[1], extentB[1], this.minExtent]); // Added 100 to deal with no records found
 
-        var round = 100;
+        var round = 10;
 
         max = round * (Math.ceil( max / round ) );
         y.domain([min, max]);
@@ -161,10 +165,10 @@ var chart = {
             .attr("stroke", "white")
             .call(yAxis);
 
-        if (data.length > 1) {
+        if (data.actual.chart.length > 1) {
 
             svg.append("path")
-                .datum(data)
+                .datum(data.actual.chart)
                 .attr("class", "line-b")
                 .attr("d", lineA)
                 .attr("stroke", "#0086bd")
@@ -183,7 +187,7 @@ var chart = {
         // Draw the xeros line, starting at LineA and animating to LineB
 
         svg.append("path")
-            .datum(data)
+            .datum(data.model.chart)
             .attr("class", "line-a")
             .attr("d", lineA)
             .attr("stroke", "#fff")
@@ -197,10 +201,10 @@ var chart = {
 
 
 
-            if (data.length < 8) {
+            if (data.actual.chart.length < 8) {
                 // Actual data rendered at the reference data then animated
                 svg.selectAll("dot")
-                    .data(data)
+                    .data(data.actual.chart)
                     .enter().append("circle")
                     .attr("fill", "#0086bd")
                     .attr("r", 3.5)
@@ -230,7 +234,7 @@ var chart = {
 
                 // Reference data
                 svg.selectAll("dot")
-                    .data(data)
+                    .data(data.model.chart)
                     .enter().append("circle")
                     .attr("fill", "white")
                     .attr("r", 3.5)
@@ -248,10 +252,10 @@ var chart = {
 
             }
         }
-        if ( data.length == 1 ) {
+        if ( data.actual.chart.length == 1 ) {
             //gxAxis.attr("transform", "translate(" + width / 2 + "," + height + ")");
             svg.selectAll("dot")
-                .data(data)
+                .data(data.actual.chart)
                 .enter().append("circle")
                 .attr("fill", "#0086bd")
                 .attr("r", 3.5)
@@ -280,7 +284,7 @@ var chart = {
                     return y(0);
                 });
             svg.selectAll("dot")
-                    .data(data)
+                    .data(data.model.chart)
                     .enter().append("circle")
                     .attr("fill", "white")
                     .attr("r", 3.5)

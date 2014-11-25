@@ -7,7 +7,7 @@
  * @see https://drupal.org/node/1728164
  */
 ?>
-<div id="page-1" class="main page">
+<div id="report-dashboard" class="main page">
 
     <div class="page-container">
         <div class="container">
@@ -77,29 +77,16 @@
                         <div class="col col-2">
                             <div class="col kpi-chart chart {{name}}" name="{{name}}"></div>
                         </div>
-                      {{#if xeros}}
                         <div class="col col-3">
-                          <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost}}</div>
+                          <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString actual.summary.cost}}</div>
                           <div class="col saved">{{labels.lineB}}</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
                           <div class="col border"></div>
-                          <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost_xeros}}</div>
+                          <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString model.summary.cost}}</div>
                           <div class="col saved">{{labels.lineA}}</div>
                           <div class="col border"></div>
-                          <div class="col percent">{{toLocaleString summaryData.savings}}%</div>
+                          <div class="col percent">{{toLocaleString actual.savings}}%</div>
                           <div class="col saved">{{labels.savings}}</div>
                         </div>
-                      {{else}}
-                        <div class="col col-3">
-                            <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost}}</div>
-                            <div class="col saved">{{labels.lineA}}</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
-                            <div class="col border"></div>
-                            <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString summaryData.cost_xeros}}</div>
-                            <div class="col saved">{{labels.lineB}}</div>
-                            <div class="col border"></div>
-                            <div class="col percent">{{toLocaleString summaryData.savings}}%</div>
-                            <div class="col saved">{{labels.savings}}</div>
-                        </div>
-                      {{/if}}
                     </div>
                     {{/each}}
                 </script>
