@@ -263,7 +263,7 @@ var view = {
 //            }
 
         });
-
+this.bindEvents();
     },
     initialize : function() {
         //createDropDown();
@@ -271,7 +271,16 @@ var view = {
         FF.Controls.TimeSelect.create();
         view.updateLegend();
     },
-    bindNav : function() {
+    bindEvents : function() {
+
+        jQuery( ".flipper-openbtn" ).click(function() {
+            console.log("opening");
+            jQuery(this).parents('.flip-container').addClass("hover");
+        });
+        jQuery( ".flipper-closebtn" ).click(function() {
+            console.log("closing");
+            jQuery(this).parents('.flip-container').removeClass("hover");
+        });
 //        jQuery('.water-only-0 .link').unbind().click(function (event) {
 //            event.preventDefault();
 //            var classification,
@@ -286,3 +295,6 @@ var view = {
 //        });
     }
 }
+
+
+

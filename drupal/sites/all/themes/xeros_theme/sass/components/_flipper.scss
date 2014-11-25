@@ -1,21 +1,49 @@
 /* entire container, keeps perspective */
 .flip-container {
   $speed:0.6s;
+
   $backBackgroundColor:white;
   $backFontSize:12px;
+  $navBarColor:white;
+  $border:1px dotted grey;
   perspective: 1000;
   position:relative;
-  cursor: pointer;
+
 
   /* flip speed goes here */
   .flipper {
     transition: $speed;
     transform-style: preserve-3d;
+    border:$border;
+  }
+
+  .flipper-navbar {
+    width:189px;
+    height:24px;
+    //border-bottom: 1px dotted grey;
+    background-color:$navBarColor;
+    opacity:0.8;
+    overflow: hidden;
+    .flipper-navbtn {
+      padding-top: 2px;
+      position: relative;
+      float:right;
+      padding-right:2px;
+      font-size: 20px;
+      text-align: right;
+      width:inherit;
+      height:24px;
+      cursor: pointer;
+      opacity: .75;
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   .front, .back {
     backface-visibility: hidden;
-
+    width: 200px;
   }
 
   /* front pane, placed above back */
@@ -29,18 +57,28 @@
   /* back, initially hidden pane */
   .back {
     font-size: $backFontSize;
-    top: 0;
-    left: 0;
+    top:0;
+    left:0;
     background-color: $backBackgroundColor;
     transform: rotateY(180deg);
     position:absolute;
-    height: 480px;
-    width: 200px;
+    height: 100px;
+    padding: 0px;
+    margin: 0px;
+    left: -19px;
+  }
+  .flipback-container{
+    overflow: hidden;
+    height:auto;
   }
 }
 
+.flip {
+  transform: rotateY(180deg);
+}
 /* flip the pane when hovered */
-.flip-container:hover .flipper, .flip-container.hover .flipper {
+//.flip-container:hover .flipper,
+.flip-container.hover .flipper {
   transform: rotateY(180deg);
 }
 
