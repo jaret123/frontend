@@ -269,6 +269,19 @@ var view = {
 
     },
     bindNav : function() {
+        jQuery( ".dashboard-gear" ).click(function() {
+            console.log("gear clicked");
+            jQuery('.lightbox-content').show();
+            jQuery('.black_overlay').show();
+
+        });
+
+        jQuery( ".lightbox-closebtn" ).click(function() {
+
+            jQuery('.lightbox-content').hide();
+            jQuery('.black_overlay').hide();
+
+        });
 
         // Bind any navigation that is on an item in a template.
     }

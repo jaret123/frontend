@@ -12,9 +12,10 @@
     <div class="page-container">
         <div class="container">
             <div class="kpis">
+                <div  class="dashboard-gear fa fa-gear"></div>
               <div class="chart-header">
 <!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
-                  <div id="" class="fa fa-gear"></div>
+
               <div class="legend">
               </div>
               <script id="legend-tpl" type="text/x-handlebars-template">
@@ -99,16 +100,30 @@
             </div>
           <div class="news__gradient"></div>
         </div>
-        <div class="data-select-box lightbox white_content">
-            <div class="data-select-box-header">Select Data to Compare</div>
-            <div class="data-select-box-content">
-             Selector Form Here
-            </div>
-        </div>
-        <div class="lightbox black_overlay"></div>
 
 </div>
 
+</div>
+<div class="lightbox lightbox-content">
+    <div class="lightbox-header">Select Data to Compare <div class="lightbox-closebtn fa fa-close"></div></div>
+    <div class="lightbox-body">
+        <form>
+            <div id="dataset1-box">
+            <label for="dataset1" class="lightbox-label">Data Set One</lable>
+                <select id="dataset1">
+
+                </select>
+            </div>
+                <label for="dataset2" class="lightbox-label">Data Set two</lable>
+                    <select id="dataset2">
+
+                    </select>
+        </form>
+
+
+    </div>
+</div>
+<div class="lightbox black_overlay"></div>
 <script>
   // url of the webservice
     window.reportName = 'dashboard';

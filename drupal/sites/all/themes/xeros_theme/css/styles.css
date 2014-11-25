@@ -3610,8 +3610,13 @@ a:hover, a:active {
   transform: rotateY(180deg);
 }
 
-/* line 2, ../sass/components/_lightbox.scss */
-.lightbox .black_overlay {
+/* line 1, ../sass/components/_lightbox.scss */
+.lightbox {
+  min-width: 600px;
+  min-height: 400px;
+}
+/* line 4, ../sass/components/_lightbox.scss */
+.lightbox.black_overlay {
   display: none;
   position: absolute;
   top: 0%;
@@ -3624,19 +3629,38 @@ a:hover, a:active {
   opacity: .80;
   filter: alpha(opacity=80);
 }
-/* line 15, ../sass/components/_lightbox.scss */
-.lightbox .white_content {
+/* line 18, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content {
   display: none;
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
+  top: 10%;
+  left: 13%;
+  width: 70%;
   height: 50%;
-  padding: 16px;
-  border: 16px solid orange;
+  padding: 2px;
+  box-shadow: 2px 2px 1px grey;
   background-color: white;
   z-index: 1002;
   overflow: auto;
+}
+/* line 31, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-header {
+  border-bottom: 1px solid grey;
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+}
+/* line 36, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-header .lightbox-closebtn {
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  float: right;
+  position: relative;
+}
+/* line 44, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-body {
+  padding: 10px;
 }
 
 /* Layout rules */
@@ -4195,12 +4219,12 @@ a:hover, a:active {
   padding-left: 30px;
 }
 
-/* line 170, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+/* line 172, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
 a:link, a:visited {
   text-decoration: none;
 }
 
-/* line 171, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+/* line 173, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
 a:hover, a:active {
   text-decoration: underline;
 }
