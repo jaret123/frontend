@@ -1,5 +1,6 @@
 // The main router of the report app
 
+
 var app = {
 
     apiUrlBase: "",

@@ -16,7 +16,14 @@ function status_board() {
 
   // We are overriding some theme styles, so we are going to load this last
   // This is a little janky.  Ideally the theme should be refactored to be specific to it's pages
+
   drupal_add_css($module_path . '/css/ops.css', array( 'group' => CSS_THEME, 'weight' => 1) );
+
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Utils.js');
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/libs/underscore.js');
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/libs/handlebars.js');
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/HandlebarsHelpers.js');
+  drupal_add_js(drupal_get_path('module', 'xeros_app') . '/js/Format.js');
 
   drupal_add_js($module_path . '/libs/moment-with-locales.js');
   drupal_add_js($module_path . '/js/fullscreenAPI.js');
