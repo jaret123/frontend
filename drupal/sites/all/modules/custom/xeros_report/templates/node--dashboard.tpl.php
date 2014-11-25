@@ -14,6 +14,9 @@
             <div class="kpis">
               <div class="chart-header">
 <!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
+                  <div class="gear">
+
+                  </div>
               <div class="legend">
 
               </div>
