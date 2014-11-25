@@ -174,7 +174,7 @@ var view = {
             //app.reportData[i].xeros = FF.Location.xeros();
 
             // Calculate savings
-            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.cost, app.reportData[i].model.cost);
+            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.summary.cost, app.reportData[i].model.summary.cost);
 
             // Invert the savings if this is a xeros machine
             if ( FF.Location.xeros() ) {
