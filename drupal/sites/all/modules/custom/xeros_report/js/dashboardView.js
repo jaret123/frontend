@@ -269,20 +269,25 @@ var view = {
 
     },
     bindEvents : function() {
+        /**
+         * Controls the Window for Choosing Data Compare
+         * @author Ron Kozlowski 11-25-2014
+         */
+        //Opens Window from Gear
         jQuery( ".dashboard-gear" ).click(function() {
             console.log("gear clicked");
             jQuery('.lightbox-content').show();
             jQuery('.header__logo').css('z-index', 0);
             jQuery('.black_overlay').show();
         });
-
+        //Closes Window for X or from cancel button
         jQuery(".lightbox-closebtn,#compare-cancelbtn").click(function() {
             jQuery('.lightbox-content').hide();
             jQuery('.black_overlay').hide();
             jQuery('.header__logo').css('z-index', 10);
 
         });
-        //Save Compare Button
+        //Save Compare Button 
         jQuery("#compare-savebtn").click(function() {
             console.log("saving the buttons")
            alert('in bindEvents in DashboardView');
