@@ -191,7 +191,7 @@ var view = {
         draw(); // This does the html template draw
         self.drawLegend();
         self.drawCharts();
-        self.bindNav();
+        self.bindEvents();
         //exportPDF.init();
     },
     pInt : function(value) {
@@ -268,20 +268,27 @@ var view = {
         app.initialize();
 
     },
-    bindNav : function() {
+    bindEvents : function() {
         jQuery( ".dashboard-gear" ).click(function() {
             console.log("gear clicked");
             jQuery('.lightbox-content').show();
+            jQuery('.header__logo').css('z-index', 0);
             jQuery('.black_overlay').show();
-
         });
 
-        jQuery( ".lightbox-closebtn" ).click(function() {
-
+        jQuery(".lightbox-closebtn,#compare-cancelbtn").click(function() {
             jQuery('.lightbox-content').hide();
             jQuery('.black_overlay').hide();
+            jQuery('.header__logo').css('z-index', 10);
 
         });
+        //Save Compare Button
+        jQuery("#compare-savebtn").click(function() {
+            console.log("saving the buttons")
+           alert('in bindEvents in DashboardView');
+        });
+
+
 
         // Bind any navigation that is on an item in a template.
     }

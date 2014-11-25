@@ -167,6 +167,41 @@
   }
 
 
+  .compare__buttons {
+    width: 100%;
+    cursor:pointer;
+    .compare__button {
+      width: 150px;
+      height: 20px;
+      border: 1px solid dimgrey;
+      padding-top: 5px;
+      padding-bottom:5px;
+      text-align: center;
+      color: white;
+      margin-right: 20px;
+      border-radius: 2px;
+      opacity:0.95;
+      &:hover{
+        opacity:1.0;
+      }
+      &.compare__button-submit {
+        float: right;
+        background-color: cornflowerblue;
+
+      }
+      &.compare__button-cancel {
+        float: right;
+        background-color: lightgrey;
+        border: 1px solid black;
+
+      }
+
+    }
+  }
+
+
+
+
 }
 
 a:link, a:visited {text-decoration: none;}

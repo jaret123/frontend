@@ -100,30 +100,40 @@
             </div>
           <div class="news__gradient"></div>
         </div>
-
-</div>
-
-</div>
-<div class="lightbox lightbox-content">
-    <div class="lightbox-header">Select Data to Compare <div class="lightbox-closebtn fa fa-close"></div></div>
-    <div class="lightbox-body">
-        <form>
-            <div id="dataset1-box">
-            <label for="dataset1" class="lightbox-label">Data Set One</lable>
-                <select id="dataset1">
-
+        <div class="lightbox lightbox-content">
+            <div class="lightbox-header">Select Data to Compare <div class="lightbox-closebtn fa fa-close"></div></div>
+            <div class="lightbox-body">
+                <div id="selector1" class="compare_selectors">
+                <span>Data Set One</span>
+                <select id="time-select" autofocus class="">
+                    <option value="xeros_actual">Xeros Actual</option>
+                    <option value="non_zeros_actual">Non_Xeros Actual</option>
+                    <option value="model_xeros_simple">Xeros Static Data</option>
+                    <option value="model_non_s _actual">Non Xeros Static Data</option>
                 </select>
+                </div>
+                <div id="selector1" class="compare_selectors">
+                <span>Data Set Two</span>
+                <select id="compare-select2" autofocus class="">
+                    <option value="xeros_actual">Xeros Actual</option>
+                    <option value="non_zeros_actual">Non_Xeros Actual</option>
+                    <option value="model_xeros_simple">Xeros Static Data</option>
+                    <option value="model_non_s_actual">Non Xeros Static Data</option>
+                </select>
+                </div>
             </div>
-                <label for="dataset2" class="lightbox-label">Data Set two</lable>
-                    <select id="dataset2">
-
-                    </select>
-        </form>
-
-
-    </div>
+            <div class="lightbox-footer">
+                <div id="compare">
+                    <div class="compare__buttons">
+                        <div id="compare-savebtn" class="compare__button compare__button-submit">Save</div>
+                        <div id="compare-cancelbtn" class="compare__button compare__button-cancel">Cancel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lightbox black_overlay"></div>
 </div>
-<div class="lightbox black_overlay"></div>
+</div>
 <script>
   // url of the webservice
     window.reportName = 'dashboard';
