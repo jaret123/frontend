@@ -5,7 +5,8 @@
 }
 
 .metric {
-  .arrow {
+  .arrow,
+  .thumb {
     display: inline-block;
     width: inherit;
     background: no-repeat left bottom;
@@ -25,6 +26,12 @@
         content: "\f062";
       }
     }
+    .thumb {
+      &:after {
+        color: #ff0000;
+        content: "\f088";
+      }
+    }
   }
 
   // If the difference between actual and model is negative
@@ -33,6 +40,12 @@
       &:after {
         color: #00c900;
         content: "\f063";
+      }
+    }
+    .thumb {
+      &:after {
+        color: #00c900;
+        content: "\f087";
       }
     }
   }
@@ -52,11 +65,23 @@
         color: #00c900;
       }
     }
+    .thumb {
+      &:after {
+        color: #00c900;
+        content: "\f087";
+      }
+    }
   }
   .positive {
     .arrow {
       &:after {
         color: #ff0000;
+      }
+    }
+    .thumb {
+      &:after {
+        color: #ff0000;
+        content: "\f088";
       }
     }
   }

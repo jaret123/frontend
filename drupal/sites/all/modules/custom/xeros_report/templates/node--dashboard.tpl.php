@@ -12,7 +12,7 @@
     <div class="page-container">
         <div class="container">
             <div class="kpis">
-                <div  class="dashboard-gear fa fa-gear"></div>
+                <div  class="dashboard-gear fa fa-gear" data-toggle="modal" data-target="#chart-options"></div>
               <div class="chart-header">
 <!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
 
@@ -100,40 +100,41 @@
             </div>
           <div class="news__gradient"></div>
         </div>
-        <div class="lightbox lightbox-content">
-            <div class="lightbox-header">Select Data to Compare <div class="lightbox-closebtn fa fa-close"></div></div>
-            <div class="lightbox-body">
-                <div id="selector1" class="compare_selectors">
-                <span>Data Set One</span>
-                <select id="time-select" autofocus class="">
-                    <option value="xeros_actual">Xeros Actual</option>
-                    <option value="non_zeros_actual">Non_Xeros Actual</option>
-                    <option value="model_xeros_simple">Xeros Static Data</option>
-                    <option value="model_non_s _actual">Non Xeros Static Data</option>
-                </select>
-                </div>
-                <div id="selector1" class="compare_selectors">
-                <span>Data Set Two</span>
-                <select id="compare-select2" autofocus class="">
-                    <option value="xeros_actual">Xeros Actual</option>
-                    <option value="non_zeros_actual">Non_Xeros Actual</option>
-                    <option value="model_xeros_simple">Xeros Static Data</option>
-                    <option value="model_non_s_actual">Non Xeros Static Data</option>
-                </select>
-                </div>
-            </div>
-            <div class="lightbox-footer">
-                <div id="compare">
-                    <div class="compare__buttons">
-                        <div id="compare-savebtn" class="compare__button compare__button-submit">Save</div>
-                        <div id="compare-cancelbtn" class="compare__button compare__button-cancel">Cancel</div>
-                    </div>
-                </div>
-            </div>
+
+
+  </div>
+
+  <div class="modal fade" id="chart-options">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">Select Data to Compare</h4>
         </div>
-        <div class="lightbox black_overlay"></div>
+        <div class="modal-body">
+          <div id="dataset1-box">
+            <label for="machineType" class="lightbox-label">Do you want to look at Xeros or Non-Xeros machines?</label>
+            <select id="machineType">
+              <option>Xeros</option>
+              <option>Non-Xeros</option>
+            </select>
+          </div>
+          <label for="model" class="lightbox-label">What data do you want to compare to?</label>
+          <select id="model">
+            <option>Xeros Model Data</option>
+            <option>Non-Xeros Model Data</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </div>
 </div>
+
 <script>
   // url of the webservice
     window.reportName = 'dashboard';

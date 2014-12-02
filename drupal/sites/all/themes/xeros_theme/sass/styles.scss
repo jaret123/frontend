@@ -15,6 +15,24 @@
 /* HTML element (SMACSS base) rules */
 @import "normalize";
 
+// Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Override variables
+@import "bootstrap-variables";
+
+// Reset and dependencies
+//@import "bootstrap/normalize";
+
+//@import "bootstrap-compass";
+//@import "bootstrap-variables";
+@import "bootstrap/variables";
+@import "bootstrap/buttons";
+@import "bootstrap/scaffolding";
+@import "bootstrap/close";
+@import "bootstrap/modals";
+
 @import "compass/typography/lists/horizontal-list";
 @import "compass/css3/images";
 @import "compass/css3/border-radius";
@@ -30,6 +48,7 @@
 @import "components/chartKpi";
 
 /*  Theme components */
+
 @import "components/caret";
 @import "components/dropdown";
 @import "components/widgets.scss";
@@ -41,7 +60,9 @@
 @import "components/icons";
 @import "components/legend";
 @import "components/misc";
+
 @import "components/page-1";
+
 //@import "components/page-2";
 
 

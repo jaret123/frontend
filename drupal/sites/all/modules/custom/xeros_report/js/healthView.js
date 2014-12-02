@@ -1,17 +1,25 @@
 /**
  * Created by jason on 2/5/14.
  */
+var colors = {
+    blueOne : "rgba(0,135,190,1)",
+    orange: "rgba(255,185,67,.65)",
+    yellow : "rgba(255,185,67,1)",
+    blueTwo : "rgba(0,135,190,.65)"
+};
+
 var view = {
+
 
     barColor : {
        xeros : {
-           actual : "rgba(35,64,94,1)",
-           model : "rgba(0,100,200,1)",
-           modelSimple : "rgba(0,100,200,1)"
+           actual : colors.blueOne,
+           model : colors.blueTwo,
+           modelSimple : colors.blueTwo
        },
         nonXeros : {
-            actual : "rgba(178,116,11,1)",
-            model : "rgba(255,185,67,1)"
+            actual : colors.yellow,
+            model : colors.orange
         }
     },
     // Each report view has a slightly different data structure
@@ -25,10 +33,12 @@ var view = {
 
             for ( i in app.reportData) {
 
+
                 var cssClass = [];
 
-
                 var machineId = parseInt(app.reportData[i].info.machine_id, 10);
+
+                var machineType = app.reportData[i].info.machine_type;
 
                 app.reportData[i].water_only = parseInt(app.reportData[i].info.water_only, 10);
 
@@ -41,7 +51,8 @@ var view = {
                     therms : {}
                 }
 
-                if (app.reportData[i].info.machine_type == 'xeros') {
+                // Machine Type Xeros
+                if (machineType == 'xeros') {
                     app.reportData[i].actual.barColor = self.barColor.xeros.actual;
                     cssClass.push("xeros");
                     cssClass.push("model-non-xeros");
@@ -74,8 +85,9 @@ var view = {
 
                 }
 
-                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type);
-                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type);
+                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type, 'gallons of water');
+
+                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type, 'therms');
 
                 app.reportData[i].info.cssClass = cssClass.join(" ");
 
@@ -128,7 +140,16 @@ var view = {
         var html = legendTemplate(view.barColor);
         jQuery('#report-health .legend').html(html).removeClass("fade");
     },
-    calculateDelta : function(actual, model, machineType) {
+    calculateDelta : function(actual, model, machineType, metric) {
+
+        var message = '';
+
+        // percent difference
+        var delta = 0;
+
+        // absolute difference
+        var diff = 0;
+
         if ( machineType == 'xeros') {
             numerator = parseInt(actual, 10);
             denominator = parseInt(model, 10);
@@ -137,7 +158,7 @@ var view = {
             denominator = parseInt(actual, 10);
         }
 
-        var delta = 0;
+
         // BUG - Divide by zero throws NaN
 
         // Divide by 0
@@ -150,15 +171,39 @@ var view = {
         } else {
             delta = parseInt(((denominator - numerator) / denominator) * 100);
         }
+
+        diff = parseInt(denominator - numerator);
+
         var cssClass = '';
-        if ( delta >= 0 ) {
+        // TODO: Ron - double check this logic.
+        if ( delta > 0 ) {
             cssClass = 'positive'
-        } else {
+            if ( machineType == 'xeros') {
+                message = 'Because you are using a Xeros machine you used ' + diff + ' less ' + metric;
+            } else {
+                message = 'If you were using a Xeros machine you would have used ' + diff + ' less ' + metric;
+            }
+        } else if ( delta < 0 ) {
             cssClass = 'negative'
+            if ( machineType == 'xeros') {
+                message = 'Because you are using a Xeros machine you used ' + diff + ' more ' + metric;
+            } else {
+                message = 'If you were using a Xeros machine you would have used ' + diff + ' more ' + metric;
+            }
+        } else {
+            cssClass = 'equal'
+            if ( machineType == 'xeros') {
+                message = 'You used the same amount of ' + metric + ' in your Xeros machine as the industry average.';
+            } else {
+                message = 'You used the same amount of ' + metric + ' in your Non-Xeros machine as you would with a Xeros machine.';
+            }
         }
+
+
         return {
             value : delta,
-            cssClass : cssClass
+            cssClass : cssClass,
+            message : message
         }
     },
     drawCharts : function() {
@@ -204,26 +249,6 @@ var view = {
 
             if (row.info.machine_type == 'xeros') {
 
-                chart.colors = [row.model.barColor, row.actual.barColor];
-                chart.classes = ["base", "xeros"];
-
-                // Cold Water
-                chart.selector = "[chart=cold_water-" + row.info.machine_id + "] .chart";
-
-                chart.data = [parseInt(row.model.cold_water), parseInt(row.actual.cold_water), d3.max(c) * domainMultiple];
-                if ( self.isValid(chart.data) ) {
-                    chart.drawBar();
-                }
-
-                // Hot Water
-                chart.selector = "[chart=hot_water-" + row.info.machine_id + "] .chart";
-                chart.data = [parseInt(row.model.therms), parseInt(row.actual.therms), d3.max(h) * domainMultiple];
-                if ( self.isValid(chart.data) ) {
-                    chart.drawBar();
-                }
-
-            } else {
-
                 chart.colors = [row.actual.barColor, row.model.barColor];
                 chart.classes = ["base", "xeros"];
 
@@ -241,7 +266,29 @@ var view = {
                 if ( self.isValid(chart.data) ) {
                     chart.drawBar();
                 }
+
+            } else {
+
+                chart.colors = [row.actual.barColor, row.model.barColor];
+                chart.classes = ["base", "non-xeros"];
+
+                // Cold Water
+                chart.selector = "[chart=cold_water-" + row.info.machine_id + "] .chart";
+
+                chart.data = [parseInt(row.actual.cold_water), parseInt(row.model.cold_water), d3.max(c) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
+
+                // Hot Water
+                chart.selector = "[chart=hot_water-" + row.info.machine_id + "] .chart";
+                chart.data = [parseInt(row.actual.therms), parseInt(row.model.therms), d3.max(h) * domainMultiple];
+                if ( self.isValid(chart.data) ) {
+                    chart.drawBar();
+                }
             }
+
+
         }
 
 

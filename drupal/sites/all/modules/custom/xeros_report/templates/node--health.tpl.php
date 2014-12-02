@@ -119,13 +119,13 @@
                                                 <div class="flipper-frontcontainer">
                                                      <div class="chart" name="{{info.machine_id}}-cold_water"></div>
                                                      <div class="delta" data="{{delta.cold_water.value}}">{{formatDeltaValue delta.cold_water.value}}</div>
-                                                     <div class="arrow"></div>
+                                                     <div class="thumb"></div>
                                                      <div class="metric__message"></div>
                                                 </div>
                                             </div>
                                         <div class="back">
                                             <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close"></div></div>
-                                           <div class="flipper-backcontainer">{{model.description}}</div>
+                                           <div class="flipper-backcontainer">{{delta.cold_water.message}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,13 +136,13 @@
                                               <div class="flipper-container flipper-front-container">
                                                   <div class="chart" name="{{info.machine_id}}-hot_water"></div>
                                                   <div class="delta" data="{{delta.therms.value}}">{{formatDeltaValue delta.therms.value}}</div>
-                                                  <div class="arrow"></div>
+                                                  <div class="thumb"></div>
                                                  <div class="metric__message"></div>
                                              </div>
                                         </div>
                                       <div class="back">
                                           <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close"></div></div>
-                                          <div class="flipper-backcontainer">{{model.description}}</div>
+                                          <div class="flipper-backcontainer">{{delta.therms.message}}</div>
                                       </div>
                                   </div>
                                 </div>

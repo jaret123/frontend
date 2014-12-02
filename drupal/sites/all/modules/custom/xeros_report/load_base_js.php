@@ -3,8 +3,8 @@
 function load_base_js($variables, $hook) {
   $path = drupal_get_path('module', 'xeros_app');
 
-  // TODO: XER-78 Move these to a theme function that only get's loaded for the report pages.
   // Libraries common to all modules
+  drupal_add_js(drupal_get_path('theme', 'xeros_theme') . '/js/bootstrap/modal.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/libs/underscore-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/libs/alertFallback.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Format.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
@@ -26,7 +26,6 @@ function load_base_js($variables, $hook) {
   drupal_add_js($path . '/js/Controls-MachineNav.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-Spinner.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-Pdf.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-
 
   // Utility modules common to all drupal modules
   drupal_add_js($path . '/js/Utils.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
