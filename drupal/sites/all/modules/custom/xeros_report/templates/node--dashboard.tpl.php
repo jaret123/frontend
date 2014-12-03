@@ -137,7 +137,6 @@
     $path = drupal_get_path('module', 'xeros_report');
     drupal_add_js($path . '/js/dashboardView.js', array('scope' => 'footer', 'weight' => 5, 'preprocess' => FALSE));
 
-
   drupal_add_js('jQuery(document).ready(function () {
           view.initialize();
       });',
@@ -145,5 +144,3 @@
   );
 
 ?>
-
-<script src="<?php print drupal_get_path('theme', 'xeros_theme'); ?>/data/news.js"></script>

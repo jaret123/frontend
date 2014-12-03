@@ -80,6 +80,36 @@ function xeros_report_theme() {
       'template' => 'templates/node--health',
       'arguments' => array(),
     ),
+    'block_location_picker_template' => array(
+      'variables' => array(),
+      'template' => 'templates/block--location-picker',
+    ),
   );
   return $themes;
 }
+
+
+//implementation of hook_block_info
+function xeros_report_block_info() {
+  $blocks = array();
+  $blocks['location_picker'] = array(
+    'info' => t('Location Picker'),
+  );
+
+  return $blocks;
+}
+
+//implementation of hook_block_view
+function xeros_report_block_view($delta='') {
+  $block = array();
+
+  switch($delta) {
+    case 'location_picker' :
+      $variables = array(); //do stuff here
+      $block['content'] = theme('block--location-picker', $variables);
+      break;
+  }
+  return $block;
+}
+
+
