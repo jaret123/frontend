@@ -27,7 +27,7 @@ $aliases['xeros.dev'] = array (
         ),
 );
 $aliases['xeros.test'] = array (
-    'root' => '/var/www/xeros/www/drupal',
+    'root' => '/var/www/xeros-test/www/drupal',
     'uri' => 'http://sbeadycare-test.xeroscleaning.com',
     'remote-host' => 'xeros-qa',
     'path-aliases' =>
