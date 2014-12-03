@@ -19,18 +19,11 @@
               <div class="legend">
               </div>
               <script id="legend-tpl" type="text/x-handlebars-template">
-                {{#if xeros }}
+                <div class="legend__wrapper {{cssClass}}"</div>
                   <span class="swatch current actual"></span>
-                  <span class="label">Current Consumption (Xeros)</span><br/>
-                  <span class="swatch xeros model"></span>
-                  <span class="label">Industry Average Consumption (Non Xeros)</span>
-                {{else}}
-                  <span class="swatch current"></span>
-                  <span class="label">Current Consumption (Non Xeros)</span><br/>
-                  <span class="swatch xeros model"></span>
-                  <span class="label">Potential Consumption with Xeros</span>
-                {{/if}}
-
+                  <span class="label">{{lineA-key}}</span><br/>
+                  <span class="swatch model"></span>
+                  <span class="label">{{lineB-key}}</span>
               </script>
 <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
@@ -113,21 +106,22 @@
         </div>
         <div class="modal-body">
           <div id="dataset1-box">
-            <label for="machineType" class="lightbox-label">Do you want to look at Xeros or Non-Xeros machines?</label>
-            <select id="machineType">
-              <option>Xeros</option>
-              <option>Non-Xeros</option>
+            <label for="machineType">Do you want to look at Xeros or Non-Xeros machines?</label>
+            <select id="machineType" class="chart-options__machine-type">
+              <option value="xeros">Xeros</option>
+              <option value="non-xeros">Non-Xeros</option>
             </select>
           </div>
-          <label for="model" class="lightbox-label">What data do you want to compare to?</label>
-          <select id="model">
-            <option>Xeros Model Data</option>
-            <option>Non-Xeros Model Data</option>
+          <label for="model">What data do you want to compare to?</label>
+          <select id="model" class="chart-options__model">
+            <option value="model_xeros">Xeros Model Data</option>
+            <option value="model_xeros_simple">Xeros Model Data</option>
+            <option value="model_non_xeros_simple">Non-Xeros Model Data</option>
           </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary chart-options__save">Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -391,8 +391,9 @@ METRIC
       switch($machine_type->model) {
         case 'xeros':
           // Model Non Xeros Simple
-          $metric['model_non_xeros_simple'] = array();
+          //$metric['model_non_xeros_simple'] = array();
           $metric['model_non_xeros_simple']['active'] = true;
+          $metric['active-models'][] = 'model_non_xeros_simple';
 
           //
           $metric['model_xeros_simple'] = array(
@@ -403,6 +404,7 @@ METRIC
           break;
         case 'non-xeros':
           $metric['model_xeros_simple']['active'] = true;
+          $metric['active-models'][] = 'model_xeros_simple';
 
           $metric['model_non_xeros_simple'] = array();
           $metric['model_non_xeros_simple']['notes'] = 'Because this machine is a nonxeros machine the non_xeros_simple model is not available.';

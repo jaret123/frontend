@@ -3258,7 +3258,7 @@ h1 {
   border: 1px solid #999999;
 }
 /* line 25, ../sass/components/_legend.scss */
-.legend .swatch.xeros {
+.legend .swatch.model {
   background-color: #0087be;
   border: 1px solid #0087be;
 }
@@ -3271,6 +3271,11 @@ h1 {
 /* line 6, ../sass/components/_misc.scss */
 .select select, .select option {
   margin-left: 10px;
+}
+
+/* line 13, ../sass/components/_misc.scss */
+select option.hide {
+  display: none;
 }
 
 /* line 2, ../sass/components/_page-1.scss */

@@ -33,7 +33,6 @@ var view = {
 
             for ( i in app.reportData) {
 
-
                 var cssClass = [];
 
                 var machineId = parseInt(app.reportData[i].info.machine_id, 10);

@@ -5,29 +5,45 @@ var view = {
 
     // change these values to change which data we display.
     // The Web service returns all the data.
-    machineType : 'non-xeros',
-    model : 'model_xeros',
+    machineType : '',
+    model : '',
 
     legendTpl : '',
+
+//    setOptions : function() {
+//        var self = this;
+//        self.machineType = 'xeros';
+//        self.model = 'model_xeros';
+//    },
     // Each report view has a slightly different data structure
-    parseData : function(draw) {
+    parseData : function(draw, options) {
         var self = this;
+
+        if ( typeof options !== 'undefined') {
+            // Grab the value parsed to us
+            this.machineType = options.machineType;
+            this.model = options.model;
+        } else {
+            // Grab the first valid one in the data array
+            this.machineType = _.keys(app.data)[0];
+            // Grab the first valid model in the data set
+            this.model = app.data[this.machineType]['cold-water']['active-models'][0];
+        }
+
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
         // Industry Averages per cycle
-        var industryAverages = {
-            avg_cold_water_volume: "121.64078133",
-            avg_cold_water_cost: "1.20101627",
-            avg_hot_water_volume: "51.41446880",
-            avg_therms: "0.37381793",
-            avg_therm_cost: "0.34448701",
-            avg_chemical_strength: "17.38840517",
-            avg_chemical_cost: "1.18185205"
-        };
+//        var industryAverages = {
+//            avg_cold_water_volume: "121.64078133",
+//            avg_cold_water_cost: "1.20101627",
+//            avg_hot_water_volume: "51.41446880",
+//            avg_therms: "0.37381793",
+//            avg_therm_cost: "0.34448701",
+//            avg_chemical_strength: "17.38840517",
+//            avg_chemical_cost: "1.18185205"
+//        };
 
-
-
-        ar = app.data[self.machineType];
+        //ar = app.data[self.machineType];
 
         var ar = [
                 {
@@ -177,19 +193,19 @@ var view = {
             app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.summary.cost, app.reportData[i].model.summary.cost);
 
             // Invert the savings if this is a xeros machine
-            if ( FF.Location.xeros() ) {
+            if ( self.machineType ) {
                 // Calculate savings
                 app.reportData[i].actual.savings = -app.reportData[i].actual.savings;
             }
 
             // Add custom labels for Xeros versus non-xeros machines
             // TODO - make the labels a bit more descriptive
-            app.reportData[i].labels = labels[FF.Location.machineTypes()];
+            app.reportData[i].labels = labels[self.machineType];
 
         }
 
         draw(); // This does the html template draw
-        self.drawLegend();
+        self.drawLegend(labels[self.machineType]);
         self.drawCharts();
         self.bindEvents();
         //exportPDF.init();
@@ -202,7 +218,7 @@ var view = {
             return parseInt(value, 10);
         }
     },
-    delta : function(base, change) { // TODO: Move to a utility library
+    delta : function(base, change) {
         var delta = 0;
 
         if ( base == 0) {
@@ -253,13 +269,12 @@ var view = {
             }
         }
     },
-    drawLegend : function() {
+    drawLegend : function(data) {
         var legendTpl = Handlebars.compile(jQuery("#legend-tpl").html());
-        var html = legendTpl({xeros : app.reportData[0].xeros});
+        var html = legendTpl(data);
         jQuery('.legend').html(html);
     },
     initialize : function() {
-
         // Do any initialization unique to this view.
 
         FF.Controls.TimeSelect.create();
@@ -267,33 +282,70 @@ var view = {
 
         app.initialize();
 
+        jQuery('#chart-options').on('show.bs.modal', function (e) {
+            // If there is no data yet, don't open
+            if (_.isEmpty(app.data) || view.machineType == '' || view.model == '') {
+                return e.preventDefault();
+            } else {
+                var els = {};
+                els.chartOptions = jQuery(e.target);
+                els.machineType = els.chartOptions.find('.chart-options__machine-type');
+                els.model = els.chartOptions.find('.chart-options__model');
+
+                els.machineType.val(view.machineType);
+                els.model.val(view.model);
+
+                // Only show machine type options for which we have machines
+                els.machineType.find('option').addClass('hide');
+                jQuery(_.keys(app.data)).each(function() {
+                   els.machineType.find('option[value="' + this + '"]').removeClass('hide');
+                });
+
+                // Only show valid options for the model based on the machine type
+                els.model.find('option').addClass('hide');
+                jQuery(app.data[view.machineType]['cold-water']['active-models']).each(function() {
+                   els.model.find('options[value="' + this + '"]').removeClass('hide');
+                });
+            }
+        });
+
+        jQuery('#chart-options .chart-options__machine-type').on('change', function(e) {
+            var els = {};
+            els.chartOptions = jQuery(e.target).parents('#chart-options');
+            els.machineType = els.chartOptions.find('.chart-options__machine-type');
+            els.model = els.chartOptions.find('.chart-options__model');
+
+            // Use the selectedMachineType now instead of the view.machineType
+            var selectedMachineType = els.machineType.val();
+
+            // Only show valid options for the model based on the machine type
+            els.model.find('option').addClass('hide');
+
+            jQuery(app.data[selectedMachineType]['cold-water']['active-models']).each(function() {
+                els.model.find('option[value="' + this.valueOf() + '"]').removeClass('hide');
+            });
+
+            var firstActiveValue = jQuery(els.model.find('option:not(.hide)')[0]).val();
+            els.model.val(firstActiveValue);
+        });
+
+        //Save Compare Button
+        jQuery(".chart-options__save").on('click', function() {
+            var els = {};
+            els.chartOptions = jQuery(this).parents('#chart-options');
+            els.machineType = els.chartOptions.find('.chart-options__machine-type');
+            els.model = els.chartOptions.find('.chart-options__model');
+
+            jQuery(this).parents('#chart-options').hide();
+            app.fadeReport();
+            view.parseData(app.showReport, {
+                machineType : els.machineType.val(),
+                model : els.model.val()
+            });
+            console.log("saving the buttons");
+        });
     },
     bindEvents : function() {
-        /**
-         * Controls the Window for Choosing Data Compare
-         * @author Ron Kozlowski 11-25-2014
-         */
-        //Opens Window from Gear
-        jQuery( ".dashboard-gear" ).click(function() {
-            console.log("gear clicked");
-            jQuery('.lightbox-content').show();
-            jQuery('.header__logo').css('z-index', 0);
-            jQuery('.black_overlay').show();
-        });
-        //Closes Window for X or from cancel button
-        jQuery(".lightbox-closebtn,#compare-cancelbtn").click(function() {
-            jQuery('.lightbox-content').hide();
-            jQuery('.black_overlay').hide();
-            jQuery('.header__logo').css('z-index', 10);
-
-        });
-        //Save Compare Button 
-        jQuery("#compare-savebtn").click(function() {
-            console.log("saving the buttons")
-           alert('in bindEvents in DashboardView');
-        });
-
-
 
         // Bind any navigation that is on an item in a template.
     }
