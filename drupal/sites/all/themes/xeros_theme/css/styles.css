@@ -1104,15 +1104,15 @@ button.close {
   }
 }
 /* line 1, ../sass/components/_admin.scss */
-.admin-menu-icon {
+.location-picker-icon {
   height: 16px;
   width: 16px;
 }
 
-/* line 1, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu {
+/* line 1, ../sass/components/_location-picker.scss */
+.location-picker {
   background-color: rgba(255, 255, 255, 0.8);
-  position: absolute;
+  position: fixed;
   top: 200px;
   left: -185px;
   -webkit-transition: left 150ms;
@@ -1120,28 +1120,28 @@ button.close {
   transition: left 150ms;
   overflow: visible;
 }
-/* line 11, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu > * {
+/* line 10, ../sass/components/_location-picker.scss */
+.location-picker > * {
   border: 1px solid gray;
   border-left: 0px solid white;
   border-radius: 0 3px 3px 0;
   display: block;
   vertical-align: top;
 }
-/* line 20, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu h4 {
+/* line 19, ../sass/components/_location-picker.scss */
+.location-picker h4 {
   margin-top: 0;
   margin-bottom: 3px;
   line-height: 1em;
 }
-/* line 25, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu .xeros-admin-menu__menu-wrapper {
+/* line 24, ../sass/components/_location-picker.scss */
+.location-picker .location-picker__wrapper {
   padding: 5px;
   padding-top: 15px;
   width: 180px;
 }
-/* line 31, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu .xeros-admin-menu__button {
+/* line 30, ../sass/components/_location-picker.scss */
+.location-picker .location-picker__button {
   position: absolute;
   -webkit-transition: right 150ms;
   -o-transition: right 150ms;
@@ -1156,12 +1156,12 @@ button.close {
   text-decoration: none;
   color: white;
 }
-/* line 46, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu.open {
+/* line 45, ../sass/components/_location-picker.scss */
+.location-picker.open {
   left: 0;
 }
-/* line 49, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu.open .admin-menu__button {
+/* line 48, ../sass/components/_location-picker.scss */
+.location-picker.open .location-picker__button {
   right: 3px;
 }
 

@@ -6,7 +6,7 @@ var FF = FF || {};
  *
  * Created by jason on 10/1/14
  */
-FF.Controls.AdminMenu = (function ($) {
+FF.Controls.LocationPicker = (function ($) {
 
     var pub = {},
         els = {};
@@ -16,25 +16,25 @@ FF.Controls.AdminMenu = (function ($) {
 
     function create() {
         // Display the Admin menu if it exists
-        //els.AdminMenu.find('.xeros-admin-menu__button').on('click')
-        $(".xeros-admin-menu .xeros-admin-menu__button").click(function(e) {
-            $(".xeros-admin-menu").toggleClass("open");
-            $(".xeros-admin-menu__button").html("Menu");
-            $(".open .xeros-admin-menu__button").html("Close");
+        //els.AdminMenu.find('.location-picker__button').on('click')
+        $(".location-picker .location-picker__button").click(function(e) {
+            $(".location-picker").toggleClass("open");
+            $(".location-picker__button").html("Menu");
+            $(".open .location-picker__button").html("Close");
         });
         app.options_tpl = Handlebars.compile($("#options-tpl").html());
     }
 
     function init() {
 
-        els.AdminMenu = $('.xeros-admin-menu');
+        els.AdminMenu = $('.location-picker');
 
         // If the user is a Xeros Admin then the list of companies will
         // be put into the app namespace.
         // This is not a security hole, because access is checked again on the
         // backend any time you query data
 
-        if (typeof(app.companies) !== 'undefined') {
+        if (typeof(context.companies) !== 'undefined') {
             if (els.AdminMenu.length > 0) {
                 // Render the admin menu
                 create();
@@ -47,4 +47,4 @@ FF.Controls.AdminMenu = (function ($) {
     return pub;
 })(jQuery);
 
-jQuery(document).ready(FF.Controls.AdminMenu.init);
+jQuery(document).ready(FF.Controls.LocationPicker.init);

@@ -49,17 +49,17 @@ FF.Controls.CompanySelect = (function ($) {
     pub.create = create;
 
     function create() {
-        var opts = app.options_tpl( {'data' : app.companies } );
+        var opts = app.options_tpl( {'data' : context.companies } );
         $("#company-select").html(opts);
         $("#company-select").val(FF.User.reportSettings.company.id);
 
         FF.Controls.Dropdown.create("#company-select", function (event) {
             FF.User.setReportCompany(parseInt($(event.target).find("span.value").html(), 0));
-            FF.Controls.LocationSelect.update({'data' : app.companies[FF.User.reportSettings.company.id].location });
+            FF.Controls.LocationSelect.update({'data' : context.companies[FF.User.reportSettings.company.id].location });
         });
         var locations = {data : ""};
         if ( FF.User.reportSettings.company.id !== 0 ) {
-            locations.data = app.companies[FF.User.reportSettings.company.id].location;
+            locations.data = context.companies[FF.User.reportSettings.company.id].location;
             FF.Controls.LocationSelect.update(locations, FF.User.reportSettings.location.id);
         }
     };

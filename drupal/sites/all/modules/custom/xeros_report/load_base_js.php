@@ -48,7 +48,7 @@ function load_base_js($variables, $hook) {
     // Add display elements which are bound to the User control
     drupal_add_js($path . '/js/Display.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/Controls-Csv.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
-    drupal_add_js($path . '/js/Controls-AdminMenu.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
+    drupal_add_js($path . '/js/Controls-LocationPicker.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
 
 
 //    $variables['user']->company = "No company assigned";

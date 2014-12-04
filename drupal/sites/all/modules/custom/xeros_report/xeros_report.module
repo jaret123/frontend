@@ -80,7 +80,7 @@ function xeros_report_theme() {
       'template' => 'templates/node--health',
       'arguments' => array(),
     ),
-    'block_location_picker_template' => array(
+    'block_location_picker' => array(
       'variables' => array(),
       'template' => 'templates/block--location-picker',
     ),
@@ -104,9 +104,14 @@ function xeros_report_block_view($delta='') {
   $block = array();
 
   switch($delta) {
+//    case 'location_picker' :
+//      $block['subject'] = '';
+//      $block['content'] = 'Hello World';
+//      break;
     case 'location_picker' :
       $variables = array(); //do stuff here
-      $block['content'] = theme('block--location-picker', $variables);
+      $block['subject'] = '';
+      $block['content'] = theme('block_location_picker', $variables);
       break;
   }
   return $block;
