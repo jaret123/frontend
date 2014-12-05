@@ -57,6 +57,7 @@ FF.Controls.CompanySelect = (function ($) {
             FF.User.setReportCompany(parseInt($(event.target).find("span.value").html(), 0));
             FF.Controls.LocationSelect.update({'data' : context.companies[FF.User.reportSettings.company.id].location });
         });
+
         var locations = {data : ""};
         if ( FF.User.reportSettings.company.id !== 0 ) {
             locations.data = context.companies[FF.User.reportSettings.company.id].location;

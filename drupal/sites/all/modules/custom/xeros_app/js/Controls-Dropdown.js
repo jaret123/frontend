@@ -19,12 +19,16 @@ FF.Controls.Dropdown = (function ($) {
     function create(selector, callback) {
         // Select list
         var source = $(selector);
+        source.hide();
         // Currently selected
         var selected = source.find("option[value=" + source.val() + "]");
         // Options
         var options = $("option", source);
         // New fancy dropdown
         var targetId = $(selector).attr('id') + "__dl";
+
+        // Destroy this if it already exists (Singleton)
+        $('#' + targetId).remove();
 
         // Append the new fancy dropdown
         $(source).after('<dl id=' + targetId + ' class="dropdown" select-list="' + selector + '"></dl>');
@@ -49,6 +53,7 @@ FF.Controls.Dropdown = (function ($) {
         source_dl.find("dt a").click(function (event) {
             event.preventDefault();
             source_dl.find("dd ul").toggle();
+            source_dl.siblings('.dropdown').find('dd ul').hide();
         });
 
         // Bind a click event to the document to automatically close the drop down

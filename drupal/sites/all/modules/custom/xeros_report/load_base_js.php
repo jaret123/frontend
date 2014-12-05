@@ -49,7 +49,7 @@ function load_base_js($variables, $hook) {
     drupal_add_js($path . '/js/Display.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/Controls-Csv.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
     drupal_add_js($path . '/js/Controls-LocationPicker.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
-
+    drupal_add_js($path . '/js/Controls-ModelSelect.js', array('scope' => 'footer', 'weight' => 10, 'preprocess' => TRUE));
 
 //    $variables['user']->company = "No company assigned";
 //    $variables['user']->location = "No location assigned";

@@ -279,71 +279,10 @@ var view = {
 
         FF.Controls.TimeSelect.create();
         FF.Controls.Pdf.create();
+        FF.Controls.ModelSelect.init();
 
         app.initialize();
 
-        jQuery('#chart-options').on('show.bs.modal', function (e) {
-            // If there is no data yet, don't open
-            if (_.isEmpty(app.data) || view.machineType == '' || view.model == '') {
-                return e.preventDefault();
-            } else {
-                var els = {};
-                els.chartOptions = jQuery(e.target);
-                els.machineType = els.chartOptions.find('.chart-options__machine-type');
-                els.model = els.chartOptions.find('.chart-options__model');
-
-                els.machineType.val(view.machineType);
-                els.model.val(view.model);
-
-                // Only show machine type options for which we have machines
-                els.machineType.find('option').addClass('hide');
-                jQuery(_.keys(app.data.options)).each(function() {
-                   els.machineType.find('option[value="' + this + '"]').removeClass('hide');
-                });
-
-                // Only show valid options for the model based on the machine type
-                els.model.find('option').addClass('hide');
-                jQuery(app.data.options[view.machineType].models).each(function() {
-                   els.model.find('options[value="' + this + '"]').removeClass('hide');
-                });
-            }
-        });
-
-        jQuery('#chart-options .chart-options__machine-type').on('change', function(e) {
-            var els = {};
-            els.chartOptions = jQuery(e.target).parents('#chart-options');
-            els.machineType = els.chartOptions.find('.chart-options__machine-type');
-            els.model = els.chartOptions.find('.chart-options__model');
-
-            // Use the selectedMachineType now instead of the view.machineType
-            var selectedMachineType = els.machineType.val();
-
-            // Only show valid options for the model based on the machine type
-            els.model.find('option').addClass('hide');
-
-            jQuery(app.data.options[selectedMachineType].models).each(function() {
-                els.model.find('option[value="' + this.valueOf() + '"]').removeClass('hide');
-            });
-
-            var firstActiveValue = jQuery(els.model.find('option:not(.hide)')[0]).val();
-            els.model.val(firstActiveValue);
-        });
-
-        //Save Compare Button
-        jQuery(".chart-options__save").on('click', function() {
-            var els = {};
-            els.chartOptions = jQuery(this).parents('#chart-options');
-            els.machineType = els.chartOptions.find('.chart-options__machine-type');
-            els.model = els.chartOptions.find('.chart-options__model');
-
-            jQuery(this).parents('#chart-options').hide();
-            app.fadeReport();
-            view.parseData(app.showReport, {
-                machineType : els.machineType.val(),
-                model : els.model.val()
-            });
-            console.log("saving the buttons");
-        });
     },
     bindEvents : function() {
 

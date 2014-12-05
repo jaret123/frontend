@@ -1119,8 +1119,9 @@ button.close {
   -o-transition: left 150ms;
   transition: left 150ms;
   overflow: visible;
+  z-index: 1000;
 }
-/* line 10, ../sass/components/_location-picker.scss */
+/* line 11, ../sass/components/_location-picker.scss */
 .location-picker > * {
   border: 1px solid gray;
   border-left: 0px solid white;
@@ -1128,19 +1129,19 @@ button.close {
   display: block;
   vertical-align: top;
 }
-/* line 19, ../sass/components/_location-picker.scss */
+/* line 20, ../sass/components/_location-picker.scss */
 .location-picker h4 {
   margin-top: 0;
   margin-bottom: 3px;
   line-height: 1em;
 }
-/* line 24, ../sass/components/_location-picker.scss */
+/* line 25, ../sass/components/_location-picker.scss */
 .location-picker .location-picker__wrapper {
   padding: 5px;
   padding-top: 15px;
   width: 180px;
 }
-/* line 30, ../sass/components/_location-picker.scss */
+/* line 31, ../sass/components/_location-picker.scss */
 .location-picker .location-picker__button {
   position: absolute;
   -webkit-transition: right 150ms;
@@ -1156,11 +1157,11 @@ button.close {
   text-decoration: none;
   color: white;
 }
-/* line 45, ../sass/components/_location-picker.scss */
+/* line 46, ../sass/components/_location-picker.scss */
 .location-picker.open {
   left: 0;
 }
-/* line 48, ../sass/components/_location-picker.scss */
+/* line 49, ../sass/components/_location-picker.scss */
 .location-picker.open .location-picker__button {
   right: 3px;
 }
@@ -1525,6 +1526,11 @@ img.flag {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+/* line 182, ../sass/components/_dropdown.scss */
+.modal .dropdown dt a {
+  width: initial;
 }
 
 /* line 2, ../sass/components/_widgets.scss */

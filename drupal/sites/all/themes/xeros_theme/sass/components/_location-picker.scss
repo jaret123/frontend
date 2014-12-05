@@ -6,6 +6,7 @@
   @include single-transition( left, 150ms );
   //left: -95%;
   overflow: visible;
+  z-index: 1000;
 
   > * {
     //opacity: 0;

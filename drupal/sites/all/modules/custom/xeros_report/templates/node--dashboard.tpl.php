@@ -108,17 +108,20 @@
           <div id="dataset1-box">
             <label for="machineType">Do you want to look at Xeros or Non-Xeros machines?</label>
             <select id="machineType" class="chart-options__machine-type">
-              <option value="xeros">Xeros</option>
-              <option value="non-xeros">Non-Xeros</option>
+              <option value="">-select machine type-</option>
             </select>
           </div>
           <label for="model">What data do you want to compare to?</label>
-          <select id="model" class="chart-options__model">
-            <option value="model_xeros">Xeros Model Data</option>
-            <option value="model_xeros_simple">Xeros Model Data</option>
-            <option value="model_non_xeros_simple">Non-Xeros Model Data</option>
+          <select id="model" class="chart-options__model" autofocus="">
+            <option value="">-select model-</option>
           </select>
         </div>
+        <script id="machine-options-tpl" type="text/x-handlebars-template">
+          <option value="0">-select-</option>
+          {{#each data}}
+          <option value="{{@key}}">{{this.name}}</option>
+          {{/each}}
+        </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary chart-options__save">Save changes</button>
