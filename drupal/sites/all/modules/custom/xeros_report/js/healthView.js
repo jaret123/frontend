@@ -98,6 +98,18 @@ var view = {
             draw(); // This does the html template draw
 
             self.drawCharts();
+
+            jQuery('.row:not(.first)').each(function() {
+                var rowHeight = jQuery(this).height();
+
+
+                var cols = jQuery(this).find('.col');
+                cols.each(function() {
+                    var colHeight = jQuery(this).height();
+                    jQuery(this).css('margin-top', (rowHeight - colHeight) / 2 );
+                });
+            });
+
             self.bindEvents();
         })
     },

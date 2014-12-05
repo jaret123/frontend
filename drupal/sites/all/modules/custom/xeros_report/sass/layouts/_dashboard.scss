@@ -20,6 +20,19 @@
     background-color: white;
     border: 1px solid gray;
   }
+  .dashboard-gear {
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+    i {
+      font-size: 16px;
+      margin-right: 5px;
+      margin-left: 3px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
   // select
   .kpis__select {
     @include zen-clear(both);

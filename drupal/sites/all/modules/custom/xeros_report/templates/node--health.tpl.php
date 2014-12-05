@@ -76,12 +76,14 @@
 <!--                            <div class="label">Chemical</div>-->
 <!--                            <div class="sub-label">(Ounces)</div>-->
 <!--                        </div>-->
+                      <div class="health-wrapper">
                         <div class="col col-4">
                           <div class="label">Health</div>
                         </div>
                         <div class="col col-5">
                           <div class="label">Action/Update</div>
                         </div>
+                      </div>
                     </div>
 
                     <div class="template-container">

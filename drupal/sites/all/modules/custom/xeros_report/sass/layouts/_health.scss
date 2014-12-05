@@ -45,18 +45,11 @@
     .row {
       overflow: hidden;
       border-top: 1px dashed $font-color;
-
-      padding-top: 25px;
-      padding-bottom: 25px;
+      padding-top: 20px;
+      padding-bottom: 20px;
       text-align: center;
       position: relative;
-      .metric {
-        position: absolute;
-        bottom: 20px;
-      }
-      .health {
-        padding-top: 20px;
-      }
+
       .action {
         font-size: 14px;
         text-align: left;

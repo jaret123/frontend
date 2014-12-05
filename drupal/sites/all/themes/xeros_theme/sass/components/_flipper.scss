@@ -5,35 +5,30 @@
   $backBackgroundColor:white;
   $backFontSize:12px;
   $navBarColor:white;
-  $border:1px dotted grey;
+  $border:1px solid rgba(68,68,68, .75);
+
   perspective: 1000;
   position:relative;
 
-  width:185px;
   /* flip speed goes here */
   .flipper {
     transition: $speed;
     transform-style: preserve-3d;
     border:$border;
+    @include box-shadow(1px 1px 3px rgba(50,50,50,.25));
+    background-color: $backBackgroundColor;
+    padding: 5px;
+
   }
 
   .flipper-navbar {
-    width:185px;
-    height:24px;
-    //border-bottom: 1px dotted grey;
-    background-color:$navBarColor;
-    opacity:0.8;
-    overflow: hidden;
+    position: relative;
+    text-align: right;
     .flipper-navbtn {
-
-      padding-top: 2px;
-      position: relative;
-      float:right;
-      padding-right:2px;
       font-size: 20px;
-      text-align: right;
-      height:24px;
+      color: $font-color;
       cursor: pointer;
+      margin-right: 10px;
       opacity: .75;
       &:hover {
         opacity: 1;
@@ -50,34 +45,19 @@
   .front {
    z-index: 2;
     /* for firefox 31 */
-    transform: rotateY(0deg);
+    @include transform(rotateY(0deg));
     position: relative;
     top:0px;
-    width:185px;
-    .flipper-navbtn {
-      width:190px;
-      margin-right:-1px;
-    }
   }
   /* back, initially hidden pane */
   .back {
     font-size: $backFontSize;
+
+    position:absolute;
     top:0;
     left:0;
     background-color: $backBackgroundColor;
-    transform: rotateY(180deg);
-    position:absolute;
-    height: 80px;
-    padding: 0px;
-    margin: 0px;
-    //left: -25px;
-    //margin-left:13px;
-    text-align: left;
-    width:185px;
-    .flipper-closebtn {
-    padding-right: 2px;
-  }
-
+    @include transform(rotateY(180deg));
   }
   .flipback-backcontainer{
     overflow: hidden;
@@ -91,7 +71,7 @@
 /* flip the pane when hovered */
 //.flip-container:hover .flipper,
 .flip-container.hover .flipper {
-  transform: rotateY(180deg);
+  @include transform(rotateY(180deg));
 }
 
 

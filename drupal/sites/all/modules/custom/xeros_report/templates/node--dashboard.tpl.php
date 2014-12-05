@@ -12,9 +12,7 @@
     <div class="page-container">
         <div class="container">
             <div class="kpis">
-                <div  class="dashboard-gear fa fa-gear" data-toggle="modal" data-target="#chart-options"></div>
               <div class="chart-header">
-<!-- TODO: Turn this into a handlebar template and switch it out based on the machine type -->
 
               <div class="legend">
               </div>
@@ -25,7 +23,9 @@
                   <span class="swatch model"></span>
                   <span class="label">{{lineB-key}}</span>
               </script>
-<!-- End template -->
+                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i>Select Data</div>
+
+                <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
                       <span>
                           <span>Timeframe</span>
