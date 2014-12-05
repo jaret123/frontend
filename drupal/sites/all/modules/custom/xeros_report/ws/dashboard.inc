@@ -13,7 +13,7 @@
  * Machines - 6 ( Milnor ), 7 ( Xeros)
  */
 // TODO: : Add company ID as an optional parameter when we start allowing company level reports
-function ws_dashboard($location_ids = '', $from_date, $to_date) {
+function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
 
   $u = new WsUtils();
 
@@ -34,7 +34,9 @@ function ws_dashboard($location_ids = '', $from_date, $to_date) {
     }
   }
 
-  $output = array();
+  $output = array(
+    'options' => array(), // Report options that the user can configure
+  );
 
 
   // need to get by location and machine_type_filter
@@ -55,7 +57,7 @@ function ws_dashboard($location_ids = '', $from_date, $to_date) {
   SELECT
           DISTINCT CASE
               WHEN Manufacturer = 'xeros' THEN 'xeros'
-              ELSE 'non-xeros'
+              ELSE 'non_xeros'
           END AS model
           FROM xeros_machine
           WHERE location_id IN ( :location_id )
@@ -65,6 +67,9 @@ SQL;
 
   $machine_types = $query->fetchAll();
 
+  /**
+   * Do seperate calculations for each machine_type
+   */
   foreach ($machine_types as $machine_type) {
 
     $kpis = array();
@@ -74,7 +79,7 @@ SQL;
       case "xeros":
         $filters[':machine_type_filter'] = "and xc.manufacturer = 'xeros'";
         break;
-      case "non-xeros":
+      case "non_xeros":
         $filters[':machine_type_filter'] = "and xc.manufacturer <> 'xeros'";
         break;
     }
@@ -232,6 +237,8 @@ METRIC
      *
      * Iterate over the metrics array and build the SQL for the calculations
      */
+
+
     foreach ($metrics as $k => $v) {
       $metric_name = $v['name'];
       $ar = array(
@@ -243,11 +250,11 @@ METRIC
       $filters[':metric'] = $u->replaceFilters($v["query"], $filters);
 
       // PDO tries to add extra strings to our replacement
-      $summarySql = $u->replaceFilters($summarySql, $filters);
+      $s = $u->replaceFilters($summarySql, $filters);
       // PDO tries to add extra strings to our replacement
-      $dataPointSql = $u->replaceFilters($dataPointSql, $filters);
+      $d = $u->replaceFilters($dataPointSql, $filters);
 
-      $results = db_query($summarySql);
+      $results = db_query($s);
 
       // BUG - Check whether we get data before we process it or send back a notice
       // LOG all SQL requests
@@ -255,10 +262,11 @@ METRIC
 
       $ar["summaryData"] = $a[0];
 
-      $dataPoints = db_query($dataPointSql);
+      if ( $format !== 'summary') {
+        $dataPoints = db_query($d);
 
-      $ar["chartData"] = $dataPoints->fetchAll();
-
+        $ar["chartData"] = $dataPoints->fetchAll();
+      }
 
       /**
        *
@@ -315,113 +323,137 @@ METRIC
         ),
       );
 
-      foreach ($ar['chartData'] as $value) {
-        $metric['actual']['chart'][] = array(
-          'date' => $value->date,
-          'value' => floatval($value->actual_value),
-          'cost' => floatval($value->actual_cost)
-        );
-        $metric['model_xeros']['chart'][] = array(
-          'date' => $value->date,
-          'value' => floatval($value->model_xeros_value),
-          'cost' => floatval($value->model_xeros_cost)
-        );
+      if ( $format !== 'summary' ) {
+        foreach ($ar['chartData'] as $value) {
+          $metric['actual']['chart'][] = array(
+            'date' => $value->date,
+            'value' => floatval($value->actual_value),
+            'cost' => floatval($value->actual_cost)
+          );
+          $metric['model_xeros']['chart'][] = array(
+            'date' => $value->date,
+            'value' => floatval($value->model_xeros_value),
+            'cost' => floatval($value->model_xeros_cost)
+          );
+        }
       }
 
-      switch ($metric_name) { // metric
-        case 'cold-water':
-          $metric['model_xeros_simple'] = array(
-            'summary' => array(
-              'value' => $metric['actual']['summary']['value'] * .25,
-              'cost' => $metric['actual']['summary']['cost'] * .25
-            )
-          );
-          $metric['model_non_xeros_simple'] = array(
-            'summary' => array(
-              'value' => $metric['actual']['summary']['value'] * 4,
-              'cost' => $metric['actual']['summary']['cost'] * 4
-            )
-          );
 
-          foreach ( $metric['actual']['chart'] as $datapoint ) {
-            $metric['model_xeros_simple']['chart'][] = array(
-              'date' => $datapoint['date'],
-              'value' => $datapoint['value'] * .25,
-              'cost' => $datapoint['cost'] * .25,
-            );
-            $metric['model_non_xeros_simple']['chart'][] = array(
-              'date' => $datapoint['date'],
-              'value' => $datapoint['value'] * 4,
-              'cost' => $datapoint['cost'] * 4,
-            );
-          }
-          break;
-
-        case 'therms':
-          $metric['model_xeros_simple'] = array(
-            'summary' => array(
-              'value' => $metric['actual']['summary']['value'] * 0,
-              'cost' => $metric['actual']['summary']['cost'] * 0
-            )
-          );
-          // It's important that the metrics are pulled in order.  Cold water has
-          // to be calculated before therms or this will error
-
-          $metric['model_non_xeros_simple'] = array(
-            'summary' => array(
-              'value' => $output[$machine_type->model]['cold-water']['actual']['summary']['value'] * .3,
-              'cost' => $output[$machine_type->model]['cold-water']['actual']['summary']['cost'] * .3
-            )
-          );
-          foreach ( $metric['actual']['chart'] as $index => $datapoint ) {
-            $metric['model_xeros_simple']['chart'][] = array(
-              'date' => $datapoint['date'],
-              'value' => 0,
-              'cost' => 0,
-            );
-            $metric['model_non_xeros_simple']['chart'][$index] = array(
-              'date' => $datapoint['date'],
-              'value' => $output[$machine_type->model]['cold-water']['actual']['chart']['value'][$index] * .3,
-              'cost' => $output[$machine_type->model]['cold-water']['actual']['chart']['cost'][$index] * .3,
-            );
-          }
-          break;
-      }
-
+      /**
+       * Machine type differences
+       */
       switch($machine_type->model) {
         case 'xeros':
-          // Model Non Xeros Simple
-          //$metric['model_non_xeros_simple'] = array();
-          $metric['model_non_xeros_simple']['active'] = true;
-          $metric['active-models'][] = 'model_non_xeros_simple';
+          $output['options']['machine_types']['xeros'] = array();
+          $output['options']['machine_types']['xeros']['models'][] = 'model_non_xeros_simple';
 
-          //
           $metric['model_xeros_simple'] = array(
             'notes' => 'Because this machine is a xeros machine the xeros_simple model is not available.',
             'active' => false
           );
 
+          switch ($metric_name) { // metric
+            case 'cold-water':
+              $metric['model_non_xeros_simple'] = array(
+                'summary' => array(
+                  'value' => $metric['actual']['summary']['value'] * 4,
+                  'cost' => $metric['actual']['summary']['cost'] * 4
+                )
+              );
+
+              if ( $format !== 'summary' ) {
+                foreach ( $metric['actual']['chart'] as $datapoint ) {
+                  $metric['model_non_xeros_simple']['chart'][] = array(
+                    'date' => $datapoint['date'],
+                    'value' => $datapoint['value'] * 4,
+                    'cost' => $datapoint['cost'] * 4,
+                  );
+                }
+              }
+              break;
+
+            case 'therms':
+              // It's important that the metrics are pulled in order.  Cold water has
+              // to be calculated before therms or this will error
+
+              $metric['model_non_xeros_simple'] = array(
+                'summary' => array(
+                  'value' => $output[$machine_type->model]['cold-water']['actual']['summary']['value'] * .3,
+                  'cost' => $output[$machine_type->model]['cold-water']['actual']['summary']['cost'] * .3
+                )
+              );
+              if ( $format !== 'summary' ) {
+                foreach ( $metric['actual']['chart'] as $index => $datapoint ) {
+                  $metric['model_non_xeros_simple']['chart'][$index] = array(
+                    'date' => $datapoint['date'],
+                    'value' => $output[$machine_type->model]['cold-water']['actual']['chart']['value'][$index] * .3,
+                    'cost' => $output[$machine_type->model]['cold-water']['actual']['chart']['cost'][$index] * .3,
+                  );
+                }
+              }
+              break;
+          }
+
           break;
-        case 'non-xeros':
-          $metric['model_xeros_simple']['active'] = true;
-          $metric['active-models'][] = 'model_xeros_simple';
+        case 'non_xeros':
+          $output['options']['machine_types']['non_xeros'] = array();
+          $output['options']['machine_types']['non_xeros']['models'][] = 'model_xeros_simple';
+          $output['options']['machine_types']['non_xeros']['models'][] = 'model_xeros';
 
-          $metric['model_non_xeros_simple'] = array();
-          $metric['model_non_xeros_simple']['notes'] = 'Because this machine is a nonxeros machine the non_xeros_simple model is not available.';
-          $metric['model_non_xeros_simple']['active'] = false;
+          $metric['model_non_xeros_simple'] = array(
+            'notes' => 'Because this machine is a nonxeros machine the non_xeros_simple model is not available.',
+            'active' => false
+          );
 
+          switch ($metric_name) { // metric
+            case 'cold-water':
+              $metric['model_xeros_simple'] = array(
+                'summary' => array(
+                  'value' => $metric['actual']['summary']['value'] * .25,
+                  'cost' => $metric['actual']['summary']['cost'] * .25
+                )
+              );
+              if ( $format !== 'summary' ) {
+                foreach ( $metric['actual']['chart'] as $datapoint ) {
+                  $metric['model_xeros_simple']['chart'][] = array(
+                    'date' => $datapoint['date'],
+                    'value' => $datapoint['value'] * .25,
+                    'cost' => $datapoint['cost'] * .25,
+                  );
+                }
+              }
+              break;
+
+            case 'therms':
+              $metric['model_xeros_simple'] = array(
+                'summary' => array(
+                  'value' => $metric['actual']['summary']['value'] * 0,
+                  'cost' => $metric['actual']['summary']['cost'] * 0
+                )
+              );
+              if ( $format !== 'summary' ) {
+                foreach ( $metric['actual']['chart'] as $index => $datapoint ) {
+                  $metric['model_xeros_simple']['chart'][] = array(
+                    'date' => $datapoint['date'],
+                    'value' => 0,
+                    'cost' => 0,
+                  );
+                }
+              }
+              break;
+          }
           break;
       }
 
-      switch($data->info->water_only) {
-        case '1':
-
-          // Removed the standard model because it is not relevant
-          $metric['model_xeros']['notes'] = array();
-          $metric['model_xeros']['description'] = 'The expected data of a xeros machine based on the classifications of laundry.';
-          $metric['model_xeros']['notes'] = 'Because this is a water only machine, this data is not available.';
-          $metric['model_xeros']['active'] = false;
-      }
+//      switch($data->info->water_only) {
+//        case '1':
+//
+//          // Removed the standard model because it is not relevant
+//          $metric['model_xeros']['notes'] = array();
+//          $metric['model_xeros']['description'] = 'The expected data of a xeros machine based on the classifications of laundry.';
+//          $metric['model_xeros']['notes'] = 'Because this is a water only machine, this data is not available.';
+//          $metric['model_xeros']['active'] = false;
+//      }
 
       $output[$machine_type->model][$metric['name']] = $metric;
     }

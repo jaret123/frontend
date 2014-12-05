@@ -11,7 +11,7 @@ function xeros_report_menu() {
   $items['ws/dashboard'] = array(
     'title' => '',
     'page callback' => 'ws_dashboard',
-    'page arguments' => array(2,3,4),
+    'page arguments' => array(2,3,4,5),
     'access arguments' => array('access content'),
     'file' => 'ws/dashboard.inc'
   );

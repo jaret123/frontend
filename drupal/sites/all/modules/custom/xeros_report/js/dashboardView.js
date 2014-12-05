@@ -25,9 +25,9 @@ var view = {
             this.model = options.model;
         } else {
             // Grab the first valid one in the data array
-            this.machineType = _.keys(app.data)[0];
+            this.machineType = _.keys(app.data.options.machine_types)[0];
             // Grab the first valid model in the data set
-            this.model = app.data[this.machineType]['cold-water']['active-models'][0];
+            this.model = app.data.options.machine_types[this.machineType]['models'][0];
         }
 
         //app.reportData = app.data.data[app.machine].metrics[app.metric];
@@ -104,10 +104,10 @@ var view = {
             };
 
         var labels = {
-            'non-xeros' : {
+            'non_xeros' : {
                 lineA : 'Actual Cost',
                 lineB : 'Potential Cost',
-                'lineA-key' : 'Current Consumption',
+                'lineA-key' : 'Current Consumption (Non-Xeros Machines)',
                 'lineB-key' : 'Potential Consumption with Xeros',
                 savings : 'Potential Savings',
                 cssClass : 'non-xeros'
@@ -115,8 +115,8 @@ var view = {
             xeros : {
                 lineA : 'Industry Avg Cost',
                 lineB : 'Xeros Actual Cost',
-                'lineA-key' : 'Current Consumption',
-                'lineB-key' : 'Industry Benchmark',
+                'lineA-key' : 'Current Consumption (Xeros Machines)',
+                'lineB-key' : 'Industry Benchmark (Non-Xeros Machines)',
                 savings : 'Current Savings',
                 cssClass : 'xeros'
             }
@@ -148,8 +148,8 @@ var view = {
                 app.reportData[0].actual.summary.value += app.reportData[ij].actual.summary.value ;
 
                 // TODO: Test what model to use for this calc
-                app.reportData[0].model.cost += app.reportData[ij].model.cost;
-                app.reportData[0].model.value += app.reportData[ij].model.value;
+                app.reportData[0].model.summary.cost += app.reportData[ij].model.summary.cost;
+                app.reportData[0].model.summary.value += app.reportData[ij].model.summary.value;
 
                 var l = app.reportData[ij].actual.chart.length,
                     d = 0;
@@ -297,13 +297,13 @@ var view = {
 
                 // Only show machine type options for which we have machines
                 els.machineType.find('option').addClass('hide');
-                jQuery(_.keys(app.data)).each(function() {
+                jQuery(_.keys(app.data.options)).each(function() {
                    els.machineType.find('option[value="' + this + '"]').removeClass('hide');
                 });
 
                 // Only show valid options for the model based on the machine type
                 els.model.find('option').addClass('hide');
-                jQuery(app.data[view.machineType]['cold-water']['active-models']).each(function() {
+                jQuery(app.data.options[view.machineType].models).each(function() {
                    els.model.find('options[value="' + this + '"]').removeClass('hide');
                 });
             }
@@ -321,7 +321,7 @@ var view = {
             // Only show valid options for the model based on the machine type
             els.model.find('option').addClass('hide');
 
-            jQuery(app.data[selectedMachineType]['cold-water']['active-models']).each(function() {
+            jQuery(app.data.options[selectedMachineType].models).each(function() {
                 els.model.find('option[value="' + this.valueOf() + '"]').removeClass('hide');
             });
 
