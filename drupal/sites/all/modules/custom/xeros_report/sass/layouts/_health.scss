@@ -59,7 +59,7 @@
         }
 
       }
-     
+
 
       &.first {
         padding-top: 10px;
@@ -219,5 +219,21 @@
       }
     }
   }
+
+
+
+
+}
+//RK - made for status icons
+
+.status_data_icon {
+  width:20%;
+  float:left;
 }
 
+.status_data {
+  padding-right: 2px;
+  text-align: left;
+  width: 80%;
+  margin-left: 75px;
+}

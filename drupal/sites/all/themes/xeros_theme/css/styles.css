@@ -4019,30 +4019,28 @@ a:hover, a:active {
 /* line 30, ../sass/components/_actions.scss */
 #consumption .status:before {
   font-size: 40px;
-  float: left;
-  padding-left: 5px;
 }
 
-/* line 39, ../sass/components/_actions.scss */
+/* line 38, ../sass/components/_actions.scss */
 .page-actions td {
   padding: 2px 3px;
 }
-/* line 42, ../sass/components/_actions.scss */
+/* line 41, ../sass/components/_actions.scss */
 .page-actions .page-wrapper {
   width: auto;
   max-width: 1100px;
 }
-/* line 46, ../sass/components/_actions.scss */
+/* line 45, ../sass/components/_actions.scss */
 .page-actions .status {
   position: relative;
 }
-/* line 48, ../sass/components/_actions.scss */
+/* line 47, ../sass/components/_actions.scss */
 .page-actions .status:before {
   position: absolute;
   top: 2px;
 }
 
-/* line 58, ../sass/components/_actions.scss */
+/* line 57, ../sass/components/_actions.scss */
 .node-action-form .vertical-tabs,
 .node-action-form #edit-preview {
   display: none;
@@ -4480,6 +4478,20 @@ a:hover, a:active {
   background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
   background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
   background-image: linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+}
+
+/* line 229, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+.status_data_icon {
+  width: 20%;
+  float: left;
+}
+
+/* line 234, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+.status_data {
+  padding-right: 2px;
+  text-align: left;
+  width: 80%;
+  margin-left: 75px;
 }
 
 /* line 2, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
