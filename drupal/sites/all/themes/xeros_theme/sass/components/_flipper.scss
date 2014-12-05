@@ -30,9 +30,15 @@
       margin-right: 10px;
       opacity: .75;
       position: relative;
+      width:90%;
+      padding-left:2px;
+      &.flipper-openbtn {
+        top:-15px;
+      }
       &:hover {
         opacity: 1;
       }
+
     }
   }
 

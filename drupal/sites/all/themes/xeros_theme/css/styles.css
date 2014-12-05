@@ -4077,16 +4077,22 @@ a:hover, a:active {
   margin-right: 10px;
   opacity: .75;
   position: relative;
+  width: 90%;
+  padding-left: 2px;
 }
-/* line 33, ../sass/components/_flipper.scss */
+/* line 35, ../sass/components/_flipper.scss */
+.flip-container .flipper-navbar .flipper-navbtn.flipper-openbtn {
+  top: -15px;
+}
+/* line 38, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn:hover {
   opacity: 1;
 }
-/* line 39, ../sass/components/_flipper.scss */
+/* line 45, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
   backface-visibility: hidden;
 }
-/* line 45, ../sass/components/_flipper.scss */
+/* line 51, ../sass/components/_flipper.scss */
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
@@ -4098,7 +4104,7 @@ a:hover, a:active {
   position: relative;
   top: 0px;
 }
-/* line 53, ../sass/components/_flipper.scss */
+/* line 59, ../sass/components/_flipper.scss */
 .flip-container .back {
   font-size: 12px;
   position: absolute;
@@ -4111,7 +4117,7 @@ a:hover, a:active {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-/* line 62, ../sass/components/_flipper.scss */
+/* line 68, ../sass/components/_flipper.scss */
 .flip-container .flipback-backcontainer {
   overflow: hidden;
   height: auto;
@@ -4120,7 +4126,7 @@ a:hover, a:active {
 }
 
 /* flip the pane when hovered */
-/* line 73, ../sass/components/_flipper.scss */
+/* line 79, ../sass/components/_flipper.scss */
 .flip-container.hover .flipper {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
