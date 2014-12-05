@@ -99,14 +99,14 @@ var view = {
 
             self.drawCharts();
 
+            //TODO: Need to set each cell to the same height, and then add padding
             jQuery('.row:not(.first)').each(function() {
-                var rowHeight = jQuery(this).height();
-
-
-                var cols = jQuery(this).find('.col');
+                var rowHeight = jQuery(this).innerHeight();
+                var cols = jQuery(this).find('.col .col__wrapper');
                 cols.each(function() {
-                    var colHeight = jQuery(this).height();
-                    jQuery(this).css('margin-top', (rowHeight - colHeight) / 2 );
+                    var colHeight = jQuery(this).outerHeight();
+                    jQuery(this).css('padding-top', (rowHeight - colHeight) / 2 );
+                    jQuery(this).css('padding-bottom', (rowHeight - colHeight) / 2 );
                 });
             });
 

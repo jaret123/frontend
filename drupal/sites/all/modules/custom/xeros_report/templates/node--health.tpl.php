@@ -79,8 +79,6 @@
                       <div class="health-wrapper">
                         <div class="col col-4">
                           <div class="label">Health</div>
-                        </div>
-                        <div class="col col-5">
                           <div class="label">Action/Update</div>
                         </div>
                       </div>
@@ -91,6 +89,7 @@
                             {{#each this}}
                             <div class="row {{info.cssClass}} {{info.machine_type}} water-only-{{info.water_only}}" machineId={{id}}>
                                 <div class="col col-1">
+                                  <div class="col__wrapper">
                                     <span class="consumption__machine {{info.machine_name}}">
                                         <div class="icon-Washer">
                                           <div class="icon-washer-label {{digits info.cycles}}">
@@ -113,9 +112,10 @@
                                         </div>
                                         <div class="metric__message"></div>
                                     </span>
+                                  </div>
                                 </div>
                                 <div class="col col-2 metric flip-container {{delta.cold_water.cssClass}}" classification="cold_water" machine="{{id}}" chart="cold_water-{{info.machine_id}}">
-                                    <div class="flipper">
+                                    <div class="flipper col__wrapper">
                                         <div class="front">
                                             <div class="flipper-navbar"><div id="flipperbtn" class="flipper-navbtn flipper-openbtn fa fa-question-circle"></div></div>
                                                 <div class="flipper-frontcontainer">
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="col col-3 metric flip-container {{delta.therms.cssClass}}" classification="hot_water" machine="{{id}}" chart="hot_water-{{info.machine_id}}">
-                                  <div class="flipper">
+                                  <div class="flipper col__wrapper">
                                         <div class="front">
                                               <div class="flipper-navbar"><div class="flipper-navbtn flipper-openbtn fa fa-question-circle"></div></div>
                                               <div class="flipper-container flipper-front-container">
@@ -148,14 +148,18 @@
                                       </div>
                                   </div>
                                 </div>
-                                <div class="col col-4 health">
-                                  <div class="{{actionData.action_status.class}}"></div>
-                                </div>
-                                <div class="col col-5 action">
-                                  {{#if actionData.action_title.data}}
-                                    <div><strong>{{actionData.action_created}}:</strong><br/> {{actionData.action_title.data}}</div>
-                                  {{/if}}
-                                </div>
+                                  <div class="col col-4 health">
+                                    <div class="col__wrapper">
+                                      <div class="{{actionData.action_status.class}}">
+                                      </div>
+                                      {{#if actionData.action_title.data}}
+                                      <div><strong>{{actionData.action_created}}:</strong><br/> {{actionData.action_title.data}}</div>
+                                      {{/if}}
+                                    </div>
+                                  </div>
+                                  <!--<div class="col col-5 action">-->
+
+                                  <!--</div>-->
                             </div>
                             {{/each}}
                         </script>

@@ -3983,60 +3983,64 @@ a:hover, a:active {
   font-family: Lato;
 }
 
-/* line 6, ../sass/components/_actions.scss */
+/* line 5, ../sass/components/_actions.scss */
+.status {
+  line-height: 1;
+}
+/* line 7, ../sass/components/_actions.scss */
 .status:before {
   font-family: FontAwesome;
   font-size: 22px;
 }
-/* line 10, ../sass/components/_actions.scss */
+/* line 11, ../sass/components/_actions.scss */
 .status.status-0 {
   color: green;
 }
-/* line 12, ../sass/components/_actions.scss */
+/* line 13, ../sass/components/_actions.scss */
 .status.status-0:before {
   content: "\f058";
 }
-/* line 16, ../sass/components/_actions.scss */
+/* line 17, ../sass/components/_actions.scss */
 .status.status-1 {
   color: #ffd200;
 }
-/* line 18, ../sass/components/_actions.scss */
+/* line 19, ../sass/components/_actions.scss */
 .status.status-1:before {
   content: "\f06a";
 }
-/* line 22, ../sass/components/_actions.scss */
+/* line 23, ../sass/components/_actions.scss */
 .status.status-2 {
   color: red;
 }
-/* line 24, ../sass/components/_actions.scss */
+/* line 25, ../sass/components/_actions.scss */
 .status.status-2:before {
   content: "\f057";
 }
-/* line 29, ../sass/components/_actions.scss */
+/* line 30, ../sass/components/_actions.scss */
 #consumption .status:before {
   font-size: 40px;
 }
 
-/* line 36, ../sass/components/_actions.scss */
+/* line 37, ../sass/components/_actions.scss */
 .page-actions td {
   padding: 2px 3px;
 }
-/* line 39, ../sass/components/_actions.scss */
+/* line 40, ../sass/components/_actions.scss */
 .page-actions .page-wrapper {
   width: auto;
   max-width: 1100px;
 }
-/* line 43, ../sass/components/_actions.scss */
+/* line 44, ../sass/components/_actions.scss */
 .page-actions .status {
   position: relative;
 }
-/* line 45, ../sass/components/_actions.scss */
+/* line 46, ../sass/components/_actions.scss */
 .page-actions .status:before {
   position: absolute;
   top: 2px;
 }
 
-/* line 55, ../sass/components/_actions.scss */
+/* line 56, ../sass/components/_actions.scss */
 .node-action-form .vertical-tabs,
 .node-action-form #edit-preview {
   display: none;
@@ -4061,12 +4065,12 @@ a:hover, a:active {
   background-color: white;
   padding: 5px;
 }
-/* line 24, ../sass/components/_flipper.scss */
+/* line 23, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar {
   position: relative;
   text-align: right;
 }
-/* line 27, ../sass/components/_flipper.scss */
+/* line 26, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn {
   font-size: 20px;
   color: #444444;
@@ -4074,15 +4078,15 @@ a:hover, a:active {
   margin-right: 10px;
   opacity: .75;
 }
-/* line 33, ../sass/components/_flipper.scss */
+/* line 32, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn:hover {
   opacity: 1;
 }
-/* line 39, ../sass/components/_flipper.scss */
+/* line 38, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
   backface-visibility: hidden;
 }
-/* line 45, ../sass/components/_flipper.scss */
+/* line 44, ../sass/components/_flipper.scss */
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
@@ -4094,7 +4098,7 @@ a:hover, a:active {
   position: relative;
   top: 0px;
 }
-/* line 53, ../sass/components/_flipper.scss */
+/* line 52, ../sass/components/_flipper.scss */
 .flip-container .back {
   font-size: 12px;
   position: absolute;
@@ -4107,7 +4111,7 @@ a:hover, a:active {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-/* line 62, ../sass/components/_flipper.scss */
+/* line 61, ../sass/components/_flipper.scss */
 .flip-container .flipback-backcontainer {
   overflow: hidden;
   height: auto;
@@ -4116,7 +4120,7 @@ a:hover, a:active {
 }
 
 /* flip the pane when hovered */
-/* line 73, ../sass/components/_flipper.scss */
+/* line 72, ../sass/components/_flipper.scss */
 .flip-container.hover .flipper {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -4302,8 +4306,8 @@ a:hover, a:active {
 /* line 93, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-Washer {
   font-size: 80px;
-  float: left;
   width: 80px;
+  display: inline-block;
   position: relative;
 }
 /* line 99, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
@@ -4334,15 +4338,15 @@ a:hover, a:active {
 }
 /* line 120, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .machine-label {
-  float: left;
+  display: inline-block;
   width: 80px;
-  width: calc(100% - 80px);
+  width: calc(100% - 90px);
   font-size: 0.8em;
   line-height: 1.5em;
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 131, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 132, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 {
   float: left;
   width: 20%;
@@ -4356,7 +4360,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 134, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 135, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-3 {
   float: left;
   width: 20%;
@@ -4370,25 +4374,11 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 137, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 138, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 {
   float: left;
-  width: 20%;
+  width: 40%;
   margin-left: 60%;
-  margin-right: -80%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-}
-/* line 140, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
-#report-health .consumption-container .row .col-5 {
-  float: left;
-  width: 20%;
-  margin-left: 80%;
   margin-right: -100%;
   padding-left: 2px;
   padding-right: 3px;
@@ -4398,7 +4388,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 145, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 143, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 img.bar-chart, #report-health .consumption-container .row .col-3 img.bar-chart, #report-health .consumption-container .row .col-4 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -4409,7 +4399,7 @@ a:hover, a:active {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 151, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 149, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 .labels, #report-health .consumption-container .row .col-3 .labels, #report-health .consumption-container .row .col-4 .labels {
   position: relative;
   display: inline-block;
@@ -4417,35 +4407,43 @@ a:hover, a:active {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 160, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 158, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 .labels .potential, #report-health .consumption-container .row .col-3 .labels .potential, #report-health .consumption-container .row .col-4 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 168, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 166, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 img {
   display: inline-block;
 }
-/* line 171, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 169, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 174, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 172, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 179, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 177, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 188, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 185, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4:not(:nth-child(1)) .col__wrapper {
+  border: 1px solid #444444;
+  -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  background-color: white;
+  padding: 5px;
+}
+/* line 194, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -4453,26 +4451,33 @@ a:hover, a:active {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 192, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 198, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 197, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 203, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
 }
-/* line 205, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 211, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.non-xeros {
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #f0f0f0), color-stop(50%, #f5f5f5), color-stop(100%, #f0f0f0));
+  background-image: -webkit-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: -moz-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: -o-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+}
+/* line 214, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.xeros {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
-  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e5f4fa), color-stop(50%, #f2f9fc), color-stop(100%, #e5f4fa));
   background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -ms-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: linear-gradient(to bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
 }
 
 /* line 2, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
