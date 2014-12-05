@@ -17,7 +17,7 @@
     border:$border;
     @include box-shadow(1px 1px 3px rgba(50,50,50,.25));
     background-color: $backBackgroundColor;
-    padding: 5px;
+    //padding:5px;
   }
 
   .flipper-navbar {
@@ -29,6 +29,7 @@
       cursor: pointer;
       margin-right: 10px;
       opacity: .75;
+      position: relative;
       &:hover {
         opacity: 1;
       }

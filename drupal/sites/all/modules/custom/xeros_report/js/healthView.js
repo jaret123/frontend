@@ -103,11 +103,23 @@ var view = {
             jQuery('.row:not(.first)').each(function() {
                 var rowHeight = jQuery(this).innerHeight();
                 var cols = jQuery(this).find('.col .col__wrapper');
+
                 cols.each(function() {
                     var colHeight = jQuery(this).outerHeight();
-                    jQuery(this).css('padding-top', (rowHeight - colHeight) / 2 );
-                    jQuery(this).css('padding-bottom', (rowHeight - colHeight) / 2 );
+                    var paddingtop = (rowHeight - colHeight) / 2 ;
+                   jQuery(this).css('padding-top', paddingtop);
+                    jQuery(this).css('height', rowHeight - paddingtop);
+
+                    //jQuery('.back').css('height', rowHeight - paddingtop);
+                    var offset = 5;
+                   // jQuery('.flipper-openbtn').css('top',-(paddingtop/3));
+                   // jQuery('.flipper-closebtn').css('top',(paddingtop/3));
+                  //  jQuery('.front').css('height', rowHeight - paddingtop);
+                    //jQuery('.health').css('height', rowHeight);
+                    //jQuery(this).css('padding-bottom', (rowHeight - colHeight) / 2 );
                 });
+                //jQuery('.flipcontainer').css('height', colHeight);
+                //jQuery('.front').css('height', rowHeight );
             });
 
             self.bindEvents();
