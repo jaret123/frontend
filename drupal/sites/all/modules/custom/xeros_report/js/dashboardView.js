@@ -24,18 +24,6 @@ var view = {
             this.model = app.data.options.machine_types[this.machineType]['models'][0];
         }
 
-
-        // Industry Averages per cycle
-//        var industryAverages = {
-//            avg_cold_water_volume: "121.64078133",
-//            avg_cold_water_cost: "1.20101627",
-//            avg_hot_water_volume: "51.41446880",
-//            avg_therms: "0.37381793",
-//            avg_therm_cost: "0.34448701",
-//            avg_chemical_strength: "17.38840517",
-//            avg_chemical_cost: "1.18185205"
-//        };
-
         var ar = [
                 {
                     name : 'total',
@@ -96,8 +84,8 @@ var view = {
 
         var labels = {
             'non_xeros' : {
-                lineA : 'Actual Cost',
-                lineB : 'Potential Cost',
+                lineA : 'Potential Cost',
+                lineB : 'Actual Cost',
                 'lineA-key' : 'Current Consumption (Non-Xeros Machines)',
                 'lineB-key' : 'Potential Consumption with Xeros',
                 savings : 'Potential Savings',
@@ -138,7 +126,6 @@ var view = {
                 app.reportData[0].actual.summary.cost += app.reportData[ij].actual.summary.cost ;
                 app.reportData[0].actual.summary.value += app.reportData[ij].actual.summary.value ;
 
-                // TODO: Test what model to use for this calc
                 app.reportData[0].model.summary.cost += app.reportData[ij].model.summary.cost;
                 app.reportData[0].model.summary.value += app.reportData[ij].model.summary.value;
 
@@ -177,20 +164,18 @@ var view = {
 
         for ( i in app.reportData ) {
 
-            // Pass to template for use in conditional templates
-            //app.reportData[i].xeros = FF.Location.xeros();
+            if ( self.machineType == 'xeros') {
+                // Calculate savings (model - actual)
+                app.reportData[i].actual.savings = self.delta(app.reportData[i].model.summary.cost, app.reportData[i].actual.summary.cost);
+                //app.reportData[i].actual.savings = -app.reportData[i].actual.savings;
+            } else {
 
-            // Calculate savings
-            app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.summary.cost, app.reportData[i].model.summary.cost);
-
-            // Invert the savings if this is a xeros machine
-            if ( self.machineType ) {
-                // Calculate savings
-                app.reportData[i].actual.savings = -app.reportData[i].actual.savings;
+                // Calculate what you could be saving (actual - model)
+                app.reportData[i].actual.savings = self.delta(app.reportData[i].actual.summary.cost, app.reportData[i].model.summary.cost);
+                //app.reportData[i].actual.savings = -app.reportData[i].actual.savings;
             }
 
             // Add custom labels for Xeros versus non-xeros machines
-            // TODO - make the labels a bit more descriptive
             app.reportData[i].labels = labels[self.machineType];
 
         }
@@ -209,6 +194,12 @@ var view = {
             return parseInt(value, 10);
         }
     },
+    /**
+     *
+     * @param base
+     * @param change
+     * @returns {number}
+     */
     delta : function(base, change) {
         var delta = 0;
 
