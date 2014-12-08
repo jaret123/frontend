@@ -83,7 +83,7 @@ var app = {
     routeCallback: function() {
 
         // if dataRefresh equals 1, then go to the web service again and get new data
-        if ( FF.User.reportSettings.location.id !== 0 && FF.User.reportSettings.company.id !== 0 ) {
+        if ( FF.User.reportSettings.location.id !== '' && FF.User.reportSettings.company.id !== '' ) {
             if ( app.dataRefresh == 1 ) {
                 app.setApiUrl();
                 app.fadeReport();
