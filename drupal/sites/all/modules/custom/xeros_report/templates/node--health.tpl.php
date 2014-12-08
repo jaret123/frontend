@@ -127,7 +127,8 @@
                                             </div>
                                         <div class="back">
                                             <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close"></div></div>
-                                           <div class="flipper-backcontainer">{{delta.cold_water.message}}</div>
+                                           <div class="flipper-backcontainer">
+                                               {{delta.cold_water.message}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,11 +151,15 @@
                                 </div>
                                   <div class="col col-4 health">
                                     <div class="col__wrapper">
+                                        <div class="status_data_icon">
                                       <div class="{{actionData.action_status.class}}">
                                       </div>
+                                        </div>
+                                        <div class="status_data">
                                       {{#if actionData.action_title.data}}
                                       <div><strong>{{actionData.action_created}}:</strong><br/> {{actionData.action_title.data}}</div>
                                       {{/if}}
+                                        </div>
                                     </div>
                                   </div>
                                   <!--<div class="col col-5 action">-->
