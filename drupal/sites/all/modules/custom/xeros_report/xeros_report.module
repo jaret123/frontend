@@ -12,28 +12,29 @@ function xeros_report_menu() {
     'title' => '',
     'page callback' => 'ws_dashboard',
     'page arguments' => array(2,3,4,5),
-    'access arguments' => array('access content'),
+    'access arguments' => array('xeros report dashboard'),
     'file' => 'ws/dashboard.inc'
   );
   $items['report/dashboard'] = array(
     'title' => 'Operational Dashboard',
     'page callback' => 'report_dashboard',
     'page arguments' => array(),
-    'access arguments' => array('access content'),
+    'access arguments' => array('xeros report dashboard'),
     'file' => 'report/dashboard.inc'
   );
   $items['ws/health-detail'] = array(
     'title' => '',
     'page callback' => 'ws_health',
     'page arguments' => array(2,3,4),
-    'access arguments' => array('access content'),
+    'access arguments' => array('xeros report health'),
     'file' => 'ws/health.inc'
   );
   $items['report/health'] = array(
     'title' => 'Health Detail',
     'page callback' => 'report_health',
     'page arguments' => array(),
-    'access arguments' => array('access content'),
+    'access callback' => 'user_access',
+    'access arguments' => array('xeros report health'),
     'file' => 'report/health.inc'
   );
   $items['config/static-values'] = array(
@@ -117,4 +118,16 @@ function xeros_report_block_view($delta='') {
   return $block;
 }
 
+function xeros_report_permission() {
+  return array(
+    'xeros report dashboard' => array(
+      'title' => t('View Dashboard Report'),
+      'description' => t('Roles with this permission have the ability to access the dashboard report'),
+    ),
+    'xeros report health' => array(
+      'title' => t('View Health Report'),
+      'description' => t('Roles with this permission have the ability to access the health report'),
+    )
+  );
+}
 
