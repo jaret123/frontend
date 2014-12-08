@@ -9,12 +9,6 @@ var view = {
     model : '',
 
     legendTpl : '',
-
-//    setOptions : function() {
-//        var self = this;
-//        self.machineType = 'xeros';
-//        self.model = 'model_xeros';
-//    },
     // Each report view has a slightly different data structure
     parseData : function(draw, options) {
         var self = this;
@@ -30,7 +24,6 @@ var view = {
             this.model = app.data.options.machine_types[this.machineType]['models'][0];
         }
 
-        //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
         // Industry Averages per cycle
 //        var industryAverages = {
@@ -42,8 +35,6 @@ var view = {
 //            avg_chemical_strength: "17.38840517",
 //            avg_chemical_cost: "1.18185205"
 //        };
-
-        //ar = app.data[self.machineType];
 
         var ar = [
                 {

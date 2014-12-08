@@ -1,6 +1,43 @@
 <?php
 
 /**
+ * METRICS
+ *
+ * Generate the metrics calculations.  Store them in an array and iterate over them
+ *
+ *
+ * Hard coding the multipliers for now
+ *
+ * From ws/industry/averages
+ * {
+ * avg_cold_water_volume: "121.64078133",
+ * avg_cold_water_cost: "1.20101627",
+ * avg_hot_water_volume: "51.41446880",
+ * avg_therms: "0.37381793",
+ * avg_therm_cost: "0.34448701",
+ * avg_chemical_strength: "17.38840517",
+ * avg_chemical_cost: "1.18185205"
+ * }
+ */
+
+/**
+ * On average, industry washers use .37 therms per cycle
+ */
+define('INDUSTRY_THERMS', 0.37381793);
+/**
+ * On average, the industry cost per therm is
+ */
+define('INDUSTRY_THERMS_COST', 0.34448701);
+/**
+ * On average, industry washers use 4x as much water as xeros
+ */
+define('INDUSTRY_WATER_DIFF', 4);
+
+define('XEROS_THERMS', 0);
+
+define('XEROS_THERMS_DIFF', 0);
+
+/**
  * @param        $from_date
  * @param        $to_date
  * @param null   $location_id
@@ -14,6 +51,7 @@
  */
 // TODO: : Add company ID as an optional parameter when we start allowing company level reports
 function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
+
 
   $u = new WsUtils();
 
@@ -153,25 +191,7 @@ SQL;
          1 = 1
 SQL;
 
-    /**
-     * METRICS
-     *
-     * Generate the metrics calculations.  Store them in an array and iterate over them
-     *
-     *
-     * Hard coding the multipliers for now
-     *
-     * From ws/industry/averages
-     * {
-     * avg_cold_water_volume: "121.64078133",
-     * avg_cold_water_cost: "1.20101627",
-     * avg_hot_water_volume: "51.41446880",
-     * avg_therms: "0.37381793",
-     * avg_therm_cost: "0.34448701",
-     * avg_chemical_strength: "17.38840517",
-     * avg_chemical_cost: "1.18185205"
-     * }
-     */
+
 
 
     /**
@@ -356,8 +376,8 @@ METRIC
             case 'cold-water':
               $metric['model_non_xeros_simple'] = array(
                 'summary' => array(
-                  'value' => $metric['actual']['summary']['value'] * 4,
-                  'cost' => $metric['actual']['summary']['cost'] * 4
+                  'value' => $metric['actual']['summary']['value'] * INDUSTRY_WATER_DIFF,
+                  'cost' => $metric['actual']['summary']['cost'] * INDUSTRY_WATER_DIFF
                 )
               );
 
@@ -365,8 +385,8 @@ METRIC
                 foreach ( $metric['actual']['chart'] as $datapoint ) {
                   $metric['model_non_xeros_simple']['chart'][] = array(
                     'date' => $datapoint['date'],
-                    'value' => $datapoint['value'] * 4,
-                    'cost' => $datapoint['cost'] * 4,
+                    'value' => $datapoint['value'] * INDUSTRY_WATER_DIFF,
+                    'cost' => $datapoint['cost'] * INDUSTRY_WATER_DIFF,
                   );
                 }
               }
@@ -378,16 +398,16 @@ METRIC
 
               $metric['model_non_xeros_simple'] = array(
                 'summary' => array(
-                  'value' => $output[$machine_type->model]['cold-water']['actual']['summary']['value'] * .3,
-                  'cost' => $output[$machine_type->model]['cold-water']['actual']['summary']['cost'] * .3
+                  'value' => $output[$machine_type->model]['cold-water']['actual']['summary']['value'] * INDUSTRY_THERMS,
+                  'cost' => $output[$machine_type->model]['cold-water']['actual']['summary']['cost'] * INDUSTRY_THERMS_COST
                 )
               );
               if ( $format !== 'summary' ) {
                 foreach ( $metric['actual']['chart'] as $index => $datapoint ) {
                   $metric['model_non_xeros_simple']['chart'][$index] = array(
                     'date' => $datapoint['date'],
-                    'value' => $output[$machine_type->model]['cold-water']['actual']['chart']['value'][$index] * .3,
-                    'cost' => $output[$machine_type->model]['cold-water']['actual']['chart']['cost'][$index] * .3,
+                    'value' => $output[$machine_type->model]['cold-water']['actual']['chart']['value'][$index] * INDUSTRY_THERMS,
+                    'cost' => $output[$machine_type->model]['cold-water']['actual']['chart']['cost'][$index] * INDUSTRY_THERMS_COST,
                   );
                 }
               }
@@ -409,16 +429,16 @@ METRIC
             case 'cold-water':
               $metric['model_xeros_simple'] = array(
                 'summary' => array(
-                  'value' => $metric['actual']['summary']['value'] * .25,
-                  'cost' => $metric['actual']['summary']['cost'] * .25
+                  'value' => $metric['actual']['summary']['value'] / INDUSTRY_WATER_DIFF,
+                  'cost' => $metric['actual']['summary']['cost'] / INDUSTRY_WATER_DIFF
                 )
               );
               if ( $format !== 'summary' ) {
                 foreach ( $metric['actual']['chart'] as $datapoint ) {
                   $metric['model_xeros_simple']['chart'][] = array(
                     'date' => $datapoint['date'],
-                    'value' => $datapoint['value'] * .25,
-                    'cost' => $datapoint['cost'] * .25,
+                    'value' => $datapoint['value'] / INDUSTRY_WATER_DIFF,
+                    'cost' => $datapoint['cost'] / INDUSTRY_WATER_DIFF,
                   );
                 }
               }
@@ -427,16 +447,16 @@ METRIC
             case 'therms':
               $metric['model_xeros_simple'] = array(
                 'summary' => array(
-                  'value' => $metric['actual']['summary']['value'] * 0,
-                  'cost' => $metric['actual']['summary']['cost'] * 0
+                  'value' => $metric['actual']['summary']['value'] * XEROS_THERMS_DIFF,
+                  'cost' => $metric['actual']['summary']['cost'] * XEROS_THERMS_DIFF
                 )
               );
               if ( $format !== 'summary' ) {
                 foreach ( $metric['actual']['chart'] as $index => $datapoint ) {
                   $metric['model_xeros_simple']['chart'][] = array(
                     'date' => $datapoint['date'],
-                    'value' => 0,
-                    'cost' => 0,
+                    'value' => XEROS_THERMS,
+                    'cost' => XEROS_THERMS,
                   );
                 }
               }
