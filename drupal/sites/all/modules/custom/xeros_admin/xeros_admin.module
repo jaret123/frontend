@@ -85,3 +85,26 @@ function xeros_admin_permission() {
     ),
   );
 }
+
+/**
+ * Implements hook form alter;
+ */
+function xeros_admin_form_alter(&$form, &$form_state, $form_id) {
+
+  // Check when the right form is passed
+  if ($form_id == 'user_profile_form') {
+
+    if (!user_access('xeros admin')) {
+      // Don't allow non admins from changing companies
+      $form['field_company'] = array(
+
+      );
+
+      $form['field_location'] = array(
+
+      );
+    }
+
+
+  }
+}

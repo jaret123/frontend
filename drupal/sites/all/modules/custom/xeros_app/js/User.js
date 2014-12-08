@@ -133,9 +133,9 @@ FF.User = (function ($) {
         for ( var i in c ) {
             var kv = c[i].trim().split("=");
             if ( kv[0] == "sessionDates" ) {
-                var daterange = kv[1].split(",");
-                if (typeof daterange == "object") {
-                    pub.setReportDateRange(daterange);
+                var dr = kv[1];
+                if ( typeof dr == "string" && dr.length > 0 ) {
+                    pub.reportSettings.dates = dr.split(',');
                 }
             }
             if (kv[0] == "sessionTimeSelect") {
