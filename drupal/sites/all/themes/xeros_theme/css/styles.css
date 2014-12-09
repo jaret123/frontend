@@ -4072,27 +4072,28 @@ a:hover, a:active {
 /* line 26, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn {
   font-size: 20px;
-  color: #444444;
+  color: grey;
   cursor: pointer;
   margin-right: 10px;
-  opacity: .75;
+  opacity: 1;
   position: relative;
   width: 90%;
   padding-left: 2px;
 }
 /* line 35, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn.flipper-openbtn {
-  top: -15px;
+  top: -18px;
 }
-/* line 38, ../sass/components/_flipper.scss */
+/* line 39, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn:hover {
   opacity: 1;
+  color: #0086bd;
 }
-/* line 45, ../sass/components/_flipper.scss */
+/* line 47, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
   backface-visibility: hidden;
 }
-/* line 51, ../sass/components/_flipper.scss */
+/* line 53, ../sass/components/_flipper.scss */
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
@@ -4104,7 +4105,7 @@ a:hover, a:active {
   position: relative;
   top: 0px;
 }
-/* line 59, ../sass/components/_flipper.scss */
+/* line 61, ../sass/components/_flipper.scss */
 .flip-container .back {
   font-size: 12px;
   position: absolute;
@@ -4117,7 +4118,7 @@ a:hover, a:active {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-/* line 68, ../sass/components/_flipper.scss */
+/* line 70, ../sass/components/_flipper.scss */
 .flip-container .flipback-backcontainer {
   overflow: hidden;
   height: auto;
@@ -4126,7 +4127,7 @@ a:hover, a:active {
 }
 
 /* flip the pane when hovered */
-/* line 79, ../sass/components/_flipper.scss */
+/* line 81, ../sass/components/_flipper.scss */
 .flip-container.hover .flipper {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -4248,7 +4249,7 @@ a:hover, a:active {
 /* line 45, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row {
   overflow: hidden;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed grey;
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
@@ -4280,7 +4281,7 @@ a:hover, a:active {
 }
 /* line 79, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.last {
-  border-bottom: 1px dashed #444444;
+  border-bottom: 1px dashed grey;
 }
 /* line 83, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.water-only-0 .link {
@@ -4443,7 +4444,7 @@ a:hover, a:active {
 }
 /* line 187, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4:not(:nth-child(1)) .col__wrapper {
-  border: 1px solid #444444;
+  border: 1px solid grey;
   -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   background-color: white;
@@ -4595,7 +4596,7 @@ a:hover, a:active {
   padding-right: 0;
   clear: left;
   display: block;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed grey;
   padding-top: 10px;
   padding-bottom: 10px;
   overflow: hidden;
@@ -4687,7 +4688,7 @@ a:hover, a:active {
 /* line 125, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
 #report-dashboard .container .kpis .row .col-3 .border {
   height: 1px;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed grey;
   width: 60%;
   margin-left: 20%;
   margin-top: 4px;

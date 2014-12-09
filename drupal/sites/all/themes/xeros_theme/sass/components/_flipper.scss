@@ -6,7 +6,7 @@
   $backFontSize:12px;
   $navBarColor:white;
   $border:1px solid rgba(68,68,68, .75);
-
+  $font-color:grey;
   perspective: 1000;
   position:relative;
 
@@ -28,15 +28,17 @@
       color: $font-color;
       cursor: pointer;
       margin-right: 10px;
-      opacity: .75;
+      opacity: 1;
       position: relative;
       width:90%;
       padding-left:2px;
       &.flipper-openbtn {
-        top:-15px;
+        top: -18px;
+
       }
       &:hover {
         opacity: 1;
+        color:#0086bd;
       }
 
     }
