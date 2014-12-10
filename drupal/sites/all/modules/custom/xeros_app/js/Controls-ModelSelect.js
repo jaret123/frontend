@@ -63,7 +63,7 @@ FF.Controls.ModelSelect = (function ($) {
             };
         });
 
-        var options = app.options_tpl( {'data' : machineOptions } );
+        var options = els.optionsTemplate( {'data' : machineOptions } );
         els.machineType.html(options);
         els.machineType.val(view.machineType);
 
@@ -78,7 +78,7 @@ FF.Controls.ModelSelect = (function ($) {
             };
         });
 
-        var options = app.options_tpl( {'data' : machineOptions } );
+        var options = els.optionsTemplate( {'data' : machineOptions } );
         els.machineType.html(options);
         els.machineType.val(view.machineType);
 
@@ -99,7 +99,7 @@ FF.Controls.ModelSelect = (function ($) {
            }
         });
 
-        var options = app.options_tpl( { 'data' : modelOptions } );
+        var options = els.optionsTemplate( { 'data' : modelOptions } );
         els.model.html(options);
         if (calledFromInit) {
             els.model.val(view.model);
@@ -116,7 +116,7 @@ FF.Controls.ModelSelect = (function ($) {
         els.chartOptions = $('#chart-options');
         els.machineType = els.chartOptions.find('.chart-options__machine-type');
         els.model = els.chartOptions.find('.chart-options__model');
-
+        els.optionsTemplate = Handlebars.compile($("#machine-options-tpl").html());
         els.chartOptions.on('show.bs.modal', show);
 
         //els.machineType.on('change', updateModel);
