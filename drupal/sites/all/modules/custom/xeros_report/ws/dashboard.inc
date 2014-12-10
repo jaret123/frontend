@@ -438,7 +438,7 @@ METRIC
                   $metric['model_xeros_simple']['chart'][] = array(
                     'date' => $datapoint['date'],
                     'value' => $datapoint['value'] / INDUSTRY_WATER_DIFF,
-                    'cost' => $datapoint['cost'] / INDUSTRY_WATER_DIFF,
+                    'cost' => $datapoint['cost'] / INDUSTRY_WATER_DIFF, //todo units conversion(locatzation)
                   );
                 }
               }

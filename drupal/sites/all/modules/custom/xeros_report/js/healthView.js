@@ -3,9 +3,11 @@
  */
 var colors = {
     blueOne : "rgba(0,135,190,1)",
-    orange: "rgba(255,185,67,.65)",
-    yellow : "rgba(255,185,67,1)",
-    blueTwo : "rgba(0,135,190,.65)"
+    orange: "rgba(247,146,12,1)",  //old "rgba(255,185,67,.65)",
+    yellow : "rgba(251,229,105,1)", //old yellow : color rgba(255,185,67,1)
+    brown:"rgba(105,69,30,1)",
+    grey:"rgba(172,173,176,1)",
+    blueTwo : "rgba(142,178,209,1)" //"rgba(0,135,190,.65)"
 };
 
 var view = {
@@ -14,11 +16,11 @@ var view = {
     barColor : {
        xeros : {
            actual : colors.blueOne,
-           model : colors.blueTwo,
-           modelSimple : colors.blueTwo
+           model : colors.grey,
+           modelSimple : colors.grey
        },
         nonXeros : {
-            actual : colors.yellow,
+            actual : colors.brown,
             model : colors.orange
         }
     },

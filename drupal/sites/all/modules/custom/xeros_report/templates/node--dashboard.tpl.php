@@ -101,13 +101,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">Select Data to Compare</h4>
+          <h4 class="modal-title">Select Dashboard View</h4>
         </div>
         <div class="modal-body">
           <div id="dataset1-box">
             <label for="machineType">Do you want to look at Xeros or Non-Xeros machines?</label>
             <select id="machineType" class="chart-options__machine-type">
-              <option value="">-select machine type-</option>
+              <option value="">-Select machine type to display-</option>
             </select>
           </div>
           <label for="model">What data do you want to compare to?</label>
@@ -116,7 +116,7 @@
           </select>
         </div>
         <script id="machine-options-tpl" type="text/x-handlebars-template">
-          <option value="0">-select-</option>
+          <option value="0">-Select comparison model-</option>
           {{#each data}}
           <option value="{{@key}}">{{this.name}}</option>
           {{/each}}
