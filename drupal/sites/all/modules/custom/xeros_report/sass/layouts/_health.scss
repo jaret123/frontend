@@ -185,7 +185,7 @@
         }
         &:not(:nth-child(1)) {
           .col__wrapper {
-            border: 1px solid $font-color;
+            border: 1px solid rgba(68,68,68, .25);//$font-color;
             @include box-shadow(1px 1px 3px rgba(50,50,50,.25));
             background-color: white;
           //  padding: 5px;

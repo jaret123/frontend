@@ -4059,7 +4059,7 @@ a:hover, a:active {
 .flip-container .flipper {
   transition: 0.6s;
   transform-style: preserve-3d;
-  border: 1px solid rgba(68, 68, 68, 0.75);
+  border: 1px solid rgba(68, 68, 68, 0.25);
   -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   background-color: white;
@@ -4444,7 +4444,7 @@ a:hover, a:active {
 }
 /* line 187, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4:not(:nth-child(1)) .col__wrapper {
-  border: 1px solid grey;
+  border: 1px solid rgba(68, 68, 68, 0.25);
   -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   background-color: white;
