@@ -1174,55 +1174,56 @@ button.close {
   width: inherit;
   background: no-repeat left bottom;
   background-size: contain;
+  padding-left: 10px;
 }
-/* line 14, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 15, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric .arrow:after,
 .metric .thumb:after {
   font-family: FontAwesome;
 }
-/* line 18, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 19, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric .delta {
   display: inline-block;
 }
-/* line 24, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 25, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric.negative .arrow:after {
   color: #ff0000;
   content: "\f062";
 }
-/* line 30, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 31, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric.negative .thumb:after {
   color: #ff0000;
   content: "\f088";
 }
-/* line 40, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 41, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric.positive .arrow:after {
   color: #00c900;
   content: "\f063";
 }
-/* line 46, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 47, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric.positive .thumb:after {
   color: #00c900;
   content: "\f087";
 }
-/* line 54, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 55, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .metric.delta-none .arrow {
   opacity: 0;
 }
 
-/* line 64, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 65, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .non-xeros .negative .arrow:after {
   color: #00c900;
 }
-/* line 69, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 70, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .non-xeros .negative .thumb:after {
   color: #00c900;
   content: "\f087";
 }
-/* line 77, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 78, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .non-xeros .positive .arrow:after {
   color: #ff0000;
 }
-/* line 82, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+/* line 83, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
 .non-xeros .positive .thumb:after {
   color: #ff0000;
   content: "\f088";
