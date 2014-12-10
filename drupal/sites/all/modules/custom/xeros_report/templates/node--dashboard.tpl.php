@@ -23,8 +23,7 @@
                   <span class="swatch model"></span>
                   <span class="label">{{lineB-key}}</span>
               </script>
-                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i>Select Data</div>
-
+                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span>Select Dashboard View</span></div>
                 <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
                       <span>

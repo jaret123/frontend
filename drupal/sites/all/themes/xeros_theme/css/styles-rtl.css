@@ -5,7 +5,7 @@
 /* Import Sass mixins, variables, Compass modules, etc. */
 /* line 92, ../sass/_init.scss */
 h1, h2 {
-  font-weight: 100;
+  font-weight: 300;
 }
 
 /* line 95, ../sass/_init.scss */
@@ -15,7 +15,7 @@ h3 {
 
 /* line 127, ../sass/_init.scss */
 html {
-  color: #444444;
+  color: #222222;
   font-weight: 300;
 }
 
