@@ -24,9 +24,9 @@ FF.Controls.ModelSelect = (function ($) {
             non_xeros : "Non Xeros"
         },
         models : {
-            model_xeros : "Xeros Model Data (Classification Level Comparison)",
-            model_xeros_simple : "Xeros Model Data (Aggregate Level - Based on Water Consumption)",
-            model_non_xeros_simple : "Non Xeros Data (Aggregate Level - Based on Industry Averages)"
+            model_xeros : "Xeros benchmark based on Classifications",
+            model_xeros_simple : "Xeros benchmark based on total water sewer usage",
+            model_non_xeros_simple : "Non-Xeros benchmark based on Industry Averages"
         }
     }
     function save() {
