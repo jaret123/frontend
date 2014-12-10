@@ -63,18 +63,19 @@
 
       &.first {
         padding-top: 10px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
         .label, .sub-label {
           text-align: center;
         }
         .label {
           font-weight: 400;
+
         }
-        //        .sub-label {
-        //          font-weight: 100;
-        //          font-size: .83em;
-        //		  line-height:1em;
-        //        }
+        .sub-label {
+              font-weight: 100;
+        font-size: .43em;
+       line-height:1em;
+           }
       }
       &.last {
         border-bottom: 1px dashed $font-color;
@@ -122,8 +123,8 @@
         .machine-label {
           //float: left;
           display: inline-block;
-          width: 80px; // Leave for backward compatibility
-          width: calc(100% - 90px);
+          width: 75px; // Leave for backward compatibility
+          width: calc(100% - 120px);
           font-size: 0.8em;
           line-height: 1.5em;
           vertical-align: top;
@@ -182,6 +183,7 @@
             left: 91px;
             color: $font-accent-color;
           }
+
         }
         &:not(:nth-child(1)) {
           .col__wrapper {

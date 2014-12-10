@@ -64,9 +64,11 @@
                         </div>
                         <div class="col col-2">
                             <div class="label">Water Sewer</div>
+                            <div class="sub-label">(in gallons)</div>
                         </div>
                         <div class="col col-3">
-                            <div class="label">Therms</div>
+                            <div class="label">Energy</div>
+                            <div class="sub-label">(in therms)</div>
                         </div>
 <!--                        <div class="col col-4">-->
 <!--                            <div class="label">Cycle Time</div>-->
@@ -78,8 +80,8 @@
 <!--                        </div>-->
                       <div class="health-wrapper">
                         <div class="col col-4">
-                          <div class="label">Health</div>
-                          <div class="label">Action/Update</div>
+                          <div class="label">Health, Action/Update</div>
+                          <!--<div class="label">Action/Update</div> -->
                         </div>
                       </div>
                     </div>
@@ -101,7 +103,7 @@
                                         </div>
                                         <div class="machine-label">
                                             {{info.machine_name}} <br/>
-                                            {{info.manufacturer}} <br/>
+                                           <!-- {{info.manufacturer}} <br/> -->
                                             {{#if info.water_only}}
                                             <span>Water Only</span> <br/>
                                             {{else}}

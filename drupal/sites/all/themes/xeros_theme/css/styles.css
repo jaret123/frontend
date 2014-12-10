@@ -4269,7 +4269,7 @@ a:hover, a:active {
 /* line 64, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.first {
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
 /* line 67, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.first .label, #report-health .consumption-container .row.first .sub-label {
@@ -4279,19 +4279,25 @@ a:hover, a:active {
 #report-health .consumption-container .row.first .label {
   font-weight: 400;
 }
-/* line 79, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 74, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.first .sub-label {
+  font-weight: 100;
+  font-size: .43em;
+  line-height: 1em;
+}
+/* line 80, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.last {
   border-bottom: 1px dashed grey;
 }
-/* line 83, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 84, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.water-only-0 .link {
   cursor: pointer;
 }
-/* line 86, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 87, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.water-only-0 .link:hover {
   opacity: 0.8;
 }
-/* line 90, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 91, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 {
   float: left;
   width: 20%;
@@ -4306,18 +4312,18 @@ a:hover, a:active {
   word-wrap: break-word;
   font-weight: 300;
 }
-/* line 94, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 95, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .small {
   font-size: 9px;
 }
-/* line 95, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 96, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-Washer {
   font-size: 80px;
   width: 80px;
   display: inline-block;
   position: relative;
 }
-/* line 101, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 102, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-washer-label {
   position: absolute;
   top: 38px;
@@ -4327,33 +4333,33 @@ a:hover, a:active {
   text-align: center;
   font-family: "Lato", Helvetica, "Nimbus Sans L", sans-serif;
 }
-/* line 109, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 110, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-washer-label.digits-4 {
   font-size: 14px;
 }
-/* line 112, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 113, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-washer-label.digits-5 {
   font-size: 13px;
 }
-/* line 115, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 116, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .icon-washer-label.digits-6 {
   font-size: 12px;
 }
-/* line 119, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 120, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .Xeros .icon-washer-label {
   top: 44px;
 }
-/* line 122, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 123, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-1 .machine-label {
   display: inline-block;
-  width: 80px;
-  width: calc(100% - 90px);
+  width: 75px;
+  width: calc(100% - 120px);
   font-size: 0.8em;
   line-height: 1.5em;
   vertical-align: top;
   margin-top: 12px;
 }
-/* line 134, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 135, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 {
   float: left;
   width: 20%;
@@ -4367,7 +4373,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 137, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 138, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-3 {
   float: left;
   width: 20%;
@@ -4381,7 +4387,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 140, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 141, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 {
   float: left;
   width: 40%;
@@ -4395,7 +4401,7 @@ a:hover, a:active {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 145, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 146, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 img.bar-chart, #report-health .consumption-container .row .col-3 img.bar-chart, #report-health .consumption-container .row .col-4 img.bar-chart {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
@@ -4406,7 +4412,7 @@ a:hover, a:active {
   margin-bottom: -4px;
   position: relative;
 }
-/* line 151, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 152, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 .labels, #report-health .consumption-container .row .col-3 .labels, #report-health .consumption-container .row .col-4 .labels {
   position: relative;
   display: inline-block;
@@ -4414,35 +4420,35 @@ a:hover, a:active {
   font-weight: 300;
   margin-left: 1px;
 }
-/* line 160, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 161, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-2 .labels .potential, #report-health .consumption-container .row .col-3 .labels .potential, #report-health .consumption-container .row .col-4 .labels .potential {
   color: #0087be;
   margin-left: -40px;
   margin-top: -5px;
 }
-/* line 168, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 169, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 img {
   display: inline-block;
 }
-/* line 171, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 172, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels {
   display: inline-block;
   font-size: 11px;
 }
-/* line 174, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 175, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels .actual {
   position: absolute;
   top: 10px;
   left: 74px;
 }
-/* line 179, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 180, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4 .labels .potential {
   position: absolute;
   top: -15px;
   left: 91px;
   color: #0087be;
 }
-/* line 187, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 189, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-4:not(:nth-child(1)) .col__wrapper {
   border: 1px solid rgba(68, 68, 68, 0.25);
   -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
@@ -4450,7 +4456,7 @@ a:hover, a:active {
   background-color: white;
   padding-left: 5px;
 }
-/* line 197, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 199, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 img.bar-chart {
   -webkit-transform: rotate(90deg) scaleY(2);
   -moz-transform: rotate(90deg) scaleY(2);
@@ -4458,19 +4464,19 @@ a:hover, a:active {
   -o-transform: rotate(90deg) scaleY(2);
   transform: rotate(90deg) scaleY(2);
 }
-/* line 201, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 203, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 .labels .actual {
   color: white;
   z-index: 10;
   margin-left: 0px;
 }
-/* line 206, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 208, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row .col-5 .labels .potential {
   color: #0087be;
   margin-left: -37px;
   margin-top: -5px;
 }
-/* line 214, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 216, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.non-xeros {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #f0f0f0), color-stop(50%, #f5f5f5), color-stop(100%, #f0f0f0));
   background-image: -webkit-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
@@ -4478,7 +4484,7 @@ a:hover, a:active {
   background-image: -o-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
   background-image: linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
 }
-/* line 217, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 219, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.xeros {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e5f4fa), color-stop(50%, #f2f9fc), color-stop(100%, #e5f4fa));
   background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
@@ -4487,13 +4493,13 @@ a:hover, a:active {
   background-image: linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
 }
 
-/* line 229, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 231, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 .status_data_icon {
   width: 20%;
   float: left;
 }
 
-/* line 234, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 236, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 .status_data {
   padding-right: 2px;
   text-align: left;
