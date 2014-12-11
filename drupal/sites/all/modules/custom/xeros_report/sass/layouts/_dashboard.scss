@@ -16,6 +16,15 @@
     z-index: 10;
   }
 
+
+  #model__dl  {
+    dd {
+      ul{
+        min-width: 368px;
+      }
+    }
+
+  }
   .legend .swatch.current {
     background-color: white;
     border: 1px solid gray;
