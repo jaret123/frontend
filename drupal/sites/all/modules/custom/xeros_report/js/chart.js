@@ -334,7 +334,7 @@ var chart = {
         classes = chart.classes;
 
         var margin = {top: 10, right: 20, bottom: 0, left: 20},
-            width = 120 - (margin.left + margin.right),
+            width = 150 - (margin.left + margin.right),
             height = 100 - (margin.top + margin.bottom),
             barHeight = 28; //todo changes this and above to adjust size
 
