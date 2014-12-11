@@ -1033,15 +1033,16 @@ button.close {
 .modal-title {
   margin: 0;
   line-height: 1.42857;
+  font-weight: 400;
 }
 
-/* line 95, ../sass/bootstrap/_modals.scss */
+/* line 96, ../sass/bootstrap/_modals.scss */
 .modal-body {
   position: relative;
   padding: 15px;
 }
 
-/* line 101, ../sass/bootstrap/_modals.scss */
+/* line 102, ../sass/bootstrap/_modals.scss */
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -1056,21 +1057,21 @@ button.close {
 .modal-footer:after {
   clear: both;
 }
-/* line 108, ../sass/bootstrap/_modals.scss */
+/* line 109, ../sass/bootstrap/_modals.scss */
 .modal-footer .btn + .btn {
   margin-left: 5px;
   margin-bottom: 0;
 }
-/* line 113, ../sass/bootstrap/_modals.scss */
+/* line 114, ../sass/bootstrap/_modals.scss */
 .modal-footer .btn-group .btn + .btn {
   margin-left: -1px;
 }
-/* line 117, ../sass/bootstrap/_modals.scss */
+/* line 118, ../sass/bootstrap/_modals.scss */
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
 }
 
-/* line 123, ../sass/bootstrap/_modals.scss */
+/* line 124, ../sass/bootstrap/_modals.scss */
 .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;
@@ -1080,25 +1081,25 @@ button.close {
 }
 
 @media (min-width: 768px) {
-  /* line 134, ../sass/bootstrap/_modals.scss */
+  /* line 135, ../sass/bootstrap/_modals.scss */
   .modal-dialog {
     width: 600px;
     margin: 30px auto;
   }
 
-  /* line 138, ../sass/bootstrap/_modals.scss */
+  /* line 139, ../sass/bootstrap/_modals.scss */
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 
-  /* line 143, ../sass/bootstrap/_modals.scss */
+  /* line 144, ../sass/bootstrap/_modals.scss */
   .modal-sm {
     width: 300px;
   }
 }
 @media (min-width: 992px) {
-  /* line 147, ../sass/bootstrap/_modals.scss */
+  /* line 148, ../sass/bootstrap/_modals.scss */
   .modal-lg {
     width: 900px;
   }
