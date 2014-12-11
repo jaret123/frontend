@@ -24,7 +24,7 @@ FF.Controls.ModelSelect = (function ($) {
             non_xeros : "Non Xeros"
         },
         models : {
-            model_xeros : "Xeros benchmark based on Classifications",
+            model_xeros : "Xeros benchmark based on classifications",
             model_xeros_simple : "Xeros benchmark based on total water sewer usage",
             model_non_xeros_simple : "Non-Xeros benchmark based on Industry Averages"
         }
