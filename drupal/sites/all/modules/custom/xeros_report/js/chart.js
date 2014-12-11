@@ -336,7 +336,7 @@ var chart = {
         var margin = {top: 10, right: 20, bottom: 0, left: 20},
             width = 120 - (margin.left + margin.right),
             height = 100 - (margin.top + margin.bottom),
-            barHeight = 20;
+            barHeight = 28; //todo changes this and above to adjust size
 
         var x = d3.scale.linear()
             .domain([0, domainMax])
