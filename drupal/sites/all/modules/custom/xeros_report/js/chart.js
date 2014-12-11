@@ -387,7 +387,8 @@ var chart = {
                     return "#FFF";
                 }
                 else {
-                    return colors[1];
+                    return colors[i];
+
                 }
 
             })
