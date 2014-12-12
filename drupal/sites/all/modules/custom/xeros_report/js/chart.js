@@ -334,9 +334,9 @@ var chart = {
         classes = chart.classes;
 
         var margin = {top: 10, right: 20, bottom: 0, left: 20},
-            width = 150 - (margin.left + margin.right),
+            width = 200 - (margin.left + margin.right),
             height = 100 - (margin.top + margin.bottom),
-            barHeight = 28; //todo changes this and above to adjust size
+            barHeight = 32; //todo changes this and above to adjust size
 
         var x = d3.scale.linear()
             .domain([0, domainMax])
@@ -402,7 +402,7 @@ var chart = {
             .attr("fill", "white")
             .attr("stroke", "none")
             .attr("font-family", "Arial")
-            .attr("font-size", "12px");
+            .attr("font-size", "14px");
     },
     drawDonut: function () {
         self = this;

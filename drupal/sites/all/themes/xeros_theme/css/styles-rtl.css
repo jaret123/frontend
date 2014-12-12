@@ -13,7 +13,12 @@ h3 {
   font-weight: 300;
 }
 
-/* line 127, ../sass/_init.scss */
+/* line 98, ../sass/_init.scss */
+b, strong {
+  font-weight: 300;
+}
+
+/* line 130, ../sass/_init.scss */
 html {
   color: #222222;
   font-weight: 300;
