@@ -8,12 +8,10 @@
  */
 ?>
 <div id="report-dashboard" class="main page">
-
     <div class="page-container">
         <div class="container">
             <div class="kpis">
               <div class="chart-header">
-
               <div class="legend">
               </div>
               <script id="legend-tpl" type="text/x-handlebars-template">
@@ -105,18 +103,18 @@
         </div>
         <div class="modal-body">
           <div id="dataset1-box">
-            <label for="machineType">Do you want to look at Xeros or Non-Xeros machines?</label>
+            <label for="machineType">Select machine type to display</label>
             <select id="machineType" class="chart-options__machine-type">
-              <option value="">-Select machine type to display-</option>
+              <option value="">-Select-</option>
             </select>
           </div>
-          <label for="model">What data do you want to compare to?</label>
+          <label for="model">Select comparison model</label>
           <select id="model" class="chart-options__model" autofocus="">
-            <option value="">-select model-</option>
+            <option value="">-select-</option>
           </select>
         </div>
         <script id="machine-options-tpl" type="text/x-handlebars-template">
-          <option value="0">-Select comparison model-</option>
+          <option value="0">-Select-</option>
           {{#each data}}
           <option value="{{@key}}">{{this.name}}</option>
           {{/each}}
