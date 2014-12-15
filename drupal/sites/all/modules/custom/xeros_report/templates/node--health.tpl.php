@@ -159,7 +159,7 @@
                                         </div>
                                         <div class="status_data">
                                       {{#if actionData.action_title.data}}
-                                      <div><strong>{{actionData.action_created}}:</strong><br/> {{actionData.action_title.data}}</div>
+                                      <div><strong>{{actionData.action_created}}</strong><br/> {{actionData.action_title.data}}</div>
                                       {{/if}}
                                         </div>
                                     </div>
