@@ -5,7 +5,7 @@
  */
 ?>
 <?php //if (isset($node->nid)): ?>
-<!--  --><?php //if ( user_access('xeros change location') && ($node->nid == 2 || $node->nid == 3) ): ?>
+  <?php if ( user_access('xeros change location') ): ?>
     <div class="location-picker">
       <div class="location-picker__wrapper">
         <a href="#" class="location-picker__button">Menu</a>
@@ -30,5 +30,5 @@
         </script>
       </div>
     </div>
-<!--  --><?php // endif; ?>
+  <?php  endif; ?>
 <?php // endif; ?>
