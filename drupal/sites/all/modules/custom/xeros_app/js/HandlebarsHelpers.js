@@ -139,7 +139,9 @@ Handlebars.registerHelper('formatDeltaValue', function(value) {
 })
 
 Handlebars.registerHelper('digits', function(cycles) {
-    if (typeof cycles !== "undefined") {
+    //TODO Why would cycles come in as null
+    if (typeof(cycles) != "undefined" && cycles !==null) {
+        console.log(cycles);
         return 'digits-' + cycles.toString().length;
     } else {
         return '';
