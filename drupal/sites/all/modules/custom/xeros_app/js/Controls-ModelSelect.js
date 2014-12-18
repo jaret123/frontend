@@ -31,19 +31,25 @@ FF.Controls.ModelSelect = (function ($) {
     }
     function save() {
         els.chartOptions.hide();
+
         app.fadeReport();
         setTimeout(function() {
             view.parseData(app.showReport, {
                 machineType : els.machineType.val(),
                 model : els.model.val()
             });
+            $('body').removeClass('modal-open');
         }, 300);
+
         console.log("saving the buttons");
+
     }
 
     function show(e) {
+
         // If there is no data yet, don't open
         if (_.isEmpty(app.data) || view.machineType == '' || view.model == '') {
+
             return e.preventDefault();
         } else {
             showMachineTypes(e);
