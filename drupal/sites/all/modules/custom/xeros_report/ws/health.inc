@@ -12,6 +12,30 @@
  * Location - 10 - Sterling Headquarters
  * Machines - 6 ( Milnor ), 7 ( Xeros)
  */
+
+/**
+ * On average, industry washers use .37 therms per cycle
+ */
+define('INDUSTRY_THERMS', 0.37381793);
+/**
+ * On average, the industry cost per therm is
+ */
+define('INDUSTRY_THERMS_COST', 0.34448701);
+/**
+ * On average, industry washers use 4x as much water as xeros
+ */
+define('INDUSTRY_WATER_DIFF', 4);
+
+define('XEROS_THERMS', 0);
+
+define('XEROS_THERMS_DIFF', 0);
+
+define('INDUSTRY_THERMS_PER_GALLON', .1);
+
+define('INDUSTRY_HOT_WATER_RATIO', .4);
+
+include_once (drupal_get_path('module', 'xeros_admin') . '/db/location_profile.inc');
+
 // TODO: : Add company ID as an optional parameter when we start allowing company level reports
 function ws_health($location_ids = '', $from_date, $to_date ) {
 
@@ -44,6 +68,10 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
     }
   }
 
+  $lp = new location_profile();
+
+  // Get the location specific values (needed for the new calculations)
+  $location_profiles = $lp->select_locations($location_ids);
 
   $output = array();
   $kpis = array();
@@ -157,6 +185,9 @@ SQL;
    *
    *               cold_water_actual * static_hot_water_ratio * static_therms_per_gallon
    *
+   *               cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio = Hot water used by a Non-Xeros machine
+   *               (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
+   *
    * Non Xeros
    *
    * When a machine is a non xeros machine - compare to high level theoretical Xeros differences.
@@ -221,15 +252,17 @@ SQL;
 
     switch($data->info->machine_type) {
       case 'xeros':
-        $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * 4;
-        $data->model_non_xeros_simple->therms = $data->actual->cold_water * .5 * 3.2;
+        $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * INDUSTRY_WATER_DIFF;
+        $data->model_non_xeros_simple->therms = conversion('non-xeros-therms', array(
+                                                                                'xeros_cold_water' => $data->actual->cold_water,
+                                                                                'location' => $location_profiles[$location_id]));
         $data->model_non_xeros_simple->active = true;
 
         $data->model_xeros_simple->notes = 'Because this machine is a xeros machine the xeros_simple model is not available.';
         $data->model_xeros_simple->active = false;
         break;
       case 'non-xeros':
-        $data->model_xeros_simple->cold_water = $data->actual->cold_water * .25;
+        $data->model_xeros_simple->cold_water = $data->actual->cold_water / INDUSTRY_WATER_DIFF;
         $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
         $data->model_xeros_simple->active = true;
 
@@ -257,3 +290,33 @@ SQL;
 
 }
 
+/**
+*               cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio = Hot water used by a Non-Xeros machine
+*               (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
+**/
+
+function conversion($conversion, $values = array()) {
+
+  switch ($conversion) {
+
+    /**
+     *  array(
+     *    'xeros_cold_water' => int,
+     *    'location' = location object
+     *  )
+     */
+    case 'non-xeros-therms':
+      $location = $values['location'];
+
+      // Hot water used by a Non-Xeros machine = cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio
+      $non_xeros_hot_water = $values['xeros_cold_water'] * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
+
+      // Non Xeros Therms = (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
+      $non_xeros_therms = ($non_xeros_hot_water * 8.34 * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion'];
+
+      return $non_xeros_therms;
+
+    default:
+      return null;
+  }
+}

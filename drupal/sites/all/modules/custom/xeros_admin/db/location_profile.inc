@@ -27,4 +27,25 @@ class location_profile extends orm_abstract {
     }
     return $rows;
   }
+
+  function select_locations($location_ids = array()) {
+
+    $select = db_select($this->table, 'a');
+    $select->fields('a', $this->fields);
+
+    if (count($location_ids) > 0) {
+      $select->condition('a.location_id', implode(',', $location_ids));
+      $entries = $select->execute()->fetchAll(PDO::FETCH_ASSOC);
+      $rows = array();
+      if (!empty($entries)) {
+        foreach ($entries as $entry) {
+          // Sanitize the data before handing it off to the theme layer.
+          $rows[$entry['location_id']] = array_map('check_plain', $entry);
+        }
+      }
+      return $rows;
+    } else {
+      return NULL;
+    }
+  }
 }

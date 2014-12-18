@@ -2,6 +2,14 @@
 
 function ws_industry_averages() {
 
+  $record = get_industry_averages();
+
+  echo json_encode($record);
+
+}
+
+function get_industry_averages() {
+
   $query = <<<SQL
   select
       avg(cycle_cold_water_volume) as avg_cold_water_volume,
@@ -20,6 +28,11 @@ SQL;
 
   $record = $result->fetchObject();
 
-  echo json_encode($record);
+  foreach ($record as $key => $value) {
+    $record->$key = (float)$value;
+  }
 
+  $record->avg_therm_per_gallon_hot_water = $record->avg_therms / $record->avg_hot_water_volume;
+
+  return $record;
 }
