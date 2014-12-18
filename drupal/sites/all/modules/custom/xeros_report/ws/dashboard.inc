@@ -5,37 +5,10 @@
  *
  * Generate the metrics calculations.  Store them in an array and iterate over them
  *
- *
- * Hard coding the multipliers for now
- *
- * From ws/industry/averages
- * {
- * avg_cold_water_volume: "121.64078133",
- * avg_cold_water_cost: "1.20101627",
- * avg_hot_water_volume: "51.41446880",
- * avg_therms: "0.37381793",
- * avg_therm_cost: "0.34448701",
- * avg_chemical_strength: "17.38840517",
- * avg_chemical_cost: "1.18185205"
- * }
- */
+**/
 
-/**
- * On average, industry washers use .37 therms per cycle
- */
-define('INDUSTRY_THERMS', 0.37381793);
-/**
- * On average, the industry cost per therm is
- */
-define('INDUSTRY_THERMS_COST', 0.34448701);
-/**
- * On average, industry washers use 4x as much water as xeros
- */
-define('INDUSTRY_WATER_DIFF', 4);
+include_once (drupal_get_path('module', 'xeros_report') . '/conversion.inc');
 
-define('XEROS_THERMS', 0);
-
-define('XEROS_THERMS_DIFF', 0);
 
 /**
  * @param        $from_date
@@ -191,9 +164,6 @@ SQL;
          1 = 1
 SQL;
 
-
-
-
     /**
      *
      * If it's a xeros machine, then the actual data is the actual data (ie - water measured from a xeros machine)
@@ -246,11 +216,6 @@ METRIC
 //   		count(*) * 1.18185 as cost_xeros -- Model data
 //METRIC
 //            ));
-
-
-
-
-
 
     /**
      * Calculate the metrics
