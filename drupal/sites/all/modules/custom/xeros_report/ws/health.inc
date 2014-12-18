@@ -252,18 +252,16 @@ SQL;
 
     switch($data->info->machine_type) {
       case 'xeros':
-        $data->model_non_xeros_simple->cold_water = $data->actual->cold_water * INDUSTRY_WATER_DIFF;
-        $data->model_non_xeros_simple->therms = conversion('non-xeros-therms', array(
-                                                                                'xeros_cold_water' => $data->actual->cold_water,
-                                                                                'location' => $location_profiles[$location_id]));
+        $data->model_non_xeros_simple->cold_water = convert_non_xeros_water($data->actual->cold_water);
+        $data->model_non_xeros_simple->therms = convert_non_xeros_therms($data->actual->cold_water, $location_profiles[$location_id]);
         $data->model_non_xeros_simple->active = true;
 
         $data->model_xeros_simple->notes = 'Because this machine is a xeros machine the xeros_simple model is not available.';
         $data->model_xeros_simple->active = false;
         break;
       case 'non-xeros':
-        $data->model_xeros_simple->cold_water = $data->actual->cold_water / INDUSTRY_WATER_DIFF;
-        $data->model_xeros_simple->therms = $data->actual->cold_water * 0;
+        $data->model_xeros_simple->cold_water = convert_xeros_water($data->actual->cold_water);
+        $data->model_xeros_simple->therms = convert_xeros_therms($data->actual->cold_water);
         $data->model_xeros_simple->active = true;
 
         $data->model_non_xeros_simple->notes = 'Because this machine is a nonxeros machine the non_xeros_simple model is not available.';
@@ -295,28 +293,33 @@ SQL;
 *               (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
 **/
 
-function conversion($conversion, $values = array()) {
 
-  switch ($conversion) {
+function convert_non_xeros_therms($xeros_cold_water, $location) {
 
-    /**
-     *  array(
-     *    'xeros_cold_water' => int,
-     *    'location' = location object
-     *  )
-     */
-    case 'non-xeros-therms':
-      $location = $values['location'];
+    // Hot water used by a Non-Xeros machine = cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio
+    $non_xeros_hot_water = $xeros_cold_water * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
 
-      // Hot water used by a Non-Xeros machine = cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio
-      $non_xeros_hot_water = $values['xeros_cold_water'] * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
+    // Non Xeros Therms = (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
+    $non_xeros_therms = ($non_xeros_hot_water * 8.34 * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion'];
 
-      // Non Xeros Therms = (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
-      $non_xeros_therms = ($non_xeros_hot_water * 8.34 * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion'];
+    return $non_xeros_therms;
 
-      return $non_xeros_therms;
-
-    default:
-      return null;
-  }
 }
+
+function convert_non_xeros_water($xeros_cold_water) {
+
+  return $xeros_cold_water * INDUSTRY_WATER_DIFF;
+}
+
+function convert_xeros_water($non_xeros_water) {
+
+  return $non_xeros_water / INDUSTRY_WATER_DIFF;
+
+}
+
+function convert_xeros_therms($non_xeros_water) {
+
+  return $non_xeros_water * 0;
+
+}
+
