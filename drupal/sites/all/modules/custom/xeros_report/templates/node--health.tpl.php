@@ -119,7 +119,7 @@
                                 <div class="col col-2 metric flip-container {{delta.cold_water.cssClass}}" classification="cold_water" machine="{{id}}" chart="cold_water-{{info.machine_id}}">
                                     <div class="flipper col__wrapper">
                                         <div class="front">
-                                            <div class="flipper-navbar"><div id="flipperbtn" class="flipper-navbtn flipper-openbtn fa fa-question-circle" title="Click for more information"></div></div>
+                                            <div class="flipper-navbar"><div id="flipperbtn" class="flipper-navbtn flipper-openbtn fa fa-question-circle" data-toggle="tooltip" data-placement="left" title="Click for more information"></div></div>
                                                 <div class="flipper-frontcontainer">
                                                      <div class="chart" name="{{info.machine_id}}-cold_water"></div>
                                                      <div class="delta" data="{{delta.cold_water.value}}">{{formatDeltaValue delta.cold_water.value}}</div>
@@ -128,7 +128,7 @@
                                                 </div>
                                             </div>
                                         <div class="back">
-                                            <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close" title="Close"></div></div>
+                                            <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close" title="Close" data-toggle="tooltip" data-placement="left" ></div></div>
                                            <div class="flipper-backcontainer">
                                                {{delta.cold_water.message}}</div>
                                         </div>
@@ -137,7 +137,7 @@
                                 <div class="col col-3 metric flip-container {{delta.therms.cssClass}}" classification="hot_water" machine="{{id}}" chart="hot_water-{{info.machine_id}}">
                                   <div class="flipper col__wrapper">
                                         <div class="front">
-                                              <div class="flipper-navbar"><div class="flipper-navbtn flipper-openbtn fa fa-question-circle" title="Click for more information"></div></div>
+                                              <div class="flipper-navbar"><div class="flipper-navbtn flipper-openbtn fa fa-question-circle" data-toggle="tooltip" data-placement="left"  title="Click for more information"></div></div>
                                               <div class="flipper-container flipper-front-container">
                                                   <div class="chart" name="{{info.machine_id}}-hot_water"></div>
                                                   <div class="delta" data="{{delta.therms.value}}">{{formatDeltaValue delta.therms.value}}</div>
@@ -146,7 +146,7 @@
                                              </div>
                                         </div>
                                       <div class="back">
-                                          <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close" title="Close"></div></div>
+                                          <div class="flipper-navbar"><div class="flipper-navbtn flipper-closebtn fa fa-close" data-toggle="tooltip" data-placement="left"  title="Close"></div></div>
                                           <div class="flipper-backcontainer">{{delta.therms.message}}</div>
                                       </div>
                                   </div>
