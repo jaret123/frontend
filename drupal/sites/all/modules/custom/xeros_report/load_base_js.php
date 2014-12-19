@@ -5,6 +5,7 @@ function load_base_js($variables, $hook) {
 
   // Libraries common to all modules
   drupal_add_js(drupal_get_path('theme', 'xeros_theme') . '/js/bootstrap/modal.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+  drupal_add_js(drupal_get_path('theme', 'xeros_theme') . '/js/bootstrap/tooltip.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/libs/underscore-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/libs/alertFallback.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Format.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
