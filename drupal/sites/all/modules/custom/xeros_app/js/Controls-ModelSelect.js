@@ -38,7 +38,9 @@ FF.Controls.ModelSelect = (function ($) {
                 machineType : els.machineType.val(),
                 model : els.model.val()
             });
+
             $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
         }, 300);
 
         console.log("saving the buttons");

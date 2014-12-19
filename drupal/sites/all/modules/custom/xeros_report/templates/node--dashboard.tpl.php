@@ -121,7 +121,7 @@
         </script>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary chart-options__save">Save changes</button>
+          <button type="button" class="btn btn-primary chart-options__save" data-dismiss="modal" >Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
