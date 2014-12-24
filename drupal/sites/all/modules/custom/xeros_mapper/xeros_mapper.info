@@ -2,4 +2,5 @@ name = Xeros Wash Cycle Mapper Admin Interface
 description = Provides an administration interface for viewing, editing, and re-mapping wash cyles.
 package = Xeros
 core = 7.x
-dependencies[] = xeros_admin
+
+#dependencies[] = xeros_admin

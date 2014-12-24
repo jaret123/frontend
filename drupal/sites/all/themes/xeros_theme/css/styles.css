@@ -10,7 +10,7 @@
 /* Import Sass mixins, variables, Compass modules, etc. */
 /* line 92, ../sass/_init.scss */
 h1, h2 {
-  font-weight: 100;
+  font-weight: 300;
 }
 
 /* line 95, ../sass/_init.scss */
@@ -18,9 +18,14 @@ h3 {
   font-weight: 300;
 }
 
-/* line 127, ../sass/_init.scss */
+/* line 98, ../sass/_init.scss */
+b, strong {
+  font-weight: 300;
+}
+
+/* line 130, ../sass/_init.scss */
 html {
-  color: #444444;
+  color: #222222;
   font-weight: 300;
 }
 
@@ -252,7 +257,7 @@ abbr[title] {
 /* line 223, ../sass/_normalize.scss */
 b,
 strong {
-  font-weight: bold;
+  font-weight: 400;
 }
 
 /* Address styling not present in Safari 5 and Chrome. */
@@ -595,49 +600,557 @@ table {
   margin-bottom: 1.5em;
 }
 
+/* line 9, ../sass/bootstrap/_buttons.scss */
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 1px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* line 27, ../sass/bootstrap/_buttons.scss */
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+/* line 34, ../sass/bootstrap/_buttons.scss */
+.btn:hover, .btn:focus, .btn.focus {
+  color: #333333;
+  text-decoration: none;
+}
+/* line 40, ../sass/bootstrap/_buttons.scss */
+.btn:active, .btn.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+/* line 48, ../sass/bootstrap/_buttons.scss */
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/* line 60, ../sass/bootstrap/_buttons.scss */
+.btn-default {
+  color: #333333;
+  background-color: white;
+  border-color: #cccccc;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+  color: #333333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
+  background-color: white;
+  border-color: #cccccc;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-default .badge {
+  color: white;
+  background-color: #333333;
+}
+
+/* line 63, ../sass/bootstrap/_buttons.scss */
+.btn-primary {
+  color: white;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+  color: white;
+  background-color: #286090;
+  border-color: #204d74;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-primary .badge {
+  color: #337ab7;
+  background-color: white;
+}
+
+/* line 67, ../sass/bootstrap/_buttons.scss */
+.btn-success {
+  color: white;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
+  color: white;
+  background-color: #449d44;
+  border-color: #398439;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-success:active, .btn-success.active, .open > .btn-success.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled.focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled].focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success.focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-success .badge {
+  color: #5cb85c;
+  background-color: white;
+}
+
+/* line 71, ../sass/bootstrap/_buttons.scss */
+.btn-info {
+  color: white;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+  color: white;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled].focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-info .badge {
+  color: #5bc0de;
+  background-color: white;
+}
+
+/* line 75, ../sass/bootstrap/_buttons.scss */
+.btn-warning {
+  color: white;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-warning:hover, .btn-warning:focus, .btn-warning.focus, .btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
+  color: white;
+  background-color: #ec971f;
+  border-color: #d58512;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled.focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled].focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning.focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-warning .badge {
+  color: #f0ad4e;
+  background-color: white;
+}
+
+/* line 79, ../sass/bootstrap/_buttons.scss */
+.btn-danger {
+  color: white;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+/* line 16, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
+  color: white;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+/* line 23, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
+  background-image: none;
+}
+/* line 34, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+/* line 40, ../sass/bootstrap/mixins/_buttons.scss */
+.btn-danger .badge {
+  color: #d9534f;
+  background-color: white;
+}
+
+/* line 88, ../sass/bootstrap/_buttons.scss */
+.btn-link {
+  color: #337ab7;
+  font-weight: normal;
+  border-radius: 0;
+}
+/* line 97, ../sass/bootstrap/_buttons.scss */
+.btn-link, .btn-link:active, .btn-link.active, .btn-link[disabled], fieldset[disabled] .btn-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* line 104, ../sass/bootstrap/_buttons.scss */
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+  border-color: transparent;
+}
+/* line 108, ../sass/bootstrap/_buttons.scss */
+.btn-link:hover, .btn-link:focus {
+  color: #23527c;
+  text-decoration: underline;
+  background-color: transparent;
+}
+/* line 116, ../sass/bootstrap/_buttons.scss */
+.btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
+  color: #777777;
+  text-decoration: none;
+}
+
+/* line 127, ../sass/bootstrap/_buttons.scss */
+.btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+
+/* line 131, ../sass/bootstrap/_buttons.scss */
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+/* line 135, ../sass/bootstrap/_buttons.scss */
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+/* line 143, ../sass/bootstrap/_buttons.scss */
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* line 149, ../sass/bootstrap/_buttons.scss */
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+/* line 157, ../sass/bootstrap/_buttons.scss */
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+/* line 113, ../sass/bootstrap/_scaffolding.scss */
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}
+
+/* line 125, ../sass/bootstrap/_scaffolding.scss */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* line 142, ../sass/bootstrap/_scaffolding.scss */
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+/* line 6, ../sass/bootstrap/_close.scss */
+.close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: black;
+  text-shadow: 0 1px 0 white;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+/* line 16, ../sass/bootstrap/_close.scss */
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+/* line 29, ../sass/bootstrap/_close.scss */
+button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+/* line 11, ../sass/bootstrap/_modals.scss */
+.modal-open {
+  overflow: hidden;
+}
+
+/* line 16, ../sass/bootstrap/_modals.scss */
+.modal {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}
+/* line 32, ../sass/bootstrap/_modals.scss */
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+/* line 36, ../sass/bootstrap/_modals.scss */
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+/* line 38, ../sass/bootstrap/_modals.scss */
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* line 44, ../sass/bootstrap/_modals.scss */
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px;
+}
+
+/* line 51, ../sass/bootstrap/_modals.scss */
+.modal-content {
+  position: relative;
+  background-color: white;
+  border: 1px solid #999999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  outline: 0;
+}
+
+/* line 64, ../sass/bootstrap/_modals.scss */
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: black;
+}
+/* line 71, ../sass/bootstrap/_modals.scss */
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+/* line 72, ../sass/bootstrap/_modals.scss */
+.modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+/* line 77, ../sass/bootstrap/_modals.scss */
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 16.42857px;
+}
+
+/* line 83, ../sass/bootstrap/_modals.scss */
+.modal-header .close {
+  margin-top: -2px;
+}
+
+/* line 88, ../sass/bootstrap/_modals.scss */
+.modal-title {
+  margin: 0;
+  line-height: 1.42857;
+  font-weight: 400;
+}
+
+/* line 96, ../sass/bootstrap/_modals.scss */
+.modal-body {
+  position: relative;
+  padding: 15px;
+}
+
+/* line 102, ../sass/bootstrap/_modals.scss */
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+/* line 15, ../sass/bootstrap/mixins/_clearfix.scss */
+.modal-footer:before, .modal-footer:after {
+  content: " ";
+  display: table;
+}
+/* line 19, ../sass/bootstrap/mixins/_clearfix.scss */
+.modal-footer:after {
+  clear: both;
+}
+/* line 109, ../sass/bootstrap/_modals.scss */
+.modal-footer .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+/* line 114, ../sass/bootstrap/_modals.scss */
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+/* line 118, ../sass/bootstrap/_modals.scss */
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+
+/* line 124, ../sass/bootstrap/_modals.scss */
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  /* line 135, ../sass/bootstrap/_modals.scss */
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  /* line 139, ../sass/bootstrap/_modals.scss */
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  /* line 144, ../sass/bootstrap/_modals.scss */
+  .modal-sm {
+    width: 300px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 148, ../sass/bootstrap/_modals.scss */
+  .modal-lg {
+    width: 900px;
+  }
+}
 /* line 1, ../sass/components/_admin.scss */
-.admin-menu-icon {
+.location-picker-icon {
   height: 16px;
   width: 16px;
 }
 
-/* line 1, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu {
+/* line 1, ../sass/components/_location-picker.scss */
+.location-picker {
   background-color: rgba(255, 255, 255, 0.8);
-  position: absolute;
+  position: fixed;
   top: 200px;
   left: -185px;
   -webkit-transition: left 150ms;
-  -moz-transition: left 150ms;
   -o-transition: left 150ms;
   transition: left 150ms;
   overflow: visible;
+  z-index: 1000;
 }
-/* line 11, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu > * {
+/* line 11, ../sass/components/_location-picker.scss */
+.location-picker > * {
   border: 1px solid gray;
   border-left: 0px solid white;
   border-radius: 0 3px 3px 0;
   display: block;
   vertical-align: top;
 }
-/* line 20, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu h4 {
+/* line 20, ../sass/components/_location-picker.scss */
+.location-picker h4 {
   margin-top: 0;
   margin-bottom: 3px;
   line-height: 1em;
 }
-/* line 25, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu .xeros-admin-menu__menu-wrapper {
+/* line 25, ../sass/components/_location-picker.scss */
+.location-picker .location-picker__wrapper {
   padding: 5px;
   padding-top: 15px;
   width: 180px;
 }
-/* line 31, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu .xeros-admin-menu__button {
+/* line 31, ../sass/components/_location-picker.scss */
+.location-picker .location-picker__button {
   position: absolute;
   -webkit-transition: right 150ms;
-  -moz-transition: right 150ms;
   -o-transition: right 150ms;
   transition: right 150ms;
   right: -38px;
@@ -650,13 +1163,130 @@ table {
   text-decoration: none;
   color: white;
 }
-/* line 46, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu.open {
+/* line 46, ../sass/components/_location-picker.scss */
+.location-picker.open {
   left: 0;
 }
-/* line 49, ../sass/components/_admin-menu.scss */
-.xeros-admin-menu.open .admin-menu__button {
+/* line 49, ../sass/components/_location-picker.scss */
+.location-picker.open .location-picker__button {
   right: 3px;
+}
+
+/* Load from xeros_report module */
+/* line 9, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric .arrow,
+.metric .thumb {
+  display: inline-block;
+  width: inherit;
+  background: no-repeat left bottom;
+  background-size: contain;
+  padding-left: 10px;
+}
+/* line 15, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric .arrow:after,
+.metric .thumb:after {
+  font-family: FontAwesome;
+}
+/* line 19, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric .delta {
+  display: inline-block;
+}
+/* line 25, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric.negative .arrow:after {
+  color: #ff0000;
+  content: "\f062";
+}
+/* line 31, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric.negative .thumb:after {
+  color: #ff0000;
+  content: "\f088";
+}
+/* line 41, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric.positive .arrow:after {
+  color: #00c900;
+  content: "\f063";
+}
+/* line 47, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric.positive .thumb:after {
+  color: #00c900;
+  content: "\f087";
+}
+/* line 55, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.metric.delta-none .arrow {
+  opacity: 0;
+}
+
+/* line 65, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.non-xeros .negative .arrow:after {
+  color: #00c900;
+}
+/* line 70, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.non-xeros .negative .thumb:after {
+  color: #00c900;
+  content: "\f087";
+}
+/* line 78, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.non-xeros .positive .arrow:after {
+  color: #ff0000;
+}
+/* line 83, ../../../modules/custom/xeros_report/sass/components/_chart.scss */
+.non-xeros .positive .thumb:after {
+  color: #ff0000;
+  content: "\f088";
+}
+
+/* line 1, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart {
+  height: 150px;
+  text-align: center;
+}
+/* line 26, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart .line-a, .kpi-chart .line-b {
+  fill: none;
+}
+/* line 30, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart .line-a {
+  stroke: white;
+}
+/* line 34, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart .line-b {
+  stroke: #0086bd;
+}
+/* line 37, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart circle.circle-a {
+  fill: white;
+}
+/* line 40, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart circle.circle-b {
+  fill: #0086bd;
+}
+/* line 44, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart.xeros .line-a {
+  stroke: #0086bd;
+}
+/* line 47, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart.xeros .line-b {
+  stroke: lightgray;
+}
+/* line 50, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart.xeros circle.circle-a {
+  fill: #0086bd;
+}
+/* line 53, ../../../modules/custom/xeros_report/sass/components/_chartKpi.scss */
+.kpi-chart.xeros circle.circle-b {
+  fill: lightgray;
+}
+
+/*  Theme components */
+/* line 8, ../sass/components/_typography.scss */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  -webkit-font-smoothing: antialiased;
 }
 
 /* line 1, ../sass/components/_caret.scss */
@@ -721,78 +1351,6 @@ table {
 /* line 57, ../sass/components/_caret.scss */
 .caret-right-wrapper.active .caret-right:hover {
   opacity: .8;
-}
-
-/* line 8, ../sass/components/_chart.scss */
-.metric .arrow {
-  display: inline-block;
-  width: inherit;
-  background: no-repeat left bottom;
-  background-size: contain;
-}
-/* line 13, ../sass/components/_chart.scss */
-.metric .arrow:after {
-  font-family: FontAwesome;
-}
-/* line 17, ../sass/components/_chart.scss */
-.metric .delta {
-  display: inline-block;
-}
-/* line 23, ../sass/components/_chart.scss */
-.metric.delta-up .arrow:after {
-  color: #ff0000;
-  content: "\f062";
-}
-/* line 32, ../sass/components/_chart.scss */
-.metric.delta-down .arrow:after {
-  color: #00c900;
-  content: "\f063";
-}
-/* line 40, ../sass/components/_chart.scss */
-.metric.delta-none .arrow {
-  opacity: 0;
-}
-
-/* line 1, ../sass/components/_chartKpi.scss */
-.kpi-chart {
-  height: 150px;
-  text-align: center;
-}
-/* line 26, ../sass/components/_chartKpi.scss */
-.kpi-chart .line-a, .kpi-chart .line-b {
-  fill: none;
-}
-/* line 30, ../sass/components/_chartKpi.scss */
-.kpi-chart .line-a {
-  stroke: white;
-}
-/* line 34, ../sass/components/_chartKpi.scss */
-.kpi-chart .line-b {
-  stroke: #0086bd;
-}
-/* line 37, ../sass/components/_chartKpi.scss */
-.kpi-chart circle.circle-a {
-  fill: white;
-}
-/* line 40, ../sass/components/_chartKpi.scss */
-.kpi-chart circle.circle-b {
-  fill: #0086bd;
-}
-/* line 44, ../sass/components/_chartKpi.scss */
-.kpi-chart.xeros .line-a {
-  stroke: #0086bd;
-}
-/* line 47, ../sass/components/_chartKpi.scss */
-.kpi-chart.xeros .line-b {
-  stroke: lightgray;
-}
-/* line 50, ../sass/components/_chartKpi.scss */
-.kpi-chart.xeros circle.circle-a {
-  fill: #0086bd;
-}
-/* line 53, ../sass/components/_chartKpi.scss */
-.kpi-chart.xeros circle.circle-b {
-  fill: lightgray;
 }
 
 /* line 10, ../sass/components/_dropdown.scss */
@@ -986,6 +1544,11 @@ img.flag {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+
+/* line 182, ../sass/components/_dropdown.scss */
+.modal .dropdown dt a {
+  width: initial;
 }
 
 /* line 2, ../sass/components/_widgets.scss */
@@ -1764,7 +2327,6 @@ a.tabs-primary__tab-link, a.tabs-primary__tab-link.is-active {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
   -webkit-transition: background-color 0.3s;
-  -moz-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
   color: white;
@@ -1808,7 +2370,6 @@ a.tabs-secondary__tab-link, a.tabs-secondary__tab-link.is-active {
   -o-border-radius: 0.75em;
   border-radius: 0.75em;
   -webkit-transition: background-color 0.3s;
-  -moz-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
   background-color: #f2f2f2;
@@ -2276,7 +2837,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1376896851');
+  background-image: url('../images/progress.gif?1416407843');
 }
 
 /* line 2, ../sass/components/_footer.scss */
@@ -2302,9 +2863,7 @@ tr.selected td {
 }
 /* line 20, ../sass/components/_footer.scss */
 .region-footer .footer-wrapper a {
-  -webkit-transition: color 0.3s ease;
-  -webkit-transition-delay: 0;
-  -moz-transition: color 0.3s ease 0;
+  -webkit-transition: color 0.3s ease 0;
   -o-transition: color 0.3s ease 0;
   transition: color 0.3s ease 0;
   text-decoration: none;
@@ -2405,12 +2964,11 @@ h1 {
 /* line 25, ../sass/components/_header.scss */
 .header .header__logo {
   position: absolute;
-  z-index: 10;
   top: 10px;
   margin-left: -12px;
   overflow: visible;
 }
-/* line 31, ../sass/components/_header.scss */
+/* line 30, ../sass/components/_header.scss */
 .header .header__logo a {
   display: block;
   height: 76px;
@@ -2420,13 +2978,13 @@ h1 {
   background-position: center center;
   background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo.png");
 }
-/* line 42, ../sass/components/_header.scss */
+/* line 41, ../sass/components/_header.scss */
 .header .header__row-1 {
   position: relative;
   text-align: right;
   line-height: 2em;
 }
-/* line 47, ../sass/components/_header.scss */
+/* line 46, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu {
   display: inline-block;
   margin: 0;
@@ -2434,7 +2992,7 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2445,35 +3003,35 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
-/* line 50, ../sass/components/_header.scss */
+/* line 49, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu li {
   text-transform: uppercase;
   margin-left: 10px;
   font-size: 75%;
 }
-/* line 55, ../sass/components/_header.scss */
+/* line 54, ../sass/components/_header.scss */
 .header .header__row-1 ul.menu a, .header .header__row-1 ul.menu a:hover, .header .header__row-1 ul.menu a:visited {
   color: #0087be;
   border: 0;
 }
-/* line 61, ../sass/components/_header.scss */
+/* line 60, ../sass/components/_header.scss */
 .header .header__row-2 {
   line-height: 2em;
   text-align: left;
 }
-/* line 64, ../sass/components/_header.scss */
+/* line 63, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu {
   display: inline-block;
   margin: 0;
@@ -2483,7 +3041,7 @@ h1 {
   margin-left: 250px;
   margin-top: -12px;
 }
-/* line 60, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -2494,19 +3052,19 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../.rvm/gems/ruby-2.1.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
-/* line 69, ../sass/components/_header.scss */
+/* line 68, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li {
   text-transform: uppercase;
   background-color: #0b7fb0;
@@ -2526,25 +3084,25 @@ h1 {
   font-size: 90%;
   padding: 0;
 }
-/* line 79, ../sass/components/_header.scss */
+/* line 78, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li.active {
   background-color: #0086bd;
 }
-/* line 82, ../sass/components/_header.scss */
+/* line 81, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li:hover {
   background-color: #6bcaee;
   background: #0ea2e0;
 }
-/* line 86, ../sass/components/_header.scss */
+/* line 85, ../sass/components/_header.scss */
 .header .header__row-2 ul.menu li a {
   display: block;
   text-decoration: none;
   color: inherit;
   padding: 0 10px !important;
 }
-/* line 95, ../sass/components/_header.scss */
+/* line 94, ../sass/components/_header.scss */
 .header .header__row-2 .header__welcome {
-  color: #444444;
+  color: #222222;
   display: inline-block;
   float: right;
   font-size: 80%;
@@ -2553,14 +3111,14 @@ h1 {
   text-align: right;
 }
 
-/* line 108, ../sass/components/_header.scss */
+/* line 107, ../sass/components/_header.scss */
 .admin-menu .header {
   margin-top: 24px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  /* line 117, ../sass/components/_header.scss */
+  /* line 116, ../sass/components/_header.scss */
   .header .header__logo a {
     background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
     background-size: 177px 76px;
@@ -2702,10 +3260,15 @@ h1 {
   line-height: 20px;
 }
 /* line 8, ../sass/components/_legend.scss */
+.legend .column {
+  float: left;
+  margin-right: 20px;
+}
+/* line 12, ../sass/components/_legend.scss */
 .legend .label {
   margin-left: 5px;
 }
-/* line 11, ../sass/components/_legend.scss */
+/* line 15, ../sass/components/_legend.scss */
 .legend .swatch {
   width: 20px;
   height: 12px;
@@ -2713,13 +3276,13 @@ h1 {
   margin-left: 3px;
   margin-bottom: -1px;
 }
-/* line 17, ../sass/components/_legend.scss */
+/* line 21, ../sass/components/_legend.scss */
 .legend .swatch.current {
   background-color: #999999;
   border: 1px solid #999999;
 }
-/* line 21, ../sass/components/_legend.scss */
-.legend .swatch.xeros {
+/* line 25, ../sass/components/_legend.scss */
+.legend .swatch.model {
   background-color: #0087be;
   border: 1px solid #0087be;
 }
@@ -2732,6 +3295,11 @@ h1 {
 /* line 6, ../sass/components/_misc.scss */
 .select select, .select option {
   margin-left: 10px;
+}
+
+/* line 13, ../sass/components/_misc.scss */
+select option.hide {
+  display: none;
 }
 
 /* line 2, ../sass/components/_page-1.scss */
@@ -2771,14 +3339,10 @@ h1 {
 }
 /* line 37, ../sass/components/_page-1.scss */
 #page-1 .container .template-container {
-  -webkit-transition: height 0.3s ease;
-  -webkit-transition-delay: 0;
-  -moz-transition: height 0.3s ease 0;
+  -webkit-transition: height 0.3s ease 0;
   -o-transition: height 0.3s ease 0;
   transition: height 0.3s ease 0;
-  -webkit-transition: opacity 0.3s ease-in;
-  -webkit-transition-delay: 0;
-  -moz-transition: opacity 0.3s ease-in 0;
+  -webkit-transition: opacity 0.3s ease-in 0;
   -o-transition: opacity 0.3s ease-in 0;
   transition: opacity 0.3s ease-in 0;
   min-height: 600px;
@@ -2817,7 +3381,7 @@ h1 {
   padding-right: 0;
   clear: left;
   display: block;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed #222222;
   padding-top: 10px;
   padding-bottom: 10px;
   overflow: hidden;
@@ -2909,7 +3473,7 @@ h1 {
 /* line 112, ../sass/components/_page-1.scss */
 #page-1 .container .kpis .row .col-3 .border {
   height: 1px;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed #222222;
   width: 60%;
   margin-left: 20%;
   margin-top: 4px;
@@ -3024,316 +3588,6 @@ a:hover, a:active {
   text-decoration: underline;
 }
 
-/* line 2, ../sass/components/_page-2.scss */
-#page-2 {
-  opacity: 1;
-  z-index: 0;
-  width: 980px;
-  margin-left: auto;
-  margin-right: auto;
-}
-/* line 12, ../sass/components/_page-2.scss */
-#page-2.active {
-  z-index: 10;
-}
-/* line 15, ../sass/components/_page-2.scss */
-#page-2 .consumption-container {
-  position: relative;
-}
-/* line 17, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .kpis__select {
-  font-weight: 300;
-  clear: both;
-  overflow: hidden;
-}
-/* line 21, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .kpis__select > span {
-  float: right;
-}
-/* line 24, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .kpis__select dl {
-  margin: 0 0 10px 0;
-}
-/* line 27, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .kpis__select select, #page-2 .consumption-container .kpis__select option {
-  margin-left: 10px;
-}
-/* line 46, ../sass/components/_grids.scss */
-#page-2 .consumption-container:before, #page-2 .consumption-container:after {
-  content: "";
-  display: table;
-}
-/* line 50, ../sass/components/_grids.scss */
-#page-2 .consumption-container:after {
-  clear: both;
-}
-/* line 34, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .consumption__grid-container {
-  margin-top: 3px;
-  position: relative;
-  min-height: 400px;
-}
-/* line 39, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .template-container {
-  -webkit-transition: opacity 0.3s ease-in;
-  -webkit-transition-delay: 0;
-  -moz-transition: opacity 0.3s ease-in 0;
-  -o-transition: opacity 0.3s ease-in 0;
-  transition: opacity 0.3s ease-in 0;
-}
-/* line 41, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .template-container.fade {
-  opacity: .5;
-}
-/* line 45, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row {
-  overflow: hidden;
-  border-top: 1px dashed #444444;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  text-align: center;
-  position: relative;
-  clear: left;
-}
-/* line 53, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .metric {
-  position: absolute;
-  bottom: 20px;
-}
-/* line 57, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .health {
-  padding-top: 20px;
-}
-/* line 60, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .action {
-  font-size: 14px;
-  text-align: left;
-}
-/* line 63, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .action strong {
-  font-weight: normal;
-  color: black;
-}
-/* line 69, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.first {
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-/* line 72, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.first .label, #page-2 .consumption-container .row.first .sub-label {
-  text-align: center;
-}
-/* line 75, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.first .label {
-  font-weight: 400;
-}
-/* line 84, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.last {
-  border-bottom: 1px dashed #444444;
-}
-/* line 88, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.water-only-0 .link {
-  cursor: pointer;
-}
-/* line 91, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.water-only-0 .link:hover {
-  opacity: 0.8;
-}
-/* line 95, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 {
-  float: left;
-  width: 20%;
-  margin-left: 0%;
-  margin-right: -20%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-  font-weight: 300;
-}
-/* line 99, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .small {
-  font-size: 9px;
-}
-/* line 100, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-Washer {
-  font-size: 80px;
-  float: left;
-  width: 80px;
-  position: relative;
-}
-/* line 106, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-washer-label {
-  position: absolute;
-  top: 38px;
-  left: 0;
-  right: 0;
-  font-size: 17px;
-  text-align: center;
-  font-family: "Lato", Helvetica, "Nimbus Sans L", sans-serif;
-}
-/* line 114, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-4 {
-  font-size: 14px;
-}
-/* line 117, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-5 {
-  font-size: 13px;
-}
-/* line 120, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .icon-washer-label.digits-6 {
-  font-size: 12px;
-}
-/* line 124, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .Xeros .icon-washer-label {
-  top: 44px;
-}
-/* line 127, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-1 .machine-label {
-  float: left;
-  width: 80px;
-  width: calc(100% - 80px);
-  font-size: 0.8em;
-  line-height: 1.5em;
-  vertical-align: top;
-  margin-top: 12px;
-}
-/* line 138, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-2 {
-  float: left;
-  width: 20%;
-  margin-left: 20%;
-  margin-right: -40%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-}
-/* line 141, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-3 {
-  float: left;
-  width: 20%;
-  margin-left: 40%;
-  margin-right: -60%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-}
-/* line 144, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-4 {
-  float: left;
-  width: 20%;
-  margin-left: 60%;
-  margin-right: -80%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-}
-/* line 147, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-5 {
-  float: left;
-  width: 20%;
-  margin-left: 80%;
-  margin-right: -100%;
-  padding-left: 2px;
-  padding-right: 3px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  word-wrap: break-word;
-}
-/* line 152, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-2 img.bar-chart, #page-2 .consumption-container .row .col-3 img.bar-chart, #page-2 .consumption-container .row .col-4 img.bar-chart {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-  display: inline-block;
-  margin-bottom: -4px;
-  position: relative;
-}
-/* line 158, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-2 .labels, #page-2 .consumption-container .row .col-3 .labels, #page-2 .consumption-container .row .col-4 .labels {
-  position: relative;
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 300;
-  margin-left: 1px;
-}
-/* line 167, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-2 .labels .potential, #page-2 .consumption-container .row .col-3 .labels .potential, #page-2 .consumption-container .row .col-4 .labels .potential {
-  color: #0087be;
-  margin-left: -40px;
-  margin-top: -5px;
-}
-/* line 175, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-4 img {
-  display: inline-block;
-}
-/* line 178, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-4 .labels {
-  display: inline-block;
-  font-size: 11px;
-}
-/* line 181, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-4 .labels .actual {
-  position: absolute;
-  top: 10px;
-  left: 74px;
-}
-/* line 186, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-4 .labels .potential {
-  position: absolute;
-  top: -15px;
-  left: 91px;
-  color: #0087be;
-}
-/* line 195, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-5 img.bar-chart {
-  -webkit-transform: rotate(90deg) scaleY(2);
-  -moz-transform: rotate(90deg) scaleY(2);
-  -ms-transform: rotate(90deg) scaleY(2);
-  -o-transform: rotate(90deg) scaleY(2);
-  transform: rotate(90deg) scaleY(2);
-}
-/* line 199, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-5 .labels .actual {
-  color: white;
-  z-index: 10;
-  margin-left: 0px;
-}
-/* line 204, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row .col-5 .labels .potential {
-  color: #0087be;
-  margin-left: -37px;
-  margin-top: -5px;
-}
-/* line 212, ../sass/components/_page-2.scss */
-#page-2 .consumption-container .row.Xeros {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e5f4fa), color-stop(0.5, #f2f9fc) color-stop(1, #e5f4fa));
-  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: -ms-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-  background-image: linear-gradient(to bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
-}
-
 /* line 2, ../sass/components/_page-3.scss */
 #page-3 {
   opacity: 1;
@@ -3364,14 +3618,12 @@ a:hover, a:active {
 #page-3 .consumption-details-container .line {
   margin-top: 10px;
   margin-bottom: 0px;
-  border-top: 1px dashed #444444;
+  border-top: 1px dashed #222222;
 }
 /* line 33, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .template-container {
   margin-top: 28px;
-  -webkit-transition: opacity 0.3s ease-in;
-  -webkit-transition-delay: 0;
-  -moz-transition: opacity 0.3s ease-in 0;
+  -webkit-transition: opacity 0.3s ease-in 0;
   -o-transition: opacity 0.3s ease-in 0;
   transition: opacity 0.3s ease-in 0;
 }
@@ -3431,7 +3683,7 @@ a:hover, a:active {
 }
 /* line 83, ../sass/components/_page-3.scss */
 #page-3 .consumption-details-container .container .row .top {
-  border: 1px solid #444444;
+  border: 1px solid #222222;
   border-bottom: none;
 }
 /* line 87, ../sass/components/_page-3.scss */
@@ -3726,16 +3978,10 @@ a:hover, a:active {
   width: 114px;
   background-color: #F7F7F7;
   -webkit-transition-property: width, background, border-color, color;
-  -moz-transition-property: width, background, border-color, color;
-  -o-transition-property: width, background, border-color, color;
   transition-property: width, background, border-color, color;
   -webkit-transition-duration: 0.75s;
-  -moz-transition-duration: 0.75s;
-  -o-transition-duration: 0.75s;
   transition-duration: 0.75s;
   -webkit-transition-timing-function: linear;
-  -moz-transition-timing-function: linear;
-  -o-transition-timing-function: linear;
   transition-timing-function: linear;
 }
 /* line 11, ../sass/components/_alerts.scss */
@@ -3755,66 +4001,845 @@ a:hover, a:active {
   font-family: Lato;
 }
 
-/* line 6, ../sass/components/_actions.scss */
+/* line 5, ../sass/components/_actions.scss */
+.status {
+  line-height: 1;
+}
+/* line 7, ../sass/components/_actions.scss */
 .status:before {
   font-family: FontAwesome;
   font-size: 22px;
 }
-/* line 10, ../sass/components/_actions.scss */
+/* line 11, ../sass/components/_actions.scss */
 .status.status-0 {
   color: green;
 }
-/* line 12, ../sass/components/_actions.scss */
+/* line 13, ../sass/components/_actions.scss */
 .status.status-0:before {
   content: "\f058";
 }
-/* line 16, ../sass/components/_actions.scss */
+/* line 17, ../sass/components/_actions.scss */
 .status.status-1 {
   color: #ffd200;
 }
-/* line 18, ../sass/components/_actions.scss */
+/* line 19, ../sass/components/_actions.scss */
 .status.status-1:before {
   content: "\f06a";
 }
-/* line 22, ../sass/components/_actions.scss */
+/* line 23, ../sass/components/_actions.scss */
 .status.status-2 {
   color: red;
 }
-/* line 24, ../sass/components/_actions.scss */
+/* line 25, ../sass/components/_actions.scss */
 .status.status-2:before {
   content: "\f057";
 }
-/* line 29, ../sass/components/_actions.scss */
+/* line 30, ../sass/components/_actions.scss */
 #consumption .status:before {
   font-size: 40px;
 }
 
-/* line 36, ../sass/components/_actions.scss */
+/* line 38, ../sass/components/_actions.scss */
 .page-actions td {
   padding: 2px 3px;
 }
-/* line 39, ../sass/components/_actions.scss */
+/* line 41, ../sass/components/_actions.scss */
 .page-actions .page-wrapper {
   width: auto;
   max-width: 1100px;
 }
-/* line 43, ../sass/components/_actions.scss */
+/* line 45, ../sass/components/_actions.scss */
 .page-actions .status {
   position: relative;
 }
-/* line 45, ../sass/components/_actions.scss */
+/* line 47, ../sass/components/_actions.scss */
 .page-actions .status:before {
   position: absolute;
   top: 2px;
 }
 
-/* line 55, ../sass/components/_actions.scss */
+/* line 57, ../sass/components/_actions.scss */
 .node-action-form .vertical-tabs,
 .node-action-form #edit-preview {
   display: none;
 }
 
+/* entire container, keeps perspective */
+/* line 2, ../sass/components/_flipper.scss */
+.flip-container {
+  perspective: 1000;
+  position: relative;
+  /* flip speed goes here */
+  /* front pane, placed above back */
+  /* back, initially hidden pane */
+}
+/* line 14, ../sass/components/_flipper.scss */
+.flip-container .flipper {
+  -webkit-transition: transform 0.4s linear;
+  -o-transition: transform 0.4s linear;
+  transition: transform 0.4s linear;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(68, 68, 68, 0.25);
+  -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  background-color: white;
+}
+/* line 23, ../sass/components/_flipper.scss */
+.flip-container .flipper-navbar {
+  position: relative;
+  text-align: right;
+}
+/* line 26, ../sass/components/_flipper.scss */
+.flip-container .flipper-navbar .flipper-navbtn {
+  font-size: 20px;
+  font-weight: 200;
+  color: #444444;
+  cursor: pointer;
+  margin-right: 10px;
+  opacity: 1;
+  position: relative;
+  width: 90%;
+  left: -2px;
+}
+/* line 36, ../sass/components/_flipper.scss */
+.flip-container .flipper-navbar .flipper-navbtn.flipper-openbtn {
+  top: -11px;
+}
+/* line 41, ../sass/components/_flipper.scss */
+.flip-container .flipper-navbar .flipper-navbtn:hover {
+  opacity: 1;
+  color: #0086bd;
+}
+/* line 49, ../sass/components/_flipper.scss */
+.flip-container .front, .flip-container .back {
+  backface-visibility: hidden;
+}
+/* line 55, ../sass/components/_flipper.scss */
+.flip-container .front {
+  z-index: 2;
+  /* for firefox 31 */
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  position: relative;
+  top: 0px;
+}
+/* line 64, ../sass/components/_flipper.scss */
+.flip-container .back {
+  font-size: 12px;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+/* line 73, ../sass/components/_flipper.scss */
+.flip-container .back .flipper-closebtn {
+  top: 3px;
+  left: 3px;
+}
+/* line 78, ../sass/components/_flipper.scss */
+.flip-container .flipback-backcontainer {
+  overflow: hidden;
+  height: auto;
+  width: auto;
+  margin-left: 25px;
+  padding: 5px;
+}
+
+/* flip the pane when hovered */
+/* line 90, ../sass/components/_flipper.scss */
+.flip-container.hover .flipper {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* line 1, ../sass/components/_lightbox.scss */
+.lightbox {
+  min-width: 600px;
+  min-height: 400px;
+}
+/* line 4, ../sass/components/_lightbox.scss */
+.lightbox:before {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+}
+/* line 14, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content {
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 13%;
+  width: 70%;
+  height: 50%;
+  padding: 2px;
+  box-shadow: 2px 2px 1px grey;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}
+/* line 27, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-header {
+  border-bottom: 1px solid grey;
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+}
+/* line 32, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-header .lightbox-closebtn {
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  float: right;
+  position: relative;
+}
+/* line 40, ../sass/components/_lightbox.scss */
+.lightbox.lightbox-content .lightbox-body {
+  padding: 10px;
+}
+
 /* Layout rules */
+/* Report module layouts */
+/* line 2, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health {
+  opacity: 1;
+  z-index: 0;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 12, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health.active {
+  z-index: 10;
+}
+/* line 15, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container {
+  position: relative;
+}
+/* line 17, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .kpis__select {
+  font-weight: 300;
+  clear: both;
+  overflow: hidden;
+}
+/* line 21, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .kpis__select > span {
+  float: right;
+}
+/* line 24, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .kpis__select dl {
+  margin: 0 0 10px 0;
+}
+/* line 27, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .kpis__select select, #report-health .consumption-container .kpis__select option {
+  margin-left: 10px;
+}
+/* line 46, ../sass/components/_grids.scss */
+#report-health .consumption-container:before, #report-health .consumption-container:after {
+  content: "";
+  display: table;
+}
+/* line 50, ../sass/components/_grids.scss */
+#report-health .consumption-container:after {
+  clear: both;
+}
+/* line 34, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .consumption__grid-container {
+  margin-top: 3px;
+  position: relative;
+  min-height: 400px;
+}
+/* line 39, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .template-container {
+  -webkit-transition: opacity 0.3s ease-in 0;
+  -o-transition: opacity 0.3s ease-in 0;
+  transition: opacity 0.3s ease-in 0;
+}
+/* line 41, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .template-container.fade {
+  opacity: .5;
+}
+/* line 45, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row {
+  overflow: hidden;
+  border-top: 1px dashed #444444;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  position: relative;
+  clear: left;
+}
+/* line 53, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .action {
+  font-size: 14px;
+  text-align: left;
+}
+/* line 56, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .action strong {
+  font-weight: normal;
+  color: black;
+}
+/* line 64, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.first {
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+/* line 67, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.first .label, #report-health .consumption-container .row.first .sub-label {
+  text-align: center;
+}
+/* line 70, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.first .label {
+  font-weight: 400;
+}
+/* line 74, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.first .sub-label {
+  font-weight: 300;
+  font-size: 1em;
+  line-height: 1.2em;
+}
+/* line 80, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.last {
+  border-bottom: 1px dashed #444444;
+}
+/* line 84, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.water-only-0 .link {
+  cursor: pointer;
+}
+/* line 87, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.water-only-0 .link:hover {
+  opacity: 0.8;
+}
+/* line 91, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 {
+  float: left;
+  width: 20%;
+  margin-left: 0%;
+  margin-right: -20%;
+  padding-left: 2px;
+  padding-right: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  font-weight: 300;
+}
+/* line 95, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .small {
+  font-size: 9px;
+}
+/* line 96, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .icon-Washer {
+  font-size: 80px;
+  width: 80px;
+  display: inline-block;
+  position: relative;
+}
+/* line 102, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .icon-washer-label {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  font-size: 17px;
+  text-align: center;
+  font-family: "Lato", Helvetica, "Nimbus Sans L", sans-serif;
+}
+/* line 110, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .icon-washer-label.digits-4 {
+  font-size: 14px;
+}
+/* line 113, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .icon-washer-label.digits-5 {
+  font-size: 13px;
+}
+/* line 116, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .icon-washer-label.digits-6 {
+  font-size: 12px;
+}
+/* line 120, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .Xeros .icon-washer-label {
+  top: 44px;
+}
+/* line 123, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-1 .machine-label {
+  display: inline-block;
+  width: 75px;
+  width: calc(100% - 120px);
+  font-size: 0.8em;
+  line-height: 1.5em;
+  vertical-align: top;
+  margin-top: 12px;
+}
+/* line 135, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-2 {
+  float: left;
+  width: 20%;
+  margin-left: 20%;
+  margin-right: -40%;
+  padding-left: 2px;
+  padding-right: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 138, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-3 {
+  float: left;
+  width: 20%;
+  margin-left: 40%;
+  margin-right: -60%;
+  padding-left: 2px;
+  padding-right: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 141, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4 {
+  float: left;
+  width: 40%;
+  margin-left: 60%;
+  margin-right: -100%;
+  padding-left: 2px;
+  padding-right: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 146, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-2 img.bar-chart, #report-health .consumption-container .row .col-3 img.bar-chart, #report-health .consumption-container .row .col-4 img.bar-chart {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  display: inline-block;
+  margin-bottom: -4px;
+  position: relative;
+}
+/* line 152, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-2 .labels, #report-health .consumption-container .row .col-3 .labels, #report-health .consumption-container .row .col-4 .labels {
+  position: relative;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 300;
+  margin-left: 1px;
+}
+/* line 161, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-2 .labels .potential, #report-health .consumption-container .row .col-3 .labels .potential, #report-health .consumption-container .row .col-4 .labels .potential {
+  color: #0087be;
+  margin-left: -40px;
+  margin-top: -5px;
+}
+/* line 169, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4 img {
+  display: inline-block;
+}
+/* line 172, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4 .labels {
+  display: inline-block;
+  font-size: 11px;
+}
+/* line 175, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4 .labels .actual {
+  position: absolute;
+  top: 10px;
+  left: 74px;
+}
+/* line 180, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4 .labels .potential {
+  position: absolute;
+  top: -15px;
+  left: 91px;
+  color: #0087be;
+}
+/* line 189, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-4:not(:nth-child(1)) .col__wrapper {
+  border: 1px solid rgba(68, 68, 68, 0.25);
+  -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  background-color: white;
+  padding-left: 5px;
+}
+/* line 199, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-5 img.bar-chart {
+  -webkit-transform: rotate(90deg) scaleY(2);
+  -moz-transform: rotate(90deg) scaleY(2);
+  -ms-transform: rotate(90deg) scaleY(2);
+  -o-transform: rotate(90deg) scaleY(2);
+  transform: rotate(90deg) scaleY(2);
+}
+/* line 203, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-5 .labels .actual {
+  color: white;
+  z-index: 10;
+  margin-left: 0px;
+}
+/* line 208, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col-5 .labels .potential {
+  color: #0087be;
+  margin-left: -37px;
+  margin-top: -5px;
+}
+/* line 216, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.non-xeros {
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #f0f0f0), color-stop(50%, #f5f5f5), color-stop(100%, #f0f0f0));
+  background-image: -webkit-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: -moz-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: -o-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+  background-image: linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
+}
+/* line 219, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row.xeros {
+  background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e5f4fa), color-stop(50%, #f2f9fc), color-stop(100%, #e5f4fa));
+  background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -moz-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: -o-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+  background-image: linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
+}
+
+/* line 231, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+.status_data_icon {
+  width: 20%;
+  float: left;
+}
+
+/* line 236, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+.status_data {
+  padding-right: 2px;
+  text-align: left;
+  width: 80%;
+  margin-left: 75px;
+}
+
+/* line 2, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard {
+  opacity: 1;
+  z-index: 0;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 15, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard.active {
+  z-index: 10;
+}
+/* line 22, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard #model__dl dd ul {
+  min-width: 368px;
+}
+/* line 28, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .legend .swatch.current {
+  background-color: white;
+  border: 1px solid gray;
+}
+/* line 32, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .dashboard-gear {
+  position: absolute;
+  bottom: 0;
+  font-size: 14px;
+  margin-left: 2px;
+}
+/* line 38, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .dashboard-gear i {
+  font-size: 20px;
+  margin-right: 5px;
+  margin-left: 3px;
+}
+/* line 43, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .dashboard-gear:hover {
+  cursor: pointer;
+}
+/* line 48, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .kpis__select {
+  clear: both;
+  overflow: hidden;
+  margin: 0;
+}
+/* line 52, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .kpis__select > span {
+  float: right;
+}
+/* line 55, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .kpis__select dl {
+  margin: 0 0 10px 0;
+}
+/* line 60, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container {
+  width: 980px;
+}
+/* line 61, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .template-container {
+  -webkit-transition: height 0.3s ease 0;
+  -o-transition: height 0.3s ease 0;
+  transition: height 0.3s ease 0;
+  -webkit-transition: opacity 0.3s ease-in 0;
+  -o-transition: opacity 0.3s ease-in 0;
+  transition: opacity 0.3s ease-in 0;
+  min-height: 600px;
+}
+/* line 65, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .template-container.fade {
+  opacity: .5;
+}
+/* line 46, ../sass/components/_grids.scss */
+#report-dashboard .container:before, #report-dashboard .container:after {
+  content: "";
+  display: table;
+}
+/* line 50, ../sass/components/_grids.scss */
+#report-dashboard .container:after {
+  clear: both;
+}
+/* line 72, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis {
+  position: relative;
+  float: left;
+  width: 66.66667%;
+  margin-left: 0%;
+  margin-right: -66.66667%;
+  padding-left: 0px;
+  padding-right: 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 76, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row {
+  padding-left: 0;
+  padding-right: 0;
+  clear: left;
+  display: block;
+  border-top: 1px dashed #444444;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+/* line 84, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-1 {
+  float: left;
+  width: 25%;
+  margin-left: 0%;
+  margin-right: -25%;
+  padding-left: 0px;
+  padding-right: 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: 300;
+}
+/* line 88, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-1 .icon {
+  margin-top: 34px;
+  font-size: 60px;
+}
+/* line 94, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-2 {
+  float: left;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: -75%;
+  padding-left: 0px;
+  padding-right: 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 97, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 {
+  float: left;
+  width: 25%;
+  margin-left: 75%;
+  margin-right: -100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  text-align: center;
+  height: 150px;
+  position: relative;
+}
+/* line 102, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .unit {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: .7em;
+}
+/* line 107, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .dollars {
+  margin-top: 3px;
+  font-size: 1.6em;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+/* line 112, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .dollars .dollar-sign {
+  font-size: .6em;
+  vertical-align: top;
+}
+/* line 124, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .saved {
+  font-weight: 300;
+  font-size: .8em;
+  padding: 0 20px;
+  line-height: 130%;
+  margin-top: 2px;
+}
+/* line 131, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .percent {
+  font-weight: 300;
+  font-size: 1.1em;
+  margin-top: 4px;
+}
+/* line 136, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .border {
+  height: 1px;
+  border-top: 1px dashed #444444;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 4px;
+  margin-bottom: -1px;
+}
+/* line 144, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .info {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+/* line 148, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis .row .col-3 .info:hover {
+  color: #0087be;
+}
+/* line 156, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-total .icon {
+  color: #79bdb5;
+}
+/* line 157, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-total .kpi-chart {
+  background-color: #79bdb5;
+}
+/* line 158, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-total .col-3 {
+  border: 1px solid #79bdb5;
+}
+/* line 161, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-cold-water .icon {
+  color: #77b8d5;
+}
+/* line 162, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-cold-water .kpi-chart {
+  background-color: #77b8d5;
+}
+/* line 163, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-cold-water .col-3 {
+  border: 1px solid #77b8d5;
+}
+/* line 166, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-therms .icon {
+  color: #f47f48;
+}
+/* line 167, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-therms .kpi-chart {
+  background-color: #f47f48;
+}
+/* line 168, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .container .kpis-therms .col-3 {
+  border: 1px solid #f47f48;
+}
+/* line 187, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .news {
+  float: left;
+  width: 33.33333%;
+  margin-left: 66.66667%;
+  margin-right: -100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin-top: 22px;
+  padding-left: 30px;
+}
+/* line 194, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .compare__buttons {
+  width: 100%;
+  cursor: pointer;
+}
+/* line 197, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .compare__buttons .compare__button {
+  width: 150px;
+  height: 20px;
+  border: 1px solid dimgrey;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  color: white;
+  margin-right: 20px;
+  border-radius: 2px;
+  opacity: 0.95;
+}
+/* line 208, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .compare__buttons .compare__button:hover {
+  opacity: 1.0;
+}
+/* line 211, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .compare__buttons .compare__button.compare__button-submit {
+  float: right;
+  background-color: cornflowerblue;
+}
+/* line 216, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+#report-dashboard .compare__buttons .compare__button.compare__button-cancel {
+  float: right;
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+
+/* line 231, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+a:link, a:visited {
+  text-decoration: none;
+}
+
+/* line 232, ../../../modules/custom/xeros_report/sass/layouts/_dashboard.scss */
+a:hover, a:active {
+  text-decoration: underline;
+}
+
+/* Theme base layouts */
 /**
  * @file
  * Layout styles.
@@ -3839,8 +4864,8 @@ html, body {
 /* Set the shared properties for all grid items. */
 /* line 27, ../sass/layouts/_layout.scss */
 .grid-item {
-  padding-left: 2px;
-  padding-right: 3px;
+  padding-left: 0px;
+  padding-right: 0px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -3883,8 +4908,8 @@ html, body {
     width: 60%;
     margin-left: 20%;
     margin-right: -80%;
-    padding-left: 2px;
-    padding-right: 3px;
+    padding-left: 0px;
+    padding-right: 0px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -3898,8 +4923,8 @@ html, body {
     width: 20%;
     margin-left: 0%;
     margin-right: -20%;
-    padding-left: 2px;
-    padding-right: 3px;
+    padding-left: 0px;
+    padding-right: 0px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
@@ -3913,8 +4938,8 @@ html, body {
     width: 20%;
     margin-left: 80%;
     margin-right: -100%;
-    padding-left: 2px;
-    padding-right: 3px;
+    padding-left: 0px;
+    padding-right: 0px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;

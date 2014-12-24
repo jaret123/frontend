@@ -53,11 +53,5 @@
   <?php print $page; ?>
   <?php print $page_bottom; ?>
 
-  <!--    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>-->
-
-
-
-
-  <script src="<?php print $base_path . $path_to_xeros_theme; ?>/data/news.js"></script>
 </body>
 </html>

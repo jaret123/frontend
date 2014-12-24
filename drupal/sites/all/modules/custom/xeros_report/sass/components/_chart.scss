@@ -1,0 +1,89 @@
+.chart {
+  text {
+    //font-size: 12px;
+  }
+}
+
+.metric {
+  .arrow,
+  .thumb {
+    display: inline-block;
+    width: inherit;
+    background: no-repeat left bottom;
+    background-size: contain;
+    padding-left:10px;
+    &:after {
+      font-family: FontAwesome;
+    }
+  }
+  .delta {
+    display: inline-block;
+  }
+  // If the difference between actual and model is positive
+  &.negative {
+    .arrow {
+      &:after {
+        color: #ff0000;
+        content: "\f062";
+      }
+    }
+    .thumb {
+      &:after {
+        color: #ff0000;
+        content: "\f088";
+      }
+    }
+  }
+
+  // If the difference between actual and model is negative
+  &.positive {
+    .arrow {
+      &:after {
+        color: #00c900;
+        content: "\f063";
+      }
+    }
+    .thumb {
+      &:after {
+        color: #00c900;
+        content: "\f087";
+      }
+    }
+  }
+  // If actual and model are equal
+  &.delta-none {
+    .arrow {
+      opacity: 0;
+    }
+  }
+}
+
+// Flip the color but not the arrow for non-xeros (if we could be saving money, then RED)
+.non-xeros {
+  .negative {
+    .arrow {
+      &:after {
+        color: #00c900;
+      }
+    }
+    .thumb {
+      &:after {
+        color: #00c900;
+        content: "\f087";
+      }
+    }
+  }
+  .positive {
+    .arrow {
+      &:after {
+        color: #ff0000;
+      }
+    }
+    .thumb {
+      &:after {
+        color: #ff0000;
+        content: "\f088";
+      }
+    }
+  }
+}

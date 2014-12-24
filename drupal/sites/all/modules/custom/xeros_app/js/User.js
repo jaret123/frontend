@@ -56,10 +56,10 @@ FF.User = (function ($) {
 
     function setReportCompany(companyId, callback) {
         if ( typeof companyId == "number" && companyId !== 0 ) {
-            if (checkNested(app.companies, companyId)) {
-                // Get it from app.companies if it exists - Admin users
+            if (checkNested(context.companies, companyId)) {
+                // Get it from context.companies if it exists - Admin users
                 pub.reportSettings.company.id = companyId;
-                pub.reportSettings.company.title = app.companies[companyId].name;
+                pub.reportSettings.company.title = context.companies[companyId].name;
                 //debugger;
                 setCookie('sessionCompany', pub.reportSettings.company.id);
                 updateFinish(callback);
@@ -70,9 +70,9 @@ FF.User = (function ($) {
     }
     function setReportLocation(locationId, callback) {
         if ( typeof locationId == "number" && locationId !== 0 ) {
-            if (checkNested(app.companies, pub.reportSettings.company.id, 'location', locationId, 'name')) {
+            if (checkNested(context.companies, pub.reportSettings.company.id, 'location', locationId, 'name')) {
                 pub.reportSettings.location.id = locationId;
-                pub.reportSettings.location.title = app.companies[pub.reportSettings.company.id].location[locationId].name;
+                pub.reportSettings.location.title = context.companies[pub.reportSettings.company.id].location[locationId].name;
                 setCookie('sessionLocation',pub.reportSettings.location.id);
                 updateFinish(callback);
             }
@@ -133,9 +133,9 @@ FF.User = (function ($) {
         for ( var i in c ) {
             var kv = c[i].trim().split("=");
             if ( kv[0] == "sessionDates" ) {
-                var daterange = kv[1].split(",");
-                if (typeof daterange == "object") {
-                    pub.setReportDateRange(daterange);
+                var dr = kv[1];
+                if ( typeof dr == "string" && dr.length > 0 ) {
+                    pub.reportSettings.dates = dr.split(',');
                 }
             }
             if (kv[0] == "sessionTimeSelect") {

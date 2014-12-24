@@ -26,12 +26,13 @@ javascripts_dir = "js"
 
 # Require any additional compass plugins installed on your system.
 #require 'ninesixty'
-#require 'zen-grids'
+require 'zen-grids'
+#require 'bootstrap-sass'
 
 # Assuming this theme is in sites/*/themes/THEMENAME, you can add the partials
 # included with a module by uncommenting and modifying one of the lines below:
 #add_import_path "../../../default/modules/FOO"
-#add_import_path "../../../all/modules/FOO"
+add_import_path "../../../all/modules/custom/xeros_report/sass"
 #add_import_path "../../../../modules/FOO"
 
 

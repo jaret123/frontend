@@ -1,0 +1,8 @@
+name = Xeros Reports
+description = This module contains the report definitions for the major reports and their user interfaces.
+package = Xeros
+core = 7.x
+
+#configure = admin/config/administration/xeros/reports
+
+#files[] = ws_utils.inc

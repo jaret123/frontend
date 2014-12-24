@@ -236,6 +236,47 @@ switch ($host) {
     );
     $conf['database_script_dir'] = "/Users/jason/dev/ELYXOR/xeros/db/updates/";
     $conf['mysql_bin'] = "/Applications/MAMP/Library/bin/mysql";
+    error_reporting(E_ALL);
+    ini_set('display_errors', TRUE);
+    ini_set('display_startup_errors', TRUE);
+    break;
+  case 'sbeadycare-dev.xeroscleaning.com':
+    $databases = array(
+      'default' =>
+        array(
+          'default' =>
+            array(
+              'database' => 'xeros-dev',
+              'username' => 'xeros',
+              'password' => 'X#r)S2014',
+              'host'     => 'localhost',
+              'port'     => '',
+              'driver'   => 'mysql',
+              'prefix'   => '',
+            ),
+        ),
+    );
+    $conf['database_script_dir'] = "/var/www/xeros-dev/www/db/updates/";
+    $conf['mysql_bin'] = "/usr/bin/mysql";
+    break;
+  case 'sbeadycare-test.xeroscleaning.com':
+    $databases = array(
+      'default' =>
+        array(
+          'default' =>
+            array(
+              'database' => 'xeros-test',
+              'username' => 'xeros',
+              'password' => 'X#r)S2014',
+              'host'     => 'localhost',
+              'port'     => '',
+              'driver'   => 'mysql',
+              'prefix'   => '',
+            ),
+        ),
+    );
+    $conf['database_script_dir'] = "/var/www/xeros-test/www/db/updates/";
+    $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
   case 'sbeadycare-qa.xeroscleaning.com':
     $databases = array(

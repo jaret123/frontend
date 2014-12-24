@@ -3,6 +3,7 @@ $color-yellow: rgb(255,210,0);
 $color-green: green;
 
 .status {
+  line-height: 1;
   &:before {
     font-family: FontAwesome;
     font-size: 22px;
@@ -28,6 +29,7 @@ $color-green: green;
   #consumption & {
     &:before {
       font-size: 40px;
+
     }
   }
 }

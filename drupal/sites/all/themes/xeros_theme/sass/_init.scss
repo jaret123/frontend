@@ -90,9 +90,12 @@ $font-body:        $lato;
 $font-monospace:   $courier;
 
 h1, h2 {
-  font-weight: 100;
+  font-weight: 300;
 }
 h3 {
+  font-weight: 300;
+}
+b,strong {
   font-weight: 300;
 }
 //
@@ -114,7 +117,7 @@ $tabs-background-color-active: #6bcaee;
 
 $header-background-color: rgb(211,239,252);
 
-$font-color: #444;
+$font-color: #222;
 $font-accent-color: rgb(0,135,190);
 
 $chart-color-1: rgb(121,189,181);

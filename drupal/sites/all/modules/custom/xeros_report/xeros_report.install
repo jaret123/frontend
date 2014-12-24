@@ -1,0 +1,91 @@
+<?php
+
+
+/**
+ * Create the configuration schema for simple static values for xeros
+ *
+ * Implements hook_schema()
+ */
+function xeros_report_schema() {
+  $schema = array();
+
+  $schema['xeros_static_values'] = array(
+    'description' => 'Static values used throughout the site',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key of the Project entity',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'bundle' => array(
+        'description' => 'Group of configuration values',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'name' => array(
+        'description' => 'Static value name',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'value' => array(
+        'description' => 'Value - stored as a string',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'description' => array(
+        'description' => 'Description',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'bundle_name' => array('bundle', 'name'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function xeros_report_install() {
+
+  $data = array(
+    array(
+      'bundle' => 'xeros_model_simple',
+      'name' => 'water_diff',
+      'value' => '4',
+      'description' => 'Actual water * {water_diff} = xeros_model_simple'
+    ),
+    array(
+      'bundle' => 'xeros_model_simple',
+      'name' => 'therms_per_gallon',
+      'value' => '2',
+      'description' => 'Actual water * {water_diff} = xeros_model_simple'
+    ),
+    array(
+      'bundle' => 'xeros_model_simple',
+      'name' => 'hot_water_ratio',
+      'value' => '10',
+      'description' => 'Industry average hot water used as a ratio of cold water'
+    ),
+  );
+
+  foreach ($data as $values) {
+    $nid = db_insert('xeros_static_values')
+      ->fields($values)
+      ->execute();
+  }
+}
+
+function xeros_report_uninstall() {
+  // Drop my tables.
+  drupal_uninstall_schema('xeros_report');
+}

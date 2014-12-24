@@ -1,12 +1,12 @@
-.xeros-admin-menu {
+.location-picker {
   background-color: rgba(255,255,255, .8);
-  position: absolute;
+  position: fixed;
   top: 200px;
   left: -185px;
   @include single-transition( left, 150ms );
   //left: -95%;
   overflow: visible;
-
+  z-index: 1000;
 
   > * {
     //opacity: 0;
@@ -22,13 +22,13 @@
     margin-bottom: 3px;
     line-height: 1em;
   }
-  .xeros-admin-menu__menu-wrapper {
+  .location-picker__wrapper {
     padding: 5px;
     padding-top: 15px;
     width: 180px;
 
   }
-  .xeros-admin-menu__button {
+  .location-picker__button {
     position: absolute;
     @include single-transition( right, 150ms );
     right: -38px;
@@ -46,7 +46,7 @@
   &.open {
     left: 0;
 
-    .admin-menu__button {
+    .location-picker__button {
       right: 3px;
 
     }

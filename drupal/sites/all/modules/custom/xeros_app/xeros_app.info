@@ -4,3 +4,5 @@ package = Xeros
 core = 7.x
 
 configure = admin/config/administration/xeros/base
+
+files[] = ws_utils.inc

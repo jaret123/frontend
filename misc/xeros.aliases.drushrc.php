@@ -1,31 +1,57 @@
 <?php
-
 $aliases['xeros.dev'] = array (
-  'root' => '/var/www/ELYXOR/dev/www/drupal',
-  'uri' => 'http://xeros-dev.d.ffinno.com',
-  'remote-host' => 'ffinno',
-  'path-aliases' => 
-  array (
-    '%drush' => '/usr/bin',
-    '%site' => 'sites/default/',
-    '%files' => 'sites/default/files'
-  ),
-  'databases' => 
-  array (
-    'default' => 
-    array (
-      'default' => 
-      array (
-        'database' => 'xeros_dev',
-        'username' => 'root',
-        'password' => 'root',
-        'host' => 'localhost',
-        'port' => '',
-        'driver' => 'mysql',
-        'prefix' => '',
-      ),
-    ),
-  ),
+    'root' => '/var/www/xeros-dev/www/drupal',
+    'uri' => 'http://sbeadycare-dev.xeroscleaning.com',
+    'remote-host' => 'xeros-qa',
+    'path-aliases' =>
+        array (
+            '%drush' => '/usr/bin',
+            '%site' => 'sites/default/',
+            '%files' => 'sites/default/files'
+        ),
+    'databases' =>
+        array (
+            'default' =>
+                array (
+                    'default' =>
+                        array (
+                            'database' => 'xeros-dev',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        ),
+);
+$aliases['xeros.test'] = array (
+    'root' => '/var/www/xeros-test/www/drupal',
+    'uri' => 'http://sbeadycare-test.xeroscleaning.com',
+    'remote-host' => 'xeros-qa',
+    'path-aliases' =>
+        array (
+            '%drush' => '/usr/bin',
+            '%site' => 'sites/default/',
+            '%files' => 'sites/default/files'
+        ),
+    'databases' =>
+        array (
+            'default' =>
+                array (
+                    'default' =>
+                        array (
+                            'database' => 'xeros-test',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        ),
 );
 $aliases['xeros.qa'] = array (
     'root' => '/var/www/xeros/www/drupal',

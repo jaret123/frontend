@@ -125,11 +125,10 @@ Handlebars.registerHelper('formatDelta', function(numerator, denominator) {
     }
 })
 
-Handlebars.registerHelper('formatDeltaValue', function(numerator, denominator) {
-    if ( typeof denominator == "undefined" || typeof numerator == "undefined") {
+Handlebars.registerHelper('formatDeltaValue', function(value) {
+    if ( typeof value == "undefined" ) {
         return 'No Readings';
     } else {
-        var value = Handlebars.helpers.deltaValue(numerator, denominator);
         if (value === '-') {
             value = '';
         } else {
@@ -139,28 +138,10 @@ Handlebars.registerHelper('formatDeltaValue', function(numerator, denominator) {
     }
 })
 
-Handlebars.registerHelper('deltaValue', function(numerator, denominator) {
-    numerator = parseInt(numerator, 10);
-    denominator = parseInt(denominator, 10);
-
-    var delta = 0;
-    // BUG - Divide by zero throws NaN
-
-    // Divide by 0
-    if ( denominator === 0 ) {
-        if ( numerator === 0 ) {
-            delta = 0;
-        } else {
-            delta = 100;
-        }
-    } else {
-        delta = parseInt(((denominator - numerator) / denominator) * 100);
-    }
-    return delta;
-})
-
 Handlebars.registerHelper('digits', function(cycles) {
-    if (typeof cycles !== "undefined") {
+    //TODO Why would cycles come in as null
+    if (typeof(cycles) != "undefined" && cycles !==null) {
+        console.log(cycles);
         return 'digits-' + cycles.toString().length;
     } else {
         return '';

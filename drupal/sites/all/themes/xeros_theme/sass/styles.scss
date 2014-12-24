@@ -15,18 +15,41 @@
 /* HTML element (SMACSS base) rules */
 @import "normalize";
 
+// Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// Override variables
+@import "bootstrap-variables";
+
+// Reset and dependencies
+//@import "bootstrap/normalize";
+
+//@import "bootstrap-compass";
+//@import "bootstrap-variables";
+@import "bootstrap/variables";
+@import "bootstrap/buttons";
+@import "bootstrap/scaffolding";
+@import "bootstrap/close";
+@import "bootstrap/modals";
+
 @import "compass/typography/lists/horizontal-list";
 @import "compass/css3/images";
 @import "compass/css3/border-radius";
 @import "compass/css3/transform";
 
 @import "components/admin";
-@import "components/admin-menu";
-@import "components/caret";
+@import "components/location-picker";
+
+/* Load from xeros_report module */
 @import "components/chart";
 @import "components/chartBar";
 @import "components/chartDonut";
 @import "components/chartKpi";
+
+/*  Theme components */
+@import "components/typography";
+@import "components/caret";
 @import "components/dropdown";
 @import "components/widgets.scss";
 @import "components/kalendae";
@@ -37,17 +60,27 @@
 @import "components/icons";
 @import "components/legend";
 @import "components/misc";
+
 @import "components/page-1";
-@import "components/page-2";
+
+//@import "components/page-2";
+
+
 @import "components/page-3";
 @import "components/landing";
 @import "components/error";
 @import "components/news";
 @import "components/alerts";
 @import "components/actions";
-
+@import "components/flipper";
+@import "components/lightbox";
 
 /* Layout rules */
+/* Report module layouts */
+@import "layouts/health";
+@import "layouts/dashboard";
+
+/* Theme base layouts */
 @import "layouts/layout";
 
 /* Component (SMACSS module) rules */

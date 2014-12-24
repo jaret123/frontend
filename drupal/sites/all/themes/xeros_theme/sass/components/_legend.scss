@@ -5,6 +5,10 @@
   top: 00px;
   position: absolute;
   line-height: 20px;
+  .column {
+    float: left;
+    margin-right: 20px;
+  }
   .label {
     margin-left: 5px;
   }
@@ -18,9 +22,13 @@
       background-color: rgb(153, 153, 153);
       border: 1px solid rgb(153, 153, 153);
     }
-    &.xeros {
+    &.model {
       background-color: $font-accent-color;
       border: 1px solid $font-accent-color;
     }
+//    &.xeros {
+//      background-color: $font-accent-color;
+//      border: 1px solid $font-accent-color;
+//    }
   }
 }
