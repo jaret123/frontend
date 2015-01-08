@@ -350,10 +350,29 @@ var view = {
          */
         jQuery( ".flipper-openbtn" ).click(function() {
             jQuery(this).parents('.flip-container').addClass("hover");
+            console.log(FF.Utils.msieVersion());
+            if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
+                console.log("IE");
+                var flipper = jQuery(this).parents('.flipper');
+                var back = flipper.find('.back');
+                var front = flipper.find('.front');
+
+                back.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
+                front.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
+            }
         });
+
         jQuery( ".flipper-closebtn" ).click(function() {
             jQuery(this).parents('.flip-container').removeClass("hover");
+            if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
+        var flipper = jQuery(this).parents('.flipper');
+        var back = flipper.find('.back');
+        var front = flipper.find('.front');
+        front.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
+        back.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
+    }
         });
+
 //        jQuery('.water-only-0 .link').unbind().click(function (event) {
 //            event.preventDefault();
 //            var classification,
