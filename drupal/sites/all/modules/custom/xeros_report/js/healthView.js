@@ -350,9 +350,9 @@ var view = {
          */
         jQuery( ".flipper-openbtn" ).click(function() {
             jQuery(this).parents('.flip-container').addClass("hover");
-            console.log(FF.Utils.msieVersion());
+          //  console.log(FF.Utils.msieVersion());
             if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
-                console.log("IE");
+                //console.log("IE");
                 var flipper = jQuery(this).parents('.flipper');
                 var back = flipper.find('.back');
                 var front = flipper.find('.front');
