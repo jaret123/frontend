@@ -395,7 +395,13 @@ var chart = {
             .attr("y", barHeight / 2)
             .attr("dy", ".35em")
             .text(function (d) {
-                return d.toLocaleString();
+              return   FF.Format.HealthtoLocaleString(d,2);
+                //var b =  Math.round(d*(Math.pow(10,2)))/Math.pow(10,2);
+                //  console.log(value,b);
+               // t = parseFloat(t);
+              //  t = FF.Format.numberWithCommas(b);
+              //  return t;
+              //  return d.toLocaleString(); //maybe here
             });
         // We need to explicitly set the styles on text to make rendering in the PDF better.
         svg.selectAll("text")
