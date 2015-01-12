@@ -1420,34 +1420,40 @@ h6 {
   width: auto;
   min-width: 170px;
   list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
 }
-/* line 70, ../sass/components/_dropdown.scss */
+/* line 71, ../sass/components/_dropdown.scss */
+.dropdown dd ul :focus {
+  overflow-y: auto;
+}
+/* line 76, ../sass/components/_dropdown.scss */
 .dropdown span.value {
   display: none;
 }
-/* line 73, ../sass/components/_dropdown.scss */
+/* line 79, ../sass/components/_dropdown.scss */
 .dropdown dd ul li a {
   padding: 5px;
   display: block;
 }
-/* line 77, ../sass/components/_dropdown.scss */
+/* line 83, ../sass/components/_dropdown.scss */
 .dropdown dd ul li a:hover {
   background-color: #eeeeee;
 }
 
-/* line 82, ../sass/components/_dropdown.scss */
+/* line 88, ../sass/components/_dropdown.scss */
 img.flag {
   border: none;
   vertical-align: middle;
   margin-left: 10px;
 }
 
-/* line 88, ../sass/components/_dropdown.scss */
+/* line 94, ../sass/components/_dropdown.scss */
 .flagvisibility {
   display: none;
 }
 
-/* line 96, ../sass/components/_dropdown.scss */
+/* line 102, ../sass/components/_dropdown.scss */
 #cal {
   position: absolute;
   right: 0;
@@ -1463,24 +1469,24 @@ img.flag {
   padding-bottom: 15px;
 }
 
-/* line 110, ../sass/components/_dropdown.scss */
+/* line 116, ../sass/components/_dropdown.scss */
 #cal.show {
   display: block;
 }
 
-/* line 113, ../sass/components/_dropdown.scss */
+/* line 119, ../sass/components/_dropdown.scss */
 #time-select__dl {
   /* border-bottom: 1px solid white; */
   /*position: relative;*/
   /*z-index: 10;*/
 }
 
-/* line 118, ../sass/components/_dropdown.scss */
+/* line 124, ../sass/components/_dropdown.scss */
 .dropdown dt a {
   /*border-bottom: 1px solid white;*/
 }
 
-/* line 121, ../sass/components/_dropdown.scss */
+/* line 127, ../sass/components/_dropdown.scss */
 .cal__button {
   position: absolute;
   bottom: 0;
@@ -1489,7 +1495,7 @@ img.flag {
   padding-right: 18px;
 }
 
-/* line 128, ../sass/components/_dropdown.scss */
+/* line 134, ../sass/components/_dropdown.scss */
 .cal__button-submit, .cal__button-cancel {
   font-size: 11px;
   display: inline-block;
@@ -1502,7 +1508,7 @@ img.flag {
   text-transform: uppercase;
 }
 
-/* line 139, ../sass/components/_dropdown.scss */
+/* line 145, ../sass/components/_dropdown.scss */
 .cal__button-submit:hover, .cal__button-cancel:hover {
   border: 1px solid #5ba0d0;
   background: #eeeeee;
@@ -1510,20 +1516,20 @@ img.flag {
   cursor: pointer;
 }
 
-/* line 146, ../sass/components/_dropdown.scss */
+/* line 152, ../sass/components/_dropdown.scss */
 .chart-header {
   position: relative;
   height: 65px;
 }
 
-/* line 151, ../sass/components/_dropdown.scss */
+/* line 157, ../sass/components/_dropdown.scss */
 .download {
   display: none;
   font-size: 12px;
   margin-left: 3px;
   position: relative;
 }
-/* line 157, ../sass/components/_dropdown.scss */
+/* line 163, ../sass/components/_dropdown.scss */
 .download a:link, .download a:visited {
   background-color: #aaa;
   margin-left: 5px;
@@ -1533,12 +1539,12 @@ img.flag {
   text-decoration: none;
   color: white;
 }
-/* line 167, ../sass/components/_dropdown.scss */
+/* line 173, ../sass/components/_dropdown.scss */
 .download a:hover, .download a:active {
   background-color: #5ba0d0;
 }
 
-/* line 172, ../sass/components/_dropdown.scss */
+/* line 178, ../sass/components/_dropdown.scss */
 .data-range {
   font-size: 12px;
   position: absolute;
@@ -1546,7 +1552,7 @@ img.flag {
   bottom: 0;
 }
 
-/* line 182, ../sass/components/_dropdown.scss */
+/* line 188, ../sass/components/_dropdown.scss */
 .modal .dropdown dt a {
   width: initial;
 }
