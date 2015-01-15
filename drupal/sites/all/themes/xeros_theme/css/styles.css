@@ -4073,13 +4073,16 @@ a:hover, a:active {
 /* entire container, keeps perspective */
 /* line 2, ../sass/components/_flipper.scss */
 .flip-container {
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -o-perspective: 1000;
   perspective: 1000;
   position: relative;
   /* flip speed goes here */
   /* front pane, placed above back */
   /* back, initially hidden pane */
 }
-/* line 14, ../sass/components/_flipper.scss */
+/* line 17, ../sass/components/_flipper.scss */
 .flip-container .flipper {
   -webkit-transition: transform 0.4s linear;
   -o-transition: transform 0.4s linear;
@@ -4089,13 +4092,14 @@ a:hover, a:active {
   -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
   background-color: white;
+  position: relative;
 }
-/* line 23, ../sass/components/_flipper.scss */
+/* line 32, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar {
   position: relative;
   text-align: right;
 }
-/* line 26, ../sass/components/_flipper.scss */
+/* line 35, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn {
   font-size: 20px;
   font-weight: 200;
@@ -4107,33 +4111,49 @@ a:hover, a:active {
   width: 90%;
   left: -2px;
 }
-/* line 36, ../sass/components/_flipper.scss */
+/* line 45, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn.flipper-openbtn {
   top: -11px;
 }
-/* line 41, ../sass/components/_flipper.scss */
+/* line 50, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn:hover {
   opacity: 1;
   color: #0086bd;
 }
-/* line 49, ../sass/components/_flipper.scss */
+/* line 58, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
   backface-visibility: hidden;
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transition: 0.6s;
+  -moz-transform-style: preserve-3d;
+  -o-transition: 0.6s;
+  -o-transform-style: preserve-3d;
+  -ms-transition: 0.6s;
+  -ms-transform-style: preserve-3d;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-/* line 55, ../sass/components/_flipper.scss */
+/* line 86, ../sass/components/_flipper.scss */
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
-  -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);
-  transform: rotateY(0deg);
   position: relative;
   top: 0px;
 }
-/* line 64, ../sass/components/_flipper.scss */
+/* line 95, ../sass/components/_flipper.scss */
 .flip-container .back {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
   font-size: 12px;
   padding: 5px;
   position: absolute;
@@ -4146,12 +4166,12 @@ a:hover, a:active {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-/* line 73, ../sass/components/_flipper.scss */
+/* line 109, ../sass/components/_flipper.scss */
 .flip-container .back .flipper-closebtn {
   top: 3px;
   left: 3px;
 }
-/* line 78, ../sass/components/_flipper.scss */
+/* line 114, ../sass/components/_flipper.scss */
 .flip-container .flipback-backcontainer {
   overflow: hidden;
   height: auto;
@@ -4161,11 +4181,19 @@ a:hover, a:active {
 }
 
 /* flip the pane when hovered */
-/* line 90, ../sass/components/_flipper.scss */
-.flip-container.hover .flipper {
+/* line 134, ../sass/components/_flipper.scss */
+.flip-container.hover .back {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+/* line 143, ../sass/components/_flipper.scss */
+.flip-container.hover .front {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
-  -ms-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
