@@ -28,15 +28,8 @@ Handlebars.registerHelper("toLocaleString", function(value, dec) {
     if ( typeof(value) === "undefined" )  {
         return 0
     } else {
-        var d = parseInt(dec);
-        if ( typeof(d) !== "number" ) {
-            dec = 0;
-        }
-        var t = parseFloat(value);
-        t = t.toFixed(dec);
-        //t = parseFloat(t);
-        t = FF.Format.numberWithCommas(t);
-        return t;
+        return FF.Format.toLocaleString(value,dec);
+
     }
 });
 
