@@ -316,25 +316,6 @@ switch ($host) {
     $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
-  case 'xeros-dev.d.ffinno.com':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros_dev',
-              'username' => 'root',
-              'password' => 'root',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/var/www/ELYXOR/dev/www/db/updates/";
-    $conf['mysql_bin'] = "/usr/bin/mysql";
-    break;
 }
 $local_settings = dirname(__FILE__) . '/settings.local.php';
 if (file_exists($local_settings)) {

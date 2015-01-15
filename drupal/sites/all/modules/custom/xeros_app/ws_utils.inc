@@ -58,7 +58,7 @@ class WsUtils {
 
   function machines_by_location($location_ids) {
 
-    $sql = 'select machine_id from xeros_machine where location_id in (:location_ids)';
+    $sql = 'select machine_id from xeros_machine where location_id in (:location_ids) and active = 1';
 
     $sql = $this->replaceFilters($sql, array(':location_ids' => implode(",", $location_ids)));
 
