@@ -117,7 +117,7 @@ var app = {
             url: self.apiUrl,
             dataType: 'json',
             success: function (data) {
-                console.log("data retrieved: " + self.apiUrl);
+               // console.log("data retrieved: " + self.apiUrl);
                 self.data = data;
                 self.dataRefresh = 0;
                 self.route();
