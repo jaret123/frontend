@@ -212,6 +212,11 @@
           }
         }
       }
+
+      .col__wrapper {
+        @include zen-clear();
+      }
+
       @include zen-clear();
       &.non-xeros {
         @include background-image(linear-gradient(bottom, rgb(240,240,240) 0%, rgb(245,245,245) 50%, rgb(240,240,240) 100%));

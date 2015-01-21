@@ -4088,40 +4088,34 @@ a:hover, a:active {
   -o-transition: transform 0.4s linear;
   transition: transform 0.4s linear;
   transform-style: preserve-3d;
-  border: 1px solid rgba(68, 68, 68, 0.25);
-  -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
-  box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
-  background-color: white;
-  position: relative;
 }
-/* line 32, ../sass/components/_flipper.scss */
+/* line 24, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar {
-  position: relative;
   text-align: right;
+  height: 30px;
 }
-/* line 35, ../sass/components/_flipper.scss */
+/* line 29, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
   font-size: 20px;
   font-weight: 200;
   color: #444444;
   cursor: pointer;
-  margin-right: 10px;
   opacity: 1;
-  position: relative;
-  width: 90%;
-  left: -2px;
 }
-/* line 45, ../sass/components/_flipper.scss */
-.flip-container .flipper-navbar .flipper-navbtn.flipper-openbtn {
-  top: -11px;
-}
-/* line 50, ../sass/components/_flipper.scss */
+/* line 47, ../sass/components/_flipper.scss */
 .flip-container .flipper-navbar .flipper-navbtn:hover {
   opacity: 1;
   color: #0086bd;
 }
-/* line 58, ../sass/components/_flipper.scss */
+/* line 55, ../sass/components/_flipper.scss */
 .flip-container .front, .flip-container .back {
+  border: 1px solid rgba(68, 68, 68, 0.25);
+  -webkit-box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  box-shadow: 1px 1px 3px rgba(50, 50, 50, 0.25);
+  background-color: white;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -o-backface-visibility: hidden;
@@ -4140,14 +4134,14 @@ a:hover, a:active {
   top: 0;
   left: 0;
 }
-/* line 86, ../sass/components/_flipper.scss */
+/* line 87, ../sass/components/_flipper.scss */
 .flip-container .front {
   z-index: 2;
   /* for firefox 31 */
   position: relative;
   top: 0px;
 }
-/* line 95, ../sass/components/_flipper.scss */
+/* line 96, ../sass/components/_flipper.scss */
 .flip-container .back {
   -webkit-transform: rotateY(0deg);
   -moz-transform: rotateY(0deg);
@@ -4155,8 +4149,6 @@ a:hover, a:active {
   -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
   font-size: 12px;
-  padding: 5px;
-  position: absolute;
   top: 0;
   left: 0;
   background-color: white;
@@ -4166,18 +4158,14 @@ a:hover, a:active {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-/* line 109, ../sass/components/_flipper.scss */
-.flip-container .back .flipper-closebtn {
-  top: 3px;
-  left: 3px;
+/* line 112, ../sass/components/_flipper.scss */
+.flip-container .flipper-frontcontainer {
+  padding-top: 5px;
 }
-/* line 114, ../sass/components/_flipper.scss */
-.flip-container .flipback-backcontainer {
-  overflow: hidden;
-  height: auto;
-  width: auto;
-  margin-left: 25px;
-  padding: 5px;
+/* line 116, ../sass/components/_flipper.scss */
+.flip-container .flipper-backcontainer {
+  overflow: auto;
+  padding: 0px 6px;
 }
 
 /* flip the pane when hovered */
@@ -4539,6 +4527,10 @@ a:hover, a:active {
   margin-top: -5px;
 }
 /* line 216, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+#report-health .consumption-container .row .col__wrapper {
+  clear: left;
+}
+/* line 221, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.non-xeros {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #f0f0f0), color-stop(50%, #f5f5f5), color-stop(100%, #f0f0f0));
   background-image: -webkit-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
@@ -4546,7 +4538,7 @@ a:hover, a:active {
   background-image: -o-linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
   background-image: linear-gradient(bottom, #f0f0f0 0%, #f5f5f5 50%, #f0f0f0 100%);
 }
-/* line 219, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 224, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 #report-health .consumption-container .row.xeros {
   background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #e5f4fa), color-stop(50%, #f2f9fc), color-stop(100%, #e5f4fa));
   background-image: -webkit-linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
@@ -4555,13 +4547,13 @@ a:hover, a:active {
   background-image: linear-gradient(bottom, #e5f4fa 0%, #f2f9fc 50%, #e5f4fa 100%);
 }
 
-/* line 231, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 236, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 .status_data_icon {
   width: 20%;
   float: left;
 }
 
-/* line 236, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
+/* line 241, ../../../modules/custom/xeros_report/sass/layouts/_health.scss */
 .status_data {
   padding-right: 2px;
   text-align: left;
