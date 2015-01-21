@@ -18,34 +18,31 @@
     @include transition(transform .4s linear);
 
     transform-style: preserve-3d;
-  //  -webkit-perspective: 1000;
-    border:$border;
-    @include box-shadow(1px 1px 3px rgba(50,50,50,.25));
-    background-color: $backBackgroundColor;
 
-    //padding:5px;
-
-
-    position: relative;
   }
 
   .flipper-navbar {
-    position: relative;
+
+
     text-align: right;
+    height:30px;
     .flipper-navbtn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
       font-size: 20px;
       font-weight: 200;
       color: $font-color;
       cursor: pointer;
-      margin-right: 10px;
       opacity: 1;
-      position: relative;
-      width:90%;
-     left:-2px;
+
       &.flipper-openbtn {
-        top: -11px;
+
       }
 
+      &.flipper-closebtn {
+
+      }
 
       &:hover {
         opacity: 1;
@@ -56,6 +53,9 @@
   }
 
   .front, .back {
+    border:$border;
+    @include box-shadow(1px 1px 3px rgba(50,50,50,.25));
+    background-color: $backBackgroundColor;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     -o-backface-visibility: hidden;
@@ -80,6 +80,7 @@
     position: absolute;
     top: 0;
     left: 0;
+
   }
 
   /* front pane, placed above back */
@@ -99,24 +100,23 @@
     -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
     font-size: $backFontSize;
-    padding:5px;
-    position:absolute;
+
+    //position:absolute;
     top:0;
     left:0;
     background-color: $backBackgroundColor;
 //opaccity:0;
     @include transform(rotateY(180deg));
-    .flipper-closebtn {
-      top: 3px;
-      left:3px;
-    }
+
   }
-  .flipback-backcontainer{
-    overflow: hidden;
-    height:auto;
-    width:auto;
-    margin-left:25px;
-    padding: 5px;
+  .flipper-frontcontainer {
+    padding-top:5px;
+  }
+
+  .flipper-backcontainer {
+    overflow: auto;
+
+    padding: 0px 6px;
   }
 }
 

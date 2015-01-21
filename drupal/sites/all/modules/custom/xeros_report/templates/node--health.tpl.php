@@ -92,6 +92,7 @@
                             <div class="row {{info.cssClass}} {{info.machine_type}} water-only-{{info.water_only}}" machineId={{id}}>
                                 <div class="col col-1">
                                   <div class="col__wrapper">
+                                      <div class="front">
                                     <span class="consumption__machine {{info.machine_name}}">
                                         <div class="icon-Washer">
                                           <div class="icon-washer-label {{digits info.cycles}}">
@@ -115,6 +116,7 @@
                                         <div class="metric__message"></div>
                                     </span>
                                   </div>
+                                      </div>
                                 </div>
                                 <div class="col col-2 metric flip-container {{delta.cold_water.cssClass}}" classification="cold_water" machine="{{id}}" chart="cold_water-{{info.machine_id}}">
                                     <div class="flipper col__wrapper">
@@ -153,6 +155,7 @@
                                 </div>
                                   <div class="col col-4 health">
                                     <div class="col__wrapper">
+                                        <div class="front">
                                         <div class="status_data_icon">
                                       <div class="{{actionData.action_status.class}}">
                                       </div>
@@ -162,6 +165,7 @@
                                       <div><strong>{{actionData.action_created}}</strong><br/> {{actionData.action_title.data}}</div>
                                       {{/if}}
                                         </div>
+                                            </div>
                                     </div>
                                   </div>
                                   <!--<div class="col col-5 action">-->

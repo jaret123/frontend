@@ -103,15 +103,19 @@ var view = {
 
             //TODO: Need to set each cell to the same height, and then add padding
             jQuery('.row:not(.first)').each(function() {
+               // debugger;
                 var rowHeight = jQuery(this).innerHeight();
                 var cols = jQuery(this).find('.col .col__wrapper');
 
                 cols.each(function() {
+                 ///   debugger;
                     var colHeight = jQuery(this).outerHeight();
                     var paddingtop = (rowHeight - colHeight) / 2 ;
-                   jQuery(this).css('padding-top', paddingtop);
-                    jQuery(this).css('height', rowHeight - paddingtop);
 
+                    jQuery(this).find('.front').css('height', rowHeight - paddingtop);
+                    jQuery(this).find('.front').css('padding-top', paddingtop);
+                    jQuery(this).find('.back').css('padding-top', paddingtop);
+                    jQuery(this).find('.back').css('height', rowHeight - paddingtop);
                     //jQuery('.back').css('height', rowHeight - paddingtop);
                     var offset = 5;
                    // jQuery('.flipper-openbtn').css('top',-(paddingtop/3));
