@@ -43,7 +43,7 @@
           <?php print render($title_suffix); ?>
           <?php print $messages; ?>
             <div class="error-messages">
-                Status Message
+                <?php print t("Status Message"); ?>
             </div>
           <?php print render($tabs); ?>
           <?php print render($page['help']); ?>

@@ -78,8 +78,8 @@ var view = {
             ar[2]['meta'] = {
                 cssClass : "therms",
                 icon : "Thermometer",
-                label : "Therms",
-                title : "Therms"
+                label : Drupal.t("Therms"),
+                title : Drupal.t("Therms")
             };
 
         var labels = {
