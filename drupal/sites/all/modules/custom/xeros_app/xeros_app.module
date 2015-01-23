@@ -74,7 +74,6 @@ function xeros_app_form_user_profile_form_alter(&$form, &$form_state, $form_id) 
       $form['field_company']['#access'] = false;
       $form['field_location']['#access'] = false;
       $form['picture']['#access'] = false;
-      $form['timezone']['#access'] = false;
     }
   }
 }
