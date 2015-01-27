@@ -32,8 +32,8 @@ var view = {
                     meta : {
                         cssClass : "total",
                         icon : "Globe",
-                        label : "Overall Expense",
-                        title : "Total Savings"
+                        label : Drupal.t("Overall Expense"),
+                        title : Drupal.t("Total Savings")
                     },
                     actual: {
                         summary : {
@@ -72,8 +72,8 @@ var view = {
             ar[1]['meta'] = {
                     cssClass : "cold-water",
                     icon : "Drop",
-                    label : "Water Sewer",
-                    title : "Water Sewer"
+                    label : Drupal.t("Water Sewer"),
+                    title : Drupal.t("Water Sewer")
                 };
             ar[2]['meta'] = {
                 cssClass : "therms",
@@ -84,19 +84,19 @@ var view = {
 
         var labels = {
             'non_xeros' : {
-                lineA : 'Potential Cost',
-                lineB : 'Actual Cost',
-                'lineA-key' : 'Current Consumption (Non-Xeros Machines)',
-                'lineB-key' : 'Potential Consumption with Xeros',
-                savings : 'Potential Savings',
+                lineA : Drupal.t('Potential Cost'),
+                lineB : Drupal.t('Actual Cost'),
+                'lineA-key' : Drupal.t('Current Consumption (Non-Xeros Machines)'),
+                'lineB-key' : Drupal.t('Potential Consumption with Xeros'),
+                savings : Drupal.t('Potential Savings'),
                 cssClass : 'non-xeros'
             },
             xeros : {
-                lineA : 'Industry Avg Cost',
-                lineB : 'Xeros Actual Cost',
-                'lineA-key' : 'Current Consumption (Xeros Machines)',
-                'lineB-key' : 'Industry Benchmark (Non-Xeros Machines)',
-                savings : 'Current Savings',
+                lineA : Drupal.t('Industry Avg Cost'),
+                lineB : Drupal.t('Xeros Actual Cost'),
+                'lineA-key' : Drupal.t('Current Consumption (Xeros Machines)'),
+                'lineB-key' : Drupal.t('Industry Benchmark (Non-Xeros Machines)'),
+                savings : Drupal.t('Current Savings'),
                 cssClass : 'xeros'
             }
         };
@@ -137,12 +137,12 @@ var view = {
                         app.reportData[0].actual.chart[d] = {
                             cost: 0,
                             date : '',
-                            value: 0,
+                            value: 0
                         };
                         app.reportData[0].model.chart[d] = {
                             cost: 0,
                             date : '',
-                            value: 0,
+                            value: 0
                         };
                     }
                     var x = app.reportData[ij].actual.chart[d];

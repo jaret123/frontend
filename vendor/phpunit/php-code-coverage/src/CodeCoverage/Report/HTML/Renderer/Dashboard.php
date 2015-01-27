@@ -323,7 +323,7 @@ class PHP_CodeCoverage_Report_HTML_Renderer_Dashboard extends PHP_CodeCoverage_R
     {
         return sprintf(
             '        <li><a href="index.html">%s</a></li>' . "\n" .
-            '        <li class="active">(Dashboard)</li>' . "\n",
+            '        <li class="active">(' . t('Dashboard') . ')</li>' . "\n",
             $node->getName()
         );
     }

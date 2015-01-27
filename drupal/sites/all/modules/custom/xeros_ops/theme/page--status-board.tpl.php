@@ -27,8 +27,8 @@
     if ( $user->uid > 0 ) :
       $u = user_load($user->uid);
 
-      $user->company = "No company assigned";
-      $user->location = "No location assigned";
+      $user->company = t("No company assigned");
+      $user->location = t("No location assigned");
 
       if (isset($u->field_company['und'][0]['target_id'])) {
         $company = node_load($u->field_company['und'][0]['target_id']);
@@ -39,7 +39,7 @@
         $user->location = $location->title;
       }
       ?>
-      <span class="header__welcome">Welcome <?php print $user->name ; ?><br/>
+      <span class="header__welcome"><?php print t('welcome'); ?> <?php print $user->name ; ?><br/>
               Company: <span class="header__company"><?php print $user->company ?></span><br/>
               Location: <span class="header__location"><?php print $user->location ?></span>
             </span>
@@ -98,28 +98,28 @@
         </div>
         <div class="key__details">
           <div class="title">
-            Status
+            <?php print t('Status'); ?>
           </div>
           <div class="green key__item">
-            Machine is active.
+            <?php print t('Machine is active.'); ?>
           </div>
           <div class="yellow key__item">
-            Machine is idle.
+            <?php print t('Machine is idle.'); ?>
           </div>
           <div class="red key__item">
-            Alert.  See status message for details.
+            <?php print t('Alert.  See status message for details.'); ?>
           </div>
           <div class="grey key__item">
-            Machine is not currently being monitored.
+            <?php print t('Machine is not currently being monitored.'); ?>
           </div>
           <div class="title">
-            Machine Type
+            <?php print t('Machine Type'); ?>
           </div>
           <div class="xeros key__item">
-            Xeros Machine.
+            <?php print t(' Xeros Machine.'); ?>
           </div>
           <div class="non-xeros key__item">
-            Non Xeros Machine.
+            <?php print t('Non Xeros Machine.'); ?>
           </div>
 <!--          <div class="blue key__item">-->
 <!--            <i class="fa fa-bolt"></i>-->
@@ -135,10 +135,10 @@
 <!--        <span class="controls display-type" data-display-type="icon" >Icons </span>-->
 <!--        <span class="controls display-type" data-display-type="block" >Blocks </span>-->
 
-        <span class="controls show-label" >Show Labels </span>
-        <span class="controls show-details" >Show Details </span>
+        <span class="controls show-label" > <?php print t('Show Labels'); ?> </span>
+        <span class="controls show-details" ><?php print t('Show Details'); ?> </span>
 
-        <span class="controls full-screen" data-display="full-screen">Full Screen</span>
+        <span class="controls full-screen" data-display="full-screen"><?php print t('Full Screen'); ?></span>
       </div>
 
     </div>

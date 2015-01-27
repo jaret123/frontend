@@ -41,6 +41,7 @@ Handlebars.registerHelper('dateFormat', function(context, block) {
     console.log(context);
     var d = new Date(context);
     console.log(d);
+    //TODO this is where date format goes @jason
     if (window.moment) {
         var f = block.hash.format || "MMM Do, YYYY";
 

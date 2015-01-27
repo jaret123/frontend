@@ -87,7 +87,7 @@ var exportPDF = {
 //                'elementHandlers': specialElementHandlers
 //            });
 
-            doc.text("Total Savings", 20, 20);
+            doc.text(Drupal.t("Total Savings"), 20, 20);
 
             //load a svg snippet in the canvas with id = 'drawingArea'
             var chart = $(".kpi-chart.total").html();
@@ -103,11 +103,11 @@ var exportPDF = {
 
             doc.addImage(img, 'JPEG', 60, 20 - 5);
 
-            doc.text("Total Savings", 150, 20);
+            doc.text(Drupal.t("Total Savings"), 150, 20);
             doc.text("$10,208", 150, 30);
-            doc.text("Actual Cost", 150, 40);
+            doc.text(Drupal.t("Actual Cost"), 150, 40);
             doc.text("$4,603", 150, 50);
-            doc.text("Potential Cost", 150, 60);
+            doc.text(Drupal.t("Potential Cost"), 150, 60);
             doc.text("54%", 150, 70);
 
 

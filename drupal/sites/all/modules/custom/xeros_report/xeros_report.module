@@ -9,28 +9,28 @@ function xeros_report_menu() {
   $items = array();
 
   $items['ws/dashboard'] = array(
-    'title' => '',
+    'title' =>t(''),
     'page callback' => 'ws_dashboard',
     'page arguments' => array(2,3,4,5),
     'access arguments' => array('xeros report dashboard'),
     'file' => 'ws/dashboard.inc'
   );
   $items['report/dashboard'] = array(
-    'title' => 'Operational Dashboard',
+    'title' => t('Operational Dashboard'),
     'page callback' => 'report_dashboard',
     'page arguments' => array(),
     'access arguments' => array('xeros report dashboard'),
     'file' => 'report/dashboard.inc'
   );
   $items['ws/health-detail'] = array(
-    'title' => '',
+    'title' => t(''),
     'page callback' => 'ws_health',
     'page arguments' => array(2,3,4),
     'access arguments' => array('xeros report health'),
     'file' => 'ws/health.inc'
   );
   $items['report/health'] = array(
-    'title' => 'Health Detail',
+    'title' => t('Health Detail'),
     'page callback' => 'report_health',
     'page arguments' => array(),
     'access callback' => 'user_access',
@@ -38,7 +38,7 @@ function xeros_report_menu() {
     'file' => 'report/health.inc'
   );
   $items['config/static-values'] = array(
-    'title' => 'Static Values',
+    'title' => t('Static Values'),
     'page callback' => 'config_static_values',
     'page arguments' => array(),
     'access arguments' => array('xeros admin'),

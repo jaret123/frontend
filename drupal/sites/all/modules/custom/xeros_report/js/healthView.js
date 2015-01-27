@@ -10,6 +10,7 @@ var colors = {
     blueTwo : "rgba(142,178,209,1)" //"rgba(0,135,190,.65)"
 };
 
+
 var view = {
 
 
@@ -86,9 +87,9 @@ var view = {
 
                 }
 
-                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type, 'gallons of water');
+                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type, Drupal.t('gallons of water'));
 
-                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type, 'therms');
+                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type, Drupal.t('therms'));
 
                 app.reportData[i].info.cssClass = cssClass.join(" ");
 
@@ -346,6 +347,7 @@ var view = {
         app.initialize();
         FF.Controls.TimeSelect.create();
         view.updateLegend();
+
     },
     bindEvents : function() {
         /*

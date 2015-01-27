@@ -21,22 +21,22 @@
                   <span class="swatch model"></span>
                   <span class="label">{{lineB-key}}</span>
               </script>
-                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span>Select Dashboard View</span></div>
+                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span><?php print t("Select Dashboard View"); ?></span></div>
                 <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
                       <span>
-                          <span>Timeframe</span>
+                          <span><?php print t('Timeframe'); ?></span>
                           <select id="time-select" autofocus class="flagvisibility">
-                              <option value="weekToDate">Week To Date</option>
-                              <option value="monthToDate" selected>Month to Date</option>
-                              <option value="yearToDate">Year to Date</option>
-                              <option value="custom">Custom...</option>
+                              <option value="weekToDate"><?php print t('Week To Date'); ?></option>
+                              <option value="monthToDate" selected><?php print t('Month to Date'); ?></option>
+                              <option value="yearToDate"><?php print t('Year to Date'); ?></option>
+                              <option value="custom"><?php print t('Custom...'); ?></option>
                           </select>
                       </span>
                       <div id="cal">
                           <div class="cal__button">
-                              <div class="cal__button-submit">Get Data</div>
-                              <div class="cal__button-cancel">Cancel</div>
+                              <div class="cal__button-submit"><?php print t('Get Data'); ?></div>
+                              <div class="cal__button-cancel"><?php print t('Cancel'); ?></div>
                           </div>
                       </div>
                   </div>
@@ -66,10 +66,10 @@
                             <div class="col kpi-chart chart {{name}}" name="{{name}}"></div>
                         </div>
                         <div class="col col-3">
-                          <div class="col dollars actual-dollars"><span class="dollar-sign">$</span>{{toLocaleString actual.summary.cost}}</div>
+                          <div class="col dollars actual-dollars"><span class="dollar-sign"><?php print t('$'); ?></span>{{toLocaleString actual.summary.cost}}</div>
                           <div class="col saved">{{labels.lineB}}</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
                           <div class="col border"></div>
-                          <div class="col dollars potential-dollars"><span class="dollar-sign">$</span>{{toLocaleString model.summary.cost}}</div>
+                          <div class="col dollars potential-dollars"><span class="dollar-sign"><?php print t('$'); ?></span>{{toLocaleString model.summary.cost}}</div>
                           <div class="col saved">{{labels.lineA}}</div>
                           <div class="col border"></div>
                           <div class="col percent">{{toLocaleString actual.savings}}%</div>
@@ -90,38 +90,36 @@
             </div>
           <div class="news__gradient"></div>
         </div>
-
-
   </div>
 
   <div class="modal fade" id="chart-options">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php print t("Close"); ?></span></button>
           <h4 class="modal-title"><?php print t("Select Dashboard View"); ?></h4>
         </div>
         <div class="modal-body">
           <div id="dataset1-box">
-            <label for="machineType">Select machine type to display</label>
+            <label for="machineType"><?php print t('Select machine type to display'); ?></label>
             <select id="machineType" class="chart-options__machine-type">
-              <option value="">-Select-</option>
+              <option value=""><?php print t('-Select-'); ?></option>
             </select>
           </div>
-          <label for="model">Select comparison model</label>
+          <label for="model"><?php print t('Select comparison model'); ?></label>
           <select id="model" class="chart-options__model" autofocus="">
             <option value="">-select-</option>
           </select>
         </div>
         <script id="machine-options-tpl" type="text/x-handlebars-template">
-          <option value="0">-Select-</option>
+          <option value="0"><?php print t('-Select-'); ?></option>
           {{#each data}}
           <option value="{{@key}}">{{this.name}}</option>
           {{/each}}
         </script>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary chart-options__save" data-dismiss="modal" >Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><?php print t('Close'); ?></button>
+          <button type="button" class="btn btn-primary chart-options__save" data-dismiss="modal" ><?php print t('Save changes'); ?></button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -131,7 +129,7 @@
 
 <script>
   // url of the webservice
-    window.reportName = 'dashboard';
+    window.reportName = Drupal.t('dashboard');
 </script>
 <?php
     $path = drupal_get_path('module', 'xeros_report');

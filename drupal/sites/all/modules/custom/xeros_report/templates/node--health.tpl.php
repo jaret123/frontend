@@ -32,16 +32,16 @@
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
-                          <option value="weekToDate">Week To Date</option>
-                          <option value="monthToDate" selected>Month to Date</option>
-                          <option value="yearToDate">Year to Date</option>
-                          <option value="custom">Custom...</option>
+                          <option value="weekToDate"><?php print t('Week To Date'); ?></option>
+                          <option value="monthToDate" selected><?php print t('Month to Date'); ?></option>
+                          <option value="yearToDate"><?php print t('Year to Date'); ?></option>
+                          <option value="custom"><?php print t('Custom...'); ?></option>
                         </select>
                     </span>
                     <div id="cal">
                         <div class="cal__button">
-                            <div class="cal__button-submit">Get Data</div>
-                            <div class="cal__button-cancel">Cancel</div>
+                            <div class="cal__button-submit"><?php print t('Get Data'); ?></div>
+                            <div class="cal__button-cancel"><?php print t('Cancel'); ?></div>
                         </div>
                     </div>
                 </div>
@@ -53,22 +53,22 @@
                     </form>
                 </div>
                 <div class="data-range">
-                    Report Date Range <span class="date-range__from"></span> to <span class="date-range__to"></span>
+                    <?php print t('Report Date Range'); ?> <span class="date-range__from"></span> <?php print t('to'); ?> <span class="date-range__to"></span>
                 </div>
               </div>
 
                 <div class="consumption__grid-container">
                     <div class="row first">
                         <div class="col col-1">
-                            <div class="label">Machine</div>
+                            <div class="label"><?php print t('Machine'); ?></div>
                         </div>
                         <div class="col col-2">
-                            <div class="label">Water Sewer</div>
-                            <div class="sub-label">(in gallons)</div>
+                            <div class="label"><?php print t('Water Sewer'); ?></div>
+                            <div id="water_units" class="sub-label">(<?php print t("in gallons"); ?>)</div>
                         </div>
                         <div class="col col-3">
                             <div class="label">Energy</div>
-                            <div class="sub-label">(in therms)</div>
+                            <div class="sub-label">(<?php print t("in therms"); ?>)</div>
                         </div>
 <!--                        <div class="col col-4">-->
 <!--                            <div class="label">Cycle Time</div>-->
@@ -80,7 +80,7 @@
 <!--                        </div>-->
                       <div class="health-wrapper">
                         <div class="col col-4">
-                          <div class="label">Health, Action/Update</div>
+                          <div class="label"><?php print t("Health, Action/Update") ?></div>
                           <!--<div class="label">Action/Update</div> -->
                         </div>
                       </div>
