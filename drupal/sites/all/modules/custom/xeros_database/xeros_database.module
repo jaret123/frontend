@@ -76,6 +76,20 @@ function xeros_database_update_7206() {
     run_external_script("$s");
   }
 }
+
+/**
+ *
+ * Alter the xeros_location table to add temperature_unit
+ */
+
+function xeros_database_update_7207() {
+    $scripts = array(
+        "updates/db-update-2015-01-28-xeros-location-temperature-unit.sql"
+    );
+    foreach ( $scripts as $s ) {
+        run_external_script("$s");
+    }
+}
 /**
  * Helper functions
  */

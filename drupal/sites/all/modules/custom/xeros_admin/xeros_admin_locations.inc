@@ -129,6 +129,14 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
   return $output;
 }
 
+/**
+ * location_form is the form definition
+ *
+ * @param $form
+ * @param $form_state
+ * @param $vars
+ * @return mixed
+ */
 function location_form($form, &$form_state, $vars) {
 
   if (empty($form_state['#vars'])) {
@@ -180,26 +188,6 @@ function location_form($form, &$form_state, $vars) {
 
   $form['location_profile'] = location_profile($form_state['values']['location_profile']);
 
-  $options = field_info_field('field_machine_types');
-
-  $o = array();
-  if (!empty($vars['location']->field_machine_types)) {
-    foreach ( $vars['location']->field_machine_types['und'] as $key => $value ) {
-      array_push($o, $value['value']);
-    }
-  }
-
-  // Machine types is a field on location node type, but we want it to appear in the location profile section.
-  $form['location_profile']['machine_types'] = array(
-    '#title' => 'Machine Types',
-    '#description' => 'Indicate which machine types you would like to present in the location reports.  Note: the location should have some of these machines live.',
-    '#type' => 'radios',
-    '#options' => $options['settings']['allowed_values'],
-    // '#default_value' => !empty($vars['location']->field_machine_types) ?  $o : array(), // Checkboxes
-    '#default_value' => !empty($o[0]) ?  $o[0] : null, // Radios
-    '#required' => TRUE
-  );
-
   $form['labor_profile'] = labor_profile($vars['labor_profile']);
 
   if ( $form_state['#vars']['#function_call'] == 'edit' ) {
@@ -244,6 +232,12 @@ function location_form($form, &$form_state, $vars) {
   return $form;
 }
 
+/**
+ * location_form_validate
+ *
+ *
+ *
+ **/
 function location_form_validate($form, &$form_state) {
   $location_name = $form_state['values']['location_name'];
   if ($location_name && ($location_name == 'ERROR')) {
@@ -254,6 +248,7 @@ function location_form_validate($form, &$form_state) {
   }
   //drupal_set_message('Validation run');
 }
+
 
 function location_form_submit($form, &$form_state) {
 
@@ -268,14 +263,6 @@ function location_form_submit($form, &$form_state) {
     $l->title = $form_state['values']['location_name'];
     $l->body = '';
     $l->field_company['und'][0]['target_id'] = $company_id;
-
-    $machine_types = $form_state['values']['location_profile']['machine_types'];
-
-//    $machine_types = array();
-//    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
-//      array_push($machine_types, array('value' => $value));
-//    }
-    $l->field_machine_types['und'][0] = $machine_types;
 
     node_save($l);
 
@@ -296,7 +283,8 @@ function location_form_submit($form, &$form_state) {
       'heating_efficiency',
       'thermal_conversion',
       'cost_per_therm',
-      'cost_per_gallon'
+      'cost_per_gallon',
+      'temperature_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -335,17 +323,8 @@ function location_form_submit($form, &$form_state) {
     $l->title = $form_state['values']['location_name'];
     $l->body = '';
 
-    $machine_types = $form_state['values']['location_profile']['machine_types'];
-
-//    $machine_types = array();
-//    foreach ($form_state['values']['location_profile']['machine_types'] as $key => $value) {
-//      array_push($machine_types, array('value' => $value));
-//    }
-    $l->field_machine_types['und'][0]['value'] = $machine_types;
-
     node_save($l);
 
-    //unset($form_state['values']['location_profile']['machine_types']);
     // Update Location Profile Values
 
     $lp = new location_profile();
@@ -353,7 +332,6 @@ function location_form_submit($form, &$form_state) {
 
     $f = array(
       'water_volume_unit',
-      'machine_types',
       'chemical_volume_unit',
       'temperature_rise_spring',
       'temperature_rise_summer',
@@ -362,7 +340,8 @@ function location_form_submit($form, &$form_state) {
       'heating_efficiency',
       'thermal_conversion',
       'cost_per_therm',
-      'cost_per_gallon'
+      'cost_per_gallon',
+      'temperature_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -447,10 +426,17 @@ function location_profile($vars) {
     ),
     'chemical_volume_unit' => array(
       '#title' => 'Chemical Volume Unit',
-      '#description' => 'What unit are the chemicals measured in (ouncs, grams)',
+      '#description' => 'What unit are the chemicals measured in (ounces, grams)',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('ounces', 'grams')),
       '#default_value' => !empty($lp['chemical_volume_unit']) ? $lp['chemical_volume_unit'] : 'ounces',
+    ),
+    'temperature_unit' => array(
+      '#title' => 'Temperature Unit (C/F)',
+      '#description' => 'What unit is temperature measured in (C = Celsius, F = Fahrenheit)',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc(array('F', 'C')),
+      '#default_value' => !empty($lp['temperature_unit']) ? $lp['temperature_unit'] : 'F',
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',
