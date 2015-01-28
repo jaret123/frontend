@@ -129,6 +129,14 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
   return $output;
 }
 
+/**
+ * location_form is the form definition
+ *
+ * @param $form
+ * @param $form_state
+ * @param $vars
+ * @return mixed
+ */
 function location_form($form, &$form_state, $vars) {
 
   if (empty($form_state['#vars'])) {
@@ -244,6 +252,12 @@ function location_form($form, &$form_state, $vars) {
   return $form;
 }
 
+/**
+ * location_form_validate
+ *
+ *
+ *
+ **/
 function location_form_validate($form, &$form_state) {
   $location_name = $form_state['values']['location_name'];
   if ($location_name && ($location_name == 'ERROR')) {
@@ -254,6 +268,7 @@ function location_form_validate($form, &$form_state) {
   }
   //drupal_set_message('Validation run');
 }
+
 
 function location_form_submit($form, &$form_state) {
 
@@ -296,7 +311,8 @@ function location_form_submit($form, &$form_state) {
       'heating_efficiency',
       'thermal_conversion',
       'cost_per_therm',
-      'cost_per_gallon'
+      'cost_per_gallon',
+      'temperature_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -362,7 +378,8 @@ function location_form_submit($form, &$form_state) {
       'heating_efficiency',
       'thermal_conversion',
       'cost_per_therm',
-      'cost_per_gallon'
+      'cost_per_gallon',
+      'temperature_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -447,10 +464,17 @@ function location_profile($vars) {
     ),
     'chemical_volume_unit' => array(
       '#title' => 'Chemical Volume Unit',
-      '#description' => 'What unit are the chemicals measured in (ouncs, grams)',
+      '#description' => 'What unit are the chemicals measured in (ounces, grams)',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('ounces', 'grams')),
       '#default_value' => !empty($lp['chemical_volume_unit']) ? $lp['chemical_volume_unit'] : 'ounces',
+    ),
+    'temperature_unit' => array(
+      '#title' => 'Temperature Unit (C/F)',
+      '#description' => 'What unit is temperature measured in (C = Celsius, F = Fahrenheit)',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc(array('F', 'C')),
+      '#default_value' => !empty($lp['temperature_unit']) ? $lp['temperature_unit'] : 'F',
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',

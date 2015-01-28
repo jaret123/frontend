@@ -6,6 +6,9 @@
  * @return mixed
  */
 function xeros_admin_menu() {
+
+  $items = array();
+
   $items['config/companies'] = array(
     'title' => 'Company Listing',
     'page callback' => 'company_listing',
