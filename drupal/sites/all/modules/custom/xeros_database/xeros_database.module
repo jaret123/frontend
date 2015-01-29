@@ -129,7 +129,7 @@ function run_external_script($script) {
     }
 
     watchdog("xeros_database", '<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
-    drupal_set_message('<pre>' . $script . "<br/>" . $message . '</pre>', null, $watchdog_level);
+    drupal_set_message('<pre>' . $script . "<br/>" . $message . "<br/>" . $command . '</pre>', null, $watchdog_level);
 }
 
 function startsWith($haystack, $needle)

@@ -258,6 +258,9 @@ switch ($host) {
     );
     $conf['database_script_dir'] = "/var/www/xeros-dev/www/db";
     $conf['mysql_bin'] = "/usr/bin/mysql";
+    error_reporting(E_ALL);
+    ini_set('display_errors', TRUE);
+    ini_set('display_startup_errors', TRUE);
     break;
   case 'sbeadycare-test.xeroscleaning.com':
     $databases = array(
