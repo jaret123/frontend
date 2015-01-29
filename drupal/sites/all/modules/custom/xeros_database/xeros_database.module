@@ -117,7 +117,7 @@ function run_external_script($script) {
     $script_path = $GLOBALS['conf']['database_script_dir'];
     $mysql_bin = $GLOBALS['conf']['mysql_bin'];
 
-    $command = $mysql_bin . " -u{$db['username']} -p{$db['password']} "
+    $command = $mysql_bin . " -u{$db['username']} -p'{$db['password']}' "
         . "-h {$db['host']} -D {$db['database']} < {$script_path}"
         . "/" . $script . " 2>&1";
 
