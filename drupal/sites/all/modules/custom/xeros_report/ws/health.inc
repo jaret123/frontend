@@ -14,7 +14,6 @@
  */
 
 
-
 include_once (drupal_get_path('module', 'xeros_admin') . '/db/location_profile.inc');
 include_once (drupal_get_path('module', 'xeros_report') . '/conversion.inc');
 
@@ -114,14 +113,14 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
          SELECT
            machine_id,
            count(*) as cycles,
-           sum(cycle_cold_water_volume) AS cold_water_actual,
+           sum(cycle_cold_water_volume)       AS cold_water_actual,
            sum(cycle_cold_water_xeros_volume) as cold_water_model_xeros,
 
-           sum(cycle_therms)              AS therms_actual,
-           sum(cycle_therms_xeros)        AS therms_model_xeros,
+           sum(cycle_therms)                  AS therms_actual,
+           sum(cycle_therms_xeros)            AS therms_model_xeros,
 
-           sum(cycle_time_total_time)           AS time_actual,
-           sum(cycle_time_xeros_total_time)     AS time_model_xeros,
+           sum(cycle_time_total_time)         AS time_actual,
+           sum(cycle_time_xeros_total_time)   AS time_model_xeros,
 
            sum(cycle_chemical_strength)       AS chemical_actual,
            sum(cycle_chemical_xeros_strength) AS chemical_model_xeros

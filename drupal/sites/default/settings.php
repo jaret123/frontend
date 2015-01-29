@@ -234,7 +234,7 @@ switch ($host) {
             ),
         ),
     );
-    $conf['database_script_dir'] = "/Users/jason/dev/ELYXOR/xeros/db/updates/";
+    $conf['database_script_dir'] = "/Users/Jason/dev/ELYXOR/xeros-sbeady/db";
     $conf['mysql_bin'] = "/Applications/MAMP/Library/bin/mysql";
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
@@ -256,7 +256,7 @@ switch ($host) {
             ),
         ),
     );
-    $conf['database_script_dir'] = "/var/www/xeros-dev/www/db/updates/";
+    $conf['database_script_dir'] = "/var/www/xeros-dev/www/db";
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
   case 'sbeadycare-test.xeroscleaning.com':
@@ -275,7 +275,7 @@ switch ($host) {
             ),
         ),
     );
-    $conf['database_script_dir'] = "/var/www/xeros-test/www/db/updates/";
+    $conf['database_script_dir'] = "/var/www/xeros-test/www/db";
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
   case 'sbeadycare-qa.xeroscleaning.com':
@@ -294,7 +294,7 @@ switch ($host) {
             ),
         ),
     );
-    $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
+    $conf['database_script_dir'] = "/var/www/xeros/www/db";
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
   case 'sbeadycare.xeroscleaning.com':
@@ -313,7 +313,7 @@ switch ($host) {
             ),
         ),
     );
-    $conf['database_script_dir'] = "/var/www/xeros/www/db/updates/";
+    $conf['database_script_dir'] = "/var/www/xeros/www/db";
     $conf['mysql_bin'] = "/usr/bin/mysql";
     break;
 }
