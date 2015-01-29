@@ -1,0 +1,57 @@
+<?php
+
+require_once(drupal_get_path('module', 'xeros_exchange') . '/user_profile_form.inc');
+
+/**
+ * Implements hook_menu()
+ *
+ * @return mixed
+ */
+function xeros_exchange_menu() {
+  /*
+  $items['ws/location'] = array(
+    'title' => 'Location Web Service',
+    'page callback' => 'ws_location',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_location.inc'
+  );
+  $items['ws/company'] = array(
+    'title' => 'Company Web Service',
+    'page callback' => 'ws_company',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_company.inc'
+  );
+  $items['ws/industry/averages'] = array(
+    'title' => 'Industry Averages Web Service',
+    'page callback' => 'ws_industry_averages',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'file' => 'ws_industry_averages.inc'
+  );
+
+  return $items;
+  */
+}
+
+function xeros_exchange_permission() {
+  return array(
+    'xeros exchange' => array(
+      'title' => t('Xeros Exchange Access'),
+      'description' => t('Roles with this permission have the ability to access the Xeros Exchange'),
+    )
+  );
+}
+
+///**
+// * @param $variables
+// * @param $hook
+// *
+// * Only load libraries here.  Don't load anything that takes an action.  Those should be in individual modules.
+// */
+//function xeros_app_preprocess_html(&$variables, $hook) {
+//  $path = drupal_get_path('module', 'xeros_app');
+//  drupal_add_js($path . '/libs/bootstrap-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+//}
+

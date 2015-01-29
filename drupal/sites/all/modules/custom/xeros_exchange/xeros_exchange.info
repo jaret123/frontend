@@ -1,0 +1,6 @@
+name = Xeros Currency Exchange Application
+description = This module contains the Exchange Engine
+package = Xeros
+core = 7.x
+
+configure = admin/config/administration/xeros/base
