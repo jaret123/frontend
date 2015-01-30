@@ -90,6 +90,25 @@ function xeros_database_update_7207() {
         run_external_script("$s");
     }
 }
+
+/**
+ *
+ * Alter the xeros_cycle process
+ */
+
+function xeros_database_update_7208() {
+    $scripts = array(
+        "aggregate_tables/ddl-udf_convert_mass.sql",
+        "aggregate_tables/ddl-udf_convert_temperature.sql",
+        "aggregate_tables/ddl-udf_convert_volume.sql",
+        "aggregate_tables/ddl-standardize-location-profile.sql",
+        "aggregate_tables/ddl-standardize-meter.sql",
+        "aggregate_tables/ddl-sp-cycle-data.sql"
+    );
+    foreach ( $scripts as $s ) {
+        run_external_script("$s");
+    }
+}
 /**
  * Helper functions
  */
@@ -101,7 +120,7 @@ function run_external_script($script) {
     $command = $mysql_bin . " -u{$db['username']} -p{$db['password']} "
         . "-h {$db['host']} -D {$db['database']} < {$script_path}";
 
-    $message = shell_exec($command . $script . " 2>&1");
+    $message = shell_exec($command . "/" . $script . " 2>&1");
 
     if ( startsWith($message, "ERROR") ) {
       $watchdog_level = 3;

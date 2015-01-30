@@ -95,22 +95,28 @@ BEGIN
     dma.machine_id,
     dma.classification_id,
     cu.chemical_profile_id,
-    cu.strength,
+    CASE
+			 WHEN cu.strength = '''' THEN 0
+			 ELSE cu.strength
+		END,
     cp.unit_cost,
-    cu.xeros_strength,
-    cp.unit_cost * cu.strength       AS chemical_unit_cost,
-    cp.xeros_unit_cost * cu.xeros_strength AS xeros_chemical_unit_cost,
+    CASE
+			 WHEN cu.xeros_strength = '''' THEN 0
+			 ELSE cu.xeros_strength
+		END,
+    cp.unit_cost * cu.strength       				AS chemical_unit_cost,
+    cp.xeros_unit_cost * cu.xeros_strength 	AS xeros_chemical_unit_cost,
     mc.load_size,
     mc.xeros_load_size
 	  FROM
-		  xeros_dai_meter_actual AS dma
+		  xeros_dai_meter_standard AS dma
 		  LEFT JOIN xeros_machine_classification AS mc
-			ON dma.machine_id = mc.machine_id
+				ON dma.machine_id = mc.machine_id
 		   AND dma.classification_id = mc.classification_id
 		  LEFT JOIN xeros_chemical_usage AS cu
-			ON mc.machine_classification_id = cu.machine_classification_id
+				ON mc.machine_classification_id = cu.machine_classification_id
 		  LEFT JOIN xeros_chemical_profile AS cp
-			ON cu.chemical_profile_id = cp.chemical_profile_id
+				ON cu.chemical_profile_id = cp.chemical_profile_id
 	WHERE ',
 		where_clause, ' ')
 	;
@@ -199,14 +205,14 @@ BEGIN
 		)
 	  SELECT
 		dai_meter_actual_id,
-		sum(chemical_unit_cost)                   		AS cycle_chemical_cost,
-		sum(strength)                             		AS cycle_chemical_strength,
-		sum(strength / load_size)                 		AS cycle_chemical_strength_per_pound,
-		sum(chemical_unit_cost / load_size)       		AS cycle_chemical_cost_per_pound,
-		sum(xeros_chemical_unit_cost / xeros_load_size) AS cycle_chemical_xeros_cost_per_pound,
-		sum(xeros_strength)                       		AS cycle_chemical_xeros_strength,
-		sum(xeros_strength / xeros_load_size)           AS cycle_chemical_xeros_strength_per_pound,
-		sum(xeros_chemical_unit_cost)             		AS cycle_chemical_xeros_cost  
+		sum(chemical_unit_cost)                   				AS cycle_chemical_cost,
+		sum(strength)                             				AS cycle_chemical_strength,
+		sum(strength / load_size)                 				AS cycle_chemical_strength_per_pound,
+		sum(chemical_unit_cost / load_size)       				AS cycle_chemical_cost_per_pound,
+		sum(xeros_chemical_unit_cost / xeros_load_size) 	AS cycle_chemical_xeros_cost_per_pound,
+		sum(xeros_strength)                       				AS cycle_chemical_xeros_strength,
+		sum(xeros_strength / xeros_load_size)           	AS cycle_chemical_xeros_strength_per_pound,
+		sum(xeros_chemical_unit_cost)             				AS cycle_chemical_xeros_cost
 	  FROM
 		xeros_chemical_unit
 	  WHERE ',
@@ -301,6 +307,13 @@ DROP PROCEDURE IF EXISTS sp_xeros_cycle;;
 
 CREATE PROCEDURE sp_xeros_cycle (IN refresh_mode varchar(10), IN record_id int)
 /**
+*  Xeros Cycle will store all metrics in standard units
+*
+*  Temperature - F
+*  Energy      - Therms
+*  Volume      - Gallons
+*  Currency    - US Dollars
+*
 *  refresh_mode = 
 *    FULL - Refresh the entire reporting database
 *    INCR (Incremental) - Insert all new records (records greater than the max in the aggregate table
@@ -366,21 +379,21 @@ BEGIN
     cycle_cold_water_xeros_cost_per_pound,
 
 -- hot water
-	cycle_hot_water_volume,
-	cycle_hot_water_pounds,
-	cycle_hot_water_xeros_volume,
-	cycle_hot_water_xeros_pounds,
-	cycle_hot_water_volume_per_pound,
-	cycle_hot_water_xeros_volume_per_pound,
-
-	cycle_therms,
-	cycle_therms_xeros,
-	cycle_therms_cost,
-	cycle_therms_cost_xeros,
-	cycle_therms_per_pound,
-	cycle_therms_per_pound_xeros,
-	cycle_therm_cost_per_pound,
-	cycle_therm_cost_per_pound_xeros,
+		cycle_hot_water_volume,
+		cycle_hot_water_pounds,
+		cycle_hot_water_xeros_volume,
+		cycle_hot_water_xeros_pounds,
+		cycle_hot_water_volume_per_pound,
+		cycle_hot_water_xeros_volume_per_pound,
+	
+		cycle_therms,
+		cycle_therms_xeros,
+		cycle_therms_cost,
+		cycle_therms_cost_xeros,
+		cycle_therms_per_pound,
+		cycle_therms_per_pound_xeros,
+		cycle_therm_cost_per_pound,
+		cycle_therm_cost_per_pound_xeros,
 
 -- Labor and cycle time measures
     cycle_time_run_time,
@@ -409,23 +422,26 @@ BEGIN
 	  m.manufacturer,
     dma.classification_id,
     m.location_id,
--- Base measures
--- Should always equal one in this view
-    date(reading_timestamp)                                                                     AS reading_date,
-    reading_timestamp                                                                           AS reading_timestamp,
-    mc.load_size                                                                               AS cycle_load_size,
-    mc.xeros_load_size                                                                         AS cycle_xeros_load_size,
+    
+	-- Base measures
+	-- Should always equal one in this view
+    date(reading_timestamp)                                                                     	AS reading_date,
+    reading_timestamp                                                                           	AS reading_timestamp,
+    mc.load_size                                                                               		AS cycle_load_size,
+    mc.xeros_load_size                                                                         		AS cycle_xeros_load_size,
 
--- Cold water
-    ( dma.cold_water + dma.hot_water) * m.water_meter_rate                                                                        AS cycle_cold_water_volume,
-    xlsv.cold_water_gallons + xlsv.hot_water_gallons                                                                   AS cycle_cold_water_xeros_volume,
-    ( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) * lp.cost_per_gallon                             AS cycle_cold_water_cost,
-    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons ) * lp.cost_per_gallon                              AS cycle_cold_water_xeros_cost,
+	-- Cold water
+    ( dma.cold_water + dma.hot_water) * m.water_meter_rate                                       	AS cycle_cold_water_volume,
+    	xlsv.cold_water_gallons + xlsv.hot_water_gallons                                            AS cycle_cold_water_xeros_volume,
+    ( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) * lp.cost_per_gallon                AS cycle_cold_water_cost,
+    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons ) * lp.cost_per_gallon                     AS cycle_cold_water_xeros_cost,
 
-    ( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) / mc.load_size                                                    AS cycle_cold_water_volume_per_pound,
-    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  / mc.xeros_load_size                                                    AS cycle_cold_water_xeros_volume_per_pound,
-    (( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) * lp.cost_per_gallon) / mc.load_size           AS cycle_cold_water_cost_per_pound,
-    (( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  * lp.cost_per_gallon) / mc.xeros_load_size           AS cycle_cold_water_xeros_cost_per_pound,
+    ( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) / mc.load_size                      AS cycle_cold_water_volume_per_pound,
+    ( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  / mc.xeros_load_size                    AS cycle_cold_water_xeros_volume_per_pound,
+    (( (dma.cold_water + dma.hot_water) * m.water_meter_rate ) * lp.cost_per_gallon) / mc.load_size           
+    																																															AS cycle_cold_water_cost_per_pound,
+    (( xlsv.cold_water_gallons + xlsv.hot_water_gallons )  * lp.cost_per_gallon) / mc.xeros_load_size           
+    																																															AS cycle_cold_water_xeros_cost_per_pound,
 
 	cycle_hot_water_volume,
 	cycle_hot_water_pounds,
@@ -443,19 +459,21 @@ BEGIN
 	cycle_therm_cost_per_pound,
 	cycle_therm_cost_per_pound_xeros,
 
--- Labor and cycle time measures
+	-- Labor and cycle time measures
 
-      -- DMA Run time is in seconds - need to convert to minutes ( / 60 )
-      -- Hourly Rate is per hour, need to convert to minutes ( / 60 )
-    dma.run_time / 60                                                                              AS cycle_time_run_time,
-    xlsv.run_time                                                                              AS cycle_time_xeros_run_time,
-    mc.unload_time                                                                             AS cycle_time_unload_time,
-    ( dma.run_time / 60 ) + mc.unload_time                                                             AS cycle_time_total_time,
-    xlsv.run_time + mc.unload_time                                                            AS cycle_time_xeros_total_time,
-    ( ( dma.run_time / 60 ) + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)                              AS cycle_time_labor_cost,
-    (xlsv.run_time + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)                             AS cycle_time_xeros_labor_cost,
-      ( ( ( dma.run_time / 60 ) + mc.unload_time) * (labor_profile.ops_hourly_rate / 60) ) / mc.load_size            AS cycle_time_labor_cost_per_pound,
-    ((xlsv.run_time + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)) / mc.xeros_load_size     AS cycle_time_xeros_labor_cost_per_pound,
+		-- DMA Run time is in seconds - need to convert to minutes ( / 60 )
+		-- Hourly Rate is per hour, need to convert to minutes ( / 60 )
+    dma.run_time / 60                                                                             AS cycle_time_run_time,
+    xlsv.run_time                                                                              		AS cycle_time_xeros_run_time,
+    mc.unload_time                                                                             		AS cycle_time_unload_time,
+    ( dma.run_time / 60 ) + mc.unload_time                                                        AS cycle_time_total_time,
+    xlsv.run_time + mc.unload_time                                                            		AS cycle_time_xeros_total_time,
+    ( ( dma.run_time / 60 ) + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)              AS cycle_time_labor_cost,
+    (xlsv.run_time + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)                       AS cycle_time_xeros_labor_cost,
+      ( ( ( dma.run_time / 60 ) + mc.unload_time) * (labor_profile.ops_hourly_rate / 60) ) / mc.load_size            
+      																																														AS cycle_time_labor_cost_per_pound,
+    ((xlsv.run_time + mc.unload_time) * (labor_profile.ops_hourly_rate / 60)) / mc.xeros_load_size     
+    																																															AS cycle_time_xeros_labor_cost_per_pound,
 
     cycle_chemical_cost,
     cycle_chemical_xeros_cost,
@@ -467,7 +485,7 @@ BEGIN
     cycle_chemical_xeros_strength_per_pound
 
   FROM
-      xeros_dai_meter_actual AS dma
+      xeros_dai_meter_standard AS dma
       LEFT JOIN xeros_classification AS c
         ON dma.classification_id = c.classification_id
       LEFT JOIN xeros_machine_classification AS mc
@@ -480,14 +498,14 @@ BEGIN
       LEFT JOIN xeros_utility_actual AS ua
         ON m.location_id = ua.location_id
            AND ua.utility_type = \'water\'
-	  LEFT JOIN xeros_therm_cycle AS tc
-		ON dma.dai_meter_actual_id = tc.dai_meter_actual_id
+	    LEFT JOIN xeros_therm_cycle AS tc
+		    ON dma.dai_meter_actual_id = tc.dai_meter_actual_id
       LEFT JOIN xeros_labor_profile AS labor_profile
         ON m.location_id  = labor_profile.location_id
       LEFT JOIN xeros_chemical_cycle AS cc
         ON dma.dai_meter_actual_id = cc.dai_meter_actual_id
-	  LEFT JOIN xeros_location_profile as lp
-		on m.location_id = lp.location_id
+	    LEFT JOIN xeros_location_profile as lp
+		    ON m.location_id = lp.location_id
 	WHERE ',
 		where_clause, ' ')
 	;
