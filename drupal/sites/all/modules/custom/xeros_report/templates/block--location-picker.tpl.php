@@ -17,7 +17,7 @@
         </div>
 
         <select id="company-select" autofocus="" class="flagvisibility">
-          <option value="0"><?php print t('-select-'); ?>/option>
+          <option value="0"><?php print t('-select-'); ?></option>
         </select>
         <select id="location-select" autofocus="" class="flagvisibility">
           <option value=""><?php print t('-select company-'); ?></option>

@@ -84,7 +84,9 @@ function xeros_database_update_7206() {
 
 function xeros_database_update_7207() {
     $scripts = array(
-        "updates/db-update-2015-01-28-xeros-location-temperature-unit.sql"
+        "updates/db-update-2015-01-28-xeros-location-temperature-unit.sql",
+        "updates/db-update-2015-02-02-xeros-location-currency-unit.sql",
+        "updates/db-update-2015-01-28-add-actual-timezone.sql"
     );
     foreach ( $scripts as $s ) {
         run_external_script("$s");
@@ -109,6 +111,7 @@ function xeros_database_update_7208() {
         run_external_script("$s");
     }
 }
+
 /**
  * Helper functions
  */

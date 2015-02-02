@@ -30,6 +30,8 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
 
   $l = $u->user_access_locations();
 
+  $u->get_timezone_offset($GLOBALS['user']->timezone,'America/New_York');
+
   // Kick the person out if they don't have access
   if (!user_is_logged_in()) {
     return "Access Denied";
