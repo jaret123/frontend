@@ -284,7 +284,8 @@ function location_form_submit($form, &$form_state) {
       'thermal_conversion',
       'cost_per_therm',
       'cost_per_gallon',
-      'temperature_unit'
+      'temperature_unit',
+      'currency_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -341,7 +342,8 @@ function location_form_submit($form, &$form_state) {
       'thermal_conversion',
       'cost_per_therm',
       'cost_per_gallon',
-      'temperature_unit'
+      'temperature_unit',
+      'currency_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -437,6 +439,13 @@ function location_profile($vars) {
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('F', 'C')),
       '#default_value' => !empty($lp['temperature_unit']) ? $lp['temperature_unit'] : 'F',
+    ),
+    'currency_unit' => array(
+        '#title' => 'Currency (USD, GBP, EUR)',
+        '#description' => 'What unit is temperature measured in (C = Celsius, F = Fahrenheit)',
+        '#type' => 'select',
+        '#options' => drupal_map_assoc(array('USD', 'GBP', 'EUR')),
+        '#default_value' => !empty($lp['currency_unit']) ? $lp['currency_unit'] : 'USD',
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',

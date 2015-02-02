@@ -18,7 +18,8 @@ CREATE TABLE xeros_location_profile_standard
   temperature_rise_summer INT DEFAULT 0,
   cost_per_therm DECIMAL(15,4),
   cost_per_gallon DECIMAL(15,5),
-  temperature_unit VARCHAR(2) DEFAULT 'F'
+  temperature_unit VARCHAR(2) DEFAULT 'F',
+  currency_profile VARCHAR(5) DEFAULT 'USD'
 );
 
 CREATE INDEX PK_location_id ON xeros_location_profile_standard (location_id);;
@@ -54,7 +55,8 @@ CREATE PROCEDURE sp_standardize_location_profile ()
       temperature_rise_summer,
       cost_per_therm,
       cost_per_gallon,
-      temperature_unit
+      temperature_unit,
+      currency_unit
     )
     SELECT
       location_id,
@@ -66,9 +68,10 @@ CREATE PROCEDURE sp_standardize_location_profile ()
       heating_efficiency,
       thermal_conversion,
       udf_convert_temperature(temperature_rise_summer, temperature_unit, 'F'),
-      cost_per_therm,
-      cost_per_gallon,
-      temperature_unit
+      udf_convert_currency(cost_per_therm, 'USD', 'USD'),
+      udf_convert_currency(cost_per_gallon, 'USD', 'USD'),
+      temperature_unit,
+      currency_unit
     FROM
       xeros_location_profile AS lp;
 
