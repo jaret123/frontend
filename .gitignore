@@ -8,3 +8,4 @@ xeros-sbeady.iml
 settings.local.php
 drupal/sites/all/themes/xeros_theme/node_modules/qunitjs/package.json
 vendor/*
+.DS_Store

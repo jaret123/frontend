@@ -421,14 +421,14 @@ function location_profile($vars) {
     '#collapsed' => TRUE,
     'water_volume_unit' => array(
       '#title' => 'Water Volume Unit',
-      '#description' => 'What unit is the water measured in (gallons or liters)',
+      '#description' => 'What unit is the water measured in (eg. gallons or liters)',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('gallons', 'liters')),
       '#default_value' => !empty($lp['water_volume_unit']) ? $lp['water_volume_unit'] : 'gallons',
     ),
     'chemical_volume_unit' => array(
       '#title' => 'Chemical Volume Unit',
-      '#description' => 'What unit are the chemicals measured in (ounces, grams)',
+      '#description' => 'What units are the chemicals measured in. (ounces, grams)',
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('ounces', 'grams')),
       '#default_value' => !empty($lp['chemical_volume_unit']) ? $lp['chemical_volume_unit'] : 'ounces',

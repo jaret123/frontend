@@ -87,6 +87,11 @@ function load_base_js($variables, $hook) {
     });',
       array('type' => 'inline', 'scope' => 'footer', 'weight' => 14)
     );
+
+    //load Xeros Exchange Module
+    $path = drupal_get_path('module', 'xeros_exchange');
+    // Custom theme code
+    drupal_add_js($path . '/js/exchange.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   } else {
   }
 }
