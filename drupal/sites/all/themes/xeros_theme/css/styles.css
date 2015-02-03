@@ -3117,19 +3117,32 @@ h1 {
   text-align: right;
 }
 
-/* line 107, ../sass/components/_header.scss */
+/* line 108, ../sass/components/_header.scss */
 .admin-menu .header {
   margin-top: 24px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   /* Retina-specific stuff here */
-  /* line 116, ../sass/components/_header.scss */
+  /* line 117, ../sass/components/_header.scss */
   .header .header__logo a {
     background-image: url("/sites/all/themes/xeros_theme/images/sbeadycare_logo_2x.png");
     background-size: 177px 76px;
   }
 }
+/* line 124, ../sass/components/_header.scss */
+.lang-dropdown-select-element {
+  float: right;
+  margin-left: 12px;
+  margin-top: 6px;
+  z-index: 99;
+}
+
+/* line 131, ../sass/components/_header.scss */
+#block-lang-dropdown-language {
+  z-index: 99;
+}
+
 @font-face {
   font-family: 'xeros-icon';
   src: url("../fonts/xeros-icon.eot?-ibma36");
