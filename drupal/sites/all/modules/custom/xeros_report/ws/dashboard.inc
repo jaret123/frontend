@@ -9,6 +9,13 @@
 
 include_once (drupal_get_path('module', 'xeros_report') . '/conversion.inc');
 
+define('DEFAULT_MASS', 'ounces');
+
+define('DEFAULT_VOLUME', 'gallons');
+
+define('DEFAULT_TEMPERATURE', 'F');
+
+define('DEFAULT_CURRENCY', 'USD');
 
 /**
  * @param        $from_date
@@ -36,6 +43,13 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
   if (!user_is_logged_in()) {
     return "Access Denied";
   }
+
+  $unit_mass = locale_currency_get_current_mass();
+  $unit_volume = locale_currency_get_current_volume();
+  $unit_temperature = locale_currency_get_current_temperature();
+  $unit_currency = locale_currency_get_current_currency();
+
+  $exchange_rate = CurrencyExchanger::load(DEFAULT_CURRENCY, $unit_currency);
 
   // Return a warning if they are trying to access a location ID they don't have access to.
   $location_ids = explode(',', $location_ids);

@@ -1,0 +1,171 @@
+<?php
+
+/**
+ * @file
+ * Locale Currency module
+ * Allows admins to define a currency code for each of their locales.
+ *
+ * @author Tom Kirkpatrick (mrfelton), www.systemseed.com
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function locale_currency_form_alter(&$form, &$form_state, $form_id) {
+  if (($form_id == 'locale_languages_edit_form') || ($form_id == 'locale_languages_custom_form')) {
+    $languages = language_list();
+    $fields = array();
+    $fields['currency'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Currency Code',
+      '#maxlength' => 3,
+      '#size' => 12,
+      '#default_value' => isset($languages[$form['langcode']['#value']]->currency) ? $languages[$form['langcode']['#value']]->currency : 'USD',
+      '#description' => t('<a href="@link">ISO 4217</a> compliant currency identifier. Examples: "GBP", "EUR", and "USD".', array('@link' => 'http://www.oanda.com/site/help/iso_code.shtml')),
+    );
+    
+    $mass = array(
+      'ounces' => t('ounces'),
+      'grams' => t('grams')
+    );
+    $fields['mass'] = array(
+      '#type' => 'radios',
+      '#title' => t('Mass'),
+      '#default_value' => isset($languages[$form['langcode']['#value']]->mass) ? $languages[$form['langcode']['#value']]->mass : 'ounces',
+      '#options' => $mass,
+      '#description' => t('Unit of Mass (ounces or grams)'),
+    );
+
+    $mass = array(
+      'gallons' => t('gallons'),
+      'ounces' => t('liters')
+    );
+    $fields['volume'] = array(
+      '#type' => 'radios',
+      '#title' => t('Volume'),
+      '#default_value' => isset($languages[$form['langcode']['#value']]->volume) ? $languages[$form['langcode']['#value']]->volume : 'gallons',
+      '#options' => $mass,
+      '#description' => t('Unit of Volume (gallons or liters)'),
+    );
+
+    $temperature = array(
+      'F' => t('Fahrenheit'),
+      'C' => t('Celsius')
+    );
+    $fields['temperature'] = array(
+      '#type' => 'radios',
+      '#title' => t('temperature'),
+      '#default_value' => isset($languages[$form['langcode']['#value']]->temperature) ? $languages[$form['langcode']['#value']]->temperature : 'F',
+      '#options' => $temperature,
+      '#description' => t('Unit of temperature (Fahrenheit or Celsius)'),
+    );
+    
+    $form['#submit'][] = 'locale_currency_edit_submit';
+    $form['submit']['#weight'] = 10;
+    
+    switch ($form_id) {
+      case 'locale_languages_edit_form':
+        $form['currency'] = $fields['currency'];
+        $form['mass'] = $fields['mass'];
+        $form['volume'] = $fields['volume'];
+        $form['temperature'] = $fields['temperature'];
+        break;
+
+      case 'locale_languages_custom_form':
+        $form['custom language']['currency'] = $fields['currency'];
+        $form['custom language']['mass'] = $fields['mass'];
+        $form['custom language']['volume'] = $fields['volume'];
+        $form['custom language']['temperature'] = $fields['temperature'];
+        break;
+    }
+  }
+}
+
+/**
+ * Custom submit handler for the locale language form.
+ */
+function locale_currency_edit_submit($form, &$form_state) {
+//  dsm($form_state);
+  db_update('languages')
+  ->fields(array(
+    'currency' => $form_state['values']['currency'],
+    'mass' => $form_state['values']['mass'],
+    'volume' => $form_state['values']['volume'],
+    'temperature' => $form_state['values']['temperature'],
+  ))
+  ->condition('language', $form_state['values']['langcode'])
+  ->execute();
+  $language_default = language_default();
+  if ($language_default->language == $form_state['values']['langcode']) {
+    $language_default->currency = $form_state['values']['currency'];
+    $language_default->mass = $form_state['values']['mass'];
+    $language_default->volume = $form_state['values']['volume'];
+    $language_default->temperature = $form_state['values']['temperature'];
+
+    variable_set('language_default', $language_default);
+  }
+}
+
+/**
+ * API function to get the currency code associated with a specific locale.
+ *
+ * @param $lang
+ *   Language code whose associated currency to look up.
+ *
+ * @return
+ *   Currency associated with requested language, or NULL if there was none.
+ */
+function locale_currency_get_currency($lang) {
+  $languages = language_list('enabled');
+  $language = $languages[1][$lang];
+  if (isset($language)) {
+    return $language->currency;
+  }
+  return NULL;
+}
+
+
+/**
+ * API function to get the currency code associated with current language.
+ *
+ * @return
+ *   Currency code associated with the current language.
+ */
+function locale_currency_get_current_currency() {
+  global $language;
+  return $language->currency;
+}
+
+/**
+ * API function to get the currency code associated with current language.
+ *
+ * @return
+ *   Currency code associated with the current language.
+ */
+function locale_currency_get_current_mass() {
+  global $language;
+  return $language->mass;
+}
+
+/**
+ * API function to get the currency code associated with current language.
+ *
+ * @return
+ *   Currency code associated with the current language.
+ */
+function locale_currency_get_current_volume() {
+  global $language;
+  return $language->volume;
+}
+
+/**
+ * API function to get the currency code associated with current language.
+ *
+ * @return
+ *   Currency code associated with the current language.
+ */
+function locale_currency_get_current_temperature() {
+  global $language;
+  return $language->temperature;
+}
+
