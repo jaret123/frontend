@@ -9,14 +9,6 @@
 
 include_once (drupal_get_path('module', 'xeros_report') . '/conversion.inc');
 
-define('DEFAULT_MASS', 'ounces');
-
-define('DEFAULT_VOLUME', 'gallons');
-
-define('DEFAULT_TEMPERATURE', 'F');
-
-define('DEFAULT_CURRENCY', 'USD');
-
 /**
  * @param        $from_date
  * @param        $to_date
@@ -44,13 +36,6 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
     return "Access Denied";
   }
 
-  $unit_mass = locale_currency_get_current_mass();
-  $unit_volume = locale_currency_get_current_volume();
-  $unit_temperature = locale_currency_get_current_temperature();
-  $unit_currency = locale_currency_get_current_currency();
-
-  $exchange_rate = CurrencyExchanger::load(DEFAULT_CURRENCY, $unit_currency);
-
   // Return a warning if they are trying to access a location ID they don't have access to.
   $location_ids = explode(',', $location_ids);
 
@@ -74,7 +59,16 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
     ':fromDate'        => $from_date,
     ':toDate'          => $to_date . ' 12:59:59',
     ':machineIds'      => implode(",", $machine_ids),
-    ':water_only_diff' => '3.2' //todo Pull this from DB
+    ':water_only_diff' => '3.2', //todo Pull this from DB
+    ':default_mass'     => DEFAULT_MASS,
+    ':unit_mass'        => locale_currency_get_current_mass(),
+    ':default_volume'   => DEFAULT_VOLUME,
+    ':unit_volume'      => locale_currency_get_current_volume(),
+    ':default_temperature' => DEFAULT_TEMPERATURE,
+    ':unit_temperature' => locale_currency_get_current_temperature(),
+    ':default_currency' => DEFAULT_CURRENCY,
+    ':unit_currency'   => locale_currency_get_current_currency(),
+    ':exchange_rate'   => CurrencyExchanger::load(DEFAULT_CURRENCY, locale_currency_get_current_currency())
   );
 
   // Get the machine types at this location and return all the correct data and models
@@ -123,8 +117,8 @@ SQL;
             b.cycles,
             coalesce(b.actual_value, 0) AS actual_value,
             coalesce(b.model_xeros_value, 0) AS model_xeros_value,
-            coalesce(b.actual_cost, 0) AS actual_cost,
-            coalesce(b.model_xeros_cost, 0) AS model_xeros_cost
+            coalesce(b.actual_cost * :exchange_rate, 0) AS actual_cost,
+            coalesce(b.model_xeros_cost * :exchange_rate, 0) AS model_xeros_cost
         FROM
             (
             SELECT
@@ -192,10 +186,10 @@ SQL;
           $metrics, array(
             "name"  => "cold-water",
             "query" => <<<METRIC
-   		sum(truncate(xc.cycle_cold_water_volume, 0)) as actual_value,
-   		sum(coalesce(xc.cycle_cold_water_xeros_volume, 0)) as model_xeros_value,
-   		sum(coalesce(xc.cycle_cold_water_cost, 0)) as actual_cost,
-   		sum(coalesce(xc.cycle_cold_water_xeros_cost, 0)) as model_xeros_cost
+   		udf_convert_volume(sum(truncate(xc.cycle_cold_water_volume, 0)), ':default_volume', ':unit_volume') as actual_value,
+   		udf_convert_volume(sum(coalesce(xc.cycle_cold_water_xeros_volume, 0)), ':default_volume', ':unit_volume') as model_xeros_value,
+   		sum(coalesce(xc.cycle_cold_water_cost, 0)) * :exchange_rate as actual_cost,
+   		sum(coalesce(xc.cycle_cold_water_xeros_cost, 0)) * :exchange_rate as model_xeros_cost
 METRIC
           )
         );
@@ -204,10 +198,10 @@ METRIC
           $metrics, array(
             "name"  => "therms",
             "query" => <<<METRIC
-   		sum(coalesce(xc.cycle_therms, 0)) as actual_value,
-   		sum(coalesce(xc.cycle_therms_xeros, 0)) as model_xeros_value,
-   		sum(coalesce(xc.cycle_therms_cost, 0)) as actual_cost,
-   		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) as model_xeros_cost
+   		udf_convert_energy(sum(coalesce(xc.cycle_therms, 0)), ':default_energy', :unit_energy) as actual_value,
+   		udf_convert_energy(sum(coalesce(xc.cycle_therms_xeros, 0)), ':default_energy', :unit_energy) as model_xeros_value,
+   		sum(coalesce(xc.cycle_therms_cost, 0)) * :exchange_rate as actual_cost,
+   		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) * :exchange_rate as model_xeros_cost
 METRIC
             // Cycle Time (not in use)
           )
@@ -217,8 +211,8 @@ METRIC
 //            "query" => <<<METRIC
 //   		sum(xc.cycle_time_total_time) as value,
 //   		sum(xc.cycle_time_xeros_total_time) as value_xeros,
-//   		sum(xc.cycle_time_labor_cost) as cost,
-//   		sum(xc.cycle_time_xeros_labor_cost) as cost_xeros
+//   		sum(xc.cycle_time_labor_cost) * :exchange_rate as cost,
+//   		sum(xc.cycle_time_xeros_labor_cost) * exchange_rate as cost_xeros
 //METRIC
 //        ));
         // Chemical
@@ -226,10 +220,10 @@ METRIC
 //          array_push($metrics, array(
 //              "name" => "chemical",
 //              "query" => <<<METRIC
-//   		sum(coalesce(xc.cycle_chemical_strength, 0)) as value,
-//   		count(*) * 17.3884 as value_xeros, -- Model data
-//   		sum(coalesce(xc.cycle_chemical_cost, 0)) as cost,
-//   		count(*) * 1.18185 as cost_xeros -- Model data
+//   		udf_convert_mass(sum(coalesce(xc.cycle_chemical_strength, 0)), ':default_mass', ':unit_mass') as value,
+//   		udf_convert_mass(count(*) * 17.3884, ':default_mass', ':unit_mass') as value_xeros, -- Model data
+//   		sum(coalesce(xc.cycle_chemical_cost, 0)) * :exchange_rate as cost,
+//   		count(*) * 1.18185 * :exchange_rate as cost_xeros -- Model data
 //METRIC
 //            ));
 
@@ -445,16 +439,6 @@ METRIC
           }
           break;
       }
-
-//      switch($data->info->water_only) {
-//        case '1':
-//
-//          // Removed the standard model because it is not relevant
-//          $metric['model_xeros']['notes'] = array();
-//          $metric['model_xeros']['description'] = 'The expected data of a xeros machine based on the classifications of laundry.';
-//          $metric['model_xeros']['notes'] = 'Because this is a water only machine, this data is not available.';
-//          $metric['model_xeros']['active'] = false;
-//      }
 
       $output[$machine_type->model][$metric['name']] = $metric;
     }

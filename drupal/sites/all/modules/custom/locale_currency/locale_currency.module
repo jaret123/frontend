@@ -59,7 +59,19 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#options' => $temperature,
       '#description' => t('Unit of temperature (Fahrenheit or Celsius)'),
     );
-    
+
+    $energy = array(
+      'therms' => t('Therms'),
+      'kwh' => t('kWh')
+    );
+    $fields['energy'] = array(
+      '#type' => 'radios',
+      '#title' => t('energy'),
+      '#default_value' => isset($languages[$form['langcode']['#value']]->energy) ? $languages[$form['langcode']['#value']]->energy : 'therms',
+      '#options' => $energy,
+      '#description' => t('Unit of energy (Therms or kwh)'),
+    );
+
     $form['#submit'][] = 'locale_currency_edit_submit';
     $form['submit']['#weight'] = 10;
     
@@ -69,6 +81,8 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
         $form['mass'] = $fields['mass'];
         $form['volume'] = $fields['volume'];
         $form['temperature'] = $fields['temperature'];
+        $form['energy'] = $fields['energy'];
+
         break;
 
       case 'locale_languages_custom_form':
@@ -76,6 +90,8 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
         $form['custom language']['mass'] = $fields['mass'];
         $form['custom language']['volume'] = $fields['volume'];
         $form['custom language']['temperature'] = $fields['temperature'];
+        $form['custom language']['energy'] = $fields['energy'];
+
         break;
     }
   }
@@ -92,6 +108,7 @@ function locale_currency_edit_submit($form, &$form_state) {
     'mass' => $form_state['values']['mass'],
     'volume' => $form_state['values']['volume'],
     'temperature' => $form_state['values']['temperature'],
+    'energy' => $form_state['values']['energy'],
   ))
   ->condition('language', $form_state['values']['langcode'])
   ->execute();
@@ -101,6 +118,7 @@ function locale_currency_edit_submit($form, &$form_state) {
     $language_default->mass = $form_state['values']['mass'];
     $language_default->volume = $form_state['values']['volume'];
     $language_default->temperature = $form_state['values']['temperature'];
+    $language_default->energy = $form_state['values']['energy'];
 
     variable_set('language_default', $language_default);
   }
@@ -169,3 +187,7 @@ function locale_currency_get_current_temperature() {
   return $language->temperature;
 }
 
+function locale_currency_get_current_energy() {
+  global $language;
+  return $language->energy;
+}

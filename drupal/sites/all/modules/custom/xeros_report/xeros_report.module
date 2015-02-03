@@ -1,5 +1,14 @@
 <?php
 
+
+define('DEFAULT_MASS', 'ounces');
+
+define('DEFAULT_VOLUME', 'gallons');
+
+define('DEFAULT_TEMPERATURE', 'F');
+
+define('DEFAULT_CURRENCY', 'USD');
+
 /**
  * Implements hook_menu().
  * @return array
