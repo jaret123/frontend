@@ -201,6 +201,23 @@ function xeros_report_variable_info($options) {
       'localize' => TRUE,
       'group' => 'units',
   );
+  $variables['unit_currency'] = array(
+    'type' => 'string',
+    'title' => t('Unit Currency'),
+    'default' => 'USD',
+    'description' => t('Currency'),
+    'element' => array(
+      '#type' => 'radios',
+      '#options' => array(
+        'USD' => t('USD'),
+        'EUR' => t('EUR'),
+        'GBP' => t('GBP')
+      ),
+    ),
+    'required' => TRUE,
+    'localize' => TRUE,
+    'group' => 'units',
+  );
   return $variables;
 }
 
