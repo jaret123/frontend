@@ -131,3 +131,76 @@ function xeros_report_permission() {
   );
 }
 
+function xeros_report_variable_group_info() {
+
+  $groups = array();
+
+  $groups['units'] = array(
+      'title' => t('Units'),
+      'description' => t('Language Units'),
+      'access' => 'administer site configuration',
+      'path' => array('admin/config/system/units'),
+  );
+
+  return $groups;
+
+}
+
+/**
+ * Implements hook_variable_info().
+ */
+function xeros_report_variable_info($options) {
+
+
+
+  $variables['unit_mass'] = array(
+      'type' => 'string',
+      'title' => t('Unit Mass', array(), $options),
+      'default' => 'ounces',
+      'description' => t('Ounces or Grams', array(), $options),
+      'element' => array(
+          '#type' => 'radios',
+          '#options' => array(
+              'ounces' => t('Ounces'),
+              'grams' => t('Grams'),
+          ),
+      ),
+      'required' => TRUE,
+      'localize' => TRUE,
+      'group' => 'units',
+  );
+  $variables['unit_volume'] = array(
+      'type' => 'string',
+      'title' => t('Unit Volume'),
+      'default' => 'gallons',
+      'description' => t('Gallons or Liters'),
+      'element' => array(
+          '#type' => 'radios',
+          '#options' => array(
+              'gallons' => t('Gallons'),
+              'liters' => t('Liters'),
+          ),
+      ),
+      'required' => TRUE,
+      'localize' => TRUE,
+      'group' => 'units',
+  );
+  $variables['unit_temperature'] = array(
+      'type' => 'string',
+      'title' => t('Unit Temperature'),
+      'default' => 'F',
+      'description' => t('Fahrenheit or Celsius'),
+      'element' => array(
+          '#type' => 'radios',
+          '#options' => array(
+              'F' => t('Fahrenheit'),
+              'C' => t('Celsius'),
+          ),
+      ),
+      'required' => TRUE,
+      'localize' => TRUE,
+      'group' => 'units',
+  );
+  return $variables;
+}
+
