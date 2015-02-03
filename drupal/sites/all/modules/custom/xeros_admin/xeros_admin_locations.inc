@@ -286,7 +286,8 @@ function location_form_submit($form, &$form_state) {
       'cost_per_gallon',
       'temperature_unit',
       'currency_unit',
-      'timezone'
+      'timezone',
+      'energy_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -345,7 +346,8 @@ function location_form_submit($form, &$form_state) {
       'cost_per_gallon',
       'temperature_unit',
       'currency_unit',
-      'timezone'
+      'timezone',
+      'energy_unit'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -441,6 +443,13 @@ function location_profile($vars) {
       '#type' => 'select',
       '#options' => drupal_map_assoc(array('F', 'C')),
       '#default_value' => !empty($lp['temperature_unit']) ? $lp['temperature_unit'] : 'F',
+    ),
+    'energy_unit' => array(
+      '#title' => 'Energy Unit',
+      '#description' => 'What unit is energy measured in (therms, kwh)',
+      '#type' => 'select',
+      '#options' => drupal_map_assoc(array('therms', 'kwh')),
+      '#default_value' => !empty($lp['energy_unit']) ? $lp['energy_unit'] : 'therms',
     ),
     'currency_unit' => array(
         '#title' => 'Currency (USD, GBP, EUR)',
