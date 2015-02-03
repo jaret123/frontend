@@ -285,7 +285,8 @@ function location_form_submit($form, &$form_state) {
       'cost_per_therm',
       'cost_per_gallon',
       'temperature_unit',
-      'currency_unit'
+      'currency_unit',
+      'timezone'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -343,7 +344,8 @@ function location_form_submit($form, &$form_state) {
       'cost_per_therm',
       'cost_per_gallon',
       'temperature_unit',
-      'currency_unit'
+      'currency_unit',
+      'timezone'
     );
     foreach($f as $field) {
       $lp->fields[$field] = $form_state['values']['location_profile'][$field];
@@ -446,6 +448,13 @@ function location_profile($vars) {
         '#type' => 'select',
         '#options' => drupal_map_assoc(array('USD', 'GBP', 'EUR')),
         '#default_value' => !empty($lp['currency_unit']) ? $lp['currency_unit'] : 'USD',
+    ),
+    'timezone' => array(
+      '#title' => 'Location Timezone',
+      '#date_label_position' => 'above',
+      '#type' => 'date_timezone',
+      '#default_value' => !empty($lp['timezone']) ? $lp['timezone'] : 'America/New_York',
+      '#description' => "Select a timezone if all the events will happen in the same place. Select that place's timezone",
     ),
     'temperature_rise_spring' => array(
       '#title' => 'Temperature Rise Spring',

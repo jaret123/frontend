@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Locale Currency module install file
+ * Installs the Locale Currency module
+ *
+ * @author Tom Kirkpatrick (mrfelton), www.systemseed.com
+ */
+
+/**
+ * Implements hook_schema_alter().
+ */
+function locale_currency_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['languages']['fields']['currency'] = array(
+    'description' => 'ISO 4217 3-character currency code, as a character string.',
+    'type' => 'varchar',
+    'length' => 3,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  $schema['languages']['fields']['mass'] = array(
+    'description' => 'Mass',
+    'type' => 'varchar',
+    'length' => 10,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  $schema['languages']['fields']['volume'] = array(
+    'description' => 'Volume.',
+    'type' => 'varchar',
+    'length' => 10,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  $schema['languages']['fields']['temperature'] = array(
+    'description' => 'Temperature.',
+    'type' => 'varchar',
+    'length' => 1,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  $schema['languages']['fields']['energy'] = array(
+    'description' => 'Energy.',
+    'type' => 'varchar',
+    'length' => 10,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  // TODO - Update schema info
+}
+
+/**
+ * Implements hook_install().
+ */
+function locale_currency_install() {
+  db_add_field('languages', 'currency',
+    array(
+    'description' => st('ISO 4217 3-character currency code, as a character string.'),
+    'type' => 'varchar',
+    'length' => 3,
+    'not null' => TRUE,
+    'default' => '',
+  ));
+  db_add_field('languages', 'mass',
+    array(
+      'description' => st('Unit of measure for Mass.'),
+      'type' => 'varchar',
+      'length' => 10,
+      'not null' => TRUE,
+      'default' => 'ounces',
+    ));
+  db_add_field('languages', 'volume',
+    array(
+      'description' => st('Unit of measure for volume.'),
+      'type' => 'varchar',
+      'length' => 10,
+      'not null' => TRUE,
+      'default' => 'gallons',
+    ));
+  db_add_field('languages', 'temperature',
+    array(
+      'description' => st('Unit of measure for temperature.'),
+      'type' => 'varchar',
+      'length' => 1,
+      'not null' => TRUE,
+      'default' => 'F',
+    ));
+  db_add_field('languages', 'energy',
+    array(
+      'description' => st('Unit of measure for energy.'),
+      'type' => 'varchar',
+      'length' => 10,
+      'not null' => TRUE,
+      'default' => 'therms',
+    ));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function locale_currency_uninstall() {
+  db_drop_field('languages', 'currency');
+  db_drop_field('languages', 'mass');
+  db_drop_field('languages', 'volume');
+  db_drop_field('languages', 'temperature');
+  db_drop_field('languages', 'energy');
+}

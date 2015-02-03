@@ -63,10 +63,19 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
   $machine_ids = $u->machines_by_location($location_ids);
 
   $filters = array(
-    ':fromDate' => $from_date,
-    ':toDate' => $to_date . ' 12:59:59',
-    ':machineIds' => implode(",", $machine_ids),
-    ':water_only_diff' => '3.2'
+    ':fromDate'         => $from_date,
+    ':toDate'           => $to_date . ' 12:59:59',
+    ':machineIds'       => implode(",", $machine_ids),
+    ':water_only_diff'  => '3.2',
+    ':default_mass'     => DEFAULT_MASS,
+    ':unit_mass'        => locale_currency_get_current_mass(),
+    ':default_volume'   => DEFAULT_VOLUME,
+    ':unit_volume'      => locale_currency_get_current_volume(),
+    ':default_temperature' => DEFAULT_TEMPERATURE,
+    ':unit_temperature' => locale_currency_get_current_temperature(),
+    ':default_currency' => DEFAULT_CURRENCY,
+    ':unit_currency'   => locale_currency_get_current_currency(),
+    ':exchange_rate'   => CurrencyExchanger::load(DEFAULT_CURRENCY, locale_currency_get_current_currency())
   );
 
 
@@ -113,17 +122,17 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
          SELECT
            machine_id,
            count(*) as cycles,
-           sum(cycle_cold_water_volume)       AS cold_water_actual,
-           sum(cycle_cold_water_xeros_volume) as cold_water_model_xeros,
+           udf_convert_volume(sum(cycle_cold_water_volume), ':default_volume', ':unit_volume')       AS cold_water_actual,
+           udf_convert_volume(sum(cycle_cold_water_xeros_volume), ':default_volume', ':unit_volume') AS cold_water_model_xeros,
 
-           sum(cycle_therms)                  AS therms_actual,
-           sum(cycle_therms_xeros)            AS therms_model_xeros,
+           udf_convert_engery(sum(cycle_therms), ':default_energy', ':unit_energy')                  AS therms_actual,
+           udf_convert_energy(sum(cycle_therms_xeros), ':default_energy', ':unit_energy')            AS therms_model_xeros,
 
            sum(cycle_time_total_time)         AS time_actual,
            sum(cycle_time_xeros_total_time)   AS time_model_xeros,
 
-           sum(cycle_chemical_strength)       AS chemical_actual,
-           sum(cycle_chemical_xeros_strength) AS chemical_model_xeros
+           udf_convert_mass(sum(cycle_chemical_strength), ':default_mass', ':unit_mass')             AS chemical_actual,
+           udf_convert_mass(sum(cycle_chemical_xeros_strength), ':default_mass', ':unit_mass')       AS chemical_model_xeros
 
          FROM
            xeros_cycle
