@@ -127,7 +127,7 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
            udf_convert_volume(sum(cycle_cold_water_volume), ':default_volume', ':unit_volume')       AS cold_water_actual,
            udf_convert_volume(sum(cycle_cold_water_xeros_volume), ':default_volume', ':unit_volume') AS cold_water_model_xeros,
 
-           udf_convert_engery(sum(cycle_therms), ':default_energy', ':unit_energy')                  AS therms_actual,
+           udf_convert_energy(sum(cycle_therms), ':default_energy', ':unit_energy')                  AS therms_actual,
            udf_convert_energy(sum(cycle_therms_xeros), ':default_energy', ':unit_energy')            AS therms_model_xeros,
 
            sum(cycle_time_total_time)         AS time_actual,
