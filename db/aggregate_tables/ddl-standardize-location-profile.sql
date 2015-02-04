@@ -19,7 +19,7 @@ CREATE TABLE xeros_location_profile_standard
   cost_per_therm DECIMAL(15,4),
   cost_per_gallon DECIMAL(15,5),
   temperature_unit VARCHAR(2) DEFAULT 'F',
-  currency_profile VARCHAR(5) DEFAULT 'USD'
+  currency_unit VARCHAR(5) DEFAULT 'USD'
 );
 
 CREATE INDEX PK_location_id ON xeros_location_profile_standard (location_id);;
