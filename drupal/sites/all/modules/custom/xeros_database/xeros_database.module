@@ -4,7 +4,7 @@
  * Dedupe and add a primary key to the chemical unit table
  */
 function xeros_database_update_7201() {
-  run_external_script("db-update-2014-03-06__add-key-to-xeros_chemical_usage.sql");
+  run_external_script("updates/db-update-2014-03-06__add-key-to-xeros_chemical_usage.sql");
 }
 
 
@@ -14,34 +14,23 @@ function xeros_database_update_7201() {
 function xeros_database_update_7202() {
     // Do nothing
   $scripts = array(
-    "db-update-2014-03-19_add-2-variance-columns-to-xeros_machine-for-mapping.sql",
-    "db-update-2014-03-19_add-column-xeros_unit_cost-to-xeros_chemical_profile.sql",
-    "db-update-2014-03-19_add-column-cost_per_gallon-to-xeros_location_profile.sql"
+    "updates/db-update-2014-03-19_add-2-variance-columns-to-xeros_machine-for-mapping.sql",
+    "updates/db-update-2014-03-19_add-column-xeros_unit_cost-to-xeros_chemical_profile.sql",
+    "updates/db-update-2014-03-19_add-column-cost_per_gallon-to-xeros_location_profile.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
   }
 }
 
-/**
- * Update the report builds to implement incremental refresh functionality.
- */
-function xeros_database_update_7203() {
-  $scripts = array(
-    "aggregate_tables/ddl-sp-therm-cycle.sql",
-    "aggregate_tables/ddl-sp-cycle-data.sql"
-  );
-  foreach ( $scripts as $s ) {
-    run_external_script("$s");
-  }
-}
+
 
 /**
  * Add model field to xeros_machine
  */
 function xeros_database_update_7204() {
   $scripts = array(
-    "db-update-2014-03-24-alter-xeros-machine.sql"
+    "updates/db-update-2014-03-24-alter-xeros-machine.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -53,8 +42,7 @@ function xeros_database_update_7204() {
  */
 function xeros_database_update_7205() {
   $scripts = array(
-    "db-update-2014-05-21-create-table-xeros-static-values.sql",
-    "ddl-sp-cycle-data.sql"
+    "updates/db-update-2014-05-21-create-table-xeros-static-values.sql",
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -70,7 +58,6 @@ function xeros_database_update_7205() {
 function xeros_database_update_7206() {
   $scripts = array(
     "updates/db-update-2014-08-06-move-water-meter-rate-to-machine.sql",
-    "aggregate_tables/ddl-sp-cycle-data.sql"
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -95,25 +82,6 @@ function xeros_database_update_7207() {
     }
 }
 
-/**
- *
- * Alter the xeros_cycle process
- */
-
-function xeros_database_update_7208() {
-    $scripts = array(
-        "aggregate_tables/ddl-udf_convert_mass.sql",
-        "aggregate_tables/ddl-udf_convert_temperature.sql",
-        "aggregate_tables/ddl-udf_convert_volume.sql",
-        "aggregate_tables/ddl-udf_convert_energy.sql",
-        "aggregate_tables/ddl-standardize-location-profile.sql",
-        "aggregate_tables/ddl-standardize-meter.sql",
-        "aggregate_tables/ddl-sp-cycle-data.sql"
-    );
-    foreach ( $scripts as $s ) {
-        run_external_script("$s");
-    }
-}
 
 /**
  * Helper functions

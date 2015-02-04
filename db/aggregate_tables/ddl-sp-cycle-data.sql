@@ -249,6 +249,7 @@ CREATE TABLE xeros_cycle
 -- Should always equal one in this view
     reading_date timestamp,
     reading_timestamp timestamp,
+		olson_timezone_id varchar(100),
     cycle_load_size decimal(15,4),
     cycle_xeros_load_size decimal(15,4),
 
@@ -365,6 +366,7 @@ BEGIN
     location_id,
     reading_date,
     reading_timestamp,
+    olson_timezone_id,
     cycle_load_size,
     cycle_xeros_load_size,
 -- Cold water
@@ -427,6 +429,7 @@ BEGIN
 	-- Should always equal one in this view
     date(reading_timestamp)                                                                     	AS reading_date,
     reading_timestamp                                                                           	AS reading_timestamp,
+    dma.olson_timezone_id,
     mc.load_size                                                                               		AS cycle_load_size,
     mc.xeros_load_size                                                                         		AS cycle_xeros_load_size,
 

@@ -36,7 +36,7 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#description' => t('Unit of Mass (ounces or grams)'),
     );
 
-    $mass = array(
+    $volume = array(
       'gallons' => t('gallons'),
       'ounces' => t('liters')
     );
@@ -44,7 +44,7 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#type' => 'radios',
       '#title' => t('Volume'),
       '#default_value' => isset($languages[$form['langcode']['#value']]->volume) ? $languages[$form['langcode']['#value']]->volume : 'gallons',
-      '#options' => $mass,
+      '#options' => $volume,
       '#description' => t('Unit of Volume (gallons or liters)'),
     );
 
@@ -60,15 +60,14 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#description' => t('Unit of temperature (Fahrenheit or Celsius)'),
     );
 
-    $energy = array(
-      'therms' => t('Therms'),
-      'kwh' => t('kWh')
-    );
     $fields['energy'] = array(
       '#type' => 'radios',
       '#title' => t('energy'),
       '#default_value' => isset($languages[$form['langcode']['#value']]->energy) ? $languages[$form['langcode']['#value']]->energy : 'therms',
-      '#options' => $energy,
+      '#options' => array(
+        'therms' => t('Therms'),
+        'kwh' => t('Kilo Watt Hours')
+      ),
       '#description' => t('Unit of energy (Therms or kwh)'),
     );
 

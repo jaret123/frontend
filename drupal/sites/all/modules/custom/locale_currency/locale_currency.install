@@ -35,19 +35,19 @@ function locale_currency_schema_alter(&$schema) {
     'default' => '',
   );
   $schema['languages']['fields']['temperature'] = array(
-    'description' => 'Temperature.',
+    'description' => 'Temperature',
     'type' => 'varchar',
     'length' => 1,
     'not null' => TRUE,
     'default' => '',
   );
-  $schema['languages']['fields']['energy'] = array(
-    'description' => 'Energy.',
-    'type' => 'varchar',
-    'length' => 10,
-    'not null' => TRUE,
-    'default' => '',
-  );
+//  $schema['languages']['fields']['energy'] = array(
+//    'description' => 'Energy',
+//    'type' => 'varchar',
+//    'length' => 10,
+//    'not null' => TRUE,
+//    'default' => 'therms',
+//  );
   // TODO - Update schema info
 }
 

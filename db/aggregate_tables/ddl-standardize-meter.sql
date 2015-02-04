@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS xeros_dai_meter_standard;;
 CREATE TABLE xeros_dai_meter_standard
 (
 	dai_meter_actual_id INT UNSIGNED NOT NULL,
-	reading_timestamp TIMESTAMP NOT NULL,
+	reading_timestamp TIMESTAMP,
+	olson_timezone_id varchar(100),
 	active_dai_id INT UNSIGNED,
 	classification_id INT UNSIGNED,
 	hot_water DECIMAL(10,2),
@@ -77,6 +78,7 @@ BEGIN
 	(
 		dai_meter_actual_id,
 		reading_timestamp,
+		olson_timezone_id,
 		active_dai_id,
 		classification_id,
 		hot_water,
@@ -87,6 +89,7 @@ BEGIN
 	SELECT
 		dma.dai_meter_actual_id,
 		dma.reading_timestamp,
+		dma.olson_timezone_id,
 		dma.active_dai_id,
 		dma.classification_id,
 		udf_convert_volume_gallons(dma.hot_water, lp.water_volume_unit),

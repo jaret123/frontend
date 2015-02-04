@@ -70,7 +70,8 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
     ':unit_energy'        => locale_currency_get_current_energy(),
     ':default_currency' => DEFAULT_CURRENCY,
     ':unit_currency'   => locale_currency_get_current_currency(),
-    ':exchange_rate'   => CurrencyExchanger::load(DEFAULT_CURRENCY, locale_currency_get_current_currency())
+    ':exchange_rate'   => CurrencyExchanger::load(DEFAULT_CURRENCY, locale_currency_get_current_currency()),
+    ':timezone'       => $GLOBALS['user']->timezone
   );
 
   // Get the machine types at this location and return all the correct data and models
@@ -115,32 +116,35 @@ SQL;
     $dataPointSql
       = <<<SQL
         SELECT
-            b.date,
+            xd.date,
             b.cycles,
-            coalesce(b.actual_value, 0) AS actual_value,
-            coalesce(b.model_xeros_value, 0) AS model_xeros_value,
-            coalesce(b.actual_cost * :exchange_rate, 0) AS actual_cost,
-            coalesce(b.model_xeros_cost * :exchange_rate, 0) AS model_xeros_cost
+            IFNULL(b.actual_value, 0) AS actual_value,
+            IFNULL(b.model_xeros_value, 0) AS model_xeros_value,
+            IFNULL(b.actual_cost * :exchange_rate, 0) AS actual_cost,
+            IFNULL(b.model_xeros_cost * :exchange_rate, 0) AS model_xeros_cost
         FROM
+          xeros_dates AS xd
+            LEFT JOIN
             (
             SELECT
-                xd.date,
+                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) as date,
                 count(*) AS cycles,
                 :metric
             FROM
-                xeros_dates AS xd
-                LEFT JOIN xeros_cycle AS xc
-                  ON xd.date = xc.reading_date
-                  AND xc.machine_id IN ( :machineIds )
-                  :machine_type_filter
+                 xeros_cycle AS xc
             WHERE
                 1 = 1
-                AND xd.date >= ':fromDate' AND xd.date <= ':toDate'
+                AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) >= ':fromDate'
+                AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) <= ':toDate'
+                AND xc.machine_id IN ( :machineIds )
+                :machine_type_filter
             GROUP BY
-                xd.date
+                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone'))
             ) AS b
+              ON xd.date = b.date
         WHERE
-           1 = 1
+           xd.date >= ':fromDate'
+           AND xd.date <= ':toDate'
         ORDER BY
             b.date
 SQL;
@@ -158,22 +162,26 @@ SQL;
         coalesce(truncate(b.actual_cost, 0), 0) AS actual_cost,
         coalesce(truncate(b.model_xeros_cost, 0), 0) AS model_xeros_cost
       FROM
+        xeros_dates AS xd
+          LEFT JOIN
           (
           SELECT
-              xd.date,
+              date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) as date,
               :metric
-          FROM
-              xeros_dates AS xd
-              LEFT JOIN xeros_cycle AS xc
-                ON xd.date = xc.reading_date
+            FROM
+                 xeros_cycle AS xc
+            WHERE
+                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) >= ':fromDate'
+                AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) <= ':toDate'
                 AND xc.machine_id IN ( :machineIds )
                 :machine_type_filter
-          WHERE
-              1 = 1
-              AND xd.date >= ':fromDate' AND xd.date <= ':toDate'
+            GROUP BY
+                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone'))
           ) AS b
+          ON xd.date = b.date
       WHERE
-         1 = 1
+         xd.date >= ':fromDate'
+         AND xd.date <= ':toDate'
 SQL;
 
     /**
@@ -188,10 +196,10 @@ SQL;
           $metrics, array(
             "name"  => "cold-water",
             "query" => <<<METRIC
-   		udf_convert_volume(sum(truncate(xc.cycle_cold_water_volume, 0)), ':default_volume', ':unit_volume') as actual_value,
-   		udf_convert_volume(sum(coalesce(xc.cycle_cold_water_xeros_volume, 0)), ':default_volume', ':unit_volume') as model_xeros_value,
-   		sum(coalesce(xc.cycle_cold_water_cost, 0)) * :exchange_rate as actual_cost,
-   		sum(coalesce(xc.cycle_cold_water_xeros_cost, 0)) * :exchange_rate as model_xeros_cost
+   		    udf_convert_volume(sum(truncate(xc.cycle_cold_water_volume, 0)), ':default_volume', ':unit_volume') as actual_value,
+   		    udf_convert_volume(sum(coalesce(xc.cycle_cold_water_xeros_volume, 0)), ':default_volume', ':unit_volume') as model_xeros_value,
+   		    sum(coalesce(xc.cycle_cold_water_cost, 0)) * :exchange_rate as actual_cost,
+   		    sum(coalesce(xc.cycle_cold_water_xeros_cost, 0)) * :exchange_rate as model_xeros_cost
 METRIC
           )
         );
@@ -200,8 +208,8 @@ METRIC
           $metrics, array(
             "name"  => "therms",
             "query" => <<<METRIC
-   		udf_convert_energy(sum(coalesce(xc.cycle_therms, 0)), ':default_energy', :unit_energy) as actual_value,
-   		udf_convert_energy(sum(coalesce(xc.cycle_therms_xeros, 0)), ':default_energy', :unit_energy) as model_xeros_value,
+   		udf_convert_energy(sum(coalesce(xc.cycle_therms, 0)), ':default_energy', ':unit_energy') as actual_value,
+   		udf_convert_energy(sum(coalesce(xc.cycle_therms_xeros, 0)), ':default_energy', ':unit_energy') as model_xeros_value,
    		sum(coalesce(xc.cycle_therms_cost, 0)) * :exchange_rate as actual_cost,
    		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) * :exchange_rate as model_xeros_cost
 METRIC
