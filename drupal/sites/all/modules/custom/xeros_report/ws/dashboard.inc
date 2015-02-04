@@ -70,7 +70,6 @@ function ws_dashboard($location_ids = '', $from_date, $to_date, $format = '') {
     ':unit_energy'        => locale_currency_get_current_energy(),
     ':default_currency' => DEFAULT_CURRENCY,
     ':unit_currency'   => locale_currency_get_current_currency(),
-    ':exchange_rate'   => CurrencyExchanger::load(DEFAULT_CURRENCY, locale_currency_get_current_currency()),
     ':timezone'       => $GLOBALS['user']->timezone
   );
 
@@ -117,11 +116,11 @@ SQL;
       = <<<SQL
         SELECT
             xd.date,
-            b.cycles,
+            IFNULL(b.cycles, 0) AS cycles,
             IFNULL(b.actual_value, 0) AS actual_value,
             IFNULL(b.model_xeros_value, 0) AS model_xeros_value,
-            IFNULL(b.actual_cost * :exchange_rate, 0) AS actual_cost,
-            IFNULL(b.model_xeros_cost * :exchange_rate, 0) AS model_xeros_cost
+            udf_convert_currency(IFNULL(b.actual_cost, 0), ':default_currency', ':unit_currency') AS actual_cost,
+            udf_convert_currency(IFNULL(b.model_xeros_cost, 0), ':default_currency', ':unit_currency')  AS model_xeros_cost
         FROM
           xeros_dates AS xd
             LEFT JOIN
@@ -133,8 +132,7 @@ SQL;
             FROM
                  xeros_cycle AS xc
             WHERE
-                1 = 1
-                AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) >= ':fromDate'
+                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) >= ':fromDate'
                 AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) <= ':toDate'
                 AND xc.machine_id IN ( :machineIds )
                 :machine_type_filter
@@ -146,7 +144,7 @@ SQL;
            xd.date >= ':fromDate'
            AND xd.date <= ':toDate'
         ORDER BY
-            b.date
+            xd.date
 SQL;
 
     /**
@@ -157,10 +155,10 @@ SQL;
     $summarySql
       = <<<SQL
       SELECT
-        coalesce(truncate(b.actual_value, 0), 0) AS actual_value,
-        coalesce(truncate(b.model_xeros_value, 0), 0) AS model_xeros_value,
-        coalesce(truncate(b.actual_cost, 0), 0) AS actual_cost,
-        coalesce(truncate(b.model_xeros_cost, 0), 0) AS model_xeros_cost
+        IFNULL(b.actual_value, 0) AS actual_value,
+        IFNULL(b.model_xeros_value, 0) AS model_xeros_value,
+        IFNULL(b.actual_cost, 0) AS actual_cost,
+        IFNULL(b.model_xeros_cost, 0) AS model_xeros_cost
       FROM
         xeros_dates AS xd
           LEFT JOIN
@@ -197,9 +195,9 @@ SQL;
             "name"  => "cold-water",
             "query" => <<<METRIC
    		    udf_convert_volume(sum(truncate(xc.cycle_cold_water_volume, 0)), ':default_volume', ':unit_volume') as actual_value,
-   		    udf_convert_volume(sum(coalesce(xc.cycle_cold_water_xeros_volume, 0)), ':default_volume', ':unit_volume') as model_xeros_value,
-   		    sum(coalesce(xc.cycle_cold_water_cost, 0)) * :exchange_rate as actual_cost,
-   		    sum(coalesce(xc.cycle_cold_water_xeros_cost, 0)) * :exchange_rate as model_xeros_cost
+   		    udf_convert_volume(sum(IFNULL(xc.cycle_cold_water_xeros_volume, 0)), ':default_volume', ':unit_volume') as model_xeros_value,
+   		    udf_convert_currency(sum(IFNULL(xc.cycle_cold_water_cost, 0)), ':default_currency', ':unit_currency') as actual_cost,
+   		    udf_convert_currency(sum(IFNULL(xc.cycle_cold_water_xeros_cost, 0)) , ':default_currency', ':unit_currency') as model_xeros_cost
 METRIC
           )
         );
@@ -208,10 +206,10 @@ METRIC
           $metrics, array(
             "name"  => "therms",
             "query" => <<<METRIC
-   		udf_convert_energy(sum(coalesce(xc.cycle_therms, 0)), ':default_energy', ':unit_energy') as actual_value,
-   		udf_convert_energy(sum(coalesce(xc.cycle_therms_xeros, 0)), ':default_energy', ':unit_energy') as model_xeros_value,
-   		sum(coalesce(xc.cycle_therms_cost, 0)) * :exchange_rate as actual_cost,
-   		sum(coalesce(xc.cycle_therms_cost_xeros, 0)) * :exchange_rate as model_xeros_cost
+   		udf_convert_energy(sum(IFNULL(xc.cycle_therms, 0)), ':default_energy', ':unit_energy') as actual_value,
+   		udf_convert_energy(sum(IFNULL(xc.cycle_therms_xeros, 0)), ':default_energy', ':unit_energy') as model_xeros_value,
+   		udf_convert_currency(sum(IFNULL(xc.cycle_therms_cost, 0)) , ':default_currency', ':unit_currency') as actual_cost,
+   		udf_convert_currency(sum(IFNULL(xc.cycle_therms_cost_xeros, 0)) , ':default_currency', ':unit_currency') as model_xeros_cost
 METRIC
             // Cycle Time (not in use)
           )
@@ -230,9 +228,9 @@ METRIC
 //          array_push($metrics, array(
 //              "name" => "chemical",
 //              "query" => <<<METRIC
-//   		udf_convert_mass(sum(coalesce(xc.cycle_chemical_strength, 0)), ':default_mass', ':unit_mass') as value,
+//   		udf_convert_mass(sum(IFNULL(xc.cycle_chemical_strength, 0)), ':default_mass', ':unit_mass') as value,
 //   		udf_convert_mass(count(*) * 17.3884, ':default_mass', ':unit_mass') as value_xeros, -- Model data
-//   		sum(coalesce(xc.cycle_chemical_cost, 0)) * :exchange_rate as cost,
+//   		sum(IFNULL(xc.cycle_chemical_cost, 0)) * :exchange_rate as cost,
 //   		count(*) * 1.18185 * :exchange_rate as cost_xeros -- Model data
 //METRIC
 //            ));
