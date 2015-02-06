@@ -3130,15 +3130,22 @@ h1 {
     background-size: 177px 76px;
   }
 }
-/* line 124, ../sass/components/_header.scss */
+/* line 123, ../sass/components/_header.scss */
 .lang-dropdown-select-element {
   float: right;
   margin-left: 12px;
   margin-top: 6px;
   z-index: 99;
+  color: #0087BE;
+  font-size: 75%;
+  border: 1px #0087BE solid;
+  border-radius: 0;
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
 }
 
-/* line 131, ../sass/components/_header.scss */
+/* line 143, ../sass/components/_header.scss */
 #block-lang-dropdown-language {
   z-index: 99;
 }
