@@ -1,6 +1,6 @@
 DELIMITER ;;
 
-DROP FUNCTION IF EXISTS udf_convert_currency;;
+DROP FUNCTION IF EXISTS :q;;
 
 CREATE FUNCTION udf_convert_currency( _value float(10,2), _unit_from varchar(10), _unit_to varchar(10) )
   RETURNS DECIMAL(10,4)

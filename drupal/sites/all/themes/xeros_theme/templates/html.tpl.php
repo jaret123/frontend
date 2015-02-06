@@ -41,6 +41,7 @@
     <script src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
     <![endif]-->
   <?php endif; ?>
+  <script src="//tdcdn.blob.core.windows.net/toolbar/assets/prod/td.js" async data-trackduck-id="54d4e682f665e02f5b56cc21"></script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?> >
 
