@@ -2,7 +2,7 @@ DELIMITER ;;
 
 DROP FUNCTION IF EXISTS udf_convert_volume;;
 
-CREATE FUNCTION udf_convert_volume( _volume float(10,2), _unit_from varchar(10), _unit_to varchar(10) )
+CREATE FUNCTION udf_convert_volume( _volume float(10,2), _unit_from varchar(10) charset utf8, _unit_to varchar(10) charset utf8 )
   RETURNS DECIMAL(10,4)
   BEGIN
 
