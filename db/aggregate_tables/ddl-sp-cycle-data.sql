@@ -11,7 +11,7 @@ CREATE TABLE xeros_chemical_unit
 	machine_id int unsigned,
 	classificiation_id int unsigned,
 	chemical_profile_id int unsigned,
-	strength decimal(15,4),
+	strength decimal(15,4):q
 	unit_cost decimal(15,4),
 	xeros_strength decimal(15,4),
 	chemical_unit_cost decimal(15,4),

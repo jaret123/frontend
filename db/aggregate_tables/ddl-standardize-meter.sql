@@ -92,8 +92,8 @@ BEGIN
 		dma.olson_timezone_id,
 		dma.active_dai_id,
 		dma.classification_id,
-		udf_convert_volume_gallons(dma.hot_water, lp.water_volume_unit),
-		udf_convert_volume_gallons(dma.cold_water, lp.water_volume_unit),
+		udf_convert_volume(dma.hot_water, lp.water_volume_unit, ''gallons''),
+		udf_convert_volume(dma.cold_water, lp.water_volume_unit, ''gallons''),
 		dma.run_time,
 		dma.machine_id
 	FROM
