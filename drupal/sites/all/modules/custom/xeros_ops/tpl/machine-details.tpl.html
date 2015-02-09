@@ -43,7 +43,7 @@
     <div class="log">
         {{#each history}}
         <div class="log__row">
-            <div class="log__timestamp">{{1.time_stamp}} - </div>
+            <div class="log__timestamp">{{1.time_stamp}} - {{1.olson_timestamp_id}}</div>
             <div class="log__status">{{statusFormat 1.status_code "code"}} - </div>
             <div class="log__message">{{1.status_message}}</div>
         </div>
