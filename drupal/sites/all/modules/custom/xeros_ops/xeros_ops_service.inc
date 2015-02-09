@@ -197,18 +197,19 @@ select
 	x.cycle_hot_water_volume,
     x.cycle_therms,
 	x.cycle_chemical_strength,
-	CONVERT_TZ(x.reading_timestamp, @@session.time_zone, '-00:00') as cycle_end_time, -- Readings are in their local timezone
-	CONVERT_TZ(date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute), @@session.time_zone, '-00:00') as cycle_start_time,
+	x.reading_timestamp as cycle_end_time, -- Readings are in their local timezone
+	date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute) as cycle_start_time,
 	x.cycle_time_run_time,
 	x.classification_id,
 	x.machine_id,
-	xc.name as classification_name
+	xc.name as classification_name,
+	x.olson_timezone_id
 from
 	xeros_cycle AS x
 	left join xeros_classification as xc
 		on x.classification_id = xc.classification_id
 where
-	x.reading_timestamp > date(CONVERT_TZ(NOW(), @@session.time_zone, '-06:00'))
+	x.reading_timestamp > date(CONVERT_TZ(NOW(), @@session.time_zone, x.olson_timezone_id))
 	and x.machine_id in ({{machineIds}})
 order by
     x.reading_timestamp desc
