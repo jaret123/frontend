@@ -28,21 +28,18 @@
  * Most Drupal database SELECT queries are performed by a call to db_query() or
  * db_query_range(). Module authors should also consider using the PagerDefault
  * Extender for queries that return results that need to be presented on
- * multiple pages (see https://drupal.org/node/508796), and the TableSort
- * Extender for generating appropriate queries for sortable tables
- * (see https://drupal.org/node/1848372).
+ * multiple pages, and the Tablesort Extender for generating appropriate queries
+ * for sortable tables.
  *
  * For example, one might wish to return a list of the most recent 10 nodes
  * authored by a given user. Instead of directly issuing the SQL query
  * @code
- * SELECT n.nid, n.title, n.created FROM node n WHERE n.uid = $uid
- *   ORDER BY n.created DESC LIMIT 0, 10;
+ * SELECT n.nid, n.title, n.created FROM node n WHERE n.uid = $uid LIMIT 0, 10;
  * @endcode
  * one would instead call the Drupal functions:
  * @code
  * $result = db_query_range('SELECT n.nid, n.title, n.created
- *   FROM {node} n WHERE n.uid = :uid
- *   ORDER BY n.created DESC', 0, 10, array(':uid' => $uid));
+ *   FROM {node} n WHERE n.uid = :uid', 0, 10, array(':uid' => $uid));
  * foreach ($result as $record) {
  *   // Perform operations on $record->title, etc. here.
  * }
@@ -736,7 +733,7 @@ abstract class DatabaseConnection extends PDO {
     // to expand it out into a comma-delimited set of placeholders.
     foreach (array_filter($args, 'is_array') as $key => $data) {
       $new_keys = array();
-      foreach (array_values($data) as $i => $value) {
+      foreach ($data as $i => $value) {
         // This assumes that there are no other placeholders that use the same
         // name.  For example, if the array placeholder is defined as :example
         // and there is already an :example_2 placeholder, this will generate
@@ -2383,14 +2380,14 @@ function db_query_range($query, $from, $count, array $args = array(), array $opt
 }
 
 /**
- * Executes a SELECT query string and saves the result set to a temporary table.
+ * Executes a query string and saves the result set to a temporary table.
  *
  * The execution of the query string happens against the active database.
  *
  * @param $query
- *   The prepared SELECT statement query to run. Although it will accept both
- *   named and unnamed placeholders, named placeholders are strongly preferred
- *   as they are more self-documenting.
+ *   The prepared statement query to run. Although it will accept both named and
+ *   unnamed placeholders, named placeholders are strongly preferred as they are
+ *   more self-documenting.
  * @param $args
  *   An array of values to substitute into the query. If the query uses named
  *   placeholders, this is an associative array in any order. If the query uses
@@ -2832,7 +2829,7 @@ function db_drop_table($table) {
  *   will be set to the value of the key in all rows. This is most useful for
  *   creating NOT NULL columns with no default value in existing tables.
  * @param $keys_new
- *   (optional) Keys and indexes specification to be created on the table along
+ *   Optional keys and indexes specification to be created on the table along
  *   with adding the field. The format is the same as a table specification, but
  *   without the 'fields' element. If you are adding a type 'serial' field, you
  *   MUST specify at least one key or index including it in this array. See
@@ -3012,7 +3009,7 @@ function db_drop_index($table, $name) {
  * @param $spec
  *   The field specification for the new field.
  * @param $keys_new
- *   (optional) Keys and indexes specification to be created on the table along
+ *   Optional keys and indexes specification to be created on the table along
  *   with changing the field. The format is the same as a table specification
  *   but without the 'fields' element.
  */

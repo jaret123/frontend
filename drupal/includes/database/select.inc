@@ -377,8 +377,7 @@ interface SelectQueryInterface extends QueryConditionInterface, QueryAlterableIn
    * @param $field
    *   The field on which to order.
    * @param $direction
-   *   The direction to sort. Legal values are "ASC" and "DESC". Any other value
-   *   will be converted to "ASC".
+   *   The direction to sort. Legal values are "ASC" and "DESC".
    * @return SelectQueryInterface
    *   The called object.
    */
@@ -597,7 +596,7 @@ class SelectQueryExtender implements SelectQueryInterface {
 
   public function hasAnyTag() {
     $args = func_get_args();
-    return call_user_func_array(array($this->query, 'hasAnyTag'), $args);
+    return call_user_func_array(array($this->query, 'hasAnyTags'), $args);
   }
 
   public function addMetaData($key, $object) {
@@ -1385,8 +1384,6 @@ class SelectQuery extends Query implements SelectQueryInterface {
   }
 
   public function orderBy($field, $direction = 'ASC') {
-    // Only allow ASC and DESC, default to ASC.
-    $direction = strtoupper($direction) == 'DESC' ? 'DESC' : 'ASC';
     $this->order[$field] = $direction;
     return $this;
   }

@@ -99,11 +99,6 @@
     $('span.modal-title', Drupal.CTools.Modal.modal).html(Drupal.CTools.Modal.currentSettings.loadingText);
     Drupal.CTools.Modal.modalContent(Drupal.CTools.Modal.modal, settings.modalOptions, settings.animation, settings.animationSpeed);
     $('#modalContent .modal-content').html(Drupal.theme(settings.throbberTheme));
-
-    // Position autocomplete results based on the scroll position of the modal.
-    $('#modalContent .modal-content').delegate('input.form-autocomplete', 'keyup', function() {
-      $('#autocomplete').css('top', $(this).position().top + $(this).outerHeight() + $(this).offsetParent().filter('#modal-content').scrollTop());
-    });
   };
 
   /**
@@ -227,11 +222,7 @@
         // AJAX submits specified in this manner automatically submit to the
         // normal form action.
         element_settings.url = Drupal.CTools.Modal.findURL(this);
-        if (element_settings.url == '') {
-          element_settings.url = $(this).closest('form').attr('action');
-        }
         element_settings.event = 'click';
-        element_settings.setClick = true;
 
         var base = $this.attr('id');
         Drupal.ajax[base] = new Drupal.ajax(base, this, element_settings);
@@ -258,10 +249,6 @@
         $('input[type=submit], button', this).click(function(event) {
           Drupal.ajax[base].element = this;
           this.form.clk = this;
-          // Stop autocomplete from submitting.
-          if (Drupal.autocompleteSubmit && !Drupal.autocompleteSubmit()) {
-            return false;
-          }
           // An empty event means we were triggered via .click() and
           // in jquery 1.4 this won't trigger a submit.
           if (event.bubbles == undefined) {
@@ -295,10 +282,7 @@
     // content. This is helpful for allowing users to see error messages at the
     // top of a form, etc.
     $('#modal-content').html(response.output).scrollTop(0);
-
-    // Attach behaviors within a modal dialog.
-    var settings = response.settings || ajax.settings || Drupal.settings;
-    Drupal.attachBehaviors('#modalContent', settings);
+    Drupal.attachBehaviors();
   }
 
   /**
@@ -379,9 +363,9 @@
     css.filter = 'alpha(opacity=' + (100 * css.opacity) + ')';
     content.hide();
 
-    // If we already have modalContent, remove it.
-    if ($('#modalBackdrop').length) $('#modalBackdrop').remove();
-    if ($('#modalContent').length) $('#modalContent').remove();
+    // if we already ahve a modalContent, remove it
+    if ( $('#modalBackdrop')) $('#modalBackdrop').remove();
+    if ( $('#modalContent')) $('#modalContent').remove();
 
     // position code lifted from http://www.quirksmode.org/viewport/compatibility.html
     if (self.pageYOffset) { // all except Explorer
@@ -421,17 +405,12 @@
           return true;
         }
       }
-
-      if ($(target).is('#modalContent, body') || $(target).filter('*:visible').parents('#modalContent').length) {
-        // Allow the event only if target is a visible child node
-        // of #modalContent.
+      if( $(target).filter('*:visible').parents('#modalContent').size()) {
+        // allow the event only if target is a visible child node of #modalContent
         return true;
       }
-      else {
-        $('#modalContent').focus();
-      }
-
-      event.preventDefault();
+      if ( $('#modalContent')) $('#modalContent').get(0).focus();
+      return false;
     };
     $('body').bind( 'focus', modalEventHandler );
     $('body').bind( 'keypress', modalEventHandler );
@@ -482,16 +461,6 @@
 
     // Move and resize the modalBackdrop and modalContent on resize of the window
      modalContentResize = function(){
-
-      // position code lifted from http://www.quirksmode.org/viewport/compatibility.html
-      if (self.pageYOffset) { // all except Explorer
-      var wt = self.pageYOffset;
-      } else if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
-        var wt = document.documentElement.scrollTop;
-      } else if (document.body) { // all other Explorers
-        var wt = document.body.scrollTop;
-      }
-
       // Get our heights
       var docHeight = $(document).height();
       var docWidth = $(document).width();
@@ -501,7 +470,7 @@
 
       // Get where we should move content to
       var modalContent = $('#modalContent');
-      var mdcTop = wt + ( winHeight / 2 ) - ( modalContent.outerHeight() / 2);
+      var mdcTop = ( winHeight / 2 ) - (  modalContent.outerHeight() / 2);
       var mdcLeft = ( winWidth / 2 ) - ( modalContent.outerWidth() / 2);
 
       // Apply the changes
