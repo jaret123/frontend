@@ -155,16 +155,13 @@ SQL;
     $summarySql
       = <<<SQL
       SELECT
-        IFNULL(b.actual_value, 0) AS actual_value,
-        IFNULL(b.model_xeros_value, 0) AS model_xeros_value,
-        IFNULL(b.actual_cost, 0) AS actual_cost,
-        IFNULL(b.model_xeros_cost, 0) AS model_xeros_cost
-      FROM
-        xeros_dates AS xd
-          LEFT JOIN
+        sum(IFNULL(b.actual_value, 0)) AS actual_value,
+        sum(IFNULL(b.model_xeros_value, 0)) AS model_xeros_value,
+        sum(IFNULL(b.actual_cost, 0)) AS actual_cost,
+        sum(IFNULL(b.model_xeros_cost, 0)) AS model_xeros_cost
+          FROM
           (
           SELECT
-              date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) as date,
               :metric
             FROM
                  xeros_cycle AS xc
@@ -173,13 +170,7 @@ SQL;
                 AND date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone')) <= ':toDate'
                 AND xc.machine_id IN ( :machineIds )
                 :machine_type_filter
-            GROUP BY
-                date(convert_tz(xc.reading_timestamp, xc.olson_timezone_id, ':timezone'))
           ) AS b
-          ON xd.date = b.date
-      WHERE
-         xd.date >= ':fromDate'
-         AND xd.date <= ':toDate'
 SQL;
 
     /**

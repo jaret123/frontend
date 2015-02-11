@@ -542,6 +542,8 @@ BEGIN
   call sp_chemical_unit(refresh_mode, record_id);
   call sp_chemical_cycle(refresh_mode, record_id);
   call sp_therm_cycle(refresh_mode, record_id);
+	call sp_standardize_location_profile();
+	call sp_standardize_meter(refresh_mode, record_id);
   call sp_xeros_cycle(refresh_mode, record_id);
 
 END;;
