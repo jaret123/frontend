@@ -32,8 +32,8 @@ var view = {
                     meta : {
                         cssClass : "total",
                         icon : "Globe",
-                        label : Drupal.t("Overall Expense"),
-                        title : Drupal.t("Total Savings")
+                        label : Drupal.t("Overall Expense",{},{context:'Dashboard'}),
+                        title : Drupal.t("Total Savings",{},{context:'Dashboard'})
                     },
                     actual: {
                         summary : {
@@ -72,31 +72,31 @@ var view = {
             ar[1]['meta'] = {
                     cssClass : "cold-water",
                     icon : "Drop",
-                    label : Drupal.t("Water Sewer"),
-                    title : Drupal.t("Water Sewer")
+                    label : Drupal.t("Water Sewer",{},{context:'Dashboard'}),
+                    title : Drupal.t("Water Sewer",{},{context:'Dashboard'})
                 };
             ar[2]['meta'] = {
                 cssClass : "therms",
                 icon : "Thermometer",
-                label : Drupal.t("Therms"),
-                title : Drupal.t("Therms")
+                label : Drupal.t("Therms",{},{context:'Dashboard'}),
+                title : Drupal.t("Therms",{},{context:'Dashboard'})
             };
 
         var labels = {
             'non_xeros' : {
-                lineA : Drupal.t('Potential Cost'),
-                lineB : Drupal.t('Actual Cost'),
-                'lineA-key' : Drupal.t('Current Consumption (Non-Xeros Machines)'),
-                'lineB-key' : Drupal.t('Potential Consumption with Xeros'),
-                savings : Drupal.t('Potential Savings'),
+                lineA : Drupal.t('Potential Cost',{},{context:'Dashboard'}),
+                lineB : Drupal.t('Actual Cost',{},{context:'Dashboard'}),
+                'lineA-key' : Drupal.t('Current Consumption (Non-Xeros Machines)',{},{context:'Dashboard'}),
+                'lineB-key' : Drupal.t('Potential Consumption with Xeros',{},{context:'Dashboard'}),
+                savings : Drupal.t('Potential Savings',{},{context:'Dashboard'}),
                 cssClass : 'non-xeros'
             },
             xeros : {
-                lineA : Drupal.t('Industry Avg Cost'),
-                lineB : Drupal.t('Xeros Actual Cost'),
-                'lineA-key' : Drupal.t('Current Consumption (Xeros Machines)'),
-                'lineB-key' : Drupal.t('Industry Benchmark (Non-Xeros Machines)'),
-                savings : Drupal.t('Current Savings'),
+                lineA : Drupal.t('Industry Avg Cost',{},{context:'Dashboard'}),
+                lineB : Drupal.t('Xeros Actual Cost',{},{context:'Dashboard'}),
+                'lineA-key' : Drupal.t('Current Consumption (Xeros Machines)',{},{context:'Dashboard'}),
+                'lineB-key' : Drupal.t('Industry Benchmark (Non-Xeros Machines)',{},{context:'Dashboard'}),
+                savings : Drupal.t('Current Savings',{},{context:'Dashboard'}),
                 cssClass : 'xeros'
             }
         };

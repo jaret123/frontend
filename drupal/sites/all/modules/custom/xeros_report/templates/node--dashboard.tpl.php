@@ -21,22 +21,22 @@
                   <span class="swatch model"></span>
                   <span class="label">{{lineB-key}}</span>
               </script>
-                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span><?php print t("Select Dashboard View"); ?></span></div>
+                <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span><?php print t("Select Dashboard View",array(),array("context"=>"dashboard")); ?></span></div>
                 <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
                       <span>
-                          <span><?php print t('Timeframe'); ?></span>
+                          <span><?php print t('Timeframe',array("context"=>"dashboard timeframe selector")); ?></span>
                           <select id="time-select" autofocus class="flagvisibility">
-                              <option value="weekToDate"><?php print t('Week To Date'); ?></option>
-                              <option value="monthToDate" selected><?php print t('Month to Date'); ?></option>
-                              <option value="yearToDate"><?php print t('Year to Date'); ?></option>
-                              <option value="custom"><?php print t('Custom...'); ?></option>
+                              <option value="weekToDate"><?php print t('Week To Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
+                              <option value="monthToDate" selected><?php print t('Month to Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
+                              <option value="yearToDate"><?php print t('Year to Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
+                              <option value="custom"><?php print t('Custom...',array(),array("context"=>"dashboard timeframe selector")); ?></option>
                           </select>
                       </span>
                       <div id="cal">
                           <div class="cal__button">
-                              <div class="cal__button-submit"><?php print t('Get Data'); ?></div>
-                              <div class="cal__button-cancel"><?php print t('Cancel'); ?></div>
+                              <div class="cal__button-submit"><?php print t('Get Data',array(),array("context"=>"dashboard timeframe selector")); ?></div>
+                              <div class="cal__button-cancel"><?php print t('Cancel',array(),array("context"=>"dashboard timeframe selector")); ?></div>
                           </div>
                       </div>
                   </div>
@@ -66,10 +66,10 @@
                             <div class="col kpi-chart chart {{name}}" name="{{name}}"></div>
                         </div>
                         <div class="col col-3">
-                          <div class="col dollars actual-dollars"><span class="dollar-sign"><?php print t('$'); ?></span>{{toLocaleString actual.summary.cost}}</div>
+                          <div class="col dollars actual-dollars"><span class="dollar-sign"><?php print t('$',array(),array("context"=>"dashboard")); ?></span>{{toLocaleString actual.summary.cost}}</div>
                           <div class="col saved">{{labels.lineB}}</div><!-- TODO: Put this in the array being passed in and change based on machine type -->
                           <div class="col border"></div>
-                          <div class="col dollars potential-dollars"><span class="dollar-sign"><?php print t('$'); ?></span>{{toLocaleString model.summary.cost}}</div>
+                          <div class="col dollars potential-dollars"><span class="dollar-sign"><?php print t('$',array(),array("context"=>"dashboard")); ?></span>{{toLocaleString model.summary.cost}}</div>
                           <div class="col saved">{{labels.lineA}}</div>
                           <div class="col border"></div>
                           <div class="col percent">{{toLocaleString actual.savings}}%</div>
@@ -96,30 +96,30 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php print t("Close"); ?></span></button>
-          <h4 class="modal-title"><?php print t("Select Dashboard View"); ?></h4>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"><?php print t("Close",array(),array("context"=>"select dashboard view window")); ?></span></button>
+          <h4 class="modal-title"><?php print t("Select Dashboard View",array(),array("context"=>"select dashboard view window")); ?></h4>
         </div>
         <div class="modal-body">
           <div id="dataset1-box">
-            <label for="machineType"><?php print t('Select machine type to display'); ?></label>
+            <label for="machineType"><?php print t('Select machine type to display',array(),array("context"=>"select dashboard view window")); ?></label>
             <select id="machineType" class="chart-options__machine-type">
-              <option value=""><?php print t('-Select-'); ?></option>
+              <option value=""><?php print t('-Select-',array(),array("context"=>"select dashboard view window")); ?></option>
             </select>
           </div>
-          <label for="model"><?php print t('Select comparison model'); ?></label>
+          <label for="model"><?php print t('Select comparison model',array(),array("context"=>"select dashboard view window")); ?></label>
           <select id="model" class="chart-options__model" autofocus="">
             <option value="">-select-</option>
           </select>
         </div>
         <script id="machine-options-tpl" type="text/x-handlebars-template">
-          <option value="0"><?php print t('-Select-'); ?></option>
+          <option value="0"><?php print t('-Select-',array(),array("context"=>"select dashboard view window")); ?></option>
           {{#each data}}
           <option value="{{@key}}">{{this.name}}</option>
           {{/each}}
         </script>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><?php print t('Close'); ?></button>
-          <button type="button" class="btn btn-primary chart-options__save" data-dismiss="modal" ><?php print t('Save changes'); ?></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><?php print t('Close',array(),array("context"=>"select dashboard view window")); ?></button>
+          <button type="button" class="btn btn-primary chart-options__save" data-dismiss="modal" ><?php print t('Save changes',array(),array("context"=>"select dashboard view window")); ?></button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
