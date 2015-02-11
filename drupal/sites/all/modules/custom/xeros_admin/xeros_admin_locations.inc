@@ -453,7 +453,7 @@ function location_profile($vars) {
     ),
     'currency_unit' => array(
         '#title' => t('Currency (USD, GBP, EUR)', array(), array('context' => 'location setup')),
-        '#description' => t('What unit is temperature measured in (C = Celsius, F = Fahrenheit)', array(), array('context' => 'location setup')),
+        '#description' => t('What unit of currency for this location ', array(), array('context' => 'location setup')),
         '#type' => 'select',
         '#options' => drupal_map_assoc(array('USD', 'GBP', 'EUR')),
         '#default_value' => !empty($lp['currency_unit']) ? $lp['currency_unit'] : 'USD',
