@@ -236,9 +236,9 @@ switch ($host) {
     );
     $conf['database_script_dir'] = "/Users/Jason/dev/ELYXOR/xeros-sbeady/db";
     $conf['mysql_bin'] = "/Applications/MAMP/Library/bin/mysql";
-    error_reporting(E_ALL);
-    ini_set('display_errors', TRUE);
-    ini_set('display_startup_errors', TRUE);
+//    error_reporting(E_ALL);
+//    ini_set('display_errors', TRUE);
+//    ini_set('display_startup_errors', TRUE);
     break;
   case 'sbeadycare-dev.xeroscleaning.com':
     $databases = array(
