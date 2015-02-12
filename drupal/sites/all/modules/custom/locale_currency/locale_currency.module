@@ -17,18 +17,19 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
     $languages = language_list();
 
     $default_currency = 'USD';
+    $default_energy = 'therms';
     $default_mass = 'ounces';
     $default_volume = 'gallons';
     $default_temperature = 'F';
-    $default_energy = 'therms';
+
 
     // Define default value for currency
     if (isset($form['langcode']) && isset($form['langcode']['#value'])) {
-      $default_currency = empty($languages[$form['langcode']['#value']]->currency) ? $languages[$form['langcode']['#value']]->currency : 'USD';
-      $default_mass = isset($languages[$form['langcode']['#value']]->mass) ? $languages[$form['langcode']['#value']]->mass : 'ounces';
-      $default_volume = isset($languages[$form['langcode']['#value']]->volume) ? $languages[$form['langcode']['#value']]->volume : 'gallons';
-      $default_temperature = isset($languages[$form['langcode']['#value']]->temperature) ? $languages[$form['langcode']['#value']]->temperature : 'F';
-      $default_energy = isset($languages[$form['langcode']['#value']]->energy) ? $languages[$form['langcode']['#value']]->energy : 'therms';
+      $default_currency = empty($languages[$form['langcode']['#value']]->currency) ? $languages[$form['langcode']['#value']]->currency : $default_currency;
+      $default_energy = isset($languages[$form['langcode']['#value']]->energy) ? $languages[$form['langcode']['#value']]->energy : $default_energy;
+      $default_mass = isset($languages[$form['langcode']['#value']]->mass) ? $languages[$form['langcode']['#value']]->mass : $default_mass;
+      $default_volume = isset($languages[$form['langcode']['#value']]->volume) ? $languages[$form['langcode']['#value']]->volume : $default_volume;
+      $default_temperature = isset($languages[$form['langcode']['#value']]->temperature) ? $languages[$form['langcode']['#value']]->temperature : $default_temperature;
     }
 
     $fields = array();
@@ -39,6 +40,19 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#size' => 12,
       '#default_value' => $default_currency,
       '#description' => t('<a href="@link">ISO 4217</a> compliant currency identifier. Examples: "GBP", "EUR", and "USD".', array('@link' => 'http://www.oanda.com/site/help/iso_code.shtml'),array("context"=>"Locale Currency Module")),
+    );
+
+    $energy = array(
+      'therms' => t('Therms',array(),array("context"=>"Locale Currency Module")),
+      'kwh' => t('KWH',array(),array("context"=>"Locale Currency Module"))
+    );
+
+    $fields['energy'] = array(
+      '#type' => 'radios',
+      '#default_value' => $default_energy,
+      '#title' => t('Energy',array(),array("context"=>"Locale Currency Module")),
+      '#options' => $energy,
+      '#description' => t('Unit of energy (Therms or kwh)',array(),array("context"=>"Locale Currency Module")),
     );
 
     $mass = array(
@@ -55,7 +69,7 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
 
     $volume = array(
       'gallons' => t('gallons',array(),array("context"=>"Locale Currency Module")),
-      'ounces' => t('liters',array(),array("context"=>"Locale Currency Module"))
+      'liters' => t('liters',array(),array("context"=>"Locale Currency Module"))
     );
     $fields['volume'] = array(
       '#type' => 'radios',
@@ -77,16 +91,7 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
       '#description' => t('Unit of temperature (Fahrenheit or Celsius)',array(),array("context"=>"Locale Currency Module")),
     );
 
-    $fields['energy'] = array(
-      '#type' => 'radios',
-      '#default_value' => $default_energy,
-      '#title' => t('energy',array(),array("context"=>"Locale Currency Module")),
-      '#options' => array(
-        'therms' => t('Therms'),
-        'kwh' => t('Kilo Watt Hours')
-      ),
-      '#description' => t('Unit of energy (Therms or kwh)',array(),array("context"=>"Locale Currency Module")),
-    );
+
 
     $form['#submit'][] = 'locale_currency_edit_submit';
     $form['submit']['#weight'] = 10;
@@ -94,20 +99,18 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
     switch ($form_id) {
       case 'locale_languages_edit_form':
         $form['currency'] = $fields['currency'];
+        $form['energy'] = $fields['energy'];
         $form['mass'] = $fields['mass'];
         $form['volume'] = $fields['volume'];
         $form['temperature'] = $fields['temperature'];
-        $form['energy'] = $fields['energy'];
-
         break;
 
       case 'locale_languages_custom_form':
         $form['custom language']['currency'] = $fields['currency'];
+        $form['custom language']['energy'] = $fields['energy'];
         $form['custom language']['mass'] = $fields['mass'];
         $form['custom language']['volume'] = $fields['volume'];
         $form['custom language']['temperature'] = $fields['temperature'];
-        $form['custom language']['energy'] = $fields['energy'];
-
         break;
     }
   }
@@ -121,20 +124,21 @@ function locale_currency_edit_submit($form, &$form_state) {
   db_update('languages')
   ->fields(array(
     'currency' => $form_state['values']['currency'],
+    'energy' => $form_state['values']['energy'],
     'mass' => $form_state['values']['mass'],
     'volume' => $form_state['values']['volume'],
     'temperature' => $form_state['values']['temperature'],
-    'energy' => $form_state['values']['energy'],
   ))
   ->condition('language', $form_state['values']['langcode'])
   ->execute();
   $language_default = language_default();
   if ($language_default->language == $form_state['values']['langcode']) {
     $language_default->currency = $form_state['values']['currency'];
+    $language_default->energy = $form_state['values']['energy'];
     $language_default->mass = $form_state['values']['mass'];
     $language_default->volume = $form_state['values']['volume'];
     $language_default->temperature = $form_state['values']['temperature'];
-    $language_default->energy = $form_state['values']['energy'];
+
 
     variable_set('language_default', $language_default);
   }

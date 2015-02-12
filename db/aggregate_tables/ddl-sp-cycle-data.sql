@@ -74,6 +74,7 @@ BEGIN
 
     END IF;
 
+	-- BUG: Need to standardize the chemical volume used with the udf_convert_mass function
     
 	SET @s = CONCAT('
 	INSERT INTO xeros_chemical_unit 

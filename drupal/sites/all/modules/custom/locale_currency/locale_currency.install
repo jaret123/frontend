@@ -20,6 +20,13 @@ function locale_currency_schema_alter(&$schema) {
     'not null' => TRUE,
     'default' => 'USD',
   );
+  $schema['languages']['fields']['energy'] = array(
+    'description' => 'Energy',
+    'type' => 'varchar',
+    'length' => 10,
+    'not null' => TRUE,
+    'default' => 'therms',
+  );
   $schema['languages']['fields']['mass'] = array(
     'description' => 'Mass',
     'type' => 'varchar',
@@ -41,13 +48,7 @@ function locale_currency_schema_alter(&$schema) {
     'not null' => TRUE,
     'default' => 'F',
   );
-  $schema['languages']['fields']['energy'] = array(
-    'description' => 'Energy',
-    'type' => 'varchar',
-    'length' => 10,
-    'not null' => TRUE,
-    'default' => 'therms',
-  );
+
   // TODO - Update schema info
 }
 
@@ -63,6 +64,14 @@ function locale_currency_install() {
     'not null' => TRUE,
     'default' => 'USD',
   ));
+  db_add_field('languages', 'energy',
+    array(
+      'description' => st('Unit of measure for energy.'),
+      'type' => 'varchar',
+      'length' => 10,
+      'not null' => TRUE,
+      'default' => 'therms',
+    ));
   db_add_field('languages', 'mass',
     array(
       'description' => st('Unit of measure for Mass.'),
@@ -87,14 +96,6 @@ function locale_currency_install() {
       'not null' => TRUE,
       'default' => 'F',
     ));
-  db_add_field('languages', 'energy',
-    array(
-      'description' => st('Unit of measure for energy.'),
-      'type' => 'varchar',
-      'length' => 10,
-      'not null' => TRUE,
-      'default' => 'therms',
-    ));
 }
 
 /**
@@ -102,8 +103,8 @@ function locale_currency_install() {
  */
 function locale_currency_uninstall() {
   db_drop_field('languages', 'currency');
+  db_drop_field('languages', 'energy');
   db_drop_field('languages', 'mass');
   db_drop_field('languages', 'volume');
   db_drop_field('languages', 'temperature');
-  db_drop_field('languages', 'energy');
 }
