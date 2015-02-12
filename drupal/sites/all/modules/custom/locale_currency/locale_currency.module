@@ -34,58 +34,58 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
     $fields = array();
     $fields['currency'] = array(
       '#type' => 'textfield',
-      '#title' => 'Currency Code',
+      '#title' => t('Currency Code',array(),array("context"=>"Locale Currency Module")),
       '#maxlength' => 3,
       '#size' => 12,
       '#default_value' => $default_currency,
-      '#description' => t('<a href="@link">ISO 4217</a> compliant currency identifier. Examples: "GBP", "EUR", and "USD".', array('@link' => 'http://www.oanda.com/site/help/iso_code.shtml')),
+      '#description' => t('<a href="@link">ISO 4217</a> compliant currency identifier. Examples: "GBP", "EUR", and "USD".', array('@link' => 'http://www.oanda.com/site/help/iso_code.shtml'),array("context"=>"Locale Currency Module")),
     );
 
     $mass = array(
-      'ounces' => t('ounces'),
-      'grams' => t('grams')
+      'ounces' => t('ounces',array(),array("context"=>"Locale Currency Module")),
+      'grams' => t('grams',array(),array("context"=>"Locale Currency Module"))
     );
     $fields['mass'] = array(
       '#type' => 'radios',
-      '#title' => t('Mass'),
       '#default_value' => $default_mass,
+      '#title' => t('Mass',array(),array("context"=>"Locale Currency Module")),
       '#options' => $mass,
-      '#description' => t('Unit of Mass (ounces or grams)'),
+      '#description' => t('Unit of Mass (ounces or grams)',array(),array("context"=>"Locale Currency Module")),
     );
 
     $volume = array(
-      'gallons' => t('gallons'),
-      'ounces' => t('liters')
+      'gallons' => t('gallons',array(),array("context"=>"Locale Currency Module")),
+      'ounces' => t('liters',array(),array("context"=>"Locale Currency Module"))
     );
     $fields['volume'] = array(
       '#type' => 'radios',
       '#title' => t('Volume'),
       '#default_value' => $default_volume,
       '#options' => $volume,
-      '#description' => t('Unit of Volume (gallons or liters)'),
+      '#description' => t('Unit of Volume (gallons or liters)',array(),array("context"=>"Locale Currency Module")),
     );
 
     $temperature = array(
-      'F' => t('Fahrenheit'),
-      'C' => t('Celsius')
+      'F' => t('Fahrenheit',array(),array("context"=>"Locale Currency Module")),
+      'C' => t('Celsius',array(),array("context"=>"Locale Currency Module"))
     );
     $fields['temperature'] = array(
       '#type' => 'radios',
-      '#title' => t('temperature'),
       '#default_value' => $default_temperature,
+      '#title' => t('temperature',array(),array("context"=>"Locale Currency Module")),
       '#options' => $temperature,
-      '#description' => t('Unit of temperature (Fahrenheit or Celsius)'),
+      '#description' => t('Unit of temperature (Fahrenheit or Celsius)',array(),array("context"=>"Locale Currency Module")),
     );
 
     $fields['energy'] = array(
       '#type' => 'radios',
-      '#title' => t('energy'),
       '#default_value' => $default_energy,
+      '#title' => t('energy',array(),array("context"=>"Locale Currency Module")),
       '#options' => array(
         'therms' => t('Therms'),
         'kwh' => t('Kilo Watt Hours')
       ),
-      '#description' => t('Unit of energy (Therms or kwh)'),
+      '#description' => t('Unit of energy (Therms or kwh)',array(),array("context"=>"Locale Currency Module")),
     );
 
     $form['#submit'][] = 'locale_currency_edit_submit';
