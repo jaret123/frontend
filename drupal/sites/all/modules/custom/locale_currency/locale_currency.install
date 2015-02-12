@@ -18,36 +18,36 @@ function locale_currency_schema_alter(&$schema) {
     'type' => 'varchar',
     'length' => 3,
     'not null' => TRUE,
-    'default' => '',
+    'default' => 'USD',
   );
   $schema['languages']['fields']['mass'] = array(
     'description' => 'Mass',
     'type' => 'varchar',
     'length' => 10,
     'not null' => TRUE,
-    'default' => '',
+    'default' => 'ounces',
   );
   $schema['languages']['fields']['volume'] = array(
     'description' => 'Volume.',
     'type' => 'varchar',
     'length' => 10,
     'not null' => TRUE,
-    'default' => '',
+    'default' => 'gallons',
   );
   $schema['languages']['fields']['temperature'] = array(
     'description' => 'Temperature',
     'type' => 'varchar',
     'length' => 1,
     'not null' => TRUE,
-    'default' => '',
+    'default' => 'F',
   );
-//  $schema['languages']['fields']['energy'] = array(
-//    'description' => 'Energy',
-//    'type' => 'varchar',
-//    'length' => 10,
-//    'not null' => TRUE,
-//    'default' => 'therms',
-//  );
+  $schema['languages']['fields']['energy'] = array(
+    'description' => 'Energy',
+    'type' => 'varchar',
+    'length' => 10,
+    'not null' => TRUE,
+    'default' => 'therms',
+  );
   // TODO - Update schema info
 }
 
@@ -61,7 +61,7 @@ function locale_currency_install() {
     'type' => 'varchar',
     'length' => 3,
     'not null' => TRUE,
-    'default' => '',
+    'default' => 'USD',
   ));
   db_add_field('languages', 'mass',
     array(

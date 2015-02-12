@@ -24,7 +24,7 @@ function locale_currency_form_alter(&$form, &$form_state, $form_id) {
 
     // Define default value for currency
     if (isset($form['langcode']) && isset($form['langcode']['#value'])) {
-      $default_currency = isset($languages[$form['langcode']['#value']]->currency) ? $languages[$form['langcode']['#value']]->currency : 'USD';
+      $default_currency = empty($languages[$form['langcode']['#value']]->currency) ? $languages[$form['langcode']['#value']]->currency : 'USD';
       $default_mass = isset($languages[$form['langcode']['#value']]->mass) ? $languages[$form['langcode']['#value']]->mass : 'ounces';
       $default_volume = isset($languages[$form['langcode']['#value']]->volume) ? $languages[$form['langcode']['#value']]->volume : 'gallons';
       $default_temperature = isset($languages[$form['langcode']['#value']]->temperature) ? $languages[$form['langcode']['#value']]->temperature : 'F';
