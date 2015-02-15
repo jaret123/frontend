@@ -31,7 +31,7 @@
         <div class=" status-message">
             <i class="fa status-icon"></i>
             {{statusFormat machine.status.status_code machine.machine_status "code"}} -
-            <span class="log__timestamp">{{machine.status.time_stamp}} - </span>
+            <span class="log__timestamp">{{machine.status.time_stamp}} {{olson_timezone_id}} - </span>
             <span class="log__message">{{machine.status.status_message}}</span>
         </div>
         <!--<div class="silence">-->
@@ -51,7 +51,7 @@
     </div>
 
     <div class="details">
-        <h4 class="machine-detail__location"><script type="application/javascript">Drupal.t('Machine Details');</script></h4>
+        <h4 class="machine-detail__location">Machine Details</h4>
         Company: {{machine.company_title}}<br/>
         Location: {{machine.location_title}}<br/>
         Serial Number: {{machine.serial_number}}
@@ -61,21 +61,22 @@
     <div class="machine-detail__cycles">
         <h4>Cycles</h4>
         <h5>Summary</h5>
-        <span class="label">Last Cycle Ended:</span>{{last_cycle_end_time}}<br/>
+        <span class="label">Last Cycle Ended:</span>{{last_cycle_end_time}} {{olson_timezone_id}}<br/>
         <span class="label">Cycles Today:</span>{{machine.usage.cycles}}<br/>
         <span class="label">Total Run Time Today:</span>{{runTimeFormat machine.usage.run_time}}<br/>
 
         <h5>Details</h5>
         {{#each cycles}}
         <div>
+            <!-- @BUG - you can't put Javascript functions inside of a Handelbars Template -->
             <div class="cycle__status"><em>{{classification_name}}</em></div>
-            <div class="cycle__timestamp"><span class="label"><script type="application/javascript">Drupal.t('Start Time');</script>:</span>{{cycle_start_time}}</div>
-            <div class="cycle__timestamp"><span class="label"><script type="application/javascript">Drupal.t('End Time');</script>:</span>{{cycle_end_time}}</div>
+            <div class="cycle__timestamp"><span class="label">Start Time:</span>{{cycle_start_time}} {{olson_timezone_id}}</div>
+            <div class="cycle__timestamp"><span class="label">End Time:</span>{{cycle_end_time}} {{olson_timezone_id}}</div>
             <!-- Gallons are already rounded by the web service -->
-            <div class="cycle__detail"><span class="label"><script type="application/javascript">Drupal.t('Cold Water Used');</script>:</span>{{round cycle_cold_water_volume 1}} <script type="application/javascript">Drupal.t('gallons');</script></div>
-            <div class="cycle__detail"><span class="label"><script type="application/javascript">Drupal.t('Hot Water Used');</script>:</span>{{round cycle_hot_water_volume 1}} <script type="application/javascript">Drupal.t('gallons');</script></div>
-            <div class="cycle__detail"><span class="label"><script type="application/javascript">Drupal.t('Therms');</script>:</span>{{round cycle_therms 2}}</div>
-            <div class="cycle__detail"><span class="label"><script type="application/javascript">Drupal.t('Chemicals');</script>:</span>{{round cycle_chemical_strength 1}} ounces</div>
+            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{round cycle_cold_water_volume 1}} gallons</div>
+            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{round cycle_hot_water_volume 1}} gallons</div>
+            <div class="cycle__detail"><span class="label">Therms:</span>{{round cycle_therms 2}}</div>
+            <div class="cycle__detail"><span class="label">Chemicals:</span>{{round cycle_chemical_strength 1}} ounces</div>
         </div>
         <br/>
         {{/each}}

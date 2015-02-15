@@ -4,9 +4,6 @@
 
 function service($service_name, $machineIds) {
 
-  error_reporting(E_ALL);
-  ini_set('display_errors', 'on');
-
   switch ($service_name) {
     case 'status':
       $result = get_status('current', $machineIds);
@@ -30,22 +27,34 @@ function service($service_name, $machineIds) {
       break;
   }
 
-  //echo $result;
 }
 
-// TODO: Refactor this into two seperate calls
+/**
+ *
+ * Returns the current status of a set of machines.
+ *
+ * @param $record_count
+ * @param $machineIds
+ *
+ * @return array
+ */
 function get_status($record_count, $machineIds) {
 
+  /**
+   * Number of idle records before we consider something to be out of sync
+   */
   $idle_count = 4;
+
+  $timezone = $GLOBALS['user']->timezone;
 
   $status = false;
   if ($record_count == 'current') {
     $status = true;
     // Configure the idle count
     $record_count = $idle_count;
-    $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ", '-06:00')";
+    $query = "call sp_get_status(" . $machineIds . ", " . $record_count . ", '" . $timezone . "')";
   } else {
-    $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ", '-06:00')";
+    $query = "call sp_get_status_history(" . $machineIds . ", " . $record_count . ", '" . $timezone . "')";
   }
 
   $result = db_query($query, array());
@@ -75,27 +84,15 @@ function get_status($record_count, $machineIds) {
   return $a;
 }
 
-function get_logs($service_name, $machineIds) {
-
-  $services = array();
-  $services['status'] = variable_get('ops_service_status');
-  $services['history'] = variable_get('ops_service_history');
-
-  $options = array(
-    'http' => array(
-      'header' => "Content-type: application/json; charset=utf-8",
-      'method' => 'POST',
-      'content' => '[' . $machineIds . ']',
-    ),
-  );
-
-  $request_context = stream_context_create($options);
-  $result = file_get_contents($services[$service_name], false, $request_context);
-
-  return $result;
-
-}
-
+/**
+ * Get all the machines and their current status
+ *
+ * This is used for setting up the Ops board showing all the machines.
+ *
+ * @param $machineIds
+ *
+ * @return array
+ */
 function get_machines($machineIds) {
 
   $query = <<<SQL
@@ -106,22 +103,23 @@ function get_machines($machineIds) {
 	m.machine_name,
 	m.notes,
 	m.location_id,
+
 	m.status as machine_status,
 	coalesce(l.title, 'Unknown Location') as location_title,
 	coalesce(c.title, 'Unknown Company') as company_title
 from
     xeros_machine as m
-left join node as l
-	on m.location_id = l.nid
-	and l.type = 'location'
-left join field_data_field_company as lc
-	on l.nid = lc.entity_id
-	and lc.bundle = 'location'
-left join node as c
-	on lc.field_company_target_id = c.nid
-	and c.type = 'company'
-where
-    m.status not in ('inactive');
+    left join node as l
+        on m.location_id = l.nid
+        and l.type = 'location'
+    left join field_data_field_company as lc
+        on l.nid = lc.entity_id
+        and lc.bundle = 'location'
+    left join node as c
+        on lc.field_company_target_id = c.nid
+        and c.type = 'company'
+    where
+        m.status not in ('inactive');
 
 SQL;
 
@@ -158,6 +156,11 @@ SQL;
   //return json_encode($machines);
 }
 
+/**
+ * This is going to show how many cycles and how many minutes this machine has been used today.
+ *
+ * @return array
+ */
 function get_usage() {
   $query = <<<SQL
     SELECT
@@ -188,6 +191,13 @@ SQL;
   //return json_encode($r);
 }
 
+/**
+ *
+ *
+ * @param $machineIds
+ *
+ * @return array
+ */
 function get_cycles($machineIds) {
 
   $query = <<<SQL
@@ -197,6 +207,7 @@ select
 	x.cycle_hot_water_volume,
     x.cycle_therms,
 	x.cycle_chemical_strength,
+	x.olson_timezone_id,
 	x.reading_timestamp as cycle_end_time, -- Readings are in their local timezone
 	date_add(x.reading_timestamp, INTERVAL -x.cycle_time_run_time minute) as cycle_start_time,
 	x.cycle_time_run_time,

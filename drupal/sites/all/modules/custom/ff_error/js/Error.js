@@ -94,10 +94,10 @@ FF.Error = (function ($) {
         // Track basic JavaScript errors
         window.addEventListener('error', function(e) {
             errorData.module = 'General Error';
-            errorData.errorMessage = e.error.message;
+            errorData.errorMessage = '';
             errorData.url = e.error.url;
             errorData.severity = 1;
-            errorData.errorCode = e.error.errorCode;
+            errorData.errorCode = '';
 
             error(error, e.error.message, e.error.errorCode, false);
 
@@ -107,12 +107,12 @@ FF.Error = (function ($) {
         // Track AJAX errors (jQuery API)
         $(document).ajaxError(function(event, request, settings, thrownError) {
             errorData.module = 'Ajax Error';
-            errorData.errorMessage = request.responseText;
-            errorData.url = settings.url;
+            errorData.errorMessage = '';
+            errorData.url = '';
             errorData.severity = 1;
-            errorData.errorCode = request.status;
+            errorData.errorCode = '';
 
-            error(error, request.responseText, request.status, false);
+            console.log(error, request.responseText, request.status, false);
 
             //alert('ajax error');
         });

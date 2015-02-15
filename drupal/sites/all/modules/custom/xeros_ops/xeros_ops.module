@@ -13,21 +13,21 @@ function xeros_ops_menu() {
     'access arguments' => array('xeros status board'),
     'file' => 'xeros_ops_status_board.inc'
   );
-  $items['admin/config/settings/ops'] = array(
-    'title' => 'Ops Module Settings',
-    'description' => 'Ops Module Settings',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('ops_settings'),
-    'access arguments' => array('admin'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  $items['status-board-request'] = array(
-    'title' => 'Proxy for web services',
+//  $items['admin/config/settings/ops'] = array(
+//    'title' => 'Ops Module Settings',
+//    'description' => 'Ops Module Settings',
+//    'page callback' => 'drupal_get_form',
+//    'page arguments' => array('ops_settings'),
+//    'access arguments' => array('admin'),
+//    'type' => MENU_NORMAL_ITEM,
+//  );
+  $items['ws/status-board'] = array(
+    'title' => 'Status Board Web Service',
     'page callback' => 'service',
     //'page callback' => 'service',
-    'page arguments' => array(1,2),
+    'page arguments' => array(2,3),
     'access arguments' => array('xeros status board'),
-    'file' => 'xeros_ops_service.inc',
+    'file' => 'ws/xeros_ops_service.inc',
   );
 
   return $items;
@@ -57,24 +57,24 @@ function xeros_ops_theme(){
 function xeros_ops_preprocess_html(&$variables) {
   $variables['classes_array'][] = "page-ops";
 }
-
-// Configuration form form
-function ops_settings() {
-  $form = array();
-  $form['ops_service_status'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Status Webservice endpoint'),
-    '#default_value' => variable_get('ops_service_status', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/status'),
-    '#description' => t('The webservice for the machine status'),
-    '#required' => TRUE,
-  );
-  $form['ops_service_history'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Status Webservice endpoint'),
-    '#default_value' => variable_get('ops_service_history', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/history'),
-    '#description' => t('The webservice for the machine status'),
-    '#required' => TRUE,
-  );
-  return system_settings_form($form);
-}
+//
+//// Configuration form form
+//function ops_settings() {
+//  $form = array();
+//  $form['ops_service_status'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Status Webservice endpoint'),
+//    '#default_value' => variable_get('ops_service_status', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/status'),
+//    '#description' => t('The webservice for the machine status'),
+//    '#required' => TRUE,
+//  );
+//  $form['ops_service_history'] = array(
+//    '#type' => 'textfield',
+//    '#title' => t('Status Webservice endpoint'),
+//    '#default_value' => variable_get('ops_service_history', 'http://sbeadycare-qa.xeroscleaning.com/xsvc/rs/history'),
+//    '#description' => t('The webservice for the machine status'),
+//    '#required' => TRUE,
+//  );
+//  return system_settings_form($form);
+//}
 

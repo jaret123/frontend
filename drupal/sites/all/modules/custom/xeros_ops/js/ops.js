@@ -143,8 +143,9 @@ FF.Hud = (function($){
     };
 
     loadStatus = function(callback) {
+        console.log('machineIds: ', machineIds);
         jQuery.ajax({
-            url: 'status-board-request/status/' + machineIds.toString(),
+            url: 'ws/status-board/status/' + machineIds.toString(),
             //data: '[' + machineIds.toString() + ']',
             success: function(d) {
                 status = formatStatus(d);
@@ -156,8 +157,9 @@ FF.Hud = (function($){
     };
 
     loadHistory = function(machineId, callback) {
+        console.log('machineId: ', machineId);
         jQuery.ajax({
-            url: 'status-board-request/history/' + machineId.toString(),
+            url: 'ws/status-board/history/' + machineId.toString(),
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 for (var first in d) break;
@@ -173,7 +175,7 @@ FF.Hud = (function($){
 
     loadCycles = function(machineId, callback) {
         jQuery.ajax({
-            url: 'status-board-request/cycles/' + machineId.toString(),
+            url: 'ws/status-board/cycles/' + machineId.toString(),
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 for (var first in d) break;
@@ -193,7 +195,7 @@ FF.Hud = (function($){
 
     loadData = function(callback) {
         jQuery.ajax({
-           url: 'status-board-request/machines/NULL',
+           url: 'ws/status-board/machines/NULL',
             success: function(d) {
                 data.machineSource = d;
                 callback();
@@ -235,6 +237,8 @@ FF.Hud = (function($){
 
         // Pass the data for the machine that was clicked
         data.details.machine = data.machineSource[machineId];;
+
+        console.log(data.details);
 
         // Load status history
         loadHistory(machineId, function(machineId) {
