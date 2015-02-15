@@ -13,6 +13,7 @@ FF.Error = (function ($) {
     // Public functions/objects
     pub.init = init;
     pub.error = error;
+    pub.errorData = errorData;
 
     var errorService = '/ws/error';
 
@@ -96,9 +97,9 @@ FF.Error = (function ($) {
             errorData.errorMessage = e.error.message;
             errorData.url = e.error.url;
             errorData.severity = 1;
-            errorData.errorCode = e.error.errodCode;
+            errorData.errorCode = e.error.errorCode;
 
-            error(error, msg, status, false);
+            error(error, e.error.message, e.error.errorCode, false);
 
             //alert('window error');
         });
@@ -111,7 +112,7 @@ FF.Error = (function ($) {
             errorData.severity = 1;
             errorData.errorCode = request.status;
 
-            error(error, msg, status, false);
+            error(error, request.responseText, request.status, false);
 
             //alert('ajax error');
         });
