@@ -33,6 +33,9 @@ var app = {
 
     route: function () {
         var self = this;
+
+        var error = false;
+
         var hash = window.location.hash;
         // hashArray =
         //  0 - Machine
@@ -59,7 +62,15 @@ var app = {
             if (hashArray.length > 1) {
                 // Machine
                 // TODO: Might move to User.reportSettings
-                app.machine = hashArray[0];
+                if ( hashArray[0].length > 1) {
+                    app.machine = hashArray[0];
+                } else {
+                    // Throw error, now machines defined
+                    error = true;
+                    jQuery(app.err).addClass("active");
+                    jQuery(app.err).html("<div>This location does not have any active machines.</div>");
+                    return;
+                }
                 // Metric
                 if ( hashArray[1].length > 1 ) {
                     FF.User.setReportMetric(hashArray[1]);
@@ -78,7 +89,9 @@ var app = {
                 }
             }
         }
-        self.routeCallback();
+        if ( !error ) {
+            self.routeCallback();
+        }
     },
     routeCallback: function() {
 
@@ -126,7 +139,7 @@ var app = {
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
                 jQuery(app.err).addClass("active");
-                jQuery(app.err).html("Oops, something happened with the data service.  Please contact your system administrator.");
+                jQuery(app.err).html("<div>Oops, something happened with the data service.  Please contact your system administrator.</div>");
             }
         })
     },
@@ -146,7 +159,6 @@ var app = {
         }
     },
     initialize: function () {
-        var self = this;
         var self = this;
         self.reportName = window.reportName;
         // Sometimes the summary data comes back empty when we don't have readings yet.

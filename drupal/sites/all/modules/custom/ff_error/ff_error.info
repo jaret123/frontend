@@ -1,0 +1,8 @@
+name = Javascript Error Reporting Module
+description = This module captures errors in javascript and send them to GA and to Drupal Watchdog Logs.
+package = FF
+core = 7.x
+
+files[] = ws/error.inc
+
+scripts[] = js/Error.js

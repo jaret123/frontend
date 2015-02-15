@@ -1,0 +1,21 @@
+<?php
+
+/**
+ *
+ * Implements hook_menu()
+ *
+ * @return array
+ */
+function ff_error_menu() {
+  $items = array();
+
+  $items['ws/error'] = array(
+    'title' => 'Error Reporting Webservice',
+    'page callback' => 'ws_error',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+    'file' => 'ws/error.inc'
+  );
+  return $items;
+}
+

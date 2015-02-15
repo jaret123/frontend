@@ -179,30 +179,31 @@ var chart = {
                 .attr("d", lineA)
                 .attr("stroke", "#0086bd")
                 .attr("fill", "none")
+                .style({
+                    'stroke-width' : '3px',
+                    'shape-rendering' : 'smoothEdges'
+                })
                 .transition()
                 .delay(500)
                 .duration(1500)
                 .attr("d", lineB)
                 .attr("fill", "none")
+;
+
+            // append the line itself
+            // Draw the xeros line, starting at LineA and animating to LineB
+
+            svg.append("path")
+                .datum(_d.to)
+                .attr("class", "line-a")
+                .attr("d", lineA)
+                .attr("stroke", "#fff")
+                .attr("fill", "none")
                 .style({
                     'stroke-width' : '3px',
                     'shape-rendering' : 'smoothEdges'
                 });
-
-        // append the line itself
-        // Draw the xeros line, starting at LineA and animating to LineB
-
-        svg.append("path")
-            .datum(_d.to)
-            .attr("class", "line-a")
-            .attr("d", lineA)
-            .attr("stroke", "#fff")
-            .attr("fill", "none")
-            .style({
-                'stroke-width' : '3px',
-                'shape-rendering' : 'smoothEdges'
-            });
-        ;
+            ;
 
 
 
@@ -213,7 +214,7 @@ var chart = {
                 svg.selectAll("dot")
                     .data(_d.from)
                     .enter().append("circle")
-                    .attr("fill", "#0086bd")
+                    .attr("fill", "white")
                     .attr("r", 3.5)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
@@ -244,7 +245,7 @@ var chart = {
                 svg.selectAll("dot")
                     .data(_d.from)
                     .enter().append("circle")
-                    .attr("fill", "white")
+                    .attr("fill", "#0086bd")
                     .attr("r", 3.5)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
