@@ -45,7 +45,7 @@ FF.Hud = (function($){
     var refreshInterval = 5 * 60; // 5 minutes
 
 
-    formatData = function() {
+    function formatData() {
         // Grab the global data object and create a local copy so we can
         // refactor easily later;
 
@@ -118,7 +118,7 @@ FF.Hud = (function($){
         console.log (data.machine);
     };
 
-    formatStatus = function(data) {
+    function formatStatus(data) {
         var _status = {};
         for (i=0; i < data.length; i++) {
             var _machineStatus = data[i];
@@ -131,32 +131,33 @@ FF.Hud = (function($){
         return _status;
     };
 
-    formatHistory = function(data) {
+    function formatHistory(data) {
         var _status = [];
         if ( typeof data !== "undefined" ) {
             _status = _.pairs(data);
             // Invert the order
             _status = _.sortBy(_status, function(obj) { return -(obj[0]) });
         }
+
         console.log('history', _status);
         return _status;
     };
 
-    loadStatus = function(callback) {
-        console.log('machineIds: ', machineIds);
-        jQuery.ajax({
-            url: 'ws/status-board/status/' + machineIds.toString(),
-            //data: '[' + machineIds.toString() + ']',
-            success: function(d) {
-                status = formatStatus(d);
-            },
-            dataType: 'json',
-            type: 'GET',
-            contentType: 'application/json'
-        });
-    };
+    //loadStatus = function(callback) {
+    //    console.log('machineIds: ', machineIds);
+    //    jQuery.ajax({
+    //        url: 'ws/status-board/status/' + machineIds.toString(),
+    //        //data: '[' + machineIds.toString() + ']',
+    //        success: function(d) {
+    //            status = formatStatus(d);
+    //        },
+    //        dataType: 'json',
+    //        type: 'GET',
+    //        contentType: 'application/json'
+    //    });
+    //};
 
-    loadHistory = function(machineId, callback) {
+    function loadHistory(machineId, callback) {
         console.log('machineId: ', machineId);
         jQuery.ajax({
             url: 'ws/status-board/history/' + machineId.toString(),
@@ -164,7 +165,8 @@ FF.Hud = (function($){
             success: function(d) {
                 for (var first in d) break;
                 //data.details.history = d[first];
-                data.details.history= formatHistory(d[first]);
+                data.details.history= formatHistory(d[first], d.user_timezone);
+                data.details.user_timezone = d.user_timezone;
                 callback(machineId);
             },
             dataType: 'json',
@@ -173,17 +175,19 @@ FF.Hud = (function($){
         });
     };
 
-    loadCycles = function(machineId, callback) {
+    function loadCycles(machineId, callback) {
         jQuery.ajax({
             url: 'ws/status-board/cycles/' + machineId.toString(),
             //data: '[' + machineId.toString() + ']',
             success: function(d) {
                 for (var first in d) break;
                 data.details.cycles = d[first];
-                if (d.length > 0) {
+                if ($(d).length > 0) {
                     data.details.last_cycle_end_time = d[first][d[first].length - 1].cycle_end_time;
+                    data.details.last_cycle_olson_timezone_id = d[first][d[first].length - 1].olson_timezone_id;
                 } else {
-                    data.details.last_cycle_end_time = '0';
+                    data.details.last_cycle_end_time = 'Not Found';
+                    data.details.last_cycle_olson_timezone_id = '';
                 }
                 callback();
             },
@@ -193,7 +197,7 @@ FF.Hud = (function($){
         });
     }
 
-    loadData = function(callback) {
+    function loadData(callback) {
         jQuery.ajax({
            url: 'ws/status-board/machines/NULL',
             success: function(d) {
@@ -207,7 +211,7 @@ FF.Hud = (function($){
     };
 
 
-    loadMachineTemplate = function(callback) {
+    function loadMachineTemplate(callback) {
         $.ajax({
             //url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine.tpl.html',
             url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine-block.tpl.html',
@@ -218,7 +222,7 @@ FF.Hud = (function($){
             dataType: 'html'
         });
     }
-    loadMachineDetailTemplate = function() {
+    function loadMachineDetailTemplate() {
         $.ajax({
             url: Drupal.settings.xeros_ops.modulePath + '/tpl/machine-details.tpl.html',
             success: function(source) {
@@ -228,7 +232,7 @@ FF.Hud = (function($){
         })
     };
 
-    renderDetail = function(machineId) {
+    function renderDetail(machineId) {
 
         var template = Handlebars.compile(tpl.machineDetail);
 
@@ -258,7 +262,7 @@ FF.Hud = (function($){
 
     };
 
-    renderStatus = function() {
+    function renderStatus() {
         console.log("Ready to render");
 
         // Compile Template
@@ -283,14 +287,14 @@ FF.Hud = (function($){
 
     };
 
-    showMachine = function(machineId) {
+    function showMachine(machineId) {
 
         renderDetail(machineId);
 
         $('.machine-detail').addClass('show');
     };
 
-    bindDetailEvents = function() {
+    function bindDetailEvents() {
         // Close machine details
         $('.machine-detail__close').on('click', function() {
             $(this).closest('.machine-detail').removeClass('show');
@@ -304,7 +308,7 @@ FF.Hud = (function($){
     };
 
     // Only bind once per page view
-    bindPageEvents = function() {
+    function bindPageEvents() {
         // Toggle key display
         $('.page-ops__key').unbind().on('click', function() {
             $(this).toggleClass('show');
@@ -368,7 +372,7 @@ FF.Hud = (function($){
     }
 
     // Bind events on the machines
-    bindEvents = function() {
+    function bindEvents() {
 
         els.alerts =      $('.machine');
 
@@ -410,9 +414,9 @@ FF.Hud = (function($){
     function refreshDisplay() {
 
         //  format an ISO date using Moment.js
-//  http://momentjs.com/
-//  moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
-//  usage: {{dateFormat creation_date format="MMMM YYYY"}}
+        //  http://momentjs.com/
+        //  moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
+        //  usage: {{dateFormat creation_date format="MMMM YYYY"}}
 
 
         loadData(function() {

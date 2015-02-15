@@ -81,6 +81,8 @@ function get_status($record_count, $machineIds) {
     }
   }
 
+  $a['user_timezone'] = $timezone;
+
   return $a;
 }
 
@@ -103,7 +105,6 @@ function get_machines($machineIds) {
 	m.machine_name,
 	m.notes,
 	m.location_id,
-
 	m.status as machine_status,
 	coalesce(l.title, 'Unknown Location') as location_title,
 	coalesce(c.title, 'Unknown Company') as company_title

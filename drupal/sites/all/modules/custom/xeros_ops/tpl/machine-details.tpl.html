@@ -19,11 +19,8 @@
         <h4>Status</h4>
         <div class=" status-message">
             <i class="fa status-icon"></i>
-            <script type="application/javascript">Drupal.t('This machine is currently not actively monitored.');</script>
+            This machine is currently not actively monitored.
         </div>
-        <!--<div class="silence">-->
-        <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
-        <!--</div>-->
     </div>
 
     <div class="status status-monitored">
@@ -31,19 +28,16 @@
         <div class=" status-message">
             <i class="fa status-icon"></i>
             {{statusFormat machine.status.status_code machine.machine_status "code"}} -
-            <span class="log__timestamp">{{machine.status.time_stamp}} {{olson_timezone_id}} - </span>
+            <span class="log__timestamp">{{machine.status.time_stamp}} {{user_timezone}} - </span>
             <span class="log__message">{{machine.status.status_message}}</span>
         </div>
-        <!--<div class="silence">-->
-            <!--<i class="fa fa-pause icon-silence"></i>Pause Alarm-->
-        <!--</div>-->
     </div>
 
-    <h4 class="log__title"><script type="application/javascript">Drupal.t('View Status Log');</script> <i class="fa fa-chevron-down log__open-close"></i></h4>
+    <h4 class="log__title">View Status Log<i class="fa fa-chevron-down log__open-close"></i></h4>
     <div class="log">
         {{#each history}}
         <div class="log__row">
-            <div class="log__timestamp">{{1.time_stamp}} - {{1.olson_timestamp_id}}</div>
+            <div class="log__timestamp">{{1.time_stamp}} {{../user_timezone}} - </div>
             <div class="log__status">{{statusFormat 1.status_code "code"}} - </div>
             <div class="log__message">{{1.status_message}}</div>
         </div>
@@ -61,7 +55,7 @@
     <div class="machine-detail__cycles">
         <h4>Cycles</h4>
         <h5>Summary</h5>
-        <span class="label">Last Cycle Ended:</span>{{last_cycle_end_time}} {{olson_timezone_id}}<br/>
+        <span class="label">Last Cycle Ended:</span>{{last_cycle_end_time}} {{last_cycle_olson_timezone_id}}<br/>
         <span class="label">Cycles Today:</span>{{machine.usage.cycles}}<br/>
         <span class="label">Total Run Time Today:</span>{{runTimeFormat machine.usage.run_time}}<br/>
 
