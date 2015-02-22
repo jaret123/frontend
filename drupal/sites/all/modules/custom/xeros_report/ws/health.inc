@@ -64,7 +64,7 @@ function ws_health($location_ids = '', $from_date, $to_date ) {
 
   if (count($machine_ids) == 0) {
     print json_encode(array('error' => 'This location has no active machines.  See location configuration.'));
-    drupal_set_message(t('This location has no active machines.  See location configuration.'));
+    drupal_set_error(t('This location has no active machines.  See location configuration.'));
     return;
   }
 

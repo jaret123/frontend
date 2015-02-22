@@ -12,7 +12,7 @@ FF.Error = (function ($) {
 
     // Public functions/objects
     pub.init = init;
-    pub.error = error;
+    pub.setError = setError;
     pub.errorData = errorData;
 
     var errorService = '/ws/error';
@@ -33,24 +33,28 @@ FF.Error = (function ($) {
      *
      * @param e
      */
-    function error(e, message, status, display) {
+    function setError(e, message, status, display) {
 
         // By default, display errors
         if (typeof(display)==='undefined') display = true;
 
-        $.ajax({
-            url: errorService,
-            data: errorData,
-            dataType: 'json',
-            success: function () {
-                if (display) {
-                    displayErrors();
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
-            }
-        })
+        if (display) {
+            displayErrors();
+        }
+
+        //$.ajax({
+        //    url: errorService,
+        //    data: errorData,
+        //    dataType: 'json',
+        //    success: function () {
+        //        if (display) {
+        //            displayErrors();
+        //        }
+        //    },
+        //    error: function (jqXHR, textStatus, errorThrown) {
+        //        console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
+        //    }
+        //})
     }
 
     /**
@@ -82,7 +86,7 @@ FF.Error = (function ($) {
             errorData.severity = 1;
             errorData.errorCode = error;
 
-            error(error, msg, status, false);
+            setError(error, msg, status, false);
 
             var suppressErrorAlert = true;
             // If you return true, then error alerts (like in older versions of
@@ -99,7 +103,7 @@ FF.Error = (function ($) {
             errorData.severity = 1;
             errorData.errorCode = '';
 
-            error(error, e.error.message, e.error.errorCode, false);
+            setError('Error', e.error.message, e.error.errorCode, false);
 
             //alert('window error');
         });
@@ -112,7 +116,7 @@ FF.Error = (function ($) {
             errorData.severity = 1;
             errorData.errorCode = '';
 
-            console.log(error, request.responseText, request.status, false);
+            console.log('Error', request.responseText, request.status, false);
 
             //alert('ajax error');
         });

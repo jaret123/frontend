@@ -14,7 +14,17 @@ FF.Location = (function ($) {
     // Public functions/objects
     pub.init = init;
 
+    /**
+     * Public properties
+     * @type {{}}
+     */
     pub.location = {};
+
+    pub.machines = [];
+
+    /**
+     * Public methods
+     */
     pub.getLocation = getLocation;
     pub.machineTypes = machineTypes;
     pub.xeros = xeros;
@@ -25,9 +35,7 @@ FF.Location = (function ($) {
             success: function(d) {
                 pub.location = d;
                 console.log('pub.location: ', pub.location.nid);
-                if ( typeof(callback) == 'function') {
-                    callback();
-                }
+                getMachineIds(locationId, callback);
             },
             dataType: 'json',
             type: 'GET',
@@ -42,7 +50,25 @@ FF.Location = (function ($) {
         } else {
             return 'non-xeros';
         }
+    }
 
+    function getMachineIds(locationId, callback) {
+        jQuery.ajax({
+            url: '/ws/location/' + locationId + '/machines',
+            success: function(d) {
+                pub.machines = d;
+                console.log('pub.location.machines: ', pub.machines);
+                if ( pub.machines.length == 0 ) {
+                    FF.Error.setError('Location.getMachineIds', 'This location has not active machines.', null, true)
+                }
+                if ( typeof(callback) == 'function') {
+                    callback();
+                }
+            },
+            dataType: 'json',
+            type: 'GET',
+            contentType: 'application/json'
+        });
     }
 
     function xeros() {

@@ -15,13 +15,13 @@ FF.Controls.LocationPicker = (function ($) {
     pub.init = init;
 
     function create() {
-        // Display the Admin menu if it exists
-        //els.AdminMenu.find('.location-picker__button').on('click')
+        // Open and close button of the location menu
         $(".location-picker .location-picker__button").click(function(e) {
             $(".location-picker").toggleClass("open");
             $(".location-picker__button").html("Menu");
             $(".open .location-picker__button").html("Close");
         });
+
         app.options_tpl = Handlebars.compile($("#options-tpl").html());
     }
 

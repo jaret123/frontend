@@ -8,20 +8,27 @@ var FF = FF || {};
  */
 FF.User = (function ($) {
 
-    var pub = {},
-        els = {};
+    var pub = {};
+
+    var els = {};
 
     // Public functions/objects
     pub.init = init;
+
+    /**
+     * Public setters
+     * @type {setReportCompany}
+     */
     pub.setReportCompany = setReportCompany;
     pub.setReportLocation = setReportLocation;
     pub.setReportDateRange = setReportDateRange;
     pub.setReportMetric = setReportMetric;
 
-//    self.fromDate = self.sessionDateRange[0];
-//    self.toDate = self.sessionDateRange[1];
 
-    // These settings are set by the user and saved in cookies
+    /**
+     * These are user settings set by the user
+     * @type {{dates: Array, timeSelect: string, company: {id: number, title: string}, location: {id: number, title: string}, metric: string}}
+     */
     pub.reportSettings = {
         dates: [], // From date and to date
         timeSelect : 'monthToDate', // Default
@@ -36,23 +43,35 @@ FF.User = (function ($) {
         metric : ''
     };
 
-    // These settings are set in Drupal
+    /**
+     *
+     * @type {{id: number, title: string}}
+     */
     pub.location = {
         id: 0,
         title: 'No location assigned'
     };
 
+    /**
+     * Array of machines to look at.  Most reports are only one machine at a time
+     * @type {Array}
+     */
+    pub.machines = [];
+
+    /**
+     *
+     * @type {{id: number, title: string}}
+     */
     pub.company = {
         id: 0,
         title: 'No company assigned'
     };
 
-    // Create an event and dispatch it any time we successfully run a setter.
-    // Create the event.
-    var event = document.createEvent('Event');
-
-    // Define that the event name.
-    event.initEvent('CustomEventUserChange', true, true);
+    /**
+     * List of properties changed
+     * @type [[]]
+     */
+    pub.changed = [];
 
     function setReportCompany(companyId, callback) {
         if ( typeof companyId == "number" && companyId !== 0 ) {
@@ -62,6 +81,9 @@ FF.User = (function ($) {
                 pub.reportSettings.company.title = context.companies[companyId].name;
                 //debugger;
                 setCookie('sessionCompany', pub.reportSettings.company.id);
+
+                pub.changed = [ 'company' ];
+
                 updateFinish(callback);
             }
         } else {
@@ -74,6 +96,9 @@ FF.User = (function ($) {
                 pub.reportSettings.location.id = locationId;
                 pub.reportSettings.location.title = context.companies[pub.reportSettings.company.id].location[locationId].name;
                 setCookie('sessionLocation',pub.reportSettings.location.id);
+
+                pub.changed = [ 'location' ] ;
+
                 updateFinish(callback);
             }
         } else {
@@ -112,6 +137,9 @@ FF.User = (function ($) {
             // Save to cookies
             setCookie('sessionTimeSelect', pub.reportSettings.timeSelect);
             setCookie('sessionDates', pub.reportSettings.dates.toString());
+
+            pub.changed = [ 'dates'] ;
+
             updateFinish(callback);
         } else {
             console.log('Invalid dates passed to report date range', dateRange);
@@ -121,6 +149,9 @@ FF.User = (function ($) {
         if ( typeof metric == "string" ) {
             pub.reportSettings.metric = metric;
             setCookie('sessionMetric', pub.reportSettings.metric);
+
+            pub.changed = ['metric'] ;
+
             updateFinish(callback);
         } else {
             console.log('Invalid metric passed to metric.')
@@ -174,6 +205,13 @@ FF.User = (function ($) {
 
     function updateFinish(callback) {
         //saveCookie();
+        // Create an event and dispatch it any time we successfully run a setter.
+        // Create the event.
+        var event = document.createEvent('Event');
+
+        // Define the event name.
+        event.initEvent('CustomEventUserChange', true, true);
+
         console.log('Custom event dispatched');
         document.dispatchEvent(event);
         if ( typeof callback == "function") {

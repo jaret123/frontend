@@ -27,8 +27,14 @@ FF.Display = (function ($) {
     function init() {
         document.addEventListener('CustomEventUserChange', function () {
             console.log('Heard event');
-            updateDateRange();
-            updateHeaderDisplay();
+
+            if ( _.contains(FF.User.changed, 'location') ) {
+                updateHeaderDisplay();
+            }
+
+            if  (_.contains(FF.User.changed, 'dates') ) {
+                updateDateRange();
+            }
         })
     }
 

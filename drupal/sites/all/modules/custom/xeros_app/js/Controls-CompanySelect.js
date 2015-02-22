@@ -18,7 +18,7 @@ FF.Controls.LocationSelect = (function ($) {
     function create() {
         FF.Controls.Dropdown.create("#location-select", function (event) {
             var locationId = parseInt($(event.target).find("span.value").html(), 10);
-            app.dataRefresh = 1; // TODO: Should we let something else manage this?
+            app.dataRefresh = 1;
             FF.User.setReportLocation(locationId, self.setHeaderDisplay);
         });
     };
@@ -33,6 +33,7 @@ FF.Controls.LocationSelect = (function ($) {
             $("#location-select").val(selected);
         }
         // Remove the location select and rebuild it
+        console.log('Rebuild location');
         $("#location-select__dl").remove();
         create();
     };

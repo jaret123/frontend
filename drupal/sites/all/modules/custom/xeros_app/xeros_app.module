@@ -8,10 +8,17 @@ require_once(drupal_get_path('module', 'xeros_app') . '/user_profile_form.inc');
  * @return mixed
  */
 function xeros_app_menu() {
-  $items['ws/location'] = array(
+  $items['ws/location/%/machines'] = array(
+    'title' => 'Get machines by location',
+    'page callback' => 'ws_location_machines',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'file' => 'ws_location.inc'
+  );
+  $items['ws/location/%'] = array(
     'title' => 'Location Web Service',
     'page callback' => 'ws_location',
-    'page arguments' => array(),
+    'page arguments' => array(2),
     'access arguments' => array('access content'),
     'file' => 'ws_location.inc'
   );

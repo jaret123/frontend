@@ -12,8 +12,6 @@ var colors = {
 
 
 var view = {
-
-
     barColor : {
        xeros : {
            actual : colors.blueOne,
@@ -28,7 +26,6 @@ var view = {
     // Each report view has a slightly different data structure
     parseData : function(draw) {
         var self = this;
-        //app.reportData = app.data.data[app.machine].metrics[app.metric];
 
         app.reportData = app.data;
 
@@ -43,7 +40,6 @@ var view = {
                 var machineType = app.reportData[i].info.machine_type;
 
                 app.reportData[i].water_only = parseInt(app.reportData[i].info.water_only, 10);
-
 
                 /**
                  * This is the logic to pick the default comparison and to list what comparisons are available.
@@ -188,7 +184,6 @@ var view = {
             denominator = parseInt(actual, 10);
         }
 
-
         // BUG - Divide by zero throws NaN
 
         // Divide by 0
@@ -317,36 +312,16 @@ var view = {
                     chart.drawBar();
                 }
             }
-
-
         }
-
-
-        jQuery(".metric").each(function() {
-//            var d =  jQuery(this).find(".delta").attr("data");
-//            // Hide charts with errors
-//            if (typeof d == "undefined" || d == "" )
-//            {
-//                jQuery(this).find(".chart, .delta").hide();
-//                jQuery(this).find(".metric__message").html("No Readings<br/> Found");
-//                jQuery(this).removeClass("link");
-//            } else { // Perform some other decorations
-//                var d = parseInt(jQuery(this).find(".delta").attr("data"));
-//                if ( d < 0 ) {
-//                    jQuery(this).find(".arrow").addClass("up");
-//                } else {
-//                    jQuery(this).find(".arrow").addClass("down")
-//                }
-//            }
-
-        });
 
     },
     initialize : function() {
         //createDropDown();
-        app.initialize();
-        FF.Controls.TimeSelect.create();
-        view.updateLegend();
+        FF.User.init(function() {
+            app.initialize();
+            FF.Controls.TimeSelect.create();
+            view.updateLegend();
+        });
 
     },
     bindEvents : function() {
@@ -356,7 +331,6 @@ var view = {
          */
         jQuery( ".flipper-openbtn" ).click(function() {
             jQuery(this).parents('.flip-container').addClass("hover");
-          //  console.log(FF.Utils.msieVersion());
             if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
                 //console.log("IE");
                 var flipper = jQuery(this).parents('.flipper');
@@ -371,26 +345,14 @@ var view = {
         jQuery( ".flipper-closebtn" ).click(function() {
             jQuery(this).parents('.flip-container').removeClass("hover");
             if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
-        var flipper = jQuery(this).parents('.flipper');
-        var back = flipper.find('.back');
-        var front = flipper.find('.front');
-        front.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
-        back.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
-    }
+                var flipper = jQuery(this).parents('.flipper');
+                var back = flipper.find('.back');
+                var front = flipper.find('.front');
+                front.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
+                back.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
+            }
         });
 
-//        jQuery('.water-only-0 .link').unbind().click(function (event) {
-//            event.preventDefault();
-//            var classification,
-//                machine_id;
-//
-//            classification = jQuery(this).attr("classification");
-//            machine_id = jQuery(this).attr("machine");
-//            // TODO: Move to user settings
-//            FF.User.setReportMetric(classification);
-//
-//            document.location.href = 'consumption-details#' + machine_id + "+" + FF.User.reportSettings.metric + "+" + FF.User.reportSettings.timeSelect + ',' + FF.User.reportSettings.dates.toString();
-//        });
     }
 }
 

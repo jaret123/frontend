@@ -36,6 +36,8 @@ var app = {
 
         var error = false;
 
+        jQuery(app.err).removeClass("active");
+
         var hash = window.location.hash;
         // hashArray =
         //  0 - Machine
@@ -49,20 +51,18 @@ var app = {
 
         // If no hash
         if (!hash) {
-
             self.setApiUrl();
-
         // If there is a hash
         } else {
             /**
              *
-             * Hash is #<machineid>+<metricname>+<custom,fromdate,todate||timeselect>+<locationId>
+             * Hash is #<machineid> + <metricname> + <custom,fromdate,todate||timeselect> + <locationId>
              */
             hashArray = hash.substr(1).split("+");
             if (hashArray.length > 1) {
                 // Machine
                 // TODO: Might move to User.reportSettings
-                if ( hashArray[0].length > 1) {
+                if ( hashArray[0].length > 0) {
                     app.machine = hashArray[0];
                 } else {
                     // Throw error, now machines defined
@@ -72,16 +72,16 @@ var app = {
                     return;
                 }
                 // Metric
-                if ( hashArray[1].length > 1 ) {
+                if ( hashArray[1].length > 0 ) {
                     FF.User.setReportMetric(hashArray[1]);
                 }
                 // Date Range
                 // custom,fromdate,todate||timeselect
-                if ( hashArray[2].length > 1 ) {
+                if ( hashArray[2].length > 0 ) {
                     FF.User.setReportDateRange(hashArray[2]);
                 }
                 // Location Id
-                if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 1 )  {
+                if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 0 )  {
                     var locationId = hashArray[3];
                     FF.User.setReportLocation(parseInt(locationId, 10));
                     FF.Location.getLocation(hashArray[3], self.routeCallback);
@@ -96,6 +96,17 @@ var app = {
     routeCallback: function() {
 
         // if dataRefresh equals 1, then go to the web service again and get new data
+
+        // Test the location
+        FF.Location.getLocation(FF.User.reportSettings.location.id);
+
+        if ( FF.Location.machines.length == 0 ) {
+            jQuery(app.err).addClass("active");
+            jQuery(app.err).html("This location has no active machines.");
+            return;
+        }
+
+
         if ( FF.User.reportSettings.location.id !== '' && FF.User.reportSettings.company.id !== '' ) {
             if ( app.dataRefresh == 1 ) {
                 app.setApiUrl();
@@ -166,12 +177,15 @@ var app = {
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 
         document.addEventListener('CustomEventUserChange', function () {
-            self.updateHash();
+            // Don't change if the company changes.  We want to wait for the location to change
+            if ( !_.contains(FF.User.changed, 'company')) {
+                self.updateHash();
+            }
         });
 
-        FF.User.setReportLocation(FF.User.location.id);
+        FF.User.setReportLocation(FF.User.reportSettings.location.id);
         // Build the apiUrl
-        FF.Location.getLocation(FF.User.location.id, function() {
+        FF.Location.getLocation(FF.User.reportSettings.location.id, function() {
             self.registerEvents();
             // Do the things that get values from the template (window)
             self.apiUrlBase = window.apiUrlBase;
