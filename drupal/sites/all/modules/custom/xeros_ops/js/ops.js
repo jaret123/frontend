@@ -5,6 +5,12 @@
 var FF = FF || {};
 
 /**
+ * Variable: labels
+ *  Contains the labels for this page, so that they can be translated
+ */
+
+
+/**
  * Class: FF.Hud
  *   Encapsulates functionality related to the header
  */
@@ -44,6 +50,33 @@ FF.Hud = (function($){
 
     var refreshInterval = 5 * 60; // 5 minutes
 
+    var labels = {
+        start_time: translate("Start Time"),
+        end_time: translate("End Time"),
+        status: translate("Status"),
+        not_monitored: translate("This machine is currently not actively monitored"),
+        status_log: translate("View Status Log"),
+        machine_details: translate("Machine Details"),
+        company: translate("Company"),
+        location: translate("Location"),
+        serial: translate("Serial Number"),
+        cycles: translate("Cycles"),
+        summary: translate("Summary"),
+        last_cycle: translate("Last Cycle Ended"),
+        cycles_today: translate("Cycles Today"),
+        total_run_time: translate("Total Run Time Today"),
+        cold_water: translate("Cold Water Used"),
+        hot_water: translate("Hot Water Used"),
+        therms: translate("Therms"),
+        chemicals: translate("Chemicals"),
+        gallons: translate("gallons"),
+        ounces: translate("ounces")
+
+    };
+
+    function translate(label) {
+        return Drupal.t(label, {}, {context: "Status Board Detail"});
+    }
 
     function formatData() {
         // Grab the global data object and create a local copy so we can
@@ -76,7 +109,7 @@ FF.Hud = (function($){
                 if ( typeof data.machine.companies[m.company_title].locations[m.location_title] == 'undefined') {
                     data.machine.companies[m.company_title].locations[m.location_title] = {
                         'machines' : {},
-                        'location_title' : m.location_title,
+                        'location_title' : m.location_title
                     };
                 }
 
@@ -240,7 +273,7 @@ FF.Hud = (function($){
         data.details = {};
 
         // Pass the data for the machine that was clicked
-        data.details.machine = data.machineSource[machineId];;
+        data.details.machine = data.machineSource[machineId];
 
         console.log(data.details);
 
@@ -250,6 +283,9 @@ FF.Hud = (function($){
             loadCycles(machineId, function(d) {
 
                 console.log(data.details);
+
+                data.details.labels = labels;
+
                 var html = template(data.details);
 
                 jQuery('.machine-detail').html(html);
@@ -268,6 +304,7 @@ FF.Hud = (function($){
         // Compile Template
         var template = Handlebars.compile(tpl.machine);
 
+        data.machine.labels = labels;
         // Render Template
         var html = template(data.machine);
         $('.machine-status').html(html);

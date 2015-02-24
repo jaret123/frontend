@@ -27,13 +27,27 @@ define('INDUSTRY_HOT_WATER_RATIO', .4);
  **/
 
 
-function convert_non_xeros_therms($xeros_cold_water, $location) {
+function convert_non_xeros_therms($xeros_cold_water, $location, $unit_volume) {
 
   // Hot water used by a Non-Xeros machine = cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio
-  $non_xeros_hot_water = $xeros_cold_water * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
+    $non_xeros_hot_water = $xeros_cold_water * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
 
-  // Non Xeros Therms = (Hot water used * 8.34 * (temp_rise_season / heating_rise_efficiency)) / 100,000
-  $non_xeros_therms = ($non_xeros_hot_water * 8.34 * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion'];
+    $convert_to_therms = 1;
+    $pounds_per_unit_volume = 8.34;
+
+    switch ($unit_volume) {
+        case 'gallons':
+            break;
+        case 'liters' :
+            $pounds_per_unit_volume = 2.2;
+            $convert_to_therms = 29.3001;
+            break;
+        default:
+            //TODO: throw error
+            break;
+    }
+    // Non Xeros Therms = (Hot water used * pounds per unit volume * (temp_rise_season / heating_rise_efficiency)) / 100,000
+    $non_xeros_therms = (($non_xeros_hot_water * $pounds_per_unit_volume * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion']) * $convert_to_therms;
 
   return $non_xeros_therms;
 

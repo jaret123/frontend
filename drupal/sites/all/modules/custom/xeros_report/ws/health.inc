@@ -251,7 +251,7 @@ SQL;
     switch($data->info->machine_type) {
       case 'xeros':
         $data->model_non_xeros_simple->cold_water = convert_non_xeros_water($data->actual->cold_water);
-        $data->model_non_xeros_simple->therms = convert_non_xeros_therms($data->actual->cold_water, $location_profiles[$location_id]);
+        $data->model_non_xeros_simple->therms = convert_non_xeros_therms($data->actual->cold_water, $location_profiles[$location_id], $filters[':unit_volume']);
         $data->model_non_xeros_simple->active = true;
 
         $data->model_xeros_simple->notes = 'Because this machine is a xeros machine the xeros_simple model is not available.';

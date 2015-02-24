@@ -51,6 +51,10 @@
  * @see example.sites.php
  * @see conf_path()
  */
+$conf['locale_custom_strings_fr'][''] = array(
+    'Start Time'       =>      'L\'heure de Début'
+);
+
 
 /**
  * Database settings:

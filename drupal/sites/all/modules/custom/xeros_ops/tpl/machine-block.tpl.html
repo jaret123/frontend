@@ -19,14 +19,14 @@
             <div class="machine-list__wrapper">
             {{#each machines}}
                 <div class="machine {{machine_status}}" data-machine-status="{{machine_status}}" data-machine-id="{{@key}}">
-                    <div class="machine__wrapper {{statusFormat status.status_code machine_status "color"}} {{manufacturer}} {{modelFilter}}" data-status="{{status.status_code}}">
+                    <div class="machine__wrapper {{statusFormat status.status_code machine_status 'color'}} {{manufacturer}} {{modelFilter}}" data-status="{{status.status_code}}">
                         <div class="machine__icons">
                             <i class="icon-Washer"></i>
                             <i class="fa status-icon"></i>
                         </div>
                         <div class="machine__data">
-                            <div>{{usage.cycles}} <span class="annotation">Cycles today</span></div>
-                            <div>{{runTimeFormat usage.run_time}} <span class="annotation">Run time today</span></div>
+                            <div>{{usage.cycles}} <span class="annotation">{{labels.cycles_today}}</span></div>
+                            <div>{{runTimeFormat usage.run_time}} <span class="annotation">{{labels.total_run_time}}</span></div>
                         </div>
                         <div class="machine__label">
                             {{machine_name}}
