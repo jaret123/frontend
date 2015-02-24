@@ -6,10 +6,10 @@ CREATE FUNCTION udf_convert_volume( _volume float(10,2), _unit_from varchar(10) 
   RETURNS DECIMAL(10,4)
   BEGIN
 
-    IF _unit_from = 'liters' and _unit_to = 'gallons' then
-      return _volume * 0.264172;
-    elseif _unit_from = 'gallons' and _unit_to = 'liters' THEN
+    IF _unit_from = 'gallons' and _unit_to = 'liters' then
       return _volume * 3.78541;
+    elseif _unit_from = 'liters' and _unit_to = 'gallons' THEN
+      return _volume / 3.78541;
     elseif _unit_from = _unit_to THEN
       return _volume;
     ELSE
