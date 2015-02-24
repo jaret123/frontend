@@ -32,6 +32,7 @@ function convert_non_xeros_therms($xeros_cold_water, $location, $unit_volume) {
   // Hot water used by a Non-Xeros machine = cold_water_actual * xeros_cold_water_ratio * static_hot_water_ratio
     $non_xeros_hot_water = $xeros_cold_water * INDUSTRY_WATER_DIFF * INDUSTRY_HOT_WATER_RATIO;
 
+    //this function outputs therms by default, assuming incoming gallons
     $convert_to_therms = 1;
     $pounds_per_unit_volume = 8.34;
 
@@ -39,14 +40,16 @@ function convert_non_xeros_therms($xeros_cold_water, $location, $unit_volume) {
         case 'gallons':
             break;
         case 'liters' :
+            //if liters are incoming, we need to make two changes: convert the liters to pounds, and convert from therms to kwh
             $pounds_per_unit_volume = 2.2;
             $convert_to_therms = 29.3001;
             break;
         default:
-            //TODO: throw error
+            watchdog('xeros_report', 'No units supplied for conversion', null, WATCHDOG_ERROR);
             break;
     }
     // Non Xeros Therms = (Hot water used * pounds per unit volume * (temp_rise_season / heating_rise_efficiency)) / 100,000
+    // When incoming is liters, then we need to multiply by 29.3001 to convert to kWh
     $non_xeros_therms = (($non_xeros_hot_water * $pounds_per_unit_volume * ($location['temperature_rise_spring'] / $location['heating_efficiency'])) / $location['thermal_conversion']) * $convert_to_therms;
 
   return $non_xeros_therms;
@@ -56,6 +59,7 @@ function convert_non_xeros_therms($xeros_cold_water, $location, $unit_volume) {
 function convert_non_xeros_water($xeros_cold_water) {
 
   return $xeros_cold_water * INDUSTRY_WATER_DIFF;
+
 }
 
 function convert_xeros_water($non_xeros_water) {
