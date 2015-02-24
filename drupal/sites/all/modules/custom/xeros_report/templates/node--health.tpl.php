@@ -67,7 +67,7 @@
                             <div id="water_units" class="sub-label">(<?php print t("in gallons",array(),array('context'=>'Health Detail')); ?>)</div>
                         </div>
                         <div class="col col-3">
-                            <div class="label">Energy</div>
+                            <div class="label"><?php print t('Energy',array(),array('context'=>'Health Detail')); ?></div>
                             <div class="sub-label">(<?php print t("in therms",array(),array('context'=>'Health Detail')); ?>)</div>
                         </div>
 <!--                        <div class="col col-4">-->
