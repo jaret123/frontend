@@ -1,0 +1,60 @@
+diff --git a/includes/locale.inc b/includes/locale.inc
+index c168da0..b510d03 100644
+--- a/includes/locale.inc
++++ b/includes/locale.inc
+@@ -1856,6 +1856,7 @@ function _locale_translate_seek() {
+       'group' => 'all',
+       'language' => 'all',
+       'string' => '',
++      'context' => '',
+     );
+   }
+ 
+@@ -1898,6 +1899,11 @@ function _locale_translate_seek() {
+       break;
+   }
+ 
++  // Filter on string context.
++  if ($query['context']) {
++    $sql_query->condition('s.context', '%' . db_like($query['context']) . '%', 'LIKE');
++  }
++
+   // Add a condition on the text group.
+   if (!empty($query['group']) && $query['group'] != 'all') {
+     $sql_query->condition('s.textgroup', $query['group']);
+@@ -1950,7 +1956,7 @@ function _locale_translate_seek_query() {
+   $query = &drupal_static(__FUNCTION__);
+   if (!isset($query)) {
+     $query = array();
+-    $fields = array('string', 'language', 'translation', 'group');
++    $fields = array('string', 'context', 'language', 'translation', 'group');
+     foreach ($fields as $field) {
+       if (isset($_SESSION['locale_translation_filter'][$field])) {
+         $query[$field] = $_SESSION['locale_translation_filter'][$field];
+diff --git a/modules/locale/locale.admin.inc b/modules/locale/locale.admin.inc
+index f1a71dd..969533d 100644
+--- a/modules/locale/locale.admin.inc
++++ b/modules/locale/locale.admin.inc
+@@ -816,6 +816,11 @@ function locale_translation_filters() {
+     'description' => t('Leave blank to show all strings. The search is case sensitive.'),
+   );
+ 
++  $filters['context'] = array(
++    'title' => t('Context contains'),
++    'description' => t('Leave blank to include all contexts. The search is case sensitive.'),
++  );
++
+   $filters['language'] = array(
+     'title' => t('Language'),
+     'options' => array_merge(array('all' => t('All languages'), 'en' => t('English (provided by Drupal)')), $languages),
+@@ -851,8 +856,8 @@ function locale_translation_filter_form() {
+   );
+   foreach ($filters as $key => $filter) {
+     // Special case for 'string' filter.
+-    if ($key == 'string') {
+-      $form['filters']['status']['string'] = array(
++    if ($key == 'string' || $key == 'context') {
++      $form['filters']['status'][$key] = array(
+         '#type' => 'textfield',
+         '#title' => $filter['title'],
+         '#description' => $filter['description'],

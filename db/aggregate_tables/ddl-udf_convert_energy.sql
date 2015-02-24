@@ -9,7 +9,7 @@ CREATE FUNCTION udf_convert_energy( _value float(10,2), _unit_from varchar(10) c
     IF _unit_from = 'therms' and _unit_to = 'kwh' then
       return _value * 29.3001;
     elseif _unit_from = 'kwh' and _unit_to = 'therms' THEN
-      return _value * 0.0341;
+      return _value / 29.3001;
     elseif _unit_from = _unit_to THEN
       return _value ;
     ELSE

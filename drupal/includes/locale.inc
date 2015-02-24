@@ -1856,6 +1856,7 @@ function _locale_translate_seek() {
       'group' => 'all',
       'language' => 'all',
       'string' => '',
+      'context' => '',
     );
   }
 
@@ -1896,6 +1897,11 @@ function _locale_translate_seek() {
       }
       $sql_query->condition($condition);
       break;
+  }
+
+  // Filter on string context.
+  if ($query['context']) {
+    $sql_query->condition('s.context', '%' . db_like($query['context']) . '%', 'LIKE');
   }
 
   // Add a condition on the text group.
@@ -1950,7 +1956,7 @@ function _locale_translate_seek_query() {
   $query = &drupal_static(__FUNCTION__);
   if (!isset($query)) {
     $query = array();
-    $fields = array('string', 'language', 'translation', 'group');
+    $fields = array('string', 'context', 'language', 'translation', 'group');
     foreach ($fields as $field) {
       if (isset($_SESSION['locale_translation_filter'][$field])) {
         $query[$field] = $_SESSION['locale_translation_filter'][$field];

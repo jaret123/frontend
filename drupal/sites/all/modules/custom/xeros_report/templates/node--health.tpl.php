@@ -32,16 +32,16 @@
                     <span>
                         <span>Timeframe</span>
                         <select id="time-select" autofocus class="flagvisibility">
-                          <option value="weekToDate"><?php print t('Week To Date'); ?></option>
-                          <option value="monthToDate" selected><?php print t('Month to Date'); ?></option>
-                          <option value="yearToDate"><?php print t('Year to Date'); ?></option>
-                          <option value="custom"><?php print t('Custom...'); ?></option>
+                          <option value="weekToDate"><?php print t('Week To Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
+                          <option value="monthToDate" selected><?php print t('Month to Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
+                          <option value="yearToDate"><?php print t('Year to Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
+                          <option value="custom"><?php print t('Custom...',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
                         </select>
                     </span>
                     <div id="cal">
                         <div class="cal__button">
-                            <div class="cal__button-submit"><?php print t('Get Data'); ?></div>
-                            <div class="cal__button-cancel"><?php print t('Cancel'); ?></div>
+                            <div class="cal__button-submit"><?php print t('Get Data',array(),array('context'=>'Health Detail TimeFrame')); ?></div>
+                            <div class="cal__button-cancel"><?php print t('Cancel',array(),array('context'=>'Health Detail TimeFrame')); ?></div>
                         </div>
                     </div>
                 </div>
@@ -53,22 +53,22 @@
                     </form>
                 </div>
                 <div class="data-range">
-                    <?php print t('Report Date Range'); ?> <span class="date-range__from"></span> <?php print t('to'); ?> <span class="date-range__to"></span>
+                    <?php print t('Report Date Range',array(),array('context'=>'Health Detail')); ?> <span class="date-range__from"></span> <?php print t('to',array(),array('context'=>'Health Detail Report')); ?> <span class="date-range__to"></span>
                 </div>
               </div>
 
                 <div class="consumption__grid-container">
                     <div class="row first">
                         <div class="col col-1">
-                            <div class="label"><?php print t('Machine'); ?></div>
+                            <div class="label"><?php print t('Machine',array(),array('context'=>'Health Detail')); ?></div>
                         </div>
                         <div class="col col-2">
-                            <div class="label"><?php print t('Water Sewer'); ?></div>
-                            <div id="water_units" class="sub-label">(<?php print t("in gallons"); ?>)</div>
+                            <div class="label"><?php print t('Water Sewer',array(),array('context'=>'Health Detail')); ?></div>
+                            <div id="water_units" class="sub-label">(<?php print t("in gallons",array(),array('context'=>'Health Detail')); ?>)</div>
                         </div>
                         <div class="col col-3">
                             <div class="label">Energy</div>
-                            <div class="sub-label">(<?php print t("in therms"); ?>)</div>
+                            <div class="sub-label">(<?php print t("in therms",array(),array('context'=>'Health Detail')); ?>)</div>
                         </div>
 <!--                        <div class="col col-4">-->
 <!--                            <div class="label">Cycle Time</div>-->
@@ -80,7 +80,7 @@
 <!--                        </div>-->
                       <div class="health-wrapper">
                         <div class="col col-4">
-                          <div class="label"><?php print t("Health, Action/Update") ?></div>
+                          <div class="label"><?php print t("Health, Action/Update",array(),array('context'=>'Health Detail')); ?></div>
                           <!--<div class="label">Action/Update</div> -->
                         </div>
                       </div>

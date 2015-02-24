@@ -83,9 +83,9 @@ var view = {
 
                 }
 
-                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type, Drupal.t('gallons of water'));
+                app.reportData[i].delta.cold_water = self.calculateDelta(app.reportData[i].actual.cold_water, app.reportData[i].model.cold_water, app.reportData[i].info.machine_type, Drupal.t('gallons of water',{},{context:'Health Detail'}));
 
-                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type, Drupal.t('therms'));
+                app.reportData[i].delta.therms = self.calculateDelta(app.reportData[i].actual.therms, app.reportData[i].model.therms, app.reportData[i].info.machine_type, Drupal.t('therms',{},{context:'Health Detail'}));
 
                 app.reportData[i].info.cssClass = cssClass.join(" ");
 

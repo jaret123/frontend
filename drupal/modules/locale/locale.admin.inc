@@ -816,6 +816,11 @@ function locale_translation_filters() {
     'description' => t('Leave blank to show all strings. The search is case sensitive.'),
   );
 
+  $filters['context'] = array(
+    'title' => t('Context contains'),
+    'description' => t('Leave blank to include all contexts. The search is case sensitive.'),
+  );
+
   $filters['language'] = array(
     'title' => t('Language'),
     'options' => array_merge(array('all' => t('All languages'), 'en' => t('English (provided by Drupal)')), $languages),
@@ -851,8 +856,8 @@ function locale_translation_filter_form() {
   );
   foreach ($filters as $key => $filter) {
     // Special case for 'string' filter.
-    if ($key == 'string') {
-      $form['filters']['status']['string'] = array(
+    if ($key == 'string' || $key == 'context') {
+      $form['filters']['status'][$key] = array(
         '#type' => 'textfield',
         '#title' => $filter['title'],
         '#description' => $filter['description'],
