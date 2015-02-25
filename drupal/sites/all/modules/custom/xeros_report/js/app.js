@@ -132,7 +132,8 @@ var app = {
 
     fadeReport: function () {
         jQuery('.template-container').addClass("fade");
-        jQuery('#spinner').show();
+        FF.Controls.Spinner.show();
+       // jQuery('#spinner').show();
     },
 
     getData: function () {
