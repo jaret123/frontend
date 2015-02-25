@@ -106,7 +106,7 @@
                                             {{info.machine_name}} <br/>
                                            <!-- {{info.manufacturer}} <br/> -->
                                             {{#if info.water_only}}
-                                            <span>Water Only</span> <br/>
+                                            <span><?php print t("Water Only",array(),array('context'=>'Health Detail')); ?></span> <br/>
                                             {{else}}
                                             <!--<span>cycles: {{cycles}}</span> <br/>-->
                                             {{/if}}
