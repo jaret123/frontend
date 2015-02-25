@@ -36,6 +36,7 @@ FF.Controls.Spinner = (function ($) {
     };
 
     function show() {
+        console.log("Showing the Spinner");
         var spinner = new Spinner(opts).spin($('#spinner'));
     }
 
