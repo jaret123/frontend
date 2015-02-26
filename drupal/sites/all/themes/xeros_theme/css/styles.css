@@ -3274,6 +3274,7 @@ h1 {
   top: 40%;
   left: 50%;
   position: absolute;
+  z-index: 2000000;
 }
 
 /* line 1, ../sass/components/_legend.scss */

@@ -56,7 +56,6 @@
                     <?php print t('Report Date Range',array(),array('context'=>'Health Detail')); ?> <span class="date-range__from"></span> <?php print t('to',array(),array('context'=>'Health Detail Report')); ?> <span class="date-range__to"></span>
                 </div>
               </div>
-
                 <div class="consumption__grid-container">
                     <div class="row first">
                         <div class="col col-1">
@@ -175,13 +174,12 @@
                             {{/each}}
                         </script>
                     </div>
-                    <div id="spinner"></div>
+                    <div id="spinner" class="spinner"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
     <script>
         window.reportName = 'health-detail';
         window.dateRange = 'last30days';
@@ -189,15 +187,9 @@
 <?php
     $path = drupal_get_path('module', 'xeros_report');
     drupal_add_js($path . '/js/healthView.js', array('scope' => 'footer', 'weight' => 5, 'preprocess' => TRUE));
-
-
-drupal_add_js('jQuery(document).ready(function () {
+    drupal_add_js('jQuery(document).ready(function () {
         view.initialize();
     });',
   array('type' => 'inline', 'scope' => 'footer', 'weight' => 15)
 );
-
-
-
 ?>
-
