@@ -6,6 +6,7 @@ FF.Controls = FF.Controls || {};
  *
  *
  * Created by jason on 10/1/14
+ * Modified by Ron on 02/26/15
  */
 FF.Controls.Spinner = (function ($) {
 
@@ -15,7 +16,6 @@ FF.Controls.Spinner = (function ($) {
     // Public functions/objects
     pub.show = show;
     pub.hide = hide;
-
 
 
     var opts = {
@@ -48,7 +48,6 @@ FF.Controls.Spinner = (function ($) {
     function hide() {
        $('#spinner').hide();
     }
-
 
     return pub;
 })(jQuery);
