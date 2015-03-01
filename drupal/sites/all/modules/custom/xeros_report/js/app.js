@@ -18,8 +18,21 @@ var app = {
 
     registerEvents: function () {
         var self = this;
-        // Register routing listener
+
+        /**
+         * Listen to changes in the hash.  If the hash changes, then update the report
+         */
         jQuery(window).on('hashchange', jQuery.proxy(this.route, this));
+
+        /**
+         * Listen for a change to user.js and if it changes update the hash
+         */
+        jQuery( document).on("user:change", function(event, data) {
+            // Don't change if the company changes.  We want to wait for the location to change
+            if ( !_.contains(data, 'company')) {
+                self.updateHash();
+            }
+        })
     },
 
     setApiUrl: function () {
@@ -31,12 +44,15 @@ var app = {
         ;
     },
 
-    route: function () {
+    /**
+     * Read the hash and update the page based on the data in the hash
+     */
+    route: function (callback) {
         var self = this;
 
         var error = false;
 
-        jQuery(app.err).removeClass("active");
+        FF.Error.hide();
 
         var hash = window.location.hash;
         // hashArray =
@@ -84,42 +100,44 @@ var app = {
                 if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 0 )  {
                     var locationId = hashArray[3];
                     FF.User.setReportLocation(parseInt(locationId, 10));
-                    FF.Location.getLocation(hashArray[3], self.routeCallback);
+                    FF.Location.getLocation(hashArray[3], function() {
+                        self.routeCallback(callback);
+                    });
                     return; // Break here because we just called the rest of this in a callback.
                 }
             }
         }
         if ( !error ) {
-            self.routeCallback();
+            self.routeCallback(callback);
         }
     },
-    routeCallback: function() {
+    routeCallback: function(callback) {
 
+        app.fadeReport();
         // if dataRefresh equals 1, then go to the web service again and get new data
 
         // Test the location
         FF.Location.getLocation(FF.User.reportSettings.location.id);
 
         if ( FF.Location.machines.length == 0 ) {
-            jQuery(app.err).addClass("active");
-            jQuery(app.err).html("This location has no active machines.");
+            FF.Error.set("This location has no active machines.");
             return;
         }
-
-
         if ( FF.User.reportSettings.location.id !== '' && FF.User.reportSettings.company.id !== '' ) {
             if ( app.dataRefresh == 1 ) {
                 app.setApiUrl();
-                app.fadeReport();
                 app.getData();
             } else {
                 view.parseData(app.showReport);
             }
         } else {
-            jQuery(app.err).addClass("active");
-            jQuery(app.err).html("This user has not been assigned a company or a location.");
+            FF.Error.set("This user has not been assigned a company or a location.");
+            return;
         }
 
+        if (typeof(callback) === 'function') {
+            callback();
+        }
     },
 
     // This is going to be passed as a function to the view
@@ -131,8 +149,8 @@ var app = {
     },
 
     fadeReport: function () {
+        FF.Controls.Spinner.show();
         jQuery('.template-container').addClass("fade");
-        jQuery('#spinner').show();
     },
 
     getData: function () {
@@ -142,21 +160,16 @@ var app = {
             url: self.apiUrl,
             dataType: 'json',
             success: function (data) {
-                console.log("data retrieved: " + self.apiUrl);
                 self.data = data;
                 self.dataRefresh = 0;
                 self.route();
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
-                jQuery(app.err).addClass("active");
-                jQuery(app.err).html("<div>Oops, something happened with the data service.  Please contact your system administrator.</div>");
+                FF.Error.set('app.getData', 'Oops, something happened with the data service.  Please contact your system administrator.', errorThrown, true);
             }
         })
     },
-    /**
-     * Listen for a change to user and update the hash when it changes
-     */
+
     updateHash: function() {
         var hash = app.machine + "+" +
             FF.User.reportSettings.metric + "+" +
@@ -176,20 +189,20 @@ var app = {
 
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 
-        document.addEventListener('CustomEventUserChange', function () {
-            // Don't change if the company changes.  We want to wait for the location to change
-            if ( !_.contains(FF.User.changed, 'company')) {
-                self.updateHash();
-            }
-        });
 
+
+        /**
+         * Draw the report for the first time
+         */
         FF.User.setReportLocation(FF.User.reportSettings.location.id);
-        // Build the apiUrl
+
         FF.Location.getLocation(FF.User.reportSettings.location.id, function() {
-            self.registerEvents();
             // Do the things that get values from the template (window)
             self.apiUrlBase = window.apiUrlBase;
-            self.route();
+            self.route(function() {
+                // After drawing the report for the first time register the listeners
+                self.registerEvents();
+            });
         });
     }
 }

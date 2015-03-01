@@ -8,12 +8,18 @@ var FF = FF || {};
  */
 FF.Error = (function ($) {
 
+    var els = {};
+
     var pub = {};
+
+    var listen = false;
 
     // Public functions/objects
     pub.init = init;
-    pub.setError = setError;
+    pub.set = set;
+    pub.hide = hide;
     pub.errorData = errorData;
+
 
     var errorService = '/ws/error';
 
@@ -33,15 +39,18 @@ FF.Error = (function ($) {
      *
      * @param e
      */
-    function setError(e, message, status, display) {
+    function set(e, message, status, display) {
 
         // By default, display errors
         if (typeof(display)==='undefined') display = true;
 
         if (display) {
-            displayErrors();
+            displayError(e, message, status);
         }
 
+        /**
+         * Send error to Drupal Watchdog
+         */
         //$.ajax({
         //    url: errorService,
         //    data: errorData,
@@ -60,12 +69,17 @@ FF.Error = (function ($) {
     /**
      * Private method to display errors to the screen
      */
-    function displayErrors() {
+    function displayError(e, message, status) {
         els.errorMessage.append('<div>' + message + '</div>');
+        els.errorMessage.addClass("active");
     }
 
-    function init() {
+    function hide() {
+        els.errorMessage.html('');
+        els.errorMessage.removeClass('active');
+    }
 
+    function registerListeners() {
         // Override previous handler.
         window.onerror = function myErrorHandler(msg, url, line, col, error) {
 
@@ -120,6 +134,20 @@ FF.Error = (function ($) {
 
             //alert('ajax error');
         });
+    }
+    function init() {
+
+        els.errorMessage = jQuery(".error-messages");
+
+        els.errorMessage.html('');
+
+        /**
+         * Optional configuration to capture all javascript and ajax errors
+         */
+        if ( listen ) {
+            registerListeners();
+        }
+
     }
 
     return pub;

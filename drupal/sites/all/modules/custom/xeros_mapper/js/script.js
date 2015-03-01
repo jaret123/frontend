@@ -49,7 +49,6 @@
                 $(this).addClass('inactive')
                     .siblings()
                     .removeClass('inactive');
-                console.log(id);
             }
 
             var hideDetails = function(e) {
@@ -85,7 +84,6 @@
             els.closeButtons.on('click', hideDetails);
 
             var showClassification = function() {
-                console.log('showclassification');
 
                 var row = $(this).parents('tr');
                 var el = this;
@@ -111,8 +109,6 @@
                 // Get the classification form and show it.
                 var url = els.classificationUrl.replace('{{id}}', id);
 
-
-                console.log(url);
                 $.ajax({
                     url: url, // TODO: Needs to be the Machine ID
                     success: function(template) {
@@ -173,8 +169,6 @@
             }
 
             var hideClassification = function(e) {
-                console.log('Hide classfication');
-
                 if (!e) { e = window.event; };
 
                 e.stopPropagation();

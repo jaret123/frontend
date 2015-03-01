@@ -25,7 +25,7 @@
         <script id="options-tpl" type="text/x-handlebars-template">
           <option value="0"><?php print t('-select-'); ?></option>
           {{#each data}}
-          <option value="{{@key}}">{{this.name}}</option>
+          <option value="{{key}}">{{this.name}}</option>
           {{/each}}
         </script>
       </div>

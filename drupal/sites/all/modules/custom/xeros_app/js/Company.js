@@ -20,7 +20,6 @@ FF.Company = (function ($) {
             url: 'ws/company/' + companyId,
             success: function(d) {
                 pub.company = d;
-                console.log('pub.company: ', pub.company.nid);
                 if ( typeof(callback) == 'function') {
                     callback();
                 }

@@ -38,9 +38,7 @@ Handlebars.registerHelper("waterOnly", function(water_only) {
 });
 
 Handlebars.registerHelper('dateFormat', function(context, block) {
-    console.log(context);
     var d = new Date(context);
-    console.log(d);
     //TODO this is where date format goes @jason
     if (window.moment) {
         var f = block.hash.format || "MMM Do, YYYY";
@@ -135,7 +133,6 @@ Handlebars.registerHelper('formatDeltaValue', function(value) {
 Handlebars.registerHelper('digits', function(cycles) {
     //TODO Why would cycles come in as null
     if (typeof(cycles) != "undefined" && cycles !==null) {
-        console.log(cycles);
         return 'digits-' + cycles.toString().length;
     } else {
         return '';

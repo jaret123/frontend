@@ -71,7 +71,7 @@ FF.User = (function ($) {
      * List of properties changed
      * @type [[]]
      */
-    pub.changed = [];
+    var changed = [];
 
     function setReportCompany(companyId, callback) {
         if ( typeof companyId == "number" && companyId !== 0 ) {
@@ -82,12 +82,12 @@ FF.User = (function ($) {
                 //debugger;
                 setCookie('sessionCompany', pub.reportSettings.company.id);
 
-                pub.changed = [ 'company' ];
+                changed = [ 'company' ];
 
                 updateFinish(callback);
             }
         } else {
-            console.log('Invalid companyID passed to setReportCompany');
+            FF.Error.set("User.setReportCompany", 'Invalid companyID passed to setReportCompany', null, false);
         }
     }
     function setReportLocation(locationId, callback) {
@@ -97,12 +97,12 @@ FF.User = (function ($) {
                 pub.reportSettings.location.title = context.companies[pub.reportSettings.company.id].location[locationId].name;
                 setCookie('sessionLocation',pub.reportSettings.location.id);
 
-                pub.changed = [ 'location' ] ;
+                changed = [ 'location' ] ;
 
                 updateFinish(callback);
             }
         } else {
-            console.log('Invalid locationId passed to setReportLocation');
+            FF.Error.set("User.setReportLocation", 'Invalid LocationID passed to setReportLocation', null, false);
         }
     }
 
@@ -138,11 +138,11 @@ FF.User = (function ($) {
             setCookie('sessionTimeSelect', pub.reportSettings.timeSelect);
             setCookie('sessionDates', pub.reportSettings.dates.toString());
 
-            pub.changed = [ 'dates'] ;
+            changed = [ 'dates'] ;
 
             updateFinish(callback);
         } else {
-            console.log('Invalid dates passed to report date range', dateRange);
+            FF.Error.set('User.setReportDateRange', 'Invalid dates passed to report date range', dateRange, false);
         }
     }
     function setReportMetric(metric, callback) {
@@ -150,11 +150,11 @@ FF.User = (function ($) {
             pub.reportSettings.metric = metric;
             setCookie('sessionMetric', pub.reportSettings.metric);
 
-            pub.changed = ['metric'] ;
+            changed = ['metric'] ;
 
             updateFinish(callback);
         } else {
-            console.log('Invalid metric passed to metric.')
+            FF.Error.set('User.setReportMetric', 'Invalid metric passed to metric', metric, false);
         }
 
     }
@@ -207,13 +207,9 @@ FF.User = (function ($) {
         //saveCookie();
         // Create an event and dispatch it any time we successfully run a setter.
         // Create the event.
-        var event = document.createEvent('Event');
 
-        // Define the event name.
-        event.initEvent('CustomEventUserChange', true, true);
+        $(document).trigger('user:change', [ changed ]);
 
-        console.log('Custom event dispatched');
-        document.dispatchEvent(event);
         if ( typeof callback == "function") {
             callback();
         }

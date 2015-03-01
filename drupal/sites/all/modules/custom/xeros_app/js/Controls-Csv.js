@@ -24,9 +24,9 @@ FF.Controls.Csv = (function ($) {
     };
 
     function init() {
-        document.addEventListener('CustomEventUserChange', function () {
-            updateCsvLink();
-        })
+        $( document).on('user:change', function(event, data) {
+           updateCsvLink();
+        });
     }
 
     return pub;

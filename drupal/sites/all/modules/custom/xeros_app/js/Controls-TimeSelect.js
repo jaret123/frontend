@@ -27,8 +27,6 @@ FF.Controls.TimeSelect = (function ($) {
     pub.dateRanges = dateRanges;
 
     function createDateRanges() {
-
-        console.log("CreateDateRanges");
         var fromDate = new Date();
         var toDate = new Date();
 
@@ -39,7 +37,6 @@ FF.Controls.TimeSelect = (function ($) {
             FF.Format.sqlDate(fromDate),
             FF.Format.sqlDate(toDate)
         ];
-        console.log(dateRanges.yearToDate);
 
         // Month to date
         fromDate = new Date();
@@ -100,7 +97,6 @@ FF.Controls.TimeSelect = (function ($) {
         });
 
         $(".cal__button-cancel").unbind().click(function (e) {
-            console.log("cancel");
             $("#cal").removeClass("show");
         });
     }

@@ -25,17 +25,15 @@ FF.Display = (function ($) {
     }
 
     function init() {
-        document.addEventListener('CustomEventUserChange', function () {
-            console.log('Heard event');
-
-            if ( _.contains(FF.User.changed, 'location') ) {
+        $(document).on("user:change", function(event, data) {
+            if ( _.contains(data, 'location') ) {
                 updateHeaderDisplay();
             }
 
-            if  (_.contains(FF.User.changed, 'dates') ) {
+            if  (_.contains(data, 'dates') ) {
                 updateDateRange();
             }
-        })
+        });
     }
 
     return pub;

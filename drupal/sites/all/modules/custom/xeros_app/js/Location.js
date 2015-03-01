@@ -34,7 +34,6 @@ FF.Location = (function ($) {
             url: '/ws/location/' + locationId,
             success: function(d) {
                 pub.location = d;
-                console.log('pub.location: ', pub.location.nid);
                 getMachineIds(locationId, callback);
             },
             dataType: 'json',
@@ -57,13 +56,13 @@ FF.Location = (function ($) {
             url: '/ws/location/' + locationId + '/machines',
             success: function(d) {
                 pub.machines = d;
-                console.log('pub.location.machines: ', pub.machines);
                 if ( pub.machines.length == 0 ) {
-                    FF.Error.setError('Location.getMachineIds', 'This location has not active machines.', null, true)
+                    FF.Error.set('Location.getMachineIds', 'This location has no active machines.', null, true);
                 }
                 if ( typeof(callback) == 'function') {
                     callback();
                 }
+
             },
             dataType: 'json',
             type: 'GET',

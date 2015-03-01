@@ -42,9 +42,6 @@ FF.Controls.ModelSelect = (function ($) {
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         }, 300);
-
-        console.log("saving the buttons");
-
     }
 
     function show(e) {

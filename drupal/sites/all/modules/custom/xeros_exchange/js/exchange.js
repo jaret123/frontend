@@ -9,6 +9,5 @@ getRate:function(from,to) {
  parseExchangeRate:function(data) {
     var name = data.query.results.row.name;
     var rate = parseFloat(data.query.results.row.rate, 10);
-    console.log("Exchange rate " + name + " is " + rate);
 }
 };

@@ -19,21 +19,29 @@ FF.Controls.LocationSelect = (function ($) {
         FF.Controls.Dropdown.create("#location-select", function (event) {
             var locationId = parseInt($(event.target).find("span.value").html(), 10);
             app.dataRefresh = 1;
-            FF.User.setReportLocation(locationId, self.setHeaderDisplay);
+            FF.User.setReportLocation(locationId);
         });
     };
 
     function update(locations, selected) {
         var opts;
         if ( locations.data != "" ) {
-            opts = app.options_tpl( locations );
+
+            var data = _.each(locations.data, function(obj, key) {
+                obj.key = parseInt(key, 0);
+            });
+
+            data = _.toArray(data);
+
+            data = _.sortBy(data, function(obj) { return obj.name});
+
+            opts = app.options_tpl( {data : data } );
             $("#location-select").html(opts);
         }
         if ( typeof(selected) != 'undefined' ) {
             $("#location-select").val(selected);
         }
         // Remove the location select and rebuild it
-        console.log('Rebuild location');
         $("#location-select__dl").remove();
         create();
     };
@@ -50,13 +58,33 @@ FF.Controls.CompanySelect = (function ($) {
     pub.create = create;
 
     function create() {
-        var opts = app.options_tpl( {'data' : context.companies } );
+        // Put the key onton each element in the array then sort the array by the key
+
+        var data = {};
+
+        data = context.companies;
+
+        _.each(data, function(obj, key) {
+            obj.key = parseInt(key, 0);
+        });
+
+        data = _.toArray(data);
+
+        data = _.sortBy(data, function(obj) { return obj.name});
+
+        var opts = app.options_tpl( {'data' : data } );
         $("#company-select").html(opts);
         $("#company-select").val(FF.User.reportSettings.company.id);
 
         FF.Controls.Dropdown.create("#company-select", function (event) {
-            FF.User.setReportCompany(parseInt($(event.target).find("span.value").html(), 0));
-            FF.Controls.LocationSelect.update({'data' : context.companies[FF.User.reportSettings.company.id].location });
+            var companyId = parseInt($(event.target).find("span.value").html(), 0)
+            FF.User.setReportCompany(companyId);
+
+            var company = _.filter(data, function(obj) {
+                return obj.key === companyId;
+            });
+
+            FF.Controls.LocationSelect.update({'data' : company[0].location });
         });
 
         var locations = {data : ""};

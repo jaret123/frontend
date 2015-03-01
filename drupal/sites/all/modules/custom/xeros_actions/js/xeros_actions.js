@@ -31,8 +31,6 @@ FF.xeros_actions = (function ($) {
             jQuery('#edit-field-machine-entity-reference-und').val(params.machine_id);
             jQuery('.form-item-field-machine-entity-reference-und').css('display', 'none');
         }
-
-        console.log(params);
     }
 
     return pub;

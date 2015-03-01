@@ -134,16 +134,13 @@ var view = {
             url: '/actions/json',
             dataType: 'json',
             success: function (data) {
-                console.log("data retrieved: " + 'actions/json');
                 // Append the data and finish this function
                 if (typeof callback == "function") {
                     callback(data);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Ajax Error: " + textStatus + " -- " + errorThrown + "--" + jqXHR);
-                jQuery(app.err).addClass("active");
-                jQuery(app.err).html("Oops, something happened with the actions service.  Please contact your system administrator.");
+                FF.Error.set('healthView.getActionData', "Oops, something happened with the actions service.  Please contact your system administrator.", errorThrown, TRUE);
             }
         });
     },
