@@ -1,4 +1,4 @@
-<div class="machine-detail__wrapper {{statusFormat machine.status.status_code machine.machine_status "color"}} {{machine.manufacturer}}" data-machine-status={{machine.machine_status}}>
+<div class="machine-detail__wrapper {{statusFormat machine.status.status_code machine.machine_status 'color'}} {{machine.manufacturer}}" data-machine-status={{machine.machine_status}}>
     <i class="fa fa-times machine-detail__close"></i>
     <div class="machine-detail__header">
         <div>
@@ -16,15 +16,15 @@
     </div>
 
     <div class="status status-not-monitored">
-        <h4>Status</h4>
+        <h4>{{labels.status}}</h4>
         <div class=" status-message">
             <i class="fa status-icon"></i>
-            This machine is currently not actively monitored.
+            {{labels.not_monitored}}.
         </div>
     </div>
 
     <div class="status status-monitored">
-        <h4>Status</h4>
+        <h4>{{labels.status}}</h4>
         <div class=" status-message">
             <i class="fa status-icon"></i>
             {{statusFormat machine.status.status_code machine.machine_status "code"}} -
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <h4 class="log__title">View Status Log<i class="fa fa-chevron-down log__open-close"></i></h4>
+    <h4 class="log__title">{{labels.status_log}}<i class="fa fa-chevron-down log__open-close"></i></h4>
     <div class="log">
         {{#each history}}
         <div class="log__row">
@@ -45,32 +45,32 @@
     </div>
 
     <div class="details">
-        <h4 class="machine-detail__location">Machine Details</h4>
-        Company: {{machine.company_title}}<br/>
-        Location: {{machine.location_title}}<br/>
-        Serial Number: {{machine.serial_number}}
+        <h4 class="machine-detail__location">{{labels.machine_details}}</h4>
+        {{labels.company}}: {{machine.company_title}}<br/>
+        {{labels.location}}: {{machine.location_title}}<br/>
+        {{labels.serial}}: {{machine.serial_number}}
     </div>
 
     <!-- TODO: Get the cycles for the machine for the day -->
     <div class="machine-detail__cycles">
-        <h4>Cycles</h4>
-        <h5>Summary</h5>
-        <span class="label">Last Cycle Ended:</span>{{last_cycle_end_time}} {{last_cycle_olson_timezone_id}}<br/>
-        <span class="label">Cycles Today:</span>{{machine.usage.cycles}}<br/>
-        <span class="label">Total Run Time Today:</span>{{runTimeFormat machine.usage.run_time}}<br/>
+        <h4>{{labels.cycles}}</h4>
+        <h5>{{labels.summary}}</h5>
+        <span class="label">{{labels.last_cycle}}:</span>{{last_cycle_end_time}} {{last_cycle_olson_timezone_id}}<br/>
+        <span class="label">{{labels.cycles_today}}:</span>{{machine.usage.cycles}}<br/>
+        <span class="label">{{labels.total_run_time}}:</span>{{runTimeFormat machine.usage.run_time}}<br/>
 
         <h5>Details</h5>
         {{#each cycles}}
         <div>
             <!-- @BUG - you can't put Javascript functions inside of a Handelbars Template -->
             <div class="cycle__status"><em>{{classification_name}}</em></div>
-            <div class="cycle__timestamp"><span class="label">Start Time:</span>{{cycle_start_time}} {{olson_timezone_id}}</div>
-            <div class="cycle__timestamp"><span class="label">End Time:</span>{{cycle_end_time}} {{olson_timezone_id}}</div>
+            <div class="cycle__timestamp"><span class="label">{{../labels.start_time}}:</span>{{cycle_start_time}} {{olson_timezone_id}}</div>
+            <div class="cycle__timestamp"><span class="label">{{../labels.end_time}}:</span>{{cycle_end_time}} {{olson_timezone_id}}</div>
             <!-- Gallons are already rounded by the web service -->
-            <div class="cycle__detail"><span class="label">Cold Water Used:</span>{{round cycle_cold_water_volume 1}} gallons</div>
-            <div class="cycle__detail"><span class="label">Hot Water Used:</span>{{round cycle_hot_water_volume 1}} gallons</div>
-            <div class="cycle__detail"><span class="label">Therms:</span>{{round cycle_therms 2}}</div>
-            <div class="cycle__detail"><span class="label">Chemicals:</span>{{round cycle_chemical_strength 1}} ounces</div>
+            <div class="cycle__detail"><span class="label">{{../labels.cold_water}}:</span>{{round cycle_cold_water_volume 1}} {{../labels.gallons}}</div>
+            <div class="cycle__detail"><span class="label">{{../labels.hot_water}}:</span>{{round cycle_hot_water_volume 1}} {{../labels.gallons}}</div>
+            <div class="cycle__detail"><span class="label">{{../labels.therms}}:</span>{{round cycle_therms 2}}</div>
+            <div class="cycle__detail"><span class="label">{{../labels.chemicals}}:</span>{{round cycle_chemical_strength 1}} {{../labels.ounces}}</div>
         </div>
         <br/>
         {{/each}}

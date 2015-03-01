@@ -27,8 +27,8 @@
     if ( $user->uid > 0 ) :
       $u = user_load($user->uid);
 
-      $user->company = t("No company assigned");
-      $user->location = t("No location assigned");
+      $user->company = t("No company assigned", array(), array('context'=>'status board'));
+      $user->location = t("No location assigned", array(), array('context'=>'status board'));
 
       if (isset($u->field_company['und'][0]['target_id'])) {
         $company = node_load($u->field_company['und'][0]['target_id']);
@@ -39,7 +39,7 @@
         $user->location = $location->title;
       }
       ?>
-      <span class="header__welcome"><?php print t('welcome'); ?> <?php print $user->name ; ?><br/>
+      <span class="header__welcome"><?php print t('Welcome', array(), array('context'=>'status board')); ?> <?php print $user->name ; ?><br/>
               Company: <span class="header__company"><?php print $user->company ?></span><br/>
               Location: <span class="header__location"><?php print $user->location ?></span>
             </span>
@@ -79,7 +79,7 @@
 
       </div>
       <div class="controls__details">
-        <span>Filter by Status: </span>
+        <span><?php print t('Filter by Status', array(), array('context'=>'status board')); ?>: </span>
         <span class="controls filter red" data-filter="red"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter yellow" data-filter="yellow"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter green" data-filter="green"><i class="fa status-icon"></i><div class="controls__label">0</div></span>
@@ -87,39 +87,39 @@
         <!--        <span class="controls filter blue" data-filter="blue"><i class="fa status-icon"></i>10 </span>-->
       </div>
       <div class="controls__model">
-        <span>Model: </span>
+        <span><?php print t('Model', array(), array('context'=>'status board')); ?>: </span>
         <span class="controls filter xeros" data-filter="xeros"><i class="fa model-icon"></i><div class="controls__label">0</div></span>
         <span class="controls filter non-xeros" data-filter="non-xeros"><i class="fa model-icon"></i><div class="controls__label">0</div></span>
       </div>
       <div class="page-ops__key">
         <div class="key__header">
-          <div class="key__title">Key</div>
+          <div class="key__title"><?php print t('Key', array(), array('context'=>'status board')); ?></div>
           <i class="fa fa-chevron-down key__open-close"></i>
         </div>
         <div class="key__details">
           <div class="title">
-            <?php print t('Status'); ?>
+            <?php print t('Status', array(), array('context'=>'status board')); ?>
           </div>
           <div class="green key__item">
-            <?php print t('Machine is active.'); ?>
+            <?php print t('Machine is active.', array(), array('context'=>'status board')); ?>
           </div>
           <div class="yellow key__item">
-            <?php print t('Machine is idle.'); ?>
+            <?php print t('Machine is idle.', array(), array('context'=>'status board')); ?>
           </div>
           <div class="red key__item">
-            <?php print t('Alert.  See status message for details.'); ?>
+            <?php print t('Alert. See status message for details.', array(), array('context'=>'status board')); ?>
           </div>
           <div class="grey key__item">
-            <?php print t('Machine is not currently being monitored.'); ?>
+            <?php print t('Machine is not currently being monitored.', array(), array('context'=>'status board')); ?>
           </div>
           <div class="title">
-            <?php print t('Machine Type'); ?>
+              <?php print t('Machine Type', array(), array('context'=>'status board')); ?>
           </div>
           <div class="xeros key__item">
-            <?php print t(' Xeros Machine.'); ?>
+              <?php print t('Xeros Machine', array(), array('context'=>'status board')); ?>
           </div>
           <div class="non-xeros key__item">
-            <?php print t('Non Xeros Machine.'); ?>
+              <?php print t('Non Xeros Machine', array(), array('context'=>'status board')); ?>
           </div>
 <!--          <div class="blue key__item">-->
 <!--            <i class="fa fa-bolt"></i>-->
@@ -129,16 +129,16 @@
       </div>
 
       <div class="controls__display">
-        <span>Display: </span>
+        <span><?php print t('Display', array(), array('context'=>'status board')); ?>:</span>
 <!--        <span class="controls display-type block" data-display-type="block">Block </span>-->
 <!--        <span class="controls display-type list" data-display-type="list">List </span>-->
 <!--        <span class="controls display-type" data-display-type="icon" >Icons </span>-->
 <!--        <span class="controls display-type" data-display-type="block" >Blocks </span>-->
 
-        <span class="controls show-label" > <?php print t('Show Labels'); ?> </span>
-        <span class="controls show-details" ><?php print t('Show Details'); ?> </span>
+        <span class="controls show-label" > <?php print t('Show Labels', array(), array('context'=>'status board')); ?> </span>
+        <span class="controls show-details" ><?php print t('Show Details', array(), array('context'=>'status board')); ?> </span>
 
-        <span class="controls full-screen" data-display="full-screen"><?php print t('Full Screen'); ?></span>
+        <span class="controls full-screen" data-display="full-screen"><?php print t('Full Screen', array(), array('context'=>'status board')); ?></span>
       </div>
 
     </div>
