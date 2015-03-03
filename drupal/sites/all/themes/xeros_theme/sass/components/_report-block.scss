@@ -1,0 +1,85 @@
+
+#report-dashboard {
+  opacity: 1;
+  z-index: 0;
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+
+  $zen-column-count: 3;
+  $zen-gutter-width: 15px;
+
+  @include zen-grid-container;
+
+  .reports__grid-container {
+    h5 {
+      margin: 0px;
+    }
+
+    h3 {
+      margin-top: 0px;
+      margin-bottom: 11.5px;
+    }
+
+    .report-block {
+      position: relative;
+      .dropdown {
+        position: relative;
+        top: 0;
+        right: 0;
+      }
+    }
+    .machine-block {
+      .machine-list-open {
+        cursor: pointer;
+      }
+      .machine-output {
+        display: none;
+      }
+      &.active {
+        .machine-list-open {
+          i {
+            transform: rotate(180deg);
+          }
+        }
+        .machine-output {
+          display: block;
+        }
+      }
+    }
+
+    .row {
+      @include zen-nested-container();
+      @include zen-clear();
+      overflow: hidden;
+      border-top: 1px solid $font-color;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      position: relative;
+
+      .col {
+        min-height: 250px;
+      }
+      .col:nth-child(1) {
+        @include zen-grid-item(1, 1);
+
+      }
+      .col:nth-child(2) {
+        @include zen-grid-item(1, 2);
+        .Filters {
+          @include zen-grid-item(1, 1);
+        }
+      }
+      .col:nth-child(3) {
+        @include zen-grid-item(1, 3);
+      }
+      .col:nth-child(4) {
+        @include zen-nested-container();
+        @include zen-clear();
+        @include zen-grid-item(2, 1);
+      }
+
+    }
+  }
+}
