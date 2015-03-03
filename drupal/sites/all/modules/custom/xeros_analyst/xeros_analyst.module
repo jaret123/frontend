@@ -13,6 +13,13 @@ function xeros_analyst_menu() {
     'access arguments' => array('xeros analyst'),
     'file' => 'xeros_analyst_reports.inc'
   );
+    $items['analyst/cycle-reports'] = array(
+        'title' => 'Ops Reports',
+        'page callback' => 'analyst_cycle_reports_page',
+        'page arguments' => array(),
+        'access arguments' => array('xeros analyst'),
+        'file' => 'xeros_analyst_cycle_reports.inc'
+    );
 
   return $items;
 }
@@ -24,4 +31,16 @@ function xeros_analyst_permission() {
       'description' => t('Roles with this permission have the ability to access the analyst reports.'),
     )
   );
+}
+
+function xeros_analyst_theme()
+{
+    $themes = array(
+        'xeros_analyst_cycle_reports_template' => array(
+            'template' => 'templates/node--cycle-reports',
+            'arguments' => array(),
+        ),
+    );
+
+    return $themes;
 }

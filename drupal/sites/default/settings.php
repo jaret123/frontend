@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Drupal site-specific configuration file.
+ * Drupal site-specific configurat  ion file.
  *
  * IMPORTANT NOTE:
  * This file may have been set to read-only by the Drupal installation program.
@@ -52,7 +52,7 @@
  * @see conf_path()
  */
 $conf['locale_custom_strings_fr'][''] = array(
-    'Start Time'       =>      'L\'heure de Début'
+    'Start Time' => 'L\'heure de Début'
 );
 
 
@@ -216,117 +216,117 @@ $conf['locale_custom_strings_fr'][''] = array(
  */
 
 $host = $_SERVER['HTTP_HOST'];
-$base_url = 'http://'.$host;
+$base_url = 'http://' . $host;
 $cookie_domain = $host;
 
 //var_dump($host);
 
 switch ($host) {
-  case 'xeros.local':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros_local',
-              'username' => 'root',
-              'password' => 'root',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/Users/Jason/dev/ELYXOR/xeros-sbeady/db";
-    $conf['mysql_bin'] = "/Applications/MAMP/Library/bin/mysql";
-    error_reporting(E_ALL);
-    ini_set('display_errors', TRUE);
-    ini_set('display_startup_errors', TRUE);
-    break;
-  case 'sbeadycare-dev.xeroscleaning.com':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros-dev',
-              'username' => 'xeros',
-              'password' => 'X#r)S2014',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/var/www/xeros-dev/www/db";
-    $conf['mysql_bin'] = "/usr/bin/mysql";
-    error_reporting(E_ALL);
-    ini_set('display_errors', TRUE);
-    ini_set('display_startup_errors', TRUE);
-    break;
-  case 'sbeadycare-test.xeroscleaning.com':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros-test',
-              'username' => 'xeros',
-              'password' => 'X#r)S2014',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/var/www/xeros-test/www/db";
-    $conf['mysql_bin'] = "/usr/bin/mysql";
-    break;
-  case 'sbeadycare-qa.xeroscleaning.com':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros-qa',
-              'username' => 'xeros',
-              'password' => 'X#r)S2014',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/var/www/xeros/www/db";
-    $conf['mysql_bin'] = "/usr/bin/mysql";
-    break;
-  case 'sbeadycare.xeroscleaning.com':
-    $databases = array(
-      'default' =>
-        array(
-          'default' =>
-            array(
-              'database' => 'xeros-prod',
-              'username' => 'xeros',
-              'password' => 'X#r)S2014',
-              'host'     => 'localhost',
-              'port'     => '',
-              'driver'   => 'mysql',
-              'prefix'   => '',
-            ),
-        ),
-    );
-    $conf['database_script_dir'] = "/var/www/xeros/www/db";
-    $conf['mysql_bin'] = "/usr/bin/mysql";
-    break;
+    case 'xeros.local':
+        $databases = array(
+            'default' =>
+                array(
+                    'default' =>
+                        array(
+                            'database' => 'xeros_local',
+                            'username' => 'root',
+                            'password' => 'root',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        );
+        $conf['database_script_dir'] = "/Users/Jason/dev/ELYXOR/xeros-sbeady/db";
+        $conf['mysql_bin'] = "/Applications/MAMP/Library/bin/mysql";
+        error_reporting(E_ALL);
+        ini_set('display_errors', TRUE);
+        ini_set('display_startup_errors', TRUE);
+        break;
+    case 'sbeadycare-dev.xeroscleaning.com':
+        $databases = array(
+            'default' =>
+                array(
+                    'default' =>
+                        array(
+                            'database' => 'xeros-dev',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        );
+        $conf['database_script_dir'] = "/var/www/xeros-dev/www/db";
+        $conf['mysql_bin'] = "/usr/bin/mysql";
+        error_reporting(E_ALL);
+        ini_set('display_errors', TRUE);
+        ini_set('display_startup_errors', TRUE);
+        break;
+    case 'sbeadycare-test.xeroscleaning.com':
+        $databases = array(
+            'default' =>
+                array(
+                    'default' =>
+                        array(
+                            'database' => 'xeros-test',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        );
+        $conf['database_script_dir'] = "/var/www/xeros-test/www/db";
+        $conf['mysql_bin'] = "/usr/bin/mysql";
+        break;
+    case 'sbeadycare-qa.xeroscleaning.com':
+        $databases = array(
+            'default' =>
+                array(
+                    'default' =>
+                        array(
+                            'database' => 'xeros-qa',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        );
+        $conf['database_script_dir'] = "/var/www/xeros/www/db";
+        $conf['mysql_bin'] = "/usr/bin/mysql";
+        break;
+    case 'sbeadycare.xeroscleaning.com':
+        $databases = array(
+            'default' =>
+                array(
+                    'default' =>
+                        array(
+                            'database' => 'xeros-prod',
+                            'username' => 'xeros',
+                            'password' => 'X#r)S2014',
+                            'host' => 'localhost',
+                            'port' => '',
+                            'driver' => 'mysql',
+                            'prefix' => '',
+                        ),
+                ),
+        );
+        $conf['database_script_dir'] = "/var/www/xeros/www/db";
+        $conf['mysql_bin'] = "/usr/bin/mysql";
+        break;
 }
 $local_settings = dirname(__FILE__) . '/settings.local.php';
 if (file_exists($local_settings)) {
-  include $local_settings;
+    include $local_settings;
 }
 /**
  * Access control for update.php script.
@@ -669,5 +669,5 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
 # $conf['allow_authorize_operations'] = FALSE;
 
 if (file_exists(dirname(__FILE__) . '/local.settings.php')) {
-  include dirname(__FILE__) . '/local.settings.php';
+    include dirname(__FILE__) . '/local.settings.php';
 }

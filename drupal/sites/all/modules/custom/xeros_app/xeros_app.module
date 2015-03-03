@@ -7,50 +7,51 @@ require_once(drupal_get_path('module', 'xeros_app') . '/user_profile_form.inc');
  *
  * @return mixed
  */
-function xeros_app_menu() {
-  $items['ws/location/%/machines'] = array(
-    'title' => 'Get machines by location',
-    'page callback' => 'ws_location_machines',
-    'page arguments' => array(2),
-    'access arguments' => array('access content'),
-    'file' => 'ws_location.inc'
-  );
-  $items['ws/location/%'] = array(
-    'title' => 'Location Web Service',
-    'page callback' => 'ws_location',
-    'page arguments' => array(2),
-    'access arguments' => array('access content'),
-    'file' => 'ws_location.inc'
-  );
-  $items['ws/company'] = array(
-    'title' => 'Company Web Service',
-    'page callback' => 'ws_company',
-    'page arguments' => array(),
-    'access arguments' => array('access content'),
-    'file' => 'ws_company.inc'
-  );
-  $items['ws/industry/averages'] = array(
-    'title' => 'Industry Averages Web Service',
-    'page callback' => 'ws_industry_averages',
-    'page arguments' => array(),
-    'access arguments' => array('access content'),
-    'file' => 'ws_industry_averages.inc'
-  );
-
-  return $items;
+function xeros_app_menu()
+{
+    $items['ws/location'] = array(
+        'title' => 'Location Web Service',
+        'page callback' => 'ws_location',
+        'page arguments' => array(),
+        'access arguments' => array('access content'),
+        'file' => 'ws_location.inc'
+    );
+    $items['ws/company'] = array(
+        'title' => 'Company Web Service',
+        'page callback' => 'ws_company',
+        'page arguments' => array(),
+        'access arguments' => array('access content'),
+        'file' => 'ws_company.inc'
+    );
+    $items['ws/industry/averages'] = array(
+        'title' => 'Industry Averages Web Service',
+        'page callback' => 'ws_industry_averages',
+        'page arguments' => array(),
+        'access arguments' => array('access content'),
+        'file' => 'ws_industry_averages.inc'
+    );
+    $items['ws/machine'] = array(
+        'title' => 'Machine Web Service',
+        'page callback' => 'ws_machine',
+        'page arguments' => array(2, 3),
+        'access arguments' => array('access content'),
+        'file' => 'ws_machine.inc'
+    );
+    return $items;
 }
 
-function xeros_app_permission() {
-  return array(
-    'xeros app' => array(
-      'title' => t('Xeros App Access'),
-      'description' => t('Roles with this permission have the ability to access the Xeros App'),
-    ),
-    'xeros view all locations' => array(
-      'title' => t('Xeros View All Locations'),
-      'description' => t('Roles with this permission can see all the locations and their data.  Other users can only see data at locations they are assigned to.')
-    )
-  );
+function xeros_app_permission()
+{
+    return array(
+        'xeros app' => array(
+            'title' => t('Xeros App Access'),
+            'description' => t('Roles with this permission have the ability to access the Xeros App'),
+        ),
+        'xeros view all locations' => array(
+            'title' => t('Xeros View All Locations'),
+            'description' => t('Roles with this permission can see all the locations and their data.  Other users can only see data at locations they are assigned to.')
+        )
+    );
 }
 
 ///**
@@ -64,23 +65,26 @@ function xeros_app_permission() {
 //  drupal_add_js($path . '/libs/bootstrap-min.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 //}
 
-function xeros_app_user_logout($account) {
-  // Clear all the application cookies so we don't pass the cookies on to another user.
-  foreach ( $_COOKIE as $key => $value) {
-    if ( preg_match('/^session/', $key) == 1 ) {
-      setcookie($key, '', time()-1000);
-      setcookie($key, '', time()-1000 , '/');
+function xeros_app_user_logout($account)
+{
+    // Clear all the application cookies so we don't pass the cookies on to another user.
+    foreach ($_COOKIE as $key => $value) {
+        if (preg_match('/^session/', $key) == 1) {
+            setcookie($key, '', time() - 1000);
+            setcookie($key, '', time() - 1000, '/');
+        }
     }
-  }
 }
 
-function xeros_app_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['#form_id']) && $form['#form_id'] == 'user_profile_form') {
-    // TODO: Change to checking for a permission instead of a role
-    if ( !in_array('administrator', $GLOBALS['user']->roles ) ) {
-      $form['field_company']['#access'] = false;
-      $form['field_location']['#access'] = false;
-      $form['picture']['#access'] = false;
+function xeros_app_form_user_profile_form_alter(&$form, &$form_state, $form_id)
+{
+    if (isset($form['#form_id']) && $form['#form_id'] == 'user_profile_form') {
+        // TODO: Change to checking for a permission instead of a role
+        if (!in_array('administrator', $GLOBALS['user']->roles)) {
+            $form['field_company']['#access'] = false;
+            $form['field_location']['#access'] = false;
+            $form['picture']['#access'] = false;
+            $form['timezone']['#access'] = false;
+        }
     }
-  }
 }

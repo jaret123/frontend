@@ -2843,7 +2843,7 @@ tr.selected td {
 /* line 803, ../sass/components/_drupal-misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1416407843');
+    background-image: url('../images/progress.gif?1425405345');
 }
 
 /* line 2, ../sass/components/_footer.scss */
@@ -2998,7 +2998,8 @@ h1 {
   border: 0;
   overflow: hidden;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 60, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -3009,15 +3010,18 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 48, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:first-child, .header .header__row-1 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 49, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 50, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-1 ul.menu li.last {
   padding-right: 0;
 }
@@ -3047,7 +3051,8 @@ h1 {
   margin-left: 250px;
   margin-top: -12px;
 }
-/* line 60, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 60, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li {
   list-style-image: none;
   list-style-type: none;
@@ -3058,15 +3063,18 @@ h1 {
   padding-left: 4px;
   padding-right: 4px;
 }
-/* line 48, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 48, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:first-child, .header .header__row-2 ul.menu li.first {
   padding-left: 0;
 }
-/* line 49, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 49, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li:last-child {
   padding-right: 0;
 }
-/* line 50, ../../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
+
+/* line 50, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/typography/lists/_horizontal-list.scss */
 .header .header__row-2 ul.menu li.last {
   padding-right: 0;
 }
@@ -4254,6 +4262,165 @@ a:hover, a:active {
 /* line 40, ../sass/components/_lightbox.scss */
 .lightbox.lightbox-content .lightbox-body {
   padding: 10px;
+}
+
+/* line 3, ../sass/components/_report-block.scss */
+#report-dashboard {
+    opacity: 1;
+    z-index: 0;
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* line 46, ../sass/components/_grids.scss */
+#report-dashboard:before, #report-dashboard:after {
+    content: "";
+    display: table;
+}
+
+/* line 50, ../sass/components/_grids.scss */
+#report-dashboard:after {
+    clear: both;
+}
+
+/* line 16, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container h5 {
+    margin: 0px;
+}
+
+/* line 20, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container h3 {
+    margin-top: 0px;
+    margin-bottom: 11.5px;
+}
+
+/* line 25, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .report-block {
+    position: relative;
+}
+
+/* line 27, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .report-block .dropdown {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+/* line 34, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .machine-block .machine-list-open {
+    cursor: pointer;
+}
+
+/* line 37, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .machine-block .machine-output {
+    display: none;
+}
+
+/* line 42, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .machine-block.active .machine-list-open i {
+    transform: rotate(180deg);
+}
+
+/* line 46, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .machine-block.active .machine-output {
+    display: block;
+}
+
+/* line 52, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row {
+    padding-left: 0;
+    padding-right: 0;
+    clear: left;
+    overflow: hidden;
+    border-top: 1px solid #444444;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    position: relative;
+}
+
+/* line 62, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col {
+    min-height: 250px;
+}
+
+/* line 65, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col:nth-child(1) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+    padding-left: 7px;
+    padding-right: 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* line 69, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col:nth-child(2) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: -66.66667%;
+    padding-left: 7px;
+    padding-right: 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* line 71, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col:nth-child(2) .Filters {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+    padding-left: 7px;
+    padding-right: 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* line 75, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col:nth-child(3) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+    padding-left: 7px;
+    padding-right: 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+/* line 78, ../sass/components/_report-block.scss */
+#report-dashboard .reports__grid-container .row .col:nth-child(4) {
+    padding-left: 0;
+    padding-right: 0;
+    clear: left;
+    float: left;
+    width: 66.66667%;
+    margin-left: 0%;
+    margin-right: -66.66667%;
+    padding-left: 7px;
+    padding-right: 8px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 /* Layout rules */

@@ -1,8 +1,8 @@
 /**
  * Created by jason on 10/1/14.
  */
-Handlebars.registerHelper("formatMoney", function(value, decPlaces, thouSeparator, decSeparator) {
-    if ( typeof(value) === "undefined" )  {
+Handlebars.registerHelper("formatMoney", function (value, decPlaces, thouSeparator, decSeparator) {
+    if (typeof(value) === "undefined") {
         return 0
     } else {
         var n = value,
@@ -16,40 +16,42 @@ Handlebars.registerHelper("formatMoney", function(value, decPlaces, thouSeparato
     }
 });
 
-Handlebars.registerHelper("isBlank", function(value) {
-    if ( typeof(value) === "undefined" )  {
+Handlebars.registerHelper("isBlank", function (value) {
+    if (typeof(value) === "undefined") {
         return 0
     } else {
         return value;
     }
 });
 
-Handlebars.registerHelper("toLocaleString", function(value, dec) {
-    if ( typeof(value) === "undefined" )  {
+Handlebars.registerHelper("toLocaleString", function (value, dec) {
+    if (typeof(value) === "undefined") {
         return 0
     } else {
-        return FF.Format.toLocaleString(value,dec);
+        return FF.Format.toLocaleString(value, dec);
 
     }
 });
 
-Handlebars.registerHelper("waterOnly", function(water_only) {
+Handlebars.registerHelper("waterOnly", function (water_only) {
     return ( water_only === "1" || water_only === 1 );
 });
 
-Handlebars.registerHelper('dateFormat', function(context, block) {
+Handlebars.registerHelper('dateFormat', function (context, block) {
+    console.log(context);
     var d = new Date(context);
-    //TODO this is where date format goes @jason
+    console.log(d);
     if (window.moment) {
         var f = block.hash.format || "MMM Do, YYYY";
 
         return moment(d).format(f);
-    }else{
+    } else {
         return context;   //  moment plugin not available. return data as is.
-    };
+    }
+    ;
 });
 
-Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, format) {
+Handlebars.registerHelper('statusFormat', function (statusCode, machineStatus, format) {
     if (format == 'color') {
         if (machineStatus == 'offline') {
             return 'grey';
@@ -58,7 +60,7 @@ Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, fo
                 return 'green';
             } else if (statusCode == 0) {
                 return 'yellow';
-            } else if (statusCode < 0 ) {
+            } else if (statusCode < 0) {
                 return 'red';
             } else {
                 return 'red';
@@ -70,7 +72,7 @@ Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, fo
             return 'OK';
         } else if (statusCode == 0) {
             return 'idle';
-        } else if (statusCode < 0 ) {
+        } else if (statusCode < 0) {
             return 'fault';
         } else {
             return 'fault';
@@ -80,7 +82,7 @@ Handlebars.registerHelper('statusFormat', function(statusCode, machineStatus, fo
     }
 });
 
-Handlebars.registerHelper('runTimeFormat', function(seconds) {
+Handlebars.registerHelper('runTimeFormat', function (seconds) {
 
     seconds = Math.round(seconds);
 
@@ -92,33 +94,33 @@ Handlebars.registerHelper('runTimeFormat', function(seconds) {
 
     var time = "";
     if (hours > 0) {
-        time = hours.toString() + ":" + minutes.toString() + ":" + pad(seconds.toString(),2);
+        time = hours.toString() + ":" + minutes.toString() + ":" + pad(seconds.toString(), 2);
     } else {
-        time = minutes.toString() + ":" + FF.Format.pad(seconds.toString(),2);
+        time = minutes.toString() + ":" + FF.Format.pad(seconds.toString(), 2);
     }
     return time;
 });
 
-Handlebars.registerHelper('round', function(number, decimalPlaces) {
-    return Math.round(number * Math.pow(10, decimalPlaces)) / Math.pow(10,decimalPlaces);
+Handlebars.registerHelper('round', function (number, decimalPlaces) {
+    return Math.round(number * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);
 })
 
-Handlebars.registerHelper('formatDelta', function(numerator, denominator) {
+Handlebars.registerHelper('formatDelta', function (numerator, denominator) {
 
     var value = Handlebars.helpers.deltaValue(numerator, denominator);
-    if ( value === '-' || value === 0  ) {
+    if (value === '-' || value === 0) {
         return 'delta-none';
-    } else if ( value > 0 ) {
+    } else if (value > 0) {
         return 'delta-down';
-    } else if ( value < 0 ) {
+    } else if (value < 0) {
         return 'delta-up';
     } else {
         return 'delta-none'
     }
 })
 
-Handlebars.registerHelper('formatDeltaValue', function(value) {
-    if ( typeof value == "undefined" ) {
+Handlebars.registerHelper('formatDeltaValue', function (value) {
+    if (typeof value == "undefined") {
         return 'No Readings';
     } else {
         if (value === '-') {
@@ -128,13 +130,18 @@ Handlebars.registerHelper('formatDeltaValue', function(value) {
         }
         return value;
     }
-})
+});
 
-Handlebars.registerHelper('digits', function(cycles) {
+Handlebars.registerHelper('digits', function (cycles) {
     //TODO Why would cycles come in as null
-    if (typeof(cycles) != "undefined" && cycles !==null) {
+    if (typeof(cycles) != "undefined" && cycles !== null) {
+        console.log(cycles);
         return 'digits-' + cycles.toString().length;
     } else {
         return '';
     }
+});
+
+Handlebars.registerHelper("checkedIf", function (condition) {
+    return (condition) ? "checked" : "";
 });
