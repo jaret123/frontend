@@ -8,7 +8,7 @@
   <?php if ( user_access('xeros change location') ): ?>
     <div class="location-picker">
       <div class="location-picker__wrapper">
-        <a href="#" class="location-picker__button"><?php print t('Menu'); ?></a>
+        <div class="location-picker__button"><?php print t('Menu'); ?></div>
         <h4>
           <?php print t('Admin Menu'); ?>
         </h4>

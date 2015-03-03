@@ -17,6 +17,8 @@ FF.Controls.LocationPicker = (function ($) {
     function create() {
         // Open and close button of the location menu
         $(".location-picker .location-picker__button").click(function(e) {
+            e.stopPropagation();
+
             $(".location-picker").toggleClass("open");
             $(".location-picker__button").html("Menu");
             $(".open .location-picker__button").html("Close");
