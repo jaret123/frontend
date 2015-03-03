@@ -18,7 +18,8 @@ FF.Controls.ReportSelect = (function ($) {
     function create() {
         $("#report-select").val(FF.User.reportSettings.metric);
         FF.Controls.Dropdown.create("#report-select", function (event) {
-            FF.User.setReportMetric($(event.target).find("span.value").html());
+            var metric = $(event.target).find("span.value").html();
+            FF.User.setValues({ metric: metric }, 'metric:select');
         });
     }
 

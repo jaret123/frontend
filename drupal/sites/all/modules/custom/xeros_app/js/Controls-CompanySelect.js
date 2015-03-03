@@ -19,7 +19,7 @@ FF.Controls.LocationSelect = (function ($) {
         FF.Controls.Dropdown.create("#location-select", function (event) {
             var locationId = parseInt($(event.target).find("span.value").html(), 10);
             app.dataRefresh = 1;
-            FF.User.setReportLocation(locationId);
+            FF.User.setValues({locationId : locationId}, 'location:select');
         });
     };
 
@@ -78,7 +78,7 @@ FF.Controls.CompanySelect = (function ($) {
 
         FF.Controls.Dropdown.create("#company-select", function (event) {
             var companyId = parseInt($(event.target).find("span.value").html(), 0)
-            FF.User.setReportCompany(companyId);
+            FF.User.setValues({companyId: companyId}, 'company:select');
 
             var company = _.filter(data, function(obj) {
                 return obj.key === companyId;

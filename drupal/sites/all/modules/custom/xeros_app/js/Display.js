@@ -25,12 +25,9 @@ FF.Display = (function ($) {
     }
 
     function init() {
-        $(document).on("user:change", function(event, data) {
-            if ( _.contains(data, 'location') ) {
+        $(document).on("user:change", function(event, data, eventContext) {
+            if ( eventContext !== 'company:select' ) {
                 updateHeaderDisplay();
-            }
-
-            if  (_.contains(data, 'dates') ) {
                 updateDateRange();
             }
         });

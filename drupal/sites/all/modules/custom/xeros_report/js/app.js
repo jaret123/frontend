@@ -22,14 +22,19 @@ var app = {
         /**
          * Listen to changes in the hash.  If the hash changes, then update the report
          */
-        jQuery(window).on('hashchange', jQuery.proxy(this.route, this));
+        jQuery(window).on('hashchange', function() {
+            app.readHash();
+            app.route();
+        });
 
         /**
          * Listen for a change to user.js and if it changes update the hash
          */
-        jQuery( document).on("user:change", function(event, data) {
+        jQuery(document).on("user:change", function(event, data, eventContext) {
             // Don't change if the company changes.  We want to wait for the location to change
-            if ( !_.contains(data, 'company')) {
+            if ( eventContext == 'company:select' || eventContext == 'hash:refresh') {
+                // Do nothing if we only updated the company or this was a hash:refresh in which case we don't want to loop.
+            } else {
                 self.updateHash();
             }
         })
@@ -45,6 +50,59 @@ var app = {
     },
 
     /**
+     * Read the hash
+     */
+    readHash: function(state) {
+
+        if (typeof(state) === 'undefined') {
+            state = 'refresh';
+        }
+
+        var hash = window.location.hash;
+
+        var hashArray = hash.substr(1).split("+");
+
+        /**
+         * Parse the hash
+         *
+         * Hash is #<machineid> +
+         *          <metricname> +
+         *          <custom,fromdate,todate||timeselect> +
+         *          <locationId>
+         */
+        if (hash.length == 0) {
+            return;
+        } else {
+            var values = {};
+            // Machine
+            if ( typeof(hashArray[0] !== 'undefined') ) {
+                app.machine = hashArray[0];
+            } else {
+                app.machine = 0;
+            }
+            // Metric
+            if ( typeof(hashArray[1] !== 'undefined') ) {
+                if (state == 'init') {
+                    values.metric = hashArray[1];
+                }
+            }
+            // Date Range
+            // custom,fromdate,todate||timeselect
+            if ( typeof(hashArray[2] !== 'undefined') ) {
+                    values.dateRanges = hashArray[2];
+            }
+            // Location Id
+            if ( typeof(hashArray[3]) !== 'undefined' )  {
+                var locationId = hashArray[3];
+                values.location = parseInt(locationId, 10);
+            }
+            if ( values !== {} ) {
+                FF.User.setValues(values, 'hash:' + state);
+            }
+        }
+    },
+
+    /**
      * Read the hash and update the page based on the data in the hash
      */
     route: function (callback) {
@@ -54,90 +112,24 @@ var app = {
 
         FF.Error.hide();
 
-        var hash = window.location.hash;
-        // hashArray =
-        //  0 - Machine
-        //  1 - Metric
-        //  2 - Date Range (comma delimited)
-        //  3 - Location ID
-        var hashArray = hash.substr(1).split("+");
-
-        // Remove any error messages from the page
-        jQuery(app.err).removeClass("active");
-
-        // If no hash
-        if (!hash) {
-            self.setApiUrl();
-        // If there is a hash
-        } else {
-            /**
-             *
-             * Hash is #<machineid> + <metricname> + <custom,fromdate,todate||timeselect> + <locationId>
-             */
-            hashArray = hash.substr(1).split("+");
-            if (hashArray.length > 1) {
-                // Machine
-                // TODO: Might move to User.reportSettings
-                if ( hashArray[0].length > 0) {
-                    app.machine = hashArray[0];
-                } else {
-                    // Throw error, now machines defined
-                    error = true;
-                    jQuery(app.err).addClass("active");
-                    jQuery(app.err).html("<div>This location does not have any active machines.</div>");
-                    return;
-                }
-                // Metric
-                if ( hashArray[1].length > 0 ) {
-                    FF.User.setReportMetric(hashArray[1]);
-                }
-                // Date Range
-                // custom,fromdate,todate||timeselect
-                if ( hashArray[2].length > 0 ) {
-                    FF.User.setReportDateRange(hashArray[2]);
-                }
-                // Location Id
-                if ( typeof(hashArray[3]) !== 'undefined' && hashArray[3].length > 0 )  {
-                    var locationId = hashArray[3];
-                    FF.User.setReportLocation(parseInt(locationId, 10));
-                    FF.Location.getLocation(hashArray[3], function() {
-                        self.routeCallback(callback);
-                    });
-                    return; // Break here because we just called the rest of this in a callback.
-                }
-            }
-        }
-        if ( !error ) {
-            self.routeCallback(callback);
-        }
-    },
-    routeCallback: function(callback) {
-
-        app.fadeReport();
-        // if dataRefresh equals 1, then go to the web service again and get new data
-
         // Test the location
-        FF.Location.getLocation(FF.User.reportSettings.location.id);
-
-        if ( FF.Location.machines.length == 0 ) {
-            FF.Error.set("This location has no active machines.");
-            return;
-        }
-        if ( FF.User.reportSettings.location.id !== '' && FF.User.reportSettings.company.id !== '' ) {
-            if ( app.dataRefresh == 1 ) {
-                app.setApiUrl();
-                app.getData();
+        FF.Location.getLocation(FF.User.reportSettings.location.id, function() {
+            if ( FF.Location.machines.length == 0 ) {
+                FF.Error.set("app.route", "This location has no active machines.");
+            } else if ( FF.User.reportSettings.location.id == '' || FF.User.reportSettings.company.id == '' ) {
+                FF.Error.set("app.route", "This user has not been assigned a company or a location.");
             } else {
-                view.parseData(app.showReport);
+                if ( app.dataRefresh == 1 ) {
+                    app.setApiUrl();
+                    app.getData();
+                } else {
+                    view.parseData(app.showReport);
+                }
             }
-        } else {
-            FF.Error.set("This user has not been assigned a company or a location.");
-            return;
-        }
-
-        if (typeof(callback) === 'function') {
-            callback();
-        }
+            if (typeof(callback) === 'function') {
+                callback();
+            }
+        });
     },
 
     // This is going to be passed as a function to the view
@@ -145,7 +137,7 @@ var app = {
         FF.Controls.Spinner.hide();
         var html = app.tpl(app.reportData);
         jQuery('.template-container').html(html).removeClass("fade");
-        FF.Controls.MachineNav.create();
+        //FF.Controls.MachineNav.create();
     },
 
     fadeReport: function () {
@@ -180,29 +172,40 @@ var app = {
         // Protect us from an infinite loop.
         if (window.location.hash !== hash) {
             window.location.hash = hash;
+            app.fadeReport();
         }
     },
     initialize: function () {
         var self = this;
+        /**
+         * Get the report name for using in the URL for the webservice
+         */
         self.reportName = window.reportName;
-        // Sometimes the summary data comes back empty when we don't have readings yet.
 
+        /**
+         * Load the template
+         */
         self.tpl = Handlebars.compile(jQuery("#page-tpl").html());
 
-
+        /**
+         * Read the hash if there is one.  If there is a hash then we will override the user's settings
+         * assuming that someone has sent the user a report to review.
+         *
+         * This will override the User settings if the initial URL has a hash.
+         */
+        self.readHash('init');
 
         /**
          * Draw the report for the first time
          */
-        FF.User.setReportLocation(FF.User.reportSettings.location.id);
 
-        FF.Location.getLocation(FF.User.reportSettings.location.id, function() {
-            // Do the things that get values from the template (window)
-            self.apiUrlBase = window.apiUrlBase;
-            self.route(function() {
-                // After drawing the report for the first time register the listeners
-                self.registerEvents();
-            });
+        // Do the things that get values from the template (window)
+        self.apiUrlBase = window.apiUrlBase;
+
+        self.route(function() {
+            // After drawing the report for the first time register the listeners
+            self.registerEvents();
         });
+
     }
 }

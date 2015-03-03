@@ -24,7 +24,7 @@ function load_base_js($variables, $hook) {
   drupal_add_js($path . '/js/Controls-TimeSelect.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-CompanySelect.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-ReportSelect.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
-  drupal_add_js($path . '/js/Controls-MachineNav.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
+//  drupal_add_js($path . '/js/Controls-MachineNav.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-Spinner.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
   drupal_add_js($path . '/js/Controls-Pdf.js', array('scope' => 'footer', 'weight' => -1, 'preprocess' => TRUE));
 

@@ -72,7 +72,7 @@ FF.Controls.TimeSelect = (function ($) {
                 // Refresh data
                 app.dataRefresh = 1;
                 // Just pass the time select
-                FF.User.setReportDateRange(click_value);
+                FF.User.setValues({dateRange: click_value}, 'date:select');
             }
         });
 
@@ -93,7 +93,7 @@ FF.Controls.TimeSelect = (function ($) {
             var click_value = 'custom,' + k.getSelectedAsText();
             // Refresh data
             app.dataRefresh = 1;
-            FF.User.setReportDateRange(click_value);  // Pass custom,fromDate,toDate -- toDate is optional
+            FF.User.setValues({dateRange: click_value}, 'date:select');  // Pass custom,fromDate,toDate -- toDate is optional
         });
 
         $(".cal__button-cancel").unbind().click(function (e) {
