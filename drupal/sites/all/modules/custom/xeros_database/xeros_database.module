@@ -52,7 +52,7 @@ function xeros_database_update_7205() {
 /**
  * Move water_meter_rate to xeros_machine
  *
- * Re-run the aggregate table definitions - /ddl-sp-cycle-data.sql
+ * - db-update-2014-08-06-move-water-meter-rate-to-machine.sql
  *
  */
 function xeros_database_update_7206() {
@@ -67,6 +67,14 @@ function xeros_database_update_7206() {
 /**
  *
  * Alter the xeros_location table to add temperature_unit
+ *
+ *   db-update-2015-01-28-xeros-location-temperature-unit.sql,
+ *   db-update-2015-02-02-xeros-location-currency-unit.sql,
+ *   db-update-2015-02-02-xeros-location-timezone.sql,
+ *   db-update-2015-02-02-xeros-location-energy.sql,
+ *   db-update-2015-01-28-add-actual-timezone.sql,
+ *   db-update-2015-02-25_add_currency_exchange_rate_db_table_triggers.sql,
+ *
  */
 
 function xeros_database_update_7207() {
@@ -75,7 +83,8 @@ function xeros_database_update_7207() {
         "updates/db-update-2015-02-02-xeros-location-currency-unit.sql",
         "updates/db-update-2015-02-02-xeros-location-timezone.sql",
         "updates/db-update-2015-02-02-xeros-location-energy.sql",
-        "updates/db-update-2015-01-28-add-actual-timezone.sql"
+        "updates/db-update-2015-01-28-add-actual-timezone.sql",
+        "updates/db-update-2015-02-25_add_currency_exchange_rate_db_table_triggers.sql",
     );
     foreach ( $scripts as $s ) {
         run_external_script("$s");

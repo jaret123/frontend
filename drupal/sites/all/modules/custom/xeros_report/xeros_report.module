@@ -159,6 +159,17 @@ function xeros_report_variable_group_info() {
 
 /**
  * Update the report builds to implement incremental refresh functionality.
+ *
+ *  "aggregate_tables/ddl-udf_convert_mass.sql",
+ *  "aggregate_tables/ddl-udf_convert_temperature.sql",
+ *  "aggregate_tables/ddl-udf_convert_volume.sql",
+ *  "aggregate_tables/ddl-udf_convert_energy.sql",
+ *  "aggregate_tables/ddl-udf_convert_currency.sql",
+ *  "aggregate_tables/ddl-standardize-location-profile.sql",
+ *  "aggregate_tables/ddl-standardize-meter.sql",
+ *  "aggregate_tables/ddl-sp-therm-cycle.sql",
+ *  "aggregate_tables/ddl-sp-cycle-data.sql",
+ *  "aggregate_tables/ddl-sp-get-status-history",
  */
 function xeros_report_update_7201() {
   $scripts = array(
@@ -172,7 +183,6 @@ function xeros_report_update_7201() {
     "aggregate_tables/ddl-sp-therm-cycle.sql",
     "aggregate_tables/ddl-sp-cycle-data.sql",
     "aggregate_tables/ddl-sp-get-status-history",
-
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");

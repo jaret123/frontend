@@ -74,5 +74,5 @@ CREATE PROCEDURE sp_get_status (IN machine_ids varchar(255), IN record_count INT
 
     END$$
 
-    call sp_get_status('14,15', 3, 'America/New_York')$$
-    call sp_get_status(NULL, 3, 'America/New_York') $$
+#     call sp_get_status('14,15', 3, 'America/New_York')$$
+#     call sp_get_status(NULL, 3, 'America/New_York') $$

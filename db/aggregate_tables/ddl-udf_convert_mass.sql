@@ -18,9 +18,9 @@ CREATE FUNCTION udf_convert_mass( _mass float(10,2), _unit_from varchar(10) char
 
   END ;;
 
-select udf_convert_mass(10, 'ounces', 'grams');;
-select udf_convert_mass(10, 'grams', 'ounces');;
-select udf_convert_mass(10, 'grams', 'grams');;
-
-
-select udf_convert_mass(10, 'kelvin', 'tshirts');
+# select udf_convert_mass(10, 'ounces', 'grams');;
+# select udf_convert_mass(10, 'grams', 'ounces');;
+# select udf_convert_mass(10, 'grams', 'grams');;
+#
+#
+# select udf_convert_mass(10, 'kelvin', 'tshirts');

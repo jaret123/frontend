@@ -18,9 +18,9 @@ CREATE FUNCTION udf_convert_energy( _value float(10,2), _unit_from varchar(10) c
 
   END ;;
 
-select udf_convert_energy(10, 'therms', 'kwh');;
-select udf_convert_energy(10, 'kwh', 'therms');;
-select udf_convert_energy(10, 'kwh', 'kwh');;
-
-
-select udf_convert_energy(10, 'hats', 'tshirts');
+# select udf_convert_energy(10, 'therms', 'kwh');;
+# select udf_convert_energy(10, 'kwh', 'therms');;
+# select udf_convert_energy(10, 'kwh', 'kwh');;
+#
+#
+# select udf_convert_energy(10, 'hats', 'tshirts');

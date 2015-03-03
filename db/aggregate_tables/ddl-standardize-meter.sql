@@ -114,7 +114,7 @@ BEGIN
 END ;;
 
 
-call sp_standardize_meter('FULL', NULL) ;;
-
-select count(*) from xeros_dai_meter_standard ;;
+# call sp_standardize_meter('FULL', NULL) ;;
+#
+# select count(*) from xeros_dai_meter_standard ;;
 

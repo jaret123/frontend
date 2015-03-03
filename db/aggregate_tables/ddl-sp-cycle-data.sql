@@ -552,7 +552,7 @@ END;;
 
 DELIMITER ;
 
-call sp_refresh_report_data('FULL', null);
+# call sp_refresh_report_data('FULL', null);
 
 -- select machine_id, count(*) from xeros_cycle group by machine_id;;
 

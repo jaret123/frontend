@@ -39,7 +39,7 @@ BEGIN
 
 END$$
 
-
-call sp_get_status_history('14', 5, 'America/New_York') $$
-
-call sp_get_status_history(NULL, 5, 'America/New_York') $$
+#
+# call sp_get_status_history('14', 5, 'America/New_York') $$
+#
+# call sp_get_status_history(NULL, 5, 'America/New_York') $$

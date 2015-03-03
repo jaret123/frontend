@@ -26,10 +26,10 @@ CREATE FUNCTION udf_convert_currency( _value float(10,2), _unit_from varchar(10)
     RETURN _value * _rate;
   END ;;
 
-select udf_convert_currency(10, 'USD', 'EUR');;
-select udf_convert_currency(10, 'USD', 'GBP');;
-select udf_convert_currency(10, 'USD', 'USD');;
-
-
-select udf_convert_currency(10, 'bitcoin', 'rupies');
-select udf_convert_currency(10, 'EUR', 'USD');;
+# select udf_convert_currency(10, 'USD', 'EUR');;
+# select udf_convert_currency(10, 'USD', 'GBP');;
+# select udf_convert_currency(10, 'USD', 'USD');;
+#
+#
+# select udf_convert_currency(10, 'bitcoin', 'rupies');
+# select udf_convert_currency(10, 'EUR', 'USD');;

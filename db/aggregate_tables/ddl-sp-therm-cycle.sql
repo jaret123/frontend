@@ -25,7 +25,7 @@ BEGIN
  	RETURN temp_rise;
 END ;;
 
-select udf_temp_rise('2014-10-03', 10);;
+# select udf_temp_rise('2014-10-03', 10);;
 
 DROP FUNCTION IF EXISTS udf_total_therms;;
 CREATE FUNCTION udf_total_therms (_reading_date timestamp, _location_id int, _gallons decimal(15,4))
@@ -73,7 +73,7 @@ BEGIN
 
 END;;
 
-SELECT udf_total_therms('2014-10-11', 10, 44);;
+# SELECT udf_total_therms('2014-10-11', 10, 44);;
 
 DROP TABLE IF EXISTS xeros_therm_cycle;;
 

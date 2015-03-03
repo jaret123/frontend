@@ -18,9 +18,9 @@ CREATE FUNCTION udf_convert_volume( _volume float(10,2), _unit_from varchar(10) 
 
   END ;;
 
-select udf_convert_volume(10, 'gallons', 'liters');;
-select udf_convert_volume(10, 'liters', 'gallons');;
-select udf_convert_volume(10, 'gallons', 'gallons');;
-
-
-select udf_convert_volume(10, 'microns', 'gallons');
+# select udf_convert_volume(10, 'gallons', 'liters');;
+# select udf_convert_volume(10, 'liters', 'gallons');;
+# select udf_convert_volume(10, 'gallons', 'gallons');;
+#
+#
+# select udf_convert_volume(10, 'microns', 'gallons');

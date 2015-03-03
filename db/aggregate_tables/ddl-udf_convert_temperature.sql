@@ -18,9 +18,9 @@ CREATE FUNCTION udf_convert_temperature( _temperature float(10,2), _unit_from va
 
   END ;;
 
-select udf_convert_temperature(10, 'F', 'C');;
-select udf_convert_temperature(10, 'C', 'F');;
-select udf_convert_temperature(10, 'F', 'F');;
-
-
-select udf_convert_temperature(10, 'kelvin', 'tshirts');
+# select udf_convert_temperature(10, 'F', 'C');;
+# select udf_convert_temperature(10, 'C', 'F');;
+# select udf_convert_temperature(10, 'F', 'F');;
+#
+#
+# select udf_convert_temperature(10, 'kelvin', 'tshirts');

@@ -78,7 +78,7 @@ CREATE PROCEDURE sp_standardize_location_profile ()
   END ;;
 
 
-call sp_standardize_location_profile() ;;
-
-select count(*) from xeros_location_profile_standard ;;
+# call sp_standardize_location_profile() ;;
+#
+# select count(*) from xeros_location_profile_standard ;;
 
