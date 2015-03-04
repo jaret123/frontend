@@ -84,7 +84,6 @@ function xeros_database_update_7207() {
         "updates/db-update-2015-02-02-xeros-location-timezone.sql",
         "updates/db-update-2015-02-02-xeros-location-energy.sql",
         "updates/db-update-2015-01-28-add-actual-timezone.sql",
-        "updates/db-update-2015-02-25_add_currency_exchange_rate_db_table_triggers.sql",
     );
     foreach ( $scripts as $s ) {
         run_external_script("$s");
