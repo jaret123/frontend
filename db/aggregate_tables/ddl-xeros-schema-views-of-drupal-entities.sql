@@ -1,5 +1,3 @@
-use xeros_local;
-
 /**
 *  Delta is used for the ordering of multi-valued fields.  For these views we will take just the first one
 **/
