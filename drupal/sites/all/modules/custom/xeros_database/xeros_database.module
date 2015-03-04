@@ -39,10 +39,14 @@ function xeros_database_update_7204() {
 
 /**
  * Add static values table for the water only metrics and future static values
+ *
+ * - db-update-2014-05-21-create-table-xeros-static-values.sql,
+ * - db-update-2014-08-06-move-water-meter-rate-to-machine.sql
  */
 function xeros_database_update_7205() {
   $scripts = array(
     "updates/db-update-2014-05-21-create-table-xeros-static-values.sql",
+    "updates/db-update-2014-08-06-move-water-meter-rate-to-machine.sql",
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
@@ -52,12 +56,10 @@ function xeros_database_update_7205() {
 /**
  * Move water_meter_rate to xeros_machine
  *
- * - db-update-2014-08-06-move-water-meter-rate-to-machine.sql
  *
  */
 function xeros_database_update_7206() {
   $scripts = array(
-    "updates/db-update-2014-08-06-move-water-meter-rate-to-machine.sql",
   );
   foreach ( $scripts as $s ) {
     run_external_script("$s");
