@@ -21,7 +21,7 @@ files=(
 for i in "${files[@]}"
 do
     echo "mysql -h localhost -u root -proot $databaseName < $i"
-	mysql -h localhost -u root -p"root" $databaseName < $i
+	mysql -h localhost $databaseName < $i
 done
 
 
