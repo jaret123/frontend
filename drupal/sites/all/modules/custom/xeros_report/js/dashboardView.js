@@ -200,15 +200,18 @@ var view = {
      * @param change
      * @returns {number}
      */
-    delta : function(base, change) {
+    delta : function(_base, _change) {
         var delta = 0;
+
+        var base = _base;
+        var change = _change;
 
         if ( base == 0) {
             delta = 0;
         } else {
-            delta = parseInt(((parseInt(base, 10) - parseInt(change, 10)) / parseInt(base, 10)) * 100);
+            delta = ((base - change) / base) * 100;
         }
-        return delta;
+        return parseInt(delta, 10);
     },
     isValidSummaryData : function( summaryData ) {
        isValid = true;
