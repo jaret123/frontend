@@ -203,15 +203,15 @@ var view = {
     delta : function(_base, _change) {
         var delta = 0;
 
-        var base = _base;
-        var change = _change;
+        var base = Math.round(_base);
+        var change = Math.round(_change);
 
         if ( base == 0) {
             delta = 0;
         } else {
             delta = ((base - change) / base) * 100;
         }
-        return parseInt(delta, 10);
+        return Math.round(delta);
     },
     isValidSummaryData : function( summaryData ) {
        isValid = true;
