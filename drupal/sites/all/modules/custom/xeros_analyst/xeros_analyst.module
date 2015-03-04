@@ -6,22 +6,50 @@
  * @return mixed
  */
 function xeros_analyst_menu() {
-  $items['analyst/reports'] = array(
-    'title' => 'Analyst Reports',
-    'page callback' => 'analyst_reports_page',
-    'page arguments' => array(),
-    'access arguments' => array('xeros analyst'),
-    'file' => 'xeros_analyst_reports.inc'
-  );
-
-  return $items;
+    $items['analyst/reports'] = array(
+        'title' => 'Analyst Reports',
+        'page callback' => 'analyst_reports_page',
+        'page arguments' => array(),
+        'access arguments' => array('xeros analyst'),
+        'file' => 'xeros_analyst_reports.inc'
+    );
+    $items['analyst/cycle-reports'] = array(
+        'title' => 'Ops Reports',
+        'page callback' => 'analyst_cycle_reports_page',
+        'page arguments' => array(),
+        'access arguments' => array('xeros cycle reports'),
+        'file' => 'xeros_analyst_cycle_reports.inc'
+    );
+    return $items;
 }
 
+/**
+ * Implements hook_permission()
+ *
+ * @return array
+ */
 function xeros_analyst_permission() {
   return array(
     'xeros analyst' => array(
       'title' => t('Access the analyst reports'),
       'description' => t('Roles with this permission have the ability to access the analyst reports.'),
+    ),
+      'xeros cycle reports' => array(
+          'title' => t('Access the cycle reports'),
+          'description' => t('Roles with this permission have the ability to access the cycle reports.'),
     )
   );
+}
+
+
+function xeros_analyst_theme()
+{
+    $themes = array(
+        'xeros_analyst_cycle_reports_template' => array(
+            'template' => 'templates/node--cycle-reports',
+            'arguments' => array(),
+        ),
+    );
+
+    return $themes;
 }
