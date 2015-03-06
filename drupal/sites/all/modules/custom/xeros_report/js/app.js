@@ -116,8 +116,10 @@ var app = {
         FF.Location.getLocation(FF.User.reportSettings.location.id, function() {
             if ( FF.Location.machines.length == 0 ) {
                 FF.Error.set("app.route", "This location has no active machines.");
+                FF.Controls.Spinner.hide();
             } else if ( FF.User.reportSettings.location.id == '' || FF.User.reportSettings.company.id == '' ) {
                 FF.Error.set("app.route", "This user has not been assigned a company or a location.");
+                FF.Controls.Spinner.hide();
             } else {
                 if ( app.dataRefresh == 1 ) {
                     app.setApiUrl();
@@ -181,6 +183,9 @@ var app = {
          * Get the report name for using in the URL for the webservice
          */
         self.reportName = window.reportName;
+
+        FF.Controls.Spinner.show();
+        jQuery('.template-container').addClass("fade");
 
         /**
          * Load the template
