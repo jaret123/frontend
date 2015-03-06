@@ -30,7 +30,7 @@
                 </div>
                 <div class="kpis__select time__select">
                     <span>
-                        <span>Timeframe</span>
+                        <span><?php print t('Timeframe',array("context"=>"dashboard timeframe selector")); ?></span>
                         <select id="time-select" autofocus class="flagvisibility">
                           <option value="weekToDate"><?php print t('Week To Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
                           <option value="monthToDate" selected><?php print t('Month to Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
