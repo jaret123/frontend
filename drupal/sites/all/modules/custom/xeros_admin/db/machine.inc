@@ -35,4 +35,27 @@ class machine extends orm_abstract {
     }
     return $rows;
   }
+
+  public function selectActive($location_id = NULL, $machine_id = NULL) {
+
+    $select = db_select('xeros_machine', 'm');
+    $select->fields('m', $this->fields);
+    if ($location_id <> NULL) {
+      $select->condition('m.location_id', $location_id);
+    }
+    if ($machine_id <> NULL) {
+      $select->condition('m.machine_id', $machine_id);
+    };
+    $select->condition('m.active', 1);
+
+    $entries = $select->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $rows = array();
+    if (!empty($entries)) {
+      foreach ($entries as $entry) {
+        // Sanitize the data before handing it off to the theme layer.
+        $rows[] = array_map('check_plain', $entry);
+      }
+    }
+    return $rows;
+  }
 }

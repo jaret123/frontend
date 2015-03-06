@@ -10,7 +10,8 @@ function ws_machine($location_id = NULL, $machine_id = NULL)
     $machine->fields = array(
         'machine_id', 'machine_name', 'serial_number', 'manufacturer', 'location_id', 'active', 'status'
     );
-    $rows = $machine->select($location_id, $machine_id);
+
+    $rows = $machine->selectActive($location_id, $machine_id);
 
 
     echo json_encode($rows);

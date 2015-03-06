@@ -53,16 +53,16 @@ FF.Location = (function ($) {
 
     function getMachineIds(locationId, callback) {
         jQuery.ajax({
-            url: '/ws/location/' + locationId + '/machines',
+            url: '/ws/machine/' + locationId,
             success: function(d) {
                 pub.machines = d;
-                if ( pub.machines.length == 0 ) {
-                    FF.Error.set('Location.getMachineIds', 'This location has no active machines.', null, true);
-                }
-                if ( typeof(callback) == 'function') {
-                    callback();
-                }
-
+                callback();
+                //if ( pub.machines.length == 0 ) {
+                //    FF.Error.set('Location.getMachineIds', 'This location has no active machines.', null, true);
+                //    FF.Controls.Spinner.hide();
+                //} else if ( typeof(callback) == 'function') {
+                //    callback();
+                //}
             },
             dataType: 'json',
             type: 'GET',
