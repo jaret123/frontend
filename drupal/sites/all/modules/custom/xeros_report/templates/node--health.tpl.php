@@ -30,18 +30,18 @@
                 </div>
                 <div class="kpis__select time__select">
                     <span>
-                        <span><?php print t('Timeframe',array("context"=>"dashboard timeframe selector")); ?></span>
+                        <span><?php print t('Timeframe',array("context"=>"timeframe selector")); ?></span>
                         <select id="time-select" autofocus class="flagvisibility">
-                          <option value="weekToDate"><?php print t('Week To Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
-                          <option value="monthToDate" selected><?php print t('Month to Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
-                          <option value="yearToDate"><?php print t('Year to Date',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
-                          <option value="custom"><?php print t('Custom...',array(),array('context'=>'Health Detail TimeFrame')); ?></option>
+                          <option value="weekToDate"><?php print t('Week To Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="monthToDate" selected><?php print t('Month to Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="yearToDate"><?php print t('Year to Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="custom"><?php print t('Custom...',array(),array('context'=>'timeframe selector')); ?></option>
                         </select>
                     </span>
                     <div id="cal">
                         <div class="cal__button">
-                            <div class="cal__button-submit"><?php print t('Get Data',array(),array('context'=>'Health Detail TimeFrame')); ?></div>
-                            <div class="cal__button-cancel"><?php print t('Cancel',array(),array('context'=>'Health Detail TimeFrame')); ?></div>
+                            <div class="cal__button-submit"><?php print t('Get Data',array(),array('context'=>'timeframe selector')); ?></div>
+                            <div class="cal__button-cancel"><?php print t('Cancel',array(),array('context'=>'timeframe selector')); ?></div>
                         </div>
                     </div>
                 </div>

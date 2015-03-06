@@ -24,21 +24,21 @@
                 <div  class="dashboard-gear" data-toggle="modal" data-target="#chart-options"><i class="fa fa-gear"></i><span><?php print t("Select Dashboard View",array(),array("context"=>"dashboard")); ?></span></div>
                 <!-- End template -->
                   <div id="kpis__select" class="time__select kpis__select select">
-                      <span>
-                          <span><?php print t('Timeframe',array("context"=>"dashboard timeframe selector")); ?></span>
-                          <select id="time-select" autofocus class="flagvisibility">
-                              <option value="weekToDate"><?php print t('Week To Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
-                              <option value="monthToDate" selected><?php print t('Month to Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
-                              <option value="yearToDate"><?php print t('Year to Date',array(),array("context"=>"dashboard timeframe selector")); ?></option>
-                              <option value="custom"><?php print t('Custom...',array(),array("context"=>"dashboard timeframe selector")); ?></option>
-                          </select>
-                      </span>
-                      <div id="cal">
-                          <div class="cal__button">
-                              <div class="cal__button-submit"><?php print t('Get Data',array(),array("context"=>"dashboard timeframe selector")); ?></div>
-                              <div class="cal__button-cancel"><?php print t('Cancel',array(),array("context"=>"dashboard timeframe selector")); ?></div>
-                          </div>
-                      </div>
+                    <span>
+                        <span><?php print t('Timeframe',array("context"=>"timeframe selector")); ?></span>
+                        <select id="time-select" autofocus class="flagvisibility">
+                          <option value="weekToDate"><?php print t('Week To Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="monthToDate" selected><?php print t('Month to Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="yearToDate"><?php print t('Year to Date',array(),array('context'=>'timeframe selector')); ?></option>
+                          <option value="custom"><?php print t('Custom...',array(),array('context'=>'timeframe selector')); ?></option>
+                        </select>
+                    </span>
+                    <div id="cal">
+                        <div class="cal__button">
+                            <div class="cal__button-submit"><?php print t('Get Data',array(),array('context'=>'timeframe selector')); ?></div>
+                            <div class="cal__button-cancel"><?php print t('Cancel',array(),array('context'=>'timeframe selector')); ?></div>
+                        </div>
+                    </div>
                   </div>
                   <div class="download">
   <!--                    Download<a href="" id="download__csv">Excel</a>-->
