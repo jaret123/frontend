@@ -1464,7 +1464,7 @@ img.flag {
   border: 1px solid #ccc;
   border-radius: 0;
   margin-top: -11px;
-  z-index: 100;
+  z-index: 1;
   display: none;
   padding-bottom: 15px;
 }
@@ -4157,7 +4157,6 @@ a:hover, a:active {
 }
 /* line 87, ../sass/components/_flipper.scss */
 .flip-container .front {
-  z-index: 2;
   /* for firefox 31 */
   position: relative;
   top: 0px;
