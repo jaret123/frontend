@@ -10,3 +10,4 @@ drupal/sites/all/themes/xeros_theme/node_modules/qunitjs/package.json
 vendor/*
 .DS_Store
 atlassian-ide-plugin.xml
+Gemfile.lock
