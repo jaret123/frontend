@@ -16,6 +16,10 @@ var chart = {
             model : chart.data.model
         };
 
+        var animation = {
+            delay: 500,
+            duration: 1500
+        };
         // 
         var _d = {
             from : data.model.chart,
@@ -173,6 +177,7 @@ var chart = {
 
         if (_d.from.length > 1) {
 
+            // Draw the blue line
             svg.append("path")
                 .datum(_d.from)
                 .attr("class", "line-b")
@@ -183,18 +188,14 @@ var chart = {
                     'stroke-width' : '3px',
                     'shape-rendering' : 'smoothEdges'
                 })
-                .transition()
-                .delay(500)
-                .duration(1500)
-                .attr("d", lineB)
-                .attr("fill", "none")
-;
+            ;
 
             // append the line itself
             // Draw the xeros line, starting at LineA and animating to LineB
 
+            // Draw the white line
             svg.append("path")
-                .datum(_d.to)
+                .datum(_d.from)
                 .attr("class", "line-a")
                 .attr("d", lineA)
                 .attr("stroke", "#fff")
@@ -202,10 +203,19 @@ var chart = {
                 .style({
                     'stroke-width' : '3px',
                     'shape-rendering' : 'smoothEdges'
-                });
+                })
+                .datum(_d.to)
+                .transition()
+                .delay(animation.delay)
+                .duration(animation.duration)
+                .attr("d", lineA)
+                .attr("fill", "none")
+                .attr("stroke", "#fff")
+                .style({
+                    'stroke-width' : '3px',
+                    'shape-rendering' : 'smoothEdges'
+                })
             ;
-
-
 
 
             if (_d.from.length < 8) {
@@ -228,8 +238,8 @@ var chart = {
                     })
                     .data(_d.to)
                     .transition()
-                    .delay(500)
-                    .duration(1500)
+                    .delay(animation.delay)
+                    .duration(animation.duration)
                     .attr("cx", function (d) {
                         return x(parseDate(d["date"]));// date
                     })
@@ -280,8 +290,8 @@ var chart = {
                 })
                 .attr("transform", "translate(" + width / 2 + "," + 0 + ")")
                 .transition()
-                .delay(500)
-                .duration(1500)
+                .delay(animation.delay)
+                .duration(animation.duration)
                 .attr("cx", function (d) {
                     return x(parseDate(d["date"]));// date
                 })
