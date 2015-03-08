@@ -219,6 +219,25 @@ var chart = {
 
 
             if (_d.from.length < 8) {
+
+                // Reference data
+                svg.selectAll("dot")
+                    .data(_d.from)
+                    .enter().append("circle")
+                    .attr("fill", "#0086bd")
+                    .attr("r", 3.5)
+                    .attr("cx", function (d) {
+                        return x(parseDate(d["date"]));// date
+                    })
+                    .attr("cy", function (d) {
+                        var value = d["cost"];
+                        if (value !== "") {
+                            return y(parseInt(value, 10)); // value 1
+                        }
+                        return y(0);
+                    })
+                ;
+
                 // Actual data rendered at the reference data then animated
 
                 svg.selectAll("dot")
@@ -251,23 +270,7 @@ var chart = {
                         return y(0);
                     });
 
-                // Reference data
-                svg.selectAll("dot")
-                    .data(_d.from)
-                    .enter().append("circle")
-                    .attr("fill", "#0086bd")
-                    .attr("r", 3.5)
-                    .attr("cx", function (d) {
-                        return x(parseDate(d["date"]));// date
-                    })
-                    .attr("cy", function (d) {
-                        var value = d["cost"];
-                        if (value !== "") {
-                            return y(parseInt(value, 10)); // value 1
-                        }
-                        return y(0);
-                    })
-                ;
+
 
             }
         }
