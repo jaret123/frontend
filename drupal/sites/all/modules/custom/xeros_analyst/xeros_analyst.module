@@ -14,7 +14,7 @@ function xeros_analyst_menu() {
         'file' => 'xeros_analyst_reports.inc'
     );
     $items['analyst/cycle-reports'] = array(
-        'title' => 'Ops Reports',
+        'title' => 'Monitoring Reports',
         'page callback' => 'analyst_cycle_reports_page',
         'page arguments' => array(),
         'access arguments' => array('xeros cycle reports'),
