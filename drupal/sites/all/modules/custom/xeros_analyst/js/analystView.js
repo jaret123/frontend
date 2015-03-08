@@ -3,6 +3,13 @@
  */
 var FF = FF || {};
 
+var offlineDates =
+{
+    fromDate: null,
+    toDate: null
+};
+
+
 /**
  * FF - User
  *
@@ -14,7 +21,7 @@ FF.analystView = (function ($) {
     var pub = {},
         els = {};
 
-    var exceptionFilter = 0;
+    var exceptionFilters = [0, 0, 0];
     var hbsTemplate;
     var unknownFilters = [0, 0, 0];
     var manufacturerChecked = [false, false, false];
@@ -41,6 +48,7 @@ FF.analystView = (function ($) {
             }
         ]
     };
+
 
     var machines = [];
 
@@ -73,11 +81,13 @@ FF.analystView = (function ($) {
             reports.data[i].company = FF.User.reportSettings.company.id;
             reports.data[i].location = FF.User.reportSettings.location.id;
             reports.data[i].timeSelect = FF.User.reportSettings.timeSelect;
-            reports.data[i].exception = exceptionFilter;
+            reports.data[i].exception = exceptionFilters[i];
             reports.data[i].unknown = unknownFilters[i];
             reports.data[i].manufacturer = manufacturerChecked[i] ? 1 : 0;
             reports.data[i].manufacturerBool = manufacturerChecked[i];
         }
+        offlineDates.fromDate = FF.User.reportSettings.dates[0];
+        offlineDates.toDate = FF.User.reportSettings.dates[1];
 
         getMachines(FF.User.reportSettings.location.id, function (data) {
             machines = [];
@@ -96,8 +106,8 @@ FF.analystView = (function ($) {
             $("#unknown_select_0").val(unknownFilters[0]);
             $("#unknown_select_1").val(unknownFilters[1]);
             $("#unknown_select_2").val(unknownFilters[2]);
-            $("#exception_select_0").val(exceptionFilter[0]);
-            $("#exception_select_2").val(exceptionFilter[2]);
+            $("#exception_select_0").val(exceptionFilters[0]);
+            $("#exception_select_2").val(exceptionFilters[2]);
 
             FF.Controls.Dropdown.create("#unknown_select_0", function (event) {
                 unknownFilters[0] = parseInt($(event.target).find("span.value").html(), 0);
@@ -113,12 +123,12 @@ FF.analystView = (function ($) {
             });
 
             FF.Controls.Dropdown.create("#exception_select_0", function (event) {
-                exceptionFilter[0] = parseInt($(event.target).find("span.value").html(), 0);
+                exceptionFilters[0] = parseInt($(event.target).find("span.value").html(), 0);
                 updateLinks();
             });
 
             FF.Controls.Dropdown.create("#exception_select_2", function (event) {
-                exceptionFilter[2] = parseInt($(event.target).find("span.value").html(), 0);
+                exceptionFilters[2] = parseInt($(event.target).find("span.value").html(), 0);
                 updateLinks();
             });
         });
@@ -174,4 +184,12 @@ Handlebars.registerHelper("reportTypeQuery", function (reportType) {
     else {
         return '';
     }
+});
+
+Handlebars.registerHelper("getFromDate", function () {
+    return offlineDates.fromDate;
+});
+
+Handlebars.registerHelper("getToDate", function () {
+    return offlineDates.toDate;
 });

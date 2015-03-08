@@ -96,6 +96,10 @@ function xeros_report_theme() {
       'variables' => array(),
       'template' => 'templates/block--location-picker',
     ),
+      'block_date_range' => array(
+          'variables' => array(),
+          'template' => 'templates/block--date-range'
+      )
   );
   return $themes;
 }

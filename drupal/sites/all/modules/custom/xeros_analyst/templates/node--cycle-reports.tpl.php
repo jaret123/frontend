@@ -61,7 +61,8 @@
                         <div class="connectivity-block col first">
                             <h3>Connectivity Reports</h3>
 
-                            <div><a href="../xsvc/rs/status_gaps">Offline Report</a></div>
+                            <div><a href="../xsvc/rs/status_gaps?fromDate={{getFromDate}}&toDate={{getToDate}}">Offline
+                                    Report</a></div>
                             <div><a href="../xsvc/rs/last_log">Last Log Report</a></div>
                         </div>
                     </div>
