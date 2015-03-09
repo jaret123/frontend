@@ -1,5 +1,3 @@
-use xeros_local;
-
 /* Adapted from Tom Cunningham's 'Data Warehousing with MySql' (www.meansandends.com/mysql-data-warehouse) */
 
 ###### small-numbers table

@@ -42,6 +42,8 @@ CREATE PROCEDURE sp_standardize_location_profile ()
 **/
   BEGIN
 
+    TRUNCATE xeros_location_profile_standard;
+
     INSERT INTO xeros_location_profile_standard
     (
       location_id,
