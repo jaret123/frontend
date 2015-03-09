@@ -508,7 +508,7 @@ BEGIN
         ON m.location_id  = labor_profile.location_id
       LEFT JOIN xeros_chemical_cycle AS cc
         ON dma.dai_meter_actual_id = cc.dai_meter_actual_id
-	    LEFT JOIN xeros_location_profile as lp
+	    LEFT JOIN xeros_location_profile_standard as lp
 		    ON m.location_id = lp.location_id
 	WHERE ',
 		where_clause, ' ')
