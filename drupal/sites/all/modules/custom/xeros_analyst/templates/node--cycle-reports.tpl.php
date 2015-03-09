@@ -62,7 +62,9 @@
                             <h3>Connectivity Reports</h3>
 
                             <div><a href="../xsvc/rs/status_gaps?fromDate={{getFromDate}}&toDate={{getToDate}}">Offline
-                                    Report</a></div>
+                                    Report (with Dates)</a></div>
+                            <div><a href="../xsvc/rs/status_gaps">Offline
+                                    Report (All Time)</a></div>
                             <div><a href="../xsvc/rs/last_log">Last Log Report</a></div>
                         </div>
                     </div>
