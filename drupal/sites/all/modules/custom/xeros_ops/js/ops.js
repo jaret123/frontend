@@ -51,26 +51,26 @@ FF.Hud = (function($){
     var refreshInterval = 5 * 60; // 5 minutes
 
     var labels = {
-        start_time: translate("Start Time"),
-        end_time: translate("End Time"),
-        status: translate("Status"),
-        not_monitored: translate("This machine is currently not actively monitored"),
-        status_log: translate("View Status Log"),
-        machine_details: translate("Machine Details"),
-        company: translate("Company"),
-        location: translate("Location"),
-        serial: translate("Serial Number"),
-        cycles: translate("Cycles"),
-        summary: translate("Summary"),
-        last_cycle: translate("Last Cycle Ended"),
-        cycles_today: translate("Cycles Today"),
-        total_run_time: translate("Total Run Time Today"),
-        cold_water: translate("Cold Water Used"),
-        hot_water: translate("Hot Water Used"),
-        therms: translate("Therms"),
-        chemicals: translate("Chemicals"),
-        gallons: translate("gallons"),
-        ounces: translate("ounces")
+        start_time: Drupal.t("Start Time", {}, {context: "Status Board Detail"}),//translate("Start Time"),
+        end_time:  Drupal.t("End Time", {}, {context: "Status Board Detail"}),//translate("End Time"), //translate("End Time"),
+        status: Drupal.t("Status", {}, {context: "Status Board Detail"}),//translate("Status"),
+        not_monitored:  Drupal.t("This machine is currently not actively monitored", {}, {context: "Status Board Detail"}),//translate("This machine is currently not actively monitored"),
+        status_log: Drupal.t("View Status Log", {}, {context: "Status Board Detail"}),//translate("View Status Log"),
+        machine_details: Drupal.t("Machine Details", {}, {context: "Status Board Detail"}),//translate("Machine Details"),
+        company: Drupal.t("Company", {}, {context: "Status Board Detail"}),//translate("Company"),
+        location: Drupal.t("Location", {}, {context: "Status Board Detail"}),//translate("Location"),
+        serial: Drupal.t("Serial Number", {}, {context: "Status Board Detail"}),//translate("Serial Number"),
+        cycles: Drupal.t("Cycles", {}, {context: "Status Board Detail"}),//translate("Cycles"),
+        summary: Drupal.t("Summary", {}, {context: "Status Board Detail"}),//translate("Summary"),
+        last_cycle: Drupal.t("Last Cycle Ended", {}, {context: "Status Board Detail"}),//translate("Last Cycle Ended"),
+        cycles_today: Drupal.t("Cycles Today", {}, {context: "Status Board Detail"}),//translate("Cycles Today"),
+        total_run_time: Drupal.t("Total Run Time Today", {}, {context: "Status Board Detail"}),//translate("Total Run Time Today"),
+        cold_water: Drupal.t("Cold Water Used", {}, {context: "Status Board Detail"}),//translate("Cold Water Used"),
+        hot_water: Drupal.t("Hot Water Used", {}, {context: "Status Board Detail"}),//translate("Hot Water Used"),
+        therms: Drupal.t("Therms", {}, {context: "Status Board Detail"}),//translate("Therms"),
+        chemicals: Drupal.t("Chemicals", {}, {context: "Status Board Detail"}),//translate("Chemicals"),
+        gallons: Drupal.t("gallons", {}, {context: "Status Board Detail"}),//translate("gallons"),
+        ounces: Drupal.t("ounces", {}, {context: "Status Board Detail"}),//translate("ounces")
 
     };
 
