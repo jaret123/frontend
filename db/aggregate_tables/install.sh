@@ -1,6 +1,8 @@
 #!/bin/bash
 
-databaseName="xeros_release"
+databaseName=$1
+
+echo $databaseName
 
 files=(
     ddl-date-dimension.sql
