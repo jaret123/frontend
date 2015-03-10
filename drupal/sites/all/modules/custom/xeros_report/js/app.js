@@ -172,7 +172,7 @@ var app = {
 
         // If the newly created hash has changed, then update the hash
         // Protect us from an infinite loop.
-        if (window.location.hash !== hash) {
+        if (window.location.hash !== "#"+hash) {
             window.location.hash = hash;
             app.fadeReport();
         }
