@@ -58,7 +58,7 @@ BEGIN
           SELECT
             distinct dai_meter_actual_id
           FROM
-            sp_standardize_readings
+            xeros_dai_meter_standard
 				)  ';
 
 	ELSEIF refresh_mode = 'SINGLE' THEN
