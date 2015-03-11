@@ -353,7 +353,7 @@ var view = {
             }
         });
 
-        //Patch for IE 9 where Cards display back instead of fronts. - RNK 
+        //Patch for IE 9 where Cards display back instead of fronts. - RNK
         if (FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 9) {
             jQuery('.back').css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
             jQuery('.front').css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
