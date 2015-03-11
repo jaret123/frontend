@@ -310,7 +310,6 @@ var view = {
                 }
             }
         }
-
     },
     initialize : function() {
         //createDropDown();
@@ -320,36 +319,45 @@ var view = {
             view.updateLegend();
         });
 
+
+
     },
     bindEvents : function() {
         /*
-        Controls for the Flipping action for Water Sewer and Therms
-        @author Ron Kozlowski
+         Controls for the Flipping action for Water Sewer and Therms
+         @author Ron Kozlowski
          */
-        jQuery( ".flipper-openbtn" ).click(function() {
+        jQuery(".flipper-openbtn").click(function () {
             jQuery(this).parents('.flip-container').addClass("hover");
-            if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
-                //console.log("IE");
+            if (FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
                 var flipper = jQuery(this).parents('.flipper');
                 var back = flipper.find('.back');
                 var front = flipper.find('.front');
-
                 back.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
                 front.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
             }
+
         });
 
-        jQuery( ".flipper-closebtn" ).click(function() {
+        jQuery(".flipper-closebtn").click(function () {
+
             jQuery(this).parents('.flip-container').removeClass("hover");
-            if(FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
+            // console.log(FF.Utils.msieVersion());
+            if (FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 11) {
                 var flipper = jQuery(this).parents('.flipper');
                 var back = flipper.find('.back');
                 var front = flipper.find('.front');
                 front.css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
                 back.css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
+
             }
         });
 
+        //Patch for IE 9 where Cards display back instead of fronts. - RNK 
+        if (FF.Utils.msieVersion() != false && FF.Utils.msieVersion() <= 9) {
+            jQuery('.back').css({"opacity": "0", "z-index": "0", "backface-visibility": "hidden"});
+            jQuery('.front').css({"opacity": "1", "z-index": "2", "backface-visibility": "visible"});
+        }
     }
 }
 
