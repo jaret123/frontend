@@ -146,9 +146,9 @@ FF.Hud = (function($){
 
         data.machine.companies = _.object(s);
 
-        console.log(s);
+      //  console.log(s);
 
-        console.log (data.machine);
+      //  console.log (data.machine);
     };
 
     function formatStatus(data) {
@@ -172,7 +172,7 @@ FF.Hud = (function($){
             _status = _.sortBy(_status, function(obj) { return -(obj[0]) });
         }
 
-        console.log('history', _status);
+       // console.log('history', _status);
         return _status;
     };
 
@@ -191,7 +191,7 @@ FF.Hud = (function($){
     //};
 
     function loadHistory(machineId, callback) {
-        console.log('machineId: ', machineId);
+        //console.log('machineId: ', machineId);
         jQuery.ajax({
             url: 'ws/status-board/history/' + machineId.toString(),
             //data: '[' + machineId.toString() + ']',
@@ -275,14 +275,14 @@ FF.Hud = (function($){
         // Pass the data for the machine that was clicked
         data.details.machine = data.machineSource[machineId];
 
-        console.log(data.details);
+      //  console.log(data.details);
 
         // Load status history
         loadHistory(machineId, function(machineId) {
 
             loadCycles(machineId, function(d) {
 
-                console.log(data.details);
+                //console.log(data.details);
 
                 data.details.labels = labels;
 
@@ -299,12 +299,12 @@ FF.Hud = (function($){
     };
 
     function renderStatus() {
-        console.log("Ready to render");
-
+       // console.log("Ready to render");
+        data.machine.labels = labels;
         // Compile Template
         var template = Handlebars.compile(tpl.machine);
 
-        data.machine.labels = labels;
+
         // Render Template
         var html = template(data.machine);
         $('.machine-status').html(html);
@@ -317,7 +317,7 @@ FF.Hud = (function($){
             $(this).find('.controls__label').each(function () {
                 $(this).html(count);
             });
-            console.log(filter, count);
+            //console.log(filter, count);
         });
 
         bindEvents();
@@ -425,7 +425,7 @@ FF.Hud = (function($){
     function screenChangeHandler(){
         //NB the following line requrires the libary from John Dyer
         var fs = window.fullScreenApi.isFullScreen();
-        console.log("f" + (fs ? 'yes' : 'no' ));
+       // console.log("f" + (fs ? 'yes' : 'no' ));
         if (fs) {
             $('body').addClass('full-screen');
         }
