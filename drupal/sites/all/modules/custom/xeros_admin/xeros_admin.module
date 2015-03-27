@@ -65,6 +65,20 @@ function xeros_admin_menu() {
     'access arguments' => array('xeros admin'),
     'file' => 'xeros_admin_locations.inc',
   );
+    $items['config/active_dais'] = array(
+        'title' => 'Active DAI Listing',
+        'page callback' => 'active_dai_listing',
+        'page arguments' => array(),
+        'access arguments' => array('xeros admin'),
+        'file' => 'xeros_admin_dai.inc'
+    );
+    $items['config/active_dai'] = array(
+        'title' => 'Active DAI Configuration',
+        'page callback' => 'active_dai_edit_page',
+        'page arguments' => array(),
+        'access arguments' => array('xeros admin'),
+        'file' => 'xeros_admin_dai.inc',
+    );
 
   return $items;
 }

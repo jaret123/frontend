@@ -12,6 +12,7 @@ require_once('db/labor_profile.inc');
 require_once('db/chemical_profile.inc');
 require_once('db/company.inc');
 require_once('xeros_admin_machines.inc');
+require_once('xeros_admin_dai.inc');
 /**
  * @param null $company_id
  *
@@ -69,7 +70,6 @@ function location_listing($company_id = NULL) {
   return $output;
 }
 
-
 function location_edit_page($function_call = NULL, $location_id = NULL) {
 
   $output = '';
@@ -124,6 +124,7 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
 
     if ( $function_call == 'edit' ) {
       $output .= machine_listing($location->nid);
+        $output .= active_dai_listing($location->nid);
     }
   }
   return $output;
@@ -248,7 +249,6 @@ function location_form_validate($form, &$form_state) {
   }
   //drupal_set_message('Validation run');
 }
-
 
 function location_form_submit($form, &$form_state) {
 

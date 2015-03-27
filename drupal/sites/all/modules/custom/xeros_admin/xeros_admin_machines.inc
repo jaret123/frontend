@@ -430,6 +430,16 @@ function machine_form_submit($form, &$form_state) {
   if ( $form_state['#vars']['function_call'] == 'add' ) {
     unset($machine->fields['machine_id']);
     $new_machine_id = $machine->insert();
+
+      //adding "unknown" classification
+      $mc = new machine_classification();
+      $mc->fields['machine_id'] = $new_machine_id;
+      $mc->fields['classification_id'] = $machine->fields['unknown_class'];
+      $mc->fields['load_size'] = 60;
+      $mc->fields['xeros_load_size'] = 60;
+      $mc->fields['unload_time'] = 0;
+      $mc->insert();
+
     drupal_set_message(t('New machine saved.  Add classifications.'));
     $form_state['redirect'] = 'config/machine/' . $form_state['#vars']['location_id'] . '/edit/' . $new_machine_id;
   } else {
