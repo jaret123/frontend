@@ -9,6 +9,7 @@ require_once('db/machine.inc');
 require_once('db/machine_classification.inc');
 require_once('db/chemical_usage.inc');
 require_once('db/chemical_profile.inc');
+require_once('db/active_dai.inc');
 
 /**
  * This is used by the location edit page.
@@ -19,7 +20,7 @@ require_once('db/chemical_profile.inc');
  * @return string
  */
 function machine_listing($location_id = NULL, $machine_id = NULL) {
-  $output =  '<div>This is the machine listing page for location: ' . $location_id . '</div>';
+  $output =  '<div>This is the machine listing for location: ' . $location_id . '</div>';
 
   $machine = new machine();
 
@@ -96,7 +97,11 @@ function machine_edit_page($location_id = NULL, $function_call = NULL, $machine_
       );
     }
 
-
+    $active_dai = new active_dai();
+    $dais = $active_dai->select();
+    for ($i = 0, $size = count($dais); $i < $size; ++$i) {
+        $vars['active_dai_set'][$i] = $dais[$i]['dai_identifier'];
+    }
     $chem = new chemical_profile();
 
     // TODO - want list of unique chemicals by location - make sure what makes them unique.  Is it just the name or the
@@ -305,8 +310,11 @@ function machine_form($form, &$form_state, $vars) {
 
   // Active DAI Fields
   $form['machine_settings']['active_dai_id'] = array(
+    '#title' => 'Active DAI',
+    '#description' => 'The Active DAI assigned to this machine.',
     '#default_value' => !empty($form_state['values']['machine_settings']['machine']['active_dai_id']) ? $form_state['values']['machine_settings']['machine']['active_dai_id'] : 0,
-    '#type' => 'hidden',
+    '#type' => 'select',
+    '#options' => $vars['active_dai_set'],
   );
 
   $form['machine_settings']['dry_smart'] = array(
@@ -425,6 +433,12 @@ function machine_form_submit($form, &$form_state) {
   foreach ($f as $field) {
     $machine->fields[$field] = $form_state['values']['machine_settings'][$field];
   }
+  $active_dai = new active_dai();
+  $identifier = $form['machine_settings']['active_dai_id']['#options'][$form_state['values']['machine_settings']['active_dai_id']];
+
+  $dai = $active_dai->select(NULL,NULL,$identifier);
+
+  $machine->fields['active_dai_id'] = $dai[0]['active_dai_id'];
 
   // If it's a new machine, then update the machine records and redirect to edit page.
   if ( $form_state['#vars']['function_call'] == 'add' ) {

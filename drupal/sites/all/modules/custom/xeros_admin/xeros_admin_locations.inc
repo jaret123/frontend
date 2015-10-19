@@ -70,12 +70,12 @@ function location_listing($company_id = NULL) {
   return $output;
 }
 
-function location_edit_page($function_call = NULL, $location_id = NULL) {
+function location_edit_page($function_call = NULL, $location_id = NULL, $machine_id = NULL) {
 
   $output = '';
   $output = '<a href="/config/locations">Back to location listing</a> <br />';
 
-  if ( !in_array($function_call, array('edit', 'add')) || ($function_call == 'edit' && $location_id == NULL )) {
+  if ( !in_array($function_call, array('edit', 'add', 'remove')) || ($function_call == 'edit' && $location_id == NULL ) || ($function_call == 'remove' && ($location_id == NULL || $machine_id == NULL))) {
     $output .= 'Page not found';
   } else {
 
@@ -93,13 +93,16 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
 
     $vars['labor_profile'] = array();
 
-    if ( $function_call == 'edit' ) {
+    if ( $function_call == 'edit' || $function_call == 'remove') {
       // Load company and location
       $location = node_load($location_id);
       $company = node_load($location->field_company['und'][0]['target_id']);
+      $machine = new machine();
+      $rows = $machine->select(NULL, $machine_id);
 
       $vars['location'] = $location;
       $vars['company'] = $company;
+      $vars['machine_id'] = $rows[0]['machine_id'];
 
       $output .= 'Company: ' . $company->title . '<br />';
       $output .= 'Location: ' . $location->title . '<br />';
@@ -122,9 +125,9 @@ function location_edit_page($function_call = NULL, $location_id = NULL) {
 
     $output .= drupal_render($f);
 
-    if ( $function_call == 'edit' ) {
+    if ( $function_call == 'edit' || $function_call == 'remove') {
       $output .= machine_listing($location->nid);
-        $output .= active_dai_listing($location->nid);
+      $output .= active_dai_listing($location->nid);
     }
   }
   return $output;
@@ -145,6 +148,8 @@ function location_form($form, &$form_state, $vars) {
     $form_state['values']['location_id'] = isset($vars['location']->nid) ? $vars['location']->nid : NULL;
     $form_state['values']['location_name'] = isset($vars['location']->title) ? $vars['location']->title : NULL;
     $form_state['values']['location_profile'] = isset($vars['location_profile'][0]) ? $vars['location_profile'][0] : array();
+    $form_state['values']['machine_id'] = isset($vars['machine_id']) ? $vars['machine_id'] : NULL;
+
     $form_state['#vars'] = $vars;
   }
 
@@ -172,7 +177,14 @@ function location_form($form, &$form_state, $vars) {
       '#type' => 'select',
       '#options' => $company_options,
     );
-  } else {
+  }
+  else if ($form_state['#vars']['#function_call'] == 'remove') {
+      $machine = new machine();
+      $machine->id = $form_state['values']['machine_id'];
+      $machine->fields['active_dai_id'] = NULL;
+      $machine->update();
+  }
+  else {
     $form['company_id'] = array(
       '#type' => 'hidden',
       '#default_value' => !empty($form_state['values']['location_id']) ? $form_state['values']['location_id'] : NULL,

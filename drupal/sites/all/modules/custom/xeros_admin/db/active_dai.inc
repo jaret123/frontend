@@ -14,7 +14,7 @@ class active_dai extends orm_abstract {
   }
 
     /** Override the base function because we want multiple filters */
-    public function select($location_id = NULL, $active_dai_id = NULL)
+    public function select($location_id = NULL, $active_dai_id = NULL, $active_dai_identifier = NULL)
     {
 
         $select = db_select('xeros_active_dai', 'd');
@@ -27,9 +27,16 @@ class active_dai extends orm_abstract {
         if ($location_id <> NULL) {
             $select->condition('m.location_id', $location_id);
         }
-        if ($active_dai_id <> NULL) {
+        else if ($active_dai_id <> NULL) {
             $select->condition('d.active_dai_id', $active_dai_id);
-        };
+        }
+        else if ($active_dai_identifier <> NULL) {
+            $select->condition('d.dai_identifier', $active_dai_identifier);
+        }
+        else {
+            $select->condition('m.active_dai_id', NULL);
+        }
+
 
         $entries = $select->execute()->fetchAll(PDO::FETCH_ASSOC);
         $rows = array();

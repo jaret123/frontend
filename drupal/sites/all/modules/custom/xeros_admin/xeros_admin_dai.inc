@@ -17,7 +17,7 @@ require_once('db/active_dai.inc');
  */
 function active_dai_listing($location_id = NULL, $active_dai_id = NULL)
 {
-    $output = '<div>This is the DAI listing page for location: ' . $location_id . '</div>';
+    $output = '<div>This is the DAI listing for location: ' . $location_id . '</div>';
 
     $active_dai = new active_dai();
 
@@ -29,7 +29,9 @@ function active_dai_listing($location_id = NULL, $active_dai_id = NULL)
     if (count($rows) > 0) {
 
         foreach ($rows as $i => $row) {
-            array_push($rows[$i], '<a href="/config/active_dai/' . $row['location_id'] . '/edit/' . $row['active_dai_id'] . '">Edit</a>');
+            array_push($rows[$i],
+                '<a href="/config/active_dai/' . $row['location_id'] . '/edit/' . $row['active_dai_id'] . '">Edit</a>',
+                '<a href="/config/location/remove/' . $row['location_id'] . '/' . $row['machine_id'] . '">Remove</a>');
         }
         // Make a table
         $header = array(
@@ -38,7 +40,8 @@ function active_dai_listing($location_id = NULL, $active_dai_id = NULL)
             t('Machine ID'),
             t('Location ID'),
             t('Location Name'),
-            t('Edit')
+            t('Edit'),
+            t('Remove')
         );
         //$output .= theme('table', array('header' => $header, 'rows' => $rows));
 
@@ -61,9 +64,10 @@ function active_dai_listing($location_id = NULL, $active_dai_id = NULL)
 function active_dai_edit_page($location_id = NULL, $function_call = NULL, $active_dai_id = NULL)
 {
 
-    if ($location_id == NULL || !in_array($function_call, array('edit', 'add'))) {
+    if ($location_id == NULL || !in_array($function_call, array('edit', 'add', 'remove'))) {
         return "Page not found";
-    } else {
+    }
+    else {
         $output = '';
         $output .= '<a href="/config/location/edit/' . $location_id . '"> << Back to Location</a><br/>';
         $output .= 'Location ID: ' . $location_id . '<br />';
@@ -154,7 +158,7 @@ function active_dai_form($form, &$form_state, $vars)
         '#tree' => TRUE
     );
     // Visible fields
-    $form['dai_settings']['DAI Identifier'] = array(
+    $form['dai_settings']['dai_identifier'] = array(
         '#title' => 'DAI Identifier',
         '#type' => 'textfield',
         '#default_value' => !empty($form_state['values']['dai_identifier']) ? $form_state['values']['dai_identifier'] : '',
@@ -181,7 +185,6 @@ function active_dai_form_submit($form, &$form_state)
 
     $f = array(
         'active_dai_id',
-        'location_id'
     );
 
     foreach ($f as $field) {
@@ -202,11 +205,11 @@ function active_dai_form_submit($form, &$form_state)
         $new_active_dai_id = $active_dai->insert();
 
         drupal_set_message(t('New DAI saved.  Assign to machines.'));
-        $form_state['redirect'] = 'config/location/' . $form_state['#vars']['location_id'] . '/edit/' . $active_dai->fields['location_id'];
-    } else {
+        $form_state['redirect'] = 'config/location/edit/' . $form_state['#vars']['location_id'];
+    }
+    else {
         $active_dai->merge();
         drupal_set_message(t('DAI settings saved.'));
-        $form_state['redirect'] = 'config/location/' . $form_state['#vars']['location_id'] . '/edit/' . $active_dai->fields['location_id'];
-        //$form_state['redirect'] = 'config/location/edit/' . $form_state['#vars']['location_id'];
+        $form_state['redirect'] = 'config/location/edit' . $form_state['#vars']['location_id'];
     }
 }
